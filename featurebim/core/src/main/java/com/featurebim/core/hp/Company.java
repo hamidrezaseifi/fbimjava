@@ -1,0 +1,100 @@
+package com.featurebim.core.hp;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+/**
+ * The persistent class for the companies database table.
+ * 
+ */
+@Entity
+@Table(name="companies")
+public class Company implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private int id;
+
+	private String comments;
+
+	private String companyName;
+
+	private LocalDateTime created;
+
+	private short status;
+
+	private LocalDateTime updated;
+
+	private int version;
+
+	public Company() {
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getComments() {
+		return this.comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getCompanyName() {
+		return this.companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public LocalDateTime getCreated() {
+		return this.created;
+	}
+
+	public void setCreated(LocalDateTime created) {
+		this.created = created;
+	}
+
+	public short getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(short status) {
+		this.status = status;
+	}
+
+	public LocalDateTime getUpdated() {
+		return this.updated;
+	}
+
+	public void setUpdated(LocalDateTime updated) {
+		this.updated = updated;
+	}
+
+	public int getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	@Override
+	public String toString(){
+		return "id="+id+", name="+companyName+", updated="+updated;
+	}
+
+}
