@@ -7,22 +7,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Repository
 public class CompanyDaoImpl implements CompanyDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(CompanyDaoImpl.class);
 	
 	@Autowired
-	private SessionFactory sessionFactory;
+  private SessionFactory sessionFactory;
 	
-	protected Session getCurrentSession(){
-		return sessionFactory.getCurrentSession();
-	}
-	
-	public void setSessionFactory(SessionFactory sf){
-		this.sessionFactory = sf;
-	}
 	
 	@Override
 	public void addCompany(Company c) {

@@ -19,19 +19,23 @@ import javax.persistence.Table;
 public class Company implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+  @Id
+  @Column(name="id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String comments;
 
+  @Column(name="company_name")
 	private String companyName;
 
-	private LocalDateTime created;
-
-	private short status;
-
-	private LocalDateTime updated;
+  private int status;
 
 	private int version;
+
+  private LocalDateTime created;
+
+  private LocalDateTime updated;
 
 	public Company() {
 	}
@@ -68,11 +72,11 @@ public class Company implements Serializable {
 		this.created = created;
 	}
 
-	public short getStatus() {
+	public int getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(short status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

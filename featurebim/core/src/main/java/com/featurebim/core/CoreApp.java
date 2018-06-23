@@ -17,17 +17,19 @@ public class CoreApp {
 
 	public static void main(String[] args) {
 		CoreApp.logger.info("Starting Feature Bim Core application...");
-		ConfigurableApplicationContext ctx = SpringApplication.run(CoreApp.class, args);
+		SpringApplication.run(CoreApp.class, args);
 	    
-	    System.out.println("---------------------- hello -----------------------");
+	    /*System.out.println("---------------------- hello -----------------------");
 
 	    TestHiber testHiber = ctx.getBean(TestHiber.class);
+      
+      System.out.println("---------------------- bean created ----------------");
 	    
 	    List<Company> list = testHiber.listCountries();
 	    for(Company c : list){
 		    System.out.println(c);
 	    	
-	    }
+	    }*/
 	    
 	}
 
