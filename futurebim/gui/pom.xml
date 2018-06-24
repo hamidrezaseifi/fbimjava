@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.seifi.featurebim</groupId>
-    <artifactId>featurebim</artifactId>
+    <groupId>com.seifi.futurebim</groupId>
+    <artifactId>futurebim</artifactId>
     <version>0.0.1</version>
   </parent>
   <artifactId>gui</artifactId>
@@ -11,7 +11,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.seifi.featurebim</groupId>
+            <groupId>com.seifi.futurebim</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1</version>
         </dependency>
