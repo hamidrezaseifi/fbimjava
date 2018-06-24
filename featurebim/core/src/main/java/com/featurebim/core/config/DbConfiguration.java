@@ -1,4 +1,4 @@
-package com.featurebim.core.hp;
+package com.featurebim.core.config;
 
 import javax.sql.DataSource;
 
@@ -61,7 +61,7 @@ public class DbConfiguration {
     log.info("DB config: {}@{}", dbUserName, jdbcUrl);
 
     final HikariConfig configuration = new HikariConfig();
-    /*configuration.setAutoCommit(false);
+    configuration.setAutoCommit(false);
     configuration.setPoolName(poolName);
     configuration.setDriverClassName(className);
     configuration.setMinimumIdle(minIdleConnections);
@@ -70,17 +70,8 @@ public class DbConfiguration {
     configuration.setMaximumPoolSize(maxPoolSize);
     configuration.setUsername(dbUserName);
     configuration.setPassword(password);
-    configuration.setTransactionIsolation("TRANSACTION_READ_COMMITTED");*/
-    configuration.setAutoCommit(false);
-    configuration.setPoolName("FBIM-DB-POOL");
-    configuration.setDriverClassName("com.mysql.jdbc.Driver");
-    configuration.setMinimumIdle(5);
-    configuration.setJdbcUrl("jdbc:mysql://localhost:3306/featurebim");
-    configuration.setIdleTimeout(120000L);
-    configuration.setMaximumPoolSize(50);
-    configuration.setUsername("bim");
-    configuration.setPassword("bim");
     configuration.setTransactionIsolation("TRANSACTION_READ_COMMITTED");
+    
     
 
     configuration.addDataSourceProperty("cachePrepStmts", this.cachePreparedStatements);
