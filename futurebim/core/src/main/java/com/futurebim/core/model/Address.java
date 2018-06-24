@@ -3,14 +3,21 @@ package com.futurebim.core.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 
 /**
  * The persistent class for the addresses database table.
  * 
  */
+@Entity
+@Table(name="addresses")
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+  @EmbeddedId
 	private AddressPK id;
 
 	private String addressName;

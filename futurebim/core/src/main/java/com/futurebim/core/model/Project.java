@@ -5,24 +5,47 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the projects database table.
  * 
  */
+@Entity
+@Table(name="projects")
 public class Project implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private int id;
+  @Id
+  @Column(name="id")
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+  private Long id;
+
+  private Long companyid;
 
 	private LocalDateTime created;
 
 	private LocalDate deatline;
 
+	@Column(name="project_name")
 	private String projectName;
 
-	private int responsibleUser;
+	@Column(name="responsible_user")
+  private int responsibleUser;
 
+  @Column(name="start_date")
 	private LocalDate startDate;
 
 	private short status;
@@ -31,28 +54,40 @@ public class Project implements Serializable {
 
 	private int version;
 
-	private List<ProjectBcfFile> projectBcfFiles;
+	/*private List<ProjectBcfFile> projectBcfFiles;
 
 	private List<ProjectIfcFile> projectIfcFiles;
 
-	private List<ProjectTask> projectTasks;
+	private List<ProjectTask> projectTasks;*/
 
+  @JsonIgnore
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "companyid", insertable=false, updatable=false)  
 	private Company companyBean;
 
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "id.projectid", targetEntity = UserProjectAccess.class)
 	private List<UserProjectAccess> userProjectAccesses;
 
 	public Project() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
+	
+  public Long getCompanyid() {
+    return companyid;
+  }
+  
+  public void setCompanyid(Long companyid) {
+    this.companyid = companyid;
+  }
 
-	public LocalDateTime getCreated() {
+  public LocalDateTime getCreated() {
 		return this.created;
 	}
 
@@ -116,7 +151,7 @@ public class Project implements Serializable {
 		this.version = version;
 	}
 
-	public List<ProjectBcfFile> getProjectBcfFiles() {
+	/*public List<ProjectBcfFile> getProjectBcfFiles() {
 		return this.projectBcfFiles;
 	}
 
@@ -180,7 +215,7 @@ public class Project implements Serializable {
 		projectTask.setProject(null);
 
 		return projectTask;
-	}
+	}*/
 
 	public Company getCompanyBean() {
 		return this.companyBean;

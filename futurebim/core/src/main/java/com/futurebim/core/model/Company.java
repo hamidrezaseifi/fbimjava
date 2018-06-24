@@ -14,6 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The persistent class for the companies database table.
  * 
@@ -26,7 +31,7 @@ public class Company implements Serializable {
   @Id
   @Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	private String comments;
 
@@ -41,17 +46,23 @@ public class Company implements Serializable {
 
   private LocalDateTime updated;
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "companyid", targetEntity = User.class)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "companyid", targetEntity = User.class)
   private List<User> users = new ArrayList<>();
+
+  //@JsonIgnore
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "companyid", targetEntity = Project.class)
+  private List<Project> projects = new ArrayList<>();
 
 	public Company() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -109,6 +120,14 @@ public class Company implements Serializable {
 
   public void setUsers(List<User> users) {
     this.users = users;
+  }
+  
+  public List<Project> getProjects() {
+    return projects;
+  }
+  
+  public void setProjects(List<Project> projects) {
+    this.projects = projects;
   }
 
   @Override

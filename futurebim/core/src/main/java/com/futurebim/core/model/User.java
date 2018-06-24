@@ -8,9 +8,12 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,9 +30,10 @@ public class User implements Serializable {
 
   @Id
   @Column(name="id")
-	private int id;
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
 
-  private int companyid;
+  private Long companyid;
   
 	private LocalDate birthday;
 
@@ -62,24 +66,25 @@ public class User implements Serializable {
   @JoinColumn(name = "companyid", insertable=false, updatable=false)  
 	private Company company;
 
-	//private List<UserProjectAccess> userProjectAccesses;
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "id.userid", targetEntity = UserProjectAccess.class)
+	private List<UserProjectAccess> userProjectAccesses;
 
 	public User() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public int getCompanyid() {
+	public Long getCompanyid() {
     return this.companyid;
   }
 
-  public void setCompanyid(int company) {
+  public void setCompanyid(Long company) {
     this.companyid = company;
   }
   
@@ -188,7 +193,7 @@ public class User implements Serializable {
 		this.company = company;
 	}
 
-	/*public List<UserProjectAccess> getUserProjectAccesses() {
+	public List<UserProjectAccess> getUserProjectAccesses() {
 		return this.userProjectAccesses;
 	}
 
@@ -208,7 +213,7 @@ public class User implements Serializable {
 		userProjectAccess.setUser(null);
 
 		return userProjectAccess;
-	}*/
+	}
 
 
 }

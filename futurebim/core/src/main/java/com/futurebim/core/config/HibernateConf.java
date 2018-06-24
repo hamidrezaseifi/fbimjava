@@ -1,18 +1,25 @@
 package com.futurebim.core.config;
 
+import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.persistence.Entity;
 import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+
+import com.futurebim.core.model.*;
 
 @Configuration
 @EnableTransactionManagement
@@ -27,15 +34,37 @@ public class HibernateConf {
   
   @Bean
   public LocalSessionFactoryBean sessionFactory() {
+    
+    
+    
       LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
       sessionFactory.setDataSource(dbConfiguration.getDatasource());
-      sessionFactory.setAnnotatedClasses(new Class<?>[]{com.futurebim.core.model.Company.class, com.futurebim.core.model.User.class});
+      
+      sessionFactory.setAnnotatedClasses(findAllEntities());
       sessionFactory.setPackagesToScan("com.futurebim.core.dao.impl");
       sessionFactory.setHibernateProperties(hibernateProperties());
 
       return sessionFactory;
   }
 
+  private Class<?>[] findAllEntities(){
+    ArrayList<Class> classes = new ArrayList<Class>();
+
+    ClassPathScanningCandidateComponentProvider scanner =
+      new ClassPathScanningCandidateComponentProvider(false);
+    scanner.addIncludeFilter(new AnnotationTypeFilter(Entity.class));
+
+    for (BeanDefinition bd : scanner.findCandidateComponents("com.futurebim.core.model")) {
+      String name = bd.getBeanClassName();
+      try {
+        classes.add(Class.forName(name));
+      } catch (Exception E) {
+      }
+    }
+    
+    return classes.toArray(new Class[classes.size()]);
+  }
+  
   @Bean
   public DataSource dataSource() {
     BasicDataSource ds = new BasicDataSource();

@@ -4,14 +4,26 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 /**
  * The persistent class for the project_access_type database table.
  * 
  */
+@Entity
+@Table(name="project_access_type")
 public class ProjectAccessType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+  @Id
+  @Column(name="id")
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private LocalDateTime created;
@@ -22,7 +34,7 @@ public class ProjectAccessType implements Serializable {
 
 	private LocalDateTime updated;
 
-	private List<UserProjectAccess> userProjectAccesses;
+	//private List<UserProjectAccess> userProjectAccesses;
 
 	public ProjectAccessType() {
 	}
@@ -67,7 +79,7 @@ public class ProjectAccessType implements Serializable {
 		this.updated = updated;
 	}
 
-	public List<UserProjectAccess> getUserProjectAccesses() {
+	/*public List<UserProjectAccess> getUserProjectAccesses() {
 		return this.userProjectAccesses;
 	}
 
@@ -87,6 +99,6 @@ public class ProjectAccessType implements Serializable {
 		userProjectAccess.setProjectAccessType(null);
 
 		return userProjectAccess;
-	}
+	}*/
 
 }

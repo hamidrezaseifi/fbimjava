@@ -13,8 +13,6 @@ public class CoreReadApp {
 	public static void main(String[] args) {
 		CoreReadApp.logger.info("Starting Feature Bim Core application...");
 		SpringApplication.run(CoreReadApp.class, args);
-	    
-	    
+		 
 	}
-
 }
