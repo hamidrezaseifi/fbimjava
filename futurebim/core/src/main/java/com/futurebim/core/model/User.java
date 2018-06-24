@@ -5,16 +5,32 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the users database table.
  * 
  */
+@Entity
+@Table(name="users")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+  @Id
+  @Column(name="id")
 	private int id;
 
+  private int companyid;
+  
 	private LocalDate birthday;
 
 	private LocalDateTime created;
@@ -25,10 +41,12 @@ public class User implements Serializable {
 
 	private short gender;
 
+  @Column(name="hash_password")
 	private String hashPassword;
 
 	private String lastname;
 
+  @Column(name="name_tag")
 	private String nameTag;
 
 	private short status;
@@ -39,11 +57,12 @@ public class User implements Serializable {
 
 	private int version;
 
-	private List<Company> companies;
+	@JsonIgnore
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "companyid", insertable=false, updatable=false)  
+	private Company company;
 
-	private List<UserProjectAccess> userProjectAccesses;
-
-	private Company companyBean;
+	//private List<UserProjectAccess> userProjectAccesses;
 
 	public User() {
 	}
@@ -56,6 +75,14 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
+	public int getCompanyid() {
+    return this.companyid;
+  }
+
+  public void setCompanyid(int company) {
+    this.companyid = company;
+  }
+  
 	public LocalDate getBirthday() {
 		return this.birthday;
 	}
@@ -152,15 +179,16 @@ public class User implements Serializable {
 		this.version = version;
 	}
 
-	public List<Company> getCompanies() {
-		return this.companies;
+	@JsonIgnore
+  public Company getCompany() {
+		return this.company;
 	}
 
-	public void setCompanies(List<Company> companies) {
-		this.companies = companies;
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 
-	public List<UserProjectAccess> getUserProjectAccesses() {
+	/*public List<UserProjectAccess> getUserProjectAccesses() {
 		return this.userProjectAccesses;
 	}
 
@@ -180,14 +208,7 @@ public class User implements Serializable {
 		userProjectAccess.setUser(null);
 
 		return userProjectAccess;
-	}
+	}*/
 
-	public Company getCompanyBean() {
-		return this.companyBean;
-	}
-
-	public void setCompanyBean(Company companyBean) {
-		this.companyBean = companyBean;
-	}
 
 }

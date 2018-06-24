@@ -2,14 +2,18 @@ package com.futurebim.core.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 /**
  * The persistent class for the companies database table.
  * 
@@ -36,6 +40,9 @@ public class Company implements Serializable {
   private LocalDateTime created;
 
   private LocalDateTime updated;
+
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "companyid", targetEntity = User.class)
+  private List<User> users = new ArrayList<>();
 
 	public Company() {
 	}
@@ -96,7 +103,15 @@ public class Company implements Serializable {
 		this.version = version;
 	}
 
-	@Override
+  public List<User> getUsers() {
+    return users;
+  }
+
+  public void setUsers(List<User> users) {
+    this.users = users;
+  }
+
+  @Override
 	public String toString(){
 		return "id="+id+", name="+companyName+", updated="+updated;
 	}

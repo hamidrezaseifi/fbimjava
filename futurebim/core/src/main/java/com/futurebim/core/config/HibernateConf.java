@@ -29,7 +29,7 @@ public class HibernateConf {
   public LocalSessionFactoryBean sessionFactory() {
       LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
       sessionFactory.setDataSource(dbConfiguration.getDatasource());
-      sessionFactory.setAnnotatedClasses(new Class<?>[]{com.futurebim.core.model.Company.class});
+      sessionFactory.setAnnotatedClasses(new Class<?>[]{com.futurebim.core.model.Company.class, com.futurebim.core.model.User.class});
       sessionFactory.setPackagesToScan("com.futurebim.core.dao.impl");
       sessionFactory.setHibernateProperties(hibernateProperties());
 
