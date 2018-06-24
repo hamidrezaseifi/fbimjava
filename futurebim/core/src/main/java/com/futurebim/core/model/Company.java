@@ -4,33 +4,38 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 /**
  * The persistent class for the companies database table.
  * 
  */
+@Entity
+@Table(name="companies")
 public class Company implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+  @Id
+  @Column(name="id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String comments;
 
+  @Column(name="company_name")
 	private String companyName;
 
-	private LocalDateTime created;
-
-	private short status;
-
-	private LocalDateTime updated;
+  private int status;
 
 	private int version;
 
-	private List<User> users1;
+  private LocalDateTime created;
 
-	private List<Project> projects;
-
-	private List<User> users2;
+  private LocalDateTime updated;
 
 	public Company() {
 	}
@@ -67,11 +72,11 @@ public class Company implements Serializable {
 		this.created = created;
 	}
 
-	public short getStatus() {
+	public int getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(short status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -91,56 +96,9 @@ public class Company implements Serializable {
 		this.version = version;
 	}
 
-	public List<User> getUsers1() {
-		return this.users1;
-	}
-
-	public void setUsers1(List<User> users1) {
-		this.users1 = users1;
-	}
-
-	public List<Project> getProjects() {
-		return this.projects;
-	}
-
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
-	}
-
-	public Project addProject(Project project) {
-		getProjects().add(project);
-		project.setCompanyBean(this);
-
-		return project;
-	}
-
-	public Project removeProject(Project project) {
-		getProjects().remove(project);
-		project.setCompanyBean(null);
-
-		return project;
-	}
-
-	public List<User> getUsers2() {
-		return this.users2;
-	}
-
-	public void setUsers2(List<User> users2) {
-		this.users2 = users2;
-	}
-
-	public User addUsers2(User users2) {
-		getUsers2().add(users2);
-		users2.setCompanyBean(this);
-
-		return users2;
-	}
-
-	public User removeUsers2(User users2) {
-		getUsers2().remove(users2);
-		users2.setCompanyBean(null);
-
-		return users2;
+	@Override
+	public String toString(){
+		return "id="+id+", name="+companyName+", updated="+updated;
 	}
 
 }

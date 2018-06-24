@@ -1,4 +1,4 @@
-package com.futurebim.core.hp;
+package com.futurebim.core.dao.impl;
 
 import java.util.List;
 import org.hibernate.Session;
@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import com.futurebim.core.model.Company;
+import com.futurebim.core.dao.CompanyDao;
 
 @Transactional
 @Repository

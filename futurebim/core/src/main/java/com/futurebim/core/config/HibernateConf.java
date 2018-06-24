@@ -5,19 +5,11 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import com.futurebim.core.hp.Company;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -26,36 +18,34 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 @EnableTransactionManagement
 public class HibernateConf {
 	 
-  private DataSource dataSource;
+  private DbConfiguration dbConfiguration;
   
   @Autowired
-  public HibernateConf(DataSource dataSource) {
-    this.dataSource = dataSource;
+  public HibernateConf(DbConfiguration dbConfiguration) {
+    this.dbConfiguration = dbConfiguration;
   }
   
   @Bean
   public LocalSessionFactoryBean sessionFactory() {
       LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-      sessionFactory.setDataSource(this.dataSource);
-      sessionFactory.setAnnotatedClasses(new Class<?>[]{com.futurebim.core.hp.Company.class});
-      sessionFactory.setPackagesToScan("com.featurebim.core.hp");
+      sessionFactory.setDataSource(dbConfiguration.getDatasource());
+      sessionFactory.setAnnotatedClasses(new Class<?>[]{com.futurebim.core.model.Company.class});
+      sessionFactory.setPackagesToScan("com.futurebim.core.dao.impl");
       sessionFactory.setHibernateProperties(hibernateProperties());
 
       return sessionFactory;
   }
 
-  /*@Bean
+  @Bean
   public DataSource dataSource() {
     BasicDataSource ds = new BasicDataSource();
-    ds.setDriverClassName("com.mysql.jdbc.Driver");
-    ds.setUrl("jdbc:mysql://localhost:3306/featurebim");
-    ds.setUsername("bim");
-    ds.setPassword("bim");
-    
-    
-    
+    ds.setDriverClassName(dbConfiguration.getClassName());
+    ds.setUrl(dbConfiguration.getJdbcUrl());
+    ds.setUsername(dbConfiguration.getDbUserName());
+    ds.setPassword(dbConfiguration.getPassword());
+      
     return ds;
-  }*/
+  }
 
   @Bean
   public PlatformTransactionManager transactionManager() {

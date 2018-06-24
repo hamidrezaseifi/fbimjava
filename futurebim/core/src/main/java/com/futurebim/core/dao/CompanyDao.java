@@ -1,5 +1,7 @@
-package com.futurebim.core.hp;
+package com.futurebim.core.dao;
 import java.util.List;
+
+import com.futurebim.core.model.Company;
 
 public interface CompanyDao {
 

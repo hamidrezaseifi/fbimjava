@@ -17,6 +17,8 @@
     <module>common</module>
     <module>core</module>
     <module>gui</module>
+    <module>core-read</module>
+    <module>core-write</module>
   </modules>
   
 </project>

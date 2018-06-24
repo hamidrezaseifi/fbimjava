@@ -6,13 +6,13 @@
     <artifactId>futurebim</artifactId>
     <version>0.0.1</version>
   </parent>
-  <artifactId>core</artifactId>
+  <artifactId>core-write</artifactId>
   
     <dependencies>
 
         <dependency>
             <groupId>com.seifi.futurebim</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>core</artifactId>
             <version>0.0.1</version>
         </dependency>
 
@@ -133,5 +133,14 @@
     </dependencies>
 
 
+  <build>
+    <plugins>
+      <plugin>
+        <!-- creates an executable spring boot JAR -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
   
 </project>

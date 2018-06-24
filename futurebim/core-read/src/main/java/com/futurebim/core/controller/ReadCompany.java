@@ -1,6 +1,5 @@
 package com.futurebim.core.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.futurebim.core.hp.Company;
-import com.futurebim.core.hp.CompanyDao;
+import com.futurebim.core.model.Company;
+import com.futurebim.core.dao.CompanyDao;
 
 @RestController
 @RequestMapping(path = "/company/read")
 public class ReadCompany {
   
-CompanyDao companyDao;
+  private CompanyDao companyDao;
   
   @Autowired(required=true)
   public void setPersonService(CompanyDao companyDao){

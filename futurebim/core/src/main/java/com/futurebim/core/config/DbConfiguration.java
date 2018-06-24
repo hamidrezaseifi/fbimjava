@@ -84,4 +84,114 @@ public class DbConfiguration {
     return ds;
   }
 
+  
+  public String getPoolName() {
+    return poolName;
+  }
+
+  
+  public void setPoolName(String poolName) {
+    this.poolName = poolName;
+  }
+
+  
+  public String getJdbcUrl() {
+    return jdbcUrl;
+  }
+
+  
+  public void setJdbcUrl(String jdbcUrl) {
+    this.jdbcUrl = jdbcUrl;
+  }
+
+  
+  public String getDbUserName() {
+    return dbUserName;
+  }
+
+  
+  public void setDbUserName(String dbUserName) {
+    this.dbUserName = dbUserName;
+  }
+
+  
+  public String getPassword() {
+    return password;
+  }
+
+  
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  
+  public Integer getMinIdleConnections() {
+    return minIdleConnections;
+  }
+
+  
+  public void setMinIdleConnections(Integer minIdleConnections) {
+    this.minIdleConnections = minIdleConnections;
+  }
+
+  
+  public Integer getMaxPoolSize() {
+    return maxPoolSize;
+  }
+
+  
+  public void setMaxPoolSize(Integer maxPoolSize) {
+    this.maxPoolSize = maxPoolSize;
+  }
+
+  
+  public Boolean getCachePreparedStatements() {
+    return cachePreparedStatements;
+  }
+
+  
+  public void setCachePreparedStatements(Boolean cachePreparedStatements) {
+    this.cachePreparedStatements = cachePreparedStatements;
+  }
+
+  
+  public Integer getPreparedStatementsCacheSize() {
+    return preparedStatementsCacheSize;
+  }
+
+  
+  public void setPreparedStatementsCacheSize(Integer preparedStatementsCacheSize) {
+    this.preparedStatementsCacheSize = preparedStatementsCacheSize;
+  }
+
+  
+  public Integer getPreparedStatementsCacheSqlLimit() {
+    return preparedStatementsCacheSqlLimit;
+  }
+
+  
+  public void setPreparedStatementsCacheSqlLimit(Integer preparedStatementsCacheSqlLimit) {
+    this.preparedStatementsCacheSqlLimit = preparedStatementsCacheSqlLimit;
+  }
+
+  
+  public Boolean getUseServerSidePreparedStatements() {
+    return useServerSidePreparedStatements;
+  }
+
+  
+  public void setUseServerSidePreparedStatements(Boolean useServerSidePreparedStatements) {
+    this.useServerSidePreparedStatements = useServerSidePreparedStatements;
+  }
+
+  
+  public String getClassName() {
+    return className;
+  }
+
+  
+  public void setClassName(String className) {
+    this.className = className;
+  }
+
 }
