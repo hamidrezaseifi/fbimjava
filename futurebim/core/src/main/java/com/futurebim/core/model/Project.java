@@ -18,6 +18,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.futurebim.core.model.base.SerializableModelBase;
+import com.futurebim.core.model.enums.EStatus;
+import com.futurebim.core.model.enums.base.UnknownEnumValueException;
 
 
 /**
@@ -29,12 +31,12 @@ import com.futurebim.core.model.base.SerializableModelBase;
 public class Project extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
-  @Id
-  @Column(name="id")
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private Long id;
+	@Id
+  	@Column(name="id")
+  	@GeneratedValue(strategy=GenerationType.IDENTITY)
+  	private Long id;
 
-  private Long companyid;
+	private Long companyid;
 
 	private LocalDateTime created;
 
@@ -44,12 +46,12 @@ public class Project extends SerializableModelBase {
 	private String projectName;
 
 	@Column(name="responsible_user")
-  private int responsibleUser;
+	private int responsibleUser;
 
-  @Column(name="start_date")
+	@Column(name="start_date")
 	private LocalDate startDate;
 
-	private short status;
+	private EStatus status;
 
 	private LocalDateTime updated;
 
@@ -128,12 +130,12 @@ public class Project extends SerializableModelBase {
 		this.startDate = startDate;
 	}
 
-	public short getStatus() {
+	public EStatus getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(short status) {
-		this.status = status;
+	public void setStatus(Long status) throws UnknownEnumValueException {
+		this.status = EStatus.ofId(status);
 	}
 
 	public LocalDateTime getUpdated() {

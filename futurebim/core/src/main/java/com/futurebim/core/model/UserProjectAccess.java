@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.futurebim.core.model.base.SerializableModelBase;
+import com.futurebim.core.model.enums.EStatus;
+import com.futurebim.core.model.enums.base.UnknownEnumValueException;
 
 
 /**
@@ -31,7 +33,7 @@ public class UserProjectAccess extends SerializableModelBase {
 	  
 	private LocalDateTime created;
 
-	private short status;
+	private EStatus status;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "access_type", insertable=false, updatable=false)  
@@ -66,12 +68,12 @@ public class UserProjectAccess extends SerializableModelBase {
     return this.created;
   }
 
-	public short getStatus() {
+	public EStatus getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(short status) {
-		this.status = status;
+	public void setStatus(Long status) throws UnknownEnumValueException {
+		this.status = EStatus.ofId(status);
 	}
 
 	public ProjectAccessType getProjectAccessType() {

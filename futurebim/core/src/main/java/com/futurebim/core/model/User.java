@@ -1,6 +1,5 @@
 package com.futurebim.core.model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +17,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.futurebim.core.model.base.SerializableModelBase;
+import com.futurebim.core.model.enums.EStatus;
+import com.futurebim.core.model.enums.base.UnknownEnumValueException;
 
 
 /**
@@ -29,12 +30,12 @@ import com.futurebim.core.model.base.SerializableModelBase;
 public class User extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
-  @Id
-  @Column(name="id")
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-  private Long companyid;
+  	private Long companyid;
   
 	private LocalDate birthday;
 
@@ -46,15 +47,15 @@ public class User extends SerializableModelBase {
 
 	private short gender;
 
-  @Column(name="hash_password")
+	@Column(name="hash_password")
 	private String hashPassword;
 
 	private String lastname;
 
-  @Column(name="name_tag")
+	@Column(name="name_tag")
 	private String nameTag;
 
-	private short status;
+	private EStatus status;
 
 	private LocalDateTime updated;
 
@@ -63,11 +64,11 @@ public class User extends SerializableModelBase {
 	private int version;
 
 	@JsonIgnore
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "companyid", insertable=false, updatable=false)  
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "companyid", insertable=false, updatable=false)  
 	private Company company;
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "id.userid", targetEntity = UserProjectAccess.class)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "id.userid", targetEntity = UserProjectAccess.class)
 	private List<UserProjectAccess> userProjectAccesses;
 
 	public User() {
@@ -82,12 +83,12 @@ public class User extends SerializableModelBase {
 	}
 
 	public Long getCompanyid() {
-    return this.companyid;
-  }
+		return this.companyid;
+	}
 
-  public void setCompanyid(Long company) {
-    this.companyid = company;
-  }
+	public void setCompanyid(Long company) {
+		this.companyid = company;
+	}
   
 	public LocalDate getBirthday() {
 		return this.birthday;
@@ -153,12 +154,12 @@ public class User extends SerializableModelBase {
 		this.nameTag = nameTag;
 	}
 
-	public short getStatus() {
+	public EStatus getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(short status) {
-		this.status = status;
+	public void setStatus(Long status) throws UnknownEnumValueException {
+		this.status = EStatus.ofId(status);
 	}
 
 	public LocalDateTime getUpdated() {
@@ -186,7 +187,7 @@ public class User extends SerializableModelBase {
 	}
 
 	@JsonIgnore
-  public Company getCompany() {
+	public Company getCompany() {
 		return this.company;
 	}
 

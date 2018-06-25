@@ -3,6 +3,8 @@ package com.futurebim.core.model;
 import java.io.Serializable;
 
 import com.futurebim.core.model.base.SerializableModelBase;
+import com.futurebim.core.model.enums.EStatus;
+import com.futurebim.core.model.enums.base.UnknownEnumValueException;
 
 
 /**
@@ -22,7 +24,7 @@ public class Toolbar extends SerializableModelBase {
 
 	private short pos;
 
-	private short status;
+	private EStatus status;
 
 	private String type;
 
@@ -71,12 +73,12 @@ public class Toolbar extends SerializableModelBase {
 		this.pos = pos;
 	}
 
-	public short getStatus() {
+	public EStatus getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(short status) {
-		this.status = status;
+	public void setStatus(Long status) throws UnknownEnumValueException {
+		this.status = EStatus.ofId(status);
 	}
 
 	public String getType() {

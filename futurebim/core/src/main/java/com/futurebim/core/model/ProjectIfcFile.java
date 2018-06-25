@@ -3,6 +3,8 @@ package com.futurebim.core.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import com.futurebim.core.model.base.SerializableModelBase;
+import com.futurebim.core.model.enums.EStatus;
+import com.futurebim.core.model.enums.base.UnknownEnumValueException;
 
 
 /**
@@ -20,7 +22,7 @@ public class ProjectIfcFile extends SerializableModelBase {
 
 	private String filePath;
 
-	private short status;
+	private EStatus status;
 
 	private LocalDateTime updated;
 
@@ -61,12 +63,12 @@ public class ProjectIfcFile extends SerializableModelBase {
 		this.filePath = filePath;
 	}
 
-	public short getStatus() {
+	public EStatus getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(short status) {
-		this.status = status;
+	public void setStatus(Long status) throws UnknownEnumValueException {
+		this.status = EStatus.ofId(status);
 	}
 
 	public LocalDateTime getUpdated() {

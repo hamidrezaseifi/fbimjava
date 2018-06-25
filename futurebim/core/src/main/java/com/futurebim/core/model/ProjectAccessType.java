@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import com.futurebim.core.model.base.SerializableModelBase;
+import com.futurebim.core.model.enums.EStatus;
+import com.futurebim.core.model.enums.base.UnknownEnumValueException;
 
 
 /**
@@ -29,7 +31,7 @@ public class ProjectAccessType extends SerializableModelBase {
 
 	private LocalDateTime created;
 
-	private short status;
+	private EStatus status;
 
 	private String typeName;
 
@@ -56,12 +58,12 @@ public class ProjectAccessType extends SerializableModelBase {
 		this.created = created;
 	}
 
-	public short getStatus() {
+	public EStatus getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(short status) {
-		this.status = status;
+	public void setStatus(Long status) throws UnknownEnumValueException {
+		this.status = EStatus.ofId(status);
 	}
 
 	public String getTypeName() {
