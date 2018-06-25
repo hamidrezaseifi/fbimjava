@@ -1,20 +1,23 @@
-package com.futurebim.common.models;
+package com.futurebim.common.models.edo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the users database table.
  * 
  */
-public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class UserEdo {
 
-	private int id;
+	private Long id;
 
+  private Long companyid;
+  
 	private LocalDate birthday;
 
 	private LocalDateTime created;
@@ -39,23 +42,29 @@ public class User implements Serializable {
 
 	private int version;
 
-	private List<Company> companies;
+	private CompanyReferenceEdo company;
 
-	private List<UserProjectAccess> userProjectAccesses;
+	private List<UserProjectAccessReferenceEdo> userProjectAccesses;
 
-	private Company companyBean;
-
-	public User() {
+	public UserEdo() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
+	public Long getCompanyid() {
+    return this.companyid;
+  }
+
+  public void setCompanyid(Long company) {
+    this.companyid = company;
+  }
+  
 	public LocalDate getBirthday() {
 		return this.birthday;
 	}
@@ -152,42 +161,36 @@ public class User implements Serializable {
 		this.version = version;
 	}
 
-	public List<Company> getCompanies() {
-		return this.companies;
+	@JsonIgnore
+  public CompanyReferenceEdo getCompany() {
+		return this.company;
 	}
 
-	public void setCompanies(List<Company> companies) {
-		this.companies = companies;
+	public void setCompany(CompanyReferenceEdo company) {
+		this.company = company;
 	}
 
-	public List<UserProjectAccess> getUserProjectAccesses() {
+	public List<UserProjectAccessReferenceEdo> getUserProjectAccesses() {
 		return this.userProjectAccesses;
 	}
 
-	public void setUserProjectAccesses(List<UserProjectAccess> userProjectAccesses) {
+	public void setUserProjectAccesses(List<UserProjectAccessReferenceEdo> userProjectAccesses) {
 		this.userProjectAccesses = userProjectAccesses;
 	}
 
-	public UserProjectAccess addUserProjectAccess(UserProjectAccess userProjectAccess) {
+	public UserProjectAccessReferenceEdo addUserProjectAccess(UserProjectAccessReferenceEdo userProjectAccess) {
 		getUserProjectAccesses().add(userProjectAccess);
-		userProjectAccess.setUser(this);
+		userProjectAccess.setUserid(this.id);
 
 		return userProjectAccess;
 	}
 
-	public UserProjectAccess removeUserProjectAccess(UserProjectAccess userProjectAccess) {
+	public UserProjectAccessReferenceEdo removeUserProjectAccess(UserProjectAccessReferenceEdo userProjectAccess) {
 		getUserProjectAccesses().remove(userProjectAccess);
-		userProjectAccess.setUser(null);
+		userProjectAccess.setUserid(0L);
 
 		return userProjectAccess;
 	}
 
-	public Company getCompanyBean() {
-		return this.companyBean;
-	}
-
-	public void setCompanyBean(Company companyBean) {
-		this.companyBean = companyBean;
-	}
 
 }

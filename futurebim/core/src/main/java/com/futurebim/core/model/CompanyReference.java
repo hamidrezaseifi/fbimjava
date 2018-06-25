@@ -27,7 +27,7 @@ import com.futurebim.core.model.base.SerializableModelBase;
  */
 @Entity
 @Table(name="companies")
-public class Company extends SerializableModelBase {
+public class CompanyReference extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
   @Id
@@ -48,27 +48,16 @@ public class Company extends SerializableModelBase {
 
   private LocalDateTime updated;
 
-  @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "companyid", targetEntity = UserReference.class)
-  private List<UserReference> users = new ArrayList<>();
-
-  //@JsonIgnore
-  @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "companyid", targetEntity = ProjectReference.class)
-  private List<ProjectReference> projects = new ArrayList<>();
-
-  public Company() {
+  public CompanyReference() {
   }
 
-  public Company(final CompanyEdo edo) {
+  public CompanyReference(final CompanyEdo edo) {
     this.setId(edo.getId());
     this.setCompanyName(edo.getCompanyName());
     this.setComments(edo.getComments());
     this.setCreated(edo.getCreated());
-    this.setProjects(edo.getProjects());
     this.setStatus(edo.getStatus());
     this.setUpdated(edo.getUpdated());
-    this.setUsers(edo.getUsers());
     this.setVersion(edo.getVersion());
   }
 
@@ -127,22 +116,6 @@ public class Company extends SerializableModelBase {
 	public void setVersion(final int version) {
 		this.version = version;
 	}
-
-  public List<UserReference> getUsers() {
-    return users;
-  }
-
-  public void setUsers(final List<UserReference> users) {
-    this.users = users;
-  }
-  
-  public List<ProjectReference> getProjects() {
-    return projects;
-  }
-  
-  public void setProjects(final List<ProjectReference> projects) {
-    this.projects = projects;
-  }
 
   @Override
 	public String toString(){

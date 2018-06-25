@@ -1,18 +1,16 @@
-package com.futurebim.common.models;
+package com.futurebim.common.models.edo;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 /**
  * The persistent class for the project_access_type database table.
  * 
  */
-public class ProjectAccessType implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class ProjectAccessTypeEdo {
 
-	private int id;
+ 	private int id;
 
 	private LocalDateTime created;
 
@@ -22,9 +20,9 @@ public class ProjectAccessType implements Serializable {
 
 	private LocalDateTime updated;
 
-	private List<UserProjectAccess> userProjectAccesses;
+	//private List<UserProjectAccess> userProjectAccesses;
 
-	public ProjectAccessType() {
+	public ProjectAccessTypeEdo() {
 	}
 
 	public int getId() {
@@ -67,7 +65,7 @@ public class ProjectAccessType implements Serializable {
 		this.updated = updated;
 	}
 
-	public List<UserProjectAccess> getUserProjectAccesses() {
+	/*public List<UserProjectAccess> getUserProjectAccesses() {
 		return this.userProjectAccesses;
 	}
 
@@ -87,6 +85,6 @@ public class ProjectAccessType implements Serializable {
 		userProjectAccess.setProjectAccessType(null);
 
 		return userProjectAccess;
-	}
+	}*/
 
 }

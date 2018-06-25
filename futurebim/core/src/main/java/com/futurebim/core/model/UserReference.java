@@ -26,7 +26,7 @@ import com.futurebim.core.model.base.SerializableModelBase;
  */
 @Entity
 @Table(name="users")
-public class User extends SerializableModelBase {
+public class UserReference extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
   @Id
@@ -62,15 +62,7 @@ public class User extends SerializableModelBase {
 
 	private int version;
 
-	@JsonIgnore
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "companyid", insertable=false, updatable=false)  
-	private CompanyReference company;
-
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "id.userid", targetEntity = UserProjectAccessReference.class)
-	private List<UserProjectAccessReference> userProjectAccesses;
-
-	public User() {
+	public UserReference() {
 	}
 
 	public Long getId() {
@@ -184,37 +176,5 @@ public class User extends SerializableModelBase {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-
-	@JsonIgnore
-  public CompanyReference getCompany() {
-		return this.company;
-	}
-
-	public void setCompany(CompanyReference company) {
-		this.company = company;
-	}
-
-	public List<UserProjectAccessReference> getUserProjectAccesses() {
-		return this.userProjectAccesses;
-	}
-
-	public void setUserProjectAccesses(List<UserProjectAccessReference> userProjectAccesses) {
-		this.userProjectAccesses = userProjectAccesses;
-	}
-
-	public UserProjectAccessReference addUserProjectAccess(UserProjectAccessReference userProjectAccess) {
-		getUserProjectAccesses().add(userProjectAccess);
-		userProjectAccess.setUser(this.id);
-
-		return userProjectAccess;
-	}
-
-	public UserProjectAccessReference removeUserProjectAccess(UserProjectAccessReference userProjectAccess) {
-		getUserProjectAccesses().remove(userProjectAccess);
-		userProjectAccess.setUser(null);
-
-		return userProjectAccess;
-	}
-
 
 }

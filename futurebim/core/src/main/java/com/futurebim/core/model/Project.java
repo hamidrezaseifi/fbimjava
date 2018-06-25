@@ -64,10 +64,10 @@ public class Project extends SerializableModelBase {
   @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "companyid", insertable=false, updatable=false)  
-	private Company companyBean;
+	private CompanyReference companyBean;
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "id.projectid", targetEntity = UserProjectAccess.class)
-	private List<UserProjectAccess> userProjectAccesses;
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "id.projectid", targetEntity = UserProjectAccessReference.class)
+	private List<UserProjectAccessReference> userProjectAccesses;
 
 	public Project() {
 	}
@@ -218,30 +218,30 @@ public class Project extends SerializableModelBase {
 		return projectTask;
 	}*/
 
-	public Company getCompanyBean() {
+	public CompanyReference getCompanyBean() {
 		return this.companyBean;
 	}
 
-	public void setCompanyBean(Company companyBean) {
+	public void setCompanyBean(CompanyReference companyBean) {
 		this.companyBean = companyBean;
 	}
 
-	public List<UserProjectAccess> getUserProjectAccesses() {
+	public List<UserProjectAccessReference> getUserProjectAccesses() {
 		return this.userProjectAccesses;
 	}
 
-	public void setUserProjectAccesses(List<UserProjectAccess> userProjectAccesses) {
+	public void setUserProjectAccesses(List<UserProjectAccessReference> userProjectAccesses) {
 		this.userProjectAccesses = userProjectAccesses;
 	}
 
-	public UserProjectAccess addUserProjectAccess(UserProjectAccess userProjectAccess) {
+	public UserProjectAccessReference addUserProjectAccess(UserProjectAccessReference userProjectAccess) {
 		getUserProjectAccesses().add(userProjectAccess);
-		userProjectAccess.setProject(this);
+		userProjectAccess.setProject(this.id);
 
 		return userProjectAccess;
 	}
 
-	public UserProjectAccess removeUserProjectAccess(UserProjectAccess userProjectAccess) {
+	public UserProjectAccessReference removeUserProjectAccess(UserProjectAccessReference userProjectAccess) {
 		getUserProjectAccesses().remove(userProjectAccess);
 		userProjectAccess.setProject(null);
 

@@ -1,19 +1,23 @@
-package com.futurebim.common.models;
+package com.futurebim.common.models.edo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the projects database table.
  * 
  */
-public class Project implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	private int id;
+public class ProjectEdo  {
+
+  private Long id;
+
+  private Long companyid;
 
 	private LocalDateTime created;
 
@@ -21,7 +25,7 @@ public class Project implements Serializable {
 
 	private String projectName;
 
-	private int responsibleUser;
+  private int responsibleUser;
 
 	private LocalDate startDate;
 
@@ -31,28 +35,36 @@ public class Project implements Serializable {
 
 	private int version;
 
-	private List<ProjectBcfFile> projectBcfFiles;
+	/*private List<ProjectBcfFile> projectBcfFiles;
 
 	private List<ProjectIfcFile> projectIfcFiles;
 
-	private List<ProjectTask> projectTasks;
+	private List<ProjectTask> projectTasks;*/
 
-	private Company companyBean;
+	private CompanyReferenceEdo companyBean;
 
-	private List<UserProjectAccess> userProjectAccesses;
+	private List<UserProjectAccessReferenceEdo> userProjectAccesses;
 
-	public Project() {
+	public ProjectEdo() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
+	
+  public Long getCompanyid() {
+    return companyid;
+  }
+  
+  public void setCompanyid(Long companyid) {
+    this.companyid = companyid;
+  }
 
-	public LocalDateTime getCreated() {
+  public LocalDateTime getCreated() {
 		return this.created;
 	}
 
@@ -116,7 +128,7 @@ public class Project implements Serializable {
 		this.version = version;
 	}
 
-	public List<ProjectBcfFile> getProjectBcfFiles() {
+	/*public List<ProjectBcfFile> getProjectBcfFiles() {
 		return this.projectBcfFiles;
 	}
 
@@ -180,34 +192,34 @@ public class Project implements Serializable {
 		projectTask.setProject(null);
 
 		return projectTask;
-	}
+	}*/
 
-	public Company getCompanyBean() {
+	public CompanyReferenceEdo getCompanyBean() {
 		return this.companyBean;
 	}
 
-	public void setCompanyBean(Company companyBean) {
+	public void setCompanyBean(CompanyReferenceEdo companyBean) {
 		this.companyBean = companyBean;
 	}
 
-	public List<UserProjectAccess> getUserProjectAccesses() {
+	public List<UserProjectAccessReferenceEdo> getUserProjectAccesses() {
 		return this.userProjectAccesses;
 	}
 
-	public void setUserProjectAccesses(List<UserProjectAccess> userProjectAccesses) {
+	public void setUserProjectAccesses(List<UserProjectAccessReferenceEdo> userProjectAccesses) {
 		this.userProjectAccesses = userProjectAccesses;
 	}
 
-	public UserProjectAccess addUserProjectAccess(UserProjectAccess userProjectAccess) {
+	public UserProjectAccessReferenceEdo addUserProjectAccess(UserProjectAccessReferenceEdo userProjectAccess) {
 		getUserProjectAccesses().add(userProjectAccess);
-		userProjectAccess.setProject(this);
+		userProjectAccess.setProjectid(this.id);
 
 		return userProjectAccess;
 	}
 
-	public UserProjectAccess removeUserProjectAccess(UserProjectAccess userProjectAccess) {
+	public UserProjectAccessReferenceEdo removeUserProjectAccess(UserProjectAccessReferenceEdo userProjectAccess) {
 		getUserProjectAccesses().remove(userProjectAccess);
-		userProjectAccess.setProject(null);
+		userProjectAccess.setProjectid(0L);
 
 		return userProjectAccess;
 	}
