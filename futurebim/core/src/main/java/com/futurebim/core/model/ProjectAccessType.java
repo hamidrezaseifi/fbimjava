@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 
 /**
@@ -18,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="project_access_type")
-public class ProjectAccessType implements Serializable {
+public class ProjectAccessType extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
   @Id

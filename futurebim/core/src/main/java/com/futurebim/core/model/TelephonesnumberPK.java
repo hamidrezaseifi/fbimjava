@@ -1,12 +1,13 @@
 package com.futurebim.core.model;
 
 import java.io.Serializable;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
  * The primary key class for the telephonesnumbers database table.
  * 
  */
-public class TelephonesnumberPK implements Serializable {
+public class TelephonesnumberPK extends SerializableModelBase {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 

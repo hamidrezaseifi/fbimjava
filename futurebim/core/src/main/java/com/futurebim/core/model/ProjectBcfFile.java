@@ -2,13 +2,14 @@ package com.futurebim.core.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 
 /**
  * The persistent class for the project_bcf_files database table.
  * 
  */
-public class ProjectBcfFile implements Serializable {
+public class ProjectBcfFile extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
 	private int id;

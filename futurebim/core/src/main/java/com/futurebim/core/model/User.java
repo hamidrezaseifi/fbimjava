@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 
 /**
@@ -25,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name="users")
-public class User implements Serializable {
+public class User extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
   @Id

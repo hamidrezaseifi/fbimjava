@@ -1,12 +1,13 @@
 package com.futurebim.core.model;
 
 import java.io.Serializable;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
  * The primary key class for the emails database table.
  * 
  */
-public class EmailPK implements Serializable {
+public class EmailPK extends SerializableModelBase {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 

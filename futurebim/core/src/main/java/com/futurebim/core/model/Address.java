@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 
 /**
@@ -14,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="addresses")
-public class Address implements Serializable {
+public class Address extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
   @EmbeddedId

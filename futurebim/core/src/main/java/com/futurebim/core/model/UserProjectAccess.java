@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 
 /**
@@ -22,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name="user_project_access")
-public class UserProjectAccess implements Serializable {
+public class UserProjectAccess extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId

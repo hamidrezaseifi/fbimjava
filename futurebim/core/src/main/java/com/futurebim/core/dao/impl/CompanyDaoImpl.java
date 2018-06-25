@@ -22,47 +22,59 @@ public class CompanyDaoImpl implements CompanyDao {
 	
 	
 	@Override
-	public void addCompany(Company c) {
+	public Company addCompany(Company c) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.persist(c);
+		Long id = (Long)session.save(c);
 		logger.info("Company saved successfully, Company Details=" + c);
+		return getById(id);
 	}
 
 	@Override
-	public void updateCompany(Company c) {
+	public boolean updateCompany(Company c) {
 		Session session = this.sessionFactory.getCurrentSession();
-		session.update(c);
+		Company uc = (Company)session.merge(c);
 		logger.info("Company updated successfully, Company Details=" + c);
-
+		return uc != null;
 	}
 
 	@Override
-	public void removeCompany(int id) {
+	public boolean removeCompany(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Company c = (Company) session.load(Company.class, new Integer(id));
+		Company c = (Company) session.get(Company.class, id);
+		
 		if(null != c){
 			session.delete(c);
+			logger.info("Company deleted successfully, Company details="+c);
 		}
-		logger.info("Company deleted successfully, person details="+c);
-
+		else{
+			logger.info("Company not found!");
+			return false;
+		}
+		
+		return session.get(Company.class, id) == null;
 	}
 
 	@Override
-	public Company getById(int id) {
+	public Company getById(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();		
-		Company c = (Company) session.load(Company.class, new Integer(id));
-		logger.info("Company loaded successfully, Company details="+c);
+		Company c = (Company) session.get(Company.class, id);
+		if(c != null){
+			logger.info("Company loaded successfully, Company details="+c);
+		}
+		else{
+			logger.info("Company not found!");
+		}
+		
 		return c;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Company> listCountries() {
+		logger.info("Read Company List");
 		Session session = this.sessionFactory.getCurrentSession();
 		List<Company> personsList = session.createQuery("from Company").list();
-		for(Company c : personsList){
-			logger.info("Company List::"+c);
-		}
+		
 		return personsList;
 	}
 

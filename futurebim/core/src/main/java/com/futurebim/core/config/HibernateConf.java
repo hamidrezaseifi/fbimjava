@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
@@ -53,6 +54,7 @@ public class HibernateConf {
     ClassPathScanningCandidateComponentProvider scanner =
       new ClassPathScanningCandidateComponentProvider(false);
     scanner.addIncludeFilter(new AnnotationTypeFilter(Entity.class));
+    scanner.addIncludeFilter(new AnnotationTypeFilter(Table.class));
 
     for (BeanDefinition bd : scanner.findCandidateComponents("com.futurebim.core.model")) {
       String name = bd.getBeanClassName();

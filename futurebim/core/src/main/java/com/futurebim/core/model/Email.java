@@ -2,13 +2,14 @@ package com.futurebim.core.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 
 /**
  * The persistent class for the emails database table.
  * 
  */
-public class Email implements Serializable {
+public class Email extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
 	private EmailPK id;

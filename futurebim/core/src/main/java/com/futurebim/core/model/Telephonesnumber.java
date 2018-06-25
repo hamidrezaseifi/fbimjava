@@ -2,13 +2,14 @@ package com.futurebim.core.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 
 /**
  * The persistent class for the telephonesnumbers database table.
  * 
  */
-public class Telephonesnumber implements Serializable {
+public class Telephonesnumber extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
 	private TelephonesnumberPK id;

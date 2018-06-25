@@ -5,10 +5,10 @@ import com.futurebim.core.model.Company;
 
 public interface CompanyDao {
 
-	public void addCompany(Company c);
-	public void updateCompany(Company c);
-	public void removeCompany(int id);
-	public Company getById(int id);
+	public Company addCompany(Company c);
+	public boolean updateCompany(Company c);
+	public boolean removeCompany(Long id);
+	public Company getById(Long id);
 	public List<Company> listCountries();
 	
 }

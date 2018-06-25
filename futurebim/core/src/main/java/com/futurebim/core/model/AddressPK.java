@@ -5,13 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
  * The primary key class for the addresses database table.
  * 
  */
 @Embeddable
-public class AddressPK implements Serializable {
+public class AddressPK extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
   @NotNull

@@ -3,13 +3,14 @@ package com.futurebim.core.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 
 /**
  * The persistent class for the project_tasks database table.
  * 
  */
-public class ProjectTask implements Serializable {
+public class ProjectTask extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
 	private int id;

@@ -5,13 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
  * The primary key class for the user_project_access database table.
  * 
  */
 @Embeddable
-public class UserProjectAccessPK implements Serializable {
+public class UserProjectAccessPK extends SerializableModelBase {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 

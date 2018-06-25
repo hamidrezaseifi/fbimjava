@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.futurebim.core.model.Company;
+import com.futurebim.core.model.ui.FutureBimUiRestResponse;
 import com.futurebim.core.dao.CompanyDao;
 
 @RestController
@@ -24,9 +27,29 @@ public class ReadCompany {
   }
 
   @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody List<Company> readAll(){
-    //return new ArrayList<>();
+  public @ResponseBody FutureBimUiRestResponse readAll(){
     
-    return companyDao.listCountries();
+    return FutureBimUiRestResponse.createDataResponse(companyDao.listCountries());
   }
+
+  @RequestMapping(value = "/get/{companyid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody FutureBimUiRestResponse getCompany(@PathVariable Long companyid){
+    
+    return FutureBimUiRestResponse.createDataResponse(companyDao.getById(companyid));
+  }
+
+  @RequestMapping(value = "/delete/{companyid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody FutureBimUiRestResponse deleteCompany(@PathVariable Long companyid){
+    
+    return FutureBimUiRestResponse.createDataResponse(companyDao.removeCompany(companyid));
+  }
+
+  @RequestMapping(value = "/update", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE
+		  , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody FutureBimUiRestResponse updateCompany(@RequestBody(required = true) final Company company){
+    
+    return FutureBimUiRestResponse.createDataResponse(companyDao.updateCompany(company));
+  }
+  
+  
 }
