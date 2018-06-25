@@ -16,8 +16,8 @@ import com.futurebim.core.model.ui.FutureBimUiRestResponse;
 import com.futurebim.core.dao.CompanyDao;
 
 @RestController
-@RequestMapping(path = "/company/read")
-public class ReadCompany {
+@RequestMapping(path = "/company/write")
+public class WriteCompany {
   
   private CompanyDao companyDao;
   
@@ -26,16 +26,17 @@ public class ReadCompany {
     this.companyDao = companyDao;
   }
 
-  @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody FutureBimUiRestResponse readAll(){
+  @RequestMapping(value = "/delete/{companyid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody FutureBimUiRestResponse deleteCompany(@PathVariable Long companyid){
     
-    return FutureBimUiRestResponse.createDataResponse(companyDao.listCountries());
+    return FutureBimUiRestResponse.createDataResponse(companyDao.removeCompany(companyid));
   }
 
-  @RequestMapping(value = "/get/{companyid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody FutureBimUiRestResponse getCompany(@PathVariable Long companyid){
+  @RequestMapping(value = "/update", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE
+		  , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody FutureBimUiRestResponse updateCompany(@RequestBody(required = true) final Company company){
     
-    return FutureBimUiRestResponse.createDataResponse(companyDao.getById(companyid));
+    return FutureBimUiRestResponse.createDataResponse(companyDao.updateCompany(company));
   }
   
   
