@@ -13,32 +13,32 @@ public class ProjectBcfFile extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
-  private int id;
+  protected Long id;
 
-  private LocalDateTime created;
+  protected LocalDateTime created;
 
-  private String fileName;
+  protected String fileName;
 
-  private String filePath;
+  protected String filePath;
 
-  private String objectId;
+  protected String objectId;
 
-  private EStatus status;
+  protected EStatus status;
 
-  private LocalDateTime updated;
+  protected LocalDateTime updated;
 
-  private String viewpoint;
+  protected String viewpoint;
 
-  private Long projectid;
+  protected Long projectid;
 
   public ProjectBcfFile() {
   }
 
-  public int getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final int id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 
@@ -98,11 +98,11 @@ public class ProjectBcfFile extends SerializableModelBase {
     this.viewpoint = viewpoint;
   }
 
-  public Long getProject() {
+  public Long getProjectid() {
     return this.projectid;
   }
 
-  public void setProject(final Long projectid) {
+  public void setProjectid(final Long projectid) {
     this.projectid = projectid;
   }
 

@@ -13,28 +13,28 @@ public class ProjectIfcFile extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
-  private int id;
+  protected Long id;
 
-  private LocalDateTime created;
+  protected LocalDateTime created;
 
-  private String fileName;
+  protected String fileName;
 
-  private String filePath;
+  protected String filePath;
 
-  private EStatus status;
+  protected EStatus status;
 
-  private LocalDateTime updated;
+  protected LocalDateTime updated;
 
-  private Long projectid;
+  protected Long projectid;
 
   public ProjectIfcFile() {
   }
 
-  public int getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final int id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 
@@ -78,11 +78,11 @@ public class ProjectIfcFile extends SerializableModelBase {
     this.updated = updated;
   }
 
-  public Long getProject() {
+  public Long getProjectid() {
     return this.projectid;
   }
 
-  public void setProject(final Long projectid) {
+  public void setProjectid(final Long projectid) {
     this.projectid = projectid;
   }
 
