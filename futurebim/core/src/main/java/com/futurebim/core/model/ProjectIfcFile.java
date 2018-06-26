@@ -1,90 +1,89 @@
 package com.futurebim.core.model;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import com.futurebim.core.model.base.SerializableModelBase;
-import com.futurebim.common.model.enums.EStatus;
-import com.futurebim.common.model.enums.base.UnknownEnumValueException1;
 
+import com.futurebim.common.model.enums.EStatus;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
  * The persistent class for the project_ifc_files database table.
- * 
+ *
  */
 public class ProjectIfcFile extends SerializableModelBase {
-	private static final long serialVersionUID = 1L;
 
-	private int id;
+  private static final long serialVersionUID = 1L;
 
-	private LocalDateTime created;
+  private int id;
 
-	private String fileName;
+  private LocalDateTime created;
 
-	private String filePath;
+  private String fileName;
 
-	private EStatus status;
+  private String filePath;
 
-	private LocalDateTime updated;
+  private EStatus status;
 
-	private Long projectid;
+  private LocalDateTime updated;
 
-	public ProjectIfcFile() {
-	}
+  private Long projectid;
 
-	public int getId() {
-		return this.id;
-	}
+  public ProjectIfcFile() {
+  }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  public int getId() {
+    return this.id;
+  }
 
-	public LocalDateTime getCreated() {
-		return this.created;
-	}
+  public void setId(final int id) {
+    this.id = id;
+  }
 
-	public void setCreated(LocalDateTime created) {
-		this.created = created;
-	}
+  public LocalDateTime getCreated() {
+    return this.created;
+  }
 
-	public String getFileName() {
-		return this.fileName;
-	}
+  public void setCreated(final LocalDateTime created) {
+    this.created = created;
+  }
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
+  public String getFileName() {
+    return this.fileName;
+  }
 
-	public String getFilePath() {
-		return this.filePath;
-	}
+  public void setFileName(final String fileName) {
+    this.fileName = fileName;
+  }
 
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
+  public String getFilePath() {
+    return this.filePath;
+  }
 
-	public EStatus getStatus() {
-		return this.status;
-	}
+  public void setFilePath(final String filePath) {
+    this.filePath = filePath;
+  }
 
-	public void setStatus(Long status) throws UnknownEnumValueException1 {
-		this.status = EStatus.ofId(status);
-	}
+  public EStatus getStatus() {
+    return this.status;
+  }
 
-	public LocalDateTime getUpdated() {
-		return this.updated;
-	}
+  public void setStatus(final Long status) {
+    this.status = EStatus.ofId(status);
+  }
 
-	public void setUpdated(LocalDateTime updated) {
-		this.updated = updated;
-	}
+  public LocalDateTime getUpdated() {
+    return this.updated;
+  }
 
-	public Long getProject() {
-		return this.projectid;
-	}
+  public void setUpdated(final LocalDateTime updated) {
+    this.updated = updated;
+  }
 
-	public void setProject(Long projectid) {
-		this.projectid = projectid;
-	}
+  public Long getProject() {
+    return this.projectid;
+  }
+
+  public void setProject(final Long projectid) {
+    this.projectid = projectid;
+  }
 
 }

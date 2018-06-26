@@ -1,100 +1,97 @@
 package com.futurebim.core.model;
 
-import java.io.Serializable;
-
-import com.futurebim.core.model.base.SerializableModelBase;
 import com.futurebim.common.model.enums.EStatus;
-import com.futurebim.common.model.enums.base.UnknownEnumValueException1;
-
+import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
  * The persistent class for the toolbars database table.
- * 
+ *
  */
 public class Toolbar extends SerializableModelBase {
-	private static final long serialVersionUID = 1L;
 
-	private String id;
+  private static final long serialVersionUID = 1L;
 
-	private String image;
+  private String id;
 
-	private String label;
+  private String image;
 
-	private String parent;
+  private String label;
 
-	private short pos;
+  private String parent;
 
-	private EStatus status;
+  private short pos;
 
-	private String type;
+  private EStatus status;
 
-	private String url;
+  private String type;
 
-	public Toolbar() {
-	}
+  private String url;
 
-	public String getId() {
-		return this.id;
-	}
+  public Toolbar() {
+  }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public String getId() {
+    return this.id;
+  }
 
-	public String getImage() {
-		return this.image;
-	}
+  public void setId(final String id) {
+    this.id = id;
+  }
 
-	public void setImage(String image) {
-		this.image = image;
-	}
+  public String getImage() {
+    return this.image;
+  }
 
-	public String getLabel() {
-		return this.label;
-	}
+  public void setImage(final String image) {
+    this.image = image;
+  }
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
+  public String getLabel() {
+    return this.label;
+  }
 
-	public String getParent() {
-		return this.parent;
-	}
+  public void setLabel(final String label) {
+    this.label = label;
+  }
 
-	public void setParent(String parent) {
-		this.parent = parent;
-	}
+  public String getParent() {
+    return this.parent;
+  }
 
-	public short getPos() {
-		return this.pos;
-	}
+  public void setParent(final String parent) {
+    this.parent = parent;
+  }
 
-	public void setPos(short pos) {
-		this.pos = pos;
-	}
+  public short getPos() {
+    return this.pos;
+  }
 
-	public EStatus getStatus() {
-		return this.status;
-	}
+  public void setPos(final short pos) {
+    this.pos = pos;
+  }
 
-	public void setStatus(Long status) throws UnknownEnumValueException1 {
-		this.status = EStatus.ofId(status);
-	}
+  public EStatus getStatus() {
+    return this.status;
+  }
 
-	public String getType() {
-		return this.type;
-	}
+  public void setStatus(final Long status) {
+    this.status = EStatus.ofId(status);
+  }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+  public String getType() {
+    return this.type;
+  }
 
-	public String getUrl() {
-		return this.url;
-	}
+  public void setType(final String type) {
+    this.type = type;
+  }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+  public String getUrl() {
+    return this.url;
+  }
+
+  public void setUrl(final String url) {
+    this.url = url;
+  }
 
 }
