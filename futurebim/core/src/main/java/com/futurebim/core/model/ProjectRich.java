@@ -54,14 +54,12 @@ public class ProjectRich extends Project {
 
   public UserProjectAccess addUserProjectAccess(final UserProjectAccess userProjectAccess) {
     getUserProjectAccesses().add(userProjectAccess);
-    userProjectAccess.setProject(this.id);
 
     return userProjectAccess;
   }
 
   public UserProjectAccess removeUserProjectAccess(final UserProjectAccess userProjectAccess) {
     getUserProjectAccesses().remove(userProjectAccess);
-    userProjectAccess.setProject(null);
 
     return userProjectAccess;
   }

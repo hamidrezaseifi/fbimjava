@@ -47,14 +47,12 @@ public class UserRich extends User {
 
   public UserProjectAccess addUserProjectAccess(final UserProjectAccess userProjectAccess) {
     getUserProjectAccesses().add(userProjectAccess);
-    userProjectAccess.setUser(this.id);
 
     return userProjectAccess;
   }
 
   public UserProjectAccess removeUserProjectAccess(final UserProjectAccess userProjectAccess) {
     getUserProjectAccesses().remove(userProjectAccess);
-    userProjectAccess.setUser(null);
 
     return userProjectAccess;
   }

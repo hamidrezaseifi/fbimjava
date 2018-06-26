@@ -4,9 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -17,8 +15,8 @@ import com.futurebim.common.model.enums.EStatus;
  * The persistent class for the companies database table.
  *
  */
-@Entity
-@Table(name = "companies")
+// @Entity
+// @Table(name = "companies")
 public class CompanyRich extends Company {
 
   private static final long serialVersionUID = 1L;
