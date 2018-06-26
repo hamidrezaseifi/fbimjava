@@ -10,19 +10,19 @@ import com.futurebim.common.model.enums.EStatus;
  */
 public class CompanyReferenceEdo {
 
-  private Long id;
+  protected Long id;
 
-  private String comments;
+  protected String comments;
 
-  private String companyName;
+  protected String companyName;
 
-  private EStatus status;
+  protected EStatus status;
 
-  private int version;
+  protected int version;
 
-  private LocalDateTime created;
+  protected LocalDateTime created;
 
-  private LocalDateTime updated;
+  protected LocalDateTime updated;
 
   public CompanyReferenceEdo() {
   }

@@ -11,33 +11,33 @@ import com.futurebim.common.model.enums.EStatus;
  */
 public class UserReferenceEdo {
 
-  private Long id;
+  protected Long id;
 
-  private Long companyid;
+  protected Long companyid;
 
-  private LocalDate birthday;
+  protected LocalDate birthday;
 
-  private LocalDateTime created;
+  protected LocalDateTime created;
 
-  private String email;
+  protected String email;
 
-  private String firstname;
+  protected String firstname;
 
-  private short gender;
+  protected short gender;
 
-  private String hashPassword;
+  protected String hashPassword;
 
-  private String lastname;
+  protected String lastname;
 
-  private String nameTag;
+  protected String nameTag;
 
-  private EStatus status;
+  protected EStatus status;
 
-  private LocalDateTime updated;
+  protected LocalDateTime updated;
 
-  private String username;
+  protected String username;
 
-  private int version;
+  protected int version;
 
   public UserReferenceEdo() {
   }

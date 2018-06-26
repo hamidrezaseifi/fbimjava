@@ -10,15 +10,15 @@ import com.futurebim.common.model.enums.EStatus;
  */
 public class UserProjectAccessReferenceEdo {
 
-  private Long projectid;
+  protected Long projectid;
 
-  private Long userid;
+  protected Long userid;
 
-  private LocalDateTime created;
+  protected LocalDateTime created;
 
-  private EStatus status;
+  protected EStatus status;
 
-  private ProjectAccessTypeEdo projectAccessType;
+  protected ProjectAccessTypeEdo projectAccessType;
 
   public UserProjectAccessReferenceEdo() {
   }

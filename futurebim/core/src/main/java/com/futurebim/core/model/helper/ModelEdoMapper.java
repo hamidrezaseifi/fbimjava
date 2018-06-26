@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.futurebim.common.model.edo.CompanyEdo;
+import com.futurebim.common.model.edo.CompanyReferenceEdo;
 import com.futurebim.common.model.edo.ProjectEdo;
 import com.futurebim.common.model.edo.ProjectReferenceEdo;
 import com.futurebim.common.model.edo.UserEdo;
 import com.futurebim.common.model.edo.UserReferenceEdo;
 import com.futurebim.core.model.Company;
+import com.futurebim.core.model.CompanyReference;
 import com.futurebim.core.model.Project;
 import com.futurebim.core.model.ProjectReference;
 import com.futurebim.core.model.User;
@@ -42,6 +44,21 @@ public class ModelEdoMapper {
     }
 
     return list;
+  }
+
+  public static CompanyReference getCompanyReferenceFromEdo(final CompanyReferenceEdo edo) {
+
+    final CompanyReference c = new CompanyReference();
+
+    c.setId(edo.getId());
+    c.setCompanyName(edo.getCompanyName());
+    c.setComments(edo.getComments());
+    c.setCreated(edo.getCreated());
+    c.setStatus(edo.getStatus().getDbId());
+    c.setUpdated(edo.getUpdated());
+    c.setVersion(edo.getVersion());
+
+    return c;
   }
 
   public static Project getProjectFromEdo(final ProjectEdo edo) {
@@ -136,10 +153,10 @@ public class ModelEdoMapper {
 
   public static User getUserFromEdo(final UserEdo edo) {
 
-    final UserReference u = getUserReferenceFromEdo((UserReferenceEdo) edo);
+    final UserReference u = getUserReferenceFromEdo(edo);
 
     final User u1 = (User) u;
-    u1.setCompany(edo.getCompany());
+    u1.setCompany(getCompanyReferenceFromEdo(edo.getCompany()));
     u1.setUserProjectAccesses(edo.getUserProjectAccesses());
 
     return u1;
