@@ -1,15 +1,17 @@
 package com.futurebim.core.model;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.futurebim.common.model.enums.EStatus;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
  * The persistent class for the projects database table.
@@ -17,53 +19,106 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name = "projects")
-public class Project extends ProjectReference {
+public class Project extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
-  /*
-   * private List<ProjectBcfFile> projectBcfFiles; private List<ProjectIfcFile> projectIfcFiles; private List<ProjectTask> projectTasks;
-   */
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  protected Long id;
 
-  @JsonIgnore
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "companyid", insertable = false, updatable = false)
-  private CompanyReference companyBean;
+  protected Long companyid;
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "id.projectid", targetEntity = UserProjectAccessReference.class)
-  private List<UserProjectAccessReference> userProjectAccesses;
+  protected LocalDateTime created;
+
+  protected LocalDate deatline;
+
+  @Column(name = "project_name")
+  protected String projectName;
+
+  @Column(name = "start_date")
+  protected LocalDate startDate;
+
+  protected EStatus status;
+
+  protected LocalDateTime updated;
+
+  protected int version;
 
   public Project() {
   }
 
-  public CompanyReference getCompanyBean() {
-    return this.companyBean;
+  public Long getId() {
+    return this.id;
   }
 
-  public void setCompanyBean(final CompanyReference companyBean) {
-    this.companyBean = companyBean;
+  public void setId(final Long id) {
+    this.id = id;
   }
 
-  public List<UserProjectAccessReference> getUserProjectAccesses() {
-    return this.userProjectAccesses;
+  public Long getCompanyid() {
+    return companyid;
   }
 
-  public void setUserProjectAccesses(final List<UserProjectAccessReference> userProjectAccesses) {
-    this.userProjectAccesses = userProjectAccesses;
+  public void setCompanyid(final Long companyid) {
+    this.companyid = companyid;
   }
 
-  public UserProjectAccessReference addUserProjectAccess(final UserProjectAccessReference userProjectAccess) {
-    getUserProjectAccesses().add(userProjectAccess);
-    userProjectAccess.setProject(this.id);
-
-    return userProjectAccess;
+  public LocalDateTime getCreated() {
+    return this.created;
   }
 
-  public UserProjectAccessReference removeUserProjectAccess(final UserProjectAccessReference userProjectAccess) {
-    getUserProjectAccesses().remove(userProjectAccess);
-    userProjectAccess.setProject(null);
+  public void setCreated(final LocalDateTime created) {
+    this.created = created;
+  }
 
-    return userProjectAccess;
+  public LocalDate getDeatline() {
+    return this.deatline;
+  }
+
+  public void setDeatline(final LocalDate deatline) {
+    this.deatline = deatline;
+  }
+
+  public String getProjectName() {
+    return this.projectName;
+  }
+
+  public void setProjectName(final String projectName) {
+    this.projectName = projectName;
+  }
+
+  public LocalDate getStartDate() {
+    return this.startDate;
+  }
+
+  public void setStartDate(final LocalDate startDate) {
+    this.startDate = startDate;
+  }
+
+  public EStatus getStatus() {
+    return this.status;
+  }
+
+  public void setStatus(final Long status) {
+    this.status = EStatus.ofId(status);
+  }
+
+  public LocalDateTime getUpdated() {
+    return this.updated;
+  }
+
+  public void setUpdated(final LocalDateTime updated) {
+    this.updated = updated;
+  }
+
+  public int getVersion() {
+    return this.version;
+  }
+
+  public void setVersion(final int version) {
+    this.version = version;
   }
 
 }

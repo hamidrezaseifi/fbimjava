@@ -1,53 +1,108 @@
 package com.futurebim.common.model.edo;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import com.futurebim.common.model.enums.EStatus;
 
 /**
  * The persistent class for the projects database table.
  *
  */
 
-public class ProjectEdo extends ProjectReferenceEdo {
+public class ProjectEdo {
 
-  /*
-   * private List<ProjectBcfFile> projectBcfFiles; private List<ProjectIfcFile> projectIfcFiles; private List<ProjectTask> projectTasks;
-   */
+  protected Long id;
 
-  private CompanyReferenceEdo companyBean;
+  protected Long companyid;
 
-  private List<UserProjectAccessReferenceEdo> userProjectAccesses;
+  protected LocalDate deatline;
+
+  protected String projectName;
+
+  protected LocalDate startDate;
+
+  protected EStatus status;
+
+  protected LocalDateTime created;
+
+  protected LocalDateTime updated;
+
+  protected int version;
 
   public ProjectEdo() {
   }
 
-  public CompanyReferenceEdo getCompanyBean() {
-    return this.companyBean;
+  public Long getId() {
+    return this.id;
   }
 
-  public void setCompanyBean(final CompanyReferenceEdo companyBean) {
-    this.companyBean = companyBean;
+  public void setId(final Long id) {
+    this.id = id;
   }
 
-  public List<UserProjectAccessReferenceEdo> getUserProjectAccesses() {
-    return this.userProjectAccesses;
+  public Long getCompanyid() {
+    return companyid;
   }
 
-  public void setUserProjectAccesses(final List<UserProjectAccessReferenceEdo> userProjectAccesses) {
-    this.userProjectAccesses = userProjectAccesses;
+  public void setCompanyid(final Long companyid) {
+    this.companyid = companyid;
   }
 
-  public UserProjectAccessReferenceEdo addUserProjectAccess(final UserProjectAccessReferenceEdo userProjectAccess) {
-    getUserProjectAccesses().add(userProjectAccess);
-    userProjectAccess.setProjectid(this.id);
-
-    return userProjectAccess;
+  public LocalDateTime getCreated() {
+    return this.created;
   }
 
-  public UserProjectAccessReferenceEdo removeUserProjectAccess(final UserProjectAccessReferenceEdo userProjectAccess) {
-    getUserProjectAccesses().remove(userProjectAccess);
-    userProjectAccess.setProjectid(0L);
+  public void setCreated(final LocalDateTime created) {
+    this.created = created;
+  }
 
-    return userProjectAccess;
+  public LocalDate getDeatline() {
+    return this.deatline;
+  }
+
+  public void setDeatline(final LocalDate deatline) {
+    this.deatline = deatline;
+  }
+
+  public String getProjectName() {
+    return this.projectName;
+  }
+
+  public void setProjectName(final String projectName) {
+    this.projectName = projectName;
+  }
+
+  public LocalDate getStartDate() {
+    return this.startDate;
+  }
+
+  public void setStartDate(final LocalDate startDate) {
+    this.startDate = startDate;
+  }
+
+  public EStatus getStatus() {
+    return this.status;
+  }
+
+  public void setStatus(final EStatus status) {
+    this.status = status;
+  }
+
+  public LocalDateTime getUpdated() {
+    return this.updated;
+  }
+
+  public void setUpdated(final LocalDateTime updated) {
+    this.updated = updated;
+  }
+
+  public int getVersion() {
+    return this.version;
+  }
+
+  public void setVersion(final int version) {
+    this.version = version;
   }
 
 }

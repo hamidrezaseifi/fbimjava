@@ -3,24 +3,24 @@ package com.futurebim.core.model.helper;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.futurebim.common.model.edo.CompanyRichEdo;
 import com.futurebim.common.model.edo.CompanyEdo;
-import com.futurebim.common.model.edo.CompanyReferenceEdo;
+import com.futurebim.common.model.edo.ProjectRichEdo;
 import com.futurebim.common.model.edo.ProjectEdo;
-import com.futurebim.common.model.edo.ProjectReferenceEdo;
+import com.futurebim.common.model.edo.UserRichEdo;
 import com.futurebim.common.model.edo.UserEdo;
-import com.futurebim.common.model.edo.UserReferenceEdo;
+import com.futurebim.core.model.CompanyRich;
 import com.futurebim.core.model.Company;
-import com.futurebim.core.model.CompanyReference;
+import com.futurebim.core.model.ProjectRich;
 import com.futurebim.core.model.Project;
-import com.futurebim.core.model.ProjectReference;
+import com.futurebim.core.model.UserRich;
 import com.futurebim.core.model.User;
-import com.futurebim.core.model.UserReference;
 
 public class ModelEdoMapper {
 
-  public static Company getCompanyFromEdo(final CompanyEdo edo) {
+  public static CompanyRich getCompanyFromEdo(final CompanyRichEdo edo) {
 
-    final Company c = new Company();
+    final CompanyRich c = new CompanyRich();
 
     c.setId(edo.getId());
     c.setCompanyName(edo.getCompanyName());
@@ -35,20 +35,20 @@ public class ModelEdoMapper {
     return c;
   }
 
-  public static List<Company> getCompanyListFromEdo(final List<CompanyEdo> edoList) {
+  public static List<CompanyRich> getCompanyListFromEdo(final List<CompanyRichEdo> edoList) {
 
-    final List<Company> list = new ArrayList<>();
+    final List<CompanyRich> list = new ArrayList<>();
 
-    for (final CompanyEdo edo : edoList) {
+    for (final CompanyRichEdo edo : edoList) {
       list.add(getCompanyFromEdo(edo));
     }
 
     return list;
   }
 
-  public static CompanyReference getCompanyReferenceFromEdo(final CompanyReferenceEdo edo) {
+  public static Company getCompanyReferenceFromEdo(final CompanyEdo edo) {
 
-    final CompanyReference c = new CompanyReference();
+    final Company c = new Company();
 
     c.setId(edo.getId());
     c.setCompanyName(edo.getCompanyName());
@@ -61,9 +61,9 @@ public class ModelEdoMapper {
     return c;
   }
 
-  public static Project getProjectFromEdo(final ProjectEdo edo) {
+  public static ProjectRich getProjectFromEdo(final ProjectRichEdo edo) {
 
-    final Project p = new Project();
+    final ProjectRich p = new ProjectRich();
 
     p.setCompanyid(edo.getCompanyid());
     p.setCompanyBean(null);
@@ -80,20 +80,20 @@ public class ModelEdoMapper {
     return p;
   }
 
-  public static List<Project> getProjectListFromEdo(final List<ProjectEdo> edoList) {
+  public static List<ProjectRich> getProjectListFromEdo(final List<ProjectRichEdo> edoList) {
 
-    final List<Project> list = new ArrayList<>();
+    final List<ProjectRich> list = new ArrayList<>();
 
-    for (final ProjectEdo edo : edoList) {
+    for (final ProjectRichEdo edo : edoList) {
       list.add(getProjectFromEdo(edo));
     }
 
     return list;
   }
 
-  public static ProjectReference getProjectReferenceFromEdo(final ProjectReferenceEdo edo) {
+  public static Project getProjectReferenceFromEdo(final ProjectEdo edo) {
 
-    final ProjectReference p = new ProjectReference();
+    final Project p = new Project();
 
     p.setCompanyid(edo.getCompanyid());
     p.setCreated(edo.getCreated());
@@ -108,20 +108,20 @@ public class ModelEdoMapper {
     return p;
   }
 
-  public static List<ProjectReference> getProjectReferenceListFromEdo(final List<ProjectReferenceEdo> edoList) {
+  public static List<Project> getProjectReferenceListFromEdo(final List<ProjectEdo> edoList) {
 
-    final List<ProjectReference> list = new ArrayList<>();
+    final List<Project> list = new ArrayList<>();
 
-    for (final ProjectReferenceEdo edo : edoList) {
+    for (final ProjectEdo edo : edoList) {
       list.add(getProjectReferenceFromEdo(edo));
     }
 
     return list;
   }
 
-  public static UserReference getUserReferenceFromEdo(final UserReferenceEdo edo) {
+  public static User getUserReferenceFromEdo(final UserEdo edo) {
 
-    final UserReference u = new UserReference();
+    final User u = new User();
 
     u.setCompanyid(edo.getCompanyid());
     u.setCreated(edo.getCreated());
@@ -140,33 +140,33 @@ public class ModelEdoMapper {
     return u;
   }
 
-  public static List<UserReference> getUserReferenceListFromEdo(final List<UserReferenceEdo> edoList) {
+  public static List<User> getUserReferenceListFromEdo(final List<UserEdo> edoList) {
 
-    final List<UserReference> list = new ArrayList<>();
+    final List<User> list = new ArrayList<>();
 
-    for (final UserReferenceEdo edo : edoList) {
+    for (final UserEdo edo : edoList) {
       list.add(getUserReferenceFromEdo(edo));
     }
 
     return list;
   }
 
-  public static User getUserFromEdo(final UserEdo edo) {
+  public static UserRich getUserFromEdo(final UserRichEdo edo) {
 
-    final UserReference u = getUserReferenceFromEdo(edo);
+    final User u = getUserReferenceFromEdo(edo);
 
-    final User u1 = (User) u;
+    final UserRich u1 = (UserRich) u;
     u1.setCompany(getCompanyReferenceFromEdo(edo.getCompany()));
     u1.setUserProjectAccesses(edo.getUserProjectAccesses());
 
     return u1;
   }
 
-  public static List<User> getUserListFromEdo(final List<UserEdo> edoList) {
+  public static List<UserRich> getUserListFromEdo(final List<UserRichEdo> edoList) {
 
-    final List<User> list = new ArrayList<>();
+    final List<UserRich> list = new ArrayList<>();
 
-    for (final UserEdo edo : edoList) {
+    for (final UserRichEdo edo : edoList) {
       list.add(getUserFromEdo(edo));
     }
 

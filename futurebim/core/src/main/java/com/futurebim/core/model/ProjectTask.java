@@ -35,7 +35,7 @@ public class ProjectTask extends SerializableModelBase {
 
 	private int version;
 
-	private Project project;
+	private ProjectRich project;
 
 	public ProjectTask() {
 	}
@@ -128,11 +128,11 @@ public class ProjectTask extends SerializableModelBase {
 		this.version = version;
 	}
 
-	public Project getProject() {
+	public ProjectRich getProject() {
 		return this.project;
 	}
 
-	public void setProject(Project project) {
+	public void setProject(ProjectRich project) {
 		this.project = project;
 	}
 

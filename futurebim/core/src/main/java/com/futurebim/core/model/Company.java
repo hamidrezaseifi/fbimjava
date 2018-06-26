@@ -1,17 +1,16 @@
 package com.futurebim.core.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import com.futurebim.common.model.enums.EStatus;
+import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
  * The persistent class for the companies database table.
@@ -19,44 +18,85 @@ import com.futurebim.common.model.enums.EStatus;
  */
 @Entity
 @Table(name = "companies")
-public class Company extends CompanyReference {
+public class Company extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
-  @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "companyid", targetEntity = UserReference.class)
-  private List<UserReference> users = new ArrayList<>();
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  protected Long id;
 
-  // @JsonIgnore
-  @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "companyid", targetEntity = ProjectReference.class)
-  private List<ProjectReference> projects = new ArrayList<>();
+  protected String comments;
+
+  @Column(name = "company_name")
+  protected String companyName;
+
+  protected EStatus status;
+
+  protected int version;
+
+  protected LocalDateTime created;
+
+  protected LocalDateTime updated;
 
   public Company() {
   }
 
-  public Company(final String name, final String comments) {
-    this.companyName = name;
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(final Long id) {
+    this.id = id;
+  }
+
+  public String getComments() {
+    return this.comments;
+  }
+
+  public void setComments(final String comments) {
     this.comments = comments;
-    this.status = EStatus.Active;
-    this.created = LocalDateTime.now();
-    this.updated = LocalDateTime.now();
   }
 
-  public List<UserReference> getUsers() {
-    return users;
+  public String getCompanyName() {
+    return this.companyName;
   }
 
-  public void setUsers(final List<UserReference> users) {
-    this.users = users;
+  public void setCompanyName(final String companyName) {
+    this.companyName = companyName;
   }
 
-  public List<ProjectReference> getProjects() {
-    return projects;
+  public LocalDateTime getCreated() {
+    return this.created;
   }
 
-  public void setProjects(final List<ProjectReference> projects) {
-    this.projects = projects;
+  public void setCreated(final LocalDateTime created) {
+    this.created = created;
+  }
+
+  public EStatus getStatus() {
+    return this.status;
+  }
+
+  public void setStatus(final Long status) {
+    this.status = EStatus.ofId(status);
+  }
+
+  public LocalDateTime getUpdated() {
+    return this.updated;
+  }
+
+  public void setUpdated(final LocalDateTime updated) {
+    this.updated = updated;
+  }
+
+  public int getVersion() {
+    return this.version;
+  }
+
+  public void setVersion(final int version) {
+    this.version = version;
   }
 
   @Override

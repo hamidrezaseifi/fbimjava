@@ -2,18 +2,18 @@ package com.futurebim.core.dao;
 
 import java.util.List;
 
-import com.futurebim.core.model.User;
+import com.futurebim.core.model.UserRich;
 
 public interface UserDao {
 
-  public User addUser(User c);
+  public UserRich addUser(UserRich c);
 
-  public boolean updateUser(User c);
+  public boolean updateUser(UserRich c);
 
   public boolean removeUser(Long id);
 
-  public User getById(Long id);
+  public UserRich getById(Long id);
 
-  public List<User> listUsers();
+  public List<UserRich> listUsers();
 
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.futurebim.core.model.Company;
+import com.futurebim.core.model.CompanyRich;
 import com.futurebim.core.model.ui.FutureBimUiRestResponse;
 import com.futurebim.core.dao.CompanyDao;
 
@@ -34,7 +34,7 @@ public class WriteCompany {
 
   @RequestMapping(value = "/update", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE
 		  , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody FutureBimUiRestResponse updateCompany(@RequestBody(required = true) final Company company){
+  public @ResponseBody FutureBimUiRestResponse updateCompany(@RequestBody(required = true) final CompanyRich company){
     
     return FutureBimUiRestResponse.createDataResponse(companyDao.updateCompany(company));
   }

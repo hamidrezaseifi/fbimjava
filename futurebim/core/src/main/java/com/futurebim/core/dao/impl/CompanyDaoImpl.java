@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import com.futurebim.core.model.Company;
+import com.futurebim.core.model.CompanyRich;
 import com.futurebim.core.dao.CompanyDao;
 
 @Transactional
@@ -22,7 +22,7 @@ public class CompanyDaoImpl implements CompanyDao {
 	
 	
 	@Override
-	public Company addCompany(Company c) {
+	public CompanyRich addCompany(CompanyRich c) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Long id = (Long)session.save(c);
 		logger.info("Company saved successfully, Company Details=" + c);
@@ -30,9 +30,9 @@ public class CompanyDaoImpl implements CompanyDao {
 	}
 
 	@Override
-	public boolean updateCompany(Company c) {
+	public boolean updateCompany(CompanyRich c) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Company uc = (Company)session.merge(c);
+		CompanyRich uc = (CompanyRich)session.merge(c);
 		logger.info("Company updated successfully, Company Details=" + c);
 		return uc != null;
 	}
@@ -40,7 +40,7 @@ public class CompanyDaoImpl implements CompanyDao {
 	@Override
 	public boolean removeCompany(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Company c = (Company) session.get(Company.class, id);
+		CompanyRich c = (CompanyRich) session.get(CompanyRich.class, id);
 		
 		if(null != c){
 			session.delete(c);
@@ -51,13 +51,13 @@ public class CompanyDaoImpl implements CompanyDao {
 			return false;
 		}
 		
-		return session.get(Company.class, id) == null;
+		return session.get(CompanyRich.class, id) == null;
 	}
 
 	@Override
-	public Company getById(Long id) {
+	public CompanyRich getById(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();		
-		Company c = (Company) session.get(Company.class, id);
+		CompanyRich c = (CompanyRich) session.get(CompanyRich.class, id);
 		if(c != null){
 			logger.info("Company loaded successfully, Company details="+c);
 		}
@@ -70,10 +70,10 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Company> listCountries() {
+	public List<CompanyRich> listCountries() {
 		logger.info("Read Company List");
 		Session session = this.sessionFactory.getCurrentSession();
-		List<Company> personsList = session.createQuery("from Company").list();
+		List<CompanyRich> personsList = session.createQuery("from Company").list();
 		
 		return personsList;
 	}
