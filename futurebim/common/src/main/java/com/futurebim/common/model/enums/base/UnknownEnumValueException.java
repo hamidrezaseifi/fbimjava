@@ -1,4 +1,4 @@
-package com.futurebim.core.model.enums.base;
+package com.futurebim.common.model.enums.base;
 
 public class UnknownEnumValueException extends Exception {
 

@@ -18,7 +18,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.futurebim.common.models.edo.CompanyEdo;
+import com.futurebim.common.model.edo.CompanyEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**

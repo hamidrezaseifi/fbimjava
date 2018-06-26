@@ -18,8 +18,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.futurebim.core.model.base.SerializableModelBase;
-import com.futurebim.core.model.enums.EStatus;
-import com.futurebim.core.model.enums.base.UnknownEnumValueException;
+import com.futurebim.common.model.enums.EStatus;
+import com.futurebim.common.model.enums.base.UnknownEnumValueException;
 
 
 /**
@@ -44,9 +44,6 @@ public class Project extends SerializableModelBase {
 
 	@Column(name="project_name")
 	private String projectName;
-
-	@Column(name="responsible_user")
-	private int responsibleUser;
 
 	@Column(name="start_date")
 	private LocalDate startDate;
@@ -112,14 +109,6 @@ public class Project extends SerializableModelBase {
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
-	}
-
-	public int getResponsibleUser() {
-		return this.responsibleUser;
-	}
-
-	public void setResponsibleUser(int responsibleUser) {
-		this.responsibleUser = responsibleUser;
 	}
 
 	public LocalDate getStartDate() {

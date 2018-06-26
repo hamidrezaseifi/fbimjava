@@ -1,4 +1,4 @@
-package com.futurebim.common.models.edo;
+package com.futurebim.common.model.edo;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

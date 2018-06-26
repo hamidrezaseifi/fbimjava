@@ -43,9 +43,6 @@ public class ProjectReference extends SerializableModelBase {
 	@Column(name="project_name")
 	private String projectName;
 
-	@Column(name="responsible_user")
-  private int responsibleUser;
-
   @Column(name="start_date")
 	private LocalDate startDate;
 
@@ -96,14 +93,6 @@ public class ProjectReference extends SerializableModelBase {
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
-	}
-
-	public int getResponsibleUser() {
-		return this.responsibleUser;
-	}
-
-	public void setResponsibleUser(int responsibleUser) {
-		this.responsibleUser = responsibleUser;
 	}
 
 	public LocalDate getStartDate() {

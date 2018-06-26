@@ -3,8 +3,8 @@ package com.futurebim.core.model;
 import java.io.Serializable;
 
 import com.futurebim.core.model.base.SerializableModelBase;
-import com.futurebim.core.model.enums.EStatus;
-import com.futurebim.core.model.enums.base.UnknownEnumValueException;
+import com.futurebim.common.model.enums.EStatus;
+import com.futurebim.common.model.enums.base.UnknownEnumValueException;
 
 
 /**

@@ -15,9 +15,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.futurebim.common.model.edo.CompanyEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
-import com.futurebim.core.model.enums.EStatus;
-import com.futurebim.core.model.enums.base.UnknownEnumValueException;
+import com.futurebim.common.model.enums.EStatus;
+import com.futurebim.common.model.enums.base.UnknownEnumValueException;
 
 /**
  * The persistent class for the companies database table.
@@ -56,18 +57,6 @@ public class Company extends SerializableModelBase {
   private List<ProjectReference> projects = new ArrayList<>();
 
   public Company() {
-  }
-
-  public Company(final CompanyEdo edo) {
-    this.setId(edo.getId());
-    this.setCompanyName(edo.getCompanyName());
-    this.setComments(edo.getComments());
-    this.setCreated(edo.getCreated());
-    this.setProjects(edo.getProjects());
-    this.setStatus(edo.getStatus());
-    this.setUpdated(edo.getUpdated());
-    this.setUsers(edo.getUsers());
-    this.setVersion(edo.getVersion());
   }
 
 	public Company(String name, String comments) {

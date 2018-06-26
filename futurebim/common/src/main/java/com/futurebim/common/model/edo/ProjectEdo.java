@@ -1,4 +1,4 @@
-package com.futurebim.common.models.edo;
+package com.futurebim.common.model.edo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.futurebim.common.model.enums.EStatus;
 
 
 /**
@@ -25,11 +26,9 @@ public class ProjectEdo  {
 
 	private String projectName;
 
-  private int responsibleUser;
-
 	private LocalDate startDate;
 
-	private short status;
+	private EStatus status;
 
 	private LocalDateTime updated;
 
@@ -88,14 +87,6 @@ public class ProjectEdo  {
 		this.projectName = projectName;
 	}
 
-	public int getResponsibleUser() {
-		return this.responsibleUser;
-	}
-
-	public void setResponsibleUser(int responsibleUser) {
-		this.responsibleUser = responsibleUser;
-	}
-
 	public LocalDate getStartDate() {
 		return this.startDate;
 	}
@@ -104,11 +95,11 @@ public class ProjectEdo  {
 		this.startDate = startDate;
 	}
 
-	public short getStatus() {
+	public EStatus getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(short status) {
+	public void setStatus(EStatus status) {
 		this.status = status;
 	}
 

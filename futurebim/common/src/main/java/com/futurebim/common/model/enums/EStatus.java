@@ -1,7 +1,6 @@
-package com.futurebim.core.model.enums;
+package com.futurebim.common.model.enums;
 
-import com.futurebim.core.model.enums.base.IValueList;
-import com.futurebim.core.model.enums.base.UnknownEnumValueException;
+import com.futurebim.common.model.enums.base.IValueList;
 
 public enum EStatus implements IValueList {
 	  Unknown(0L, "status.unknown"),
@@ -33,17 +32,18 @@ public enum EStatus implements IValueList {
 	    return this.sourceSystemName;
 	  }
 	  
-	  public static EStatus ofId(final Long statusId) throws UnknownEnumValueException {
-		if (Active.dbId.equals(statusId)) {
-		  return EStatus.Active;
-		}
-		else if (Deactive.dbId.equals(statusId)) {
-		      return EStatus.Deactive;
-		    }
-		else if (Deleted.dbId.equals(statusId)) {
-		      return EStatus.Deleted;
-		    }
-		throw new UnknownEnumValueException(String.format("The status id %d is not defined for enum EStatus.", statusId));
+	  public static EStatus ofId(final Long statusId) {
+  		if (Active.dbId.equals(statusId)) {
+  		  return EStatus.Active;
+  		}
+  		else if (Deactive.dbId.equals(statusId)) {
+  		      return EStatus.Deactive;
+  		    }
+  		else if (Deleted.dbId.equals(statusId)) {
+  		      return EStatus.Deleted;
+  		    }
+  		//throw new UnknownEnumValueException(String.format("The status id %d is not defined for enum EStatus.", statusId));
+  		return EStatus.Unknown;
 	  }
 
 }

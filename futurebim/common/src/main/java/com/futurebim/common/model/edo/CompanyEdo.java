@@ -1,4 +1,4 @@
-package com.futurebim.common.models.edo;
+package com.futurebim.common.model.edo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.futurebim.common.model.enums.EStatus;
 
 /**
  * The persistent class for the companies database table.
@@ -19,17 +20,17 @@ public class CompanyEdo {
 
 	private String companyName;
 
-  private int status;
+	private EStatus status;
 
 	private int version;
 
-  private LocalDateTime created;
+	private LocalDateTime created;
 
-  private LocalDateTime updated;
+	private LocalDateTime updated;
 
-  private List<UserReferenceEdo> users = new ArrayList<>();
+	private List<UserReferenceEdo> users = new ArrayList<>();
 
-  private List<ProjectReferenceEdo> projects = new ArrayList<>();
+	private List<ProjectReferenceEdo> projects = new ArrayList<>();
 
 	public CompanyEdo() {
 	}
@@ -66,11 +67,11 @@ public class CompanyEdo {
 		this.created = created;
 	}
 
-	public int getStatus() {
+	public EStatus getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(EStatus status) {
 		this.status = status;
 	}
 

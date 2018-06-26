@@ -11,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import com.futurebim.core.model.base.SerializableModelBase;
-import com.futurebim.core.model.enums.EStatus;
-import com.futurebim.core.model.enums.base.UnknownEnumValueException;
+import com.futurebim.common.model.enums.EStatus;
+import com.futurebim.common.model.enums.base.UnknownEnumValueException;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.futurebim.common.models.edo;
+package com.futurebim.common.model.edo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
