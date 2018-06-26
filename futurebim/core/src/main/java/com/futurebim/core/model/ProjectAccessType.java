@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import com.futurebim.core.model.base.SerializableModelBase;
 import com.futurebim.common.model.enums.EStatus;
-import com.futurebim.common.model.enums.base.UnknownEnumValueException;
+import com.futurebim.common.model.enums.base.UnknownEnumValueException1;
 
 
 /**
@@ -60,7 +60,7 @@ public class ProjectAccessType extends SerializableModelBase {
 		return this.status;
 	}
 
-	public void setStatus(Long status) throws UnknownEnumValueException {
+	public void setStatus(Long status) throws UnknownEnumValueException1 {
 		this.status = EStatus.ofId(status);
 	}
 

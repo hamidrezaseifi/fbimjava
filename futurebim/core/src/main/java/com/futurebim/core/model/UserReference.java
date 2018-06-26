@@ -1,180 +1,174 @@
 package com.futurebim.core.model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.futurebim.common.model.enums.EStatus;
 import com.futurebim.core.model.base.SerializableModelBase;
-
 
 /**
  * The persistent class for the users database table.
- * 
+ *
  */
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class UserReference extends SerializableModelBase {
-	private static final long serialVersionUID = 1L;
+
+  private static final long serialVersionUID = 1L;
 
   @Id
-  @Column(name="id")
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  protected Long id;
 
-  private Long companyid;
-  
-	private LocalDate birthday;
+  protected Long companyid;
 
-	private LocalDateTime created;
+  protected LocalDate birthday;
 
-	private String email;
+  protected LocalDateTime created;
 
-	private String firstname;
+  protected String email;
 
-	private short gender;
+  protected String firstname;
 
-  @Column(name="hash_password")
-	private String hashPassword;
+  protected short gender;
 
-	private String lastname;
+  @Column(name = "hash_password")
+  protected String hashPassword;
 
-  @Column(name="name_tag")
-	private String nameTag;
+  protected String lastname;
 
-	private short status;
+  @Column(name = "name_tag")
+  protected String nameTag;
 
-	private LocalDateTime updated;
+  protected EStatus status;
 
-	private String username;
+  protected LocalDateTime updated;
 
-	private int version;
+  protected String username;
 
-	public UserReference() {
-	}
+  protected int version;
 
-	public Long getId() {
-		return this.id;
-	}
+  public UserReference() {
+  }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  public Long getId() {
+    return this.id;
+  }
 
-	public Long getCompanyid() {
+  public void setId(final Long id) {
+    this.id = id;
+  }
+
+  public Long getCompanyid() {
     return this.companyid;
   }
 
-  public void setCompanyid(Long company) {
+  public void setCompanyid(final Long company) {
     this.companyid = company;
   }
-  
-	public LocalDate getBirthday() {
-		return this.birthday;
-	}
 
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
-	}
+  public LocalDate getBirthday() {
+    return this.birthday;
+  }
 
-	public LocalDateTime getCreated() {
-		return this.created;
-	}
+  public void setBirthday(final LocalDate birthday) {
+    this.birthday = birthday;
+  }
 
-	public void setCreated(LocalDateTime created) {
-		this.created = created;
-	}
+  public LocalDateTime getCreated() {
+    return this.created;
+  }
 
-	public String getEmail() {
-		return this.email;
-	}
+  public void setCreated(final LocalDateTime created) {
+    this.created = created;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public String getEmail() {
+    return this.email;
+  }
 
-	public String getFirstname() {
-		return this.firstname;
-	}
+  public void setEmail(final String email) {
+    this.email = email;
+  }
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+  public String getFirstname() {
+    return this.firstname;
+  }
 
-	public short getGender() {
-		return this.gender;
-	}
+  public void setFirstname(final String firstname) {
+    this.firstname = firstname;
+  }
 
-	public void setGender(short gender) {
-		this.gender = gender;
-	}
+  public short getGender() {
+    return this.gender;
+  }
 
-	public String getHashPassword() {
-		return this.hashPassword;
-	}
+  public void setGender(final short gender) {
+    this.gender = gender;
+  }
 
-	public void setHashPassword(String hashPassword) {
-		this.hashPassword = hashPassword;
-	}
+  public String getHashPassword() {
+    return this.hashPassword;
+  }
 
-	public String getLastname() {
-		return this.lastname;
-	}
+  public void setHashPassword(final String hashPassword) {
+    this.hashPassword = hashPassword;
+  }
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+  public String getLastname() {
+    return this.lastname;
+  }
 
-	public String getNameTag() {
-		return this.nameTag;
-	}
+  public void setLastname(final String lastname) {
+    this.lastname = lastname;
+  }
 
-	public void setNameTag(String nameTag) {
-		this.nameTag = nameTag;
-	}
+  public String getNameTag() {
+    return this.nameTag;
+  }
 
-	public short getStatus() {
-		return this.status;
-	}
+  public void setNameTag(final String nameTag) {
+    this.nameTag = nameTag;
+  }
 
-	public void setStatus(short status) {
-		this.status = status;
-	}
+  public EStatus getStatus() {
+    return this.status;
+  }
 
-	public LocalDateTime getUpdated() {
-		return this.updated;
-	}
+  public void setStatus(final Long status) {
+    this.status = EStatus.ofId(status);
+  }
 
-	public void setUpdated(LocalDateTime updated) {
-		this.updated = updated;
-	}
+  public LocalDateTime getUpdated() {
+    return this.updated;
+  }
 
-	public String getUsername() {
-		return this.username;
-	}
+  public void setUpdated(final LocalDateTime updated) {
+    this.updated = updated;
+  }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+  public String getUsername() {
+    return this.username;
+  }
 
-	public int getVersion() {
-		return this.version;
-	}
+  public void setUsername(final String username) {
+    this.username = username;
+  }
 
-	public void setVersion(int version) {
-		this.version = version;
-	}
+  public int getVersion() {
+    return this.version;
+  }
+
+  public void setVersion(final int version) {
+    this.version = version;
+  }
 
 }

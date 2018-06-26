@@ -1,196 +1,194 @@
 package com.futurebim.common.model.edo;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.futurebim.common.model.enums.EStatus;
 
 /**
  * The persistent class for the users database table.
- * 
+ *
  */
 public class UserEdo {
 
-	private Long id;
+  private Long id;
 
   private Long companyid;
-  
-	private LocalDate birthday;
 
-	private LocalDateTime created;
+  private LocalDate birthday;
 
-	private String email;
+  private LocalDateTime created;
 
-	private String firstname;
+  private String email;
 
-	private short gender;
+  private String firstname;
 
-	private String hashPassword;
+  private short gender;
 
-	private String lastname;
+  private String hashPassword;
 
-	private String nameTag;
+  private String lastname;
 
-	private short status;
+  private String nameTag;
 
-	private LocalDateTime updated;
+  private EStatus status;
 
-	private String username;
+  private LocalDateTime updated;
 
-	private int version;
+  private String username;
 
-	private CompanyReferenceEdo company;
+  private int version;
 
-	private List<UserProjectAccessReferenceEdo> userProjectAccesses;
+  private CompanyReferenceEdo company;
 
-	public UserEdo() {
-	}
+  private List<UserProjectAccessReferenceEdo> userProjectAccesses;
 
-	public Long getId() {
-		return this.id;
-	}
+  public UserEdo() {
+  }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  public Long getId() {
+    return this.id;
+  }
 
-	public Long getCompanyid() {
+  public void setId(final Long id) {
+    this.id = id;
+  }
+
+  public Long getCompanyid() {
     return this.companyid;
   }
 
-  public void setCompanyid(Long company) {
+  public void setCompanyid(final Long company) {
     this.companyid = company;
   }
-  
-	public LocalDate getBirthday() {
-		return this.birthday;
-	}
 
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
-	}
+  public LocalDate getBirthday() {
+    return this.birthday;
+  }
 
-	public LocalDateTime getCreated() {
-		return this.created;
-	}
+  public void setBirthday(final LocalDate birthday) {
+    this.birthday = birthday;
+  }
 
-	public void setCreated(LocalDateTime created) {
-		this.created = created;
-	}
+  public LocalDateTime getCreated() {
+    return this.created;
+  }
 
-	public String getEmail() {
-		return this.email;
-	}
+  public void setCreated(final LocalDateTime created) {
+    this.created = created;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public String getEmail() {
+    return this.email;
+  }
 
-	public String getFirstname() {
-		return this.firstname;
-	}
+  public void setEmail(final String email) {
+    this.email = email;
+  }
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+  public String getFirstname() {
+    return this.firstname;
+  }
 
-	public short getGender() {
-		return this.gender;
-	}
+  public void setFirstname(final String firstname) {
+    this.firstname = firstname;
+  }
 
-	public void setGender(short gender) {
-		this.gender = gender;
-	}
+  public short getGender() {
+    return this.gender;
+  }
 
-	public String getHashPassword() {
-		return this.hashPassword;
-	}
+  public void setGender(final short gender) {
+    this.gender = gender;
+  }
 
-	public void setHashPassword(String hashPassword) {
-		this.hashPassword = hashPassword;
-	}
+  public String getHashPassword() {
+    return this.hashPassword;
+  }
 
-	public String getLastname() {
-		return this.lastname;
-	}
+  public void setHashPassword(final String hashPassword) {
+    this.hashPassword = hashPassword;
+  }
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
+  public String getLastname() {
+    return this.lastname;
+  }
 
-	public String getNameTag() {
-		return this.nameTag;
-	}
+  public void setLastname(final String lastname) {
+    this.lastname = lastname;
+  }
 
-	public void setNameTag(String nameTag) {
-		this.nameTag = nameTag;
-	}
+  public String getNameTag() {
+    return this.nameTag;
+  }
 
-	public short getStatus() {
-		return this.status;
-	}
+  public void setNameTag(final String nameTag) {
+    this.nameTag = nameTag;
+  }
 
-	public void setStatus(short status) {
-		this.status = status;
-	}
+  public EStatus getStatus() {
+    return this.status;
+  }
 
-	public LocalDateTime getUpdated() {
-		return this.updated;
-	}
+  public void setStatus(final Long status) {
+    this.status = EStatus.ofId(status);
+  }
 
-	public void setUpdated(LocalDateTime updated) {
-		this.updated = updated;
-	}
+  public LocalDateTime getUpdated() {
+    return this.updated;
+  }
 
-	public String getUsername() {
-		return this.username;
-	}
+  public void setUpdated(final LocalDateTime updated) {
+    this.updated = updated;
+  }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+  public String getUsername() {
+    return this.username;
+  }
 
-	public int getVersion() {
-		return this.version;
-	}
+  public void setUsername(final String username) {
+    this.username = username;
+  }
 
-	public void setVersion(int version) {
-		this.version = version;
-	}
+  public int getVersion() {
+    return this.version;
+  }
 
-	@JsonIgnore
+  public void setVersion(final int version) {
+    this.version = version;
+  }
+
+  @JsonIgnore
   public CompanyReferenceEdo getCompany() {
-		return this.company;
-	}
+    return this.company;
+  }
 
-	public void setCompany(CompanyReferenceEdo company) {
-		this.company = company;
-	}
+  public void setCompany(final CompanyReferenceEdo company) {
+    this.company = company;
+  }
 
-	public List<UserProjectAccessReferenceEdo> getUserProjectAccesses() {
-		return this.userProjectAccesses;
-	}
+  public List<UserProjectAccessReferenceEdo> getUserProjectAccesses() {
+    return this.userProjectAccesses;
+  }
 
-	public void setUserProjectAccesses(List<UserProjectAccessReferenceEdo> userProjectAccesses) {
-		this.userProjectAccesses = userProjectAccesses;
-	}
+  public void setUserProjectAccesses(final List<UserProjectAccessReferenceEdo> userProjectAccesses) {
+    this.userProjectAccesses = userProjectAccesses;
+  }
 
-	public UserProjectAccessReferenceEdo addUserProjectAccess(UserProjectAccessReferenceEdo userProjectAccess) {
-		getUserProjectAccesses().add(userProjectAccess);
-		userProjectAccess.setUserid(this.id);
+  public UserProjectAccessReferenceEdo addUserProjectAccess(final UserProjectAccessReferenceEdo userProjectAccess) {
+    getUserProjectAccesses().add(userProjectAccess);
+    userProjectAccess.setUserid(this.id);
 
-		return userProjectAccess;
-	}
+    return userProjectAccess;
+  }
 
-	public UserProjectAccessReferenceEdo removeUserProjectAccess(UserProjectAccessReferenceEdo userProjectAccess) {
-		getUserProjectAccesses().remove(userProjectAccess);
-		userProjectAccess.setUserid(0L);
+  public UserProjectAccessReferenceEdo removeUserProjectAccess(final UserProjectAccessReferenceEdo userProjectAccess) {
+    getUserProjectAccesses().remove(userProjectAccess);
+    userProjectAccess.setUserid(0L);
 
-		return userProjectAccess;
-	}
-
+    return userProjectAccess;
+  }
 
 }

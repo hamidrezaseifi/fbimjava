@@ -1,89 +1,86 @@
 package com.futurebim.common.model.edo;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.futurebim.common.model.enums.EStatus;
 
 /**
  * The persistent class for the user_project_access database table.
- * 
+ *
  */
 public class UserProjectAccessEdo {
 
   private int projectid;
-  
+
   private int userid;
-	  
-	private LocalDateTime created;
 
-	private short status;
+  private LocalDateTime created;
 
-	private ProjectAccessTypeEdo projectAccessType;
+  private EStatus status;
 
-	private ProjectEdo project;
+  private ProjectAccessTypeEdo projectAccessType;
 
-	private UserEdo user;
+  private ProjectEdo project;
 
-	public UserProjectAccessEdo() {
-	}
+  private UserEdo user;
+
+  public UserProjectAccessEdo() {
+  }
 
   public int getUserid() {
     return this.userid;
   }
-  
-  public void setUserid(int userid) {
+
+  public void setUserid(final int userid) {
     this.userid = userid;
   }
-  
+
   public int getProjectid() {
     return this.projectid;
   }
-  
-  public void setProjectid(int projectid) {
+
+  public void setProjectid(final int projectid) {
     this.projectid = projectid;
   }
 
-
-  public void setCreated(LocalDateTime created) {
-		this.created = created;
-	}
+  public void setCreated(final LocalDateTime created) {
+    this.created = created;
+  }
 
   public LocalDateTime getCreated() {
     return this.created;
   }
 
-	public short getStatus() {
-		return this.status;
-	}
+  public EStatus getStatus() {
+    return this.status;
+  }
 
-	public void setStatus(short status) {
-		this.status = status;
-	}
+  public void setStatus(final Long status) {
+    this.status = EStatus.ofId(status);
+  }
 
-	public ProjectAccessTypeEdo getProjectAccessType() {
-		return this.projectAccessType;
-	}
+  public ProjectAccessTypeEdo getProjectAccessType() {
+    return this.projectAccessType;
+  }
 
-	public void setProjectAccessType(ProjectAccessTypeEdo projectAccessType) {
-		this.projectAccessType = projectAccessType;
-	}
+  public void setProjectAccessType(final ProjectAccessTypeEdo projectAccessType) {
+    this.projectAccessType = projectAccessType;
+  }
 
-	public ProjectEdo getProject() {
-		return this.project;
-	}
+  public ProjectEdo getProject() {
+    return this.project;
+  }
 
-	public void setProject(ProjectEdo project) {
-		this.project = project;
-	}
+  public void setProject(final ProjectEdo project) {
+    this.project = project;
+  }
 
-	public UserEdo getUser() {
-		return this.user;
-	}
+  public UserEdo getUser() {
+    return this.user;
+  }
 
-	public void setUser(UserEdo user) {
-		this.user = user;
-	}
+  public void setUser(final UserEdo user) {
+    this.user = user;
+  }
 
 }
