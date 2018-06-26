@@ -1,5 +1,6 @@
 package com.futurebim.core.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +16,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.futurebim.common.models.edo.CompanyEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
-import com.futurebim.core.model.enums.EStatus;
-import com.futurebim.core.model.enums.base.UnknownEnumValueException;
 
 /**
  * The persistent class for the companies database table.
@@ -25,58 +27,39 @@ import com.futurebim.core.model.enums.base.UnknownEnumValueException;
  */
 @Entity
 @Table(name="companies")
-public class Company extends SerializableModelBase {
+public class CompanyReference extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-  	@Column(name="id")
+  @Id
+  @Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
 	private String comments;
 
-	@Column(name="company_name")
+  @Column(name="company_name")
 	private String companyName;
 
-	private EStatus status;
+  private int status;
 
 	private int version;
 
-	private LocalDateTime created;
+  private LocalDateTime created;
 
-	private LocalDateTime updated;
+  private LocalDateTime updated;
 
-  @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "companyid", targetEntity = UserReference.class)
-  private List<UserReference> users = new ArrayList<>();
-
-  //@JsonIgnore
-  @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "companyid", targetEntity = ProjectReference.class)
-  private List<ProjectReference> projects = new ArrayList<>();
-
-  public Company() {
+  public CompanyReference() {
   }
 
-  public Company(final CompanyEdo edo) {
+  public CompanyReference(final CompanyEdo edo) {
     this.setId(edo.getId());
     this.setCompanyName(edo.getCompanyName());
     this.setComments(edo.getComments());
     this.setCreated(edo.getCreated());
-    this.setProjects(edo.getProjects());
     this.setStatus(edo.getStatus());
     this.setUpdated(edo.getUpdated());
-    this.setUsers(edo.getUsers());
     this.setVersion(edo.getVersion());
   }
-
-	public Company(String name, String comments) {
-		this.companyName = name;
-		this.comments = comments;
-		this.status = EStatus.Active;
-		this.created = LocalDateTime.now();
-		this.updated = LocalDateTime.now();
-	}
 
 	public Long getId() {
 		return this.id;
@@ -110,12 +93,12 @@ public class Company extends SerializableModelBase {
 		this.created = created;
 	}
 
-	public EStatus getStatus() {
+	public int getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Long status) throws UnknownEnumValueException {
-		this.status = EStatus.ofId(status);
+	public void setStatus(final int status) {
+		this.status = status;
 	}
 
 	public LocalDateTime getUpdated() {
@@ -134,24 +117,7 @@ public class Company extends SerializableModelBase {
 		this.version = version;
 	}
 
-
-  public List<UserReference> getUsers() {
-    return users;
-  }
-
-  public void setUsers(final List<UserReference> users) {
-    this.users = users;
-  }
-  
-  public List<ProjectReference> getProjects() {
-    return projects;
-  }
-  
-  public void setProjects(final List<ProjectReference> projects) {
-    this.projects = projects;
-  }
-
-	@Override
+  @Override
 	public String toString(){
 		return "id="+id+", name="+companyName+", updated="+updated;
 	}

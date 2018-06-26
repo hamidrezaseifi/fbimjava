@@ -30,7 +30,7 @@ public class ProjectBcfFile extends SerializableModelBase {
 
 	private String viewpoint;
 
-	private Project project;
+	private Long projectid;
 
 	public ProjectBcfFile() {
 	}
@@ -99,12 +99,12 @@ public class ProjectBcfFile extends SerializableModelBase {
 		this.viewpoint = viewpoint;
 	}
 
-	public Project getProject() {
-		return this.project;
+	public Long getProject() {
+		return this.projectid;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setProject(Long projectid) {
+		this.projectid = projectid;
 	}
 
 }

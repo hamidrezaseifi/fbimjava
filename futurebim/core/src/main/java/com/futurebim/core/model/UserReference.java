@@ -1,5 +1,6 @@
 package com.futurebim.core.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,8 +18,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.futurebim.core.model.base.SerializableModelBase;
-import com.futurebim.core.model.enums.EStatus;
-import com.futurebim.core.model.enums.base.UnknownEnumValueException;
 
 
 /**
@@ -27,15 +26,15 @@ import com.futurebim.core.model.enums.base.UnknownEnumValueException;
  */
 @Entity
 @Table(name="users")
-public class User extends SerializableModelBase {
+public class UserReference extends SerializableModelBase {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+  @Id
+  @Column(name="id")
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-  	private Long companyid;
+  private Long companyid;
   
 	private LocalDate birthday;
 
@@ -47,15 +46,15 @@ public class User extends SerializableModelBase {
 
 	private short gender;
 
-	@Column(name="hash_password")
+  @Column(name="hash_password")
 	private String hashPassword;
 
 	private String lastname;
 
-	@Column(name="name_tag")
+  @Column(name="name_tag")
 	private String nameTag;
 
-	private EStatus status;
+	private short status;
 
 	private LocalDateTime updated;
 
@@ -63,14 +62,7 @@ public class User extends SerializableModelBase {
 
 	private int version;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "companyid", insertable=false, updatable=false)  
-	private CompanyReference company;
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "id.userid", targetEntity = UserProjectAccessReference.class)
-	private List<UserProjectAccessReference> userProjectAccesses;
-
-	public User() {
+	public UserReference() {
 	}
 
 	public Long getId() {
@@ -82,12 +74,12 @@ public class User extends SerializableModelBase {
 	}
 
 	public Long getCompanyid() {
-		return this.companyid;
-	}
+    return this.companyid;
+  }
 
-	public void setCompanyid(Long company) {
-		this.companyid = company;
-	}
+  public void setCompanyid(Long company) {
+    this.companyid = company;
+  }
   
 	public LocalDate getBirthday() {
 		return this.birthday;
@@ -153,12 +145,12 @@ public class User extends SerializableModelBase {
 		this.nameTag = nameTag;
 	}
 
-	public EStatus getStatus() {
+	public short getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Long status) throws UnknownEnumValueException {
-		this.status = EStatus.ofId(status);
+	public void setStatus(short status) {
+		this.status = status;
 	}
 
 	public LocalDateTime getUpdated() {
@@ -184,36 +176,5 @@ public class User extends SerializableModelBase {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-
-  public CompanyReference getCompany() {
-		return this.company;
-	}
-
-	public void setCompany(CompanyReference company) {
-		this.company = company;
-	}
-
-	public List<UserProjectAccessReference> getUserProjectAccesses() {
-		return this.userProjectAccesses;
-	}
-
-	public void setUserProjectAccesses(List<UserProjectAccessReference> userProjectAccesses) {
-		this.userProjectAccesses = userProjectAccesses;
-	}
-
-	public UserProjectAccessReference addUserProjectAccess(UserProjectAccessReference userProjectAccess) {
-		getUserProjectAccesses().add(userProjectAccess);
-		userProjectAccess.setUser(this.id);
-
-		return userProjectAccess;
-	}
-
-	public UserProjectAccessReference removeUserProjectAccess(UserProjectAccessReference userProjectAccess) {
-		getUserProjectAccesses().remove(userProjectAccess);
-		userProjectAccess.setUser(null);
-
-		return userProjectAccess;
-	}
-
 
 }

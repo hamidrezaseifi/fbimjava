@@ -37,8 +37,6 @@ public class ProjectAccessType extends SerializableModelBase {
 
 	private LocalDateTime updated;
 
-	//private List<UserProjectAccess> userProjectAccesses;
-
 	public ProjectAccessType() {
 	}
 
@@ -81,27 +79,5 @@ public class ProjectAccessType extends SerializableModelBase {
 	public void setUpdated(LocalDateTime updated) {
 		this.updated = updated;
 	}
-
-	/*public List<UserProjectAccess> getUserProjectAccesses() {
-		return this.userProjectAccesses;
-	}
-
-	public void setUserProjectAccesses(List<UserProjectAccess> userProjectAccesses) {
-		this.userProjectAccesses = userProjectAccesses;
-	}
-
-	public UserProjectAccess addUserProjectAccess(UserProjectAccess userProjectAccess) {
-		getUserProjectAccesses().add(userProjectAccess);
-		userProjectAccess.setProjectAccessType(this);
-
-		return userProjectAccess;
-	}
-
-	public UserProjectAccess removeUserProjectAccess(UserProjectAccess userProjectAccess) {
-		getUserProjectAccesses().remove(userProjectAccess);
-		userProjectAccess.setProjectAccessType(null);
-
-		return userProjectAccess;
-	}*/
 
 }

@@ -26,7 +26,7 @@ public class ProjectIfcFile extends SerializableModelBase {
 
 	private LocalDateTime updated;
 
-	private Project project;
+	private Long projectid;
 
 	public ProjectIfcFile() {
 	}
@@ -79,12 +79,12 @@ public class ProjectIfcFile extends SerializableModelBase {
 		this.updated = updated;
 	}
 
-	public Project getProject() {
-		return this.project;
+	public Long getProject() {
+		return this.projectid;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setProject(Long projectid) {
+		this.projectid = projectid;
 	}
 
 }
