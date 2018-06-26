@@ -26,25 +26,25 @@ public class Project extends SerializableModelBase {
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  protected Long id;
+  private Long id;
 
-  protected Long companyid;
+  private Long companyid;
 
-  protected LocalDateTime created;
+  private LocalDateTime created;
 
-  protected LocalDate deatline;
+  private LocalDate deatline;
 
   @Column(name = "project_name")
-  protected String projectName;
+  private String projectName;
 
   @Column(name = "start_date")
-  protected LocalDate startDate;
+  private LocalDate startDate;
 
-  protected EStatus status;
+  private EStatus status;
 
-  protected LocalDateTime updated;
+  private LocalDateTime updated;
 
-  protected int version;
+  private int version;
 
   public Project() {
   }

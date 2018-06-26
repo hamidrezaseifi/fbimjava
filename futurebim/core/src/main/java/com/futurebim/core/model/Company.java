@@ -25,20 +25,20 @@ public class Company extends SerializableModelBase {
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  protected Long id;
+  private Long id;
 
-  protected String comments;
+  private String comments;
 
   @Column(name = "company_name")
-  protected String companyName;
+  private String companyName;
 
-  protected EStatus status;
+  private EStatus status;
 
-  protected int version;
+  private int version;
 
-  protected LocalDateTime created;
+  private LocalDateTime created;
 
-  protected LocalDateTime updated;
+  private LocalDateTime updated;
 
   public Company() {
   }

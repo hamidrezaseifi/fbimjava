@@ -13,19 +13,19 @@ public class ProjectIfcFile extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
-  protected Long id;
+  private Long id;
 
-  protected LocalDateTime created;
+  private LocalDateTime created;
 
-  protected String fileName;
+  private String fileName;
 
-  protected String filePath;
+  private String filePath;
 
-  protected EStatus status;
+  private EStatus status;
 
-  protected LocalDateTime updated;
+  private LocalDateTime updated;
 
-  protected Long projectid;
+  private Long projectid;
 
   public ProjectIfcFile() {
   }

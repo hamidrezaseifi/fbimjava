@@ -26,35 +26,35 @@ public class User extends SerializableModelBase {
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  protected Long id;
+  private Long id;
 
-  protected Long companyid;
+  private Long companyid;
 
-  protected LocalDate birthday;
+  private LocalDate birthday;
 
-  protected LocalDateTime created;
+  private LocalDateTime created;
 
-  protected String email;
+  private String email;
 
-  protected String firstname;
+  private String firstname;
 
-  protected short gender;
+  private short gender;
 
   @Column(name = "hash_password")
-  protected String hashPassword;
+  private String hashPassword;
 
-  protected String lastname;
+  private String lastname;
 
   @Column(name = "name_tag")
-  protected String nameTag;
+  private String nameTag;
 
-  protected EStatus status;
+  private EStatus status;
 
-  protected LocalDateTime updated;
+  private LocalDateTime updated;
 
-  protected String username;
+  private String username;
 
-  protected int version;
+  private int version;
 
   public User() {
   }
