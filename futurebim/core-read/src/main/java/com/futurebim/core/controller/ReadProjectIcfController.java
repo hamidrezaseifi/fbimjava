@@ -22,6 +22,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.futurebim.core.bl.ProjectIcfReadHandler;
 import com.futurebim.core.dao.IfcPropertyDao;
 import com.futurebim.core.dao.IfcPropertySingleValueDao;
+import com.futurebim.core.model.ifc.IfcFurnituretype;
 import com.futurebim.core.model.ifc.IfcProperty;
 import com.futurebim.core.model.ifc.IfcPropertySingleValue;
 import com.futurebim.core.model.ui.FutureBimUiRestResponse;
@@ -61,7 +62,7 @@ public class ReadProjectIcfController {
   }
 
   @RequestMapping(value = "/readprop", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody List<String> test() throws IOException {
+  public @ResponseBody List<String> readProperties() throws IOException {
 
     List<IfcProperty> proplist = null;
     final XmlMapper mapper = new XmlMapper();
@@ -99,6 +100,31 @@ public class ReadProjectIcfController {
     }
 
     return idlist;
+
+  }
+
+  @RequestMapping(value = "/readtypes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody List<IfcFurnituretype> readTypes() throws IOException {
+
+    List<IfcFurnituretype> list = null;
+    final XmlMapper mapper = new XmlMapper();
+    final Resource resource = resourceLoader.getResource("classpath:mdata/types.xml");
+    try (final InputStream is = resource.getInputStream()) {
+
+      list = mapper.readValue(is, new TypeReference<List<IfcFurnituretype>>() {
+      });
+
+    }
+
+    /*
+     * final List<String> idlist = new ArrayList<>(); for (final IfcProperty prop : proplist) {
+     * prop.setIfcId("Duplex_A_20110907_optimized"); if (ifcPropertyDao.addIfcProperty(prop) != null) { for (final IfcPropertySingleValue
+     * val : prop.getIfcPropertiesValues()) { val.setPropertyId(prop.getId()); logger.error("nominal: " + val.getNominalValue().length() +
+     * " , " + prop.getId()); if (val.getNominalValue().length() > 49) { } if (ifcPropertySingleValueDao.addIfcPropertySingleValue(val) !=
+     * null) { idlist.add(prop.getId()); } } idlist.add(prop.getId()); } }
+     */
+
+    return list;
 
   }
 

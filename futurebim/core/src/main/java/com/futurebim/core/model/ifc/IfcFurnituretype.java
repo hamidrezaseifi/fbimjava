@@ -1,7 +1,6 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +8,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -20,35 +20,42 @@ import com.futurebim.core.model.base.SerializableModelBase;
  */
 @Entity
 @Table(name = "ifc_furnituretypes")
+@JacksonXmlRootElement(localName = "IfcFurnitureType")
 public class IfcFurnituretype extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
   @Id
+  @JacksonXmlProperty(localName = "id")
   private String id;
 
+  @JacksonXmlProperty(localName = "AssemblyPlace")
   @Column(name = "assembly_place")
   private String assemblyPlace;
 
   private Timestamp created;
 
+  @JacksonXmlProperty(localName = "ElementType")
   @Column(name = "element_type")
   private String elementType;
 
   private short status;
 
-  private String tag;
-
+  @JacksonXmlProperty(localName = "Name")
   @Column(name = "type_name")
   private String typeName;
+
+  @JacksonXmlProperty(localName = "Tag")
+  @Column(name = "tag")
+  private String tag;
 
   private Timestamp updated;
 
   private int version = 1;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementFurnituretype
-  @OneToMany(mappedBy = "ifcFurnituretype")
-  private List<IfcBuildingStoreySpaceFurnishingelementFurnituretype> ifcBuildingStoreySpaceFurnishingelementFurnituretypes;
+  // @OneToMany(mappedBy = "ifcFurnituretype")
+  // private List<IfcBuildingStoreySpaceFurnishingelementFurnituretype> ifcBuildingStoreySpaceFurnishingelementFurnituretypes;
 
   // bi-directional many-to-one association to ProjectIfc
   @ManyToOne(fetch = FetchType.LAZY)
@@ -98,14 +105,6 @@ public class IfcFurnituretype extends SerializableModelBase {
     this.status = status;
   }
 
-  public String getTag() {
-    return this.tag;
-  }
-
-  public void setTag(final String tag) {
-    this.tag = tag;
-  }
-
   public String getTypeName() {
     return this.typeName;
   }
@@ -130,37 +129,20 @@ public class IfcFurnituretype extends SerializableModelBase {
     this.version = version;
   }
 
-  public List<IfcBuildingStoreySpaceFurnishingelementFurnituretype> getIfcBuildingStoreySpaceFurnishingelementFurnituretypes() {
-    return this.ifcBuildingStoreySpaceFurnishingelementFurnituretypes;
-  }
-
-  public void
-         setIfcBuildingStoreySpaceFurnishingelementFurnituretypes(final List<IfcBuildingStoreySpaceFurnishingelementFurnituretype> ifcBuildingStoreySpaceFurnishingelementFurnituretypes) {
-    this.ifcBuildingStoreySpaceFurnishingelementFurnituretypes = ifcBuildingStoreySpaceFurnishingelementFurnituretypes;
-  }
-
-  public IfcBuildingStoreySpaceFurnishingelementFurnituretype
-         addIfcBuildingStoreySpaceFurnishingelementFurnituretype(final IfcBuildingStoreySpaceFurnishingelementFurnituretype ifcBuildingStoreySpaceFurnishingelementFurnituretype) {
-    getIfcBuildingStoreySpaceFurnishingelementFurnituretypes().add(ifcBuildingStoreySpaceFurnishingelementFurnituretype);
-    ifcBuildingStoreySpaceFurnishingelementFurnituretype.setIfcFurnituretype(this);
-
-    return ifcBuildingStoreySpaceFurnishingelementFurnituretype;
-  }
-
-  public IfcBuildingStoreySpaceFurnishingelementFurnituretype
-         removeIfcBuildingStoreySpaceFurnishingelementFurnituretype(final IfcBuildingStoreySpaceFurnishingelementFurnituretype ifcBuildingStoreySpaceFurnishingelementFurnituretype) {
-    getIfcBuildingStoreySpaceFurnishingelementFurnituretypes().remove(ifcBuildingStoreySpaceFurnishingelementFurnituretype);
-    ifcBuildingStoreySpaceFurnishingelementFurnituretype.setIfcFurnituretype(null);
-
-    return ifcBuildingStoreySpaceFurnishingelementFurnituretype;
-  }
-
   public ProjectIfc getProjectIfc() {
     return this.projectIfc;
   }
 
   public void setProjectIfc(final ProjectIfc projectIfc) {
     this.projectIfc = projectIfc;
+  }
+
+  public String getTag() {
+    return tag;
+  }
+
+  public void setTag(final String tag) {
+    this.tag = tag;
   }
 
 }
