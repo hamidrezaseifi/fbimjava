@@ -5,12 +5,16 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -19,16 +23,21 @@ import com.futurebim.core.model.base.SerializableModelBase;
  */
 @Entity
 @Table(name = "ifc_properties_value")
-@NamedQuery(name = "IfcPropertiesValue.findAll", query = "SELECT i FROM IfcPropertiesValue i")
-public class IfcPropertiesValue extends SerializableModelBase {
+@JacksonXmlRootElement(localName = "IfcPropertySingleValue")
+public class IfcPropertySingleValue extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
   @Id
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(name = "property_id")
+  private String propertyId;
 
   private Timestamp created;
 
+  @JacksonXmlProperty(localName = "NominalValue")
   @Column(name = "nominal_value")
   private String nominalValue;
 
@@ -36,24 +45,25 @@ public class IfcPropertiesValue extends SerializableModelBase {
 
   private Timestamp updated;
 
+  @JacksonXmlProperty(localName = "Name")
   @Column(name = "value_name")
   private String valueName;
 
-  private int version;
+  private int version = 1;
 
-  // bi-directional many-to-one association to IfcProperty
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "property_id")
+  @JoinColumn(name = "property_id", insertable = false, updatable = false)
   private IfcProperty ifcProperty;
 
-  public IfcPropertiesValue() {
+  public IfcPropertySingleValue() {
   }
 
-  public String getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final String id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 
@@ -70,7 +80,7 @@ public class IfcPropertiesValue extends SerializableModelBase {
   }
 
   public void setNominalValue(final String nominalValue) {
-    this.nominalValue = nominalValue;
+    this.nominalValue = nominalValue.length() < 150 ? nominalValue : nominalValue.substring(0, 145);
   }
 
   public short getStatus() {
@@ -111,6 +121,14 @@ public class IfcPropertiesValue extends SerializableModelBase {
 
   public void setIfcProperty(final IfcProperty ifcProperty) {
     this.ifcProperty = ifcProperty;
+  }
+
+  public String getPropertyId() {
+    return propertyId;
+  }
+
+  public void setPropertyId(final String propertyId) {
+    this.propertyId = propertyId;
   }
 
 }

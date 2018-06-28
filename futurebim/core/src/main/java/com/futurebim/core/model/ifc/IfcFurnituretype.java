@@ -44,7 +44,7 @@ public class IfcFurnituretype extends SerializableModelBase {
 
   private Timestamp updated;
 
-  private int version;
+  private int version = 1;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementFurnituretype
   @OneToMany(mappedBy = "ifcFurnituretype")

@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +20,6 @@ import com.futurebim.core.model.base.SerializableModelBase;
  */
 @Entity
 @Table(name = "ifc_project_site")
-@NamedQuery(name = "IfcProjectSite.findAll", query = "SELECT i FROM IfcProjectSite i")
 public class IfcProjectSite extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
@@ -56,7 +54,7 @@ public class IfcProjectSite extends SerializableModelBase {
 
   private Timestamp updated;
 
-  private int version;
+  private int version = 1;
 
   // bi-directional many-to-one association to IfcBuilding
   @OneToMany(mappedBy = "ifcProjectSite")

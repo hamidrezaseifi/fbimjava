@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +20,6 @@ import com.futurebim.core.model.base.SerializableModelBase;
  */
 @Entity
 @Table(name = "ifc_windowstyle")
-@NamedQuery(name = "IfcWindowstyle.findAll", query = "SELECT i FROM IfcWindowstyle i")
 public class IfcWindowstyle extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
@@ -51,7 +49,7 @@ public class IfcWindowstyle extends SerializableModelBase {
 
   private Timestamp updated;
 
-  private int version;
+  private int version = 1;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindowStyle
   @OneToMany(mappedBy = "ifcWindowstyle")

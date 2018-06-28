@@ -25,7 +25,7 @@ public class IfcBuildingStoreySpaceFurnishingelementPresentationlayer extends Se
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   private Timestamp created;
 
@@ -44,11 +44,11 @@ public class IfcBuildingStoreySpaceFurnishingelementPresentationlayer extends Se
   public IfcBuildingStoreySpaceFurnishingelementPresentationlayer() {
   }
 
-  public int getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final int id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 

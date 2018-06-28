@@ -44,7 +44,7 @@ public class IfcBuildingStorey extends SerializableModelBase {
 
   private Timestamp updated;
 
-  private int version;
+  private int version = 1;
 
   // bi-directional many-to-one association to IfcBuilding
   @ManyToOne(fetch = FetchType.LAZY)

@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.futurebim.core.model.Project;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -40,34 +43,48 @@ public class ProjectIfc extends SerializableModelBase {
 
   private Timestamp updated;
 
-  private int version;
+  private int version = 1;
 
   // bi-directional many-to-one association to IfcDoorstyle
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "projectIfc")
   private List<IfcDoorstyle> ifcDoorstyles;
 
   // bi-directional many-to-one association to IfcFurnituretype
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "projectIfc")
   private List<IfcFurnituretype> ifcFurnituretypes;
 
   // bi-directional many-to-one association to IfcPresentationlayer
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "projectIfc")
   private List<IfcPresentationlayer> ifcPresentationlayers;
 
   // bi-directional many-to-one association to IfcProject
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "projectIfc")
   private List<IfcProject> ifcProjects;
 
   // bi-directional many-to-one association to IfcProperty
-  @OneToMany(mappedBy = "projectIfc")
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "ifcId")
   private List<IfcProperty> ifcProperties;
 
   // bi-directional many-to-one association to IfcWindowstyle
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "projectIfc")
   private List<IfcWindowstyle> ifcWindowstyles;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "projectid", insertable = false, updatable = false)
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "ifcId")
+  private List<IfcUnit> ifcUnits;
+
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "ifcId")
+  private List<IfcConversionBasedUnit> ifcConversionBasedUnit;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "project_id", insertable = false, updatable = false)
   private Project project;
 
   public ProjectIfc() {
@@ -225,20 +242,6 @@ public class ProjectIfc extends SerializableModelBase {
     this.ifcProperties = ifcProperties;
   }
 
-  public IfcProperty addIfcProperty(final IfcProperty ifcProperty) {
-    getIfcProperties().add(ifcProperty);
-    ifcProperty.setProjectIfc(this);
-
-    return ifcProperty;
-  }
-
-  public IfcProperty removeIfcProperty(final IfcProperty ifcProperty) {
-    getIfcProperties().remove(ifcProperty);
-    ifcProperty.setProjectIfc(null);
-
-    return ifcProperty;
-  }
-
   public List<IfcWindowstyle> getIfcWindowstyles() {
     return this.ifcWindowstyles;
   }
@@ -267,6 +270,22 @@ public class ProjectIfc extends SerializableModelBase {
 
   public void setProject(final Project project) {
     this.project = project;
+  }
+
+  public List<IfcUnit> getIfcUnits() {
+    return ifcUnits;
+  }
+
+  public void setIfcUnits(final List<IfcUnit> ifcUnits) {
+    this.ifcUnits = ifcUnits;
+  }
+
+  public List<IfcConversionBasedUnit> getIfcConversionBasedUnit() {
+    return ifcConversionBasedUnit;
+  }
+
+  public void setIfcConversionBasedUnit(final List<IfcConversionBasedUnit> ifcConversionBasedUnit) {
+    this.ifcConversionBasedUnit = ifcConversionBasedUnit;
   }
 
 }

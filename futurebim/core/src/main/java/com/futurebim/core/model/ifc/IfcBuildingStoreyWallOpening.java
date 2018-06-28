@@ -41,7 +41,7 @@ public class IfcBuildingStoreyWallOpening extends SerializableModelBase {
 
   private Timestamp updated;
 
-  private int version;
+  private int version = 1;
 
   @Column(name = "wall_name")
   private String wallName;

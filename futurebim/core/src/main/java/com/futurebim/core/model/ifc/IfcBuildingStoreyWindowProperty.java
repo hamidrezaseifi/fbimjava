@@ -25,7 +25,7 @@ public class IfcBuildingStoreyWindowProperty extends SerializableModelBase {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   private Timestamp created;
 
@@ -44,11 +44,11 @@ public class IfcBuildingStoreyWindowProperty extends SerializableModelBase {
   public IfcBuildingStoreyWindowProperty() {
   }
 
-  public int getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final int id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 

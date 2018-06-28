@@ -14,8 +14,8 @@ import com.futurebim.core.model.base.SerializableModelBase;
  *
  */
 @Entity
-@Table(name = "ifc_units")
-public class IfcUnit extends SerializableModelBase {
+@Table(name = "ifc_conversionbaseunits")
+public class IfcConversionBasedUnit extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class IfcUnit extends SerializableModelBase {
 
   private int version = 1;
 
-  public IfcUnit() {
+  public IfcConversionBasedUnit() {
   }
 
   public String getId() {

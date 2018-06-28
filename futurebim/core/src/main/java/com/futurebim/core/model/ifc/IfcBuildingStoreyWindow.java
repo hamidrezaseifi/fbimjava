@@ -47,7 +47,7 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
 
   private Timestamp updated;
 
-  private int version;
+  private int version = 1;
 
   @Column(name = "window_name")
   private String windowName;
