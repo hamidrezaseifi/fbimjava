@@ -14,7 +14,7 @@ import com.futurebim.core.model.ui.FutureBimUiRestResponse;
 
 @RestController
 @RequestMapping(path = "/company/read")
-public class ReadCompany {
+public class ReadCompanyController {
 
   private CompanyReadHandler companyReadHandler;
 
