@@ -8,11 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CoreReadApp {
 
-	private static final Logger logger = LoggerFactory.getLogger(CoreReadApp.class);
+  private static final Logger logger = LoggerFactory.getLogger(CoreReadApp.class);
 
-	public static void main(String[] args) {
-		CoreReadApp.logger.info("Starting Feature Bim Core application...");
-		SpringApplication.run(CoreReadApp.class, args);
-		 
-	}
+  public static void main(final String[] args) {
+    CoreReadApp.logger.info("Starting Feature Bim Core application...");
+    SpringApplication.run(CoreReadApp.class, args);
+
+  }
 }

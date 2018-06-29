@@ -1,4 +1,4 @@
-package com.futurebim.core.dao.impl;
+package com.futurebim.core.dao.impl.ifc;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.futurebim.core.dao.ProjectIcfDao;
+import com.futurebim.core.dao.ifc.ProjectIcfDao;
 import com.futurebim.core.model.ifc.ProjectIfc;
 
 @Transactional
@@ -26,9 +26,9 @@ public class ProjectIcfDaoImpl implements ProjectIcfDao {
   @Override
   public ProjectIfc addProjectIfc(final ProjectIfc pifc) {
     final Session session = this.sessionFactory.getCurrentSession();
-    final Long id = (Long) session.save(pifc);
+    session.save(pifc);
     logger.info("ProjectIfc saved successfully, ProjectIfc Details=" + pifc);
-    return getById(id);
+    return getById(pifc.getId());
   }
 
   @Override
@@ -57,7 +57,7 @@ public class ProjectIcfDaoImpl implements ProjectIcfDao {
   }
 
   @Override
-  public ProjectIfc getById(final Long id) {
+  public ProjectIfc getById(final String id) {
     final Session session = this.sessionFactory.getCurrentSession();
     final ProjectIfc pifc = session.get(ProjectIfc.class, id);
     if (pifc != null) {
@@ -66,6 +66,8 @@ public class ProjectIcfDaoImpl implements ProjectIcfDao {
     else {
       logger.info("ProjectIfc not found!");
     }
+    session.disconnect();
+    // session.close();
 
     return pifc;
   }

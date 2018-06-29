@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,13 +19,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.futurebim.core.bl.ProjectIcfReadHandler;
-import com.futurebim.core.dao.IfcPropertyDao;
-import com.futurebim.core.dao.IfcPropertySingleValueDao;
+import com.futurebim.core.dao.ifc.IfcPropertyDao;
+import com.futurebim.core.dao.ifc.IfcPropertySingleValueDao;
 import com.futurebim.core.model.ifc.IfcFurnituretype;
 import com.futurebim.core.model.ifc.IfcProperty;
 import com.futurebim.core.model.ifc.IfcPropertySingleValue;
+import com.futurebim.core.model.ifc.render.ProjectIfcRender;
 import com.futurebim.core.model.ui.FutureBimUiRestResponse;
 
 @RestController
@@ -44,6 +49,11 @@ public class ReadProjectIcfController {
   @Autowired
   private IfcPropertySingleValueDao ifcPropertySingleValueDao;
 
+  @Autowired
+  private ObjectMapper                           objectMapper;
+  @Autowired
+  private MappingJackson2XmlHttpMessageConverter xmlConverter;
+
   @Autowired(required = true)
   public void setPersonService(final ProjectIcfReadHandler projectIcfReadHandler) {
     this.projectIcfReadHandler = projectIcfReadHandler;
@@ -55,10 +65,21 @@ public class ReadProjectIcfController {
     return FutureBimUiRestResponse.createDataResponse(projectIcfReadHandler.listProjectIfcs(projectId));
   }
 
-  @RequestMapping(value = "/get/{companyid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody FutureBimUiRestResponse getCompany(@PathVariable final Long ifcid) {
+  @RequestMapping(value = "/get/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody FutureBimUiRestResponse getIfc(@PathVariable final String ifcId) {
 
-    return FutureBimUiRestResponse.createDataResponse(projectIcfReadHandler.getById(ifcid));
+    return FutureBimUiRestResponse.createDataResponse(projectIcfReadHandler.getById(ifcId));
+  }
+
+  @RequestMapping(value = "/getrender/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+  public @ResponseBody ProjectIfcRender getIfcRender(@PathVariable final String ifcId) {
+
+    final XmlMapper xmlMapper = (XmlMapper) xmlConverter.getObjectMapper();
+    xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
+    xmlMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+    xmlMapper.configure(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS, true);
+
+    return new ProjectIfcRender(projectIcfReadHandler.getById(ifcId));
   }
 
   @RequestMapping(value = "/readprop", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -78,22 +99,18 @@ public class ReadProjectIcfController {
 
     for (final IfcProperty prop : proplist) {
       prop.setIfcId("Duplex_A_20110907_optimized");
+      for (final IfcPropertySingleValue val : prop.getIfcPropertiesValues()) {
+
+        val.setPropertyId(prop.getId());
+      }
+
       if (ifcPropertyDao.addIfcProperty(prop) != null) {
 
-        for (final IfcPropertySingleValue val : prop.getIfcPropertiesValues()) {
-
-          val.setPropertyId(prop.getId());
-          logger.error("nominal: " + val.getNominalValue().length() + " , " + prop.getId());
-
-          if (val.getNominalValue().length() > 49) {
-
-          }
-
-          if (ifcPropertySingleValueDao.addIfcPropertySingleValue(val) != null) {
-
-            idlist.add(prop.getId());
-          }
-        }
+        /*
+         * for (final IfcPropertySingleValue val : prop.getIfcPropertiesValues()) { val.setPropertyId(prop.getId());
+         * logger.error("nominal: " + val.getNominalValue().length() + " , " + prop.getId()); if (val.getNominalValue().length() > 49) { }
+         * if (ifcPropertySingleValueDao.addIfcPropertySingleValue(val) != null) { idlist.add(prop.getId()); } }
+         */
 
         idlist.add(prop.getId());
       }

@@ -1,4 +1,4 @@
-package com.futurebim.core.dao.impl;
+package com.futurebim.core.dao.impl.ifc;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.futurebim.core.dao.IfcPropertySingleValueDao;
+import com.futurebim.core.dao.ifc.IfcPropertySingleValueDao;
 import com.futurebim.core.model.ifc.IfcPropertySingleValue;
 
 @Transactional
@@ -66,7 +66,7 @@ public class IfcPropertySingleValueImpl implements IfcPropertySingleValueDao {
     else {
       logger.info("IfcPropertySingleValue not found!");
     }
-
+    session.disconnect();
     return pifc;
   }
 

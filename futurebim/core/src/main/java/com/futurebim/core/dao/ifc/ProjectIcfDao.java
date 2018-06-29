@@ -1,4 +1,4 @@
-package com.futurebim.core.dao;
+package com.futurebim.core.dao.ifc;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface ProjectIcfDao {
 
   public boolean removeProjectIfc(Long id);
 
-  public ProjectIfc getById(Long id);
+  public ProjectIfc getById(String id);
 
   public List<ProjectIfc> listProjectIfcs(Long projectId);
 

@@ -38,7 +38,7 @@ public class HibernateConf {
     sessionFactory.setDataSource(dbConfiguration.getDatasource());
 
     sessionFactory.setAnnotatedClasses(findAllEntities());
-    sessionFactory.setPackagesToScan("com.futurebim.core.dao.impl");
+    sessionFactory.setPackagesToScan(new String[] { "com.futurebim.core.dao.impl", "com.futurebim.core.dao.impl.ifc" });
     sessionFactory.setHibernateProperties(hibernateProperties());
 
     return sessionFactory;

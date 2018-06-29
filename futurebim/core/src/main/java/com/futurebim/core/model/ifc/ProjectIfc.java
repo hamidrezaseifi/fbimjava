@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.futurebim.core.model.Project;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -66,6 +69,8 @@ public class ProjectIfc extends SerializableModelBase {
   private List<IfcProject> ifcProjects;
 
   // bi-directional many-to-one association to IfcProperty
+  @JacksonXmlProperty(localName = "ifcProperty")
+  @JacksonXmlElementWrapper(localName = "ifcProperties")
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcId")
   private List<IfcProperty> ifcProperties;
@@ -83,6 +88,7 @@ public class ProjectIfc extends SerializableModelBase {
   @OneToMany(mappedBy = "ifcId")
   private List<IfcConversionBasedUnit> ifcConversionBasedUnit;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "project_id", insertable = false, updatable = false)
   private Project project;

@@ -2,14 +2,15 @@ package com.futurebim.core.config;
 
 import javax.sql.DataSource;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 /**
  * This class is used to configure the database connection and the connection behavior.
@@ -71,8 +72,6 @@ public class DbConfiguration {
     configuration.setUsername(dbUserName);
     configuration.setPassword(password);
     configuration.setTransactionIsolation("TRANSACTION_READ_COMMITTED");
-    
-    
 
     configuration.addDataSourceProperty("cachePrepStmts", this.cachePreparedStatements);
     configuration.addDataSourceProperty("prepStmtCacheSize", this.preparedStatementsCacheSize);
@@ -84,113 +83,91 @@ public class DbConfiguration {
     return ds;
   }
 
-  
   public String getPoolName() {
     return poolName;
   }
 
-  
-  public void setPoolName(String poolName) {
+  public void setPoolName(final String poolName) {
     this.poolName = poolName;
   }
 
-  
   public String getJdbcUrl() {
     return jdbcUrl;
   }
 
-  
-  public void setJdbcUrl(String jdbcUrl) {
+  public void setJdbcUrl(final String jdbcUrl) {
     this.jdbcUrl = jdbcUrl;
   }
 
-  
   public String getDbUserName() {
     return dbUserName;
   }
 
-  
-  public void setDbUserName(String dbUserName) {
+  public void setDbUserName(final String dbUserName) {
     this.dbUserName = dbUserName;
   }
 
-  
   public String getPassword() {
     return password;
   }
 
-  
-  public void setPassword(String password) {
+  public void setPassword(final String password) {
     this.password = password;
   }
 
-  
   public Integer getMinIdleConnections() {
     return minIdleConnections;
   }
 
-  
-  public void setMinIdleConnections(Integer minIdleConnections) {
+  public void setMinIdleConnections(final Integer minIdleConnections) {
     this.minIdleConnections = minIdleConnections;
   }
 
-  
   public Integer getMaxPoolSize() {
     return maxPoolSize;
   }
 
-  
-  public void setMaxPoolSize(Integer maxPoolSize) {
+  public void setMaxPoolSize(final Integer maxPoolSize) {
     this.maxPoolSize = maxPoolSize;
   }
 
-  
   public Boolean getCachePreparedStatements() {
     return cachePreparedStatements;
   }
 
-  
-  public void setCachePreparedStatements(Boolean cachePreparedStatements) {
+  public void setCachePreparedStatements(final Boolean cachePreparedStatements) {
     this.cachePreparedStatements = cachePreparedStatements;
   }
 
-  
   public Integer getPreparedStatementsCacheSize() {
     return preparedStatementsCacheSize;
   }
 
-  
-  public void setPreparedStatementsCacheSize(Integer preparedStatementsCacheSize) {
+  public void setPreparedStatementsCacheSize(final Integer preparedStatementsCacheSize) {
     this.preparedStatementsCacheSize = preparedStatementsCacheSize;
   }
 
-  
   public Integer getPreparedStatementsCacheSqlLimit() {
     return preparedStatementsCacheSqlLimit;
   }
 
-  
-  public void setPreparedStatementsCacheSqlLimit(Integer preparedStatementsCacheSqlLimit) {
+  public void setPreparedStatementsCacheSqlLimit(final Integer preparedStatementsCacheSqlLimit) {
     this.preparedStatementsCacheSqlLimit = preparedStatementsCacheSqlLimit;
   }
 
-  
   public Boolean getUseServerSidePreparedStatements() {
     return useServerSidePreparedStatements;
   }
 
-  
-  public void setUseServerSidePreparedStatements(Boolean useServerSidePreparedStatements) {
+  public void setUseServerSidePreparedStatements(final Boolean useServerSidePreparedStatements) {
     this.useServerSidePreparedStatements = useServerSidePreparedStatements;
   }
 
-  
   public String getClassName() {
     return className;
   }
 
-  
-  public void setClassName(String className) {
+  public void setClassName(final String className) {
     this.className = className;
   }
 

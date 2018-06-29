@@ -1,4 +1,4 @@
-package com.futurebim.core.dao;
+package com.futurebim.core.dao.ifc;
 
 import java.util.List;
 

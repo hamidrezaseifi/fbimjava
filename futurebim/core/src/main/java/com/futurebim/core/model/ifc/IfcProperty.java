@@ -3,6 +3,7 @@ package com.futurebim.core.model.ifc;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -50,7 +51,7 @@ public class IfcProperty extends SerializableModelBase {
   @LazyCollection(LazyCollectionOption.FALSE)
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcPropertySingleValue")
-  @OneToMany(mappedBy = "ifcProperty")
+  @OneToMany(mappedBy = "ifcProperty", cascade = CascadeType.ALL)
   private List<IfcPropertySingleValue> ifcPropertySingleValue;
 
   public IfcProperty() {
