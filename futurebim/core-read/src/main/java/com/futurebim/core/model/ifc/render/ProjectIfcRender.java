@@ -37,14 +37,15 @@ public class ProjectIfcRender {
   @JacksonXmlElementWrapper(localName = "types")
   private IfcTypeWrapperRender types;
 
+  @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(localName = "layers")
   private List<IfcPresentationlayerRender> layers;
 
-  @JsonIgnore
+  // @JsonIgnore
   // @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(localName = "decomposition")
-  private List<Object> decomposition;
+  private DecompositionWrapperRender decomposition;
 
   /*
    * private String id; private String ifcName; private List<IfcDoorstyle> ifcDoorstyles; private List<IfcFurnituretype> ifcFurnituretypes;
@@ -130,11 +131,11 @@ public class ProjectIfcRender {
     this.layers = layers;
   }
 
-  public List<Object> getDecomposition() {
+  public DecompositionWrapperRender getDecomposition() {
     return decomposition;
   }
 
-  public void setDecomposition(final List<Object> decomposition) {
+  public void setDecomposition(final DecompositionWrapperRender decomposition) {
     this.decomposition = decomposition;
   }
 
