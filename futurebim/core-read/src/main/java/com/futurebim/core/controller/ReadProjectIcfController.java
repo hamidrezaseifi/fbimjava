@@ -145,4 +145,23 @@ public class ReadProjectIcfController {
 
   }
 
+  @RequestMapping(value = "/readifc", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody IfcProperty readIfc() throws IOException {
+
+    final IfcProperty ifc;
+    final XmlMapper mapper = new XmlMapper();
+    final Resource resource = resourceLoader.getResource("classpath:mdata/Duplex_A_20110907_optimized.xml");
+    try (final InputStream is = resource.getInputStream()) {
+
+      ifc = mapper.readValue(is, IfcProperty.class);
+
+    }
+
+    objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+    objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+
+    return ifc;
+
+  }
+
 }
