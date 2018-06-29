@@ -15,6 +15,10 @@ public class IfcPropertyValueRender {
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
   private String valueName;
 
+  public IfcPropertyValueRender() {
+
+  }
+
   public IfcPropertyValueRender(final IfcPropertySingleValue model) {
     setNominalValue(model.getNominalValue());
     setValueName(model.getValueName());

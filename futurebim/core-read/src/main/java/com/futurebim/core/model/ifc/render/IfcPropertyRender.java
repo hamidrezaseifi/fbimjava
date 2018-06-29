@@ -25,6 +25,10 @@ public class IfcPropertyRender {
   @JacksonXmlProperty(localName = "IfcPropertySingleValue")
   private List<IfcPropertyValueRender> values = new ArrayList<>();
 
+  public IfcPropertyRender() {
+
+  }
+
   public IfcPropertyRender(final IfcProperty model) {
     setId(model.getId());
     setPropertyName(model.getPropertyName());

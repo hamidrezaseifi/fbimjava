@@ -1,23 +1,15 @@
 package com.futurebim.core.model.ifc.render;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlElement;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.futurebim.core.model.ifc.IfcConversionBasedUnit;
-import com.futurebim.core.model.ifc.IfcDoorstyle;
-import com.futurebim.core.model.ifc.IfcFurnituretype;
-import com.futurebim.core.model.ifc.IfcPresentationlayer;
-import com.futurebim.core.model.ifc.IfcProject;
-import com.futurebim.core.model.ifc.IfcWindowstyle;
 import com.futurebim.core.model.ifc.ProjectIfc;
 
 /**
@@ -27,49 +19,42 @@ import com.futurebim.core.model.ifc.ProjectIfc;
 @JacksonXmlRootElement(localName = "ifc", namespace = "http://www.w3.org/1999/xlink")
 public class ProjectIfcRender {
 
+  @JsonIgnore
   @JacksonXmlProperty(localName = "header")
-  @XmlElement
-  private final Map<String, Object> header = new HashMap<>();
+  private Map<String, Object> header = new HashMap<>();
 
+  @JsonIgnore
   @JacksonXmlProperty(localName = "units")
-  @XmlElement
-  private final IfcUnitWrapperRender units;
+  private IfcUnitWrapperRender units;
 
+  @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(localName = "properties")
-  @XmlElement
-  private final List<IfcPropertyRender> properties;
+  private List<IfcPropertyRender> properties;
 
-  private String id;
+  @JsonIgnore
+  // @JacksonXmlProperty(localName = "IfcPropertySet")
+  @JacksonXmlElementWrapper(localName = "types")
+  private IfcTypeWrapperRender types;
 
-  private Timestamp created;
+  @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
+  @JacksonXmlElementWrapper(localName = "layers")
+  private List<IfcPresentationlayerRender> layers;
 
-  private String ifcName;
+  @JsonIgnore
+  // @JacksonXmlProperty(localName = "IfcPropertySet")
+  @JacksonXmlElementWrapper(localName = "decomposition")
+  private List<Object> decomposition;
 
-  private Long projectId;
+  /*
+   * private String id; private String ifcName; private List<IfcDoorstyle> ifcDoorstyles; private List<IfcFurnituretype> ifcFurnituretypes;
+   * private List<IfcPresentationlayer> ifcPresentationlayers; private List<IfcProject> ifcProjects; private List<IfcWindowstyle>
+   * ifcWindowstyles; private List<IfcConversionBasedUnit> ifcConversionBasedUnit;
+   */
 
-  private short status;
+  public ProjectIfcRender() {
 
-  private Timestamp updated;
-
-  private final int version = 1;
-
-  // bi-directional many-to-one association to IfcDoorstyle
-  private List<IfcDoorstyle> ifcDoorstyles;
-
-  // bi-directional many-to-one association to IfcFurnituretype
-  private List<IfcFurnituretype> ifcFurnituretypes;
-
-  // bi-directional many-to-one association to IfcPresentationlayer
-  private List<IfcPresentationlayer> ifcPresentationlayers;
-
-  // bi-directional many-to-one association to IfcProject
-  private List<IfcProject> ifcProjects;
-
-  // bi-directional many-to-one association to IfcWindowstyle
-  private List<IfcWindowstyle> ifcWindowstyles;
-
-  private List<IfcConversionBasedUnit> ifcConversionBasedUnit;
+  }
 
   public ProjectIfcRender(final ProjectIfc model) {
     createHeader(model);
@@ -109,12 +94,48 @@ public class ProjectIfcRender {
     return header;
   }
 
+  public void setHeader(final Map<String, Object> header) {
+    this.header = header;
+  }
+
   public IfcUnitWrapperRender getUnits() {
     return units;
   }
 
   public List<IfcPropertyRender> getProperties() {
     return properties;
+  }
+
+  public void setUnits(final IfcUnitWrapperRender units) {
+    this.units = units;
+  }
+
+  public void setProperties(final List<IfcPropertyRender> properties) {
+    this.properties = properties;
+  }
+
+  public IfcTypeWrapperRender getTypes() {
+    return types;
+  }
+
+  public void setTypes(final IfcTypeWrapperRender types) {
+    this.types = types;
+  }
+
+  public List<IfcPresentationlayerRender> getLayers() {
+    return layers;
+  }
+
+  public void setLayers(final List<IfcPresentationlayerRender> layers) {
+    this.layers = layers;
+  }
+
+  public List<Object> getDecomposition() {
+    return decomposition;
+  }
+
+  public void setDecomposition(final List<Object> decomposition) {
+    this.decomposition = decomposition;
   }
 
 }

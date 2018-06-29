@@ -23,6 +23,10 @@ public class IfcUnitRender {
   @JacksonXmlProperty(localName = "UnitType", isAttribute = true)
   private String unitType;
 
+  public IfcUnitRender() {
+
+  }
+
   public IfcUnitRender(final IfcUnit unit) {
     setEquivalent(unit.getEquivalent());
     setUnitName(unit.getUnitName());
