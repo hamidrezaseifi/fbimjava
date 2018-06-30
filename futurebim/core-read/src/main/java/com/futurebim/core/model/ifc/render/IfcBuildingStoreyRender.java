@@ -22,52 +22,52 @@ public class IfcBuildingStoreyRender {
   @JacksonXmlProperty(localName = "Elevation", isAttribute = true)
   private String elevation;
 
-  @JacksonXmlProperty(localName = "IfcWallStandardCase", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcWallStandardCase")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> wallStandardCaseList;
+  private List<IfcWallStandardCaseRender> wallStandardCaseList;
 
-  @JacksonXmlProperty(localName = "IfcWall", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcWall")
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<Object> wallList;
 
-  @JacksonXmlProperty(localName = "IfcFooting", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcFooting")
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<Object> footingList;
 
-  @JacksonXmlProperty(localName = "IfcRoof", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcRoof")
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<Object> roofList;
 
-  @JacksonXmlProperty(localName = "IfcSlab", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcSlab")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> slabList;
+  private List<IfcSlabRender> slabList;
 
-  @JacksonXmlProperty(localName = "IfcWindow", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcWindow")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> windowList;
+  private List<IfcWindowRender> windowList;
 
-  @JacksonXmlProperty(localName = "IfcDoor", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcDoor")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> doorList;
+  private List<IfcDoorRender> doorList;
 
-  @JacksonXmlProperty(localName = "IfcStair", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcStair")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> stairList;
+  private List<IfcStairRender> stairList;
 
-  @JacksonXmlProperty(localName = "IfcCovering", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcCovering")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> coveringList;
+  private List<IfcCoveringRender> coveringList;
 
-  @JacksonXmlProperty(localName = "IfcBeam", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcBeam")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> beamList;
+  private List<IfcBeamRender> beamList;
 
-  @JacksonXmlProperty(localName = "IfcSpace", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcSpace")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> spaceList;
+  private List<IfcSpaceRender> spaceList;
 
   // @JsonIgnore
-  @JacksonXmlProperty(localName = "IfcPropertySet", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<IfcPropertySetRender> propertySetList;
 
@@ -111,67 +111,67 @@ public class IfcBuildingStoreyRender {
     this.elevation = elevation;
   }
 
-  public List<Object> getWallStandardCaseList() {
+  public List<IfcWallStandardCaseRender> getWallStandardCaseList() {
     return wallStandardCaseList;
   }
 
-  public void setWallStandardCaseList(final List<Object> wallStandardCaseList) {
+  public void setWallStandardCaseList(final List<IfcWallStandardCaseRender> wallStandardCaseList) {
     this.wallStandardCaseList = wallStandardCaseList;
   }
 
-  public List<Object> getSlabList() {
+  public List<IfcSlabRender> getSlabList() {
     return slabList;
   }
 
-  public void setSlabList(final List<Object> slabList) {
+  public void setSlabList(final List<IfcSlabRender> slabList) {
     this.slabList = slabList;
   }
 
-  public List<Object> getWindowList() {
+  public List<IfcWindowRender> getWindowList() {
     return windowList;
   }
 
-  public void setWindowList(final List<Object> windowList) {
+  public void setWindowList(final List<IfcWindowRender> windowList) {
     this.windowList = windowList;
   }
 
-  public List<Object> getDoorList() {
+  public List<IfcDoorRender> getDoorList() {
     return doorList;
   }
 
-  public void setDoorList(final List<Object> doorList) {
+  public void setDoorList(final List<IfcDoorRender> doorList) {
     this.doorList = doorList;
   }
 
-  public List<Object> getStairList() {
+  public List<IfcStairRender> getStairList() {
     return stairList;
   }
 
-  public void setStairList(final List<Object> stairList) {
+  public void setStairList(final List<IfcStairRender> stairList) {
     this.stairList = stairList;
   }
 
-  public List<Object> getCoveringList() {
+  public List<IfcCoveringRender> getCoveringList() {
     return coveringList;
   }
 
-  public void setCoveringList(final List<Object> coveringList) {
+  public void setCoveringList(final List<IfcCoveringRender> coveringList) {
     this.coveringList = coveringList;
   }
 
-  public List<Object> getBeamList() {
+  public List<IfcBeamRender> getBeamList() {
     return beamList;
   }
 
-  public void setBeamList(final List<Object> beamList) {
+  public void setBeamList(final List<IfcBeamRender> beamList) {
     this.beamList = beamList;
   }
 
-  public List<Object> getSpaceList() {
+  public List<IfcSpaceRender> getSpaceList() {
     return spaceList;
   }
 
-  public void setSpaceList(final List<Object> spaceList) {
+  public void setSpaceList(final List<IfcSpaceRender> spaceList) {
     this.spaceList = spaceList;
   }
 

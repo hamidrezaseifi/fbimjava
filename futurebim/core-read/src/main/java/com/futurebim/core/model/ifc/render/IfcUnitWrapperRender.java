@@ -17,19 +17,19 @@ public class IfcUnitWrapperRender {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcSIUnit")
-  private List<IfcUnitRender> units = new ArrayList<>();
+  private final List<IfcUnitRender> units = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcConversionBasedUnit")
-  private List<IfcConversionBasedUnitRender> conversionUnits = new ArrayList<>();
+  private final List<IfcConversionBasedUnitRender> conversionUnits = new ArrayList<>();
 
   public IfcUnitWrapperRender() {
 
   }
 
   public IfcUnitWrapperRender(final ProjectIfc model) {
-    units.addAll(IfcUnitRender.fromModelList(model.getIfcUnits()));
-    conversionUnits.addAll(IfcConversionBasedUnitRender.fromModelList(model.getIfcConversionBasedUnit()));
+    // units.addAll(IfcUnitRender.fromModelList(model.getIfcUnits()));
+    // conversionUnits.addAll(IfcConversionBasedUnitRender.fromModelList(model.getIfcConversionBasedUnit()));
   }
 
   public List<IfcUnitRender> getUnits() {
@@ -41,11 +41,11 @@ public class IfcUnitWrapperRender {
   }
 
   public void setUnits(final List<IfcUnitRender> units) {
-    this.units = units;
+    this.units.addAll(units);
   }
 
   public void setConversionUnits(final List<IfcConversionBasedUnitRender> conversionUnits) {
-    this.conversionUnits = conversionUnits;
+    this.conversionUnits.addAll(conversionUnits);
   }
 
 }

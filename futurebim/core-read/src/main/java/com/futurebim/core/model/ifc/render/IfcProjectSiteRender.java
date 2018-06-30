@@ -1,5 +1,6 @@
 package com.futurebim.core.model.ifc.render;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
@@ -36,83 +37,50 @@ public class IfcProjectSiteRender {
   @JacksonXmlProperty(localName = "RefElevation", isAttribute = true)
   private String refElevation;
 
-  @JacksonXmlProperty(localName = "IfcBuilding", isAttribute = true)
+  @JacksonXmlProperty(localName = "IfcBuilding")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcBuildingRender> IfcBuilding;
+  private final List<IfcBuildingRender> buildingList = new ArrayList<>();
 
   public IfcProjectSiteRender() {
   }
 
-  public String getId() {
-    return id;
-  }
+  /**
+   * public String getId() { return id; }
+   * 
+   * public void setId(final String id) { this.id = id; }
+   * 
+   * public String getSiteName() { return siteName; }
+   * 
+   * public void setSiteName(final String siteName) { this.siteName = siteName; }
+   * 
+   * public String getObjectType() { return objectType; }
+   * 
+   * public void setObjectType(final String objectType) { this.objectType = objectType; }
+   * 
+   * public String getObjectPlacement() { return objectPlacement; }
+   * 
+   * public void setObjectPlacement(final String objectPlacement) { this.objectPlacement = objectPlacement; }
+   * 
+   * public String getCompositionType() { return compositionType; }
+   * 
+   * public void setCompositionType(final String compositionType) { this.compositionType = compositionType; }
+   * 
+   * public String getRefLatitude() { return refLatitude; }
+   * 
+   * public void setRefLatitude(final String refLatitude) { this.refLatitude = refLatitude; }
+   * 
+   * public String getRefLongitude() { return refLongitude; }
+   * 
+   * public void setRefLongitude(final String refLongitude) { this.refLongitude = refLongitude; }
+   * 
+   * public String getRefElevation() { return refElevation; }
+   * 
+   * public void setRefElevation(final String refElevation) { this.refElevation = refElevation; }
+   */
 
-  public void setId(final String id) {
-    this.id = id;
-  }
-
-  public String getSiteName() {
-    return siteName;
-  }
-
-  public void setSiteName(final String siteName) {
-    this.siteName = siteName;
-  }
-
-  public String getObjectType() {
-    return objectType;
-  }
-
-  public void setObjectType(final String objectType) {
-    this.objectType = objectType;
-  }
-
-  public String getObjectPlacement() {
-    return objectPlacement;
-  }
-
-  public void setObjectPlacement(final String objectPlacement) {
-    this.objectPlacement = objectPlacement;
-  }
-
-  public String getCompositionType() {
-    return compositionType;
-  }
-
-  public void setCompositionType(final String compositionType) {
-    this.compositionType = compositionType;
-  }
-
-  public String getRefLatitude() {
-    return refLatitude;
-  }
-
-  public void setRefLatitude(final String refLatitude) {
-    this.refLatitude = refLatitude;
-  }
-
-  public String getRefLongitude() {
-    return refLongitude;
-  }
-
-  public void setRefLongitude(final String refLongitude) {
-    this.refLongitude = refLongitude;
-  }
-
-  public String getRefElevation() {
-    return refElevation;
-  }
-
-  public void setRefElevation(final String refElevation) {
-    this.refElevation = refElevation;
-  }
-
-  public List<IfcBuildingRender> getIfcBuilding() {
-    return IfcBuilding;
-  }
-
-  public void setIfcBuilding(final List<IfcBuildingRender> ifcBuilding) {
-    IfcBuilding = ifcBuilding;
-  }
+  /*
+   * public List<IfcBuildingRender> getIfcBuilding() { return buildingList; } public void setIfcBuilding(final List<IfcBuildingRender>
+   * ifcBuilding) { buildingList = ifcBuilding; }
+   */
 
 }

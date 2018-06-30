@@ -1,5 +1,6 @@
 package com.futurebim.core.model.ifc.render;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
@@ -26,12 +27,12 @@ public class IfcBuildingRender {
 
   @JacksonXmlProperty(localName = "IfcBuildingStorey", isAttribute = true)
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcBuildingStoreyRender> buildingStoreyList;
+  private List<IfcBuildingStoreyRender> buildingStoreyList = new ArrayList<>();
 
   // @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPropertySet", isAttribute = true)
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPropertySetRender> propertySetList;
+  private List<IfcPropertySetRender> propertySetList = new ArrayList<>();
 
   public IfcBuildingRender() {
   }

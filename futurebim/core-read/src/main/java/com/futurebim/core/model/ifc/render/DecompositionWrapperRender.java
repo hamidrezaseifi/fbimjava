@@ -10,14 +10,14 @@ public class DecompositionWrapperRender {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcProject")
-  private List<IfcProjectRender> projects = new ArrayList<>();
+  private final List<IfcProjectRender> projects = new ArrayList<>();
 
-  public List<IfcProjectRender> getProjects() {
-    return projects;
-  }
+  /*
+   * public List<IfcProjectRender> getProjects() { return projects; }
+   */
 
-  public void setProjects(final List<IfcProjectRender> projects) {
-    this.projects = projects;
-  }
+  /*
+   * public void setProjects(final List<IfcProjectRender> projects) { this.projects = projects; }
+   */
 
 }

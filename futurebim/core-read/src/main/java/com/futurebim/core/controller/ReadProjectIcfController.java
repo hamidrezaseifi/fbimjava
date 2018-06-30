@@ -145,7 +145,7 @@ public class ReadProjectIcfController {
 
   }
 
-  @RequestMapping(value = "/readifc", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  @RequestMapping(value = "/readifc", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
   public @ResponseBody ProjectIfcRender readIfc() throws IOException {
 
     final ProjectIfcRender ifc;
