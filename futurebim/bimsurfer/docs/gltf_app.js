@@ -42,18 +42,22 @@ function (BimSurfer, StaticTreeRenderer, MetaDataRenderer, Request, Utils) {
     }
     modelName = "models/" + modelName;
     
-    var tree = new StaticTreeRenderer({
+    //http://localhost:1010/pifc/read/readifc
+    
+    /*var tree = new StaticTreeRenderer({
         domNode: "treeContainer"
     });
     tree.addModel({id: 1, src: modelName + ".xml"});
     tree.build();
+    */
     
-    tree.on("click", highlight);
+    //tree.on("click", highlight);
     
     var data = new MetaDataRenderer({
         domNode: "mybimtext"
     });
-    data.addModel({id: 1, src: modelName + ".xml"});
+    //data.addModel({id: 1, src: modelName + ".xml"});
+    data.addModel({id: 1, src: "http://localhost:1010/pifc/read/readifc"});
     
     bimSurfer.load({
         src: modelName + ".gltf"
@@ -76,8 +80,8 @@ function (BimSurfer, StaticTreeRenderer, MetaDataRenderer, Request, Utils) {
 
     });
 
-    bimSurfer.on("selection-changed", function(selected) {
-        data.setSelected(selected.map(function(id) {
+    bimSurfer.on("selection-changed", function(selected) {  //alert(selected);
+        data.setSelected(selected.map(function(id) { //alert(Utils.CompressGuid(id.split("#")[1].substr(8, 36).replace(/-/g, "")));
             return Utils.CompressGuid(id.split("#")[1].substr(8, 36).replace(/-/g, ""));
         }));
     });
