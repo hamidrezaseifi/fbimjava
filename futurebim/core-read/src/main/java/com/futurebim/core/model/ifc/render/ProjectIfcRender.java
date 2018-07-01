@@ -1,7 +1,6 @@
 package com.futurebim.core.model.ifc.render;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,12 +46,6 @@ public class ProjectIfcRender {
   @JacksonXmlElementWrapper(localName = "decomposition")
   private DecompositionWrapperRender decomposition;
 
-  /*
-   * private String id; private String ifcName; private List<IfcDoorstyle> ifcDoorstyles; private List<IfcFurnituretype> ifcFurnituretypes;
-   * private List<IfcPresentationlayer> ifcPresentationlayers; private List<IfcProject> ifcProjects; private List<IfcWindowstyle>
-   * ifcWindowstyles; private List<IfcConversionBasedUnit> ifcConversionBasedUnit;
-   */
-
   public ProjectIfcRender() {
 
   }
@@ -60,10 +53,6 @@ public class ProjectIfcRender {
   public ProjectIfcRender(final ProjectIfc model) {
     createHeader(model);
 
-    units = new IfcUnitWrapperRender(model);
-
-    properties = new ArrayList<>();
-    properties.addAll(IfcPropertyRender.fromModelList(model.getIfcProperties()));
   }
 
   private void createHeader(final ProjectIfc model) {

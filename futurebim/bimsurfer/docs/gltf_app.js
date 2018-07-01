@@ -42,13 +42,13 @@ function (BimSurfer, StaticTreeRenderer, MetaDataRenderer, Request, Utils) {
     }
     modelName = "models/" + modelName;
     
-    /*var tree = new StaticTreeRenderer({
+    var tree = new StaticTreeRenderer({
         domNode: "treeContainer"
     });
     tree.addModel({id: 1, src: modelName + ".xml"});
     tree.build();
     
-    tree.on("click", highlight);*/
+    tree.on("click", highlight);
     
     var data = new MetaDataRenderer({
         domNode: "mybimtext"

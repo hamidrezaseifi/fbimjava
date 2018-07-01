@@ -27,62 +27,11 @@ public class IfcBuildingRender {
 
   @JacksonXmlProperty(localName = "IfcBuildingStorey", isAttribute = true)
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcBuildingStoreyRender> buildingStoreyList = new ArrayList<>();
+  private final List<IfcBuildingStoreyRender> buildingStoreyList = new ArrayList<>();
 
   // @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPropertySet", isAttribute = true)
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPropertySetRender> propertySetList = new ArrayList<>();
-
-  public IfcBuildingRender() {
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(final String id) {
-    this.id = id;
-  }
-
-  public String getSiteName() {
-    return siteName;
-  }
-
-  public void setSiteName(final String siteName) {
-    this.siteName = siteName;
-  }
-
-  public String getObjectPlacement() {
-    return objectPlacement;
-  }
-
-  public void setObjectPlacement(final String objectPlacement) {
-    this.objectPlacement = objectPlacement;
-  }
-
-  public String getCompositionType() {
-    return compositionType;
-  }
-
-  public void setCompositionType(final String compositionType) {
-    this.compositionType = compositionType;
-  }
-
-  public List<IfcBuildingStoreyRender> getBuildingStoreyList() {
-    return buildingStoreyList;
-  }
-
-  public void setBuildingStoreyList(final List<IfcBuildingStoreyRender> buildingStoreyList) {
-    this.buildingStoreyList = buildingStoreyList;
-  }
-
-  public List<IfcPropertySetRender> getPropertySetList() {
-    return propertySetList;
-  }
-
-  public void setPropertySetList(final List<IfcPropertySetRender> propertySetList) {
-    this.propertySetList = propertySetList;
-  }
+  private final List<IfcPropertySetRender> propertySetList = new ArrayList<>();
 
 }
