@@ -1,0 +1,126 @@
+
+
+
+
+.navbar-default {
+    background-color: #3a4651 !important;
+    border-color: none !important ;
+}
+
+
+
+.navbar-user-detail
+{
+  float: right;  
+  margin-right: 30px;
+}
+
+.navbar-user-detail .user-detail button span.glyphicon
+{
+  margin: 0;
+  margin-left: 10px;
+  font-size: 14px;
+  border: 2px solid rgb(51, 51, 51);
+  padding: 2px;
+  border-radius: 50%;
+}
+
+
+.navbar-user-detail .user-detail button.btn
+{
+  
+  padding-top: 3px;
+
+}
+
+.user-dropdown-menu span.glyphicon
+{
+  margin-right: 8px;  
+}
+
+.page-content
+{
+	margin-left: 80px;
+}
+
+.left-panel
+{
+	width: 60px; 
+	height: calc(100vh - 80px); 
+	background-color: #3a4651 !important; 
+	position: absolute; 
+	left:0; 
+	top: 52px;	
+	padding: 5px;
+	padding-top: 20px;
+	overflow-x: hidden; 
+}
+
+.left-panel ul
+{
+	list-style-type: none;	
+	padding: 10px;	
+}
+
+.left-panel ul li
+{
+	clear: both;
+	margin-left: 0px;	
+	height: 40px;
+}
+
+.left-panel ul li a div
+{
+	float: left;
+	clear: both;
+	display: none;
+}
+
+.left-panel.open ul li a div
+{
+	display: block;
+	width: calc(100% - 50px);
+}
+
+.left-panel ul li a i
+{
+	float: right;
+	background-color: #22282f!important; 
+	padding: 7px;
+	font-size: 18px !important;
+	margin-left: 10px;
+}
+
+.left-panel ul li , .left-panel ul li i, .left-panel ul li a
+{
+	color: rgba(255, 255, 255, 0.5);
+	text-decoration: none;
+}
+
+.left-panel ul li:hover , .left-panel ul li:hover i, .left-panel ul li:hover a
+{
+	color: rgba(255, 255, 255, 1);
+	text-decoration: none;
+}
+
+
+
+.clear
+{
+	clear: both;
+}
+
+.footer
+{
+	position: fixed;
+	left: 0;
+	top: calc(100vh - 30px);
+	height: 30px;
+	width: 100vw;
+	line-height: 20px;
+	padding: 5px;
+	padding-left: 50px;
+	background: #e0e0e0;	
+	font-size: 10px;
+}
+
