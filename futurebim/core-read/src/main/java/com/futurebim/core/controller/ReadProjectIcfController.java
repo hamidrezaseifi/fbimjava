@@ -157,6 +157,9 @@ public class ReadProjectIcfController {
 
     }
 
+    // final ProjectIfc model = ifc.toModel();
+    // model.setProjectId(1L);
+
     objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 

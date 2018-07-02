@@ -80,6 +80,42 @@ public class ProjectIfcRender {
     header.put("file_schema", map);
   }
 
+  public ProjectIfc toModel() {
+    final ProjectIfc model = new ProjectIfc();
+
+    model.setIfcName(getName());
+    model.setId("Duplex_A_20110907_optimized");
+
+    model.setIfcUnits(units.toUnitModel(model.getId()));
+    model.setIfcConversionBasedUnit(units.toConversionBasedUnitModel(model.getId()));
+
+    for (final IfcPropertyRender prop : properties) {
+      model.addIfcProperty(prop.toModel(model.getId()));
+    }
+
+    model.setIfcDoorstyles(types.toDoorTypeModel(model.getId()));
+    model.setIfcFurnituretypes(types.toFurnitureTypeModel(model.getId()));
+    model.setIfcWindowstyles(types.toWindowTypeModel(model.getId()));
+
+    for (final IfcPresentationlayerRender layer : layers) {
+      model.addIfcPresentationlayer(layer.toModel(model.getId()));
+    }
+
+    return model;
+  }
+
+  public String getName() {
+    if (header.keySet().contains("file_name")) {
+      final Map<String, Object> file_name = (Map<String, Object>) header.get("file_name");
+      if (file_name.keySet().contains("name")) {
+        return file_name.get("name").toString();
+
+      }
+    }
+
+    return "";
+  }
+
   public Map<String, Object> getHeader() {
     return header;
   }

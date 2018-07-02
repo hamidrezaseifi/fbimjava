@@ -1,6 +1,7 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -51,42 +52,42 @@ public class ProjectIfc extends SerializableModelBase {
   // bi-directional many-to-one association to IfcDoorstyle
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "projectIfc")
-  private List<IfcDoorstyle> ifcDoorstyles;
+  private List<IfcDoorstyle> ifcDoorstyles = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcFurnituretype
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "projectIfc")
-  private List<IfcFurnituretype> ifcFurnituretypes;
+  private List<IfcFurnituretype> ifcFurnituretypes = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcPresentationlayer
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "projectIfc")
-  private List<IfcPresentationlayer> ifcPresentationlayers;
+  private List<IfcPresentationlayer> ifcPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcProject
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "projectIfc")
-  private List<IfcProject> ifcProjects;
+  private List<IfcProject> ifcProjects = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcProperty
   @JacksonXmlProperty(localName = "ifcProperty")
   @JacksonXmlElementWrapper(localName = "ifcProperties")
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcId")
-  private List<IfcProperty> ifcProperties;
+  private List<IfcProperty> ifcProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcWindowstyle
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "projectIfc")
-  private List<IfcWindowstyle> ifcWindowstyles;
+  private List<IfcWindowstyle> ifcWindowstyles = new ArrayList<>();
 
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcId")
-  private List<IfcUnit> ifcUnits;
+  private List<IfcUnit> ifcUnits = new ArrayList<>();
 
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcId")
-  private List<IfcConversionBasedUnit> ifcConversionBasedUnit;
+  private List<IfcConversionBasedUnit> ifcConversionBasedUnit = new ArrayList<>();
 
   @JsonIgnore
   @ManyToOne(fetch = FetchType.EAGER)
@@ -248,6 +249,10 @@ public class ProjectIfc extends SerializableModelBase {
     this.ifcProperties = ifcProperties;
   }
 
+  public void addIfcProperty(final IfcProperty ifcProperty) {
+    this.ifcProperties.add(ifcProperty);
+  }
+
   public List<IfcWindowstyle> getIfcWindowstyles() {
     return this.ifcWindowstyles;
   }
@@ -286,12 +291,20 @@ public class ProjectIfc extends SerializableModelBase {
     this.ifcUnits = ifcUnits;
   }
 
+  public void addIfcUnits(final IfcUnit ifcUnit) {
+    this.ifcUnits.add(ifcUnit);
+  }
+
   public List<IfcConversionBasedUnit> getIfcConversionBasedUnit() {
     return ifcConversionBasedUnit;
   }
 
   public void setIfcConversionBasedUnit(final List<IfcConversionBasedUnit> ifcConversionBasedUnit) {
     this.ifcConversionBasedUnit = ifcConversionBasedUnit;
+  }
+
+  public void addIfcConversionBasedUnit(final IfcConversionBasedUnit ifcConversionBasedUnit) {
+    this.ifcConversionBasedUnit.add(ifcConversionBasedUnit);
   }
 
 }

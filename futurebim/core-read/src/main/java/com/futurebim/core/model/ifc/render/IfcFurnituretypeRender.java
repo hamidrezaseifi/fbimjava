@@ -1,6 +1,7 @@
 package com.futurebim.core.model.ifc.render;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcFurnituretype;
 
 /**
  * The persistent class for the ifc_furnituretypes database table.
@@ -25,4 +26,16 @@ public class IfcFurnituretypeRender {
   @JacksonXmlProperty(localName = "AssemblyPlace", isAttribute = true)
   private String assemblyPlace;
 
+  public IfcFurnituretype toModel(final String modelId) {
+
+    final IfcFurnituretype type = new IfcFurnituretype();
+    type.setAssemblyPlace(assemblyPlace);
+    type.setElementType(elementType);
+    type.setId(id);
+    type.setProjectIfcId(modelId);
+    type.setTypeName(typeName);
+    type.setTag(tag);
+
+    return type;
+  }
 }

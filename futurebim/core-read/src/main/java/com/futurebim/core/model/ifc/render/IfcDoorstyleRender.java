@@ -1,6 +1,7 @@
 package com.futurebim.core.model.ifc.render;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcDoorstyle;
 
 /**
  * The persistent class for the ifc_doorstyle database table.
@@ -28,5 +29,21 @@ public class IfcDoorstyleRender {
 
   @JacksonXmlProperty(localName = "Sizeable", isAttribute = true)
   private String sizeable;
+
+  public IfcDoorstyle toModel(final String modelId) {
+
+    final IfcDoorstyle type = new IfcDoorstyle();
+
+    type.setId(id);
+    type.setProjectIfcId(modelId);
+    type.setTypeName(typeName);
+    type.setTag(tag);
+    type.setConstructionType(constructionType);
+    type.setOperationType(operationType);
+    type.setParameterTakesPrecedence(parameterTakesPrecedence);
+    type.setSizeable(sizeable);
+
+    return type;
+  }
 
 }

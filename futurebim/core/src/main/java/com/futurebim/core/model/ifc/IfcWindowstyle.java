@@ -47,6 +47,9 @@ public class IfcWindowstyle extends SerializableModelBase {
   @Column(name = "type_name")
   private String typeName;
 
+  @Column(name = "ifc_id")
+  private String projectIfcId;
+
   private Timestamp updated;
 
   private int version = 1;
@@ -57,7 +60,7 @@ public class IfcWindowstyle extends SerializableModelBase {
 
   // bi-directional many-to-one association to ProjectIfc
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ifc_id")
+  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
   private ProjectIfc projectIfc;
 
   public IfcWindowstyle() {
@@ -179,6 +182,14 @@ public class IfcWindowstyle extends SerializableModelBase {
 
   public void setProjectIfc(final ProjectIfc projectIfc) {
     this.projectIfc = projectIfc;
+  }
+
+  public String getProjectIfcId() {
+    return projectIfcId;
+  }
+
+  public void setProjectIfcId(final String projectIfcId) {
+    this.projectIfcId = projectIfcId;
   }
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcProperty;
 
 /**
  * The persistent class for the ifc_properties database table.
@@ -23,4 +24,16 @@ public class IfcPropertyRender {
   @JacksonXmlProperty(localName = "IfcPropertySingleValue")
   private final List<IfcPropertyValueRender> values = new ArrayList<>();
 
+  public IfcProperty toModel(final String modelId) {
+
+    final IfcProperty prop = new IfcProperty();
+    prop.setIfcId(modelId);
+    prop.setPropertyName(propertyName);
+    prop.setId(id);
+
+    for (final IfcPropertyValueRender val : values) {
+      prop.addIfcPropertiesValues(val.toModel(id));
+    }
+    return prop;
+  }
 }

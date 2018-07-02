@@ -32,6 +32,9 @@ public class IfcPresentationlayer extends SerializableModelBase {
   @Column(name = "layer_name")
   private String layerName;
 
+  @Column(name = "ifc_id")
+  private String projectIfcId;
+
   private short status;
 
   private Timestamp updated;
@@ -88,7 +91,7 @@ public class IfcPresentationlayer extends SerializableModelBase {
 
   // bi-directional many-to-one association to ProjectIfc
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ifc_id")
+  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
   private ProjectIfc projectIfc;
 
   public IfcPresentationlayer() {
@@ -448,6 +451,14 @@ public class IfcPresentationlayer extends SerializableModelBase {
 
   public void setProjectIfc(final ProjectIfc projectIfc) {
     this.projectIfc = projectIfc;
+  }
+
+  public String getProjectIfcId() {
+    return projectIfcId;
+  }
+
+  public void setProjectIfcId(final String projectIfcId) {
+    this.projectIfcId = projectIfcId;
   }
 
 }
