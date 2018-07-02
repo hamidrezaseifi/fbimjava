@@ -4,10 +4,16 @@
 
 .navbar-default {
     background-color: #3a4651 !important;
-    border-color: none !important ;
+    border: none !important ;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
 }
 
-
+.breadcrumb
+{
+	height: 30px;
+	padding-left: 80px;
+}
 
 .navbar-user-detail
 {
@@ -50,7 +56,7 @@
 	background-color: #3a4651 !important; 
 	position: absolute; 
 	left:0; 
-	top: 52px;	
+	top: 50px;	
 	padding: 5px;
 	padding-top: 20px;
 	overflow-x: hidden; 
@@ -59,14 +65,23 @@
 .left-panel ul
 {
 	list-style-type: none;	
-	padding: 10px;	
+	padding-top: 10px;	
+	margin-left: 0 !important;
+    padding-left: 0 !important;
 }
 
 .left-panel ul li
 {
 	clear: both;
 	margin-left: 0px;	
-	height: 40px;
+	height: 32px;
+	margin-bottom: 10px;
+}
+
+.left-panel ul li.active
+{
+	background-color: #85CE36 !important;
+	color: rgba(255, 255, 255, 1);
 }
 
 .left-panel ul li a div
@@ -74,6 +89,9 @@
 	float: left;
 	clear: both;
 	display: none;
+	line-height: 30px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .left-panel.open ul li a div
@@ -85,10 +103,19 @@
 .left-panel ul li a i
 {
 	float: right;
-	background-color: #22282f!important; 
 	padding: 7px;
 	font-size: 18px !important;
 	margin-left: 10px;
+}
+
+.left-panel ul li:not(.active) a i
+{
+	background-color: #22282f!important; 
+}
+
+.left-panel ul li.active a i
+{
+	background-color: #85CE36 !important; 
 }
 
 .left-panel ul li , .left-panel ul li i, .left-panel ul li a
