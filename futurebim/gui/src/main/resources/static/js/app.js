@@ -115,7 +115,7 @@ mdmApp.controller('BodyController', function ($scope, $http, $sce, $element, $co
 			$("#left-panel").removeClass("open");
 			
 			$( "#left-panel" ).animate({
-			    width: 60
+			    width: 50
 			  }, 200, function() {
 				  
 			  });
