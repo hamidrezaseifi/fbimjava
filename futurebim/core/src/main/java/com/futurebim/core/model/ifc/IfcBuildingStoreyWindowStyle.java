@@ -29,7 +29,7 @@ public class IfcBuildingStoreyWindowStyle extends SerializableModelBase {
 
   private Timestamp created;
 
-  private short status;
+  private short status = 1;
 
   // bi-directional many-to-one association to IfcWindowstyle
   @ManyToOne(fetch = FetchType.LAZY)

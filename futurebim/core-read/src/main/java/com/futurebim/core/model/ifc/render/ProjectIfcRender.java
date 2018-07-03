@@ -18,32 +18,16 @@ import com.futurebim.core.model.ifc.ProjectIfc;
 @JacksonXmlRootElement(localName = "ifc", namespace = "http://www.w3.org/1999/xlink")
 public class ProjectIfcRender {
 
-  @JsonIgnore
-  @JacksonXmlProperty(localName = "header")
   private Map<String, Object> header = new HashMap<>();
 
-  @JsonIgnore
-  @JacksonXmlProperty(localName = "units")
   private IfcUnitWrapperRender units;
 
-  @JsonIgnore
-  @JacksonXmlProperty(localName = "IfcPropertySet")
-  @JacksonXmlElementWrapper(localName = "properties")
   private List<IfcPropertyRender> properties;
 
-  @JsonIgnore
-  // @JacksonXmlProperty(localName = "IfcPropertySet")
-  @JacksonXmlElementWrapper(localName = "types")
   private IfcTypeWrapperRender types;
 
-  @JsonIgnore
-  @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
-  @JacksonXmlElementWrapper(localName = "layers")
   private List<IfcPresentationlayerRender> layers;
 
-  // @JsonIgnore
-  // @JacksonXmlProperty(localName = "IfcPropertySet")
-  @JacksonXmlElementWrapper(localName = "decomposition")
   private DecompositionWrapperRender decomposition;
 
   public ProjectIfcRender() {
@@ -86,16 +70,16 @@ public class ProjectIfcRender {
     model.setIfcName(getName());
     model.setId("Duplex_A_20110907_optimized");
 
-    model.setIfcUnits(units.toUnitModel(model.getId()));
+    model.setIfcUnits(units.toUnitModel(model));
     model.setIfcConversionBasedUnit(units.toConversionBasedUnitModel(model.getId()));
 
     for (final IfcPropertyRender prop : properties) {
-      model.addIfcProperty(prop.toModel(model.getId()));
+      model.addIfcProperty(prop.toModel(model));
     }
 
     model.setIfcDoorstyles(types.toDoorTypeModel(model.getId()));
     model.setIfcFurnituretypes(types.toFurnitureTypeModel(model.getId()));
-    model.setIfcWindowstyles(types.toWindowTypeModel(model.getId()));
+    model.setIfcWindowstyles(types.toWindowTypeModel(model));
 
     for (final IfcPresentationlayerRender layer : layers) {
       model.addIfcPresentationlayer(layer.toModel(model.getId()));
@@ -104,6 +88,7 @@ public class ProjectIfcRender {
     return model;
   }
 
+  @JsonIgnore
   public String getName() {
     if (header.keySet().contains("file_name")) {
       final Map<String, Object> file_name = (Map<String, Object>) header.get("file_name");
@@ -116,6 +101,7 @@ public class ProjectIfcRender {
     return "";
   }
 
+  @JacksonXmlProperty(localName = "header")
   public Map<String, Object> getHeader() {
     return header;
   }
@@ -124,10 +110,13 @@ public class ProjectIfcRender {
     this.header = header;
   }
 
+  @JacksonXmlProperty(localName = "units")
   public IfcUnitWrapperRender getUnits() {
     return units;
   }
 
+  @JacksonXmlProperty(localName = "IfcPropertySet")
+  @JacksonXmlElementWrapper(localName = "properties")
   public List<IfcPropertyRender> getProperties() {
     return properties;
   }
@@ -140,6 +129,7 @@ public class ProjectIfcRender {
     this.properties = properties;
   }
 
+  @JacksonXmlProperty(localName = "types")
   public IfcTypeWrapperRender getTypes() {
     return types;
   }
@@ -148,6 +138,8 @@ public class ProjectIfcRender {
     this.types = types;
   }
 
+  @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
+  @JacksonXmlElementWrapper(localName = "layers")
   public List<IfcPresentationlayerRender> getLayers() {
     return layers;
   }
@@ -156,6 +148,7 @@ public class ProjectIfcRender {
     this.layers = layers;
   }
 
+  @JacksonXmlElementWrapper(localName = "decomposition")
   public DecompositionWrapperRender getDecomposition() {
     return decomposition;
   }

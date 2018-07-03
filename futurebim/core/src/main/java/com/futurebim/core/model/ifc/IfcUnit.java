@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,7 +22,8 @@ public class IfcUnit extends SerializableModelBase {
   private static final long serialVersionUID = 1L;
 
   @Id
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   private Timestamp created;
 
@@ -29,7 +32,7 @@ public class IfcUnit extends SerializableModelBase {
   @Column(name = "ifc_id")
   private String ifcId;
 
-  private short status;
+  private short status = 1;
 
   @Column(name = "unit_name")
   private String unitName;
@@ -44,11 +47,11 @@ public class IfcUnit extends SerializableModelBase {
   public IfcUnit() {
   }
 
-  public String getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final String id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 

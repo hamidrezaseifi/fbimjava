@@ -3,6 +3,7 @@ package com.futurebim.core.model.ifc.render;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.futurebim.core.model.ifc.IfcUnit;
+import com.futurebim.core.model.ifc.ProjectIfc;
 
 /**
  * The persistent class for the ifc_units database table.
@@ -20,10 +21,11 @@ public class IfcUnitRender {
   @JacksonXmlProperty(localName = "UnitType", isAttribute = true)
   protected String unitType;
 
-  public IfcUnit toUnitModel(final String modelId) {
+  public IfcUnit toUnitModel(final ProjectIfc model) {
 
     final IfcUnit u = new IfcUnit();
-    u.setIfcId(modelId);
+
+    u.setIfcId(model.getId());
     u.setUnitName(unitName);
     u.setUnitType(unitType);
     u.setEquivalent(equivalent);

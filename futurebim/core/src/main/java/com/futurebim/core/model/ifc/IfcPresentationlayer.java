@@ -35,7 +35,7 @@ public class IfcPresentationlayer extends SerializableModelBase {
   @Column(name = "ifc_id")
   private String projectIfcId;
 
-  private short status;
+  private short status = 1;
 
   private Timestamp updated;
 

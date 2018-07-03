@@ -40,7 +40,7 @@ public class IfcDoorstyle extends SerializableModelBase {
 
   private String sizeable;
 
-  private short status;
+  private short status = 1;
 
   private String tag;
 

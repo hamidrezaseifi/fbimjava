@@ -28,6 +28,7 @@ public class IfcPropertyDaoImpl implements IfcPropertyDao {
     final Session session = this.sessionFactory.getCurrentSession();
     session.save(pifc);
     logger.info("IfcProperty saved successfully, IfcProperty Details=" + pifc);
+
     return getById(pifc.getId());
   }
 
@@ -66,7 +67,7 @@ public class IfcPropertyDaoImpl implements IfcPropertyDao {
     else {
       logger.info("IfcProperty not found!");
     }
-    session.disconnect();
+    // session.disconnect();
     return pifc;
   }
 

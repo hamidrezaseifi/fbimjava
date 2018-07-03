@@ -50,7 +50,7 @@ public class IfcProjectSite extends SerializableModelBase {
   @Column(name = "site_name")
   private String siteName;
 
-  private short status;
+  private short status = 1;
 
   private Timestamp updated;
 

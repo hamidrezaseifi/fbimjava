@@ -41,7 +41,7 @@ public class IfcPropertySingleValue extends SerializableModelBase {
   @Column(name = "nominal_value")
   private String nominalValue;
 
-  private short status;
+  private short status = 1;
 
   private Timestamp updated;
 

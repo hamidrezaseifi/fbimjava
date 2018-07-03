@@ -9,6 +9,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.futurebim.core.model.ifc.IfcDoorstyle;
 import com.futurebim.core.model.ifc.IfcFurnituretype;
 import com.futurebim.core.model.ifc.IfcWindowstyle;
+import com.futurebim.core.model.ifc.ProjectIfc;
 
 /**
  * The persistent class for the ifc_units database table.
@@ -49,12 +50,12 @@ public class IfcTypeWrapperRender {
     return list;
   }
 
-  public List<IfcWindowstyle> toWindowTypeModel(final String modelId) {
+  public List<IfcWindowstyle> toWindowTypeModel(final ProjectIfc model) {
 
     final List<IfcWindowstyle> list = new ArrayList<>();
     for (final IfcWindowstyleRender type : windowTypes) {
 
-      list.add(type.toModel(modelId));
+      list.add(type.toModel(model));
     }
     return list;
   }

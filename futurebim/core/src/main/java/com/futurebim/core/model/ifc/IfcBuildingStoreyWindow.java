@@ -41,7 +41,7 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
   @Column(name = "overall_width")
   private String overallWidth;
 
-  private short status;
+  private short status = 1;
 
   private String tag;
 

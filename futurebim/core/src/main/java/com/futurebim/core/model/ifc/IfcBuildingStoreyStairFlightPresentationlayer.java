@@ -29,7 +29,7 @@ public class IfcBuildingStoreyStairFlightPresentationlayer extends SerializableM
 
   private Timestamp created;
 
-  private short status;
+  private short status = 1;
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairFlight
   @ManyToOne(fetch = FetchType.LAZY)

@@ -7,14 +7,16 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.futurebim.core.model.base.SerializableModelBase;
@@ -50,10 +52,12 @@ public class IfcProperty extends SerializableModelBase {
 
   // @JacksonXmlElementWrapper(localName = "IfcPropertySet")
   @LazyCollection(LazyCollectionOption.FALSE)
-  @JacksonXmlElementWrapper(useWrapping = false)
-  @JacksonXmlProperty(localName = "IfcPropertySingleValue")
   @OneToMany(mappedBy = "ifcProperty", cascade = CascadeType.ALL)
   private List<IfcPropertySingleValue> ifcPropertySingleValue = new ArrayList<>();
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
+  private ProjectIfc projectIfc;
 
   public IfcProperty() {
   }
@@ -124,6 +128,14 @@ public class IfcProperty extends SerializableModelBase {
 
   public void setIfcId(final String ifcId) {
     this.ifcId = ifcId;
+  }
+
+  public ProjectIfc getProjectIfc() {
+    return projectIfc;
+  }
+
+  public void setProjectIfc(final ProjectIfc projectIfc) {
+    this.projectIfc = projectIfc;
   }
 
 }

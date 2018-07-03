@@ -1,12 +1,14 @@
 package com.futurebim.core.model.ifc.render;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.futurebim.core.model.ifc.IfcPresentationlayer;
 
 /**
  * The persistent class for the ifc_presentationlayers database table.
  *
  */
+@JacksonXmlRootElement(localName = "IfcPresentationLayerAssignment")
 public class IfcPresentationlayerRender {
 
   @JacksonXmlProperty(localName = "id", isAttribute = true)

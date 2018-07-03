@@ -35,7 +35,7 @@ public class IfcBuildingStoreyWallOpening extends SerializableModelBase {
   @Column(name = "object_type")
   private String objectType;
 
-  private short status;
+  private short status = 1;
 
   private String tag;
 

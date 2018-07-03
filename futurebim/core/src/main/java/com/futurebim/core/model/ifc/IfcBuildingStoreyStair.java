@@ -41,7 +41,7 @@ public class IfcBuildingStoreyStair extends SerializableModelBase {
   @Column(name = "stair_name")
   private String stairName;
 
-  private short status;
+  private short status = 1;
 
   private String tag;
 

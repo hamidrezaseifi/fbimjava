@@ -29,7 +29,7 @@ public class IfcBuildingStoreySpaceProperty extends SerializableModelBase {
 
   private Timestamp created;
 
-  private short status;
+  private short status = 1;
 
   // bi-directional many-to-one association to IfcProperty
   @ManyToOne(fetch = FetchType.LAZY)

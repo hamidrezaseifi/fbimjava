@@ -66,7 +66,7 @@ public class ProjectIcfDaoImpl implements ProjectIcfDao {
     else {
       logger.info("ProjectIfc not found!");
     }
-    session.disconnect();
+    // session.disconnect();
     // session.close();
 
     return pifc;

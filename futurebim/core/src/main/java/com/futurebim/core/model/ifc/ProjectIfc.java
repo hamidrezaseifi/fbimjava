@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,8 +18,6 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.futurebim.core.model.Project;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -43,7 +42,7 @@ public class ProjectIfc extends SerializableModelBase {
   @Column(name = "project_id")
   private Long projectId;
 
-  private short status;
+  private short status = 1;
 
   private Timestamp updated;
 
@@ -51,42 +50,40 @@ public class ProjectIfc extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcDoorstyle
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfc")
+  @OneToMany(mappedBy = "projectIfcId", cascade = CascadeType.ALL)
   private List<IfcDoorstyle> ifcDoorstyles = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcFurnituretype
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfc")
+  @OneToMany(mappedBy = "projectIfcId", cascade = CascadeType.ALL)
   private List<IfcFurnituretype> ifcFurnituretypes = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcPresentationlayer
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfc")
+  @OneToMany(mappedBy = "projectIfcId", cascade = CascadeType.ALL)
   private List<IfcPresentationlayer> ifcPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcProject
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfc")
+  @OneToMany(mappedBy = "projectIfcId", cascade = CascadeType.ALL)
   private List<IfcProject> ifcProjects = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcProperty
-  @JacksonXmlProperty(localName = "ifcProperty")
-  @JacksonXmlElementWrapper(localName = "ifcProperties")
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId")
+  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
   private List<IfcProperty> ifcProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcWindowstyle
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfc")
+  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
   private List<IfcWindowstyle> ifcWindowstyles = new ArrayList<>();
 
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId")
+  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
   private List<IfcUnit> ifcUnits = new ArrayList<>();
 
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId")
+  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
   private List<IfcConversionBasedUnit> ifcConversionBasedUnit = new ArrayList<>();
 
   @JsonIgnore

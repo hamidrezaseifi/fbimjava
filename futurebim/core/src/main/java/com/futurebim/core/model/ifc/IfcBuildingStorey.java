@@ -37,7 +37,7 @@ public class IfcBuildingStorey extends SerializableModelBase {
   @Column(name = "object_placement")
   private String objectPlacement;
 
-  private short status;
+  private short status = 1;
 
   @Column(name = "storey_name")
   private String storeyName;

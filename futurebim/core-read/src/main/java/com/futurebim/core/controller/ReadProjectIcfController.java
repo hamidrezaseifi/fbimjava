@@ -25,10 +25,11 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.futurebim.core.bl.ProjectIcfReadHandler;
 import com.futurebim.core.dao.ifc.IfcPropertyDao;
-import com.futurebim.core.dao.ifc.IfcPropertySingleValueDao;
+import com.futurebim.core.dao.ifc.ProjectIcfDao;
 import com.futurebim.core.model.ifc.IfcFurnituretype;
 import com.futurebim.core.model.ifc.IfcProperty;
 import com.futurebim.core.model.ifc.IfcPropertySingleValue;
+import com.futurebim.core.model.ifc.ProjectIfc;
 import com.futurebim.core.model.ifc.render.ProjectIfcRender;
 import com.futurebim.core.model.ui.FutureBimUiRestResponse;
 
@@ -47,7 +48,7 @@ public class ReadProjectIcfController {
   private IfcPropertyDao ifcPropertyDao;
 
   @Autowired
-  private IfcPropertySingleValueDao ifcPropertySingleValueDao;
+  private ProjectIcfDao projectIcfDao;
 
   @Autowired
   private ObjectMapper                           objectMapper;
@@ -98,7 +99,7 @@ public class ReadProjectIcfController {
     final List<String> idlist = new ArrayList<>();
 
     for (final IfcProperty prop : proplist) {
-      prop.setIfcId("Duplex_A_20110907_optimized");
+      // prop.setIfcId("Duplex_A_20110907_optimized");
       for (final IfcPropertySingleValue val : prop.getIfcPropertiesValues()) {
 
         val.setPropertyId(prop.getId());
@@ -157,8 +158,10 @@ public class ReadProjectIcfController {
 
     }
 
-    // final ProjectIfc model = ifc.toModel();
-    // model.setProjectId(1L);
+    final ProjectIfc model = ifc.toModel();
+    model.setProjectId(1L);
+
+    final ProjectIfc res = projectIcfDao.addProjectIfc(model);
 
     objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);

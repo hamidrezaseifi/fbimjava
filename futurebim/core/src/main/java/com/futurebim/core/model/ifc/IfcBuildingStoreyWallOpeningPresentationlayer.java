@@ -26,7 +26,7 @@ public class IfcBuildingStoreyWallOpeningPresentationlayer extends SerializableM
 
   private Timestamp created;
 
-  private short status;
+  private short status = 1;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallOpening
   @ManyToOne(fetch = FetchType.LAZY)

@@ -38,7 +38,7 @@ public class IfcBuildingStoreyStairRailing extends SerializableModelBase {
   @Column(name = "railing_name")
   private String railingName;
 
-  private short status;
+  private short status = 1;
 
   private String tag;
 

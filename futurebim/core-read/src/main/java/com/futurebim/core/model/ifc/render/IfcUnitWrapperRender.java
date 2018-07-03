@@ -8,6 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.futurebim.core.model.ifc.IfcConversionBasedUnit;
 import com.futurebim.core.model.ifc.IfcUnit;
+import com.futurebim.core.model.ifc.ProjectIfc;
 
 /**
  * The persistent class for the ifc_units database table.
@@ -24,12 +25,16 @@ public class IfcUnitWrapperRender {
   @JacksonXmlProperty(localName = "IfcConversionBasedUnit")
   private final List<IfcConversionBasedUnitRender> conversionUnits = new ArrayList<>();
 
-  public List<IfcUnit> toUnitModel(final String modelId) {
+  public void setUnits(final List<IfcUnitRender> units) {
+    this.units.addAll(units);
+  }
+
+  public List<IfcUnit> toUnitModel(final ProjectIfc model) {
 
     final List<IfcUnit> list = new ArrayList<>();
     for (final IfcUnitRender unit : units) {
 
-      list.add(unit.toUnitModel(modelId));
+      list.add(unit.toUnitModel(model));
     }
     return list;
   }

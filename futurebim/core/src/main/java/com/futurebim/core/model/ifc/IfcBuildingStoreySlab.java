@@ -41,7 +41,7 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
   @Column(name = "slab_name")
   private String slabName;
 
-  private short status;
+  private short status = 1;
 
   private String tag;
 

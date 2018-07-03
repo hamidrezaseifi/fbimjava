@@ -1,15 +1,14 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.futurebim.core.model.base.SerializableModelBase;
@@ -40,27 +39,19 @@ public class IfcWindowstyle extends SerializableModelBase {
 
   private String sizeable;
 
-  private short status;
+  private short status = 1;
 
   private String tag;
 
   @Column(name = "type_name")
   private String typeName;
 
-  @Column(name = "ifc_id")
-  private String projectIfcId;
-
   private Timestamp updated;
 
   private int version = 1;
 
-  // bi-directional many-to-one association to IfcBuildingStoreyWindowStyle
-  @OneToMany(mappedBy = "ifcWindowstyle")
-  private List<IfcBuildingStoreyWindowStyle> ifcBuildingStoreyWindowStyles;
-
-  // bi-directional many-to-one association to ProjectIfc
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "ifc_id", referencedColumnName = "id", nullable = false)
   private ProjectIfc projectIfc;
 
   public IfcWindowstyle() {
@@ -154,42 +145,12 @@ public class IfcWindowstyle extends SerializableModelBase {
     this.version = version;
   }
 
-  public List<IfcBuildingStoreyWindowStyle> getIfcBuildingStoreyWindowStyles() {
-    return this.ifcBuildingStoreyWindowStyles;
-  }
-
-  public void setIfcBuildingStoreyWindowStyles(final List<IfcBuildingStoreyWindowStyle> ifcBuildingStoreyWindowStyles) {
-    this.ifcBuildingStoreyWindowStyles = ifcBuildingStoreyWindowStyles;
-  }
-
-  public IfcBuildingStoreyWindowStyle addIfcBuildingStoreyWindowStyle(final IfcBuildingStoreyWindowStyle ifcBuildingStoreyWindowStyle) {
-    getIfcBuildingStoreyWindowStyles().add(ifcBuildingStoreyWindowStyle);
-    ifcBuildingStoreyWindowStyle.setIfcWindowstyle(this);
-
-    return ifcBuildingStoreyWindowStyle;
-  }
-
-  public IfcBuildingStoreyWindowStyle removeIfcBuildingStoreyWindowStyle(final IfcBuildingStoreyWindowStyle ifcBuildingStoreyWindowStyle) {
-    getIfcBuildingStoreyWindowStyles().remove(ifcBuildingStoreyWindowStyle);
-    ifcBuildingStoreyWindowStyle.setIfcWindowstyle(null);
-
-    return ifcBuildingStoreyWindowStyle;
-  }
-
   public ProjectIfc getProjectIfc() {
     return this.projectIfc;
   }
 
   public void setProjectIfc(final ProjectIfc projectIfc) {
     this.projectIfc = projectIfc;
-  }
-
-  public String getProjectIfcId() {
-    return projectIfcId;
-  }
-
-  public void setProjectIfcId(final String projectIfcId) {
-    this.projectIfcId = projectIfcId;
   }
 
 }

@@ -41,7 +41,7 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
   @Column(name = "predefined_type")
   private String predefinedType;
 
-  private short status;
+  private short status = 1;
 
   private String tag;
 

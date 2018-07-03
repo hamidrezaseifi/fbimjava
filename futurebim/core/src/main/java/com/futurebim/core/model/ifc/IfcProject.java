@@ -37,7 +37,10 @@ public class IfcProject extends SerializableModelBase {
   @Column(name = "project_name")
   private String projectName;
 
-  private short status;
+  @Column(name = "ifc_id")
+  private String projectIfcId;
+
+  private short status = 1;
 
   private Timestamp updated;
 
@@ -45,7 +48,7 @@ public class IfcProject extends SerializableModelBase {
 
   // bi-directional many-to-one association to ProjectIfc
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ifc_id")
+  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
   private ProjectIfc projectIfc;
 
   // bi-directional many-to-one association to IfcProjectSite
@@ -147,6 +150,14 @@ public class IfcProject extends SerializableModelBase {
     ifcProjectSite.setIfcProject(null);
 
     return ifcProjectSite;
+  }
+
+  public String getProjectIfcId() {
+    return projectIfcId;
+  }
+
+  public void setProjectIfcId(final String projectIfcId) {
+    this.projectIfcId = projectIfcId;
   }
 
 }

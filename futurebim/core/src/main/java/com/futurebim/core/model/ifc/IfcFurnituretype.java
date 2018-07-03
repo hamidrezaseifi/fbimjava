@@ -39,7 +39,7 @@ public class IfcFurnituretype extends SerializableModelBase {
   @Column(name = "element_type")
   private String elementType;
 
-  private short status;
+  private short status = 1;
 
   @JacksonXmlProperty(localName = "Name")
   @Column(name = "type_name")

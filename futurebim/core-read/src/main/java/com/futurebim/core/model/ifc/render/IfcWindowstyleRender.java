@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc.render;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.futurebim.core.model.ifc.IfcWindowstyle;
+import com.futurebim.core.model.ifc.ProjectIfc;
 
 /**
  * The persistent class for the ifc_windowstyle database table.
@@ -30,12 +31,13 @@ public class IfcWindowstyleRender {
   @JacksonXmlProperty(localName = "Sizeable", isAttribute = true)
   private String sizeable;
 
-  public IfcWindowstyle toModel(final String modelId) {
+  public IfcWindowstyle toModel(final ProjectIfc model) {
 
     final IfcWindowstyle type = new IfcWindowstyle();
 
     type.setId(id);
-    type.setProjectIfcId(modelId);
+    // type.setProjectIfcId(model.getId());
+    type.setProjectIfc(model);
     type.setTypeName(typeName);
     type.setTag(tag);
     type.setConstructionType(constructionType);

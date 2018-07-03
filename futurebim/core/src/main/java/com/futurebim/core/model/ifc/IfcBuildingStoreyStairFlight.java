@@ -47,7 +47,7 @@ public class IfcBuildingStoreyStairFlight extends SerializableModelBase {
   @Column(name = "riser_height")
   private String riserHeight;
 
-  private short status;
+  private short status = 1;
 
   private String tag;
 

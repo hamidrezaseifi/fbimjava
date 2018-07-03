@@ -46,7 +46,7 @@ public class IfcBuildingStoreySpace extends SerializableModelBase {
   @Column(name = "space_name")
   private String spaceName;
 
-  private short status;
+  private short status = 1;
 
   private Timestamp updated;
 
