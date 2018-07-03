@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcBuilding;
+import com.futurebim.core.model.ifc.IfcBuildingStorey;
 
 public class IfcBuildingStoreyRender {
 
@@ -11,7 +13,7 @@ public class IfcBuildingStoreyRender {
   private String id;
 
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
-  private String siteName;
+  private String storeyName;
 
   @JacksonXmlProperty(localName = "ObjectPlacement", isAttribute = true)
   private String objectPlacement;
@@ -71,4 +73,22 @@ public class IfcBuildingStoreyRender {
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<IfcPropertySetRender> propertySetList;
 
+  public IfcBuildingStorey toModel(final IfcBuilding model) {
+
+    final IfcBuildingStorey p = new IfcBuildingStorey();
+    p.setId(id);
+    p.setCompositionType(compositionType);
+    p.setObjectPlacement(objectPlacement);
+    p.setElevation(elevation);
+    p.setIfcBuilding(model);
+    p.setBuildingId(model.getId());
+    p.setStoreyName(storeyName);
+
+    /*
+     * for (final IfcBuildingStoreyRender buildingStorey : buildingStoreyList) { p.addIfcBuildingStorey(buildingStorey.toModel(p)); //
+     * p.addIfcBuildings(building.toModel(p)); }
+     */
+
+    return p;
+  }
 }

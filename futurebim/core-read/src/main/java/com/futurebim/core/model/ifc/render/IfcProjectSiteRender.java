@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcProject;
+import com.futurebim.core.model.ifc.IfcProjectSite;
 
 /**
  * The persistent class for the ifc_project_site database table.
@@ -41,4 +43,24 @@ public class IfcProjectSiteRender {
   @JacksonXmlElementWrapper(useWrapping = false)
   private final List<IfcBuildingRender> buildingList = new ArrayList<>();
 
+  public IfcProjectSite toModel(final IfcProject model) {
+
+    final IfcProjectSite p = new IfcProjectSite();
+    p.setId(id);
+    p.setCompositionType(compositionType);
+    p.setIfcProject(model);
+    p.setObjectPlacement(objectPlacement);
+    p.setObjectType(objectType);
+    p.setRefElevation(refElevation);
+    p.setRefLatitude(refLatitude);
+    p.setRefLongitude(refLongitude);
+    p.setSiteName(siteName);
+    p.setProjectId(model.getId());
+
+    for (final IfcBuildingRender building : buildingList) {
+      p.addIfcBuilding(building.toModel(p));
+    }
+
+    return p;
+  }
 }

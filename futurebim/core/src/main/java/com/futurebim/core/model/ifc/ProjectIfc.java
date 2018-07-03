@@ -304,4 +304,12 @@ public class ProjectIfc extends SerializableModelBase {
     this.ifcConversionBasedUnit.add(ifcConversionBasedUnit);
   }
 
+  public IfcProperty findProperty(final String id) {
+    for (final IfcProperty p : ifcProperties) {
+      if (p.getId().equals(id)) {
+        return p;
+      }
+    }
+    return null;
+  }
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcBuilding;
+import com.futurebim.core.model.ifc.IfcProjectSite;
 
 /**
  * The persistent class for the ifc_building database table.
@@ -17,7 +19,7 @@ public class IfcBuildingRender {
   private String id;
 
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
-  private String siteName;
+  private final String buildingName = "-";
 
   @JacksonXmlProperty(localName = "ObjectPlacement", isAttribute = true)
   private String objectPlacement;
@@ -33,5 +35,25 @@ public class IfcBuildingRender {
   @JacksonXmlProperty(localName = "IfcPropertySet", isAttribute = true)
   @JacksonXmlElementWrapper(useWrapping = false)
   private final List<IfcPropertySetRender> propertySetList = new ArrayList<>();
+
+  public IfcBuilding toModel(final IfcProjectSite model) {
+
+    final IfcBuilding p = new IfcBuilding();
+    p.setId(id);
+    p.setCompositionType(compositionType);
+    p.setObjectPlacement(objectPlacement);
+    p.setBuildingName(buildingName);
+    p.setIfcProjectSite(model);
+    p.setSiteId(model.getId());
+
+    for (final IfcBuildingStoreyRender buildingStorey : buildingStoreyList) {
+      p.addIfcBuildingStorey(buildingStorey.toModel(p));
+    }
+    for (final IfcPropertySetRender prop : propertySetList) {
+      p.addIfcBuildingProperty(prop.toBuildingPropertyModel(p));
+    }
+
+    return p;
+  }
 
 }

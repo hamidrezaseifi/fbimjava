@@ -1,13 +1,13 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,7 +27,6 @@ public class IfcBuilding extends SerializableModelBase {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;
 
   @Column(name = "building_name")
@@ -35,6 +34,9 @@ public class IfcBuilding extends SerializableModelBase {
 
   @Column(name = "composition_type")
   private String compositionType;
+
+  @Column(name = "site_id")
+  private String siteId;
 
   private Timestamp created;
 
@@ -49,16 +51,16 @@ public class IfcBuilding extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcProjectSite
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "site_id")
+  @JoinColumn(name = "site_id", updatable = false, insertable = false)
   private IfcProjectSite ifcProjectSite;
 
   // bi-directional many-to-one association to IfcBuildingProperty
-  @OneToMany(mappedBy = "ifcBuilding")
-  private List<IfcBuildingProperty> ifcBuildingProperties;
+  @OneToMany(mappedBy = "buildingId", cascade = CascadeType.ALL)
+  private List<IfcBuildingProperty> ifcBuildingProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStorey
-  @OneToMany(mappedBy = "ifcBuilding")
-  private List<IfcBuildingStorey> ifcBuildingStoreys;
+  @OneToMany(mappedBy = "buildingId", cascade = CascadeType.ALL)
+  private List<IfcBuildingStorey> ifcBuildingStoreys = new ArrayList<>();
 
   public IfcBuilding() {
   }
@@ -177,6 +179,14 @@ public class IfcBuilding extends SerializableModelBase {
     ifcBuildingStorey.setIfcBuilding(null);
 
     return ifcBuildingStorey;
+  }
+
+  public String getSiteId() {
+    return siteId;
+  }
+
+  public void setSiteId(final String siteId) {
+    this.siteId = siteId;
   }
 
 }

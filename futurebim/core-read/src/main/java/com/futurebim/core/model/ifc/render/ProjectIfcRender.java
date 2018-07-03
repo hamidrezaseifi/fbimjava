@@ -85,6 +85,8 @@ public class ProjectIfcRender {
       model.addIfcPresentationlayer(layer.toModel(model.getId()));
     }
 
+    model.setIfcProjects(decomposition.toModel(model));
+
     return model;
   }
 

@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,6 +52,9 @@ public class IfcProjectSite extends SerializableModelBase {
   @Column(name = "site_name")
   private String siteName;
 
+  @Column(name = "project_id")
+  private String projectId;
+
   private short status = 1;
 
   private Timestamp updated;
@@ -57,12 +62,12 @@ public class IfcProjectSite extends SerializableModelBase {
   private int version = 1;
 
   // bi-directional many-to-one association to IfcBuilding
-  @OneToMany(mappedBy = "ifcProjectSite")
-  private List<IfcBuilding> ifcBuildings;
+  @OneToMany(mappedBy = "ifcProjectSite", cascade = CascadeType.ALL)
+  private List<IfcBuilding> ifcBuildings = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcProject
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "project_id")
+  @JoinColumn(name = "project_id", insertable = false, updatable = false)
   private IfcProject ifcProject;
 
   public IfcProjectSite() {
@@ -192,6 +197,14 @@ public class IfcProjectSite extends SerializableModelBase {
 
   public void setIfcProject(final IfcProject ifcProject) {
     this.ifcProject = ifcProject;
+  }
+
+  public String getProjectId() {
+    return projectId;
+  }
+
+  public void setProjectId(final String projectId) {
+    this.projectId = projectId;
   }
 
 }
