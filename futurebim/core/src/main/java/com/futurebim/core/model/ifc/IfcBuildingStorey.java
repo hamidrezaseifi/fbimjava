@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -55,59 +57,59 @@ public class IfcBuildingStorey extends SerializableModelBase {
   private IfcBuilding ifcBuilding;
 
   // bi-directional many-to-one association to IfcBuildingStoreyBeam
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyBeam> ifcBuildingStoreyBeams;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyBeam> ifcBuildingStoreyBeams = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyCovering
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyCovering> ifcBuildingStoreyCoverings;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyCovering> ifcBuildingStoreyCoverings = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyDoor
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyDoor> ifcBuildingStoreyDoors;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyDoor> ifcBuildingStoreyDoors = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyProperty
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyProperty> ifcBuildingStoreyProperties;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyProperty> ifcBuildingStoreyProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySlab
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreySlab> ifcBuildingStoreySlabs;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySlab> ifcBuildingStoreySlabs = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpace
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreySpace> ifcBuildingStoreySpaces;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySpace> ifcBuildingStoreySpaces = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelement
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreySpaceFurnishingelement> ifcBuildingStoreySpaceFurnishingelements;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySpaceFurnishingelement> ifcBuildingStoreySpaceFurnishingelements = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyStair
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyStair> ifcBuildingStoreyStairs;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStair> ifcBuildingStoreyStairs = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairFlight
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyStairFlight> ifcBuildingStoreyStairFlights;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairFlight> ifcBuildingStoreyStairFlights = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairMember
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyStairMember> ifcBuildingStoreyStairMembers;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairMember> ifcBuildingStoreyStairMembers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairRailing
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyStairRailing> ifcBuildingStoreyStairRailings;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairRailing> ifcBuildingStoreyStairRailings = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWall
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyWall> ifcBuildingStoreyWalls;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWall> ifcBuildingStoreyWalls = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindow
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyWindow> ifcBuildingStoreyWindows;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWindow> ifcBuildingStoreyWindows = new ArrayList<>();
 
-  @OneToMany(mappedBy = "ifcBuildingStorey")
-  private List<IfcBuildingStoreyWall> ifcBuildingStoreyWallCases;
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private final List<IfcBuildingStoreyWall> ifcBuildingStoreyWallCases = new ArrayList<>();
 
   public IfcBuildingStorey() {
   }

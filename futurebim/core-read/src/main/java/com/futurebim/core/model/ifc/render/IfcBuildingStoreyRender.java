@@ -1,5 +1,6 @@
 package com.futurebim.core.model.ifc.render;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
@@ -26,51 +27,51 @@ public class IfcBuildingStoreyRender {
 
   @JacksonXmlProperty(localName = "IfcWallStandardCase")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcWallStandardCaseRender> wallStandardCaseList;
+  private final List<IfcWallStandardCaseRender> wallStandardCaseList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcWall")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcWallRender> wallList;
+  private final List<IfcWallRender> wallList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcFooting")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcFootingRender> footingList;
+  private final List<IfcFootingRender> footingList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcRoof")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcRoofRender> roofList;
+  private final List<IfcRoofRender> roofList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcSlab")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcSlabRender> slabList;
+  private final List<IfcSlabRender> slabList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcWindow")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcWindowRender> windowList;
+  private final List<IfcWindowRender> windowList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcDoor")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcDoorRender> doorList;
+  private final List<IfcDoorRender> doorList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcStair")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcStairRender> stairList;
+  private final List<IfcStairRender> stairList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcCovering")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcCoveringRender> coveringList;
+  private final List<IfcCoveringRender> coveringList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcBeam")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcBeamRender> beamList;
+  private final List<IfcBeamRender> beamList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcSpace")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcSpaceRender> spaceList;
+  private final List<IfcSpaceRender> spaceList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPropertySetRender> propertySetList;
+  private final List<IfcPropertySetRender> propertySetList = new ArrayList<>();
 
   public IfcBuildingStorey toModel(final IfcBuilding model) {
 
@@ -84,7 +85,7 @@ public class IfcBuildingStoreyRender {
     p.setStoreyName(storeyName);
 
     for (final IfcWallStandardCaseRender wall : wallStandardCaseList) {
-      p.addifc(wall.toModel(p));
+      // p.addifc(wall.toModel(p));
 
     }
 
