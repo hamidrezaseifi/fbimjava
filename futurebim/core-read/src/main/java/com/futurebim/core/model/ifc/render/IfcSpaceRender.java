@@ -62,7 +62,6 @@ public class IfcSpaceRender {
 
     for (final IfcFurnishingElementRender element : furnishingElementList) {
       p.addFurnishingElement(element.toModel(p));
-      // p.addIfcBuildingStoreyProperty(prop.toIfcBuildingStoreyPropertyModel(p));
     }
 
     for (final IfcPropertySetRender prop : propertySetList) {
