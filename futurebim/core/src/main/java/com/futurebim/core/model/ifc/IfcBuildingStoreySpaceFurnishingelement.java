@@ -250,6 +250,7 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
 
   public void
          addIfcBuildingStoreySpaceFurnishingelementOpening(final IfcBuildingStoreySpaceFurnishingelementOpening ifcBuildingStoreySpaceFurnishingelementOpening) {
+    ifcBuildingStoreySpaceFurnishingelementOpening.setIfcBuildingStoreySpaceFurnishingelement(this);
     IfcBuildingStoreySpaceFurnishingelementOpenings.add(ifcBuildingStoreySpaceFurnishingelementOpening);
   }
 

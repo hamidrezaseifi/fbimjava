@@ -84,7 +84,7 @@ public class IfcFurnishingElementRender {
                                                                                                                                            pl.getPropertyId()));
       }
 
-      // p.addIfcBuildingStoreySpaceFurnishingelementOpening(open);
+      p.addIfcBuildingStoreySpaceFurnishingelementOpening(open);
     }
 
     for (final IfcFurnitureTypeSetRender type : furnitureTypeList) {

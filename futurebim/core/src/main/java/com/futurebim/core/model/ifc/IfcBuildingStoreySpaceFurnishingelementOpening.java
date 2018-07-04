@@ -7,9 +7,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,7 +27,6 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
   private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;
 
   private Timestamp created;
@@ -48,6 +48,10 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
   private String tag;
 
   private int version;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "element_id", insertable = false, updatable = false)
+  private IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer
   @OneToMany(mappedBy = "openingId", cascade = CascadeType.ALL)
@@ -183,6 +187,15 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
     ifcBuildingStoreySpaceFurnishingelementOpeningProperty.setIfcBuildingStoreySpaceFurnishingelementOpening(null);
 
     return ifcBuildingStoreySpaceFurnishingelementOpeningProperty;
+  }
+
+  public IfcBuildingStoreySpaceFurnishingelement getIfcBuildingStoreySpaceFurnishingelement() {
+    return ifcBuildingStoreySpaceFurnishingelement;
+  }
+
+  public void
+         setIfcBuildingStoreySpaceFurnishingelement(final IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement) {
+    this.ifcBuildingStoreySpaceFurnishingelement = ifcBuildingStoreySpaceFurnishingelement;
   }
 
 }
