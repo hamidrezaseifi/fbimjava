@@ -52,8 +52,7 @@
 			    <ul class="nav navbar-nav">
 			      <li th:each="menu: ${pageMenuList}" th:if="${menu.isEnabled()}">
 			      	<a th:href="${menu.getUrl()}">
-						<span th:if="${menu.hasImage()}" th:class="${menu.getCssClass('menu-image')}"></span>
-						<span th:text="${menu.getLabel()}"></span>
+						<i class="material-icons" th:text="${menu.getImage()}"></i><div th:text="${menu.getLabel()}"></div> 
 					</a>
 				  </li>
 			    </ul>
@@ -72,12 +71,12 @@
 			
 			<div class="left-panel" id ="left-panel">
 				<ul>
-					<li ><a href="#" ><i class="material-icons">account_balance</i><div>Balance</div> </a></li>
-					<li><a href="#"  ><i class="material-icons">alarm_on</i><div>Alarm</div></a></li>
-					<li class="active"><a href="#"  ><i class="material-icons">build</i><div>Konfiguration</div></a></li>
-					<li><a href="#"  ><i class="material-icons">code</i><div>Entwicklung</div></a></li>
-					<li><a href="#"  ><i class="material-icons">help_outline</i><div>Fragen</div></a></li>
-					<li><a href="#"  ><i class="material-icons">open_with</i><div>Bewegungen</div></a></li>
+					<li th:each="menu: ${pageLeftMenuList}" th:if="${menu.isEnabled()}" th:class="${menu.isActive() ? 'active' : ''}">
+						<a th:href="${menu.getUrl()}" >
+							<i class="material-icons" th:text="${menu.getImage()}"></i><div th:text="${menu.getLabel()}"></div> 
+						</a>
+					</li>
+
 				</ul>
 			</div>
        			    

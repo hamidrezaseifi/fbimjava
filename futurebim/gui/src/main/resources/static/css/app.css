@@ -78,13 +78,13 @@
 	margin-bottom: 10px;
 }
 
-.left-panel ul li.active
+.left-panel ul li.active, ul.navbar-nav li.active
 {
 	background-color: #85CE36 !important;
 	color: rgba(255, 255, 255, 1);
 }
 
-.left-panel ul li a div
+.left-panel ul li a div, ul.navbar-nav li a div
 {
 	float: left;
 	display: none;
@@ -93,13 +93,13 @@
 	padding-right: 10px;
 }
 
-.left-panel.open ul li a div
+.left-panel.open ul li a div, ul.navbar-nav li a div
 {
 	display: block;
 	width: calc(100% - 70px);
 }
 
-.left-panel ul li a i
+.left-panel ul li a i, ul.navbar-nav li a i
 {
 	clear: both;
 	float: left;
@@ -109,35 +109,39 @@
 	margin-left: 5px;
 }
 
-.left-panel ul li:not(.active) a i
+.left-panel ul li:not(.active) a i, ul.navbar-nav li:not(.active) a i
 {
 	background-color: #22282f!important; 
 }
 
-.left-panel ul li.active a
+.left-panel ul li.active a, ul.navbar-nav li.active a
 {
 	color: rgba(255, 255, 255, 1); 
 }
 
-.left-panel ul li.active a i
+.left-panel ul li.active a i, ul.navbar-nav li.active a i
 {
 	background-color: #85CE36 !important;
 	color: rgba(255, 255, 255, 1); 
 }
 
-.left-panel ul li , .left-panel ul li i, .left-panel ul li a
+.left-panel ul li , .left-panel ul li i, .left-panel ul li a,
+ul.navbar-nav li , ul.navbar-nav li i, ul.navbar-nav li a
+
 {
 	color: rgba(255, 255, 255, 0.4);
 	text-decoration: none;
 }
 
-.left-panel ul li:hover , .left-panel ul li:hover i, .left-panel ul li:hover a
+.left-panel ul li:hover , .left-panel ul li:hover i, .left-panel ul li:hover a,
+ul.navbar-nav li:hover , ul.navbar-nav li:hover i, ul.navbar-nav li:hover a
 {
 	color: rgba(255, 255, 255, 1);
 	text-decoration: none;
 }
 
-.left-panel ul li:hover:not(.active)
+.left-panel ul li:hover:not(.active),
+ul.navbar-nav li:hover:not(.active)
 {
 	color: rgba(255, 255, 255, 1);
 	text-decoration: none;
