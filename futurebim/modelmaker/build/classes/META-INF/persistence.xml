@@ -81,5 +81,8 @@
 		<class>modelmaker.User</class>
 		<class>modelmaker.UserProjectAccess</class>
 		<class>modelmaker.UserProjectAccessPK</class>
+		<class>modelmaker.IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer</class>
+		<class>modelmaker.IfcBuildingStoreySpaceFurnishingelementOpening</class>
+		<class>modelmaker.IfcBuildingStoreySpaceFurnishingelementOpeningProperty</class>
 	</persistence-unit>
 </persistence>

@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,6 +40,9 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
   @Column(name = "object_type")
   private String objectType;
 
+  @Column(name = "space_id")
+  private String spaceId;
+
   private short status = 1;
 
   private String tag;
@@ -48,20 +53,25 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "stair_id")
-  private IfcBuildingStorey ifcBuildingStorey;
+  @JoinColumn(name = "space_id", insertable = false, updatable = false)
+  private IfcBuildingStoreySpace ifcBuildingStoreySpace;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementFurnituretype
-  @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelement")
-  private List<IfcBuildingStoreySpaceFurnishingelementFurnituretype> ifcBuildingStoreySpaceFurnishingelementFurnituretypes;
+  @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelement", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySpaceFurnishingelementFurnituretype> ifcBuildingStoreySpaceFurnishingelementFurnituretypes =
+                                                                                                                           new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementPresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelement")
-  private List<IfcBuildingStoreySpaceFurnishingelementPresentationlayer> ifcBuildingStoreySpaceFurnishingelementPresentationlayers;
+  @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelement", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySpaceFurnishingelementPresentationlayer> ifcBuildingStoreySpaceFurnishingelementPresentationlayers =
+                                                                                                                                   new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelement")
-  private List<IfcBuildingStoreySpaceFurnishingelementProperty> ifcBuildingStoreySpaceFurnishingelementProperties;
+  @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelement", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySpaceFurnishingelementProperty> ifcBuildingStoreySpaceFurnishingelementProperties = new ArrayList<>();
+
+  @OneToMany(mappedBy = "elementId", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySpaceFurnishingelementOpening> IfcBuildingStoreySpaceFurnishingelementOpenings = new ArrayList<>();
 
   public IfcBuildingStoreySpaceFurnishingelement() {
   }
@@ -138,12 +148,12 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
     this.version = version;
   }
 
-  public IfcBuildingStorey getIfcBuildingStorey() {
-    return this.ifcBuildingStorey;
+  public IfcBuildingStoreySpace getIfcBuildingStorey() {
+    return this.ifcBuildingStoreySpace;
   }
 
-  public void setIfcBuildingStorey(final IfcBuildingStorey ifcBuildingStorey) {
-    this.ifcBuildingStorey = ifcBuildingStorey;
+  public void setIfcBuildingStorey(final IfcBuildingStoreySpace ifcBuildingStoreySpace) {
+    this.ifcBuildingStoreySpace = ifcBuildingStoreySpace;
   }
 
   public List<IfcBuildingStoreySpaceFurnishingelementFurnituretype> getIfcBuildingStoreySpaceFurnishingelementFurnituretypes() {
@@ -219,6 +229,36 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
     ifcBuildingStoreySpaceFurnishingelementProperty.setIfcBuildingStoreySpaceFurnishingelement(null);
 
     return ifcBuildingStoreySpaceFurnishingelementProperty;
+  }
+
+  public IfcBuildingStoreySpace getIfcBuildingStoreySpace() {
+    return ifcBuildingStoreySpace;
+  }
+
+  public void setIfcBuildingStoreySpace(final IfcBuildingStoreySpace ifcBuildingStoreySpace) {
+    this.ifcBuildingStoreySpace = ifcBuildingStoreySpace;
+  }
+
+  public List<IfcBuildingStoreySpaceFurnishingelementOpening> getIfcBuildingStoreySpaceFurnishingelementOpenings() {
+    return IfcBuildingStoreySpaceFurnishingelementOpenings;
+  }
+
+  public void
+         setIfcBuildingStoreySpaceFurnishingelementOpenings(final List<IfcBuildingStoreySpaceFurnishingelementOpening> ifcBuildingStoreySpaceFurnishingelementOpenings) {
+    IfcBuildingStoreySpaceFurnishingelementOpenings = ifcBuildingStoreySpaceFurnishingelementOpenings;
+  }
+
+  public void
+         addIfcBuildingStoreySpaceFurnishingelementOpening(final IfcBuildingStoreySpaceFurnishingelementOpening ifcBuildingStoreySpaceFurnishingelementOpening) {
+    IfcBuildingStoreySpaceFurnishingelementOpenings.add(ifcBuildingStoreySpaceFurnishingelementOpening);
+  }
+
+  public String getSpaceId() {
+    return spaceId;
+  }
+
+  public void setSpaceId(final String spaceId) {
+    this.spaceId = spaceId;
   }
 
 }

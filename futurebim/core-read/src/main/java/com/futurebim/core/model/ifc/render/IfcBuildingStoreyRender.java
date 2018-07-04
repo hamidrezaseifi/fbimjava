@@ -7,6 +7,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.futurebim.core.model.ifc.IfcBuilding;
 import com.futurebim.core.model.ifc.IfcBuildingStorey;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyProperty;
 
 public class IfcBuildingStoreyRender {
 
@@ -135,12 +136,12 @@ public class IfcBuildingStoreyRender {
     }
 
     for (final IfcSpaceRender space : spaceList) {
-      // p.addIfcBuildingStoreySpace(space.toModel(p));
+      p.addIfcBuildingStoreySpace(space.toModel(p));
 
     }
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyProperty(prop.toIfcBuildingStoreyPropertyModel(p));
+      p.addIfcBuildingStoreyProperty(new IfcBuildingStoreyProperty(id, prop.getPropertyId()));
     }
 
     return p;

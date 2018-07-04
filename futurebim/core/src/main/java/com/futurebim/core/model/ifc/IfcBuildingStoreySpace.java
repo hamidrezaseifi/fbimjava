@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,6 +48,9 @@ public class IfcBuildingStoreySpace extends SerializableModelBase {
   @Column(name = "space_name")
   private String spaceName;
 
+  @Column(name = "storey_id")
+  private String storeyId;
+
   private short status = 1;
 
   private Timestamp updated;
@@ -54,16 +59,20 @@ public class IfcBuildingStoreySpace extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "stair_id")
+  @JoinColumn(name = "storey_id", updatable = false, insertable = false)
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpacePresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreySpace")
-  private List<IfcBuildingStoreySpacePresentationlayer> ifcBuildingStoreySpacePresentationlayers;
+  @OneToMany(mappedBy = "spaceId", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySpacePresentationlayer> ifcBuildingStoreySpacePresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreySpace")
-  private List<IfcBuildingStoreySpaceProperty> ifcBuildingStoreySpaceProperties;
+  @OneToMany(mappedBy = "spaceId", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySpaceProperty> ifcBuildingStoreySpaceProperties = new ArrayList<>();
+
+  // bi-directional many-to-one association to IfcBuildingStoreySpaceProperty
+  @OneToMany(mappedBy = "spaceId", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySpaceFurnishingelement> furnishingElementList = new ArrayList<>();
 
   public IfcBuildingStoreySpace() {
   }
@@ -211,6 +220,26 @@ public class IfcBuildingStoreySpace extends SerializableModelBase {
     ifcBuildingStoreySpaceProperty.setIfcBuildingStoreySpace(null);
 
     return ifcBuildingStoreySpaceProperty;
+  }
+
+  public String getStoreyId() {
+    return storeyId;
+  }
+
+  public void setStoreyId(final String storeyId) {
+    this.storeyId = storeyId;
+  }
+
+  public List<IfcBuildingStoreySpaceFurnishingelement> getFurnishingElementList() {
+    return furnishingElementList;
+  }
+
+  public void setFurnishingElementList(final List<IfcBuildingStoreySpaceFurnishingelement> furnishingElementList) {
+    this.furnishingElementList = furnishingElementList;
+  }
+
+  public void addFurnishingElement(final IfcBuildingStoreySpaceFurnishingelement furnishingElement) {
+    this.furnishingElementList.add(furnishingElement);
   }
 
 }

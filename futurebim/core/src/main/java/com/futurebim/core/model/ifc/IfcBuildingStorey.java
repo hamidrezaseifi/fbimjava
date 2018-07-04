@@ -80,10 +80,6 @@ public class IfcBuildingStorey extends SerializableModelBase {
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpace> ifcBuildingStoreySpaces = new ArrayList<>();
 
-  // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelement
-  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
-  private List<IfcBuildingStoreySpaceFurnishingelement> ifcBuildingStoreySpaceFurnishingelements = new ArrayList<>();
-
   // bi-directional many-to-one association to IfcBuildingStoreyStair
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyStair> ifcBuildingStoreyStairs = new ArrayList<>();
@@ -324,31 +320,6 @@ public class IfcBuildingStorey extends SerializableModelBase {
     ifcBuildingStoreySpace.setIfcBuildingStorey(null);
 
     return ifcBuildingStoreySpace;
-  }
-
-  public List<IfcBuildingStoreySpaceFurnishingelement> getIfcBuildingStoreySpaceFurnishingelements() {
-    return this.ifcBuildingStoreySpaceFurnishingelements;
-  }
-
-  public void
-         setIfcBuildingStoreySpaceFurnishingelements(final List<IfcBuildingStoreySpaceFurnishingelement> ifcBuildingStoreySpaceFurnishingelements) {
-    this.ifcBuildingStoreySpaceFurnishingelements = ifcBuildingStoreySpaceFurnishingelements;
-  }
-
-  public IfcBuildingStoreySpaceFurnishingelement
-         addIfcBuildingStoreySpaceFurnishingelement(final IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement) {
-    getIfcBuildingStoreySpaceFurnishingelements().add(ifcBuildingStoreySpaceFurnishingelement);
-    ifcBuildingStoreySpaceFurnishingelement.setIfcBuildingStorey(this);
-
-    return ifcBuildingStoreySpaceFurnishingelement;
-  }
-
-  public IfcBuildingStoreySpaceFurnishingelement
-         removeIfcBuildingStoreySpaceFurnishingelement(final IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement) {
-    getIfcBuildingStoreySpaceFurnishingelements().remove(ifcBuildingStoreySpaceFurnishingelement);
-    ifcBuildingStoreySpaceFurnishingelement.setIfcBuildingStorey(null);
-
-    return ifcBuildingStoreySpaceFurnishingelement;
   }
 
   public List<IfcBuildingStoreyStair> getIfcBuildingStoreyStairs() {

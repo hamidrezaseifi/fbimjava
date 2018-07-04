@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.futurebim.core.model.ifc.IfcBuilding;
+import com.futurebim.core.model.ifc.IfcBuildingProperty;
 import com.futurebim.core.model.ifc.IfcProjectSite;
 
 /**
@@ -51,7 +52,7 @@ public class IfcBuildingRender {
     }
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingProperty(prop.toBuildingPropertyModel(p));
+      p.addIfcBuildingProperty(new IfcBuildingProperty(id, prop.getPropertyId()));
     }
 
     return p;

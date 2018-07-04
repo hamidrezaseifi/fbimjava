@@ -1,9 +1,14 @@
 package com.futurebim.core.model.ifc.render;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStorey;
+import com.futurebim.core.model.ifc.IfcBuildingStoreySpace;
+import com.futurebim.core.model.ifc.IfcBuildingStoreySpacePresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreySpaceProperty;
 
 public class IfcSpaceRender {
 
@@ -12,10 +17,9 @@ public class IfcSpaceRender {
 
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
   private String name;
-  // Description="" ObjectPlacement="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1" LongName="Living Room" CompositionType="ELEMENT"
-  // InteriorOrExteriorSpace="INTERNAL"
+
   @JacksonXmlProperty(localName = "Description", isAttribute = true)
-  private String Description;
+  private String description;
 
   @JacksonXmlProperty(localName = "ObjectPlacement", isAttribute = true)
   private String objectPlacement;
@@ -32,15 +36,43 @@ public class IfcSpaceRender {
   // @JsonIgnore
   @JacksonXmlProperty(localName = "IfcFurnishingElement")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcFurnishingElementRender> furnishingElementList;
+  private final List<IfcFurnishingElementRender> furnishingElementList = new ArrayList<>();
 
   // @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPropertySetRender> propertySetList;
+  private final List<IfcPropertySetRender> propertySetList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
+  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
 
+  public IfcBuildingStoreySpace toModel(final IfcBuildingStorey model) {
+
+    final IfcBuildingStoreySpace p = new IfcBuildingStoreySpace();
+    p.setId(id);
+    p.setCompositionType(compositionType);
+    p.setObjectPlacement(objectPlacement);
+    p.setDescription(description);
+    p.setIfcBuildingStorey(model);
+    p.setLongName(longName);
+    p.setSpaceName(name);
+    p.setInteriorOrExteriorSpace(interiorOrExteriorSpace);
+    p.setStoreyId(model.getId());
+
+    for (final IfcFurnishingElementRender element : furnishingElementList) {
+      p.addFurnishingElement(element.toModel(p));
+      // p.addIfcBuildingStoreyProperty(prop.toIfcBuildingStoreyPropertyModel(p));
+    }
+
+    for (final IfcPropertySetRender prop : propertySetList) {
+      p.addIfcBuildingStoreySpaceProperty(new IfcBuildingStoreySpaceProperty(id, prop.getPropertyId()));
+    }
+
+    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+      p.addIfcBuildingStoreySpacePresentationlayer(new IfcBuildingStoreySpacePresentationlayer(id, layer.getPropertyId()));
+    }
+
+    return p;
+  }
 }
