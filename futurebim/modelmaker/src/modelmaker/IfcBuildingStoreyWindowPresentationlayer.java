@@ -23,15 +23,15 @@ public class IfcBuildingStoreyWindowPresentationlayer implements Serializable {
 
 	private short status;
 
-	//bi-directional many-to-one association to IfcPresentationlayer
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="presentationlayer_id")
-	private IfcPresentationlayer ifcPresentationlayer;
-
 	//bi-directional many-to-one association to IfcBuildingStoreyWindow
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="window_id")
 	private IfcBuildingStoreyWindow ifcBuildingStoreyWindow;
+
+	//bi-directional many-to-one association to IfcPresentationlayer
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="presentationlayer_id")
+	private IfcPresentationlayer ifcPresentationlayer;
 
 	public IfcBuildingStoreyWindowPresentationlayer() {
 	}
@@ -60,20 +60,20 @@ public class IfcBuildingStoreyWindowPresentationlayer implements Serializable {
 		this.status = status;
 	}
 
-	public IfcPresentationlayer getIfcPresentationlayer() {
-		return this.ifcPresentationlayer;
-	}
-
-	public void setIfcPresentationlayer(IfcPresentationlayer ifcPresentationlayer) {
-		this.ifcPresentationlayer = ifcPresentationlayer;
-	}
-
 	public IfcBuildingStoreyWindow getIfcBuildingStoreyWindow() {
 		return this.ifcBuildingStoreyWindow;
 	}
 
 	public void setIfcBuildingStoreyWindow(IfcBuildingStoreyWindow ifcBuildingStoreyWindow) {
 		this.ifcBuildingStoreyWindow = ifcBuildingStoreyWindow;
+	}
+
+	public IfcPresentationlayer getIfcPresentationlayer() {
+		return this.ifcPresentationlayer;
+	}
+
+	public void setIfcPresentationlayer(IfcPresentationlayer ifcPresentationlayer) {
+		this.ifcPresentationlayer = ifcPresentationlayer;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -28,17 +29,23 @@ public class IfcBuildingStoreyWindowPresentationlayer extends SerializableModelB
 
   private short status = 1;
 
-  // bi-directional many-to-one association to IfcPresentationlayer
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "presentationlayer_id")
-  private IfcPresentationlayer ifcPresentationlayer;
+  @Column(name = "presentationlayer_id")
+  private String presentationlayerId;
+
+  @Column(name = "window_id")
+  private String windowId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindow
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "window_id")
+  @JoinColumn(name = "window_id", updatable = false, insertable = false)
   private IfcBuildingStoreyWindow ifcBuildingStoreyWindow;
 
   public IfcBuildingStoreyWindowPresentationlayer() {
+  }
+
+  public IfcBuildingStoreyWindowPresentationlayer(final String windowId, final String presentationlayerId) {
+    this.windowId = windowId;
+    this.presentationlayerId = presentationlayerId;
   }
 
   public String getId() {
@@ -65,20 +72,28 @@ public class IfcBuildingStoreyWindowPresentationlayer extends SerializableModelB
     this.status = status;
   }
 
-  public IfcPresentationlayer getIfcPresentationlayer() {
-    return this.ifcPresentationlayer;
-  }
-
-  public void setIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
-    this.ifcPresentationlayer = ifcPresentationlayer;
-  }
-
   public IfcBuildingStoreyWindow getIfcBuildingStoreyWindow() {
     return this.ifcBuildingStoreyWindow;
   }
 
   public void setIfcBuildingStoreyWindow(final IfcBuildingStoreyWindow ifcBuildingStoreyWindow) {
     this.ifcBuildingStoreyWindow = ifcBuildingStoreyWindow;
+  }
+
+  public String getPresentationlayerId() {
+    return presentationlayerId;
+  }
+
+  public void setPresentationlayerId(final String presentationlayerId) {
+    this.presentationlayerId = presentationlayerId;
+  }
+
+  public String getWindowId() {
+    return windowId;
+  }
+
+  public void setWindowId(final String windowId) {
+    this.windowId = windowId;
   }
 
 }

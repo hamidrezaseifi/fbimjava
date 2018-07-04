@@ -106,6 +106,9 @@ public class IfcBuildingStorey extends SerializableModelBase {
   @OneToMany(mappedBy = "ifcBuildingStorey")
   private List<IfcBuildingStoreyWindow> ifcBuildingStoreyWindows;
 
+  @OneToMany(mappedBy = "ifcBuildingStorey")
+  private List<IfcBuildingStoreyWall> ifcBuildingStoreyWallCases;
+
   public IfcBuildingStorey() {
   }
 

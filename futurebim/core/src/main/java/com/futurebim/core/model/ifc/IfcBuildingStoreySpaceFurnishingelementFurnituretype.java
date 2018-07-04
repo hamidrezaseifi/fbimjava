@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreySpaceFurnishingelementFurnituretype extends Serial
 
   private short status = 1;
 
+  @Column(name = "furnituretype_id")
+  private String furnituretypeId;
+
+  @Column(name = "felement_id")
+  private String felementId;
+
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelement
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "felement_id")
+  @JoinColumn(name = "felement_id", updatable = false, insertable = false)
   private IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement;
 
-  // bi-directional many-to-one association to IfcFurnituretype
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "furnituretype_id")
-  private IfcFurnituretype ifcFurnituretype;
-
   public IfcBuildingStoreySpaceFurnishingelementFurnituretype() {
+  }
+
+  public IfcBuildingStoreySpaceFurnishingelementFurnituretype(final String felementId, final String furnituretypeId) {
+    this.felementId = felementId;
+    this.furnituretypeId = furnituretypeId;
   }
 
   public Long getId() {
@@ -77,12 +84,20 @@ public class IfcBuildingStoreySpaceFurnishingelementFurnituretype extends Serial
     this.ifcBuildingStoreySpaceFurnishingelement = ifcBuildingStoreySpaceFurnishingelement;
   }
 
-  public IfcFurnituretype getIfcFurnituretype() {
-    return this.ifcFurnituretype;
+  public String getFurnituretypeId() {
+    return furnituretypeId;
   }
 
-  public void setIfcFurnituretype(final IfcFurnituretype ifcFurnituretype) {
-    this.ifcFurnituretype = ifcFurnituretype;
+  public void setFurnituretypeId(final String furnituretypeId) {
+    this.furnituretypeId = furnituretypeId;
+  }
+
+  public String getFelementId() {
+    return felementId;
+  }
+
+  public void setFelementId(final String felementId) {
+    this.felementId = felementId;
   }
 
 }

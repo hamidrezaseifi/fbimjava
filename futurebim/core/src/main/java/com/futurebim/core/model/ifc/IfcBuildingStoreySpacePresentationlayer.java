@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreySpacePresentationlayer extends SerializableModelBa
 
   private short status = 1;
 
-  // bi-directional many-to-one association to IfcPresentationlayer
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "presentationlayer_id")
-  private IfcPresentationlayer ifcPresentationlayer;
+  @Column(name = "presentationlayer_id")
+  private String presentationlayerId;
+
+  @Column(name = "space_id")
+  private String spaceId;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpace
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "space_id")
+  @JoinColumn(name = "space_id", updatable = false, insertable = false)
   private IfcBuildingStoreySpace ifcBuildingStoreySpace;
 
   public IfcBuildingStoreySpacePresentationlayer() {
+  }
+
+  public IfcBuildingStoreySpacePresentationlayer(final String spaceId, final String presentationlayerId) {
+    this.spaceId = spaceId;
+    this.presentationlayerId = presentationlayerId;
   }
 
   public Long getId() {
@@ -68,12 +75,20 @@ public class IfcBuildingStoreySpacePresentationlayer extends SerializableModelBa
     this.status = status;
   }
 
-  public IfcPresentationlayer getIfcPresentationlayer() {
-    return this.ifcPresentationlayer;
+  public String getPresentationlayerId() {
+    return presentationlayerId;
   }
 
-  public void setIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
-    this.ifcPresentationlayer = ifcPresentationlayer;
+  public void setPresentationlayerId(final String presentationlayerId) {
+    this.presentationlayerId = presentationlayerId;
+  }
+
+  public String getSpaceId() {
+    return spaceId;
+  }
+
+  public void setSpaceId(final String spaceId) {
+    this.spaceId = spaceId;
   }
 
   public IfcBuildingStoreySpace getIfcBuildingStoreySpace() {

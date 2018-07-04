@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreyStairFlightProperty extends SerializableModelBase 
 
   private short status = 1;
 
+  @Column(name = "property_id")
+  private String propertyId;
+
+  @Column(name = "flight_id")
+  private String flightId;
+
   // bi-directional many-to-one association to IfcBuildingStoreyStairFlight
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "flight_id")
+  @JoinColumn(name = "flight_id", updatable = false, insertable = false)
   private IfcBuildingStoreyStairFlight ifcBuildingStoreyStairFlight;
 
-  // bi-directional many-to-one association to IfcProperty
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "property_id")
-  private IfcProperty ifcProperty;
-
   public IfcBuildingStoreyStairFlightProperty() {
+  }
+
+  public IfcBuildingStoreyStairFlightProperty(final String flightId, final String propertyId) {
+    this.flightId = flightId;
+    this.propertyId = propertyId;
   }
 
   public Long getId() {
@@ -76,12 +83,20 @@ public class IfcBuildingStoreyStairFlightProperty extends SerializableModelBase 
     this.ifcBuildingStoreyStairFlight = ifcBuildingStoreyStairFlight;
   }
 
-  public IfcProperty getIfcProperty() {
-    return this.ifcProperty;
+  public String getPropertyId() {
+    return propertyId;
   }
 
-  public void setIfcProperty(final IfcProperty ifcProperty) {
-    this.ifcProperty = ifcProperty;
+  public void setPropertyId(final String propertyId) {
+    this.propertyId = propertyId;
+  }
+
+  public String getFlightId() {
+    return flightId;
+  }
+
+  public void setFlightId(final String flightId) {
+    this.flightId = flightId;
   }
 
 }

@@ -23,15 +23,15 @@ public class IfcBuildingStoreySpaceFurnishingelementProperty implements Serializ
 
 	private short status;
 
-	//bi-directional many-to-one association to IfcProperty
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="property_id")
-	private IfcProperty ifcProperty;
-
 	//bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelement
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="felement_id")
 	private IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement;
+
+	//bi-directional many-to-one association to IfcProperty
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="property_id")
+	private IfcProperty ifcProperty;
 
 	public IfcBuildingStoreySpaceFurnishingelementProperty() {
 	}
@@ -60,20 +60,20 @@ public class IfcBuildingStoreySpaceFurnishingelementProperty implements Serializ
 		this.status = status;
 	}
 
-	public IfcProperty getIfcProperty() {
-		return this.ifcProperty;
-	}
-
-	public void setIfcProperty(IfcProperty ifcProperty) {
-		this.ifcProperty = ifcProperty;
-	}
-
 	public IfcBuildingStoreySpaceFurnishingelement getIfcBuildingStoreySpaceFurnishingelement() {
 		return this.ifcBuildingStoreySpaceFurnishingelement;
 	}
 
 	public void setIfcBuildingStoreySpaceFurnishingelement(IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement) {
 		this.ifcBuildingStoreySpaceFurnishingelement = ifcBuildingStoreySpaceFurnishingelement;
+	}
+
+	public IfcProperty getIfcProperty() {
+		return this.ifcProperty;
+	}
+
+	public void setIfcProperty(IfcProperty ifcProperty) {
+		this.ifcProperty = ifcProperty;
 	}
 
 }

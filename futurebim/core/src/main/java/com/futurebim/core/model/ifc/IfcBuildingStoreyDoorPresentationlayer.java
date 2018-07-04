@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -28,17 +29,23 @@ public class IfcBuildingStoreyDoorPresentationlayer extends SerializableModelBas
 
   private short status = 1;
 
+  @Column(name = "presentationlayer_id")
+  private String presentationlayerId;
+
+  @Column(name = "door_id")
+  private String doorId;
+
   // bi-directional many-to-one association to IfcBuildingStoreyDoor
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "door_id")
+  @JoinColumn(name = "door_id", updatable = false, insertable = false)
   private IfcBuildingStoreyDoor ifcBuildingStoreyDoor;
 
-  // bi-directional many-to-one association to IfcPresentationlayer
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "presentationlayer_id")
-  private IfcPresentationlayer ifcPresentationlayer;
-
   public IfcBuildingStoreyDoorPresentationlayer() {
+  }
+
+  public IfcBuildingStoreyDoorPresentationlayer(final String doorId, final String presentationlayerId) {
+    this.doorId = doorId;
+    this.presentationlayerId = presentationlayerId;
   }
 
   public String getId() {
@@ -73,12 +80,20 @@ public class IfcBuildingStoreyDoorPresentationlayer extends SerializableModelBas
     this.ifcBuildingStoreyDoor = ifcBuildingStoreyDoor;
   }
 
-  public IfcPresentationlayer getIfcPresentationlayer() {
-    return this.ifcPresentationlayer;
+  public String getPresentationlayerId() {
+    return presentationlayerId;
   }
 
-  public void setIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
-    this.ifcPresentationlayer = ifcPresentationlayer;
+  public void setPresentationlayerId(final String presentationlayerId) {
+    this.presentationlayerId = presentationlayerId;
+  }
+
+  public String getDoorId() {
+    return doorId;
+  }
+
+  public void setDoorId(final String doorId) {
+    this.doorId = doorId;
   }
 
 }

@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreyCoveringPresentationlayer extends SerializableMode
 
   private short status = 1;
 
+  @Column(name = "presentationlayer_id")
+  private String presentationlayerId;
+
+  @Column(name = "covering_id")
+  private String coveringId;
+
   // bi-directional many-to-one association to IfcBuildingStoreyCovering
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "covering_id")
+  @JoinColumn(name = "covering_id", updatable = false, insertable = false)
   private IfcBuildingStoreyCovering ifcBuildingStoreyCovering;
 
-  // bi-directional many-to-one association to IfcPresentationlayer
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "presentationlayer_id")
-  private IfcPresentationlayer ifcPresentationlayer;
-
   public IfcBuildingStoreyCoveringPresentationlayer() {
+  }
+
+  public IfcBuildingStoreyCoveringPresentationlayer(final String coveringId, final String presentationlayerId) {
+    this.coveringId = coveringId;
+    this.presentationlayerId = presentationlayerId;
   }
 
   public Long getId() {
@@ -76,12 +83,20 @@ public class IfcBuildingStoreyCoveringPresentationlayer extends SerializableMode
     this.ifcBuildingStoreyCovering = ifcBuildingStoreyCovering;
   }
 
-  public IfcPresentationlayer getIfcPresentationlayer() {
-    return this.ifcPresentationlayer;
+  public String getPresentationlayerId() {
+    return presentationlayerId;
   }
 
-  public void setIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
-    this.ifcPresentationlayer = ifcPresentationlayer;
+  public void setPresentationlayerId(final String presentationlayerId) {
+    this.presentationlayerId = presentationlayerId;
+  }
+
+  public String getCoveringId() {
+    return coveringId;
+  }
+
+  public void setCoveringId(final String coveringId) {
+    this.coveringId = coveringId;
   }
 
 }

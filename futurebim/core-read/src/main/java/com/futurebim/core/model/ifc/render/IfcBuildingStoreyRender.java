@@ -30,15 +30,15 @@ public class IfcBuildingStoreyRender {
 
   @JacksonXmlProperty(localName = "IfcWall")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> wallList;
+  private List<IfcWallRender> wallList;
 
   @JacksonXmlProperty(localName = "IfcFooting")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> footingList;
+  private List<IfcFootingRender> footingList;
 
   @JacksonXmlProperty(localName = "IfcRoof")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<Object> roofList;
+  private List<IfcRoofRender> roofList;
 
   @JacksonXmlProperty(localName = "IfcSlab")
   @JacksonXmlElementWrapper(useWrapping = false)
@@ -68,7 +68,6 @@ public class IfcBuildingStoreyRender {
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<IfcSpaceRender> spaceList;
 
-  // @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<IfcPropertySetRender> propertySetList;
@@ -84,10 +83,64 @@ public class IfcBuildingStoreyRender {
     p.setBuildingId(model.getId());
     p.setStoreyName(storeyName);
 
-    /*
-     * for (final IfcBuildingStoreyRender buildingStorey : buildingStoreyList) { p.addIfcBuildingStorey(buildingStorey.toModel(p)); //
-     * p.addIfcBuildings(building.toModel(p)); }
-     */
+    for (final IfcWallStandardCaseRender wall : wallStandardCaseList) {
+      p.addifc(wall.toModel(p));
+
+    }
+
+    for (final IfcWallRender wall : wallList) {
+      // p.addIfcBuildingStoreySpace(wall.toModel(p));
+
+    }
+
+    for (final IfcFootingRender footing : footingList) {
+      // p.addIfcBuildingStoreySpace(footing.toModel(p));
+
+    }
+
+    for (final IfcRoofRender roof : roofList) {
+      // p.addIfcBuildingStoreySpace(roof.toModel(p));
+
+    }
+
+    for (final IfcSlabRender slab : slabList) {
+      // p.addIfcBuildingStoreySpace(slab.toModel(p));
+
+    }
+
+    for (final IfcWindowRender window : windowList) {
+      // p.addIfcBuildingStoreySpace(window.toModel(p));
+
+    }
+
+    for (final IfcDoorRender door : doorList) {
+      // p.addIfcBuildingStoreySpace(door.toModel(p));
+
+    }
+
+    for (final IfcStairRender stair : stairList) {
+      // p.addIfcBuildingStoreySpace(stair.toModel(p));
+
+    }
+
+    for (final IfcCoveringRender cover : coveringList) {
+      // p.addIfcBuildingStoreySpace(cover.toModel(p));
+
+    }
+
+    for (final IfcBeamRender beam : beamList) {
+      // p.addIfcBuildingStoreySpace(beam.toModel(p));
+
+    }
+
+    for (final IfcSpaceRender space : spaceList) {
+      // p.addIfcBuildingStoreySpace(space.toModel(p));
+
+    }
+
+    for (final IfcPropertySetRender prop : propertySetList) {
+      p.addIfcBuildingStoreyProperty(prop.toIfcBuildingStoreyPropertyModel(p));
+    }
 
     return p;
   }

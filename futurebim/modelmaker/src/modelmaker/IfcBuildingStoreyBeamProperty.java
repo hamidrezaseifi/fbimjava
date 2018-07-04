@@ -23,15 +23,15 @@ public class IfcBuildingStoreyBeamProperty implements Serializable {
 
 	private short status;
 
-	//bi-directional many-to-one association to IfcProperty
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="property_id")
-	private IfcProperty ifcProperty;
-
 	//bi-directional many-to-one association to IfcBuildingStoreyBeam
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="beam_id")
 	private IfcBuildingStoreyBeam ifcBuildingStoreyBeam;
+
+	//bi-directional many-to-one association to IfcProperty
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="property_id")
+	private IfcProperty ifcProperty;
 
 	public IfcBuildingStoreyBeamProperty() {
 	}
@@ -60,20 +60,20 @@ public class IfcBuildingStoreyBeamProperty implements Serializable {
 		this.status = status;
 	}
 
-	public IfcProperty getIfcProperty() {
-		return this.ifcProperty;
-	}
-
-	public void setIfcProperty(IfcProperty ifcProperty) {
-		this.ifcProperty = ifcProperty;
-	}
-
 	public IfcBuildingStoreyBeam getIfcBuildingStoreyBeam() {
 		return this.ifcBuildingStoreyBeam;
 	}
 
 	public void setIfcBuildingStoreyBeam(IfcBuildingStoreyBeam ifcBuildingStoreyBeam) {
 		this.ifcBuildingStoreyBeam = ifcBuildingStoreyBeam;
+	}
+
+	public IfcProperty getIfcProperty() {
+		return this.ifcProperty;
+	}
+
+	public void setIfcProperty(IfcProperty ifcProperty) {
+		this.ifcProperty = ifcProperty;
 	}
 
 }

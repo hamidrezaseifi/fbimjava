@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreyCoveringProperty extends SerializableModelBase {
 
   private short status = 1;
 
-  // bi-directional many-to-one association to IfcProperty
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "property_id")
-  private IfcProperty ifcProperty;
+  @Column(name = "property_id")
+  private String propertyId;
+
+  @Column(name = "covering_id")
+  private String coveringId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyCovering
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "covering_id")
+  @JoinColumn(name = "covering_id", updatable = false, insertable = false)
   private IfcBuildingStoreyCovering ifcBuildingStoreyCovering;
 
   public IfcBuildingStoreyCoveringProperty() {
+  }
+
+  public IfcBuildingStoreyCoveringProperty(final String coveringId, final String propertyId) {
+    this.coveringId = coveringId;
+    this.propertyId = propertyId;
   }
 
   public Long getId() {
@@ -68,12 +75,20 @@ public class IfcBuildingStoreyCoveringProperty extends SerializableModelBase {
     this.status = status;
   }
 
-  public IfcProperty getIfcProperty() {
-    return this.ifcProperty;
+  public String getPropertyId() {
+    return propertyId;
   }
 
-  public void setIfcProperty(final IfcProperty ifcProperty) {
-    this.ifcProperty = ifcProperty;
+  public void setPropertyId(final String propertyId) {
+    this.propertyId = propertyId;
+  }
+
+  public String getCoveringId() {
+    return coveringId;
+  }
+
+  public void setCoveringId(final String coveringId) {
+    this.coveringId = coveringId;
   }
 
   public IfcBuildingStoreyCovering getIfcBuildingStoreyCovering() {

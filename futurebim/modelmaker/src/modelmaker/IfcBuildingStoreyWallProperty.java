@@ -23,15 +23,15 @@ public class IfcBuildingStoreyWallProperty implements Serializable {
 
 	private short status;
 
-	//bi-directional many-to-one association to IfcProperty
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="property_id")
-	private IfcProperty ifcProperty;
-
 	//bi-directional many-to-one association to IfcBuildingStoreyWall
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="wall_id")
 	private IfcBuildingStoreyWall ifcBuildingStoreyWall;
+
+	//bi-directional many-to-one association to IfcProperty
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="property_id")
+	private IfcProperty ifcProperty;
 
 	public IfcBuildingStoreyWallProperty() {
 	}
@@ -60,20 +60,20 @@ public class IfcBuildingStoreyWallProperty implements Serializable {
 		this.status = status;
 	}
 
-	public IfcProperty getIfcProperty() {
-		return this.ifcProperty;
-	}
-
-	public void setIfcProperty(IfcProperty ifcProperty) {
-		this.ifcProperty = ifcProperty;
-	}
-
 	public IfcBuildingStoreyWall getIfcBuildingStoreyWall() {
 		return this.ifcBuildingStoreyWall;
 	}
 
 	public void setIfcBuildingStoreyWall(IfcBuildingStoreyWall ifcBuildingStoreyWall) {
 		this.ifcBuildingStoreyWall = ifcBuildingStoreyWall;
+	}
+
+	public IfcProperty getIfcProperty() {
+		return this.ifcProperty;
+	}
+
+	public void setIfcProperty(IfcProperty ifcProperty) {
+		this.ifcProperty = ifcProperty;
 	}
 
 }

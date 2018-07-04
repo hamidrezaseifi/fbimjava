@@ -49,6 +49,7 @@ public class IfcBuildingRender {
     for (final IfcBuildingStoreyRender buildingStorey : buildingStoreyList) {
       p.addIfcBuildingStorey(buildingStorey.toModel(p));
     }
+
     for (final IfcPropertySetRender prop : propertySetList) {
       p.addIfcBuildingProperty(prop.toBuildingPropertyModel(p));
     }

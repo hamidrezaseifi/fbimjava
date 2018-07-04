@@ -1,7 +1,6 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.futurebim.core.model.base.SerializableModelBase;
@@ -53,10 +51,6 @@ public class IfcDoorstyle extends SerializableModelBase {
   private Timestamp updated;
 
   private int version = 1;
-
-  // bi-directional many-to-one association to IfcBuildingStoreyDoorStyle
-  @OneToMany(mappedBy = "ifcDoorstyle")
-  private List<IfcBuildingStoreyDoorStyle> ifcBuildingStoreyDoorStyles;
 
   // bi-directional many-to-one association to ProjectIfc
   @ManyToOne(fetch = FetchType.LAZY)
@@ -152,28 +146,6 @@ public class IfcDoorstyle extends SerializableModelBase {
 
   public void setVersion(final int version) {
     this.version = version;
-  }
-
-  public List<IfcBuildingStoreyDoorStyle> getIfcBuildingStoreyDoorStyles() {
-    return this.ifcBuildingStoreyDoorStyles;
-  }
-
-  public void setIfcBuildingStoreyDoorStyles(final List<IfcBuildingStoreyDoorStyle> ifcBuildingStoreyDoorStyles) {
-    this.ifcBuildingStoreyDoorStyles = ifcBuildingStoreyDoorStyles;
-  }
-
-  public IfcBuildingStoreyDoorStyle addIfcBuildingStoreyDoorStyle(final IfcBuildingStoreyDoorStyle ifcBuildingStoreyDoorStyle) {
-    getIfcBuildingStoreyDoorStyles().add(ifcBuildingStoreyDoorStyle);
-    ifcBuildingStoreyDoorStyle.setIfcDoorstyle(this);
-
-    return ifcBuildingStoreyDoorStyle;
-  }
-
-  public IfcBuildingStoreyDoorStyle removeIfcBuildingStoreyDoorStyle(final IfcBuildingStoreyDoorStyle ifcBuildingStoreyDoorStyle) {
-    getIfcBuildingStoreyDoorStyles().remove(ifcBuildingStoreyDoorStyle);
-    ifcBuildingStoreyDoorStyle.setIfcDoorstyle(null);
-
-    return ifcBuildingStoreyDoorStyle;
   }
 
   public ProjectIfc getProjectIfc() {

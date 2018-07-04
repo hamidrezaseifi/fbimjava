@@ -55,5 +55,31 @@
 		<class>modelmaker.IfcUnit</class>
 		<class>modelmaker.IfcWindowstyle</class>
 		<class>modelmaker.ProjectIfc</class>
+		<class>modelmaker.Address</class>
+		<class>modelmaker.AddressPK</class>
+		<class>modelmaker.Company</class>
+		<class>modelmaker.Email</class>
+		<class>modelmaker.EmailPK</class>
+		<class>modelmaker.IfcBuildingStoreyWallOpeningProperty</class>
+		<class>modelmaker.IfcBuildingStoreyWallstandardcase</class>
+		<class>modelmaker.IfcBuildingStoreyWallstandardcaseOpening</class>
+		<class>modelmaker.IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer</class>
+		<class>modelmaker.IfcBuildingStoreyWallstandardcaseOpeningProperty</class>
+		<class>modelmaker.IfcBuildingStoreyWallstandardcasePresentationlayer</class>
+		<class>modelmaker.IfcBuildingStoreyWallstandardcaseProperty</class>
+		<class>modelmaker.IfcConversionbaseunit</class>
+		<class>modelmaker.Migration</class>
+		<class>modelmaker.ProjectAccessType</class>
+		<class>modelmaker.ProjectBcfFile</class>
+		<class>modelmaker.ProjectIfcFile</class>
+		<class>modelmaker.ProjectResponsible</class>
+		<class>modelmaker.ProjectTask</class>
+		<class>modelmaker.Project</class>
+		<class>modelmaker.Telephonesnumber</class>
+		<class>modelmaker.TelephonesnumberPK</class>
+		<class>modelmaker.Toolbar</class>
+		<class>modelmaker.User</class>
+		<class>modelmaker.UserProjectAccess</class>
+		<class>modelmaker.UserProjectAccessPK</class>
 	</persistence-unit>
 </persistence>

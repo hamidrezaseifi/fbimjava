@@ -37,4 +37,8 @@ public class IfcSlabRender {
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
 
+  @JacksonXmlProperty(localName = "IfcOpeningElement")
+  @JacksonXmlElementWrapper(useWrapping = false)
+  private List<IfcOpeningElementRender> openingElementList;
+
 }

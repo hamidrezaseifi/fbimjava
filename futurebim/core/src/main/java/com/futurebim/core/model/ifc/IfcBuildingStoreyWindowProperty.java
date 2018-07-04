@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreyWindowProperty extends SerializableModelBase {
 
   private short status = 1;
 
-  // bi-directional many-to-one association to IfcProperty
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "property_id")
-  private IfcProperty ifcProperty;
+  @Column(name = "property_id")
+  private String propertyId;
+
+  @Column(name = "window_id")
+  private String windowId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindow
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "window_id")
+  @JoinColumn(name = "window_id", updatable = false, insertable = false)
   private IfcBuildingStoreyWindow ifcBuildingStoreyWindow;
 
   public IfcBuildingStoreyWindowProperty() {
+  }
+
+  public IfcBuildingStoreyWindowProperty(final String windowId, final String propertyId) {
+    this.windowId = windowId;
+    this.propertyId = propertyId;
   }
 
   public Long getId() {
@@ -68,20 +75,28 @@ public class IfcBuildingStoreyWindowProperty extends SerializableModelBase {
     this.status = status;
   }
 
-  public IfcProperty getIfcProperty() {
-    return this.ifcProperty;
-  }
-
-  public void setIfcProperty(final IfcProperty ifcProperty) {
-    this.ifcProperty = ifcProperty;
-  }
-
   public IfcBuildingStoreyWindow getIfcBuildingStoreyWindow() {
     return this.ifcBuildingStoreyWindow;
   }
 
   public void setIfcBuildingStoreyWindow(final IfcBuildingStoreyWindow ifcBuildingStoreyWindow) {
     this.ifcBuildingStoreyWindow = ifcBuildingStoreyWindow;
+  }
+
+  public String getPropertyId() {
+    return propertyId;
+  }
+
+  public void setPropertyId(final String propertyId) {
+    this.propertyId = propertyId;
+  }
+
+  public String getWindowId() {
+    return windowId;
+  }
+
+  public void setWindowId(final String windowId) {
+    this.windowId = windowId;
   }
 
 }

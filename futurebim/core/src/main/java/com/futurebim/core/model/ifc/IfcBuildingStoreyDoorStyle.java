@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
 
   private short status = 1;
 
+  @Column(name = "style_id")
+  private String doorstyleId;
+
+  @Column(name = "door_id")
+  private String doorId;
+
   // bi-directional many-to-one association to IfcBuildingStoreyDoor
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "door_id")
+  @JoinColumn(name = "door_id", updatable = false, insertable = false)
   private IfcBuildingStoreyDoor ifcBuildingStoreyDoor;
 
-  // bi-directional many-to-one association to IfcDoorstyle
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "style_id")
-  private IfcDoorstyle ifcDoorstyle;
-
   public IfcBuildingStoreyDoorStyle() {
+  }
+
+  public IfcBuildingStoreyDoorStyle(final String doorId, final String doorstyleId) {
+    this.doorId = doorId;
+    this.doorstyleId = doorstyleId;
   }
 
   public Long getId() {
@@ -76,12 +83,20 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
     this.ifcBuildingStoreyDoor = ifcBuildingStoreyDoor;
   }
 
-  public IfcDoorstyle getIfcDoorstyle() {
-    return this.ifcDoorstyle;
+  public String getDoorstyleId() {
+    return doorstyleId;
   }
 
-  public void setIfcDoorstyle(final IfcDoorstyle ifcDoorstyle) {
-    this.ifcDoorstyle = ifcDoorstyle;
+  public void setDoorstyleId(final String doorstyleId) {
+    this.doorstyleId = doorstyleId;
+  }
+
+  public String getDoorId() {
+    return doorId;
+  }
+
+  public void setDoorId(final String doorId) {
+    this.doorId = doorId;
   }
 
 }

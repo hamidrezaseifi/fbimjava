@@ -17,14 +17,11 @@ public class IfcUnit implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String id;
+	private int id;
 
 	private Timestamp created;
 
 	private String equivalent;
-
-	@Column(name="ifc_id")
-	private String ifcId;
 
 	private short status;
 
@@ -38,14 +35,19 @@ public class IfcUnit implements Serializable {
 
 	private int version;
 
+	//bi-directional many-to-one association to ProjectIfc
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ifc_id")
+	private ProjectIfc projectIfc;
+
 	public IfcUnit() {
 	}
 
-	public String getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -63,14 +65,6 @@ public class IfcUnit implements Serializable {
 
 	public void setEquivalent(String equivalent) {
 		this.equivalent = equivalent;
-	}
-
-	public String getIfcId() {
-		return this.ifcId;
-	}
-
-	public void setIfcId(String ifcId) {
-		this.ifcId = ifcId;
 	}
 
 	public short getStatus() {
@@ -111,6 +105,14 @@ public class IfcUnit implements Serializable {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	public ProjectIfc getProjectIfc() {
+		return this.projectIfc;
+	}
+
+	public void setProjectIfc(ProjectIfc projectIfc) {
+		this.projectIfc = projectIfc;
 	}
 
 }

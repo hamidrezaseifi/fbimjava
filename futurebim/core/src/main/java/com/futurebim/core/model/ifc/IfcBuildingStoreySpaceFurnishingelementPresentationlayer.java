@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreySpaceFurnishingelementPresentationlayer extends Se
 
   private short status = 1;
 
+  @Column(name = "presentationlayer_id")
+  private String presentationlayerId;
+
+  @Column(name = "felement_id")
+  private String felementId;
+
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelement
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "felement_id")
+  @JoinColumn(name = "felement_id", updatable = false, insertable = false)
   private IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement;
 
-  // bi-directional many-to-one association to IfcPresentationlayer
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "presentationlayer_id")
-  private IfcPresentationlayer ifcPresentationlayer;
-
   public IfcBuildingStoreySpaceFurnishingelementPresentationlayer() {
+  }
+
+  public IfcBuildingStoreySpaceFurnishingelementPresentationlayer(final String felementId, final String presentationlayerId) {
+    this.felementId = felementId;
+    this.presentationlayerId = presentationlayerId;
   }
 
   public Long getId() {
@@ -77,12 +84,20 @@ public class IfcBuildingStoreySpaceFurnishingelementPresentationlayer extends Se
     this.ifcBuildingStoreySpaceFurnishingelement = ifcBuildingStoreySpaceFurnishingelement;
   }
 
-  public IfcPresentationlayer getIfcPresentationlayer() {
-    return this.ifcPresentationlayer;
+  public String getPresentationlayerId() {
+    return presentationlayerId;
   }
 
-  public void setIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
-    this.ifcPresentationlayer = ifcPresentationlayer;
+  public void setPresentationlayerId(final String presentationlayerId) {
+    this.presentationlayerId = presentationlayerId;
+  }
+
+  public String getFelementId() {
+    return felementId;
+  }
+
+  public void setFelementId(final String felementId) {
+    this.felementId = felementId;
   }
 
 }

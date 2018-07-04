@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreyWindowStyle extends SerializableModelBase {
 
   private short status = 1;
 
-  // bi-directional many-to-one association to IfcWindowstyle
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "style_id")
-  private IfcWindowstyle ifcWindowstyle;
+  @Column(name = "style_id")
+  private String styleId;
+
+  @Column(name = "window_id")
+  private String windowId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindow
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "window_id")
+  @JoinColumn(name = "window_id", updatable = false, insertable = false)
   private IfcBuildingStoreyWindow ifcBuildingStoreyWindow;
 
   public IfcBuildingStoreyWindowStyle() {
+  }
+
+  public IfcBuildingStoreyWindowStyle(final String windowId, final String styleId) {
+    this.windowId = windowId;
+    this.styleId = styleId;
   }
 
   public Long getId() {
@@ -68,20 +75,28 @@ public class IfcBuildingStoreyWindowStyle extends SerializableModelBase {
     this.status = status;
   }
 
-  public IfcWindowstyle getIfcWindowstyle() {
-    return this.ifcWindowstyle;
-  }
-
-  public void setIfcWindowstyle(final IfcWindowstyle ifcWindowstyle) {
-    this.ifcWindowstyle = ifcWindowstyle;
-  }
-
   public IfcBuildingStoreyWindow getIfcBuildingStoreyWindow() {
     return this.ifcBuildingStoreyWindow;
   }
 
   public void setIfcBuildingStoreyWindow(final IfcBuildingStoreyWindow ifcBuildingStoreyWindow) {
     this.ifcBuildingStoreyWindow = ifcBuildingStoreyWindow;
+  }
+
+  public String getStyleId() {
+    return styleId;
+  }
+
+  public void setStyleId(final String styleId) {
+    this.styleId = styleId;
+  }
+
+  public String getWindowId() {
+    return windowId;
+  }
+
+  public void setWindowId(final String windowId) {
+    this.windowId = windowId;
   }
 
 }

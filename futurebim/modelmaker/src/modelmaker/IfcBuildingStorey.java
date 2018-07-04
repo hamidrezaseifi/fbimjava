@@ -96,6 +96,10 @@ public class IfcBuildingStorey implements Serializable {
 	@OneToMany(mappedBy="ifcBuildingStorey")
 	private List<IfcBuildingStoreyWindow> ifcBuildingStoreyWindows;
 
+	//bi-directional many-to-one association to IfcBuildingStoreyWallstandardcase
+	@OneToMany(mappedBy="ifcBuildingStorey")
+	private List<IfcBuildingStoreyWallstandardcase> ifcBuildingStoreyWallstandardcases;
+
 	public IfcBuildingStorey() {
 	}
 
@@ -463,6 +467,28 @@ public class IfcBuildingStorey implements Serializable {
 		ifcBuildingStoreyWindow.setIfcBuildingStorey(null);
 
 		return ifcBuildingStoreyWindow;
+	}
+
+	public List<IfcBuildingStoreyWallstandardcase> getIfcBuildingStoreyWallstandardcases() {
+		return this.ifcBuildingStoreyWallstandardcases;
+	}
+
+	public void setIfcBuildingStoreyWallstandardcases(List<IfcBuildingStoreyWallstandardcase> ifcBuildingStoreyWallstandardcases) {
+		this.ifcBuildingStoreyWallstandardcases = ifcBuildingStoreyWallstandardcases;
+	}
+
+	public IfcBuildingStoreyWallstandardcase addIfcBuildingStoreyWallstandardcas(IfcBuildingStoreyWallstandardcase ifcBuildingStoreyWallstandardcas) {
+		getIfcBuildingStoreyWallstandardcases().add(ifcBuildingStoreyWallstandardcas);
+		ifcBuildingStoreyWallstandardcas.setIfcBuildingStorey(this);
+
+		return ifcBuildingStoreyWallstandardcas;
+	}
+
+	public IfcBuildingStoreyWallstandardcase removeIfcBuildingStoreyWallstandardcas(IfcBuildingStoreyWallstandardcase ifcBuildingStoreyWallstandardcas) {
+		getIfcBuildingStoreyWallstandardcases().remove(ifcBuildingStoreyWallstandardcas);
+		ifcBuildingStoreyWallstandardcas.setIfcBuildingStorey(null);
+
+		return ifcBuildingStoreyWallstandardcas;
 	}
 
 }

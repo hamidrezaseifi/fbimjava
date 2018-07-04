@@ -48,6 +48,10 @@ public class IfcBuildingStoreyWallOpening implements Serializable {
 	@OneToMany(mappedBy="ifcBuildingStoreyWallOpening")
 	private List<IfcBuildingStoreyWallOpeningPresentationlayer> ifcBuildingStoreyWallOpeningPresentationlayers;
 
+	//bi-directional many-to-one association to IfcBuildingStoreyWallOpeningProperty
+	@OneToMany(mappedBy="ifcBuildingStoreyWallOpening")
+	private List<IfcBuildingStoreyWallOpeningProperty> ifcBuildingStoreyWallOpeningProperties;
+
 	public IfcBuildingStoreyWallOpening() {
 	}
 
@@ -151,6 +155,28 @@ public class IfcBuildingStoreyWallOpening implements Serializable {
 		ifcBuildingStoreyWallOpeningPresentationlayer.setIfcBuildingStoreyWallOpening(null);
 
 		return ifcBuildingStoreyWallOpeningPresentationlayer;
+	}
+
+	public List<IfcBuildingStoreyWallOpeningProperty> getIfcBuildingStoreyWallOpeningProperties() {
+		return this.ifcBuildingStoreyWallOpeningProperties;
+	}
+
+	public void setIfcBuildingStoreyWallOpeningProperties(List<IfcBuildingStoreyWallOpeningProperty> ifcBuildingStoreyWallOpeningProperties) {
+		this.ifcBuildingStoreyWallOpeningProperties = ifcBuildingStoreyWallOpeningProperties;
+	}
+
+	public IfcBuildingStoreyWallOpeningProperty addIfcBuildingStoreyWallOpeningProperty(IfcBuildingStoreyWallOpeningProperty ifcBuildingStoreyWallOpeningProperty) {
+		getIfcBuildingStoreyWallOpeningProperties().add(ifcBuildingStoreyWallOpeningProperty);
+		ifcBuildingStoreyWallOpeningProperty.setIfcBuildingStoreyWallOpening(this);
+
+		return ifcBuildingStoreyWallOpeningProperty;
+	}
+
+	public IfcBuildingStoreyWallOpeningProperty removeIfcBuildingStoreyWallOpeningProperty(IfcBuildingStoreyWallOpeningProperty ifcBuildingStoreyWallOpeningProperty) {
+		getIfcBuildingStoreyWallOpeningProperties().remove(ifcBuildingStoreyWallOpeningProperty);
+		ifcBuildingStoreyWallOpeningProperty.setIfcBuildingStoreyWallOpening(null);
+
+		return ifcBuildingStoreyWallOpeningProperty;
 	}
 
 }

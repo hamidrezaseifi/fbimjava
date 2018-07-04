@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -28,17 +29,23 @@ public class IfcBuildingStoreyWallOpeningPresentationlayer extends SerializableM
 
   private short status = 1;
 
+  @Column(name = "presentationlayer_id")
+  private String presentationlayerId;
+
+  @Column(name = "opening_id")
+  private String openingId;
+
   // bi-directional many-to-one association to IfcBuildingStoreyWallOpening
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "opening_id")
+  @JoinColumn(name = "opening_id", insertable = false, updatable = false)
   private IfcBuildingStoreyWallOpening ifcBuildingStoreyWallOpening;
 
-  // bi-directional many-to-one association to IfcPresentationlayer
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "presentationlayer_id")
-  private IfcPresentationlayer ifcPresentationlayer;
-
   public IfcBuildingStoreyWallOpeningPresentationlayer() {
+  }
+
+  public IfcBuildingStoreyWallOpeningPresentationlayer(final String openingId, final String presentationlayerId) {
+    this.openingId = openingId;
+    this.presentationlayerId = presentationlayerId;
   }
 
   public String getId() {
@@ -73,12 +80,20 @@ public class IfcBuildingStoreyWallOpeningPresentationlayer extends SerializableM
     this.ifcBuildingStoreyWallOpening = ifcBuildingStoreyWallOpening;
   }
 
-  public IfcPresentationlayer getIfcPresentationlayer() {
-    return this.ifcPresentationlayer;
+  public String getPresentationlayerId() {
+    return presentationlayerId;
   }
 
-  public void setIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
-    this.ifcPresentationlayer = ifcPresentationlayer;
+  public void setPresentationlayerId(final String presentationlayerId) {
+    this.presentationlayerId = presentationlayerId;
+  }
+
+  public String getWallId() {
+    return openingId;
+  }
+
+  public void setWallId(final String openingId) {
+    this.openingId = openingId;
   }
 
 }

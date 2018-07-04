@@ -25,9 +25,6 @@ public class ProjectIfc implements Serializable {
 	@Column(name="ifc_name")
 	private String ifcName;
 
-	@Column(name="project_id")
-	private int projectId;
-
 	private short status;
 
 	private Timestamp updated;
@@ -54,9 +51,21 @@ public class ProjectIfc implements Serializable {
 	@OneToMany(mappedBy="projectIfc")
 	private List<IfcProperty> ifcProperties;
 
+	//bi-directional many-to-one association to IfcUnit
+	@OneToMany(mappedBy="projectIfc")
+	private List<IfcUnit> ifcUnits;
+
 	//bi-directional many-to-one association to IfcWindowstyle
 	@OneToMany(mappedBy="projectIfc")
 	private List<IfcWindowstyle> ifcWindowstyles;
+
+	//bi-directional many-to-one association to IfcConversionbaseunit
+	@OneToMany(mappedBy="projectIfc")
+	private List<IfcConversionbaseunit> ifcConversionbaseunits;
+
+	//bi-directional many-to-one association to Project
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Project project;
 
 	public ProjectIfc() {
 	}
@@ -83,14 +92,6 @@ public class ProjectIfc implements Serializable {
 
 	public void setIfcName(String ifcName) {
 		this.ifcName = ifcName;
-	}
-
-	public int getProjectId() {
-		return this.projectId;
-	}
-
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
 	}
 
 	public short getStatus() {
@@ -227,6 +228,28 @@ public class ProjectIfc implements Serializable {
 		return ifcProperty;
 	}
 
+	public List<IfcUnit> getIfcUnits() {
+		return this.ifcUnits;
+	}
+
+	public void setIfcUnits(List<IfcUnit> ifcUnits) {
+		this.ifcUnits = ifcUnits;
+	}
+
+	public IfcUnit addIfcUnit(IfcUnit ifcUnit) {
+		getIfcUnits().add(ifcUnit);
+		ifcUnit.setProjectIfc(this);
+
+		return ifcUnit;
+	}
+
+	public IfcUnit removeIfcUnit(IfcUnit ifcUnit) {
+		getIfcUnits().remove(ifcUnit);
+		ifcUnit.setProjectIfc(null);
+
+		return ifcUnit;
+	}
+
 	public List<IfcWindowstyle> getIfcWindowstyles() {
 		return this.ifcWindowstyles;
 	}
@@ -247,6 +270,36 @@ public class ProjectIfc implements Serializable {
 		ifcWindowstyle.setProjectIfc(null);
 
 		return ifcWindowstyle;
+	}
+
+	public List<IfcConversionbaseunit> getIfcConversionbaseunits() {
+		return this.ifcConversionbaseunits;
+	}
+
+	public void setIfcConversionbaseunits(List<IfcConversionbaseunit> ifcConversionbaseunits) {
+		this.ifcConversionbaseunits = ifcConversionbaseunits;
+	}
+
+	public IfcConversionbaseunit addIfcConversionbaseunit(IfcConversionbaseunit ifcConversionbaseunit) {
+		getIfcConversionbaseunits().add(ifcConversionbaseunit);
+		ifcConversionbaseunit.setProjectIfc(this);
+
+		return ifcConversionbaseunit;
+	}
+
+	public IfcConversionbaseunit removeIfcConversionbaseunit(IfcConversionbaseunit ifcConversionbaseunit) {
+		getIfcConversionbaseunits().remove(ifcConversionbaseunit);
+		ifcConversionbaseunit.setProjectIfc(null);
+
+		return ifcConversionbaseunit;
+	}
+
+	public Project getProject() {
+		return this.project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 }

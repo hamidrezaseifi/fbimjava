@@ -23,15 +23,15 @@ public class IfcBuildingStoreyStairRailingProperty implements Serializable {
 
 	private short status;
 
-	//bi-directional many-to-one association to IfcProperty
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="property_id")
-	private IfcProperty ifcProperty;
-
 	//bi-directional many-to-one association to IfcBuildingStoreyStairRailing
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="railing_id")
 	private IfcBuildingStoreyStairRailing ifcBuildingStoreyStairRailing;
+
+	//bi-directional many-to-one association to IfcProperty
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="property_id")
+	private IfcProperty ifcProperty;
 
 	public IfcBuildingStoreyStairRailingProperty() {
 	}
@@ -60,20 +60,20 @@ public class IfcBuildingStoreyStairRailingProperty implements Serializable {
 		this.status = status;
 	}
 
-	public IfcProperty getIfcProperty() {
-		return this.ifcProperty;
-	}
-
-	public void setIfcProperty(IfcProperty ifcProperty) {
-		this.ifcProperty = ifcProperty;
-	}
-
 	public IfcBuildingStoreyStairRailing getIfcBuildingStoreyStairRailing() {
 		return this.ifcBuildingStoreyStairRailing;
 	}
 
 	public void setIfcBuildingStoreyStairRailing(IfcBuildingStoreyStairRailing ifcBuildingStoreyStairRailing) {
 		this.ifcBuildingStoreyStairRailing = ifcBuildingStoreyStairRailing;
+	}
+
+	public IfcProperty getIfcProperty() {
+		return this.ifcProperty;
+	}
+
+	public void setIfcProperty(IfcProperty ifcProperty) {
+		this.ifcProperty = ifcProperty;
 	}
 
 }

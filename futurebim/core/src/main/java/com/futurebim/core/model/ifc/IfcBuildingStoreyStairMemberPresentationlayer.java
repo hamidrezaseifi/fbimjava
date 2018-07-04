@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreyStairMemberPresentationlayer extends SerializableM
 
   private short status = 1;
 
+  @Column(name = "presentationlayer_id")
+  private String presentationlayerId;
+
+  @Column(name = "member_id")
+  private String memberId;
+
   // bi-directional many-to-one association to IfcBuildingStoreyStairMember
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "member_id")
+  @JoinColumn(name = "member_id", updatable = false, insertable = false)
   private IfcBuildingStoreyStairMember ifcBuildingStoreyStairMember;
 
-  // bi-directional many-to-one association to IfcPresentationlayer
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "presentationlayer_id")
-  private IfcPresentationlayer ifcPresentationlayer;
-
   public IfcBuildingStoreyStairMemberPresentationlayer() {
+  }
+
+  public IfcBuildingStoreyStairMemberPresentationlayer(final String memberId, final String presentationlayerId) {
+    this.memberId = memberId;
+    this.presentationlayerId = presentationlayerId;
   }
 
   public Long getId() {
@@ -76,12 +83,20 @@ public class IfcBuildingStoreyStairMemberPresentationlayer extends SerializableM
     this.ifcBuildingStoreyStairMember = ifcBuildingStoreyStairMember;
   }
 
-  public IfcPresentationlayer getIfcPresentationlayer() {
-    return this.ifcPresentationlayer;
+  public String getPresentationlayerId() {
+    return presentationlayerId;
   }
 
-  public void setIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
-    this.ifcPresentationlayer = ifcPresentationlayer;
+  public void setPresentationlayerId(final String presentationlayerId) {
+    this.presentationlayerId = presentationlayerId;
+  }
+
+  public String getMemberId() {
+    return memberId;
+  }
+
+  public void setMemberId(final String memberId) {
+    this.memberId = memberId;
   }
 
 }

@@ -43,12 +43,12 @@ public class IfcBuildingProperty extends SerializableModelBase {
   @JoinColumn(name = "building_id", insertable = false, updatable = false)
   private IfcBuilding ifcBuilding;
 
-  // bi-directional many-to-one association to IfcProperty
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "property_id", insertable = false, updatable = false)
-  private IfcProperty ifcProperty;
-
   public IfcBuildingProperty() {
+  }
+
+  public IfcBuildingProperty(final String buildingId, final String propertyId) {
+    this.buildingId = buildingId;
+    this.propertyId = propertyId;
   }
 
   public Long getId() {
@@ -81,14 +81,6 @@ public class IfcBuildingProperty extends SerializableModelBase {
 
   public void setIfcBuilding(final IfcBuilding ifcBuilding) {
     this.ifcBuilding = ifcBuilding;
-  }
-
-  public IfcProperty getIfcProperty() {
-    return this.ifcProperty;
-  }
-
-  public void setIfcProperty(final IfcProperty ifcProperty) {
-    this.ifcProperty = ifcProperty;
   }
 
   public String getBuildingId() {

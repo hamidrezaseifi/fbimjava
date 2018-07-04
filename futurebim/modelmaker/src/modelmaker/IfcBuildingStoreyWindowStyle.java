@@ -23,15 +23,15 @@ public class IfcBuildingStoreyWindowStyle implements Serializable {
 
 	private short status;
 
-	//bi-directional many-to-one association to IfcWindowstyle
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="style_id")
-	private IfcWindowstyle ifcWindowstyle;
-
 	//bi-directional many-to-one association to IfcBuildingStoreyWindow
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="window_id")
 	private IfcBuildingStoreyWindow ifcBuildingStoreyWindow;
+
+	//bi-directional many-to-one association to IfcWindowstyle
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="style_id")
+	private IfcWindowstyle ifcWindowstyle;
 
 	public IfcBuildingStoreyWindowStyle() {
 	}
@@ -60,20 +60,20 @@ public class IfcBuildingStoreyWindowStyle implements Serializable {
 		this.status = status;
 	}
 
-	public IfcWindowstyle getIfcWindowstyle() {
-		return this.ifcWindowstyle;
-	}
-
-	public void setIfcWindowstyle(IfcWindowstyle ifcWindowstyle) {
-		this.ifcWindowstyle = ifcWindowstyle;
-	}
-
 	public IfcBuildingStoreyWindow getIfcBuildingStoreyWindow() {
 		return this.ifcBuildingStoreyWindow;
 	}
 
 	public void setIfcBuildingStoreyWindow(IfcBuildingStoreyWindow ifcBuildingStoreyWindow) {
 		this.ifcBuildingStoreyWindow = ifcBuildingStoreyWindow;
+	}
+
+	public IfcWindowstyle getIfcWindowstyle() {
+		return this.ifcWindowstyle;
+	}
+
+	public void setIfcWindowstyle(IfcWindowstyle ifcWindowstyle) {
+		this.ifcWindowstyle = ifcWindowstyle;
 	}
 
 }

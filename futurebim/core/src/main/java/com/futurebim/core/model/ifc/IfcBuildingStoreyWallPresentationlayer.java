@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -28,17 +29,23 @@ public class IfcBuildingStoreyWallPresentationlayer extends SerializableModelBas
 
   private short status = 1;
 
+  @Column(name = "presentationlayer_id")
+  private String presentationlayerId;
+
+  @Column(name = "wall_id")
+  private String wallId;
+
   // bi-directional many-to-one association to IfcBuildingStoreyWall
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "wall_id")
+  @JoinColumn(name = "wall_id", insertable = false, updatable = false)
   private IfcBuildingStoreyWall ifcBuildingStoreyWall;
 
-  // bi-directional many-to-one association to IfcPresentationlayer
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "presentationlayer_id")
-  private IfcPresentationlayer ifcPresentationlayer;
-
   public IfcBuildingStoreyWallPresentationlayer() {
+  }
+
+  public IfcBuildingStoreyWallPresentationlayer(final String wallId, final String presentationlayerId) {
+    this.wallId = wallId;
+    this.presentationlayerId = presentationlayerId;
   }
 
   public String getId() {
@@ -73,12 +80,20 @@ public class IfcBuildingStoreyWallPresentationlayer extends SerializableModelBas
     this.ifcBuildingStoreyWall = ifcBuildingStoreyWall;
   }
 
-  public IfcPresentationlayer getIfcPresentationlayer() {
-    return this.ifcPresentationlayer;
+  public String getPresentationlayerId() {
+    return presentationlayerId;
   }
 
-  public void setIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
-    this.ifcPresentationlayer = ifcPresentationlayer;
+  public void setPresentationlayerId(final String presentationlayerId) {
+    this.presentationlayerId = presentationlayerId;
+  }
+
+  public String getWallId() {
+    return wallId;
+  }
+
+  public void setWallId(final String wallId) {
+    this.wallId = wallId;
   }
 
 }

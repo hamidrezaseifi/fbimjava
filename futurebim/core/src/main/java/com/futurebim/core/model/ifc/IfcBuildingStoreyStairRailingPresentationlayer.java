@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreyStairRailingPresentationlayer extends Serializable
 
   private short status = 1;
 
-  // bi-directional many-to-one association to IfcPresentationlayer
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "presentationlayer_id")
-  private IfcPresentationlayer ifcPresentationlayer;
+  @Column(name = "presentationlayer_id")
+  private String presentationlayerId;
+
+  @Column(name = "railing_id")
+  private String railingId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairRailing
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "railing_id")
+  @JoinColumn(name = "railing_id", updatable = false, insertable = false)
   private IfcBuildingStoreyStairRailing ifcBuildingStoreyStairRailing;
 
   public IfcBuildingStoreyStairRailingPresentationlayer() {
+  }
+
+  public IfcBuildingStoreyStairRailingPresentationlayer(final String railingId, final String presentationlayerId) {
+    this.railingId = railingId;
+    this.presentationlayerId = presentationlayerId;
   }
 
   public Long getId() {
@@ -68,12 +75,20 @@ public class IfcBuildingStoreyStairRailingPresentationlayer extends Serializable
     this.status = status;
   }
 
-  public IfcPresentationlayer getIfcPresentationlayer() {
-    return this.ifcPresentationlayer;
+  public String getPresentationlayerId() {
+    return presentationlayerId;
   }
 
-  public void setIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
-    this.ifcPresentationlayer = ifcPresentationlayer;
+  public void setPresentationlayerId(final String presentationlayerId) {
+    this.presentationlayerId = presentationlayerId;
+  }
+
+  public String getRailingId() {
+    return railingId;
+  }
+
+  public void setRailingId(final String railingId) {
+    this.railingId = railingId;
   }
 
   public IfcBuildingStoreyStairRailing getIfcBuildingStoreyStairRailing() {

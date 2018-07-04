@@ -2,6 +2,7 @@ package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,17 +32,23 @@ public class IfcBuildingStoreyStairFlightPresentationlayer extends SerializableM
 
   private short status = 1;
 
+  @Column(name = "presentationlayer_id")
+  private String presentationlayerId;
+
+  @Column(name = "flight_id")
+  private String flightId;
+
   // bi-directional many-to-one association to IfcBuildingStoreyStairFlight
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "flight_id")
+  @JoinColumn(name = "flight_id", updatable = false, insertable = false)
   private IfcBuildingStoreyStairFlight ifcBuildingStoreyStairFlight;
 
-  // bi-directional many-to-one association to IfcPresentationlayer
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "presentationlayer_id")
-  private IfcPresentationlayer ifcPresentationlayer;
-
   public IfcBuildingStoreyStairFlightPresentationlayer() {
+  }
+
+  public IfcBuildingStoreyStairFlightPresentationlayer(final String flightId, final String presentationlayerId) {
+    this.flightId = flightId;
+    this.presentationlayerId = presentationlayerId;
   }
 
   public Long getId() {
@@ -76,12 +83,20 @@ public class IfcBuildingStoreyStairFlightPresentationlayer extends SerializableM
     this.ifcBuildingStoreyStairFlight = ifcBuildingStoreyStairFlight;
   }
 
-  public IfcPresentationlayer getIfcPresentationlayer() {
-    return this.ifcPresentationlayer;
+  public String getPresentationlayerId() {
+    return presentationlayerId;
   }
 
-  public void setIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
-    this.ifcPresentationlayer = ifcPresentationlayer;
+  public void setPresentationlayerId(final String presentationlayerId) {
+    this.presentationlayerId = presentationlayerId;
+  }
+
+  public String getFlightId() {
+    return flightId;
+  }
+
+  public void setFlightId(final String flightId) {
+    this.flightId = flightId;
   }
 
 }
