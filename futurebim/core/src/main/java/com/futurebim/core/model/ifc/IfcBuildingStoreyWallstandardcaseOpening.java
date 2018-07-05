@@ -6,8 +6,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,7 +25,6 @@ public class IfcBuildingStoreyWallstandardcaseOpening extends SerializableModelB
   private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;
 
   private Timestamp created;
@@ -49,8 +46,8 @@ public class IfcBuildingStoreyWallstandardcaseOpening extends SerializableModelB
 
   private int version;
 
-  @Column(name = "wall_name")
-  private String wallName;
+  @Column(name = "opening_name")
+  private String openingName;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcase
   @ManyToOne(fetch = FetchType.LAZY)
@@ -132,12 +129,12 @@ public class IfcBuildingStoreyWallstandardcaseOpening extends SerializableModelB
     this.version = version;
   }
 
-  public String getWallName() {
-    return this.wallName;
+  public String getOpeningName() {
+    return openingName;
   }
 
-  public void setWallName(final String wallName) {
-    this.wallName = wallName;
+  public void setOpeningName(final String openingName) {
+    this.openingName = openingName;
   }
 
   public IfcBuildingStoreyWallstandardcase getIfcBuildingStoreyWallstandardcase() {

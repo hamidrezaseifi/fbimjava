@@ -105,7 +105,13 @@ public class IfcBuildingStorey extends SerializableModelBase {
   private List<IfcBuildingStoreyWindow> ifcBuildingStoreyWindows = new ArrayList<>();
 
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
-  private final List<IfcBuildingStoreyWall> ifcBuildingStoreyWallCases = new ArrayList<>();
+  private List<IfcBuildingStoreyWallstandardcase> ifcBuildingStoreyWallCases = new ArrayList<>();
+
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyFooting> ifcBuildingStoreyFootings = new ArrayList<>();
+
+  @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
+  private final List<IfcBuildingStoreyRoof> ifcBuildingStoreyRoofs = new ArrayList<>();
 
   public IfcBuildingStorey() {
   }
@@ -461,6 +467,32 @@ public class IfcBuildingStorey extends SerializableModelBase {
 
   public void setBuildingId(final String buildingId) {
     this.buildingId = buildingId;
+  }
+
+  public List<IfcBuildingStoreyWallstandardcase> getIfcBuildingStoreyWallCases() {
+    return ifcBuildingStoreyWallCases;
+  }
+
+  public void setIfcBuildingStoreyWallCases(final List<IfcBuildingStoreyWallstandardcase> ifcBuildingStoreyWallCases) {
+    this.ifcBuildingStoreyWallCases = ifcBuildingStoreyWallCases;
+  }
+
+  public void addIfcBuildingStoreyWallCase(final IfcBuildingStoreyWallstandardcase ifcBuildingStoreyWallCase) {
+    ifcBuildingStoreyWallCase.setIfcBuildingStorey(this);
+    this.ifcBuildingStoreyWallCases.add(ifcBuildingStoreyWallCase);
+  }
+
+  public List<IfcBuildingStoreyFooting> getIfcBuildingStoreyFootings() {
+    return ifcBuildingStoreyFootings;
+  }
+
+  public void setIfcBuildingStoreyFootings(final List<IfcBuildingStoreyFooting> ifcBuildingStoreyFootings) {
+    this.ifcBuildingStoreyFootings = ifcBuildingStoreyFootings;
+  }
+
+  public void addIfcBuildingStoreyFooting(final IfcBuildingStoreyFooting ifcBuildingStoreyFooting) {
+    ifcBuildingStoreyFooting.setIfcBuildingStorey(this);
+    this.ifcBuildingStoreyFootings.add(ifcBuildingStoreyFooting);
   }
 
 }

@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStorey;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyCovering;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyCoveringPresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyCoveringProperty;
 
 public class IfcCoveringRender {
 
@@ -34,4 +38,26 @@ public class IfcCoveringRender {
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
 
+  public IfcBuildingStoreyCovering toModel(final IfcBuildingStorey model) {
+
+    final IfcBuildingStoreyCovering p = new IfcBuildingStoreyCovering();
+    p.setId(id);
+    p.setObjectPlacement(objectPlacement);
+    p.setCoveringName(name);
+    p.setObjectType(objectType);
+    p.setTag(tag);
+    p.setIfcBuildingStorey(model);
+    p.setStoreyId(model.getId());
+    p.setPredefinedType(predefinedType);
+
+    for (final IfcPropertySetRender prop : propertySetList) {
+      p.addIfcBuildingStoreyCoveringProperty(new IfcBuildingStoreyCoveringProperty(id, prop.getPropertyId()));
+    }
+
+    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+      p.addIfcBuildingStoreyCoveringPresentationlayer(new IfcBuildingStoreyCoveringPresentationlayer(id, layer.getPropertyId()));
+    }
+
+    return p;
+  }
 }

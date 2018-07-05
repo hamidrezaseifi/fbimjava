@@ -15,12 +15,12 @@ import javax.persistence.Table;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
- * The persistent class for the ifc_building_storey_wallstandardcase_properties database table.
+ * The persistent class for the ifc_building_storey_footing_properties database table.
  *
  */
 @Entity
-@Table(name = "ifc_building_storey_wallstandardcase_properties")
-public class IfcBuildingStoreyWallstandardcaseProperty extends SerializableModelBase {
+@Table(name = "ifc_building_storey_footing_properties")
+public class IfcBuildingStoreyFootingProperty extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
@@ -33,21 +33,21 @@ public class IfcBuildingStoreyWallstandardcaseProperty extends SerializableModel
   @Column(name = "property_id")
   private String propertyId;
 
-  @Column(name = "wall_id")
-  private String wallId;
+  @Column(name = "footing_id")
+  private String footingId;
 
   private short status;
 
-  // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcase
+  // bi-directional many-to-one association to IfcBuildingStoreyFooting
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "wall_id", insertable = false, updatable = false)
-  private IfcBuildingStoreyWallstandardcase ifcBuildingStoreyWallstandardcase;
+  @JoinColumn(name = "footing_id", updatable = false, insertable = false)
+  private IfcBuildingStoreyFooting ifcBuildingStoreyFooting;
 
-  public IfcBuildingStoreyWallstandardcaseProperty() {
+  public IfcBuildingStoreyFootingProperty() {
   }
 
-  public IfcBuildingStoreyWallstandardcaseProperty(final String wallId, final String propertyId) {
-    this.wallId = wallId;
+  public IfcBuildingStoreyFootingProperty(final String footingId, final String propertyId) {
+    this.footingId = footingId;
     this.propertyId = propertyId;
   }
 
@@ -83,20 +83,20 @@ public class IfcBuildingStoreyWallstandardcaseProperty extends SerializableModel
     this.status = status;
   }
 
-  public IfcBuildingStoreyWallstandardcase getIfcBuildingStoreyWallstandardcase() {
-    return this.ifcBuildingStoreyWallstandardcase;
+  public IfcBuildingStoreyFooting getIfcBuildingStoreyFooting() {
+    return this.ifcBuildingStoreyFooting;
   }
 
-  public void setIfcBuildingStoreyWallstandardcase(final IfcBuildingStoreyWallstandardcase ifcBuildingStoreyWallstandardcase) {
-    this.ifcBuildingStoreyWallstandardcase = ifcBuildingStoreyWallstandardcase;
+  public void setIfcBuildingStoreyFooting(final IfcBuildingStoreyFooting ifcBuildingStoreyFooting) {
+    this.ifcBuildingStoreyFooting = ifcBuildingStoreyFooting;
   }
 
-  public String getWallId() {
-    return wallId;
+  public String getFootingId() {
+    return footingId;
   }
 
-  public void setWallId(final String wallId) {
-    this.wallId = wallId;
+  public void setFootingId(final String footingId) {
+    this.footingId = footingId;
   }
 
 }

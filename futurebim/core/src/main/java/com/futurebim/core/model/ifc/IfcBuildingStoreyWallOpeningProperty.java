@@ -26,7 +26,7 @@ public class IfcBuildingStoreyWallOpeningProperty extends SerializableModelBase 
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private String id;
+  private Long id;
 
   private Timestamp created;
 
@@ -51,11 +51,11 @@ public class IfcBuildingStoreyWallOpeningProperty extends SerializableModelBase 
     this.propertyId = propertyId;
   }
 
-  public String getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final String id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 

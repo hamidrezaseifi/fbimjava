@@ -26,7 +26,7 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty extends Seri
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   private Timestamp created;
 
@@ -51,11 +51,11 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty extends Seri
     this.openingId = openingId;
   }
 
-  public int getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final int id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 

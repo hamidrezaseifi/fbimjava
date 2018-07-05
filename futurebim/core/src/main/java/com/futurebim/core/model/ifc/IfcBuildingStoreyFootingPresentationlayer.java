@@ -15,12 +15,12 @@ import javax.persistence.Table;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
- * The persistent class for the ifc_building_storey_wallstandardcase_presentationlayer database table.
+ * The persistent class for the ifc_building_storey_footing_presentationlayer database table.
  *
  */
 @Entity
-@Table(name = "ifc_building_storey_wallstandardcase_presentationlayer")
-public class IfcBuildingStoreyWallstandardcasePresentationlayer extends SerializableModelBase {
+@Table(name = "ifc_building_storey_footing_presentationlayer")
+public class IfcBuildingStoreyFootingPresentationlayer extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
@@ -33,21 +33,21 @@ public class IfcBuildingStoreyWallstandardcasePresentationlayer extends Serializ
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
-  @Column(name = "wall_id")
-  private String wallId;
+  @Column(name = "footing_id")
+  private String footingId;
 
   private short status;
 
-  // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcase
+  // bi-directional many-to-one association to IfcBuildingStoreyFooting
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "wall_id", insertable = false, updatable = false)
-  private IfcBuildingStoreyWallstandardcase ifcBuildingStoreyWallstandardcase;
+  @JoinColumn(name = "footing_id", updatable = false, insertable = false)
+  private IfcBuildingStoreyFooting ifcBuildingStoreyFooting;
 
-  public IfcBuildingStoreyWallstandardcasePresentationlayer() {
+  public IfcBuildingStoreyFootingPresentationlayer() {
   }
 
-  public IfcBuildingStoreyWallstandardcasePresentationlayer(final String wallId, final String presentationlayerId) {
-    this.wallId = wallId;
+  public IfcBuildingStoreyFootingPresentationlayer(final String footingId, final String presentationlayerId) {
+    this.footingId = footingId;
     this.presentationlayerId = presentationlayerId;
   }
 
@@ -83,20 +83,20 @@ public class IfcBuildingStoreyWallstandardcasePresentationlayer extends Serializ
     this.status = status;
   }
 
-  public IfcBuildingStoreyWallstandardcase getIfcBuildingStoreyWallstandardcase() {
-    return this.ifcBuildingStoreyWallstandardcase;
+  public IfcBuildingStoreyFooting getIfcBuildingStoreyFooting() {
+    return this.ifcBuildingStoreyFooting;
   }
 
-  public void setIfcBuildingStoreyWallstandardcase(final IfcBuildingStoreyWallstandardcase ifcBuildingStoreyWallstandardcase) {
-    this.ifcBuildingStoreyWallstandardcase = ifcBuildingStoreyWallstandardcase;
+  public void setIfcBuildingStoreyFooting(final IfcBuildingStoreyFooting ifcBuildingStoreyFooting) {
+    this.ifcBuildingStoreyFooting = ifcBuildingStoreyFooting;
   }
 
-  public String getWallId() {
-    return wallId;
+  public String getFootingId() {
+    return footingId;
   }
 
-  public void setWallId(final String wallId) {
-    this.wallId = wallId;
+  public void setFootingId(final String footingId) {
+    this.footingId = footingId;
   }
 
 }

@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,6 +37,9 @@ public class IfcBuildingStoreyWallOpening extends SerializableModelBase {
   @Column(name = "object_type")
   private String objectType;
 
+  @Column(name = "wall_id")
+  private String wallId;
+
   private short status = 1;
 
   private String tag;
@@ -43,17 +48,20 @@ public class IfcBuildingStoreyWallOpening extends SerializableModelBase {
 
   private int version = 1;
 
-  @Column(name = "wall_name")
-  private String wallName;
+  @Column(name = "opening_name")
+  private String openingName;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWall
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "wall_id")
+  @JoinColumn(name = "wall_id", insertable = false, updatable = false)
   private IfcBuildingStoreyWall ifcBuildingStoreyWall;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallOpeningPresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreyWallOpening")
-  private List<IfcBuildingStoreyWallOpeningPresentationlayer> ifcBuildingStoreyWallOpeningPresentationlayers;
+  @OneToMany(mappedBy = "ifcBuildingStoreyWallOpening", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWallOpeningPresentationlayer> ifcBuildingStoreyWallOpeningPresentationlayers = new ArrayList<>();
+
+  @OneToMany(mappedBy = "ifcBuildingStoreyWallOpening", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWallOpeningProperty> ifcBuildingStoreyWallOpeningProperties = new ArrayList<>();
 
   public IfcBuildingStoreyWallOpening() {
   }
@@ -122,12 +130,20 @@ public class IfcBuildingStoreyWallOpening extends SerializableModelBase {
     this.version = version;
   }
 
-  public String getWallName() {
-    return this.wallName;
+  public String getWallId() {
+    return wallId;
   }
 
-  public void setWallName(final String wallName) {
-    this.wallName = wallName;
+  public void setWallId(final String wallId) {
+    this.wallId = wallId;
+  }
+
+  public String getOpeningName() {
+    return openingName;
+  }
+
+  public void setOpeningName(final String openingName) {
+    this.openingName = openingName;
   }
 
   public IfcBuildingStoreyWall getIfcBuildingStoreyWall() {
@@ -161,6 +177,19 @@ public class IfcBuildingStoreyWallOpening extends SerializableModelBase {
     ifcBuildingStoreyWallOpeningPresentationlayer.setIfcBuildingStoreyWallOpening(null);
 
     return ifcBuildingStoreyWallOpeningPresentationlayer;
+  }
+
+  public List<IfcBuildingStoreyWallOpeningProperty> getIfcBuildingStoreyWallOpeningProperties() {
+    return ifcBuildingStoreyWallOpeningProperties;
+  }
+
+  public void
+         setIfcBuildingStoreyWallOpeningProperties(final List<IfcBuildingStoreyWallOpeningProperty> ifcBuildingStoreyWallOpeningProperties) {
+    this.ifcBuildingStoreyWallOpeningProperties = ifcBuildingStoreyWallOpeningProperties;
+  }
+
+  public void addIfcBuildingStoreyWallOpeningProperty(final IfcBuildingStoreyWallOpeningProperty ifcBuildingStoreyWallOpeningProperty) {
+    this.ifcBuildingStoreyWallOpeningProperties.add(ifcBuildingStoreyWallOpeningProperty);
   }
 
 }

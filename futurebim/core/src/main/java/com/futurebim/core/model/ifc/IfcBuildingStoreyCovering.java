@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,6 +43,9 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
   @Column(name = "predefined_type")
   private String predefinedType;
 
+  @Column(name = "storey_id")
+  private String storeyId;
+
   private short status = 1;
 
   private String tag;
@@ -51,16 +56,16 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "stair_id")
+  @JoinColumn(name = "storey_id", insertable = false, updatable = false)
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyCoveringPresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreyCovering")
-  private List<IfcBuildingStoreyCoveringPresentationlayer> ifcBuildingStoreyCoveringPresentationlayers;
+  @OneToMany(mappedBy = "ifcBuildingStoreyCovering", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyCoveringPresentationlayer> ifcBuildingStoreyCoveringPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyCoveringProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreyCovering")
-  private List<IfcBuildingStoreyCoveringProperty> ifcBuildingStoreyCoveringProperties;
+  @OneToMany(mappedBy = "ifcBuildingStoreyCovering", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyCoveringProperty> ifcBuildingStoreyCoveringProperties = new ArrayList<>();
 
   public IfcBuildingStoreyCovering() {
   }
@@ -200,6 +205,14 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
     ifcBuildingStoreyCoveringProperty.setIfcBuildingStoreyCovering(null);
 
     return ifcBuildingStoreyCoveringProperty;
+  }
+
+  public String getStoreyId() {
+    return storeyId;
+  }
+
+  public void setStoreyId(final String storeyId) {
+    this.storeyId = storeyId;
   }
 
 }

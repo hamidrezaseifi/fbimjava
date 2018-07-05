@@ -84,5 +84,8 @@
 		<class>modelmaker.IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer</class>
 		<class>modelmaker.IfcBuildingStoreySpaceFurnishingelementOpening</class>
 		<class>modelmaker.IfcBuildingStoreySpaceFurnishingelementOpeningProperty</class>
+		<class>modelmaker.IfcBuildingStoreyFooting</class>
+		<class>modelmaker.IfcBuildingStoreyFootingPresentationlayer</class>
+		<class>modelmaker.IfcBuildingStoreyFootingProperty</class>
 	</persistence-unit>
 </persistence>

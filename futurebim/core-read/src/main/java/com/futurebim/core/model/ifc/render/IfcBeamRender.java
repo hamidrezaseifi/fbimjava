@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStorey;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyBeam;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyBeamPresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyBeamProperty;
 
 public class IfcBeamRender {
 
@@ -30,5 +34,27 @@ public class IfcBeamRender {
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
+
+  public IfcBuildingStoreyBeam toModel(final IfcBuildingStorey model) {
+
+    final IfcBuildingStoreyBeam p = new IfcBuildingStoreyBeam();
+    p.setId(id);
+    p.setObjectPlacement(objectPlacement);
+    p.setBeamName(name);
+    p.setObjectType(objectType);
+    p.setTag(tag);
+    p.setIfcBuildingStorey(model);
+    p.setStoreyId(model.getId());
+
+    for (final IfcPropertySetRender prop : propertySetList) {
+      p.addIfcBuildingStoreyBeamProperty(new IfcBuildingStoreyBeamProperty(id, prop.getPropertyId()));
+    }
+
+    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+      p.addIfcBuildingStoreyBeamPresentationlayer(new IfcBuildingStoreyBeamPresentationlayer(id, layer.getPropertyId()));
+    }
+
+    return p;
+  }
 
 }

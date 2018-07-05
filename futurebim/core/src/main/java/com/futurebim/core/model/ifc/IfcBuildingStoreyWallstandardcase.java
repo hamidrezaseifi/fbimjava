@@ -1,13 +1,13 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,7 +27,6 @@ public class IfcBuildingStoreyWallstandardcase extends SerializableModelBase {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;
 
   private Timestamp created;
@@ -58,16 +57,16 @@ public class IfcBuildingStoreyWallstandardcase extends SerializableModelBase {
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcaseOpening
-  @OneToMany(mappedBy = "ifcBuildingStoreyWallstandardcase")
-  private List<IfcBuildingStoreyWallstandardcaseOpening> ifcBuildingStoreyWallstandardcaseOpenings;
+  @OneToMany(mappedBy = "ifcBuildingStoreyWallstandardcase", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWallstandardcaseOpening> ifcBuildingStoreyWallstandardcaseOpenings = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcasePresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreyWallstandardcase")
-  private List<IfcBuildingStoreyWallstandardcasePresentationlayer> ifcBuildingStoreyWallstandardcasePresentationlayers;
+  @OneToMany(mappedBy = "ifcBuildingStoreyWallstandardcase", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWallstandardcasePresentationlayer> ifcBuildingStoreyWallstandardcasePresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcaseProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreyWallstandardcase")
-  private List<IfcBuildingStoreyWallstandardcaseProperty> ifcBuildingStoreyWallstandardcaseProperties;
+  @OneToMany(mappedBy = "ifcBuildingStoreyWallstandardcase", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWallstandardcaseProperty> ifcBuildingStoreyWallstandardcaseProperties = new ArrayList<>();
 
   public IfcBuildingStoreyWallstandardcase() {
   }

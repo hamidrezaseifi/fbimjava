@@ -1,9 +1,20 @@
 package com.futurebim.core.model.ifc.render;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStorey;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyWallstandardcase;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyWallstandardcaseOpening;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyWallstandardcaseOpeningProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyWallstandardcasePresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyWallstandardcaseProperty;
+import com.futurebim.core.model.ifc.proxy.IfcOpeningElementProxy;
+import com.futurebim.core.model.ifc.proxy.IfcPresentationLayerAssignmentSetProxy;
+import com.futurebim.core.model.ifc.proxy.IfcPropertySetProxy;
 
 public class IfcWallStandardCaseRender {
 
@@ -24,15 +35,61 @@ public class IfcWallStandardCaseRender {
 
   @JacksonXmlProperty(localName = "IfcOpeningElement")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcOpeningElementRender> openingElementList;
+  private final List<IfcOpeningElementRender> openingElementList = new ArrayList<>();
 
   // @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPropertySetRender> propertySetList;
+  private final List<IfcPropertySetRender> propertySetList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
+  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
+
+  public IfcBuildingStoreyWallstandardcase toModel(final IfcBuildingStorey model) {
+
+    final IfcBuildingStoreyWallstandardcase p = new IfcBuildingStoreyWallstandardcase();
+    p.setId(id);
+    p.setObjectPlacement(objectPlacement);
+    p.setObjectType(objectType);
+    p.setTag(tag);
+    p.setIfcBuildingStorey(model);
+    p.setStoreyId(model.getId());
+    p.setWallName(name);
+
+    for (final IfcPropertySetRender prop : propertySetList) {
+      p.addIfcBuildingStoreyWallstandardcaseProperty(new IfcBuildingStoreyWallstandardcaseProperty(id, prop.getPropertyId()));
+    }
+
+    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+      p.addIfcBuildingStoreyWallstandardcasePresentationlayer(new IfcBuildingStoreyWallstandardcasePresentationlayer(id,
+                                                                                                                     layer.getPropertyId()));
+    }
+
+    for (final IfcOpeningElementRender element : openingElementList) {
+
+      final IfcOpeningElementProxy px = element.toProxy();
+
+      final IfcBuildingStoreyWallstandardcaseOpening open = new IfcBuildingStoreyWallstandardcaseOpening();
+      open.setWallId(id);
+      open.setId(px.getId());
+      open.setObjectPlacement(px.getObjectPlacement());
+      open.setObjectType(px.getObjectType());
+      open.setOpeningName(px.getName());
+      open.setTag(px.getTag());
+      for (final IfcPropertySetProxy prp : px.getPropertySetList()) {
+        open.addIfcBuildingStoreyWallstandardcaseOpeningProperty(new IfcBuildingStoreyWallstandardcaseOpeningProperty(px.getId(),
+                                                                                                                      prp.getPropertyId()));
+      }
+      for (final IfcPresentationLayerAssignmentSetProxy pl : px.getPresentationLayerAssignmentList()) {
+        open.addIfcBuildingStoreyWallstandardcaseOpeningPresentationlayer(new IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer(px.getId(),
+                                                                                                                                        pl.getPropertyId()));
+      }
+
+      p.addIfcBuildingStoreyWallstandardcaseOpening(open);
+    }
+
+    return p;
+  }
 
 }

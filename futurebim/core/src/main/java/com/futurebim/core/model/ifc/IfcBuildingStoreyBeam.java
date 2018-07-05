@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,6 +40,9 @@ public class IfcBuildingStoreyBeam extends SerializableModelBase {
   @Column(name = "object_type")
   private String objectType;
 
+  @Column(name = "storey_id")
+  private String storeyId;
+
   private short status = 1;
 
   private String tag;
@@ -48,16 +53,16 @@ public class IfcBuildingStoreyBeam extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "stair_id")
+  @JoinColumn(name = "storey_id", insertable = false, updatable = false)
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyBeamPresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreyBeam")
-  private List<IfcBuildingStoreyBeamPresentationlayer> ifcBuildingStoreyBeamPresentationlayers;
+  @OneToMany(mappedBy = "ifcBuildingStoreyBeam", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyBeamPresentationlayer> ifcBuildingStoreyBeamPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyBeamProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreyBeam")
-  private List<IfcBuildingStoreyBeamProperty> ifcBuildingStoreyBeamProperties;
+  @OneToMany(mappedBy = "ifcBuildingStoreyBeam", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyBeamProperty> ifcBuildingStoreyBeamProperties = new ArrayList<>();
 
   public IfcBuildingStoreyBeam() {
   }
@@ -188,6 +193,14 @@ public class IfcBuildingStoreyBeam extends SerializableModelBase {
     ifcBuildingStoreyBeamProperty.setIfcBuildingStoreyBeam(null);
 
     return ifcBuildingStoreyBeamProperty;
+  }
+
+  public String getStoreyId() {
+    return storeyId;
+  }
+
+  public void setStoreyId(final String storeyId) {
+    this.storeyId = storeyId;
   }
 
 }

@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStorey;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyFooting;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyFootingPresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyFootingProperty;
 
 public class IfcFootingRender {
 
@@ -34,4 +38,26 @@ public class IfcFootingRender {
   @JacksonXmlElementWrapper(useWrapping = false)
   private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
 
+  public IfcBuildingStoreyFooting toModel(final IfcBuildingStorey model) {
+
+    final IfcBuildingStoreyFooting p = new IfcBuildingStoreyFooting();
+    p.setId(id);
+    p.setObjectPlacement(objectPlacement);
+    p.setObjectType(objectType);
+    p.setTag(tag);
+    p.setIfcBuildingStorey(model);
+    p.setStoreyId(model.getId());
+    p.setFootingName(name);
+    p.setPredefinedType(predefinedType);
+
+    for (final IfcPropertySetRender prop : propertySetList) {
+      p.addIfcBuildingStoreyFootingProperty(new IfcBuildingStoreyFootingProperty(id, prop.getPropertyId()));
+    }
+
+    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+      p.addIfcBuildingStoreyFootingPresentationlayer(new IfcBuildingStoreyFootingPresentationlayer(id, layer.getPropertyId()));
+    }
+
+    return p;
+  }
 }

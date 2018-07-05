@@ -86,27 +86,23 @@ public class IfcBuildingStoreyRender {
     p.setStoreyName(storeyName);
 
     for (final IfcWallStandardCaseRender wall : wallStandardCaseList) {
-      // p.addifc(wall.toModel(p));
-
+      p.addIfcBuildingStoreyWallCase(wall.toModel(p));
     }
 
     for (final IfcWallRender wall : wallList) {
-      // p.addIfcBuildingStoreySpace(wall.toModel(p));
-
+      p.addIfcBuildingStoreyWall(wall.toModel(p));
     }
 
     for (final IfcFootingRender footing : footingList) {
-      // p.addIfcBuildingStoreySpace(footing.toModel(p));
-
+      p.addIfcBuildingStoreyFooting(footing.toModel(p));
     }
 
     for (final IfcRoofRender roof : roofList) {
-      // p.addIfcBuildingStoreySpace(roof.toModel(p));
-
+      // p.addIfcBuildingStoreySpace(slab.toModel(p));
     }
 
     for (final IfcSlabRender slab : slabList) {
-      // p.addIfcBuildingStoreySpace(slab.toModel(p));
+      p.addIfcBuildingStoreySlab(ifcBuildingStoreySlab)
 
     }
 
@@ -122,17 +118,15 @@ public class IfcBuildingStoreyRender {
 
     for (final IfcStairRender stair : stairList) {
       // p.addIfcBuildingStoreySpace(stair.toModel(p));
-
+      // p.addIfcBuildingStoreyStair(ifcBuildingStoreyStair)
     }
 
     for (final IfcCoveringRender cover : coveringList) {
-      // p.addIfcBuildingStoreySpace(cover.toModel(p));
-
+      p.addIfcBuildingStoreyCovering(cover.toModel(p));
     }
 
     for (final IfcBeamRender beam : beamList) {
-      // p.addIfcBuildingStoreySpace(beam.toModel(p));
-
+      p.addIfcBuildingStoreyBeam(beam.toModel(p));
     }
 
     for (final IfcSpaceRender space : spaceList) {

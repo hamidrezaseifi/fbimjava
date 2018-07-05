@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,6 +37,9 @@ public class IfcBuildingStoreyWall extends SerializableModelBase {
   @Column(name = "object_type")
   private String objectType;
 
+  @Column(name = "storey_id")
+  private String storeyId;
+
   private short status = 1;
 
   private String tag;
@@ -48,20 +53,20 @@ public class IfcBuildingStoreyWall extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "storey_id")
+  @JoinColumn(name = "storey_id", insertable = false, updatable = false)
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallOpening
-  @OneToMany(mappedBy = "ifcBuildingStoreyWall")
-  private List<IfcBuildingStoreyWallOpening> ifcBuildingStoreyWallOpenings;
+  @OneToMany(mappedBy = "ifcBuildingStoreyWall", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWallOpening> ifcBuildingStoreyWallOpenings = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallPresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreyWall")
-  private List<IfcBuildingStoreyWallPresentationlayer> ifcBuildingStoreyWallPresentationlayers;
+  @OneToMany(mappedBy = "ifcBuildingStoreyWall", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWallPresentationlayer> ifcBuildingStoreyWallPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreyWall")
-  private List<IfcBuildingStoreyWallProperty> ifcBuildingStoreyWallProperties;
+  @OneToMany(mappedBy = "ifcBuildingStoreyWall", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWallProperty> ifcBuildingStoreyWallProperties = new ArrayList<>();
 
   public IfcBuildingStoreyWall() {
   }
@@ -214,6 +219,14 @@ public class IfcBuildingStoreyWall extends SerializableModelBase {
     ifcBuildingStoreyWallProperty.setIfcBuildingStoreyWall(null);
 
     return ifcBuildingStoreyWallProperty;
+  }
+
+  public String getStoreyId() {
+    return storeyId;
+  }
+
+  public void setStoreyId(final String storeyId) {
+    this.storeyId = storeyId;
   }
 
 }
