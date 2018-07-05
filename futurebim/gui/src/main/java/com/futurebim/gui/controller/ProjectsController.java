@@ -13,74 +13,71 @@ import com.futurebim.gui.helper.PageMenuLoader;
 import com.futurebim.gui.model.MenuItem;
 
 @Controller
-@RequestMapping(path = "/")
-public class MainController extends UiControllerBase {
+@RequestMapping(path = "/projects")
+public class ProjectsController extends UiControllerBase {
 
   @Autowired
   private PageMenuLoader pageMenuLoader;
-
-  private String activeLeftMenu = "";
 
   @RequestMapping(path = "/")
   public String index(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
 
-    model.addAttribute("msg" , "Index Page ");
-    activeLeftMenu = "";
+    model.addAttribute("msg" , "Projekte Index Page");
 
     return "index";
   }
 
-  @RequestMapping(path = "/site/balance")
+  @RequestMapping(path = "/balance")
   public String balance(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
 
-    model.addAttribute("msg" , "Balance Page");
-    activeLeftMenu = "menu.balance";
+    model.addAttribute("msg" , "Projekte Balance Page");
+
     return "index";
   }
 
-  @RequestMapping(path = "/site/alarm")
+  @RequestMapping(path = "/alarm")
   public String alarm(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
 
-    model.addAttribute("msg" , "Alarm Page");
+    model.addAttribute("msg" , "Projekte Alarm Page");
 
     return "index";
   }
 
-  @RequestMapping(path = "/site/settings")
+  @RequestMapping(path = "/settings")
   public String settings(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
 
-    model.addAttribute("msg" , "Konfiguration Page ");
+    model.addAttribute("msg" , "Projekte Konfiguration Page");
 
     return "index";
   }
 
-  @RequestMapping(path = "/site/code")
+  @RequestMapping(path = "/code")
   public String code(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
 
-    model.addAttribute("msg" , "Entwicklung Page");
+    model.addAttribute("msg" , "Projekte Entwicklung Page");
 
     return "index";
   }
 
-  @RequestMapping(path = "/site/questions")
+  @RequestMapping(path = "/questions")
   public String questions(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
 
-    model.addAttribute("msg" , "Fragen Page");
+    model.addAttribute("msg" , "Projekte Fragen Page");
 
     return "index";
   }
 
-  @RequestMapping(path = "/site/moves")
+  @RequestMapping(path = "/moves")
   public String moves(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
 
-    model.addAttribute("msg" , "Bewegungen Page");
+    model.addAttribute("msg" , "Projekte Bewegungen Page");
 
     return "index";
   }
@@ -88,27 +85,25 @@ public class MainController extends UiControllerBase {
   @Override
   protected List<MenuItem> getTopToolbar() {
 
-    return pageMenuLoader.getTopMenus("menu.home");
+    return pageMenuLoader.getTopMenus("menu.projects");
   }
 
   @Override
   protected List<MenuItem> getLeftToolbar() {
 
-    return pageMenuLoader.getLeftMenus("/site", getActiveLeftToolbarId());
+    return pageMenuLoader.getLeftMenus("/projects", getActiveLeftToolbarId());
   }
 
   @Override
   protected String getActiveLeftToolbarId() {
     switch(getCurrentRelatedUrl())
     {
-    case "/":
-    case "": return "";
-    case "/site/balance": return "menu.balance";
-    case "/site/alarm": return "menu.alarm";
-    case "/site/settings": return "menu.settings";
-    case "/site/code": return "menu.code";
-    case "/site/questions": return "menu.questions";
-    case "/site/moves": return "menu.moves";
+    case "/projects/balance": return "menu.balance";
+    case "/projects/alarm": return "menu.alarm";
+    case "/projects/settings": return "menu.settings";
+    case "/projects/code": return "menu.code";
+    case "/projects/questions": return "menu.questions";
+    case "/projects/moves": return "menu.moves";
     }
 
     return "";

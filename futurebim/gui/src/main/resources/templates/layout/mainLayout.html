@@ -50,7 +50,7 @@
 			      <a class="navbar-brand" href="/"><img class="logo" th:src="@{/images/logo.png}" /></a>
 			    </div>
 			    <ul class="nav navbar-nav">
-			      <li th:each="menu: ${pageMenuList}" th:if="${menu.isEnabled()}">
+			      <li th:each="menu: ${pageTopToolList}" th:if="${menu.isEnabled()}" th:class="${menu.isActive() ? 'active' : ''}">
 			      	<a th:href="${menu.getUrl()}">
 						<i class="material-icons" th:text="${menu.getImage()}"></i><div th:text="${menu.getLabel()}"></div> 
 					</a>
@@ -71,7 +71,7 @@
 			
 			<div class="left-panel" id ="left-panel">
 				<ul>
-					<li th:each="menu: ${pageLeftMenuList}" th:if="${menu.isEnabled()}" th:class="${menu.isActive() ? 'active' : ''}">
+					<li th:each="menu: ${pageLeftToolList}" th:if="${menu.isEnabled()}" th:class="${menu.isActive() ? 'active' : ''}">
 						<a th:href="${menu.getUrl()}" >
 							<i class="material-icons" th:text="${menu.getImage()}"></i><div th:text="${menu.getLabel()}"></div> 
 						</a>
@@ -97,7 +97,7 @@
 	        </md-sidenav>
 	        
         </header>
-		<div th:fragment="breadcrumb" style="background-color: #eeeeee;">
+		<div th:fragment="breadcrumb" style="background-color: #85CE36 !important;">
 			 <ul class="breadcrumb" >
 			     <li th:each="entry : ${breadCrumb}">
 			         <a th:href="${entry.getUrl()}" th:if="${entry.isLink()}" th:text="${entry.getLabel()}"></a>

@@ -14,26 +14,49 @@ public class PageMenuLoader {
 
   public PageMenuLoader()
   {
-    topMenus.add(new MenuItem("menu.bim" , "Bim", "aspect_ratio" , "#"));
-    topMenus.add(new MenuItem("menu.projects" , "Projekte", "chrome_reader_mode" , "#", true));
-    topMenus.add(new MenuItem("menu.workflow" , "Workflow", "assessment" , "#"));
-    topMenus.add(new MenuItem("menu.settings" , "Einstellung", "settings" , "#"));
+    topMenus.add(new MenuItem("menu.home" , "Home", "home" , "/"));
+    topMenus.add(new MenuItem("menu.bim" , "Bim", "aspect_ratio" , "/bim/"));
+    topMenus.add(new MenuItem("menu.projects" , "Projekte", "chrome_reader_mode" , "/projects/", true));
+    topMenus.add(new MenuItem("menu.workflow" , "Workflow", "assessment" , "/workflow/"));
+    topMenus.add(new MenuItem("menu.settings" , "Einstellung", "settings" , "/options/"));
 
-    leftMenus.add(new MenuItem("menu.bim" , "Balance", "account_balance" , "#"));
-    leftMenus.add(new MenuItem("menu.projects" , "Alarm", "alarm_on" , "#"));
-    leftMenus.add(new MenuItem("menu.workflow" , "Konfiguration", "build" , "#", true));
-    leftMenus.add(new MenuItem("menu.settings" , "Entwicklung", "code" , "#"));
-    leftMenus.add(new MenuItem("menu.settings" , "Fragen", "help_outline" , "#"));
-    leftMenus.add(new MenuItem("menu.settings" , "Bewegungen", "open_with" , "#"));
+    leftMenus.add(new MenuItem("menu.balance" , "Balance", "account_balance" , "/balance"));
+    leftMenus.add(new MenuItem("menu.alarm" , "Alarm", "alarm_on" , "/alarm"));
+    leftMenus.add(new MenuItem("menu.settings" , "Konfiguration", "build" , "/settings", true));
+    leftMenus.add(new MenuItem("menu.code" , "Entwicklung", "code" , "/code"));
+    leftMenus.add(new MenuItem("menu.questions" , "Fragen", "help_outline" , "/questions"));
+    leftMenus.add(new MenuItem("menu.moves" , "Bewegungen", "open_with" , "/moves"));
   }
 
 
-  public List<MenuItem> getTopMenus() {
+  public List<MenuItem> getTopMenus(final String activeMenuId) {
+    for(final MenuItem ms:topMenus) {
+      ms.setActive(false);
+      if(ms.getId().equals(activeMenuId))
+      {
+        ms.setActive(true);
+      }
+    }
+
     return topMenus;
   }
 
-  public List<MenuItem> getLeftMenus() {
-    return leftMenus;
+  public List<MenuItem> getLeftMenus(final String routUrl, final String activeMenuId) {
+
+    final List<MenuItem> menus = new ArrayList<>();
+
+    for(final MenuItem ms:leftMenus) {
+      final MenuItem m = ms.clone();
+      m.setUrl(routUrl + m.getUrl());
+      m.setActive(false);
+      if(m.getId().equals(activeMenuId))
+      {
+        m.setActive(true);
+      }
+      menus.add(m);
+    }
+
+    return menus;
   }
 
 
