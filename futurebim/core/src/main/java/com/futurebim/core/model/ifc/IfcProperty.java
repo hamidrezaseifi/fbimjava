@@ -7,7 +7,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,9 +35,6 @@ public class IfcProperty extends SerializableModelBase {
   @Id
   private String id;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
   private LocalDateTime created;
 
   @JacksonXmlProperty(localName = "Name")
@@ -50,6 +50,10 @@ public class IfcProperty extends SerializableModelBase {
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcProperty", cascade = CascadeType.ALL)
   private List<IfcPropertySingleValue> ifcPropertySingleValue = new ArrayList<>();
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "ifc_id")
+  private ProjectIfc projectIfc;
 
   public IfcProperty() {
   }
@@ -114,12 +118,11 @@ public class IfcProperty extends SerializableModelBase {
     this.ifcPropertySingleValue.add(ifcPropertiesValue);
   }
 
-  public Long getIfcId() {
-    return ifcId;
+  public ProjectIfc getProjectIfc() {
+    return projectIfc;
   }
 
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
+  public void setProjectIfc(final ProjectIfc projectIfc) {
+    this.projectIfc = projectIfc;
   }
-
 }

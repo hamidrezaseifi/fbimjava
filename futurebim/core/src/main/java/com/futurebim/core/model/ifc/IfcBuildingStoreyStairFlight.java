@@ -61,7 +61,7 @@ public class IfcBuildingStoreyStairFlight extends SerializableModelBase {
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "stair_id")
-  private IfcBuildingStorey ifcBuildingStorey;
+  private IfcBuildingStoreyStair ifcBuildingStoreyStair;
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairFlightPresentationlayer
   @OneToMany(mappedBy = "ifcBuildingStoreyStairFlight")
@@ -178,12 +178,12 @@ public class IfcBuildingStoreyStairFlight extends SerializableModelBase {
     this.version = version;
   }
 
-  public IfcBuildingStorey getIfcBuildingStorey() {
-    return this.ifcBuildingStorey;
+  public IfcBuildingStoreyStair getIfcBuildingStoreyStair() {
+    return this.ifcBuildingStoreyStair;
   }
 
-  public void setIfcBuildingStorey(final IfcBuildingStorey ifcBuildingStorey) {
-    this.ifcBuildingStorey = ifcBuildingStorey;
+  public void setIfcBuildingStoreyStair(final IfcBuildingStoreyStair ifcBuildingStoreyStair) {
+    this.ifcBuildingStoreyStair = ifcBuildingStoreyStair;
   }
 
   public List<IfcBuildingStoreyStairFlightPresentationlayer> getIfcBuildingStoreyStairFlightPresentationlayers() {

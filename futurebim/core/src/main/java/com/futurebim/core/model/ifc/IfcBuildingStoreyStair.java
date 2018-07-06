@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -55,8 +57,20 @@ public class IfcBuildingStoreyStair extends SerializableModelBase {
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreyStair")
-  private List<IfcBuildingStoreyStairProperty> ifcBuildingStoreyStairProperties;
+  @OneToMany(mappedBy = "ifcBuildingStoreyStair", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairProperty> ifcBuildingStoreyStairProperties = new ArrayList<>();
+
+  // bi-directional many-to-one association to IfcBuildingStoreyStairFlight
+  @OneToMany(mappedBy = "ifcBuildingStoreyStair", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairFlight> ifcBuildingStoreyStairFlights = new ArrayList<>();
+
+  // bi-directional many-to-one association to IfcBuildingStoreyStairMember
+  @OneToMany(mappedBy = "ifcBuildingStoreyStair", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairMember> ifcBuildingStoreyStairMembers = new ArrayList<>();
+
+  // bi-directional many-to-one association to IfcBuildingStoreyStairRailing
+  @OneToMany(mappedBy = "ifcBuildingStoreyStair", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairRailing> ifcBuildingStoreyStairRailings = new ArrayList<>();
 
   public IfcBuildingStoreyStair() {
   }
@@ -149,6 +163,50 @@ public class IfcBuildingStoreyStair extends SerializableModelBase {
     this.ifcBuildingStorey = ifcBuildingStorey;
   }
 
+  public List<IfcBuildingStoreyStairFlight> getIfcBuildingStoreyStairFlights() {
+    return this.ifcBuildingStoreyStairFlights;
+  }
+
+  public void setIfcBuildingStoreyStairFlights(final List<IfcBuildingStoreyStairFlight> ifcBuildingStoreyStairFlights) {
+    this.ifcBuildingStoreyStairFlights = ifcBuildingStoreyStairFlights;
+  }
+
+  public IfcBuildingStoreyStairFlight addIfcBuildingStoreyStairFlight(final IfcBuildingStoreyStairFlight ifcBuildingStoreyStairFlight) {
+    getIfcBuildingStoreyStairFlights().add(ifcBuildingStoreyStairFlight);
+    ifcBuildingStoreyStairFlight.setIfcBuildingStoreyStair(this);
+
+    return ifcBuildingStoreyStairFlight;
+  }
+
+  public IfcBuildingStoreyStairFlight removeIfcBuildingStoreyStairFlight(final IfcBuildingStoreyStairFlight ifcBuildingStoreyStairFlight) {
+    getIfcBuildingStoreyStairFlights().remove(ifcBuildingStoreyStairFlight);
+    ifcBuildingStoreyStairFlight.setIfcBuildingStoreyStair(null);
+
+    return ifcBuildingStoreyStairFlight;
+  }
+
+  public List<IfcBuildingStoreyStairMember> getIfcBuildingStoreyStairMembers() {
+    return this.ifcBuildingStoreyStairMembers;
+  }
+
+  public void setIfcBuildingStoreyStairMembers(final List<IfcBuildingStoreyStairMember> ifcBuildingStoreyStairMembers) {
+    this.ifcBuildingStoreyStairMembers = ifcBuildingStoreyStairMembers;
+  }
+
+  public IfcBuildingStoreyStairMember addIfcBuildingStoreyStairMember(final IfcBuildingStoreyStairMember ifcBuildingStoreyStairMember) {
+    getIfcBuildingStoreyStairMembers().add(ifcBuildingStoreyStairMember);
+    ifcBuildingStoreyStairMember.setIfcBuildingStoreyStair(this);
+
+    return ifcBuildingStoreyStairMember;
+  }
+
+  public IfcBuildingStoreyStairMember removeIfcBuildingStoreyStairMember(final IfcBuildingStoreyStairMember ifcBuildingStoreyStairMember) {
+    getIfcBuildingStoreyStairMembers().remove(ifcBuildingStoreyStairMember);
+    ifcBuildingStoreyStairMember.setIfcBuildingStoreyStair(null);
+
+    return ifcBuildingStoreyStairMember;
+  }
+
   public List<IfcBuildingStoreyStairProperty> getIfcBuildingStoreyStairProperties() {
     return this.ifcBuildingStoreyStairProperties;
   }
@@ -171,6 +229,29 @@ public class IfcBuildingStoreyStair extends SerializableModelBase {
     ifcBuildingStoreyStairProperty.setIfcBuildingStoreyStair(null);
 
     return ifcBuildingStoreyStairProperty;
+  }
+
+  public List<IfcBuildingStoreyStairRailing> getIfcBuildingStoreyStairRailings() {
+    return this.ifcBuildingStoreyStairRailings;
+  }
+
+  public void setIfcBuildingStoreyStairRailings(final List<IfcBuildingStoreyStairRailing> ifcBuildingStoreyStairRailings) {
+    this.ifcBuildingStoreyStairRailings = ifcBuildingStoreyStairRailings;
+  }
+
+  public IfcBuildingStoreyStairRailing addIfcBuildingStoreyStairRailing(final IfcBuildingStoreyStairRailing ifcBuildingStoreyStairRailing) {
+    getIfcBuildingStoreyStairRailings().add(ifcBuildingStoreyStairRailing);
+    ifcBuildingStoreyStairRailing.setIfcBuildingStoreyStair(this);
+
+    return ifcBuildingStoreyStairRailing;
+  }
+
+  public IfcBuildingStoreyStairRailing
+         removeIfcBuildingStoreyStairRailing(final IfcBuildingStoreyStairRailing ifcBuildingStoreyStairRailing) {
+    getIfcBuildingStoreyStairRailings().remove(ifcBuildingStoreyStairRailing);
+    ifcBuildingStoreyStairRailing.setIfcBuildingStoreyStair(null);
+
+    return ifcBuildingStoreyStairRailing;
   }
 
 }

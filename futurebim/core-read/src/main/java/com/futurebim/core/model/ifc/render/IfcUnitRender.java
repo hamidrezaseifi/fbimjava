@@ -25,7 +25,7 @@ public class IfcUnitRender {
 
     final IfcUnit u = new IfcUnit();
 
-    u.setIfcId(model.getId());
+    u.setProjectIfc(model);
     u.setUnitName(unitName);
     u.setUnitType(unitType);
     u.setEquivalent(equivalent);

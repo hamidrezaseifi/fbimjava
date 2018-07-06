@@ -30,22 +30,22 @@ public class IfcTypeWrapperRender {
   @JacksonXmlProperty(localName = "IfcWindowStyle")// IfcWindowStyle
   private final List<IfcWindowstyleRender> windowTypes = new ArrayList<>();
 
-  public List<IfcFurnituretype> toFurnitureTypeModel(final Long modelId) {
+  public List<IfcFurnituretype> toFurnitureTypeModel(final ProjectIfc model) {
 
     final List<IfcFurnituretype> list = new ArrayList<>();
     for (final IfcFurnituretypeRender type : furnitureTypes) {
 
-      list.add(type.toModel(modelId));
+      list.add(type.toModel(model));
     }
     return list;
   }
 
-  public List<IfcDoorstyle> toDoorTypeModel(final Long modelId) {
+  public List<IfcDoorstyle> toDoorTypeModel(final ProjectIfc model) {
 
     final List<IfcDoorstyle> list = new ArrayList<>();
     for (final IfcDoorstyleRender type : doorTypes) {
 
-      list.add(type.toModel(modelId));
+      list.add(type.toModel(model));
     }
     return list;
   }

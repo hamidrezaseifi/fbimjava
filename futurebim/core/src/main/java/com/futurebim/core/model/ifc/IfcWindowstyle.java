@@ -4,7 +4,10 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.futurebim.core.model.base.SerializableModelBase;
@@ -33,9 +36,6 @@ public class IfcWindowstyle extends SerializableModelBase {
   @Column(name = "parameter_takes_precedence")
   private String parameterTakesPrecedence;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
   private String sizeable;
 
   private short status = 1;
@@ -48,6 +48,10 @@ public class IfcWindowstyle extends SerializableModelBase {
   private LocalDateTime updated;
 
   private int version = 1;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "ifc_id")
+  private ProjectIfc projectIfc;
 
   public IfcWindowstyle() {
   }
@@ -140,12 +144,11 @@ public class IfcWindowstyle extends SerializableModelBase {
     this.version = version;
   }
 
-  public Long getIfcId() {
-    return ifcId;
+  public ProjectIfc getProjectIfc() {
+    return projectIfc;
   }
 
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
+  public void setProjectIfc(final ProjectIfc projectIfc) {
+    this.projectIfc = projectIfc;
   }
-
 }

@@ -107,7 +107,7 @@ public class IfcBuildingStoreyRender {
     }
 
     for (final IfcWindowRender window : windowList) {
-      // p.addIfcBuildingStoreySpace(window.toModel(p));
+      p.addIfcBuildingStoreyWindow(window.toModel(p));
 
     }
 
@@ -117,7 +117,7 @@ public class IfcBuildingStoreyRender {
 
     for (final IfcStairRender stair : stairList) {
 
-      // p.addIfcBuildingStoreyStair(ifcBuildingStoreyStair)
+      p.addIfcBuildingStoreyStair(stair.toModel(p));
     }
 
     for (final IfcCoveringRender cover : coveringList) {

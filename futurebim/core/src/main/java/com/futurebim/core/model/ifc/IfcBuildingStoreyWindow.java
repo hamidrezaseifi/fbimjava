@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -58,16 +60,16 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindowPresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreyWindow")
-  private List<IfcBuildingStoreyWindowPresentationlayer> ifcBuildingStoreyWindowPresentationlayers;
+  @OneToMany(mappedBy = "ifcBuildingStoreyWindow", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWindowPresentationlayer> ifcBuildingStoreyWindowPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindowProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreyWindow")
-  private List<IfcBuildingStoreyWindowProperty> ifcBuildingStoreyWindowProperties;
+  @OneToMany(mappedBy = "ifcBuildingStoreyWindow", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWindowProperty> ifcBuildingStoreyWindowProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindowStyle
-  @OneToMany(mappedBy = "ifcBuildingStoreyWindow")
-  private List<IfcBuildingStoreyWindowStyle> ifcBuildingStoreyWindowStyles;
+  @OneToMany(mappedBy = "ifcBuildingStoreyWindow", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyWindowStyle> ifcBuildingStoreyWindowStyles = new ArrayList<>();
 
   public IfcBuildingStoreyWindow() {
   }

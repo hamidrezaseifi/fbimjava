@@ -4,7 +4,10 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.futurebim.core.model.base.SerializableModelBase;
@@ -42,12 +45,13 @@ public class IfcDoorstyle extends SerializableModelBase {
   @Column(name = "type_name")
   private String typeName;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
   private LocalDateTime updated;
 
   private int version = 1;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "ifc_id")
+  private ProjectIfc projectIfc;
 
   public IfcDoorstyle() {
   }
@@ -140,12 +144,11 @@ public class IfcDoorstyle extends SerializableModelBase {
     this.version = version;
   }
 
-  public Long getIfcId() {
-    return ifcId;
+  public ProjectIfc getProjectIfc() {
+    return projectIfc;
   }
 
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
+  public void setProjectIfc(final ProjectIfc projectIfc) {
+    this.projectIfc = projectIfc;
   }
-
 }

@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.futurebim.core.model.base.SerializableModelBase;
@@ -29,9 +32,6 @@ public class IfcUnit extends SerializableModelBase {
 
   private String equivalent;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
   private short status = 1;
 
   @Column(name = "unit_name")
@@ -43,6 +43,10 @@ public class IfcUnit extends SerializableModelBase {
   private LocalDateTime updated;
 
   private int version = 1;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "ifc_id")
+  private ProjectIfc projectIfc;
 
   public IfcUnit() {
   }
@@ -69,14 +73,6 @@ public class IfcUnit extends SerializableModelBase {
 
   public void setEquivalent(final String equivalent) {
     this.equivalent = equivalent;
-  }
-
-  public Long getIfcId() {
-    return this.ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
   }
 
   public short getStatus() {
@@ -117,6 +113,14 @@ public class IfcUnit extends SerializableModelBase {
 
   public void setVersion(final int version) {
     this.version = version;
+  }
+
+  public ProjectIfc getProjectIfc() {
+    return projectIfc;
+  }
+
+  public void setProjectIfc(final ProjectIfc projectIfc) {
+    this.projectIfc = projectIfc;
   }
 
 }

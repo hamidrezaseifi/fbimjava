@@ -49,20 +49,12 @@ public class IfcFurnituretype extends SerializableModelBase {
   @Column(name = "tag")
   private String tag;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
   private LocalDateTime updated;
 
   private int version = 1;
 
-  // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementFurnituretype
-  // @OneToMany(mappedBy = "ifcFurnituretype")
-  // private List<IfcBuildingStoreySpaceFurnishingelementFurnituretype> ifcBuildingStoreySpaceFurnishingelementFurnituretypes;
-
-  // bi-directional many-to-one association to ProjectIfc
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
+  @JoinColumn(name = "ifc_id")
   private ProjectIfc projectIfc;
 
   public IfcFurnituretype() {
@@ -146,14 +138,6 @@ public class IfcFurnituretype extends SerializableModelBase {
 
   public void setTag(final String tag) {
     this.tag = tag;
-  }
-
-  public Long getIfcId() {
-    return ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
   }
 
 }

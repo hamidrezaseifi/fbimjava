@@ -7,7 +7,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -36,9 +39,6 @@ public class IfcProject extends SerializableModelBase {
   @Column(name = "project_name")
   private String projectName;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
   private short status = 1;
 
   private LocalDateTime updated;
@@ -48,6 +48,10 @@ public class IfcProject extends SerializableModelBase {
   // bi-directional many-to-one association to IfcProjectSite
   @OneToMany(mappedBy = "ifcProject", cascade = CascadeType.ALL)
   private List<IfcProjectSite> ifcProjectSites = new ArrayList<>();
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "ifc_id")
+  private ProjectIfc projectIfc;
 
   public IfcProject() {
   }
@@ -142,12 +146,11 @@ public class IfcProject extends SerializableModelBase {
     return ifcProjectSite;
   }
 
-  public Long getIfcId() {
-    return ifcId;
+  public ProjectIfc getProjectIfc() {
+    return projectIfc;
   }
 
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
+  public void setProjectIfc(final ProjectIfc projectIfc) {
+    this.projectIfc = projectIfc;
   }
-
 }

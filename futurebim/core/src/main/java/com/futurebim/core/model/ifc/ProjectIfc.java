@@ -42,7 +42,7 @@ public class ProjectIfc extends SerializableModelBase {
 
   private LocalDateTime created; // = LocalDateTime.valueOf(LocalDateTime.now());
 
-  @Column(name = "ifc_name")
+  @Column(name = "ifc_name", unique = true, nullable = false)
   private String ifcName;
 
   @Column(name = "project_id")
@@ -56,40 +56,40 @@ public class ProjectIfc extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcDoorstyle
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
   private List<IfcDoorstyle> ifcDoorstyles = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcFurnituretype
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
   private List<IfcFurnituretype> ifcFurnituretypes = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcPresentationlayer
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
   private List<IfcPresentationlayer> ifcPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcProject
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
   private List<IfcProject> ifcProjects = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcProperty
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
   private List<IfcProperty> ifcProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcWindowstyle
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
   private List<IfcWindowstyle> ifcWindowstyles = new ArrayList<>();
 
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
   private List<IfcUnit> ifcUnits = new ArrayList<>();
 
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
   private List<IfcConversionBasedUnit> ifcConversionBasedUnit = new ArrayList<>();
 
   @JsonIgnore
@@ -166,6 +166,7 @@ public class ProjectIfc extends SerializableModelBase {
 
   public IfcDoorstyle addIfcDoorstyle(final IfcDoorstyle ifcDoorstyle) {
     getIfcDoorstyles().add(ifcDoorstyle);
+    ifcDoorstyle.setProjectIfc(this);
 
     return ifcDoorstyle;
   }
@@ -186,6 +187,7 @@ public class ProjectIfc extends SerializableModelBase {
 
   public IfcFurnituretype addIfcFurnituretype(final IfcFurnituretype ifcFurnituretype) {
     getIfcFurnituretypes().add(ifcFurnituretype);
+    ifcFurnituretype.setProjectIfc(this);
     ifcFurnituretype.setProjectIfc(this);
 
     return ifcFurnituretype;
@@ -208,6 +210,7 @@ public class ProjectIfc extends SerializableModelBase {
 
   public IfcPresentationlayer addIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
     getIfcPresentationlayers().add(ifcPresentationlayer);
+    ifcPresentationlayer.setProjectIfc(this);
 
     return ifcPresentationlayer;
   }
@@ -228,6 +231,7 @@ public class ProjectIfc extends SerializableModelBase {
 
   public IfcProject addIfcProject(final IfcProject ifcProject) {
     getIfcProjects().add(ifcProject);
+    ifcProject.setProjectIfc(this);
 
     return ifcProject;
   }
@@ -248,6 +252,8 @@ public class ProjectIfc extends SerializableModelBase {
 
   public void addIfcProperty(final IfcProperty ifcProperty) {
     this.ifcProperties.add(ifcProperty);
+    ifcProperty.setProjectIfc(this);
+
   }
 
   public List<IfcWindowstyle> getIfcWindowstyles() {
@@ -260,6 +266,7 @@ public class ProjectIfc extends SerializableModelBase {
 
   public IfcWindowstyle addIfcWindowstyle(final IfcWindowstyle ifcWindowstyle) {
     getIfcWindowstyles().add(ifcWindowstyle);
+    ifcWindowstyle.setProjectIfc(this);
 
     return ifcWindowstyle;
   }
@@ -288,6 +295,7 @@ public class ProjectIfc extends SerializableModelBase {
 
   public void addIfcUnits(final IfcUnit ifcUnit) {
     this.ifcUnits.add(ifcUnit);
+    ifcUnit.setProjectIfc(this);
   }
 
   public List<IfcConversionBasedUnit> getIfcConversionBasedUnit() {
@@ -300,6 +308,7 @@ public class ProjectIfc extends SerializableModelBase {
 
   public void addIfcConversionBasedUnit(final IfcConversionBasedUnit ifcConversionBasedUnit) {
     this.ifcConversionBasedUnit.add(ifcConversionBasedUnit);
+    ifcConversionBasedUnit.setProjectIfc(this);
   }
 
   public Long getId() {

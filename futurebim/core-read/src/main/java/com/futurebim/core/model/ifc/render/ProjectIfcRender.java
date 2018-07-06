@@ -71,18 +71,18 @@ public class ProjectIfcRender {
     model.setFilename("Duplex_A_20110907_optimized");
 
     model.setIfcUnits(units.toUnitModel(model));
-    model.setIfcConversionBasedUnit(units.toConversionBasedUnitModel(model.getId()));
+    model.setIfcConversionBasedUnit(units.toConversionBasedUnitModel(model));
 
     for (final IfcPropertyRender prop : properties) {
       model.addIfcProperty(prop.toModel(model));
     }
 
-    model.setIfcDoorstyles(types.toDoorTypeModel(model.getId()));
-    model.setIfcFurnituretypes(types.toFurnitureTypeModel(model.getId()));
+    model.setIfcDoorstyles(types.toDoorTypeModel(model));
+    model.setIfcFurnituretypes(types.toFurnitureTypeModel(model));
     model.setIfcWindowstyles(types.toWindowTypeModel(model));
 
     for (final IfcPresentationlayerRender layer : layers) {
-      model.addIfcPresentationlayer(layer.toModel(model.getId()));
+      model.addIfcPresentationlayer(layer.toModel(model));
     }
 
     model.setIfcProjects(decomposition.toModel(model));

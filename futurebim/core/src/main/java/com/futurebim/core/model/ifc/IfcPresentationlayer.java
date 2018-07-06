@@ -4,7 +4,10 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.futurebim.core.model.base.SerializableModelBase;
@@ -27,14 +30,15 @@ public class IfcPresentationlayer extends SerializableModelBase {
   @Column(name = "layer_name")
   private String layerName;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
   private short status = 1;
 
   private LocalDateTime updated;
 
   private int version = 1;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "ifc_id")
+  private ProjectIfc projectIfc;
 
   public IfcPresentationlayer() {
   }
@@ -87,12 +91,11 @@ public class IfcPresentationlayer extends SerializableModelBase {
     this.version = version;
   }
 
-  public Long getIfcId() {
-    return ifcId;
+  public ProjectIfc getProjectIfc() {
+    return projectIfc;
   }
 
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
+  public void setProjectIfc(final ProjectIfc projectIfc) {
+    this.projectIfc = projectIfc;
   }
-
 }

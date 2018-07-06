@@ -7,4 +7,12 @@ public class IfcWindowStyleSet {
   @JacksonXmlProperty(namespace = "xlink", localName = "href", isAttribute = true)
   private String href;
 
+  public String getStyleId() {
+    String pid = href;
+    if (pid.startsWith("#")) {
+      pid = pid.substring(1);
+    }
+    return pid;
+  }
+
 }

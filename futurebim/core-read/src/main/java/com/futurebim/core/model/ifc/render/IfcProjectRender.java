@@ -35,7 +35,7 @@ public class IfcProjectRender {
     final IfcProject p = new IfcProject();
     p.setId(id);
     p.setPhase(phase);
-    p.setIfcId(model.getId());
+    p.setProjectIfc(model);
     p.setProjectLongName(projectLongName);
     p.setProjectName(projectName);
 
