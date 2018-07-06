@@ -102,7 +102,7 @@ public class IfcBuildingStoreyRender {
     }
 
     for (final IfcSlabRender slab : slabList) {
-      p.addIfcBuildingStoreySlab(ifcBuildingStoreySlab)
+      p.addIfcBuildingStoreySlab(slab.toModel(p));
 
     }
 

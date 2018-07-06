@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,6 +43,9 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
   @Column(name = "slab_name")
   private String slabName;
 
+  @Column(name = "storey_id")
+  private String storeyId;
+
   private short status = 1;
 
   private String tag;
@@ -51,16 +56,19 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "storey_id")
+  @JoinColumn(name = "storey_id", updatable = false, insertable = false)
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreySlabPresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreySlab")
-  private List<IfcBuildingStoreySlabPresentationlayer> ifcBuildingStoreySlabPresentationlayers;
+  @OneToMany(mappedBy = "ifcBuildingStoreySlab", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySlabPresentationlayer> ifcBuildingStoreySlabPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySlabProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreySlab")
-  private List<IfcBuildingStoreySlabProperty> ifcBuildingStoreySlabProperties;
+  @OneToMany(mappedBy = "ifcBuildingStoreySlab", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreySlabProperty> ifcBuildingStoreySlabProperties = new ArrayList<>();
+
+  @OneToMany(mappedBy = "ifcBuildingStoreySlab", cascade = CascadeType.ALL)
+  private final List<IfcBuildingStoreyWallstandardcaseOpening> ifcBuildingStoreyWallstandardcaseOpenings = new ArrayList<>();
 
   public IfcBuildingStoreySlab() {
   }
