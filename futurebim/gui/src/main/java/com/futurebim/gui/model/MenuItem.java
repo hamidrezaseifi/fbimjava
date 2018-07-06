@@ -92,4 +92,13 @@ public class MenuItem {
   public void setActive(final boolean active) {
     this.active = active;
   }
+
+  @Override
+  public MenuItem clone()
+  {
+    final MenuItem menu = new MenuItem(id, label, image, url, active);
+    menu.setState(state);
+
+    return menu;
+  }
 }
