@@ -1,6 +1,6 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,14 +38,14 @@ public class IfcBuilding extends SerializableModelBase {
   @Column(name = "site_id")
   private String siteId;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @Column(name = "object_placement")
   private String objectPlacement;
 
   private short status = 1;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
 
@@ -89,11 +89,11 @@ public class IfcBuilding extends SerializableModelBase {
     this.compositionType = compositionType;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -113,11 +113,11 @@ public class IfcBuilding extends SerializableModelBase {
     this.status = status;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 

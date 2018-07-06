@@ -30,7 +30,7 @@ public class IfcTypeWrapperRender {
   @JacksonXmlProperty(localName = "IfcWindowStyle")// IfcWindowStyle
   private final List<IfcWindowstyleRender> windowTypes = new ArrayList<>();
 
-  public List<IfcFurnituretype> toFurnitureTypeModel(final String modelId) {
+  public List<IfcFurnituretype> toFurnitureTypeModel(final Long modelId) {
 
     final List<IfcFurnituretype> list = new ArrayList<>();
     for (final IfcFurnituretypeRender type : furnitureTypes) {
@@ -40,7 +40,7 @@ public class IfcTypeWrapperRender {
     return list;
   }
 
-  public List<IfcDoorstyle> toDoorTypeModel(final String modelId) {
+  public List<IfcDoorstyle> toDoorTypeModel(final Long modelId) {
 
     final List<IfcDoorstyle> list = new ArrayList<>();
     for (final IfcDoorstyleRender type : doorTypes) {

@@ -1,6 +1,6 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +28,7 @@ public class IfcBuildingStoreySpaceProperty extends SerializableModelBase {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   private short status = 1;
 
@@ -59,11 +59,11 @@ public class IfcBuildingStoreySpaceProperty extends SerializableModelBase {
     this.id = id;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 

@@ -30,12 +30,12 @@ public class IfcDoorstyleRender {
   @JacksonXmlProperty(localName = "Sizeable", isAttribute = true)
   private String sizeable;
 
-  public IfcDoorstyle toModel(final String modelId) {
+  public IfcDoorstyle toModel(final Long modelId) {
 
     final IfcDoorstyle type = new IfcDoorstyle();
 
     type.setId(id);
-    type.setProjectIfcId(modelId);
+    type.setIfcId(modelId);
     type.setTypeName(typeName);
     type.setTag(tag);
     type.setConstructionType(constructionType);

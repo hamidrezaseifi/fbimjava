@@ -1,16 +1,13 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -36,9 +33,9 @@ public class IfcProperty extends SerializableModelBase {
   private String id;
 
   @Column(name = "ifc_id")
-  private String ifcId;
+  private Long ifcId;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @JacksonXmlProperty(localName = "Name")
   @Column(name = "property_name")
@@ -46,18 +43,13 @@ public class IfcProperty extends SerializableModelBase {
 
   private short status = 1;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
 
-  // @JacksonXmlElementWrapper(localName = "IfcPropertySet")
   @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcProperty", cascade = CascadeType.ALL)
   private List<IfcPropertySingleValue> ifcPropertySingleValue = new ArrayList<>();
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
-  private ProjectIfc projectIfc;
 
   public IfcProperty() {
   }
@@ -70,11 +62,11 @@ public class IfcProperty extends SerializableModelBase {
     this.id = id;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -94,11 +86,11 @@ public class IfcProperty extends SerializableModelBase {
     this.status = status;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 
@@ -122,20 +114,12 @@ public class IfcProperty extends SerializableModelBase {
     this.ifcPropertySingleValue.add(ifcPropertiesValue);
   }
 
-  public String getIfcId() {
+  public Long getIfcId() {
     return ifcId;
   }
 
-  public void setIfcId(final String ifcId) {
+  public void setIfcId(final Long ifcId) {
     this.ifcId = ifcId;
-  }
-
-  public ProjectIfc getProjectIfc() {
-    return projectIfc;
-  }
-
-  public void setProjectIfc(final ProjectIfc projectIfc) {
-    this.projectIfc = projectIfc;
   }
 
 }

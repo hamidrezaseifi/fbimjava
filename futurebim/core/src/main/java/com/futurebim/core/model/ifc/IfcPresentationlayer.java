@@ -1,13 +1,10 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.futurebim.core.model.base.SerializableModelBase;
@@ -25,24 +22,19 @@ public class IfcPresentationlayer extends SerializableModelBase {
   @Id
   private String id;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @Column(name = "layer_name")
   private String layerName;
 
   @Column(name = "ifc_id")
-  private String projectIfcId;
+  private Long ifcId;
 
   private short status = 1;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
-
-  // bi-directional many-to-one association to ProjectIfc
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
-  private ProjectIfc projectIfc;
 
   public IfcPresentationlayer() {
   }
@@ -55,11 +47,11 @@ public class IfcPresentationlayer extends SerializableModelBase {
     this.id = id;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -79,11 +71,11 @@ public class IfcPresentationlayer extends SerializableModelBase {
     this.status = status;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 
@@ -95,20 +87,12 @@ public class IfcPresentationlayer extends SerializableModelBase {
     this.version = version;
   }
 
-  public ProjectIfc getProjectIfc() {
-    return this.projectIfc;
+  public Long getIfcId() {
+    return ifcId;
   }
 
-  public void setProjectIfc(final ProjectIfc projectIfc) {
-    this.projectIfc = projectIfc;
-  }
-
-  public String getProjectIfcId() {
-    return projectIfcId;
-  }
-
-  public void setProjectIfcId(final String projectIfcId) {
-    this.projectIfcId = projectIfcId;
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
 }

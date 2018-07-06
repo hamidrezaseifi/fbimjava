@@ -1,6 +1,6 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -27,7 +27,7 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
   @Id
   private String id;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @Column(name = "object_placement")
   private String objectPlacement;
@@ -45,7 +45,7 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
 
   private String tag;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
 
@@ -80,11 +80,11 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
     this.id = id;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -136,11 +136,11 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
     this.tag = tag;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 

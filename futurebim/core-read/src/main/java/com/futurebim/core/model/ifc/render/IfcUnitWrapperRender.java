@@ -39,7 +39,7 @@ public class IfcUnitWrapperRender {
     return list;
   }
 
-  public List<IfcConversionBasedUnit> toConversionBasedUnitModel(final String modelId) {
+  public List<IfcConversionBasedUnit> toConversionBasedUnitModel(final Long modelId) {
 
     final List<IfcConversionBasedUnit> list = new ArrayList<>();
     for (final IfcConversionBasedUnitRender unit : conversionUnits) {

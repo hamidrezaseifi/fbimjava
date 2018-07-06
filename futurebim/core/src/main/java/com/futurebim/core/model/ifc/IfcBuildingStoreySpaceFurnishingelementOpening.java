@@ -1,6 +1,6 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
   @Id
   private String id;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @Column(name = "element_id")
   private String elementId;
@@ -74,11 +74,11 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
     this.id = id;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 

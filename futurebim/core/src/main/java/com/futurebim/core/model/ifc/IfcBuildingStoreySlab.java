@@ -1,6 +1,6 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
   @Id
   private String id;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @Column(name = "object_placement")
   private String objectPlacement;
@@ -50,7 +50,7 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
 
   private String tag;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
 
@@ -67,8 +67,9 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
   @OneToMany(mappedBy = "ifcBuildingStoreySlab", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySlabProperty> ifcBuildingStoreySlabProperties = new ArrayList<>();
 
-  @OneToMany(mappedBy = "ifcBuildingStoreySlab", cascade = CascadeType.ALL)
-  private final List<IfcBuildingStoreyWallstandardcaseOpening> ifcBuildingStoreyWallstandardcaseOpenings = new ArrayList<>();
+  // bi-directional many-to-one association to IfcBuildingStoreySlabOpening
+  @OneToMany(mappedBy = "ifcBuildingStoreySlab")
+  private List<IfcBuildingStoreySlabOpening> ifcBuildingStoreySlabOpenings = new ArrayList<>();
 
   public IfcBuildingStoreySlab() {
   }
@@ -81,11 +82,11 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
     this.id = id;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -137,11 +138,11 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
     this.tag = tag;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 
@@ -207,6 +208,27 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
     ifcBuildingStoreySlabProperty.setIfcBuildingStoreySlab(null);
 
     return ifcBuildingStoreySlabProperty;
+  }
+
+  public String getStoreyId() {
+    return storeyId;
+  }
+
+  public void setStoreyId(final String storeyId) {
+    this.storeyId = storeyId;
+  }
+
+  public List<IfcBuildingStoreySlabOpening> getIfcBuildingStoreySlabOpenings() {
+    return ifcBuildingStoreySlabOpenings;
+  }
+
+  public void setIfcBuildingStoreySlabOpenings(final List<IfcBuildingStoreySlabOpening> ifcBuildingStoreySlabOpenings) {
+    this.ifcBuildingStoreySlabOpenings = ifcBuildingStoreySlabOpenings;
+  }
+
+  public void addIfcBuildingStoreySlabOpening(final IfcBuildingStoreySlabOpening ifcBuildingStoreySlabOpening) {
+    ifcBuildingStoreySlabOpening.setIfcBuildingStoreySlab(this);
+    this.ifcBuildingStoreySlabOpenings.add(ifcBuildingStoreySlabOpening);
   }
 
 }

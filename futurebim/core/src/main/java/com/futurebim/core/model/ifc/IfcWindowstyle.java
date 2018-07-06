@@ -1,14 +1,10 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.futurebim.core.model.base.SerializableModelBase;
@@ -29,13 +25,16 @@ public class IfcWindowstyle extends SerializableModelBase {
   @Column(name = "construction_type")
   private String constructionType;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @Column(name = "operation_type")
   private String operationType;
 
   @Column(name = "parameter_takes_precedence")
   private String parameterTakesPrecedence;
+
+  @Column(name = "ifc_id")
+  private Long ifcId;
 
   private String sizeable;
 
@@ -46,13 +45,9 @@ public class IfcWindowstyle extends SerializableModelBase {
   @Column(name = "type_name")
   private String typeName;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
-
-  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-  @JoinColumn(name = "ifc_id", referencedColumnName = "id", nullable = false)
-  private ProjectIfc projectIfc;
 
   public IfcWindowstyle() {
   }
@@ -73,11 +68,11 @@ public class IfcWindowstyle extends SerializableModelBase {
     this.constructionType = constructionType;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -129,11 +124,11 @@ public class IfcWindowstyle extends SerializableModelBase {
     this.typeName = typeName;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 
@@ -145,12 +140,12 @@ public class IfcWindowstyle extends SerializableModelBase {
     this.version = version;
   }
 
-  public ProjectIfc getProjectIfc() {
-    return this.projectIfc;
+  public Long getIfcId() {
+    return ifcId;
   }
 
-  public void setProjectIfc(final ProjectIfc projectIfc) {
-    this.projectIfc = projectIfc;
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
 }

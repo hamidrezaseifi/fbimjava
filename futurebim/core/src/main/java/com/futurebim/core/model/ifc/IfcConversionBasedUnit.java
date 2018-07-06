@@ -1,6 +1,6 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,12 +25,12 @@ public class IfcConversionBasedUnit extends SerializableModelBase {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   private String equivalent;
 
   @Column(name = "ifc_id")
-  private String ifcId;
+  private Long ifcId;
 
   private short status = 1;
 
@@ -40,7 +40,7 @@ public class IfcConversionBasedUnit extends SerializableModelBase {
   @Column(name = "unit_type")
   private String unitType;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
 
@@ -55,11 +55,11 @@ public class IfcConversionBasedUnit extends SerializableModelBase {
     this.id = id;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -71,11 +71,11 @@ public class IfcConversionBasedUnit extends SerializableModelBase {
     this.equivalent = equivalent;
   }
 
-  public String getIfcId() {
+  public Long getIfcId() {
     return this.ifcId;
   }
 
-  public void setIfcId(final String ifcId) {
+  public void setIfcId(final Long ifcId) {
     this.ifcId = ifcId;
   }
 
@@ -103,11 +103,11 @@ public class IfcConversionBasedUnit extends SerializableModelBase {
     this.unitType = unitType;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 

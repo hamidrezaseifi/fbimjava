@@ -27,8 +27,8 @@ public class ProjectIcfDaoImpl implements ProjectIcfDao {
   public ProjectIfc addProjectIfc(final ProjectIfc pifc) {
     final Session session = this.sessionFactory.getCurrentSession();
     session.save(pifc);
-    logger.info("ProjectIfc saved successfully, ProjectIfc Details=" + pifc);
-    return getById(pifc.getId());
+    logger.info("ProjectIfc saved successfully, ProjectIfc Details=" + pifc.getIfcName());
+    return pifc; // getById(pifc.getId());
   }
 
   @Override

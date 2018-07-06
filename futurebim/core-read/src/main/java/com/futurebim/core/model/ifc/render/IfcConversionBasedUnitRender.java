@@ -20,7 +20,7 @@ public class IfcConversionBasedUnitRender {
   @JacksonXmlProperty(localName = "UnitType", isAttribute = true)
   private String unitType;
 
-  public IfcConversionBasedUnit toUnitModel(final String modelId) {
+  public IfcConversionBasedUnit toUnitModel(final Long modelId) {
 
     final IfcConversionBasedUnit u = new IfcConversionBasedUnit();
     u.setIfcId(modelId);

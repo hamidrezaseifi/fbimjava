@@ -1,6 +1,6 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,9 +34,13 @@ public class ProjectIfc extends SerializableModelBase {
   private static final long serialVersionUID = 1L;
 
   @Id
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-  private Timestamp created;
+  @Column(name = "filename")
+  private String filename;
+
+  private LocalDateTime created; // = LocalDateTime.valueOf(LocalDateTime.now());
 
   @Column(name = "ifc_name")
   private String ifcName;
@@ -44,38 +50,38 @@ public class ProjectIfc extends SerializableModelBase {
 
   private short status = 1;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
 
   // bi-directional many-to-one association to IfcDoorstyle
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
   private List<IfcDoorstyle> ifcDoorstyles = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcFurnituretype
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
   private List<IfcFurnituretype> ifcFurnituretypes = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcPresentationlayer
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
   private List<IfcPresentationlayer> ifcPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcProject
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfcId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
   private List<IfcProject> ifcProjects = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcProperty
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
   private List<IfcProperty> ifcProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcWindowstyle
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "projectIfc", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcId", cascade = CascadeType.ALL)
   private List<IfcWindowstyle> ifcWindowstyles = new ArrayList<>();
 
   @LazyCollection(LazyCollectionOption.FALSE)
@@ -94,19 +100,19 @@ public class ProjectIfc extends SerializableModelBase {
   public ProjectIfc() {
   }
 
-  public String getId() {
-    return this.id;
+  public String getFilename() {
+    return filename;
   }
 
-  public void setId(final String id) {
-    this.id = id;
+  public void setFilename(final String filename) {
+    this.filename = filename;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -134,11 +140,11 @@ public class ProjectIfc extends SerializableModelBase {
     this.status = status;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 
@@ -160,14 +166,12 @@ public class ProjectIfc extends SerializableModelBase {
 
   public IfcDoorstyle addIfcDoorstyle(final IfcDoorstyle ifcDoorstyle) {
     getIfcDoorstyles().add(ifcDoorstyle);
-    ifcDoorstyle.setProjectIfc(this);
 
     return ifcDoorstyle;
   }
 
   public IfcDoorstyle removeIfcDoorstyle(final IfcDoorstyle ifcDoorstyle) {
     getIfcDoorstyles().remove(ifcDoorstyle);
-    ifcDoorstyle.setProjectIfc(null);
 
     return ifcDoorstyle;
   }
@@ -204,14 +208,12 @@ public class ProjectIfc extends SerializableModelBase {
 
   public IfcPresentationlayer addIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
     getIfcPresentationlayers().add(ifcPresentationlayer);
-    ifcPresentationlayer.setProjectIfc(this);
 
     return ifcPresentationlayer;
   }
 
   public IfcPresentationlayer removeIfcPresentationlayer(final IfcPresentationlayer ifcPresentationlayer) {
     getIfcPresentationlayers().remove(ifcPresentationlayer);
-    ifcPresentationlayer.setProjectIfc(null);
 
     return ifcPresentationlayer;
   }
@@ -226,14 +228,12 @@ public class ProjectIfc extends SerializableModelBase {
 
   public IfcProject addIfcProject(final IfcProject ifcProject) {
     getIfcProjects().add(ifcProject);
-    ifcProject.setProjectIfc(this);
 
     return ifcProject;
   }
 
   public IfcProject removeIfcProject(final IfcProject ifcProject) {
     getIfcProjects().remove(ifcProject);
-    ifcProject.setProjectIfc(null);
 
     return ifcProject;
   }
@@ -260,14 +260,12 @@ public class ProjectIfc extends SerializableModelBase {
 
   public IfcWindowstyle addIfcWindowstyle(final IfcWindowstyle ifcWindowstyle) {
     getIfcWindowstyles().add(ifcWindowstyle);
-    ifcWindowstyle.setProjectIfc(this);
 
     return ifcWindowstyle;
   }
 
   public IfcWindowstyle removeIfcWindowstyle(final IfcWindowstyle ifcWindowstyle) {
     getIfcWindowstyles().remove(ifcWindowstyle);
-    ifcWindowstyle.setProjectIfc(null);
 
     return ifcWindowstyle;
   }
@@ -304,12 +302,12 @@ public class ProjectIfc extends SerializableModelBase {
     this.ifcConversionBasedUnit.add(ifcConversionBasedUnit);
   }
 
-  public IfcProperty findProperty(final String id) {
-    for (final IfcProperty p : ifcProperties) {
-      if (p.getId().equals(id)) {
-        return p;
-      }
-    }
-    return null;
+  public Long getId() {
+    return id;
   }
+
+  public void setId(final Long id) {
+    this.id = id;
+  }
+
 }

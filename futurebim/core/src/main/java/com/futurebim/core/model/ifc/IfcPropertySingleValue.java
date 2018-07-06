@@ -1,6 +1,6 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +35,7 @@ public class IfcPropertySingleValue extends SerializableModelBase {
   @Column(name = "property_id")
   private String propertyId;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @JacksonXmlProperty(localName = "NominalValue")
   @Column(name = "nominal_value")
@@ -43,7 +43,7 @@ public class IfcPropertySingleValue extends SerializableModelBase {
 
   private short status = 1;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   @JacksonXmlProperty(localName = "Name")
   @Column(name = "value_name")
@@ -67,11 +67,11 @@ public class IfcPropertySingleValue extends SerializableModelBase {
     this.id = id;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -91,11 +91,11 @@ public class IfcPropertySingleValue extends SerializableModelBase {
     this.status = status;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 

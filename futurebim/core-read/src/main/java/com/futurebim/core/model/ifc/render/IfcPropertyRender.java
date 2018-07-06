@@ -29,7 +29,6 @@ public class IfcPropertyRender {
 
     final IfcProperty prop = new IfcProperty();
     prop.setIfcId(model.getId());
-    prop.setProjectIfc(model);
     prop.setPropertyName(propertyName);
     prop.setId(id);
 

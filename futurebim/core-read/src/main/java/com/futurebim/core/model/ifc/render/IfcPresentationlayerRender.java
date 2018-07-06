@@ -17,12 +17,12 @@ public class IfcPresentationlayerRender {
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
   private String layerName;
 
-  public IfcPresentationlayer toModel(final String modelId) {
+  public IfcPresentationlayer toModel(final Long modelId) {
 
     final IfcPresentationlayer layer = new IfcPresentationlayer();
     layer.setId(id);
     layer.setLayerName(layerName);
-    layer.setProjectIfcId(modelId);
+    layer.setIfcId(modelId);
 
     return layer;
   }

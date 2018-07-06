@@ -26,13 +26,13 @@ public class IfcFurnituretypeRender {
   @JacksonXmlProperty(localName = "AssemblyPlace", isAttribute = true)
   private String assemblyPlace;
 
-  public IfcFurnituretype toModel(final String modelId) {
+  public IfcFurnituretype toModel(final Long modelId) {
 
     final IfcFurnituretype type = new IfcFurnituretype();
     type.setAssemblyPlace(assemblyPlace);
     type.setElementType(elementType);
     type.setId(id);
-    type.setProjectIfcId(modelId);
+    type.setIfcId(modelId);
     type.setTypeName(typeName);
     type.setTag(tag);
 

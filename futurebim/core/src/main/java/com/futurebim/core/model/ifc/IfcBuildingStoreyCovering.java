@@ -1,6 +1,6 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
   @Column(name = "covering_name")
   private String coveringName;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @Column(name = "object_placement")
   private String objectPlacement;
@@ -50,7 +50,7 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
 
   private String tag;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
 
@@ -86,11 +86,11 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
     this.coveringName = coveringName;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -134,11 +134,11 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
     this.tag = tag;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 

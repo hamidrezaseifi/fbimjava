@@ -1,13 +1,10 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.futurebim.core.model.base.SerializableModelBase;
@@ -28,7 +25,7 @@ public class IfcDoorstyle extends SerializableModelBase {
   @Column(name = "construction_type")
   private String constructionType;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @Column(name = "operation_type")
   private String operationType;
@@ -46,16 +43,11 @@ public class IfcDoorstyle extends SerializableModelBase {
   private String typeName;
 
   @Column(name = "ifc_id")
-  private String projectIfcId;
+  private Long ifcId;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
-
-  // bi-directional many-to-one association to ProjectIfc
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
-  private ProjectIfc projectIfc;
 
   public IfcDoorstyle() {
   }
@@ -76,11 +68,11 @@ public class IfcDoorstyle extends SerializableModelBase {
     this.constructionType = constructionType;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -132,11 +124,11 @@ public class IfcDoorstyle extends SerializableModelBase {
     this.typeName = typeName;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 
@@ -148,20 +140,12 @@ public class IfcDoorstyle extends SerializableModelBase {
     this.version = version;
   }
 
-  public ProjectIfc getProjectIfc() {
-    return this.projectIfc;
+  public Long getIfcId() {
+    return ifcId;
   }
 
-  public void setProjectIfc(final ProjectIfc projectIfc) {
-    this.projectIfc = projectIfc;
-  }
-
-  public String getProjectIfcId() {
-    return projectIfcId;
-  }
-
-  public void setProjectIfcId(final String projectIfcId) {
-    this.projectIfcId = projectIfcId;
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
 }

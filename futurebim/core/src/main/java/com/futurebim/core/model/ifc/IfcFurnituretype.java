@@ -1,6 +1,6 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +33,7 @@ public class IfcFurnituretype extends SerializableModelBase {
   @Column(name = "assembly_place")
   private String assemblyPlace;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   @JacksonXmlProperty(localName = "ElementType")
   @Column(name = "element_type")
@@ -50,9 +50,9 @@ public class IfcFurnituretype extends SerializableModelBase {
   private String tag;
 
   @Column(name = "ifc_id")
-  private String projectIfcId;
+  private Long ifcId;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
 
@@ -84,11 +84,11 @@ public class IfcFurnituretype extends SerializableModelBase {
     this.assemblyPlace = assemblyPlace;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -116,11 +116,11 @@ public class IfcFurnituretype extends SerializableModelBase {
     this.typeName = typeName;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 
@@ -148,12 +148,12 @@ public class IfcFurnituretype extends SerializableModelBase {
     this.tag = tag;
   }
 
-  public String getProjectIfcId() {
-    return projectIfcId;
+  public Long getIfcId() {
+    return ifcId;
   }
 
-  public void setProjectIfcId(final String projectIfcId) {
-    this.projectIfcId = projectIfcId;
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
 }

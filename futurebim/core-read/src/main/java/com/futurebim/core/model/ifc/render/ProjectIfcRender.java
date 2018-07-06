@@ -68,7 +68,7 @@ public class ProjectIfcRender {
     final ProjectIfc model = new ProjectIfc();
 
     model.setIfcName(getName());
-    model.setId("Duplex_A_20110907_optimized");
+    model.setFilename("Duplex_A_20110907_optimized");
 
     model.setIfcUnits(units.toUnitModel(model));
     model.setIfcConversionBasedUnit(units.toConversionBasedUnitModel(model.getId()));

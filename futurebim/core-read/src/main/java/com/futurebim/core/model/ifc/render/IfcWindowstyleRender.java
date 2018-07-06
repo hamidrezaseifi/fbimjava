@@ -37,7 +37,8 @@ public class IfcWindowstyleRender {
 
     type.setId(id);
     // type.setProjectIfcId(model.getId());
-    type.setProjectIfc(model);
+    // type.setProjectIfc(model);
+    type.setIfcId(model.getId());
     type.setTypeName(typeName);
     type.setTag(tag);
     type.setConstructionType(constructionType);

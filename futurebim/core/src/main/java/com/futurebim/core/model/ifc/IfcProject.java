@@ -1,16 +1,13 @@
 package com.futurebim.core.model.ifc;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,7 +26,7 @@ public class IfcProject extends SerializableModelBase {
   @Id
   private String id;
 
-  private Timestamp created;
+  private LocalDateTime created;
 
   private String phase;
 
@@ -40,18 +37,13 @@ public class IfcProject extends SerializableModelBase {
   private String projectName;
 
   @Column(name = "ifc_id")
-  private String projectIfcId;
+  private Long ifcId;
 
   private short status = 1;
 
-  private Timestamp updated;
+  private LocalDateTime updated;
 
   private int version = 1;
-
-  // bi-directional many-to-one association to ProjectIfc
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
-  private ProjectIfc projectIfc;
 
   // bi-directional many-to-one association to IfcProjectSite
   @OneToMany(mappedBy = "ifcProject", cascade = CascadeType.ALL)
@@ -68,11 +60,11 @@ public class IfcProject extends SerializableModelBase {
     this.id = id;
   }
 
-  public Timestamp getCreated() {
+  public LocalDateTime getCreated() {
     return this.created;
   }
 
-  public void setCreated(final Timestamp created) {
+  public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
 
@@ -108,11 +100,11 @@ public class IfcProject extends SerializableModelBase {
     this.status = status;
   }
 
-  public Timestamp getUpdated() {
+  public LocalDateTime getUpdated() {
     return this.updated;
   }
 
-  public void setUpdated(final Timestamp updated) {
+  public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
 
@@ -122,14 +114,6 @@ public class IfcProject extends SerializableModelBase {
 
   public void setVersion(final int version) {
     this.version = version;
-  }
-
-  public ProjectIfc getProjectIfc() {
-    return this.projectIfc;
-  }
-
-  public void setProjectIfc(final ProjectIfc projectIfc) {
-    this.projectIfc = projectIfc;
   }
 
   public List<IfcProjectSite> getIfcProjectSites() {
@@ -158,12 +142,12 @@ public class IfcProject extends SerializableModelBase {
     return ifcProjectSite;
   }
 
-  public String getProjectIfcId() {
-    return projectIfcId;
+  public Long getIfcId() {
+    return ifcId;
   }
 
-  public void setProjectIfcId(final String projectIfcId) {
-    this.projectIfcId = projectIfcId;
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
 }

@@ -1,16 +1,17 @@
 package com.futurebim.core.model.ifc.render;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.futurebim.core.model.ifc.IfcBuildingStorey;
-import com.futurebim.core.model.ifc.IfcBuildingStoreyFootingPresentationlayer;
-import com.futurebim.core.model.ifc.IfcBuildingStoreyFootingProperty;
 import com.futurebim.core.model.ifc.IfcBuildingStoreySlab;
-import com.futurebim.core.model.ifc.IfcBuildingStoreyWallstandardcaseOpening;
-import com.futurebim.core.model.ifc.IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer;
-import com.futurebim.core.model.ifc.IfcBuildingStoreyWallstandardcaseOpeningProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStoreySlabOpening;
+import com.futurebim.core.model.ifc.IfcBuildingStoreySlabOpeningPresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreySlabOpeningProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStoreySlabPresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreySlabProperty;
 import com.futurebim.core.model.ifc.proxy.IfcOpeningElementProxy;
 import com.futurebim.core.model.ifc.proxy.IfcPresentationLayerAssignmentSetProxy;
 import com.futurebim.core.model.ifc.proxy.IfcPropertySetProxy;
@@ -49,7 +50,7 @@ public class IfcSlabRender {
 
   @JacksonXmlProperty(localName = "IfcOpeningElement")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcOpeningElementRender> openingElementList;
+  private final List<IfcOpeningElementRender> openingElementList = new ArrayList<>();
 
   public IfcBuildingStoreySlab toModel(final IfcBuildingStorey model) {
 
@@ -60,38 +61,37 @@ public class IfcSlabRender {
     p.setTag(tag);
     p.setIfcBuildingStorey(model);
     p.setStoreyId(model.getId());
-    p.setFootingName(name);
+    p.setSlabName(name);
     p.setPredefinedType(predefinedType);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyFootingProperty(new IfcBuildingStoreyFootingProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreySlabProperty(new IfcBuildingStoreySlabProperty(id, prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyFootingPresentationlayer(new IfcBuildingStoreyFootingPresentationlayer(id, layer.getPropertyId()));
+      p.addIfcBuildingStoreySlabPresentationlayer(new IfcBuildingStoreySlabPresentationlayer(id, layer.getPropertyId()));
     }
 
     for (final IfcOpeningElementRender element : openingElementList) {
 
       final IfcOpeningElementProxy px = element.toProxy();
 
-      final IfcBuildingStoreyWallstandardcaseOpening open = new IfcBuildingStoreyWallstandardcaseOpening();
-      open.setWallId(id);
+      final IfcBuildingStoreySlabOpening open = new IfcBuildingStoreySlabOpening();
+      open.setSlabId(id);
       open.setId(px.getId());
       open.setObjectPlacement(px.getObjectPlacement());
       open.setObjectType(px.getObjectType());
       open.setOpeningName(px.getName());
       open.setTag(px.getTag());
       for (final IfcPropertySetProxy prp : px.getPropertySetList()) {
-        open.addIfcBuildingStoreyWallstandardcaseOpeningProperty(new IfcBuildingStoreyWallstandardcaseOpeningProperty(px.getId(),
-                                                                                                                      prp.getPropertyId()));
+        open.addIfcBuildingStoreySlabOpeningProperty(new IfcBuildingStoreySlabOpeningProperty(px.getId(), prp.getPropertyId()));
       }
       for (final IfcPresentationLayerAssignmentSetProxy pl : px.getPresentationLayerAssignmentList()) {
-        open.addIfcBuildingStoreyWallstandardcaseOpeningPresentationlayer(new IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer(px.getId(),
-                                                                                                                                        pl.getPropertyId()));
+        open.addIfcBuildingStoreySlabOpeningPresentationlayer(new IfcBuildingStoreySlabOpeningPresentationlayer(px.getId(),
+                                                                                                                pl.getPropertyId()));
       }
 
-      p.addIfcBuildingStoreyWallstandardcaseOpening(open);
+      p.addIfcBuildingStoreySlabOpening(open);
     }
 
     return p;
