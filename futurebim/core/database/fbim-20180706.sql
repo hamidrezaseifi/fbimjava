@@ -231,7 +231,7 @@ CREATE TABLE `ifc_building_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGPROPERTIES_BUILDING` (`building_id`),
   CONSTRAINT `IFCBUILDINGPROPERTIES_BUILDING` FOREIGN KEY (`building_id`) REFERENCES `ifc_building` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -357,7 +357,7 @@ CREATE TABLE `ifc_building_storey_beam_presentationlayers` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYBEAM_BEAM` (`beam_id`),
   CONSTRAINT `IFCBUILDINGSTOREYBEAMPLAYER_BEAM` FOREIGN KEY (`beam_id`) REFERENCES `ifc_building_storey_beam` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +385,7 @@ CREATE TABLE `ifc_building_storey_beam_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYBEAM_BEAM` (`beam_id`),
   CONSTRAINT `IFCBUILDINGSTOREYBEAM_BEAM` FOREIGN KEY (`beam_id`) REFERENCES `ifc_building_storey_beam` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1065 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=729 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,7 +463,7 @@ CREATE TABLE `ifc_building_storey_covering_presentationlayers` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYCOVERING_COVERING` (`covering_id`),
   CONSTRAINT `IFCBUILDINGSTOREYCOVERINGPLAYER_COVERING` FOREIGN KEY (`covering_id`) REFERENCES `ifc_building_storey_covering` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,7 +491,7 @@ CREATE TABLE `ifc_building_storey_covering_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYCOVERING_COVERING` (`covering_id`),
   CONSTRAINT `IFCBUILDINGSTOREYCOVERING_COVERING` FOREIGN KEY (`covering_id`) REFERENCES `ifc_building_storey_covering` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=955 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=748 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -688,7 +688,7 @@ CREATE TABLE `ifc_building_storey_footing_presentationlayer` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYFOOTINGPRESENTATION_FOOTING` (`footing_id`),
   CONSTRAINT `IFCBUILDINGSTOREYFOOTINGPRESENTATION_FOOTING` FOREIGN KEY (`footing_id`) REFERENCES `ifc_building_storey_footing` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -716,7 +716,7 @@ CREATE TABLE `ifc_building_storey_footing_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYFOOTINGPROPERTIES_FOOTING` (`footing_id`),
   CONSTRAINT `IFCBUILDINGSTOREYFOOTINGPROPERTIES_FOOTING` FOREIGN KEY (`footing_id`) REFERENCES `ifc_building_storey_footing` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=812 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=463 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -744,7 +744,7 @@ CREATE TABLE `ifc_building_storey_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYPROPERTIES_STOREY` (`storey_id`),
   CONSTRAINT `IFCBUILDINGSTOREYPROPERTIES_STOREY` FOREIGN KEY (`storey_id`) REFERENCES `ifc_building_storey` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=445 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -806,7 +806,7 @@ CREATE TABLE `ifc_building_storey_roof_presentationlayer` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYROOFPRESENTATION_FOOTING` (`roof_id`),
   CONSTRAINT `IFCBUILDINGSTOREYROOFPRESENTATION_FOOTING` FOREIGN KEY (`roof_id`) REFERENCES `ifc_building_storey_roof` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -834,7 +834,7 @@ CREATE TABLE `ifc_building_storey_roof_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYROOFPROPERTIES_FOOTING` (`roof_id`),
   CONSTRAINT `IFCBUILDINGSTOREYROOFPROPERTIES_FOOTING` FOREIGN KEY (`roof_id`) REFERENCES `ifc_building_storey_roof` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=812 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1180,7 +1180,7 @@ CREATE TABLE `ifc_building_storey_slab_presentationlayer` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYSLABPRESENTATION_OPENING` (`slab_id`),
   CONSTRAINT `IFCBUILDINGSTOREYSLABPRESENTATION_OPENING` FOREIGN KEY (`slab_id`) REFERENCES `ifc_building_storey_slab` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1208,7 +1208,7 @@ CREATE TABLE `ifc_building_storey_slab_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYSLABPROPERTIES_SLAB` (`slab_id`),
   CONSTRAINT `IFCBUILDINGSTOREYSLABPROPERTIES_SLAB` FOREIGN KEY (`slab_id`) REFERENCES `ifc_building_storey_slab` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=745 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1287,7 +1287,7 @@ CREATE TABLE `ifc_building_storey_space_felement_opening_presentationlayer` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYSPACEOPENINGPRESENTATION_OPENING` (`opening_id`),
   CONSTRAINT `IFCBUILDINGSTOREYSPACEOPENINGPRESENTATION_OPENING` FOREIGN KEY (`opening_id`) REFERENCES `ifc_building_storey_space_furnishingelement_opening` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1364,7 +1364,7 @@ CREATE TABLE `ifc_building_storey_space_furnishingelement_furnituretypes` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYFURNISHINGELEMENTFURNITURETYPES_FELEMENT` (`felement_id`),
   CONSTRAINT `IFCBUILDINGSTOREYFURNISHINGELEMENTFURNITURETYPES_FELEMENT` FOREIGN KEY (`felement_id`) REFERENCES `ifc_building_storey_space_furnishingelement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1043 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=408 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1424,7 +1424,7 @@ CREATE TABLE `ifc_building_storey_space_furnishingelement_opening_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYSPACEOPENINGPROPERTIES_OPENING` (`opening_id`),
   CONSTRAINT `IFCBUILDINGSTOREYSPACEOPENINGPROPERTIES_OPENING` FOREIGN KEY (`opening_id`) REFERENCES `ifc_building_storey_space_furnishingelement_opening` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=794 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=511 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1452,7 +1452,7 @@ CREATE TABLE `ifc_building_storey_space_furnishingelement_presentationlayers` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYFURNISHINGELEMENT_FELEMENT` (`felement_id`),
   CONSTRAINT `IFCBUILDINGSTOREYFURNISHINGELEMENTPLAYER_FELEMENT` FOREIGN KEY (`felement_id`) REFERENCES `ifc_building_storey_space_furnishingelement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1043 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=408 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1480,7 +1480,7 @@ CREATE TABLE `ifc_building_storey_space_furnishingelement_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYFURNISHINGELEMENT_FELEMENT` (`felement_id`),
   CONSTRAINT `IFCBUILDINGSTOREYFURNISHINGELEMENT_FELEMENT` FOREIGN KEY (`felement_id`) REFERENCES `ifc_building_storey_space_furnishingelement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8188 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3209 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1510,7 +1510,7 @@ CREATE TABLE `ifc_building_storey_space_presentationlayers` (
   KEY `IFCBUILDINGSTOREYSPACEPLAYER_PLAYER` (`presentationlayer_id`),
   CONSTRAINT `IFCBUILDINGSTOREYSPACEPLAYER_PLAYER` FOREIGN KEY (`presentationlayer_id`) REFERENCES `ifc_presentationlayers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `IFCBUILDINGSTOREYSPACEPLAYER_SPACE` FOREIGN KEY (`space_id`) REFERENCES `ifc_building_storey_space` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=350 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1538,7 +1538,7 @@ CREATE TABLE `ifc_building_storey_space_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYSPACE_SPACE` (`space_id`),
   CONSTRAINT `IFCBUILDINGSTOREYSPACE_SPACE` FOREIGN KEY (`space_id`) REFERENCES `ifc_building_storey_space` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2095 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=817 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1560,7 +1560,7 @@ DROP TABLE IF EXISTS `ifc_building_storey_stair`;
 CREATE TABLE `ifc_building_storey_stair` (
   `id` varchar(50) NOT NULL,
   `storey_id` varchar(50) NOT NULL,
-  `stair_name` varchar(50) NOT NULL,
+  `stair_name` varchar(100) NOT NULL,
   `object_type` varchar(50) NOT NULL,
   `object_placement` varchar(50) NOT NULL,
   `tag` varchar(50) NOT NULL,
@@ -1623,8 +1623,8 @@ CREATE TABLE `ifc_building_storey_stair_flight` (
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
-  KEY `IFCBUILDINGSTOREYSTAIRFLIGHT_STAIR` (`stair_id`),
-  CONSTRAINT `IFCBUILDINGSTOREYSTAIRFLIGHT_STAIR` FOREIGN KEY (`stair_id`) REFERENCES `ifc_building_storey` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `IFCBUILDINGSTOREYSTAIRFLIGHT_STAIR_idx` (`stair_id`),
+  CONSTRAINT `IFCBUILDINGSTOREYSTAIRFLIGHT_STAIR` FOREIGN KEY (`stair_id`) REFERENCES `ifc_building_storey_stair` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1728,8 +1728,8 @@ CREATE TABLE `ifc_building_storey_stair_member` (
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
-  KEY `IFCBUILDINGSTOREYSTAIRMEMBER_STAIR` (`stair_id`),
-  CONSTRAINT `IFCBUILDINGSTOREYSTAIRMEMBER_STAIR` FOREIGN KEY (`stair_id`) REFERENCES `ifc_building_storey` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `IFCBUILDINGSTOREYSTAIRMEMBER_STAIR_idx` (`stair_id`),
+  CONSTRAINT `IFCBUILDINGSTOREYSTAIRMEMBER_STAIR` FOREIGN KEY (`stair_id`) REFERENCES `ifc_building_storey_stair` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1830,7 +1830,7 @@ CREATE TABLE `ifc_building_storey_stair_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYSTAIRPROPERTIES_STAIR` (`stair_id`),
   CONSTRAINT `IFCBUILDINGSTOREYSTAIRPROPERTIES_STAIR` FOREIGN KEY (`stair_id`) REFERENCES `ifc_building_storey_stair` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1861,8 +1861,8 @@ CREATE TABLE `ifc_building_storey_stair_railing` (
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
-  KEY `IFCBUILDINGSTOREYSTAIRRAILING_STAIR` (`stair_id`),
-  CONSTRAINT `IFCBUILDINGSTOREYSTAIRRAILING_STAIR` FOREIGN KEY (`stair_id`) REFERENCES `ifc_building_storey` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `IFCBUILDINGSTOREYSTAIRRAILING_STAIR_idx` (`stair_id`),
+  CONSTRAINT `IFCBUILDINGSTOREYSTAIRRAILING_STAIR` FOREIGN KEY (`stair_id`) REFERENCES `ifc_building_storey_stair` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -2117,7 +2117,7 @@ CREATE TABLE `ifc_building_storey_wall_presentationlayer` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYWALLPRESENTATION_OPENING` (`wall_id`),
   CONSTRAINT `IFCBUILDINGSTOREYWALLPRESENTATION_OPENING` FOREIGN KEY (`wall_id`) REFERENCES `ifc_building_storey_wall` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2145,7 +2145,7 @@ CREATE TABLE `ifc_building_storey_wall_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYWALLPROPERTIES_WALL` (`wall_id`),
   CONSTRAINT `IFCBUILDINGSTOREYWALLPROPERTIES_WALL` FOREIGN KEY (`wall_id`) REFERENCES `ifc_building_storey_wall` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2295,7 +2295,7 @@ CREATE TABLE `ifc_building_storey_wallstandardcase_presentationlayer` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYWALLSTANDARDCASEPRESENTATION_OPENING` (`wall_id`),
   CONSTRAINT `IFCBUILDINGSTOREYWALLSTANDARDCASEPRESENTATION_OPENING` FOREIGN KEY (`wall_id`) REFERENCES `ifc_building_storey_wallstandardcase` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2323,7 +2323,7 @@ CREATE TABLE `ifc_building_storey_wallstandardcase_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYWALLSTANDARDCASEPROPERTIES_WALL` (`wall_id`),
   CONSTRAINT `IFCBUILDINGSTOREYWALLSTANDARDCASEPROPERTIES_WALL` FOREIGN KEY (`wall_id`) REFERENCES `ifc_building_storey_wallstandardcase` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=952 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1303 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2402,7 +2402,7 @@ CREATE TABLE `ifc_building_storey_window_presentationlayer` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYSLABPRESENTATION_WINDOW` (`window_id`),
   CONSTRAINT `IFCBUILDINGSTOREYWINDOWPRESENTATION_WINDOW` FOREIGN KEY (`window_id`) REFERENCES `ifc_building_storey_window` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2430,7 +2430,7 @@ CREATE TABLE `ifc_building_storey_window_properties` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYWINDOWPROPERTIES_WINDOW` (`window_id`),
   CONSTRAINT `IFCBUILDINGSTOREYWINDOWPROPERTIES_WINDOW` FOREIGN KEY (`window_id`) REFERENCES `ifc_building_storey_window` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2458,7 +2458,7 @@ CREATE TABLE `ifc_building_storey_window_style` (
   PRIMARY KEY (`id`),
   KEY `IFCBUILDINGSTOREYWINDOWSTYLE_WINDOW` (`window_id`),
   CONSTRAINT `IFCBUILDINGSTOREYWINDOWSTYLE_WINDOW` FOREIGN KEY (`window_id`) REFERENCES `ifc_building_storey_window` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2479,7 +2479,7 @@ DROP TABLE IF EXISTS `ifc_conversionbaseunits`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ifc_conversionbaseunits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ifc_id` varchar(50) NOT NULL,
+  `ifc_id` int(11) NOT NULL,
   `unit_name` varchar(100) NOT NULL,
   `unit_type` varchar(100) NOT NULL,
   `equivalent` varchar(100) NOT NULL,
@@ -2488,9 +2488,9 @@ CREATE TABLE `ifc_conversionbaseunits` (
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
-  KEY `IFCCONVERSATIONBASEUNIT_IFC` (`ifc_id`),
+  KEY `IFCCONVERSATIONBASEUNIT_IFC_idx` (`ifc_id`),
   CONSTRAINT `IFCCONVERSATIONBASEUNIT_IFC` FOREIGN KEY (`ifc_id`) REFERENCES `project_ifc` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2511,7 +2511,7 @@ DROP TABLE IF EXISTS `ifc_doorstyle`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ifc_doorstyle` (
   `id` varchar(50) NOT NULL,
-  `ifc_id` varchar(50) NOT NULL,
+  `ifc_id` int(11) NOT NULL,
   `type_name` varchar(50) NOT NULL,
   `tag` varchar(50) NOT NULL,
   `operation_type` varchar(50) NOT NULL,
@@ -2562,7 +2562,7 @@ DROP TABLE IF EXISTS `ifc_furnituretypes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ifc_furnituretypes` (
   `id` varchar(50) NOT NULL,
-  `ifc_id` varchar(50) NOT NULL,
+  `ifc_id` int(11) NOT NULL,
   `type_name` varchar(50) NOT NULL,
   `tag` varchar(50) NOT NULL,
   `element_type` varchar(50) NOT NULL,
@@ -2572,7 +2572,7 @@ CREATE TABLE `ifc_furnituretypes` (
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
-  KEY `IFCFURNITURETYPE_IFC` (`ifc_id`),
+  KEY `IFCFURNITURETYPE_IFC_idx` (`ifc_id`),
   CONSTRAINT `IFCFURNITURETYPE_IFC` FOREIGN KEY (`ifc_id`) REFERENCES `project_ifc` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2611,14 +2611,14 @@ DROP TABLE IF EXISTS `ifc_presentationlayers`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ifc_presentationlayers` (
   `id` varchar(50) NOT NULL,
-  `ifc_id` varchar(50) NOT NULL,
+  `ifc_id` int(11) NOT NULL,
   `layer_name` varchar(50) NOT NULL,
   `status` smallint(6) NOT NULL DEFAULT '1',
   `version` int(11) NOT NULL,
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
-  KEY `IFCLAYER_IFC` (`ifc_id`),
+  KEY `IFCLAYER_IFC_idx` (`ifc_id`),
   CONSTRAINT `IFCLAYER_IFC` FOREIGN KEY (`ifc_id`) REFERENCES `project_ifc` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2657,7 +2657,7 @@ DROP TABLE IF EXISTS `ifc_project`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ifc_project` (
   `id` varchar(50) NOT NULL,
-  `ifc_id` varchar(50) NOT NULL,
+  `ifc_id` int(11) NOT NULL,
   `project_name` varchar(50) NOT NULL,
   `project_long_name` varchar(100) NOT NULL,
   `phase` varchar(50) NOT NULL,
@@ -2666,7 +2666,7 @@ CREATE TABLE `ifc_project` (
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
-  KEY `IFCPROJECT_IFC` (`ifc_id`),
+  KEY `IFCPROJECT_IFC_idx` (`ifc_id`),
   CONSTRAINT `IFCPROJECT_IFC` FOREIGN KEY (`ifc_id`) REFERENCES `project_ifc` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2718,7 +2718,7 @@ CREATE TABLE `ifc_project_site` (
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
-  KEY `IFCPROJECTSITE_IFC` (`project_id`),
+  KEY `IFCPROJECTSITE_IFC_idx` (`project_id`),
   CONSTRAINT `IFCPROJECTSITE_IFC` FOREIGN KEY (`project_id`) REFERENCES `ifc_project` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2757,14 +2757,14 @@ DROP TABLE IF EXISTS `ifc_properties`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ifc_properties` (
   `id` varchar(50) NOT NULL,
-  `ifc_id` varchar(50) NOT NULL,
+  `ifc_id` int(11) NOT NULL,
   `property_name` varchar(50) NOT NULL,
   `status` smallint(6) NOT NULL DEFAULT '1',
   `version` int(11) NOT NULL,
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
-  KEY `IFCPROPERTIES_IFC` (`ifc_id`),
+  KEY `IFCPROPERTIES_IFC_idx` (`ifc_id`),
   CONSTRAINT `IFCPROPERTIES_IFC` FOREIGN KEY (`ifc_id`) REFERENCES `project_ifc` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2811,9 +2811,9 @@ CREATE TABLE `ifc_properties_value` (
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
-  KEY `IFCPROPERTIESVALUE_PROPERTIES` (`property_id`),
+  KEY `IFCPROPERTIESVALUE_PROPERTIES_idx` (`property_id`),
   CONSTRAINT `IFCPROPERTIESVALUE_PROPERTIES` FOREIGN KEY (`property_id`) REFERENCES `ifc_properties` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=289460 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38227 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2834,7 +2834,7 @@ DROP TABLE IF EXISTS `ifc_units`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ifc_units` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ifc_id` varchar(50) NOT NULL,
+  `ifc_id` int(11) NOT NULL,
   `unit_name` varchar(100) NOT NULL,
   `unit_type` varchar(100) NOT NULL,
   `equivalent` varchar(100) NOT NULL,
@@ -2845,7 +2845,7 @@ CREATE TABLE `ifc_units` (
   PRIMARY KEY (`id`),
   KEY `IFCUNIT_IFC` (`ifc_id`),
   CONSTRAINT `IFCUNIT_IFC` FOREIGN KEY (`ifc_id`) REFERENCES `project_ifc` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2866,7 +2866,7 @@ DROP TABLE IF EXISTS `ifc_windowstyle`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ifc_windowstyle` (
   `id` varchar(50) NOT NULL,
-  `ifc_id` varchar(50) NOT NULL,
+  `ifc_id` int(11) NOT NULL,
   `type_name` varchar(50) NOT NULL,
   `tag` varchar(50) NOT NULL,
   `operation_type` varchar(50) NOT NULL,
@@ -3014,7 +3014,8 @@ DROP TABLE IF EXISTS `project_ifc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `project_ifc` (
-  `id` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(50) NOT NULL,
   `project_id` int(11) NOT NULL,
   `ifc_name` varchar(100) NOT NULL,
   `status` smallint(6) NOT NULL DEFAULT '1',
@@ -3022,9 +3023,10 @@ CREATE TABLE `project_ifc` (
   `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `updated` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   PRIMARY KEY (`id`),
+  UNIQUE KEY `filename_UNIQUE` (`filename`),
   KEY `PROJECT_IFC_FILES_PROJECT` (`project_id`),
   CONSTRAINT `PROJECT_IFC_PROJECT` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3451,4 +3453,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-06 22:44:29
+-- Dump completed on 2018-07-07  1:24:57
