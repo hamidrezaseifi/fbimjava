@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.futurebim.common.model.reponse.FutureBimUiRestResponse;
-import com.futurebim.gui.ProjectsHandler;
+import com.futurebim.gui.bl.ProjectsHandler;
 import com.futurebim.gui.controller.base.UiControllerBase;
 import com.futurebim.gui.helper.PageMenuLoader;
 import com.futurebim.gui.model.MenuItem;
