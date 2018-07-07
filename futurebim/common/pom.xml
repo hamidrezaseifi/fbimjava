@@ -32,6 +32,13 @@
 	      <scope>test</scope>
 	    </dependency>
     
+        <dependency>
+            <!-- TODO: review if we better take https://projects.spring.io/spring-data-rest/ -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+
+        </dependency>
+    
     </dependencies>
   
 </project>

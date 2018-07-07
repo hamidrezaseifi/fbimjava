@@ -14,6 +14,6 @@ public interface ProjectDao {
 
   public ProjectRich getById(Long id);
 
-  public List<ProjectRich> listProjects();
+  public List<ProjectRich> listProjects(final Long companyId);
 
 }

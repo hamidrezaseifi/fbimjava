@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.futurebim.common.model.reponse.FutureBimUiRestResponse;
 import com.futurebim.core.dao.CompanyDao;
 import com.futurebim.core.model.Company;
-import com.futurebim.core.model.ui.FutureBimUiRestResponse;
+
 
 @RestController
 @RequestMapping(path = "/company/write")

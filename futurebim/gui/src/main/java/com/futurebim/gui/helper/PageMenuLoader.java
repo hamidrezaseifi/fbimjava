@@ -18,6 +18,7 @@ public class PageMenuLoader {
     topMenus.add(new MenuItem("menu.bim" , "Bim", "aspect_ratio" , "/bim/"));
     topMenus.add(new MenuItem("menu.projects" , "Projekte", "chrome_reader_mode" , "/projects/", true));
     topMenus.add(new MenuItem("menu.workflow" , "Workflow", "assessment" , "/workflow/"));
+    topMenus.add(new MenuItem("menu.ifc" , "IFC Viewer", "perm_media" , "/ifc/"));
     topMenus.add(new MenuItem("menu.settings" , "Einstellung", "settings" , "/options/"));
 
     leftMenus.add(new MenuItem("menu.balance" , "Balance", "account_balance" , "/balance"));

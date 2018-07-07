@@ -69,7 +69,7 @@
 			  </div>
 			</nav>  
 			
-			<div class="left-panel" id ="left-panel">
+			<div class="left-panel" id ="left-panel" th:if="${pageLeftToolList.size() > 0}">
 				<ul>
 					<li th:each="menu: ${pageLeftToolList}" th:if="${menu.isEnabled()}" th:class="${menu.isActive() ? 'active' : ''}">
 						<a th:href="${menu.getUrl()}" >

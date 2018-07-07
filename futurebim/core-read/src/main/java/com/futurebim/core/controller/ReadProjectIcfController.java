@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
+import com.futurebim.common.model.reponse.FutureBimUiRestResponse;
 import com.futurebim.core.bl.ProjectIcfReadHandler;
 import com.futurebim.core.dao.ifc.IfcPropertyDao;
 import com.futurebim.core.dao.ifc.ProjectIcfDao;
@@ -31,7 +32,6 @@ import com.futurebim.core.model.ifc.IfcProperty;
 import com.futurebim.core.model.ifc.IfcPropertySingleValue;
 import com.futurebim.core.model.ifc.ProjectIfc;
 import com.futurebim.core.model.ifc.render.ProjectIfcRender;
-import com.futurebim.core.model.ui.FutureBimUiRestResponse;
 
 @RestController
 @RequestMapping(path = "/pifc/read")

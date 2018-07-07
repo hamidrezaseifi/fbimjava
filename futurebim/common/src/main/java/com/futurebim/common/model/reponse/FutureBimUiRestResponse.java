@@ -1,4 +1,4 @@
-package com.futurebim.core.model.ui;
+package com.futurebim.common.model.reponse;
 
 import org.springframework.http.HttpStatus;
 

@@ -17,6 +17,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.seifi.futurebim</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
+        <dependency>
             <!-- TODO: review if we better take https://projects.spring.io/spring-data-rest/ -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

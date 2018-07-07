@@ -78,6 +78,12 @@
 	margin-bottom: 10px;
 }
 
+ul.navbar-nav li
+{
+	margin-left: 10px;	
+	height: 32px;
+}
+
 .left-panel ul li.active, ul.navbar-nav li.active
 {
 	background-color: #85CE36 !important;
@@ -93,10 +99,15 @@
 	padding-right: 10px;
 }
 
-.left-panel.open ul li a div, ul.navbar-nav li a div
+.left-panel.open ul li a div
 {
 	display: block;
 	width: calc(100% - 70px);
+}
+
+.left-panel.open ul li a div, ul.navbar-nav li a div
+{
+	display: block;
 }
 
 .left-panel ul li a i, ul.navbar-nav li a i
