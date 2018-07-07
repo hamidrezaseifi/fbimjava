@@ -8,8 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,7 +27,6 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;
 
   private LocalDateTime created;
@@ -46,6 +43,9 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
   @Column(name = "shape_type")
   private String shapeType;
 
+  @Column(name = "storey_id")
+  private String storeyId;
+
   private short status;
 
   private String tag;
@@ -56,7 +56,7 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "storey_id")
+  @JoinColumn(name = "storey_id", updatable = false, insertable = false)
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyRoofPresentationlayer
@@ -247,6 +247,14 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
   public void addIfcBuildingStoreyRoofOpening(final IfcBuildingStoreyRoofOpening ifcBuildingStoreyRoofOpening) {
     this.ifcBuildingStoreyRoofOpenings.add(ifcBuildingStoreyRoofOpening);
     ifcBuildingStoreyRoofOpening.setIfcBuildingStoreyRoof(this);
+  }
+
+  public String getStoreyId() {
+    return storeyId;
+  }
+
+  public void setStoreyId(final String storeyId) {
+    this.storeyId = storeyId;
   }
 
 }

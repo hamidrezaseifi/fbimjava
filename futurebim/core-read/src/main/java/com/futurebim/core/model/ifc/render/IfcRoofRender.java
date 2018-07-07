@@ -8,6 +8,10 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.futurebim.core.model.ifc.IfcBuildingStorey;
 import com.futurebim.core.model.ifc.IfcBuildingStoreyRoof;
 import com.futurebim.core.model.ifc.IfcBuildingStoreyRoofOpening;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyRoofOpeningPresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyRoofOpeningProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyRoofPresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyRoofProperty;
 import com.futurebim.core.model.ifc.proxy.IfcOpeningElementProxy;
 import com.futurebim.core.model.ifc.proxy.IfcPresentationLayerAssignmentSetProxy;
 import com.futurebim.core.model.ifc.proxy.IfcPropertySetProxy;
@@ -60,17 +64,18 @@ public class IfcRoofRender {
     p.setIfcBuildingStorey(model);
     p.setRoofName(name);
     p.setShapeType(shapeType);
+    p.setStoreyId(model.getId());
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      // p.addIfcBuildingStoreyRoofProperty(new IfcBuildingStoreyRoofProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyRoofProperty(new IfcBuildingStoreyRoofProperty(id, prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSet prop : presentationLayerAssignmentList) {
-      // p.addIfcBuildingStoreyRoofPresentationlayer(new IfcBuildingStoreyRoofPresentationlayer(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyRoofPresentationlayer(new IfcBuildingStoreyRoofPresentationlayer(id, prop.getPropertyId()));
     }
 
     for (final IfcSlabRender slab : slabList) {
-
+      p.addIfcBuildingStoreyRoofSlab(slab.toRoolSlabModel(p));
     }
 
     for (final IfcOpeningElementRender element : openingElementList) {
@@ -84,14 +89,14 @@ public class IfcRoofRender {
       open.setOpeningName(px.getName());
       open.setTag(px.getTag());
       for (final IfcPropertySetProxy prp : px.getPropertySetList()) {
-        // open.addIfcBuildingStoreyRoofOpeningProperty(new IfcBuildingStoreyRoofOpeningProperty(px.getId(), prp.getPropertyId()));
+        open.addIfcBuildingStoreyRoofOpeningProperty(new IfcBuildingStoreyRoofOpeningProperty(px.getId(), prp.getPropertyId()));
       }
       for (final IfcPresentationLayerAssignmentSetProxy pl : px.getPresentationLayerAssignmentList()) {
-        // open.addIfcBuildingStoreyRoofOpeningPresentationlayer(new IfcBuildingStoreyRoofOpeningPresentationlayer(px.getId(),
-        // pl.getPropertyId()));
+        open.addIfcBuildingStoreyRoofOpeningPresentationlayer(new IfcBuildingStoreyRoofOpeningPresentationlayer(px.getId(),
+                                                                                                                pl.getPropertyId()));
       }
 
-      // p.addIfcBuildingStoreyRoofOpening(open);
+      p.addIfcBuildingStoreyRoofOpening(open);
     }
 
     return p;

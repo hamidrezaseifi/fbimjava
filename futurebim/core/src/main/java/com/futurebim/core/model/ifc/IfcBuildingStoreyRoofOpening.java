@@ -7,8 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.futurebim.core.model.base.SerializableModelBase;
-import com.futurebim.core.model.ifc.IfcBuildingStoreyRoof;
 
 /**
  * The persistent class for the ifc_building_storey_roof_opening database table.
@@ -29,7 +26,6 @@ public class IfcBuildingStoreyRoofOpening extends SerializableModelBase {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private String id;
 
   private Timestamp created;

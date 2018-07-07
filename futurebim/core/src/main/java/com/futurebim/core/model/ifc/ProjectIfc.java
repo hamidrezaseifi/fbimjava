@@ -40,6 +40,8 @@ public class ProjectIfc extends SerializableModelBase {
   @Column(name = "filename")
   private String filename;
 
+  private String comments;
+
   private LocalDateTime created; // = LocalDateTime.valueOf(LocalDateTime.now());
 
   @Column(name = "ifc_name", unique = true, nullable = false)
@@ -317,6 +319,14 @@ public class ProjectIfc extends SerializableModelBase {
 
   public void setId(final Long id) {
     this.id = id;
+  }
+
+  public String getComments() {
+    return comments;
+  }
+
+  public void setComments(final String comments) {
+    this.comments = comments;
   }
 
 }

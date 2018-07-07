@@ -28,7 +28,7 @@ public class IfcOpeningElementProxy {
   }
 
   public String getName() {
-    return name;
+    return name != null ? name : "";
   }
 
   public void setName(final String name) {

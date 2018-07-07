@@ -10,8 +10,6 @@ import com.futurebim.core.model.ifc.ProjectIfc;
  */
 public class IfcFurnituretypeRender {
 
-  private static final long serialVersionUID = 1L;
-
   @JacksonXmlProperty(localName = "id", isAttribute = true)
   private String id;
 
