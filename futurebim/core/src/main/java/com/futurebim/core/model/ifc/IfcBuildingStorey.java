@@ -99,7 +99,7 @@ public class IfcBuildingStorey extends SerializableModelBase {
   private List<IfcBuildingStoreyFooting> ifcBuildingStoreyFootings = new ArrayList<>();
 
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
-  private final List<IfcBuildingStoreyRoof> ifcBuildingStoreyRoofs = new ArrayList<>();
+  private List<IfcBuildingStoreyRoof> ifcBuildingStoreyRoofs = new ArrayList<>();
 
   public IfcBuildingStorey() {
   }
@@ -414,6 +414,18 @@ public class IfcBuildingStorey extends SerializableModelBase {
   public void addIfcBuildingStoreyFooting(final IfcBuildingStoreyFooting ifcBuildingStoreyFooting) {
     ifcBuildingStoreyFooting.setIfcBuildingStorey(this);
     this.ifcBuildingStoreyFootings.add(ifcBuildingStoreyFooting);
+  }
+
+  public List<IfcBuildingStoreyRoof> getIfcBuildingStoreyRoofs() {
+    return ifcBuildingStoreyRoofs;
+  }
+
+  public void setIfcBuildingStoreyRoofs(final List<IfcBuildingStoreyRoof> ifcBuildingStoreyRoofs) {
+    this.ifcBuildingStoreyRoofs = ifcBuildingStoreyRoofs;
+  }
+
+  public void addIfcBuildingStoreyRoof(final IfcBuildingStoreyRoof ifcBuildingStoreyRoof) {
+    this.ifcBuildingStoreyRoofs.add(ifcBuildingStoreyRoof);
   }
 
 }

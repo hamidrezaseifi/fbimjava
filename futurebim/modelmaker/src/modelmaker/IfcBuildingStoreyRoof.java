@@ -17,7 +17,6 @@ public class IfcBuildingStoreyRoof implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String id;
 
 	private Timestamp created;
@@ -36,28 +35,18 @@ public class IfcBuildingStoreyRoof implements Serializable {
 
 	private short status;
 
+	@Column(name="storey_id")
+	private String storeyId;
+
 	private String tag;
 
 	private Timestamp updated;
 
 	private int version;
 
-	//bi-directional many-to-one association to IfcBuildingStorey
-	@ManyToOne
-	@JoinColumn(name="storey_id")
-	private IfcBuildingStorey ifcBuildingStorey;
-
-	//bi-directional many-to-one association to IfcBuildingStoreyRoofPresentationlayer
+	//bi-directional many-to-one association to IfcBuildingStoreyRoofOpening
 	@OneToMany(mappedBy="ifcBuildingStoreyRoof")
-	private List<IfcBuildingStoreyRoofPresentationlayer> ifcBuildingStoreyRoofPresentationlayers;
-
-	//bi-directional many-to-one association to IfcBuildingStoreyRoofProperty
-	@OneToMany(mappedBy="ifcBuildingStoreyRoof")
-	private List<IfcBuildingStoreyRoofProperty> ifcBuildingStoreyRoofProperties;
-
-	//bi-directional many-to-one association to IfcBuildingStoreyRoofSlab
-	@OneToMany(mappedBy="ifcBuildingStoreyRoof")
-	private List<IfcBuildingStoreyRoofSlab> ifcBuildingStoreyRoofSlabs;
+	private List<IfcBuildingStoreyRoofOpening> ifcBuildingStoreyRoofOpenings;
 
 	public IfcBuildingStoreyRoof() {
 	}
@@ -118,6 +107,14 @@ public class IfcBuildingStoreyRoof implements Serializable {
 		this.status = status;
 	}
 
+	public String getStoreyId() {
+		return this.storeyId;
+	}
+
+	public void setStoreyId(String storeyId) {
+		this.storeyId = storeyId;
+	}
+
 	public String getTag() {
 		return this.tag;
 	}
@@ -142,78 +139,26 @@ public class IfcBuildingStoreyRoof implements Serializable {
 		this.version = version;
 	}
 
-	public IfcBuildingStorey getIfcBuildingStorey() {
-		return this.ifcBuildingStorey;
+	public List<IfcBuildingStoreyRoofOpening> getIfcBuildingStoreyRoofOpenings() {
+		return this.ifcBuildingStoreyRoofOpenings;
 	}
 
-	public void setIfcBuildingStorey(IfcBuildingStorey ifcBuildingStorey) {
-		this.ifcBuildingStorey = ifcBuildingStorey;
+	public void setIfcBuildingStoreyRoofOpenings(List<IfcBuildingStoreyRoofOpening> ifcBuildingStoreyRoofOpenings) {
+		this.ifcBuildingStoreyRoofOpenings = ifcBuildingStoreyRoofOpenings;
 	}
 
-	public List<IfcBuildingStoreyRoofPresentationlayer> getIfcBuildingStoreyRoofPresentationlayers() {
-		return this.ifcBuildingStoreyRoofPresentationlayers;
+	public IfcBuildingStoreyRoofOpening addIfcBuildingStoreyRoofOpening(IfcBuildingStoreyRoofOpening ifcBuildingStoreyRoofOpening) {
+		getIfcBuildingStoreyRoofOpenings().add(ifcBuildingStoreyRoofOpening);
+		ifcBuildingStoreyRoofOpening.setIfcBuildingStoreyRoof(this);
+
+		return ifcBuildingStoreyRoofOpening;
 	}
 
-	public void setIfcBuildingStoreyRoofPresentationlayers(List<IfcBuildingStoreyRoofPresentationlayer> ifcBuildingStoreyRoofPresentationlayers) {
-		this.ifcBuildingStoreyRoofPresentationlayers = ifcBuildingStoreyRoofPresentationlayers;
-	}
+	public IfcBuildingStoreyRoofOpening removeIfcBuildingStoreyRoofOpening(IfcBuildingStoreyRoofOpening ifcBuildingStoreyRoofOpening) {
+		getIfcBuildingStoreyRoofOpenings().remove(ifcBuildingStoreyRoofOpening);
+		ifcBuildingStoreyRoofOpening.setIfcBuildingStoreyRoof(null);
 
-	public IfcBuildingStoreyRoofPresentationlayer addIfcBuildingStoreyRoofPresentationlayer(IfcBuildingStoreyRoofPresentationlayer ifcBuildingStoreyRoofPresentationlayer) {
-		getIfcBuildingStoreyRoofPresentationlayers().add(ifcBuildingStoreyRoofPresentationlayer);
-		ifcBuildingStoreyRoofPresentationlayer.setIfcBuildingStoreyRoof(this);
-
-		return ifcBuildingStoreyRoofPresentationlayer;
-	}
-
-	public IfcBuildingStoreyRoofPresentationlayer removeIfcBuildingStoreyRoofPresentationlayer(IfcBuildingStoreyRoofPresentationlayer ifcBuildingStoreyRoofPresentationlayer) {
-		getIfcBuildingStoreyRoofPresentationlayers().remove(ifcBuildingStoreyRoofPresentationlayer);
-		ifcBuildingStoreyRoofPresentationlayer.setIfcBuildingStoreyRoof(null);
-
-		return ifcBuildingStoreyRoofPresentationlayer;
-	}
-
-	public List<IfcBuildingStoreyRoofProperty> getIfcBuildingStoreyRoofProperties() {
-		return this.ifcBuildingStoreyRoofProperties;
-	}
-
-	public void setIfcBuildingStoreyRoofProperties(List<IfcBuildingStoreyRoofProperty> ifcBuildingStoreyRoofProperties) {
-		this.ifcBuildingStoreyRoofProperties = ifcBuildingStoreyRoofProperties;
-	}
-
-	public IfcBuildingStoreyRoofProperty addIfcBuildingStoreyRoofProperty(IfcBuildingStoreyRoofProperty ifcBuildingStoreyRoofProperty) {
-		getIfcBuildingStoreyRoofProperties().add(ifcBuildingStoreyRoofProperty);
-		ifcBuildingStoreyRoofProperty.setIfcBuildingStoreyRoof(this);
-
-		return ifcBuildingStoreyRoofProperty;
-	}
-
-	public IfcBuildingStoreyRoofProperty removeIfcBuildingStoreyRoofProperty(IfcBuildingStoreyRoofProperty ifcBuildingStoreyRoofProperty) {
-		getIfcBuildingStoreyRoofProperties().remove(ifcBuildingStoreyRoofProperty);
-		ifcBuildingStoreyRoofProperty.setIfcBuildingStoreyRoof(null);
-
-		return ifcBuildingStoreyRoofProperty;
-	}
-
-	public List<IfcBuildingStoreyRoofSlab> getIfcBuildingStoreyRoofSlabs() {
-		return this.ifcBuildingStoreyRoofSlabs;
-	}
-
-	public void setIfcBuildingStoreyRoofSlabs(List<IfcBuildingStoreyRoofSlab> ifcBuildingStoreyRoofSlabs) {
-		this.ifcBuildingStoreyRoofSlabs = ifcBuildingStoreyRoofSlabs;
-	}
-
-	public IfcBuildingStoreyRoofSlab addIfcBuildingStoreyRoofSlab(IfcBuildingStoreyRoofSlab ifcBuildingStoreyRoofSlab) {
-		getIfcBuildingStoreyRoofSlabs().add(ifcBuildingStoreyRoofSlab);
-		ifcBuildingStoreyRoofSlab.setIfcBuildingStoreyRoof(this);
-
-		return ifcBuildingStoreyRoofSlab;
-	}
-
-	public IfcBuildingStoreyRoofSlab removeIfcBuildingStoreyRoofSlab(IfcBuildingStoreyRoofSlab ifcBuildingStoreyRoofSlab) {
-		getIfcBuildingStoreyRoofSlabs().remove(ifcBuildingStoreyRoofSlab);
-		ifcBuildingStoreyRoofSlab.setIfcBuildingStoreyRoof(null);
-
-		return ifcBuildingStoreyRoofSlab;
+		return ifcBuildingStoreyRoofOpening;
 	}
 
 }

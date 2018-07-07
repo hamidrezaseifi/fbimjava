@@ -99,5 +99,8 @@
 		<class>modelmaker.User</class>
 		<class>modelmaker.UserProjectAccess</class>
 		<class>modelmaker.UserProjectAccessPK</class>
+		<class>modelmaker.IfcBuildingStoreyRoofOpening</class>
+		<class>modelmaker.IfcBuildingStoreyRoofOpeningPresentationlayer</class>
+		<class>modelmaker.IfcBuildingStoreyRoofOpeningProperty</class>
 	</persistence-unit>
 </persistence>

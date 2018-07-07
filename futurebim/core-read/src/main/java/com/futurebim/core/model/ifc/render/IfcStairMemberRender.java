@@ -1,9 +1,14 @@
 package com.futurebim.core.model.ifc.render;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyStair;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyStairMember;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyStairMemberPresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyStairMemberProperty;
 
 public class IfcStairMemberRender {
 
@@ -24,11 +29,32 @@ public class IfcStairMemberRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
+  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
 
   // @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPropertySetRender> propertySetList;
+  private final List<IfcPropertySetRender> propertySetList = new ArrayList<>();
+
+  public IfcBuildingStoreyStairMember toModel(final IfcBuildingStoreyStair model) {
+
+    final IfcBuildingStoreyStairMember p = new IfcBuildingStoreyStairMember();
+    p.setId(id);
+    p.setObjectPlacement(objectPlacement);
+    p.setObjectType(objectType);
+    p.setTag(tag);
+    p.setMemberName(name);
+    p.setIfcBuildingStoreyStair(model);
+
+    for (final IfcPropertySetRender prop : propertySetList) {
+      p.addIfcBuildingStoreyStairMemberProperty(new IfcBuildingStoreyStairMemberProperty(id, prop.getPropertyId()));
+    }
+
+    for (final IfcPresentationLayerAssignmentSet prop : presentationLayerAssignmentList) {
+      p.addIfcBuildingStoreyStairMemberPresentationlayer(new IfcBuildingStoreyStairMemberPresentationlayer(id, prop.getPropertyId()));
+    }
+
+    return p;
+  }
 
 }

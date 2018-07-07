@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,6 +40,9 @@ public class IfcBuildingStoreyStairRailing extends SerializableModelBase {
   @Column(name = "railing_name")
   private String railingName;
 
+  @Column(name = "predefined_type")
+  private String predefinedType;
+
   private short status = 1;
 
   private String tag;
@@ -52,12 +57,12 @@ public class IfcBuildingStoreyStairRailing extends SerializableModelBase {
   private IfcBuildingStoreyStair ifcBuildingStoreyStair;
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairRailingPresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreyStairRailing")
-  private List<IfcBuildingStoreyStairRailingPresentationlayer> ifcBuildingStoreyStairRailingPresentationlayers;
+  @OneToMany(mappedBy = "ifcBuildingStoreyStairRailing", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairRailingPresentationlayer> ifcBuildingStoreyStairRailingPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairRailingProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreyStairRailing")
-  private List<IfcBuildingStoreyStairRailingProperty> ifcBuildingStoreyStairRailingProperties;
+  @OneToMany(mappedBy = "ifcBuildingStoreyStairRailing", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairRailingProperty> ifcBuildingStoreyStairRailingProperties = new ArrayList<>();
 
   public IfcBuildingStoreyStairRailing() {
   }
@@ -190,6 +195,14 @@ public class IfcBuildingStoreyStairRailing extends SerializableModelBase {
     ifcBuildingStoreyStairRailingProperty.setIfcBuildingStoreyStairRailing(null);
 
     return ifcBuildingStoreyStairRailingProperty;
+  }
+
+  public String getPredefinedType() {
+    return predefinedType;
+  }
+
+  public void setPredefinedType(final String predefinedType) {
+    this.predefinedType = predefinedType;
   }
 
 }

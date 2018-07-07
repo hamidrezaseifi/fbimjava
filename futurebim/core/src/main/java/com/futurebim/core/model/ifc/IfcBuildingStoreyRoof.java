@@ -48,9 +48,6 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
 
   private short status;
 
-  @Column(name = "storey_id")
-  private String storeyId;
-
   private String tag;
 
   private LocalDateTime updated;
@@ -59,7 +56,7 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "storey_id", updatable = false, insertable = false)
+  @JoinColumn(name = "storey_id")
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyRoofPresentationlayer
@@ -73,6 +70,10 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
   // bi-directional many-to-one association to IfcBuildingStoreyRoofSlab
   @OneToMany(mappedBy = "ifcBuildingStoreyRoof", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyRoofSlab> ifcBuildingStoreyRoofSlabs = new ArrayList<>();
+
+  // bi-directional many-to-one association to IfcBuildingStoreyRoofOpening
+  @OneToMany(mappedBy = "ifcBuildingStoreyRoof", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyRoofOpening> ifcBuildingStoreyRoofOpenings = new ArrayList<>();
 
   public IfcBuildingStoreyRoof() {
   }
@@ -131,14 +132,6 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
 
   public void setStatus(final short status) {
     this.status = status;
-  }
-
-  public String getStoreyId() {
-    return this.storeyId;
-  }
-
-  public void setStoreyId(final String storeyId) {
-    this.storeyId = storeyId;
   }
 
   public String getTag() {
@@ -241,6 +234,19 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
 
   public void setIfcBuildingStorey(final IfcBuildingStorey ifcBuildingStorey) {
     this.ifcBuildingStorey = ifcBuildingStorey;
+  }
+
+  public List<IfcBuildingStoreyRoofOpening> getIfcBuildingStoreyRoofOpenings() {
+    return ifcBuildingStoreyRoofOpenings;
+  }
+
+  public void setIfcBuildingStoreyRoofOpenings(final List<IfcBuildingStoreyRoofOpening> ifcBuildingStoreyRoofOpenings) {
+    this.ifcBuildingStoreyRoofOpenings = ifcBuildingStoreyRoofOpenings;
+  }
+
+  public void addIfcBuildingStoreyRoofOpening(final IfcBuildingStoreyRoofOpening ifcBuildingStoreyRoofOpening) {
+    this.ifcBuildingStoreyRoofOpenings.add(ifcBuildingStoreyRoofOpening);
+    ifcBuildingStoreyRoofOpening.setIfcBuildingStoreyRoof(this);
   }
 
 }

@@ -71,11 +71,11 @@ public class IfcStairRender {
     }
 
     for (final IfcStairMemberRender prop : memberList) {
-      p.addIfcBuildingStoreyStairMember(prop.toModel(p))
+      p.addIfcBuildingStoreyStairMember(prop.toModel(p));
     }
 
     for (final IfcStairRailingRender prop : railingList) {
-      p.addIfcBuildingStoreyStairRailing(prop.toModel(p))
+      p.addIfcBuildingStoreyStairRailing(prop.toModel(p));
     }
 
     return p;

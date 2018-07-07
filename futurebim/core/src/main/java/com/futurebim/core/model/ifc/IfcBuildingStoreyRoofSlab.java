@@ -45,9 +45,6 @@ public class IfcBuildingStoreyRoofSlab extends SerializableModelBase {
   @Column(name = "slab_name")
   private String slabName;
 
-  @Column(name = "roof_id")
-  private String roofId;
-
   private short status;
 
   private String tag;
@@ -235,14 +232,6 @@ public class IfcBuildingStoreyRoofSlab extends SerializableModelBase {
     ifcBuildingStoreyRoofSlabProperty.setIfcBuildingStoreyRoofSlab(null);
 
     return ifcBuildingStoreyRoofSlabProperty;
-  }
-
-  public String getRoofId() {
-    return roofId;
-  }
-
-  public void setRoofId(final String roofId) {
-    this.roofId = roofId;
   }
 
 }

@@ -1,8 +1,10 @@
 package com.futurebim.core.model.ifc;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -52,12 +54,12 @@ public class IfcBuildingStoreyStairMember extends SerializableModelBase {
   private IfcBuildingStoreyStair ifcBuildingStoreyStair;
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairMemberPresentationlayer
-  @OneToMany(mappedBy = "ifcBuildingStoreyStairMember")
-  private List<IfcBuildingStoreyStairMemberPresentationlayer> ifcBuildingStoreyStairMemberPresentationlayers;
+  @OneToMany(mappedBy = "ifcBuildingStoreyStairMember", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairMemberPresentationlayer> ifcBuildingStoreyStairMemberPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairMemberProperty
-  @OneToMany(mappedBy = "ifcBuildingStoreyStairMember")
-  private List<IfcBuildingStoreyStairMemberProperty> ifcBuildingStoreyStairMemberProperties;
+  @OneToMany(mappedBy = "ifcBuildingStoreyStairMember", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairMemberProperty> ifcBuildingStoreyStairMemberProperties = new ArrayList<>();
 
   public IfcBuildingStoreyStairMember() {
   }

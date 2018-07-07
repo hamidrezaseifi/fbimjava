@@ -98,7 +98,7 @@ public class IfcBuildingStoreyRender {
     }
 
     for (final IfcRoofRender roof : roofList) {
-
+      p.addIfcBuildingStoreyRoof(roof.toModel(p));
     }
 
     for (final IfcSlabRender slab : slabList) {
@@ -112,6 +112,7 @@ public class IfcBuildingStoreyRender {
     }
 
     for (final IfcDoorRender door : doorList) {
+      p.addIfcBuildingStoreyDoor(door.toModel(p));
 
     }
 

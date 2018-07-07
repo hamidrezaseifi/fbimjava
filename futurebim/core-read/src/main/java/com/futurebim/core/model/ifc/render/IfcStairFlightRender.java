@@ -1,9 +1,14 @@
 package com.futurebim.core.model.ifc.render;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyStair;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyStairFlight;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyStairFlightPresentationlayer;
+import com.futurebim.core.model.ifc.IfcBuildingStoreyStairFlightProperty;
 
 public class IfcStairFlightRender {
 
@@ -36,11 +41,34 @@ public class IfcStairFlightRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
+  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
 
-  // @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPropertySetRender> propertySetList;
+  private final List<IfcPropertySetRender> propertySetList = new ArrayList<>();
 
+  public IfcBuildingStoreyStairFlight toModel(final IfcBuildingStoreyStair model) {
+
+    final IfcBuildingStoreyStairFlight p = new IfcBuildingStoreyStairFlight();
+    p.setId(id);
+    p.setObjectPlacement(objectPlacement);
+    p.setObjectType(objectType);
+    p.setTag(tag);
+    p.setFlightName(name);
+    p.setIfcBuildingStoreyStair(model);
+    p.setNumberOfRiser(numberOfRiser);
+    p.setNumberOfTreads(numberOfTreads);
+    p.setRiserHeight(riserHeight);
+    p.setTreadsHeight(treadLength);
+
+    for (final IfcPropertySetRender prop : propertySetList) {
+      p.addIfcBuildingStoreyStairFlightProperty(new IfcBuildingStoreyStairFlightProperty(id, prop.getPropertyId()));
+    }
+
+    for (final IfcPresentationLayerAssignmentSet prop : presentationLayerAssignmentList) {
+      p.addIfcBuildingStoreyStairFlightPresentationlayer(new IfcBuildingStoreyStairFlightPresentationlayer(id, prop.getPropertyId()));
+    }
+
+    return p;
+  }
 }
