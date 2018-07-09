@@ -79,7 +79,7 @@ public class ProjectDaoImpl implements ProjectDao {
     logger.info("Read Project List");
     final Session session = this.sessionFactory.getCurrentSession();
 
-    final Query<ProjectRich> query = session.createQuery("from Project where companyid = :cid ");
+    final Query<ProjectRich> query = session.createQuery("from ProjectRich where companyid = :cid ");
     query.setParameter("cid", companyId);
     final List<ProjectRich> list = query.list();
 

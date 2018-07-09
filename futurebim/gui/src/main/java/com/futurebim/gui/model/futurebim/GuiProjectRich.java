@@ -2,7 +2,10 @@ package com.futurebim.gui.model.futurebim;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.futurebim.common.model.edo.ProjectEdo;
 import com.futurebim.common.model.enums.EStatus;
 
 /**
@@ -34,6 +37,29 @@ public class GuiProjectRich  {
 
 
   public GuiProjectRich() {
+  }
+
+
+  public GuiProjectRich(final ProjectEdo edo) {
+    this.setCompanyid(edo.getCompanyid());
+    this.setCreated(edo.getCreated());
+    this.setDeatline(edo.getDeatline());
+    this.setId(edo.getId());
+    this.setProjectName(edo.getProjectName());
+    this.setStartDate(edo.getStartDate());
+    this.setStatus(edo.getStatus());
+    this.setUpdated(edo.getUpdated());
+    this.setVersion(edo.getVersion());
+  }
+
+
+  public static List<GuiProjectRich> fromEdoList(final List<ProjectEdo> edoList) {
+
+    final List<GuiProjectRich> list = new ArrayList<>();
+    for (final ProjectEdo edo : edoList) {
+      list.add(new GuiProjectRich(edo));
+    }
+    return list;
   }
 
   public Long getId() {

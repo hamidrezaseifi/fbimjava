@@ -2,6 +2,7 @@ package com.futurebim.core.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.futurebim.common.model.edo.ProjectEdo;
 import com.futurebim.common.model.enums.EStatus;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -167,4 +169,27 @@ public class ProjectRich extends SerializableModelBase {
     return userProjectAccess;
   }
 
+  public ProjectEdo toEdo() {
+    final ProjectEdo edo = new ProjectEdo();
+    edo.setCompanyid(companyid);
+    edo.setCreated(created);
+    edo.setDeatline(deatline);
+    edo.setId(companyid);
+    edo.setProjectName(projectName);
+    edo.setStartDate(startDate);
+    edo.setStatus(status);
+    edo.setUpdated(updated);
+    edo.setVersion(version);
+
+    return edo;
+  }
+
+  public static List<ProjectEdo> toEdoList(final List<ProjectRich> list) {
+
+    final List<ProjectEdo> edoList = new ArrayList<>();
+    for (final ProjectRich p : list) {
+      edoList.add(p.toEdo());
+    }
+    return edoList;
+  }
 }

@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.futurebim.common.model.reponse.FutureBimUiRestResponse;
 import com.futurebim.gui.bl.ProjectsHandler;
 import com.futurebim.gui.controller.base.UiControllerBase;
 import com.futurebim.gui.helper.PageMenuLoader;
 import com.futurebim.gui.model.MenuItem;
+import com.futurebim.gui.model.futurebim.GuiProjectRich;
 
 @Controller
 @RequestMapping(path = "/ifc")
@@ -56,9 +56,9 @@ public class IfcViewerController extends UiControllerBase {
   }
 
   @RequestMapping(value = "/data/projects/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody FutureBimUiRestResponse readAll() {
+  public @ResponseBody List<GuiProjectRich> readAll() {
 
-    return FutureBimUiRestResponse.createDataResponse(projectsHandler.listProjects(1L));
+    return projectsHandler.listProjects(1L);
   }
 
 

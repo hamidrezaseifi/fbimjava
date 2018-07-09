@@ -7,22 +7,21 @@ public class FutureBimUiRestResponse {
   private final HttpStatus status;
   private final String     errorType;
   private final String     message;
-  private final Object     data;
 
   public static String NoError = "NoError";
 
-  private FutureBimUiRestResponse(final HttpStatus status, final String errorType, final String message) {
-    this.status = status;
-    this.errorType = errorType;
-    this.message = message;
-    this.data = "";
-  }
-
-  private FutureBimUiRestResponse(final Object data) {
+  protected FutureBimUiRestResponse() {
     this.status = HttpStatus.OK;
     this.errorType = NoError;
     this.message = "";
-    this.data = data;
+
+  }
+
+  protected FutureBimUiRestResponse(final HttpStatus status, final String errorType, final String message) {
+    this.status = status;
+    this.errorType = errorType;
+    this.message = message;
+
   }
 
   public HttpStatus getStatus() {
@@ -33,20 +32,12 @@ public class FutureBimUiRestResponse {
     return errorType;
   }
 
+  public boolean hasError() {
+    return !errorType.equals(NoError);
+  }
+
   public String getMessage() {
     return message;
-  }
-
-  public Object getData() {
-    return data;
-  }
-
-  public static FutureBimUiRestResponse createDataResponse(final Object data) {
-    return new FutureBimUiRestResponse(data);
-  }
-
-  public static FutureBimUiRestResponse createError(final HttpStatus status, final Exception ex) {
-    return new FutureBimUiRestResponse(status, ex.getClass().getName(), ex.getMessage());
   }
 
   @Override
