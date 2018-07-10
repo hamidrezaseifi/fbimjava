@@ -3,13 +3,17 @@ package com.futurebim.gui.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.futurebim.gui.controller.base.UiControllerBase;
 import com.futurebim.gui.helper.PageMenuLoader;
+import com.futurebim.gui.model.GuiLoggedData;
 import com.futurebim.gui.model.MenuItem;
 
 @Controller
@@ -19,16 +23,25 @@ public class MainController extends UiControllerBase {
   @Autowired
   private PageMenuLoader pageMenuLoader;
 
-  private String activeLeftMenu = "";
 
   @RequestMapping(path = "/")
   public String index(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
 
     model.addAttribute("msg" , "Index Page ");
-    activeLeftMenu = "";
+
 
     return "index";
+  }
+
+  @RequestMapping(path = "/site/login")
+  public RedirectView  login(final Model model,final HttpSession session){
+    model.addAttribute("breadCrumb" , new ArrayList<>());
+
+    final GuiLoggedData data = GuiLoggedData.create();
+    session.setAttribute("loggedData", data);
+
+    return new RedirectView("/");
   }
 
   @RequestMapping(path = "/site/balance")
@@ -36,7 +49,6 @@ public class MainController extends UiControllerBase {
     model.addAttribute("breadCrumb" , new ArrayList<>());
 
     model.addAttribute("msg" , "Balance Page");
-    activeLeftMenu = "menu.balance";
     return "index";
   }
 

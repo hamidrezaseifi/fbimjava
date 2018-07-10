@@ -43,6 +43,8 @@ public class IfcViewerController extends UiControllerBase {
 
     model.addAttribute("msg" , "IFC Viewer Index Page");
 
+    model.addAttribute("projects" , projectsHandler.listProjects(1L));
+
     return "ifcviewer/index";
   }
 

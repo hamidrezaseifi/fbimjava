@@ -2,6 +2,8 @@ package com.futurebim.gui.controller.base;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,12 +34,11 @@ public abstract class UiControllerBase {
   }
 
   @ModelAttribute
-  public void addAttributes(final Model model) {
+  public void addAttributes(final Model model,final HttpServletRequest request) {
     model.addAttribute("pageTopToolList", getTopToolbar());
     model.addAttribute("pageLeftToolList", getLeftToolbar());
 
 
-    //model.addAttribute("url", getCurrentRelatedUrl());
 
   }
 }

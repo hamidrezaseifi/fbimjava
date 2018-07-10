@@ -59,9 +59,13 @@
        			    
 			    <div class="navbar-user-detail">
 			      <div class="user-detail dropdown"> 
-					<md-button ng-click="toggleRight()" style="background-color:#cecece;">
-			      		<span>User, User</span>
+					<md-button ng-click="toggleRight()" style="background-color:#cecece;" th:if="${session.loggedData != null}">
+			      		<span th:text="${session.loggedData.getUser().getFullName()}"></span>
 			      		<span class="glyphicon glyphicon-user"></span>
+					</md-button>
+					<md-button ng-click="" style="background-color:#cecece;" th:if="${session.loggedData == null}" href="/site/login">
+			      		<span>Anmelden</span>
+			      		<span class="glyphicon glyphicon-log-in"></span>
 					</md-button>
 			      </div>
 			    </div>
