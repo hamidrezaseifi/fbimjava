@@ -18,6 +18,7 @@ import com.futurebim.gui.controller.base.UiControllerBase;
 import com.futurebim.gui.helper.PageMenuLoader;
 import com.futurebim.gui.model.MenuItem;
 import com.futurebim.gui.model.futurebim.GuiProjectRich;
+import com.futurebim.gui.service.GuiLoggedDataService;
 
 @Controller
 @RequestMapping(path = "/ifc")
@@ -34,6 +35,9 @@ public class IfcViewerController extends UiControllerBase {
   private ObjectMapper                           objectMapper;
 
   @Autowired
+  GuiLoggedDataService guiLoggedDataService;
+
+  @Autowired
   private MappingJackson2XmlHttpMessageConverter xmlConverter;
 
 
@@ -43,7 +47,14 @@ public class IfcViewerController extends UiControllerBase {
 
     model.addAttribute("msg" , "IFC Viewer Index Page");
 
-    model.addAttribute("projects" , projectsHandler.listProjects(1L));
+    if(guiLoggedDataService.isLoggedIn()){
+      model.addAttribute("projects" , projectsHandler.listProjects(guiLoggedDataService.getLoggedData().getUser().getCompanyid()));
+    }
+    else{
+      model.addAttribute("projects" , projectsHandler.listProjects(0L));
+    }
+
+
 
     return "ifcviewer/index";
   }

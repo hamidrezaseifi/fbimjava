@@ -1,10 +1,12 @@
 package com.futurebim.gui.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.futurebim.gui.model.futurebim.GuiUser;
@@ -13,6 +15,7 @@ import com.futurebim.gui.model.futurebim.GuiUser;
  * The persistent class for the users database table.
  *
  */
+@Component
 @Scope("session")
 @SessionAttributes("loggedData")
 public class GuiLoggedData implements Serializable {
@@ -23,13 +26,16 @@ public class GuiLoggedData implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private GuiUser user;
+  private LocalDateTime loggedTime;
 
   public GuiLoggedData(){
     this.user = null;
+    this.loggedTime = LocalDateTime.now();
   }
 
   public GuiLoggedData(final GuiUser user){
     this.user = user;
+    this.loggedTime = LocalDateTime.now();
   }
 
   public GuiUser getUser() {
@@ -41,6 +47,16 @@ public class GuiLoggedData implements Serializable {
     this.user = user;
   }
 
+
+
+  public LocalDateTime getLoggedTime() {
+    return loggedTime;
+  }
+
+
+  public void resetLoggedTime() {
+    this.loggedTime = LocalDateTime.now();
+  }
 
   public static GuiLoggedData setInSession(final HttpSession session){
 
