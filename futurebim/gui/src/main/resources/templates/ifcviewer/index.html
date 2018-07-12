@@ -3,23 +3,37 @@
     <head>
     
     	<th:block th:include="layout/mainLayout :: pageheader" />
-		<script th:src="@{/js/index.js}"></script>
+		
+		<script th:src="@{/js/tree.jquery.js}"></script>
+		<link rel="stylesheet" th:href="@{/css/jqtree.css}" />
+		
+		<script th:src="@{/js/ifcviewer.js}"></script>
+		<link rel="stylesheet" th:href="@{/css/ifcviewer.css}" />
+		
+		<script type="text/javascript" th:src="@{/bimsurfer/lib/require.js}"></script>
+		
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
         <div th:replace="layout/mainLayout :: breadcrumb" ></div>
 		
-		<div class="page-content">
+		<div class="page-content" ng-controller="IfcViewerController">
 			<h2 th:text="${msg}"></h2>
 			
+			
+			<div id="viewerContainer"></div>
+			
+			<div class="ifcviewer-projects-container">
+				<div class="project-tree-toolbar">
+	    			<md-button class="md-icon-button toolbar-button-small" data-toggle="tooltip" ng-click="toggleProjectTree($event)">
+						<mat-icon class="mat-icon material-icons" role="image">menu</mat-icon>
+					</md-button>
+				</div>	
+				<div id="project-tree"></div>	
+
+			</div>
 			   
-			 <ul >
-			      <li th:each="project: ${projects}">
-			      	<a href="#">
-						<div th:text="${project.getProjectName()}"></div> 
-					</a>
-				  </li>
-			    </ul>
+			
 			
 		</div>
 		

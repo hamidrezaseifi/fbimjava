@@ -71,7 +71,16 @@ public class IfcViewerController extends UiControllerBase {
   @RequestMapping(value = "/data/projects/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public @ResponseBody List<GuiProjectRich> readAll() {
 
-    return projectsHandler.listProjects(1L);
+    List<GuiProjectRich> list = null;
+
+    if(guiLoggedDataService.isLoggedIn()){
+      list = projectsHandler.listProjects(guiLoggedDataService.getLoggedData().getUser().getCompanyid());
+    }
+    else{
+      list = projectsHandler.listProjects(0L);
+    }
+
+    return list;
   }
 
 

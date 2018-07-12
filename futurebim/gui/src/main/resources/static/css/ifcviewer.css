@@ -1,2 +1,69 @@
 
 
+.ifcviewer-projects-container
+{
+	border: gray 1px solid;
+	border-radius: 5px;
+	width: 300px;
+	background-color: rgba(71, 90, 124, 0.6);
+	height: calc(100vh - 300px);
+	position: absolute;
+	top: 180px;
+	left: 80px;
+	
+	padding: 10px;
+	padding-top: 0px;
+}
+
+.ifcviewer-projects-container ul.jqtree-tree .jqtree-title {
+    color: rgb(255, 255, 150);
+    vertical-align: middle;
+    margin-left: 1.5em;
+}
+
+.ifcviewer-projects-container  ul.jqtree-tree li.jqtree-selected > .jqtree-element, ul.jqtree-tree li.jqtree-selected > .jqtree-element:hover {
+    background-color: transparent;
+    background: transparent;
+    text-shadow: none;
+}
+
+.project-tree-toolbar
+{
+	height: 30px;
+	margin-bottom: 10px;
+	margin-left: -10px;
+}
+
+.ifcviewer-projects-container .project-tree-toolbar button.md-icon-button
+{
+	padding: 0;
+    margin: 0;	
+}
+
+.ifcviewer-projects-container .project-tree-toolbar button.md-icon-button:hover
+{
+	color: #ffffaa;	
+}
+
+
+#project-tree
+{
+	height: calc(100% - 40px);
+	background-color: rgba(171, 190, 224, 0.6);
+	padding: 10px;
+}
+
+
+#viewerContainer
+{
+	position: absolute;
+	top: 150px;
+	left: 40px;
+	background-color: rgba(255, 255, 255);
+	height: calc(100vh - 200px);
+	width: calc(100vw - 80px);
+	border: gray 1px solid;
+	padding: 0;
+	margin: 0;
+	
+}
