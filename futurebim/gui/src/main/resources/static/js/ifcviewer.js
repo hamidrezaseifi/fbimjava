@@ -71,7 +71,17 @@ mdmApp.controller('IfcViewerController', function ($scope, $http, $sce, $element
 			
 		  $('#project-tree').tree({
 		        data: $scope.projectsData
-		    });
+		    }).on(
+		    	    'tree.click',
+		    	    function(event) {
+		    	        // The clicked node is 'event.node'
+		    	        var node = event.node;
+		    	        if(node.type == "ifc"){
+		    	        	var ifc_id = node.id;
+		    	        	require(["/js/gltf_app.js"]);
+		    	        }
+		    	    }
+		    	);
 			
 			$scope.$parent.showloading = false;
 			
@@ -87,7 +97,7 @@ mdmApp.controller('IfcViewerController', function ($scope, $http, $sce, $element
 		
 		for(idx in projectData){
 			var project = projectData[idx];
-			var node = {name : project.projectName, children: [{name: "ifc1"}, {name: "ifc2"}]};
+			var node = {name : project.projectName, id: 1, type: "project", children: [{name: "ifc1", id: 1, type: "ifc"}, {name: "ifc2", id: 2, type: "ifc"}]};
 			res.push(node);
 		}
 		
