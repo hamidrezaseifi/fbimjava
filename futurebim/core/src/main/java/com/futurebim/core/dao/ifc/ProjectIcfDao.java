@@ -12,7 +12,7 @@ public interface ProjectIcfDao {
 
   public boolean removeProjectIfc(Long id);
 
-  public ProjectIfc getById(String id);
+  public ProjectIfc getById(Long id);
 
   public List<ProjectIfc> listProjectIfcs(Long projectId);
 

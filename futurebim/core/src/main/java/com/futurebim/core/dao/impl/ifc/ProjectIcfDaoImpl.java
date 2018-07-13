@@ -57,7 +57,7 @@ public class ProjectIcfDaoImpl implements ProjectIcfDao {
   }
 
   @Override
-  public ProjectIfc getById(final String id) {
+  public ProjectIfc getById(final Long id) {
     final Session session = this.sessionFactory.getCurrentSession();
     final ProjectIfc pifc = session.get(ProjectIfc.class, id);
     if (pifc != null) {

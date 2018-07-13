@@ -12,6 +12,9 @@
 		
 		<script type="text/javascript" th:src="@{/bimsurfer/lib/require.js}"></script>
 		
+    
+
+		
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
@@ -30,6 +33,11 @@
 					</md-button>
 				</div>	
 				<div id="project-tree"></div>	
+
+			</div>
+			   
+			<div class="ifcviewer-modeldetail-container">
+				<div id="modeldetail"></div>	
 
 			</div>
 			   

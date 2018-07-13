@@ -18,7 +18,7 @@ public class ProjectIcfReadHandler {
     this.projectIcfDao = projectIcfDao;
   }
 
-  public ProjectIfc getById(final String id) {
+  public ProjectIfc getById(final Long id) {
     return projectIcfDao.getById(id);
   }
 

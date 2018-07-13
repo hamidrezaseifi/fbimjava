@@ -73,7 +73,7 @@ public class ReadProjectIcfController {
   }
 
   @RequestMapping(value = "/getrender/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
-  public @ResponseBody ProjectIfcRender getIfcRender(@PathVariable final String ifcId) {
+  public @ResponseBody ProjectIfcRender getIfcRender(@PathVariable final Long ifcId) {
 
     final XmlMapper xmlMapper = (XmlMapper) xmlConverter.getObjectMapper();
     xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);

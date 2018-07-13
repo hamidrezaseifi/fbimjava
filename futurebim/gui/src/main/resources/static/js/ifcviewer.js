@@ -1,4 +1,5 @@
 
+var ifc_id = -1;
 
 mdmApp.controller('IfcViewerController', function ($scope, $http, $sce, $element, $compile, $mdSidenav, $mdComponentRegistry) {
 
@@ -77,7 +78,7 @@ mdmApp.controller('IfcViewerController', function ($scope, $http, $sce, $element
 		    	        // The clicked node is 'event.node'
 		    	        var node = event.node;
 		    	        if(node.type == "ifc"){
-		    	        	var ifc_id = node.id;
+		    	        	ifc_id = node.id;
 		    	        	require(["/js/gltf_app.js"]);
 		    	        }
 		    	    }

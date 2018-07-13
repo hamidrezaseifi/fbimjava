@@ -15478,7 +15478,7 @@ var Canvas2Image = (function () {
             style.height = "0px";
             style.position = "absolute";
             style.opacity = 0;
-            style["z-index"] = "100000";
+            style["z-index"] = "20";
 
             body.appendChild(div);
 
@@ -15860,7 +15860,7 @@ var Canvas2Image = (function () {
             var div = document.createElement('div');
             var style = div.style;
 
-            style["z-index"] = "9000";
+            style["z-index"] = "30";
             style.position = "absolute";
 
             div.innerHTML = '<div class="sk-fading-circle">\

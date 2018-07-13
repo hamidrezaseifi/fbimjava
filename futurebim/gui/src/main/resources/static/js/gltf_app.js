@@ -1,4 +1,4 @@
-alert(ifc_id);
+//alert(ifc_id);
 
 
 
@@ -27,12 +27,12 @@ function highlight(oid, selected) {
 
 
 require([
-    "bimsurfer/src/BimSurfer",
-    "bimsurfer/src/StaticTreeRenderer",
-    "bimsurfer/src/MetaDataRenderer",
-    "bimsurfer/src/Request",
-    "bimsurfer/src/Utils",
-    "bimsurfer/lib/domReady!",
+    "../bimsurfer/src/BimSurfer",
+    "../bimsurfer/src/StaticTreeRenderer",
+    "../bimsurfer/src/MetaDataRenderer",
+    "../bimsurfer/src/Request",
+    "../bimsurfer/src/Utils",
+    "../bimsurfer/lib/domReady!",
 ],
 function (BimSurfer, StaticTreeRenderer, MetaDataRenderer, Request, Utils) {
     var bimSurfer = new BimSurfer({
@@ -45,7 +45,7 @@ function (BimSurfer, StaticTreeRenderer, MetaDataRenderer, Request, Utils) {
     } else {
         modelName = modelName.substr(1);
     }
-    modelName = "models/" + modelName;
+    modelName = "/models/" + modelName;
     
     //http://localhost:1010/pifc/read/readifc
     
@@ -59,10 +59,10 @@ function (BimSurfer, StaticTreeRenderer, MetaDataRenderer, Request, Utils) {
     //tree.on("click", highlight);
     
     var data = new MetaDataRenderer({
-        domNode: "mybimtext"
+        domNode: "modeldetail"
     });
-    //data.addModel({id: 1, src: modelName + ".xml"});
-    data.addModel({id: 1, src: "http://localhost:1010/pifc/read/readifc"});
+    data.addModel({id: 1, src: modelName + ".xml"});
+    //data.addModel({id: 1, src: "http://localhost:1010/pifc/read/readifc"});
     
     bimSurfer.load({
         src: modelName + ".gltf"
@@ -71,8 +71,9 @@ function (BimSurfer, StaticTreeRenderer, MetaDataRenderer, Request, Utils) {
         var scene = bimSurfer.viewer.scene;
         
         var aabb = scene.worldBoundary.aabb;
-        var diag = xeogl.math.subVec3(aabb.slice(3), aabb, xeogl.math.vec3());
-        var modelExtent = xeogl.math.lenVec3(diag);
+        
+        var diag = xeogl.math.subVec3(aabb.slice(3), aabb, xeogl.math.vec3()); //alert(diag);
+        var modelExtent = xeogl.math.lenVec3(diag); //alert(modelExtent);
     
         scene.camera.project.near = modelExtent / 1000.;
         scene.camera.project.far = modelExtent * 100.;
@@ -82,7 +83,8 @@ function (BimSurfer, StaticTreeRenderer, MetaDataRenderer, Request, Utils) {
         bimSurfer.viewFit({centerModel:true});
         
         bimSurfer.viewer.scene.canvas.canvas.style.display = 'block';
-
+        bimSurfer.viewer.scene.canvas.canvas.style.width = "1660px";
+        bimSurfer.viewer.scene.canvas.canvas.style.height = "660px";
     });
 
     bimSurfer.on("selection-changed", function(selected) {  //alert(selected);
