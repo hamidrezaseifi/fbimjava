@@ -36,7 +36,7 @@ public class IfcCoveringRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
+  private List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList;
 
   public IfcBuildingStoreyCovering toModel(final IfcBuildingStorey model) {
 
@@ -54,7 +54,7 @@ public class IfcCoveringRender {
       p.addIfcBuildingStoreyCoveringProperty(new IfcBuildingStoreyCoveringProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreyCoveringPresentationlayer(new IfcBuildingStoreyCoveringPresentationlayer(id, layer.getPropertyId()));
     }
 

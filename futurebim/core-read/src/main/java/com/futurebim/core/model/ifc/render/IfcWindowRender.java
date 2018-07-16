@@ -36,7 +36,7 @@ public class IfcWindowRender {
 
   @JacksonXmlProperty(localName = "IfcWindowStyle")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcWindowStyleSet> windowStyleSetList = new ArrayList<>();
+  private final List<IfcWindowStyleSetRender> windowStyleSetList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
@@ -44,7 +44,7 @@ public class IfcWindowRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
+  private final List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList = new ArrayList<>();
 
   public IfcBuildingStoreyWindow toModel(final IfcBuildingStorey model) {
 
@@ -63,11 +63,11 @@ public class IfcWindowRender {
       p.addIfcBuildingStoreyWindowProperty(new IfcBuildingStoreyWindowProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreyWindowPresentationlayer(new IfcBuildingStoreyWindowPresentationlayer(id, layer.getPropertyId()));
     }
 
-    for (final IfcWindowStyleSet style : windowStyleSetList) {
+    for (final IfcWindowStyleSetRender style : windowStyleSetList) {
       p.addIfcBuildingStoreyWindowStyle(new IfcBuildingStoreyWindowStyle(id, style.getStyleId()));
     }
 

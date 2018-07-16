@@ -3,7 +3,7 @@ package com.futurebim.core.model.ifc.render;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.futurebim.core.model.ifc.proxy.IfcPresentationLayerAssignmentSetProxy;
 
-public class IfcPresentationLayerAssignmentSet {
+public class IfcPresentationLayerAssignmentSetRender {
 
   @JacksonXmlProperty(namespace = "xlink", localName = "href", isAttribute = true)
   private String href;

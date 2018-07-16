@@ -48,7 +48,7 @@ public class IfcStairRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
+  private final List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList = new ArrayList<>();
 
   public IfcBuildingStoreyStair toModel(final IfcBuildingStorey model) {
 

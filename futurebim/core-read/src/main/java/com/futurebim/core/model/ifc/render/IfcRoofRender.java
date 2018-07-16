@@ -52,7 +52,7 @@ public class IfcRoofRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
+  private final List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList = new ArrayList<>();
 
   public IfcBuildingStoreyRoof toModel(final IfcBuildingStorey model) {
 
@@ -70,7 +70,7 @@ public class IfcRoofRender {
       p.addIfcBuildingStoreyRoofProperty(new IfcBuildingStoreyRoofProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet prop : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender prop : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreyRoofPresentationlayer(new IfcBuildingStoreyRoofPresentationlayer(id, prop.getPropertyId()));
     }
 

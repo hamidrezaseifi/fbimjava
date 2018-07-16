@@ -40,7 +40,7 @@ public class IfcWallRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
+  private List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList;
 
   @JacksonXmlProperty(localName = "IfcOpeningElement")
   @JacksonXmlElementWrapper(useWrapping = false)
@@ -61,7 +61,7 @@ public class IfcWallRender {
       p.addIfcBuildingStoreyWallProperty(new IfcBuildingStoreyWallProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreyWallPresentationlayer(new IfcBuildingStoreyWallPresentationlayer(id, layer.getPropertyId()));
     }
 

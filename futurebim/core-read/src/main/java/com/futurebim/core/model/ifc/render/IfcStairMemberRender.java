@@ -29,7 +29,7 @@ public class IfcStairMemberRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
+  private final List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList = new ArrayList<>();
 
   // @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPropertySet")
@@ -50,7 +50,7 @@ public class IfcStairMemberRender {
       p.addIfcBuildingStoreyStairMemberProperty(new IfcBuildingStoreyStairMemberProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet prop : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender prop : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreyStairMemberPresentationlayer(new IfcBuildingStoreyStairMemberPresentationlayer(id, prop.getPropertyId()));
     }
 

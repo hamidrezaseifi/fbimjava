@@ -53,7 +53,7 @@ public class IfcSlabRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
+  private final List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcOpeningElement")
   @JacksonXmlElementWrapper(useWrapping = false)
@@ -75,7 +75,7 @@ public class IfcSlabRender {
       p.addIfcBuildingStoreySlabProperty(new IfcBuildingStoreySlabProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreySlabPresentationlayer(new IfcBuildingStoreySlabPresentationlayer(id, layer.getPropertyId()));
     }
 
@@ -120,7 +120,7 @@ public class IfcSlabRender {
       p.addIfcBuildingStoreyRoofSlabProperty(new IfcBuildingStoreyRoofSlabProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreyRoofSlabPresentationlayer(new IfcBuildingStoreyRoofSlabPresentationlayer(id, layer.getPropertyId()));
     }
 

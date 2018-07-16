@@ -8,7 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.futurebim.core.model.ifc.IfcProject;
 import com.futurebim.core.model.ifc.ProjectIfc;
 
-public class DecompositionWrapperRender {
+public class IfcDecompositionWrapperRender {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcProject")

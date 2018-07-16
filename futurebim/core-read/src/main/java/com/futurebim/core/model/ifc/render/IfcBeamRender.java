@@ -33,7 +33,7 @@ public class IfcBeamRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
+  private List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList;
 
   public IfcBuildingStoreyBeam toModel(final IfcBuildingStorey model) {
 
@@ -50,7 +50,7 @@ public class IfcBeamRender {
       p.addIfcBuildingStoreyBeamProperty(new IfcBuildingStoreyBeamProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreyBeamPresentationlayer(new IfcBuildingStoreyBeamPresentationlayer(id, layer.getPropertyId()));
     }
 

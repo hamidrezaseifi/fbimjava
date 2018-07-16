@@ -28,7 +28,7 @@ public class ProjectIfcRender {
 
   private List<IfcPresentationlayerRender> layers;
 
-  private DecompositionWrapperRender decomposition;
+  private IfcDecompositionWrapperRender decomposition;
 
   public ProjectIfcRender() {
 
@@ -151,11 +151,11 @@ public class ProjectIfcRender {
   }
 
   @JacksonXmlElementWrapper(localName = "decomposition")
-  public DecompositionWrapperRender getDecomposition() {
+  public IfcDecompositionWrapperRender getDecomposition() {
     return decomposition;
   }
 
-  public void setDecomposition(final DecompositionWrapperRender decomposition) {
+  public void setDecomposition(final IfcDecompositionWrapperRender decomposition) {
     this.decomposition = decomposition;
   }
 

@@ -44,7 +44,7 @@ public class IfcWallStandardCaseRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
+  private final List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList = new ArrayList<>();
 
   public IfcBuildingStoreyWallstandardcase toModel(final IfcBuildingStorey model) {
 
@@ -61,7 +61,7 @@ public class IfcWallStandardCaseRender {
       p.addIfcBuildingStoreyWallstandardcaseProperty(new IfcBuildingStoreyWallstandardcaseProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreyWallstandardcasePresentationlayer(new IfcBuildingStoreyWallstandardcasePresentationlayer(id,
                                                                                                                      layer.getPropertyId()));
     }

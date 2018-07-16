@@ -51,7 +51,7 @@ public class IfcFurnishingElementRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
+  private final List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList = new ArrayList<>();
 
   public IfcBuildingStoreySpaceFurnishingelement toModel(final IfcBuildingStoreySpace model) {
 
@@ -96,7 +96,7 @@ public class IfcFurnishingElementRender {
       p.addIfcBuildingStoreySpaceFurnishingelementProperty(new IfcBuildingStoreySpaceFurnishingelementProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreySpaceFurnishingelementPresentationlayer(new IfcBuildingStoreySpaceFurnishingelementPresentationlayer(id,
                                                                                                                                  layer.getPropertyId()));
     }

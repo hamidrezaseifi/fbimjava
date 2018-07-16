@@ -1,12 +1,11 @@
-package com.futurebim.core.model.ifc.render;
+package com.futurebim.common.model.edo.ifc;
 
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.futurebim.core.model.ifc.proxy.IfcOpeningElementProxy;
 
-public class IfcOpeningElementRender {
+public class IfcCoveringEdo {
 
   @JacksonXmlProperty(localName = "id", isAttribute = true)
   private String id;
@@ -22,33 +21,17 @@ public class IfcOpeningElementRender {
 
   @JacksonXmlProperty(localName = "Tag", isAttribute = true)
   private String tag;
+
+  @JacksonXmlProperty(localName = "PredefinedType", isAttribute = true)
+  private String predefinedType;
+
   // @JsonIgnore
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPropertySetRender> propertySetList;
+  private List<IfcPropertySetEdo> propertySetList;
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList;
+  private List<IfcPresentationLayerAssignmentSetEdo> presentationLayerAssignmentList;
 
-  public IfcOpeningElementProxy toProxy() {
-
-    final IfcOpeningElementProxy p = new IfcOpeningElementProxy();
-
-    p.setId(id);
-    p.setName(name);
-    p.setObjectPlacement(objectPlacement);
-    p.setObjectType(objectType);
-    p.setTag(tag);
-
-    for (final IfcPropertySetRender el : propertySetList) {
-      p.addPropertySetList(el.toProxy());
-    }
-
-    for (final IfcPresentationLayerAssignmentSetRender el : presentationLayerAssignmentList) {
-      p.addPresentationLayerAssignmentList(el.toProxy());
-    }
-
-    return p;
-  }
 }

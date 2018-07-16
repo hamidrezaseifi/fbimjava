@@ -1,12 +1,12 @@
-package com.futurebim.core.model.ifc.render;
+package com.futurebim.common.model.edo.ifc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.futurebim.core.model.ifc.proxy.IfcOpeningElementProxy;
 
-public class IfcOpeningElementRender {
+public class IfcSlabEdo {
 
   @JacksonXmlProperty(localName = "id", isAttribute = true)
   private String id;
@@ -22,33 +22,20 @@ public class IfcOpeningElementRender {
 
   @JacksonXmlProperty(localName = "Tag", isAttribute = true)
   private String tag;
-  // @JsonIgnore
+
+  @JacksonXmlProperty(localName = "PredefinedType", isAttribute = true)
+  private String predefinedType;
+
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPropertySetRender> propertySetList;
+  private final List<IfcPropertySetEdo> propertySetList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList;
+  private final List<IfcPresentationLayerAssignmentSetEdo> presentationLayerAssignmentList = new ArrayList<>();
 
-  public IfcOpeningElementProxy toProxy() {
+  @JacksonXmlProperty(localName = "IfcOpeningElement")
+  @JacksonXmlElementWrapper(useWrapping = false)
+  private final List<IfcOpeningElementEdo> openingElementList = new ArrayList<>();
 
-    final IfcOpeningElementProxy p = new IfcOpeningElementProxy();
-
-    p.setId(id);
-    p.setName(name);
-    p.setObjectPlacement(objectPlacement);
-    p.setObjectType(objectType);
-    p.setTag(tag);
-
-    for (final IfcPropertySetRender el : propertySetList) {
-      p.addPropertySetList(el.toProxy());
-    }
-
-    for (final IfcPresentationLayerAssignmentSetRender el : presentationLayerAssignmentList) {
-      p.addPresentationLayerAssignmentList(el.toProxy());
-    }
-
-    return p;
-  }
 }

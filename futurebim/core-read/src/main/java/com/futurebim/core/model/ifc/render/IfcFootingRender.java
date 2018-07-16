@@ -36,7 +36,7 @@ public class IfcFootingRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList;
+  private List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList;
 
   public IfcBuildingStoreyFooting toModel(final IfcBuildingStorey model) {
 
@@ -54,7 +54,7 @@ public class IfcFootingRender {
       p.addIfcBuildingStoreyFootingProperty(new IfcBuildingStoreyFootingProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet layer : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreyFootingPresentationlayer(new IfcBuildingStoreyFootingPresentationlayer(id, layer.getPropertyId()));
     }
 

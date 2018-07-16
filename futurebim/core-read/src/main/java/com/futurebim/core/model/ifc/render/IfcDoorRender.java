@@ -40,7 +40,7 @@ public class IfcDoorRender {
 
   @JacksonXmlProperty(localName = "IfcDoorStyle")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcDoorStyleSet> doorStyleList = new ArrayList<>();
+  private final List<IfcDoorStyleSetRender> doorStyleList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
@@ -48,7 +48,7 @@ public class IfcDoorRender {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
+  private final List<IfcPresentationLayerAssignmentSetRender> presentationLayerAssignmentList = new ArrayList<>();
 
   public IfcBuildingStoreyDoor toModel(final IfcBuildingStorey model) {
 
@@ -66,11 +66,11 @@ public class IfcDoorRender {
       p.addIfcBuildingStoreyDoorProperty(new IfcBuildingStoreyDoorProperty(id, prop.getPropertyId()));
     }
 
-    for (final IfcPresentationLayerAssignmentSet prop : presentationLayerAssignmentList) {
+    for (final IfcPresentationLayerAssignmentSetRender prop : presentationLayerAssignmentList) {
       p.addIfcBuildingStoreyDoorPresentationlayer(new IfcBuildingStoreyDoorPresentationlayer(id, prop.getPropertyId()));
     }
 
-    for (final IfcDoorStyleSet style : doorStyleList) {
+    for (final IfcDoorStyleSetRender style : doorStyleList) {
       p.addIfcBuildingStoreyDoorStyle(new IfcBuildingStoreyDoorStyle(id, style.getStyleId()));
     }
 
