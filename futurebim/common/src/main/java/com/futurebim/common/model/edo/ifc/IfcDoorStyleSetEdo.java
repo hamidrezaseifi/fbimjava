@@ -7,11 +7,12 @@ public class IfcDoorStyleSetEdo {
   @JacksonXmlProperty(namespace = "xlink", localName = "href", isAttribute = true)
   private String href;
 
-  public String getStyleId() {
-    String pid = href;
-    if (pid.startsWith("#")) {
-      pid = pid.substring(1);
-    }
-    return pid;
+  public String getHref() {
+    return href;
   }
+
+  public void setHref(final String href) {
+    this.href = href;
+  }
+
 }

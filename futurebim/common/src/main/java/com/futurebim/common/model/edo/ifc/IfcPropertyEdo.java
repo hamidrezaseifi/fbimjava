@@ -21,6 +21,34 @@ public class IfcPropertyEdo {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcPropertySingleValue")
-  private final List<IfcPropertyValueEdo> values = new ArrayList<>();
+  private List<IfcPropertyValueEdo> values = new ArrayList<>();
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(final String id) {
+    this.id = id;
+  }
+
+  public String getPropertyName() {
+    return propertyName;
+  }
+
+  public void setPropertyName(final String propertyName) {
+    this.propertyName = propertyName;
+  }
+
+  public List<IfcPropertyValueEdo> getValues() {
+    return values;
+  }
+
+  public void setValues(final List<IfcPropertyValueEdo> values) {
+    this.values = values;
+  }
+
+  public void addValue(final IfcPropertyValueEdo value) {
+    this.values.add(value);
+  }
 
 }

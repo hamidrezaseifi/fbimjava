@@ -19,4 +19,28 @@ public class IfcUnitEdo {
   @JacksonXmlProperty(localName = "UnitType", isAttribute = true)
   protected String unitType;
 
+  public String getEquivalent() {
+    return equivalent;
+  }
+
+  public void setEquivalent(final String equivalent) {
+    this.equivalent = equivalent;
+  }
+
+  public String getUnitName() {
+    return unitName;
+  }
+
+  public void setUnitName(final String unitName) {
+    this.unitName = unitName;
+  }
+
+  public String getUnitType() {
+    return unitType;
+  }
+
+  public void setUnitType(final String unitType) {
+    this.unitType = unitType;
+  }
+
 }

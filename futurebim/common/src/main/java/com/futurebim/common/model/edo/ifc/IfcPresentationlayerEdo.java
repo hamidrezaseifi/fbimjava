@@ -16,4 +16,20 @@ public class IfcPresentationlayerEdo {
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
   private String layerName;
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(final String id) {
+    this.id = id;
+  }
+
+  public String getLayerName() {
+    return layerName;
+  }
+
+  public void setLayerName(final String layerName) {
+    this.layerName = layerName;
+  }
+
 }

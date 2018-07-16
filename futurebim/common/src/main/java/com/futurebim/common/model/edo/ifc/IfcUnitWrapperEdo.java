@@ -16,14 +16,34 @@ public class IfcUnitWrapperEdo {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcSIUnit")
-  private final List<IfcUnitEdo> units = new ArrayList<>();
+  private List<IfcUnitEdo> units = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcConversionBasedUnit")
-  private final List<IfcConversionBasedUnitEdo> conversionUnits = new ArrayList<>();
+  private List<IfcConversionBasedUnitEdo> conversionUnits = new ArrayList<>();
 
   public void setUnits(final List<IfcUnitEdo> units) {
-    this.units.addAll(units);
+    this.units = units;
+  }
+
+  public void addUnit(final IfcUnitEdo unit) {
+    this.units.add(unit);
+  }
+
+  public List<IfcConversionBasedUnitEdo> getConversionUnits() {
+    return conversionUnits;
+  }
+
+  public void setConversionUnits(final List<IfcConversionBasedUnitEdo> conversionUnits) {
+    this.conversionUnits = conversionUnits;
+  }
+
+  public void addConversionUnit(final IfcConversionBasedUnitEdo conversion) {
+    this.conversionUnits.add(conversion);
+  }
+
+  public List<IfcUnitEdo> getUnits() {
+    return units;
   }
 
 }

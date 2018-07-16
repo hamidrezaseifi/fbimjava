@@ -16,14 +16,50 @@ public class IfcTypeWrapperEdo {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcFurnitureType")
-  private final List<IfcFurnituretypeEdo> furnitureTypes = new ArrayList<>();
+  private List<IfcFurnituretypeEdo> furnitureTypes = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcDoorStyle")
-  private final List<IfcDoorstyleEdo> doorTypes = new ArrayList<>();
+  private List<IfcDoorstyleEdo> doorTypes = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JacksonXmlProperty(localName = "IfcWindowStyle")// IfcWindowStyle
-  private final List<IfcWindowstyleEdo> windowTypes = new ArrayList<>();
+  @JacksonXmlProperty(localName = "IfcWindowStyle")
+  private List<IfcWindowstyleEdo> windowTypes = new ArrayList<>();
+
+  public List<IfcFurnituretypeEdo> getFurnitureTypes() {
+    return furnitureTypes;
+  }
+
+  public void setFurnitureTypes(final List<IfcFurnituretypeEdo> furnitureTypes) {
+    this.furnitureTypes = furnitureTypes;
+  }
+
+  public void addFurnitureType(final IfcFurnituretypeEdo furnitureType) {
+    this.furnitureTypes.add(furnitureType);
+  }
+
+  public List<IfcDoorstyleEdo> getDoorTypes() {
+    return doorTypes;
+  }
+
+  public void setDoorTypes(final List<IfcDoorstyleEdo> doorTypes) {
+    this.doorTypes = doorTypes;
+  }
+
+  public void addDoorType(final IfcDoorstyleEdo doorType) {
+    this.doorTypes.add(doorType);
+  }
+
+  public List<IfcWindowstyleEdo> getWindowTypes() {
+    return windowTypes;
+  }
+
+  public void setWindowTypes(final List<IfcWindowstyleEdo> windowTypes) {
+    this.windowTypes = windowTypes;
+  }
+
+  public void addWindowType(final IfcWindowstyleEdo windowType) {
+    this.windowTypes.add(windowType);
+  }
 
 }

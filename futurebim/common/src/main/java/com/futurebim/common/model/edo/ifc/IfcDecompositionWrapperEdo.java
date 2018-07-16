@@ -10,6 +10,18 @@ public class IfcDecompositionWrapperEdo {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcProject")
-  private final List<IfcProjectEdo> projects = new ArrayList<>();
+  private List<IfcProjectEdo> projects = new ArrayList<>();
+
+  public List<IfcProjectEdo> getProjects() {
+    return projects;
+  }
+
+  public void setProjects(final List<IfcProjectEdo> projects) {
+    this.projects = projects;
+  }
+
+  public void addProject(final IfcProjectEdo project) {
+    this.projects.add(project);
+  }
 
 }

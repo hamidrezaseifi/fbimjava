@@ -14,4 +14,20 @@ public class IfcPropertyValueEdo {
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
   private String valueName;
 
+  public String getNominalValue() {
+    return nominalValue;
+  }
+
+  public void setNominalValue(final String nominalValue) {
+    this.nominalValue = nominalValue;
+  }
+
+  public String getValueName() {
+    return valueName;
+  }
+
+  public void setValueName(final String valueName) {
+    this.valueName = valueName;
+  }
+
 }

@@ -37,10 +37,106 @@ public class IfcStairFlightEdo {
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcPresentationLayerAssignmentSetEdo> presentationLayerAssignmentList = new ArrayList<>();
+  private List<IfcPresentationLayerAssignmentSetEdo> presentationLayerAssignmentList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  private final List<IfcPropertySetEdo> propertySetList = new ArrayList<>();
+  private List<IfcPropertySetEdo> propertySetList = new ArrayList<>();
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(final String id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(final String name) {
+    this.name = name;
+  }
+
+  public String getObjectType() {
+    return objectType;
+  }
+
+  public void setObjectType(final String objectType) {
+    this.objectType = objectType;
+  }
+
+  public String getObjectPlacement() {
+    return objectPlacement;
+  }
+
+  public void setObjectPlacement(final String objectPlacement) {
+    this.objectPlacement = objectPlacement;
+  }
+
+  public String getTag() {
+    return tag;
+  }
+
+  public void setTag(final String tag) {
+    this.tag = tag;
+  }
+
+  public String getNumberOfRiser() {
+    return numberOfRiser;
+  }
+
+  public void setNumberOfRiser(final String numberOfRiser) {
+    this.numberOfRiser = numberOfRiser;
+  }
+
+  public String getNumberOfTreads() {
+    return numberOfTreads;
+  }
+
+  public void setNumberOfTreads(final String numberOfTreads) {
+    this.numberOfTreads = numberOfTreads;
+  }
+
+  public String getRiserHeight() {
+    return riserHeight;
+  }
+
+  public void setRiserHeight(final String riserHeight) {
+    this.riserHeight = riserHeight;
+  }
+
+  public String getTreadLength() {
+    return treadLength;
+  }
+
+  public void setTreadLength(final String treadLength) {
+    this.treadLength = treadLength;
+  }
+
+  public List<IfcPresentationLayerAssignmentSetEdo> getPresentationLayerAssignmentList() {
+    return presentationLayerAssignmentList;
+  }
+
+  public void setPresentationLayerAssignmentList(final List<IfcPresentationLayerAssignmentSetEdo> presentationLayerAssignmentList) {
+    this.presentationLayerAssignmentList = presentationLayerAssignmentList;
+  }
+
+  public void addPresentationLayerAssignment(final IfcPresentationLayerAssignmentSetEdo presentationLayerAssignment) {
+    this.presentationLayerAssignmentList.add(presentationLayerAssignment);
+  }
+
+  public List<IfcPropertySetEdo> getPropertySetList() {
+    return propertySetList;
+  }
+
+  public void setPropertySetList(final List<IfcPropertySetEdo> propertySetList) {
+    this.propertySetList = propertySetList;
+  }
+
+  public void addPropertySet(final IfcPropertySetEdo propertySet) {
+    this.propertySetList.add(propertySet);
+  }
 
 }

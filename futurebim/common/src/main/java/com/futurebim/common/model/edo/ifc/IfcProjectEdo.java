@@ -26,6 +26,50 @@ public class IfcProjectEdo {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcSite")
-  private final List<IfcProjectSiteEdo> sites = new ArrayList<>();
+  private List<IfcProjectSiteEdo> sites = new ArrayList<>();
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(final String id) {
+    this.id = id;
+  }
+
+  public String getProjectName() {
+    return projectName;
+  }
+
+  public void setProjectName(final String projectName) {
+    this.projectName = projectName;
+  }
+
+  public String getProjectLongName() {
+    return projectLongName;
+  }
+
+  public void setProjectLongName(final String projectLongName) {
+    this.projectLongName = projectLongName;
+  }
+
+  public String getPhase() {
+    return phase;
+  }
+
+  public void setPhase(final String phase) {
+    this.phase = phase;
+  }
+
+  public List<IfcProjectSiteEdo> getSites() {
+    return sites;
+  }
+
+  public void setSites(final List<IfcProjectSiteEdo> sites) {
+    this.sites = sites;
+  }
+
+  public void addSite(final IfcProjectSiteEdo site) {
+    this.sites.add(site);
+  }
 
 }

@@ -1,6 +1,7 @@
 package com.futurebim.common.model.edo.ifc;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,35 +19,41 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 public class ProjectIfcEdo {
 
   @JacksonXmlProperty(localName = "header")
-  private final Map<String, Object> header = new HashMap<>();
+  private Map<String, Object> header;
 
   @JacksonXmlProperty(localName = "units")
   private IfcUnitWrapperEdo units;
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(localName = "properties")
-  private List<IfcPropertyEdo> properties;
+  private List<IfcPropertyEdo> properties = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "types")
   private IfcTypeWrapperEdo types;
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
-  private List<IfcPresentationlayerEdo> layers;
+  private List<IfcPresentationlayerEdo> layers = new ArrayList<>();
 
   @JacksonXmlElementWrapper(localName = "decomposition")
   private IfcDecompositionWrapperEdo decomposition;
 
   public ProjectIfcEdo() {
 
+    createHeader("");
+
   }
 
   public ProjectIfcEdo(final String name) {
+
     createHeader(name);
 
   }
 
   private void createHeader(final String name) {
     // com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator.Feature.WRITE_XML_DECLARATION
+
+    header = new HashMap<>();
+
     Map<String, Object> map = new HashMap<>();
     map.put("description", "ViewDefinition [CoordinationView]");
     map.put("implementation_level", "2;1");
@@ -81,6 +88,50 @@ public class ProjectIfcEdo {
     }
 
     return "";
+  }
+
+  public IfcUnitWrapperEdo getUnits() {
+    return units;
+  }
+
+  public void setUnits(final IfcUnitWrapperEdo units) {
+    this.units = units;
+  }
+
+  public List<IfcPropertyEdo> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(final List<IfcPropertyEdo> properties) {
+    this.properties = properties;
+  }
+
+  public IfcTypeWrapperEdo getTypes() {
+    return types;
+  }
+
+  public void setTypes(final IfcTypeWrapperEdo types) {
+    this.types = types;
+  }
+
+  public List<IfcPresentationlayerEdo> getLayers() {
+    return layers;
+  }
+
+  public void setLayers(final List<IfcPresentationlayerEdo> layers) {
+    this.layers = layers;
+  }
+
+  public IfcDecompositionWrapperEdo getDecomposition() {
+    return decomposition;
+  }
+
+  public void setDecomposition(final IfcDecompositionWrapperEdo decomposition) {
+    this.decomposition = decomposition;
+  }
+
+  public Map<String, Object> getHeader() {
+    return header;
   }
 
 }
