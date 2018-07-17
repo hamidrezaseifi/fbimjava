@@ -36,16 +36,14 @@ public class IfcBuildingStoreyFooting implements Serializable {
 
 	private short status;
 
+	@Column(name="storey_id")
+	private String storeyId;
+
 	private String tag;
 
 	private Timestamp updated;
 
 	private int version;
-
-	//bi-directional many-to-one association to IfcBuildingStorey
-	@ManyToOne
-	@JoinColumn(name="storey_id")
-	private IfcBuildingStorey ifcBuildingStorey;
 
 	//bi-directional many-to-one association to IfcBuildingStoreyFootingPresentationlayer
 	@OneToMany(mappedBy="ifcBuildingStoreyFooting")
@@ -114,6 +112,14 @@ public class IfcBuildingStoreyFooting implements Serializable {
 		this.status = status;
 	}
 
+	public String getStoreyId() {
+		return this.storeyId;
+	}
+
+	public void setStoreyId(String storeyId) {
+		this.storeyId = storeyId;
+	}
+
 	public String getTag() {
 		return this.tag;
 	}
@@ -136,14 +142,6 @@ public class IfcBuildingStoreyFooting implements Serializable {
 
 	public void setVersion(int version) {
 		this.version = version;
-	}
-
-	public IfcBuildingStorey getIfcBuildingStorey() {
-		return this.ifcBuildingStorey;
-	}
-
-	public void setIfcBuildingStorey(IfcBuildingStorey ifcBuildingStorey) {
-		this.ifcBuildingStorey = ifcBuildingStorey;
 	}
 
 	public List<IfcBuildingStoreyFootingPresentationlayer> getIfcBuildingStoreyFootingPresentationlayers() {

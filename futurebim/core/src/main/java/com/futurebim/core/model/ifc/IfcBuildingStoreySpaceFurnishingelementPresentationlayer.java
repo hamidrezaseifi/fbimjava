@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcPresentationLayerAssignmentSetEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -98,6 +99,14 @@ public class IfcBuildingStoreySpaceFurnishingelementPresentationlayer extends Se
 
   public void setFelementId(final String felementId) {
     this.felementId = felementId;
+  }
+
+  public IfcPresentationLayerAssignmentSetEdo toEdo() {
+
+    final IfcPresentationLayerAssignmentSetEdo edo = new IfcPresentationLayerAssignmentSetEdo();
+    edo.setHref(presentationlayerId);
+
+    return edo;
   }
 
 }

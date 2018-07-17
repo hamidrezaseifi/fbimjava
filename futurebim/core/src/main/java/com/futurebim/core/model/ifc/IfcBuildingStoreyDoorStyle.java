@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcDoorStyleSetEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -97,6 +98,14 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
 
   public void setDoorId(final String doorId) {
     this.doorId = doorId;
+  }
+
+  public IfcDoorStyleSetEdo toEdo() {
+
+    final IfcDoorStyleSetEdo edo = new IfcDoorStyleSetEdo();
+    edo.setHref(doorId);
+
+    return edo;
   }
 
 }

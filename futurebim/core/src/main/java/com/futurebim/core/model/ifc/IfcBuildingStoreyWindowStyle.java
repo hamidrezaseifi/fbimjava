@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcWindowStyleSetEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -99,4 +100,11 @@ public class IfcBuildingStoreyWindowStyle extends SerializableModelBase {
     this.windowId = windowId;
   }
 
+  public IfcWindowStyleSetEdo toEdo() {
+
+    final IfcWindowStyleSetEdo edo = new IfcWindowStyleSetEdo();
+    edo.setHref(styleId);
+
+    return edo;
+  }
 }

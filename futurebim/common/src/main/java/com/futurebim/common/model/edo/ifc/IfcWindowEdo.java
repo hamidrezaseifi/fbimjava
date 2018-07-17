@@ -129,7 +129,7 @@ public class IfcWindowEdo {
     this.presentationLayerAssignmentList = presentationLayerAssignmentList;
   }
 
-  public void addPresentationLayerAssignmentList(final IfcPresentationLayerAssignmentSetEdo presentationLayerAssignment) {
+  public void addPresentationLayerAssignment(final IfcPresentationLayerAssignmentSetEdo presentationLayerAssignment) {
     this.presentationLayerAssignmentList.add(presentationLayerAssignment);
   }
 

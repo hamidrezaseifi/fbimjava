@@ -10,8 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.futurebim.common.model.edo.ifc.IfcPresentationLayerAssignmentSetEdo;
 
 /**
  * The persistent class for the ifc_building_storey_slab_opening_presentationlayer database table.
@@ -19,8 +20,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ifc_building_storey_slab_opening_presentationlayer")
-@NamedQuery(name = "IfcBuildingStoreySlabOpeningPresentationlayer.findAll",
-            query = "SELECT i FROM IfcBuildingStoreySlabOpeningPresentationlayer i")
 public class IfcBuildingStoreySlabOpeningPresentationlayer implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -100,4 +99,11 @@ public class IfcBuildingStoreySlabOpeningPresentationlayer implements Serializab
     this.openingId = openingId;
   }
 
+  public IfcPresentationLayerAssignmentSetEdo toEdo() {
+
+    final IfcPresentationLayerAssignmentSetEdo edo = new IfcPresentationLayerAssignmentSetEdo();
+    edo.setHref(presentationlayerId);
+
+    return edo;
+  }
 }

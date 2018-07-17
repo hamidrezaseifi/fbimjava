@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcFurnishingElementEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -262,4 +263,31 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
     this.spaceId = spaceId;
   }
 
+  public IfcFurnishingElementEdo toEdo() {
+
+    final IfcFurnishingElementEdo edo = new IfcFurnishingElementEdo();
+    edo.setId(id);
+    edo.setName(elementName);
+    edo.setObjectPlacement(objectPlacement);
+    edo.setObjectType(objectType);
+    edo.setTag(tag);
+
+    for (final IfcBuildingStoreySpaceFurnishingelementPresentationlayer item : ifcBuildingStoreySpaceFurnishingelementPresentationlayers) {
+      edo.addPresentationLayerAssignment(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreySpaceFurnishingelementProperty item : ifcBuildingStoreySpaceFurnishingelementProperties) {
+      edo.addPropertySet(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreySpaceFurnishingelementFurnituretype item : ifcBuildingStoreySpaceFurnishingelementFurnituretypes) {
+      edo.addFurnitureType(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreySpaceFurnishingelementOpening item : IfcBuildingStoreySpaceFurnishingelementOpenings) {
+      edo.addOpeningElement(item.toEdo());
+    }
+
+    return edo;
+  }
 }

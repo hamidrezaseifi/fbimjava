@@ -22,6 +22,9 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening implements Serializa
 
 	private Timestamp created;
 
+	@Column(name="element_id")
+	private String elementId;
+
 	@Column(name="object_placement")
 	private String objectPlacement;
 
@@ -37,14 +40,9 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening implements Serializa
 
 	private int version;
 
-	//bi-directional many-to-one association to IfcBuildingStoreySpaceFelementOpeningPresentationlayer
+	//bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer
 	@OneToMany(mappedBy="ifcBuildingStoreySpaceFurnishingelementOpening")
-	private List<IfcBuildingStoreySpaceFelementOpeningPresentationlayer> ifcBuildingStoreySpaceFelementOpeningPresentationlayers;
-
-	//bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelement
-	@ManyToOne
-	@JoinColumn(name="element_id")
-	private IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement;
+	private List<IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer> ifcBuildingStoreySpaceFelementOpeningPresentationlayers;
 
 	//bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementOpeningProperty
 	@OneToMany(mappedBy="ifcBuildingStoreySpaceFurnishingelementOpening")
@@ -67,6 +65,14 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening implements Serializa
 
 	public void setCreated(Timestamp created) {
 		this.created = created;
+	}
+
+	public String getElementId() {
+		return this.elementId;
+	}
+
+	public void setElementId(String elementId) {
+		this.elementId = elementId;
 	}
 
 	public String getObjectPlacement() {
@@ -117,34 +123,26 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening implements Serializa
 		this.version = version;
 	}
 
-	public List<IfcBuildingStoreySpaceFelementOpeningPresentationlayer> getIfcBuildingStoreySpaceFelementOpeningPresentationlayers() {
+	public List<IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer> getIfcBuildingStoreySpaceFelementOpeningPresentationlayers() {
 		return this.ifcBuildingStoreySpaceFelementOpeningPresentationlayers;
 	}
 
-	public void setIfcBuildingStoreySpaceFelementOpeningPresentationlayers(List<IfcBuildingStoreySpaceFelementOpeningPresentationlayer> ifcBuildingStoreySpaceFelementOpeningPresentationlayers) {
+	public void setIfcBuildingStoreySpaceFelementOpeningPresentationlayers(List<IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer> ifcBuildingStoreySpaceFelementOpeningPresentationlayers) {
 		this.ifcBuildingStoreySpaceFelementOpeningPresentationlayers = ifcBuildingStoreySpaceFelementOpeningPresentationlayers;
 	}
 
-	public IfcBuildingStoreySpaceFelementOpeningPresentationlayer addIfcBuildingStoreySpaceFelementOpeningPresentationlayer(IfcBuildingStoreySpaceFelementOpeningPresentationlayer ifcBuildingStoreySpaceFelementOpeningPresentationlayer) {
+	public IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer addIfcBuildingStoreySpaceFelementOpeningPresentationlayer(IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer ifcBuildingStoreySpaceFelementOpeningPresentationlayer) {
 		getIfcBuildingStoreySpaceFelementOpeningPresentationlayers().add(ifcBuildingStoreySpaceFelementOpeningPresentationlayer);
 		ifcBuildingStoreySpaceFelementOpeningPresentationlayer.setIfcBuildingStoreySpaceFurnishingelementOpening(this);
 
 		return ifcBuildingStoreySpaceFelementOpeningPresentationlayer;
 	}
 
-	public IfcBuildingStoreySpaceFelementOpeningPresentationlayer removeIfcBuildingStoreySpaceFelementOpeningPresentationlayer(IfcBuildingStoreySpaceFelementOpeningPresentationlayer ifcBuildingStoreySpaceFelementOpeningPresentationlayer) {
+	public IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer removeIfcBuildingStoreySpaceFelementOpeningPresentationlayer(IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer ifcBuildingStoreySpaceFelementOpeningPresentationlayer) {
 		getIfcBuildingStoreySpaceFelementOpeningPresentationlayers().remove(ifcBuildingStoreySpaceFelementOpeningPresentationlayer);
 		ifcBuildingStoreySpaceFelementOpeningPresentationlayer.setIfcBuildingStoreySpaceFurnishingelementOpening(null);
 
 		return ifcBuildingStoreySpaceFelementOpeningPresentationlayer;
-	}
-
-	public IfcBuildingStoreySpaceFurnishingelement getIfcBuildingStoreySpaceFurnishingelement() {
-		return this.ifcBuildingStoreySpaceFurnishingelement;
-	}
-
-	public void setIfcBuildingStoreySpaceFurnishingelement(IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement) {
-		this.ifcBuildingStoreySpaceFurnishingelement = ifcBuildingStoreySpaceFurnishingelement;
 	}
 
 	public List<IfcBuildingStoreySpaceFurnishingelementOpeningProperty> getIfcBuildingStoreySpaceFurnishingelementOpeningProperties() {

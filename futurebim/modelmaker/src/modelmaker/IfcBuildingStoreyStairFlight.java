@@ -51,16 +51,6 @@ public class IfcBuildingStoreyStairFlight implements Serializable {
 
 	private int version;
 
-	//bi-directional many-to-one association to IfcBuildingStorey
-	@ManyToOne
-	@JoinColumn(name="stair_id")
-	private IfcBuildingStorey ifcBuildingStorey;
-
-	//bi-directional many-to-one association to IfcBuildingStoreyStair
-	@ManyToOne
-	@JoinColumn(name="stair_id")
-	private IfcBuildingStoreyStair ifcBuildingStoreyStair;
-
 	//bi-directional many-to-one association to IfcBuildingStoreyStairFlightPresentationlayer
 	@OneToMany(mappedBy="ifcBuildingStoreyStairFlight")
 	private List<IfcBuildingStoreyStairFlightPresentationlayer> ifcBuildingStoreyStairFlightPresentationlayers;
@@ -68,6 +58,11 @@ public class IfcBuildingStoreyStairFlight implements Serializable {
 	//bi-directional many-to-one association to IfcBuildingStoreyStairFlightProperty
 	@OneToMany(mappedBy="ifcBuildingStoreyStairFlight")
 	private List<IfcBuildingStoreyStairFlightProperty> ifcBuildingStoreyStairFlightProperties;
+
+	//bi-directional many-to-one association to IfcBuildingStoreyStair
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="stair_id")
+	private IfcBuildingStoreyStair ifcBuildingStoreyStair;
 
 	public IfcBuildingStoreyStairFlight() {
 	}
@@ -176,22 +171,6 @@ public class IfcBuildingStoreyStairFlight implements Serializable {
 		this.version = version;
 	}
 
-	public IfcBuildingStorey getIfcBuildingStorey() {
-		return this.ifcBuildingStorey;
-	}
-
-	public void setIfcBuildingStorey(IfcBuildingStorey ifcBuildingStorey) {
-		this.ifcBuildingStorey = ifcBuildingStorey;
-	}
-
-	public IfcBuildingStoreyStair getIfcBuildingStoreyStair() {
-		return this.ifcBuildingStoreyStair;
-	}
-
-	public void setIfcBuildingStoreyStair(IfcBuildingStoreyStair ifcBuildingStoreyStair) {
-		this.ifcBuildingStoreyStair = ifcBuildingStoreyStair;
-	}
-
 	public List<IfcBuildingStoreyStairFlightPresentationlayer> getIfcBuildingStoreyStairFlightPresentationlayers() {
 		return this.ifcBuildingStoreyStairFlightPresentationlayers;
 	}
@@ -234,6 +213,14 @@ public class IfcBuildingStoreyStairFlight implements Serializable {
 		ifcBuildingStoreyStairFlightProperty.setIfcBuildingStoreyStairFlight(null);
 
 		return ifcBuildingStoreyStairFlightProperty;
+	}
+
+	public IfcBuildingStoreyStair getIfcBuildingStoreyStair() {
+		return this.ifcBuildingStoreyStair;
+	}
+
+	public void setIfcBuildingStoreyStair(IfcBuildingStoreyStair ifcBuildingStoreyStair) {
+		this.ifcBuildingStoreyStair = ifcBuildingStoreyStair;
 	}
 
 }

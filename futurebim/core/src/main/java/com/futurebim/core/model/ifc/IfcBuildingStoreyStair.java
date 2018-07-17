@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcStairEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -71,6 +72,10 @@ public class IfcBuildingStoreyStair extends SerializableModelBase {
   // bi-directional many-to-one association to IfcBuildingStoreyStairRailing
   @OneToMany(mappedBy = "ifcBuildingStoreyStair", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyStairRailing> ifcBuildingStoreyStairRailings = new ArrayList<>();
+
+  // bi-directional many-to-one association to IfcBuildingStoreyStairPresentationlayer
+  @OneToMany(mappedBy = "ifcBuildingStoreyStair", cascade = CascadeType.ALL)
+  private List<IfcBuildingStoreyStairPresentationlayer> ifcBuildingStoreyStairPresentationlayers;
 
   public IfcBuildingStoreyStair() {
   }
@@ -254,4 +259,53 @@ public class IfcBuildingStoreyStair extends SerializableModelBase {
     return ifcBuildingStoreyStairRailing;
   }
 
+  public List<IfcBuildingStoreyStairPresentationlayer> getIfcBuildingStoreyStairPresentationlayers() {
+    return this.ifcBuildingStoreyStairPresentationlayers;
+  }
+
+  public void
+         setIfcBuildingStoreyStairPresentationlayers(final List<IfcBuildingStoreyStairPresentationlayer> ifcBuildingStoreyStairPresentationlayers) {
+    this.ifcBuildingStoreyStairPresentationlayers = ifcBuildingStoreyStairPresentationlayers;
+  }
+
+  public IfcBuildingStoreyStairPresentationlayer
+         addIfcBuildingStoreyStairPresentationlayer(final IfcBuildingStoreyStairPresentationlayer ifcBuildingStoreyStairPresentationlayer) {
+    getIfcBuildingStoreyStairPresentationlayers().add(ifcBuildingStoreyStairPresentationlayer);
+    ifcBuildingStoreyStairPresentationlayer.setIfcBuildingStoreyStair(this);
+
+    return ifcBuildingStoreyStairPresentationlayer;
+  }
+
+  public IfcStairEdo toEdo() {
+
+    final IfcStairEdo edo = new IfcStairEdo();
+    edo.setId(id);
+    edo.setName(stairName);
+    edo.setObjectPlacement(objectPlacement);
+    edo.setObjectType(objectType);
+    edo.setShapeType(shapeType);
+    edo.setTag(tag);
+
+    for (final IfcBuildingStoreyStairFlight item : ifcBuildingStoreyStairFlights) {
+      edo.addStairFlight(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyStairProperty item : ifcBuildingStoreyStairProperties) {
+      edo.addPropertySet(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyStairPresentationlayer item : ifcBuildingStoreyStairPresentationlayers) {
+      edo.addPresentationLayerAssignment(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyStairMember item : ifcBuildingStoreyStairMembers) {
+      edo.addMember(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyStairRailing item : ifcBuildingStoreyStairRailings) {
+      edo.addRailing(item.toEdo());
+    }
+
+    return edo;
+  }
 }

@@ -6,13 +6,13 @@ import java.sql.Timestamp;
 
 
 /**
- * The persistent class for the ifc_building_storey_footing_presentationlayer database table.
+ * The persistent class for the ifc_building_storey_stair_presentationlayer database table.
  * 
  */
 @Entity
-@Table(name="ifc_building_storey_footing_presentationlayer")
-@NamedQuery(name="IfcBuildingStoreyFootingPresentationlayer.findAll", query="SELECT i FROM IfcBuildingStoreyFootingPresentationlayer i")
-public class IfcBuildingStoreyFootingPresentationlayer implements Serializable {
+@Table(name="ifc_building_storey_stair_presentationlayer")
+@NamedQuery(name="IfcBuildingStoreyStairPresentationlayer.findAll", query="SELECT i FROM IfcBuildingStoreyStairPresentationlayer i")
+public class IfcBuildingStoreyStairPresentationlayer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,12 +26,12 @@ public class IfcBuildingStoreyFootingPresentationlayer implements Serializable {
 
 	private short status;
 
-	//bi-directional many-to-one association to IfcBuildingStoreyFooting
+	//bi-directional many-to-one association to IfcBuildingStoreyStair
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="footing_id")
-	private IfcBuildingStoreyFooting ifcBuildingStoreyFooting;
+	@JoinColumn(name="stair_id")
+	private IfcBuildingStoreyStair ifcBuildingStoreyStair;
 
-	public IfcBuildingStoreyFootingPresentationlayer() {
+	public IfcBuildingStoreyStairPresentationlayer() {
 	}
 
 	public int getId() {
@@ -66,12 +66,12 @@ public class IfcBuildingStoreyFootingPresentationlayer implements Serializable {
 		this.status = status;
 	}
 
-	public IfcBuildingStoreyFooting getIfcBuildingStoreyFooting() {
-		return this.ifcBuildingStoreyFooting;
+	public IfcBuildingStoreyStair getIfcBuildingStoreyStair() {
+		return this.ifcBuildingStoreyStair;
 	}
 
-	public void setIfcBuildingStoreyFooting(IfcBuildingStoreyFooting ifcBuildingStoreyFooting) {
-		this.ifcBuildingStoreyFooting = ifcBuildingStoreyFooting;
+	public void setIfcBuildingStoreyStair(IfcBuildingStoreyStair ifcBuildingStoreyStair) {
+		this.ifcBuildingStoreyStair = ifcBuildingStoreyStair;
 	}
 
 }

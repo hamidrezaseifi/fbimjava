@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcOpeningElementEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -204,4 +205,23 @@ public class IfcBuildingStoreyRoofSlabOpening extends SerializableModelBase {
     this.slabId = slabId;
   }
 
+  public IfcOpeningElementEdo toEdo() {
+
+    final IfcOpeningElementEdo edo = new IfcOpeningElementEdo();
+    edo.setId(id);
+    edo.setName(openingName);
+    edo.setObjectPlacement(objectPlacement);
+    edo.setObjectType(objectType);
+    edo.setTag(tag);
+
+    for (final IfcBuildingStoreyRoofSlabOpeningPresentationlayer item : ifcBuildingStoreyRoofSlabOpeningPresentationlayers) {
+      edo.addPresentationLayerAssignment(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyRoofSlabOpeningProperty item : ifcBuildingStoreyRoofSlabOpeningProperties) {
+      edo.addPropertySet(item.toEdo());
+    }
+
+    return edo;
+  }
 }

@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcFurnitureTypeSetEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -100,4 +101,11 @@ public class IfcBuildingStoreySpaceFurnishingelementFurnituretype extends Serial
     this.felementId = felementId;
   }
 
+  public IfcFurnitureTypeSetEdo toEdo() {
+
+    final IfcFurnitureTypeSetEdo edo = new IfcFurnitureTypeSetEdo();
+    edo.setHref(this.furnituretypeId);
+
+    return edo;
+  }
 }

@@ -1,9 +1,10 @@
 package com.futurebim.core.model.ifc;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,12 +16,12 @@ import com.futurebim.common.model.edo.ifc.IfcPresentationLayerAssignmentSetEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
- * The persistent class for the ifc_building_storey_roof_presentationlayer database table.
+ * The persistent class for the ifc_building_storey_stair_presentationlayer database table.
  *
  */
 @Entity
-@Table(name = "ifc_building_storey_roof_presentationlayer")
-public class IfcBuildingStoreyRoofPresentationlayer extends SerializableModelBase {
+@Table(name = "ifc_building_storey_stair_presentationlayer")
+public class IfcBuildingStoreyStairPresentationlayer extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
@@ -28,26 +29,26 @@ public class IfcBuildingStoreyRoofPresentationlayer extends SerializableModelBas
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  private LocalDateTime created;
+  private Timestamp created;
 
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
-  @Column(name = "roof_id")
-  private String roofId;
+  @Column(name = "stair_id")
+  private String stairId;
 
   private short status;
 
-  // bi-directional many-to-one association to IfcBuildingStoreyRoof
-  @ManyToOne
-  @JoinColumn(name = "roof_id", updatable = false, insertable = false)
-  private IfcBuildingStoreyRoof ifcBuildingStoreyRoof;
+  // bi-directional many-to-one association to IfcBuildingStoreyStair
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "stair_id", insertable = false, updatable = false)
+  private IfcBuildingStoreyStair ifcBuildingStoreyStair;
 
-  public IfcBuildingStoreyRoofPresentationlayer() {
+  public IfcBuildingStoreyStairPresentationlayer() {
   }
 
-  public IfcBuildingStoreyRoofPresentationlayer(final String roofId, final String presentationlayerId) {
-    this.roofId = roofId;
+  public IfcBuildingStoreyStairPresentationlayer(final String stairId, final String presentationlayerId) {
+    this.stairId = stairId;
     this.presentationlayerId = presentationlayerId;
   }
 
@@ -59,11 +60,11 @@ public class IfcBuildingStoreyRoofPresentationlayer extends SerializableModelBas
     this.id = id;
   }
 
-  public LocalDateTime getCreated() {
+  public Timestamp getCreated() {
     return this.created;
   }
 
-  public void setCreated(final LocalDateTime created) {
+  public void setCreated(final Timestamp created) {
     this.created = created;
   }
 
@@ -83,20 +84,20 @@ public class IfcBuildingStoreyRoofPresentationlayer extends SerializableModelBas
     this.status = status;
   }
 
-  public IfcBuildingStoreyRoof getIfcBuildingStoreyRoof() {
-    return this.ifcBuildingStoreyRoof;
+  public IfcBuildingStoreyStair getIfcBuildingStoreyStair() {
+    return this.ifcBuildingStoreyStair;
   }
 
-  public void setIfcBuildingStoreyRoof(final IfcBuildingStoreyRoof ifcBuildingStoreyRoof) {
-    this.ifcBuildingStoreyRoof = ifcBuildingStoreyRoof;
+  public void setIfcBuildingStoreyStair(final IfcBuildingStoreyStair ifcBuildingStoreyStair) {
+    this.ifcBuildingStoreyStair = ifcBuildingStoreyStair;
   }
 
-  public String getRoofId() {
-    return roofId;
+  public String getStairId() {
+    return stairId;
   }
 
-  public void setRoofId(final String roofId) {
-    this.roofId = roofId;
+  public void setStairId(final String stairId) {
+    this.stairId = stairId;
   }
 
   public IfcPresentationLayerAssignmentSetEdo toEdo() {

@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcStairFlightEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -53,8 +54,8 @@ public class IfcBuildingStoreyStairFlight extends SerializableModelBase {
 
   private String tag;
 
-  @Column(name = "treads_height")
-  private String treadsHeight;
+  @Column(name = "treads_length")
+  private String TreadLength;
 
   private LocalDateTime updated;
 
@@ -156,12 +157,12 @@ public class IfcBuildingStoreyStairFlight extends SerializableModelBase {
     this.tag = tag;
   }
 
-  public String getTreadsHeight() {
-    return this.treadsHeight;
+  public String getTreadLength() {
+    return this.TreadLength;
   }
 
-  public void setTreadsHeight(final String treadsHeight) {
-    this.treadsHeight = treadsHeight;
+  public void setTreadLength(final String treadsHeight) {
+    this.TreadLength = treadsHeight;
   }
 
   public LocalDateTime getUpdated() {
@@ -238,4 +239,27 @@ public class IfcBuildingStoreyStairFlight extends SerializableModelBase {
     return ifcBuildingStoreyStairFlightProperty;
   }
 
+  public IfcStairFlightEdo toEdo() {
+
+    final IfcStairFlightEdo edo = new IfcStairFlightEdo();
+    edo.setId(id);
+    edo.setName(flightName);
+    edo.setNumberOfRiser(numberOfRiser);
+    edo.setNumberOfTreads(numberOfTreads);
+    edo.setObjectPlacement(objectPlacement);
+    edo.setObjectType(objectType);
+    edo.setTag(tag);
+    edo.setTreadLength(TreadLength);
+    edo.setRiserHeight(riserHeight);
+
+    for (final IfcBuildingStoreyStairFlightProperty item : ifcBuildingStoreyStairFlightProperties) {
+      edo.addPropertySet(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyStairFlightPresentationlayer item : ifcBuildingStoreyStairFlightPresentationlayers) {
+      edo.addPresentationLayerAssignment(item.toEdo());
+    }
+
+    return edo;
+  }
 }

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcPropertySetEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -98,4 +99,11 @@ public class IfcBuildingStoreyRoofSlabProperty extends SerializableModelBase {
     this.slabId = slabId;
   }
 
+  public IfcPropertySetEdo toEdo() {
+
+    final IfcPropertySetEdo edo = new IfcPropertySetEdo();
+    edo.setHref(propertyId);
+
+    return edo;
+  }
 }

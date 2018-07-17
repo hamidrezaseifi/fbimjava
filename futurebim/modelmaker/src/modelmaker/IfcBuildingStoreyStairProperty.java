@@ -27,7 +27,7 @@ public class IfcBuildingStoreyStairProperty implements Serializable {
 	private short status;
 
 	//bi-directional many-to-one association to IfcBuildingStoreyStair
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="stair_id")
 	private IfcBuildingStoreyStair ifcBuildingStoreyStair;
 

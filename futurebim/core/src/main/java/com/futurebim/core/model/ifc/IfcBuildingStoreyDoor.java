@@ -252,12 +252,16 @@ public class IfcBuildingStoreyDoor extends SerializableModelBase {
     edo.setOverallHeight(overallHeight);
     edo.setOverallWidth(overallWidth);
 
-    for (final IfcBuildingStoreyCoveringPresentationlayer item : ifcBuildingStoreyCoveringPresentationlayers) {
+    for (final IfcBuildingStoreyDoorPresentationlayer item : ifcBuildingStoreyDoorPresentationlayers) {
       edo.addPresentationLayerAssignment(item.toEdo());
     }
 
-    for (final IfcBuildingStoreyCoveringProperty item : ifcBuildingStoreyCoveringProperties) {
+    for (final IfcBuildingStoreyDoorProperty item : ifcBuildingStoreyDoorProperties) {
       edo.addPropertySet(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyDoorStyle item : ifcBuildingStoreyDoorStyles) {
+      edo.addDoorStyle(item.toEdo());
     }
 
     return edo;

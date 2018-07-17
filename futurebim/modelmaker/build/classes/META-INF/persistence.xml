@@ -102,5 +102,7 @@
 		<class>modelmaker.IfcBuildingStoreyRoofOpening</class>
 		<class>modelmaker.IfcBuildingStoreyRoofOpeningPresentationlayer</class>
 		<class>modelmaker.IfcBuildingStoreyRoofOpeningProperty</class>
+		<class>modelmaker.IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer</class>
+		<class>modelmaker.IfcBuildingStoreyStairPresentationlayer</class>
 	</persistence-unit>
 </persistence>

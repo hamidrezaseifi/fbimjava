@@ -3,7 +3,6 @@ package modelmaker;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 
 /**
@@ -39,23 +38,10 @@ public class IfcBuildingStoreyStairMember implements Serializable {
 
 	private int version;
 
-	//bi-directional many-to-one association to IfcBuildingStorey
-	@ManyToOne
-	@JoinColumn(name="stair_id")
-	private IfcBuildingStorey ifcBuildingStorey;
-
 	//bi-directional many-to-one association to IfcBuildingStoreyStair
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="stair_id")
 	private IfcBuildingStoreyStair ifcBuildingStoreyStair;
-
-	//bi-directional many-to-one association to IfcBuildingStoreyStairMemberPresentationlayer
-	@OneToMany(mappedBy="ifcBuildingStoreyStairMember")
-	private List<IfcBuildingStoreyStairMemberPresentationlayer> ifcBuildingStoreyStairMemberPresentationlayers;
-
-	//bi-directional many-to-one association to IfcBuildingStoreyStairMemberProperty
-	@OneToMany(mappedBy="ifcBuildingStoreyStairMember")
-	private List<IfcBuildingStoreyStairMemberProperty> ifcBuildingStoreyStairMemberProperties;
 
 	public IfcBuildingStoreyStairMember() {
 	}
@@ -132,64 +118,12 @@ public class IfcBuildingStoreyStairMember implements Serializable {
 		this.version = version;
 	}
 
-	public IfcBuildingStorey getIfcBuildingStorey() {
-		return this.ifcBuildingStorey;
-	}
-
-	public void setIfcBuildingStorey(IfcBuildingStorey ifcBuildingStorey) {
-		this.ifcBuildingStorey = ifcBuildingStorey;
-	}
-
 	public IfcBuildingStoreyStair getIfcBuildingStoreyStair() {
 		return this.ifcBuildingStoreyStair;
 	}
 
 	public void setIfcBuildingStoreyStair(IfcBuildingStoreyStair ifcBuildingStoreyStair) {
 		this.ifcBuildingStoreyStair = ifcBuildingStoreyStair;
-	}
-
-	public List<IfcBuildingStoreyStairMemberPresentationlayer> getIfcBuildingStoreyStairMemberPresentationlayers() {
-		return this.ifcBuildingStoreyStairMemberPresentationlayers;
-	}
-
-	public void setIfcBuildingStoreyStairMemberPresentationlayers(List<IfcBuildingStoreyStairMemberPresentationlayer> ifcBuildingStoreyStairMemberPresentationlayers) {
-		this.ifcBuildingStoreyStairMemberPresentationlayers = ifcBuildingStoreyStairMemberPresentationlayers;
-	}
-
-	public IfcBuildingStoreyStairMemberPresentationlayer addIfcBuildingStoreyStairMemberPresentationlayer(IfcBuildingStoreyStairMemberPresentationlayer ifcBuildingStoreyStairMemberPresentationlayer) {
-		getIfcBuildingStoreyStairMemberPresentationlayers().add(ifcBuildingStoreyStairMemberPresentationlayer);
-		ifcBuildingStoreyStairMemberPresentationlayer.setIfcBuildingStoreyStairMember(this);
-
-		return ifcBuildingStoreyStairMemberPresentationlayer;
-	}
-
-	public IfcBuildingStoreyStairMemberPresentationlayer removeIfcBuildingStoreyStairMemberPresentationlayer(IfcBuildingStoreyStairMemberPresentationlayer ifcBuildingStoreyStairMemberPresentationlayer) {
-		getIfcBuildingStoreyStairMemberPresentationlayers().remove(ifcBuildingStoreyStairMemberPresentationlayer);
-		ifcBuildingStoreyStairMemberPresentationlayer.setIfcBuildingStoreyStairMember(null);
-
-		return ifcBuildingStoreyStairMemberPresentationlayer;
-	}
-
-	public List<IfcBuildingStoreyStairMemberProperty> getIfcBuildingStoreyStairMemberProperties() {
-		return this.ifcBuildingStoreyStairMemberProperties;
-	}
-
-	public void setIfcBuildingStoreyStairMemberProperties(List<IfcBuildingStoreyStairMemberProperty> ifcBuildingStoreyStairMemberProperties) {
-		this.ifcBuildingStoreyStairMemberProperties = ifcBuildingStoreyStairMemberProperties;
-	}
-
-	public IfcBuildingStoreyStairMemberProperty addIfcBuildingStoreyStairMemberProperty(IfcBuildingStoreyStairMemberProperty ifcBuildingStoreyStairMemberProperty) {
-		getIfcBuildingStoreyStairMemberProperties().add(ifcBuildingStoreyStairMemberProperty);
-		ifcBuildingStoreyStairMemberProperty.setIfcBuildingStoreyStairMember(this);
-
-		return ifcBuildingStoreyStairMemberProperty;
-	}
-
-	public IfcBuildingStoreyStairMemberProperty removeIfcBuildingStoreyStairMemberProperty(IfcBuildingStoreyStairMemberProperty ifcBuildingStoreyStairMemberProperty) {
-		getIfcBuildingStoreyStairMemberProperties().remove(ifcBuildingStoreyStairMemberProperty);
-		ifcBuildingStoreyStairMemberProperty.setIfcBuildingStoreyStairMember(null);
-
-		return ifcBuildingStoreyStairMemberProperty;
 	}
 
 }

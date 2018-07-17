@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcWindowEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -241,4 +242,27 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
     return ifcBuildingStoreyWindowStyle;
   }
 
+  public IfcWindowEdo toEdo() {
+
+    final IfcWindowEdo edo = new IfcWindowEdo();
+    edo.setId(id);
+    edo.setName(windowName);
+    edo.setObjectPlacement(objectPlacement);
+    edo.setObjectType(objectType);
+    edo.setTag(tag);
+
+    for (final IfcBuildingStoreyWindowStyle item : ifcBuildingStoreyWindowStyles) {
+      edo.addWindowStyleSet(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyWindowProperty item : ifcBuildingStoreyWindowProperties) {
+      edo.addPropertySet(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyWindowPresentationlayer item : ifcBuildingStoreyWindowPresentationlayers) {
+      edo.addPresentationLayerAssignment(item.toEdo());
+    }
+
+    return edo;
+  }
 }

@@ -6,13 +6,13 @@ import java.sql.Timestamp;
 
 
 /**
- * The persistent class for the ifc_building_storey_space_furnishingelement_opening_properties database table.
+ * The persistent class for the ifc_building_storey_space_felement_opening_presentationlayer database table.
  * 
  */
 @Entity
-@Table(name="ifc_building_storey_space_furnishingelement_opening_properties")
-@NamedQuery(name="IfcBuildingStoreySpaceFurnishingelementOpeningProperty.findAll", query="SELECT i FROM IfcBuildingStoreySpaceFurnishingelementOpeningProperty i")
-public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty implements Serializable {
+@Table(name="ifc_building_storey_space_felement_opening_presentationlayer")
+@NamedQuery(name="IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer.findAll", query="SELECT i FROM IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer i")
+public class IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -21,8 +21,8 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty implements S
 
 	private Timestamp created;
 
-	@Column(name="property_id")
-	private String propertyId;
+	@Column(name="presentationlayer_id")
+	private String presentationlayerId;
 
 	private short status;
 
@@ -31,7 +31,7 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty implements S
 	@JoinColumn(name="opening_id")
 	private IfcBuildingStoreySpaceFurnishingelementOpening ifcBuildingStoreySpaceFurnishingelementOpening;
 
-	public IfcBuildingStoreySpaceFurnishingelementOpeningProperty() {
+	public IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer() {
 	}
 
 	public int getId() {
@@ -50,12 +50,12 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty implements S
 		this.created = created;
 	}
 
-	public String getPropertyId() {
-		return this.propertyId;
+	public String getPresentationlayerId() {
+		return this.presentationlayerId;
 	}
 
-	public void setPropertyId(String propertyId) {
-		this.propertyId = propertyId;
+	public void setPresentationlayerId(String presentationlayerId) {
+		this.presentationlayerId = presentationlayerId;
 	}
 
 	public short getStatus() {

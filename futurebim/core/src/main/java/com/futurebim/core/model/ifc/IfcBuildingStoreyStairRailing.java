@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcStairRailingEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -205,4 +206,24 @@ public class IfcBuildingStoreyStairRailing extends SerializableModelBase {
     this.predefinedType = predefinedType;
   }
 
+  public IfcStairRailingEdo toEdo() {
+
+    final IfcStairRailingEdo edo = new IfcStairRailingEdo();
+    edo.setId(id);
+    edo.setObjectPlacement(objectPlacement);
+    edo.setObjectType(objectType);
+    edo.setTag(tag);
+    edo.setName(railingName);
+    edo.setPredefinedType(predefinedType);
+
+    for (final IfcBuildingStoreyStairRailingProperty item : ifcBuildingStoreyStairRailingProperties) {
+      edo.addPropertySet(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyStairRailingPresentationlayer item : ifcBuildingStoreyStairRailingPresentationlayers) {
+      edo.addPresentationLayerAssignment(item.toEdo());
+    }
+
+    return edo;
+  }
 }

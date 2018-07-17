@@ -27,7 +27,7 @@ public class IfcBuildingStoreyFootingProperty implements Serializable {
 	private short status;
 
 	//bi-directional many-to-one association to IfcBuildingStoreyFooting
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="footing_id")
 	private IfcBuildingStoreyFooting ifcBuildingStoreyFooting;
 

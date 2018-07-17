@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcPropertySetEdo;
+
 /**
  * The persistent class for the ifc_building_storey_slab_opening_properties database table.
  *
@@ -99,4 +101,11 @@ public class IfcBuildingStoreySlabOpeningProperty implements Serializable {
     this.openingId = openingId;
   }
 
+  public IfcPropertySetEdo toEdo() {
+
+    final IfcPropertySetEdo edo = new IfcPropertySetEdo();
+    edo.setHref(propertyId);
+
+    return edo;
+  }
 }

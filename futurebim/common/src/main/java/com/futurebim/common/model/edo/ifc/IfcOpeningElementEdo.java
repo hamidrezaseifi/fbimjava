@@ -79,8 +79,8 @@ public class IfcOpeningElementEdo {
     this.propertySetList = propertySetList;
   }
 
-  public void addPropertySetList(final List<IfcPropertySetEdo> propertySetList) {
-    this.propertySetList = propertySetList;
+  public void addPropertySet(final IfcPropertySetEdo propertySet) {
+    this.propertySetList.add(propertySet);
   }
 
   public List<IfcPresentationLayerAssignmentSetEdo> getPresentationLayerAssignmentList() {
