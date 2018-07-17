@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcDoorstyleEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -150,5 +151,18 @@ public class IfcDoorstyle extends SerializableModelBase {
 
   public void setProjectIfc(final ProjectIfc projectIfc) {
     this.projectIfc = projectIfc;
+  }
+
+  public IfcDoorstyleEdo toEdo() {
+    final IfcDoorstyleEdo edo = new IfcDoorstyleEdo();
+    edo.setConstructionType(constructionType);
+    edo.setId(id);
+    edo.setOperationType(operationType);
+    edo.setParameterTakesPrecedence(parameterTakesPrecedence);
+    edo.setSizeable(sizeable);
+    edo.setTag(tag);
+    edo.setTypeName(typeName);
+
+    return edo;
   }
 }

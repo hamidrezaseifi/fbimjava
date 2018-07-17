@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcUnitEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -121,6 +122,15 @@ public class IfcUnit extends SerializableModelBase {
 
   public void setProjectIfc(final ProjectIfc projectIfc) {
     this.projectIfc = projectIfc;
+  }
+
+  public IfcUnitEdo toEdo() {
+    final IfcUnitEdo edo = new IfcUnitEdo();
+    edo.setEquivalent(equivalent);
+    edo.setUnitName(unitName);
+    edo.setUnitType(unitType);
+
+    return edo;
   }
 
 }

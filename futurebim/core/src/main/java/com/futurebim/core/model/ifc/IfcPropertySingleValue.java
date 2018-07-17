@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.futurebim.common.model.edo.ifc.IfcPropertyValueEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -131,4 +132,11 @@ public class IfcPropertySingleValue extends SerializableModelBase {
     this.propertyId = propertyId;
   }
 
+  public IfcPropertyValueEdo toEdo() {
+    final IfcPropertyValueEdo edo = new IfcPropertyValueEdo();
+    edo.setNominalValue(nominalValue);
+    edo.setValueName(valueName);
+
+    return edo;
+  }
 }

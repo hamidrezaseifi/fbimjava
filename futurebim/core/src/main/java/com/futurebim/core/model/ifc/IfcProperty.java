@@ -19,6 +19,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.futurebim.common.model.edo.ifc.IfcPropertyEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -125,4 +126,17 @@ public class IfcProperty extends SerializableModelBase {
   public void setProjectIfc(final ProjectIfc projectIfc) {
     this.projectIfc = projectIfc;
   }
+
+  public IfcPropertyEdo toEdo() {
+    final IfcPropertyEdo edo = new IfcPropertyEdo();
+    edo.setId(id);
+    edo.setPropertyName(propertyName);
+
+    for (final IfcPropertySingleValue value : ifcPropertySingleValue) {
+      edo.addValue(value.toEdo());
+    }
+
+    return edo;
+  }
+
 }

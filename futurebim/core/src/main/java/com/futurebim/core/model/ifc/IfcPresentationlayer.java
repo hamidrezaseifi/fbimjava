@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcPresentationlayerEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -97,5 +98,13 @@ public class IfcPresentationlayer extends SerializableModelBase {
 
   public void setProjectIfc(final ProjectIfc projectIfc) {
     this.projectIfc = projectIfc;
+  }
+
+  public IfcPresentationlayerEdo toEdo() {
+    final IfcPresentationlayerEdo edo = new IfcPresentationlayerEdo();
+    edo.setId(id);
+    edo.setLayerName(layerName);
+
+    return edo;
   }
 }

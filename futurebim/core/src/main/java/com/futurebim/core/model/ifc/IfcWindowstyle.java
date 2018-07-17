@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcWindowstyleEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -151,4 +152,17 @@ public class IfcWindowstyle extends SerializableModelBase {
   public void setProjectIfc(final ProjectIfc projectIfc) {
     this.projectIfc = projectIfc;
   }
+
+  public IfcWindowstyleEdo toEdo() {
+    final IfcWindowstyleEdo edo = new IfcWindowstyleEdo();
+    edo.setId(id);
+    edo.setTag(tag);
+    edo.setTypeName(typeName);
+    edo.setConstructionType(constructionType);
+    edo.setOperationType(operationType);
+    edo.setSizeable(sizeable);
+
+    return edo;
+  }
+
 }

@@ -40,12 +40,18 @@ public class ProjectIfcEdo {
   public ProjectIfcEdo() {
 
     createHeader("");
+    this.units = new IfcUnitWrapperEdo();
+    this.types = new IfcTypeWrapperEdo();
+    this.decomposition = new IfcDecompositionWrapperEdo();
 
   }
 
   public ProjectIfcEdo(final String name) {
 
     createHeader(name);
+    this.units = new IfcUnitWrapperEdo();
+    this.types = new IfcTypeWrapperEdo();
+    this.decomposition = new IfcDecompositionWrapperEdo();
 
   }
 
@@ -106,6 +112,10 @@ public class ProjectIfcEdo {
     this.properties = properties;
   }
 
+  public void addProperty(final IfcPropertyEdo property) {
+    this.properties.add(property);
+  }
+
   public IfcTypeWrapperEdo getTypes() {
     return types;
   }
@@ -122,6 +132,10 @@ public class ProjectIfcEdo {
     this.layers = layers;
   }
 
+  public void addLayer(final IfcPresentationlayerEdo layer) {
+    this.layers.add(layer);
+  }
+
   public IfcDecompositionWrapperEdo getDecomposition() {
     return decomposition;
   }
@@ -132,6 +146,30 @@ public class ProjectIfcEdo {
 
   public Map<String, Object> getHeader() {
     return header;
+  }
+
+  public void addConversionUnit(final IfcConversionBasedUnitEdo conversion) {
+    this.units.addConversionUnit(conversion);
+  }
+
+  public void addUnit(final IfcUnitEdo unit) {
+    this.units.addUnit(unit);
+  }
+
+  public void addFurnitureType(final IfcFurnituretypeEdo furnitureType) {
+    this.types.addFurnitureType(furnitureType);
+  }
+
+  public void addDoorType(final IfcDoorstyleEdo doorType) {
+    this.types.addDoorType(doorType);
+  }
+
+  public void addWindowType(final IfcWindowstyleEdo windowType) {
+    this.types.addWindowType(windowType);
+  }
+
+  public void addProject(final IfcProjectEdo project) {
+    this.decomposition.addProject(project);
   }
 
 }

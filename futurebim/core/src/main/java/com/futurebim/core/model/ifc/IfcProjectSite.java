@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcProjectSiteEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -205,6 +206,24 @@ public class IfcProjectSite extends SerializableModelBase {
 
   public void setProjectId(final String projectId) {
     this.projectId = projectId;
+  }
+
+  public IfcProjectSiteEdo toEdo() {
+    final IfcProjectSiteEdo edo = new IfcProjectSiteEdo();
+    edo.setId(id);
+    edo.setCompositionType(compositionType);
+    edo.setObjectPlacement(objectPlacement);
+    edo.setObjectType(objectType);
+    edo.setRefElevation(refElevation);
+    edo.setRefLatitude(refLatitude);
+    edo.setRefLongitude(refLongitude);
+    edo.setSiteName(siteName);
+
+    for (final IfcBuilding item : ifcBuildings) {
+      edo.addBuilding(item.toEdo());
+    }
+
+    return edo;
   }
 
 }

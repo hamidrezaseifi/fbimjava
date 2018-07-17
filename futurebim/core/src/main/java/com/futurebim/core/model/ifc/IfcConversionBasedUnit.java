@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcConversionBasedUnitEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -123,4 +124,12 @@ public class IfcConversionBasedUnit extends SerializableModelBase {
     this.projectIfc = projectIfc;
   }
 
+  public IfcConversionBasedUnitEdo toEdo() {
+    final IfcConversionBasedUnitEdo edo = new IfcConversionBasedUnitEdo();
+    edo.setEquivalent(equivalent);
+    edo.setUnitName(unitName);
+    edo.setUnitType(unitType);
+
+    return edo;
+  }
 }

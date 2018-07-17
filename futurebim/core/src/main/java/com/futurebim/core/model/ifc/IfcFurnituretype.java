@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.futurebim.common.model.edo.ifc.IfcFurnituretypeEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -140,4 +141,14 @@ public class IfcFurnituretype extends SerializableModelBase {
     this.tag = tag;
   }
 
+  public IfcFurnituretypeEdo toEdo() {
+    final IfcFurnituretypeEdo edo = new IfcFurnituretypeEdo();
+    edo.setId(id);
+    edo.setTag(tag);
+    edo.setTypeName(typeName);
+    edo.setAssemblyPlace(assemblyPlace);
+    edo.setElementType(elementType);
+
+    return edo;
+  }
 }

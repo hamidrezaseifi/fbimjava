@@ -20,6 +20,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.futurebim.common.model.edo.ifc.ProjectIfcEdo;
 import com.futurebim.core.model.Project;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -329,4 +330,42 @@ public class ProjectIfc extends SerializableModelBase {
     this.comments = comments;
   }
 
+  public ProjectIfcEdo toEdo() {
+
+    final ProjectIfcEdo edo = new ProjectIfcEdo(getIfcName());
+
+    for (final IfcPresentationlayer layer : ifcPresentationlayers) {
+      edo.addLayer(layer.toEdo());
+    }
+
+    for (final IfcProperty property : ifcProperties) {
+      edo.addProperty(property.toEdo());
+    }
+
+    for (final IfcUnit unit : ifcUnits) {
+      edo.addUnit(unit.toEdo());
+    }
+
+    for (final IfcConversionBasedUnit unit : ifcConversionBasedUnit) {
+      edo.addConversionUnit(unit.toEdo());
+    }
+
+    for (final IfcDoorstyle item : ifcDoorstyles) {
+      edo.addDoorType(item.toEdo());
+    }
+
+    for (final IfcFurnituretype item : ifcFurnituretypes) {
+      edo.addFurnitureType(item.toEdo());
+    }
+
+    for (final IfcWindowstyle item : ifcWindowstyles) {
+      edo.addWindowType(item.toEdo());
+    }
+
+    for (final IfcProject item : ifcProjects) {
+      edo.addProject(item.toEdo());
+    }
+
+    return edo;
+  }
 }
