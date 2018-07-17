@@ -59,7 +59,7 @@ public class IfcStairFlightRender {
     p.setNumberOfRiser(numberOfRiser);
     p.setNumberOfTreads(numberOfTreads);
     p.setRiserHeight(riserHeight);
-    p.setTreadsHeight(treadLength);
+    p.setTreadLength(treadLength);
 
     for (final IfcPropertySetRender prop : propertySetList) {
       p.addIfcBuildingStoreyStairFlightProperty(new IfcBuildingStoreyStairFlightProperty(id, prop.getPropertyId()));

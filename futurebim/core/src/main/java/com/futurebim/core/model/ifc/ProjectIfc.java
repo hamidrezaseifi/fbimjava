@@ -368,4 +368,13 @@ public class ProjectIfc extends SerializableModelBase {
 
     return edo;
   }
+
+  public static List<ProjectIfcEdo> toEdoList(final List<ProjectIfc> list) {
+
+    final List<ProjectIfcEdo> edoList = new ArrayList<>();
+    for (final ProjectIfc ifc : list) {
+      edoList.add(ifc.toEdo());
+    }
+    return edoList;
+  }
 }

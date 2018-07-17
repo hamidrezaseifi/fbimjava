@@ -24,6 +24,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.futurebim.common.model.reponse.FutureBimUiRestResponse;
+import com.futurebim.common.model.reponse.ProjectIfcListRestResponse;
+import com.futurebim.common.model.reponse.ProjectIfcRestResponse;
 import com.futurebim.core.bl.ProjectIcfReadHandler;
 import com.futurebim.core.dao.ifc.IfcPropertyDao;
 import com.futurebim.core.dao.ifc.ProjectIcfDao;
@@ -63,13 +65,13 @@ public class ReadProjectIcfController {
   @RequestMapping(value = "/all/{projectId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public @ResponseBody FutureBimUiRestResponse readAll(@PathVariable final Long projectId) {
 
-    return FutureBimUiRestResponse.createDataResponse(projectIcfReadHandler.listProjectIfcs(projectId));
+    return ProjectIfcListRestResponse.createData(ProjectIfc.toEdoList(projectIcfReadHandler.listProjectIfcs(projectId)));
   }
 
   @RequestMapping(value = "/get/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody FutureBimUiRestResponse getIfc(@PathVariable final String ifcId) {
+  public @ResponseBody ProjectIfcRestResponse getIfc(@PathVariable final Long ifcId) {
 
-    return FutureBimUiRestResponse.createDataResponse(projectIcfReadHandler.getById(ifcId));
+    return ProjectIfcRestResponse.createData(projectIcfReadHandler.getById(ifcId).toEdo());
   }
 
   @RequestMapping(value = "/getrender/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
