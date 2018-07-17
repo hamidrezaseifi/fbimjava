@@ -155,7 +155,7 @@ public class IfcBuildingStoreyEdo {
     this.roofList = roofList;
   }
 
-  public void addRoofList(final IfcRoofEdo roof) {
+  public void addRoof(final IfcRoofEdo roof) {
     this.roofList.add(roof);
   }
 

@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcBeamEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -201,6 +202,26 @@ public class IfcBuildingStoreyBeam extends SerializableModelBase {
 
   public void setStoreyId(final String storeyId) {
     this.storeyId = storeyId;
+  }
+
+  public IfcBeamEdo toEdo() {
+
+    final IfcBeamEdo edo = new IfcBeamEdo();
+    edo.setId(id);
+    edo.setName(beamName);
+    edo.setObjectPlacement(objectPlacement);
+    edo.setObjectType(objectType);
+    edo.setTag(tag);
+
+    for (final IfcBuildingStoreyBeamPresentationlayer item : ifcBuildingStoreyBeamPresentationlayers) {
+      edo.addPresentationLayerAssignment(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyBeamProperty item : ifcBuildingStoreyBeamProperties) {
+      edo.addPropertySet(item.toEdo());
+    }
+
+    return edo;
   }
 
 }

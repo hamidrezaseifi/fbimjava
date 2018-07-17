@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcCoveringEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -213,6 +214,27 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
 
   public void setStoreyId(final String storeyId) {
     this.storeyId = storeyId;
+  }
+
+  public IfcCoveringEdo toEdo() {
+
+    final IfcCoveringEdo edo = new IfcCoveringEdo();
+    edo.setId(id);
+    edo.setName(coveringName);
+    edo.setObjectPlacement(objectPlacement);
+    edo.setObjectType(objectType);
+    edo.setTag(tag);
+    edo.setPredefinedType(predefinedType);
+
+    for (final IfcBuildingStoreyCoveringPresentationlayer item : ifcBuildingStoreyCoveringPresentationlayers) {
+      edo.addPresentationLayerAssignment(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyCoveringProperty item : ifcBuildingStoreyCoveringProperties) {
+      edo.addPropertySet(item.toEdo());
+    }
+
+    return edo;
   }
 
 }

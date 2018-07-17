@@ -438,12 +438,52 @@ public class IfcBuildingStorey extends SerializableModelBase {
     edo.setStoreyName(storeyName);
     edo.setId(id);
 
-    for (final IfcBuildingProperty item : ifcBuildingProperties) {
+    for (final IfcBuildingStoreyBeam item : ifcBuildingStoreyBeams) {
+      edo.addBeam(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyCovering item : ifcBuildingStoreyCoverings) {
+      edo.addCovering(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyDoor item : ifcBuildingStoreyDoors) {
+      edo.addDoor(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyProperty item : ifcBuildingStoreyProperties) {
       edo.addPropertySet(item.toEdo());
     }
 
-    for (final IfcBuildingStorey item : ifcBuildingStoreys) {
-      edo.addBuildingStorey(item.toEdo());
+    for (final IfcBuildingStoreySlab item : ifcBuildingStoreySlabs) {
+      edo.addSlab(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreySpace item : ifcBuildingStoreySpaces) {
+      edo.addSpace(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyStair item : ifcBuildingStoreyStairs) {
+      edo.addStair(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyWall item : ifcBuildingStoreyWalls) {
+      edo.addWall(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyWindow item : ifcBuildingStoreyWindows) {
+      edo.addWindow(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyWallstandardcase item : ifcBuildingStoreyWallCases) {
+      edo.addWallStandardCase(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyFooting item : ifcBuildingStoreyFootings) {
+      edo.addFooting(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyRoof item : ifcBuildingStoreyRoofs) {
+      edo.addRoof(item.toEdo());
     }
 
     return edo;

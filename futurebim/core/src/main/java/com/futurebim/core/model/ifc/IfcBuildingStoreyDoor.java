@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.futurebim.common.model.edo.ifc.IfcDoorEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
 /**
@@ -238,6 +239,28 @@ public class IfcBuildingStoreyDoor extends SerializableModelBase {
     ifcBuildingStoreyDoorStyle.setIfcBuildingStoreyDoor(null);
 
     return ifcBuildingStoreyDoorStyle;
+  }
+
+  public IfcDoorEdo toEdo() {
+
+    final IfcDoorEdo edo = new IfcDoorEdo();
+    edo.setId(id);
+    edo.setName(doorName);
+    edo.setObjectPlacement(objectPlacement);
+    edo.setObjectType(objectType);
+    edo.setTag(tag);
+    edo.setOverallHeight(overallHeight);
+    edo.setOverallWidth(overallWidth);
+
+    for (final IfcBuildingStoreyCoveringPresentationlayer item : ifcBuildingStoreyCoveringPresentationlayers) {
+      edo.addPresentationLayerAssignment(item.toEdo());
+    }
+
+    for (final IfcBuildingStoreyCoveringProperty item : ifcBuildingStoreyCoveringProperties) {
+      edo.addPropertySet(item.toEdo());
+    }
+
+    return edo;
   }
 
 }
