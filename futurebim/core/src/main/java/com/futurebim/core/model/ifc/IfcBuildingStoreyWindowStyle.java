@@ -33,6 +33,9 @@ public class IfcBuildingStoreyWindowStyle extends SerializableModelBase {
 
   private short status = 1;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   @Column(name = "style_id")
   private String styleId;
 
@@ -50,6 +53,14 @@ public class IfcBuildingStoreyWindowStyle extends SerializableModelBase {
   public IfcBuildingStoreyWindowStyle(final String windowId, final String styleId) {
     this.windowId = windowId;
     this.styleId = styleId;
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public Long getId() {

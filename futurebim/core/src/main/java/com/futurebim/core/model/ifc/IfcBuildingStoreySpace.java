@@ -33,6 +33,9 @@ public class IfcBuildingStoreySpace extends SerializableModelBase {
   @Id
   private String id;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   @Column(name = "composition_type")
   private String compositionType;
 
@@ -82,6 +85,14 @@ public class IfcBuildingStoreySpace extends SerializableModelBase {
   private List<IfcBuildingStoreySpaceFurnishingelement> furnishingElementList = new ArrayList<>();
 
   public IfcBuildingStoreySpace() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

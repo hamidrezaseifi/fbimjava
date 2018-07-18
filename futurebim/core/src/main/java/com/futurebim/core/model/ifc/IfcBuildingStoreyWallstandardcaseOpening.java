@@ -39,6 +39,9 @@ public class IfcBuildingStoreyWallstandardcaseOpening extends SerializableModelB
   @Column(name = "object_type")
   private String objectType;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private short status;
 
   private String tag;
@@ -69,6 +72,14 @@ public class IfcBuildingStoreyWallstandardcaseOpening extends SerializableModelB
   private List<IfcBuildingStoreyWallstandardcaseOpeningProperty> ifcBuildingStoreyWallstandardcaseOpeningProperties;
 
   public IfcBuildingStoreyWallstandardcaseOpening() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

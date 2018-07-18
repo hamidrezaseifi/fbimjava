@@ -33,6 +33,9 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
   @Id
   private String id;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private LocalDateTime created;
 
   @Column(name = "element_name")
@@ -82,6 +85,14 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
   private List<IfcBuildingStoreySpaceFurnishingelementOpening> IfcBuildingStoreySpaceFurnishingelementOpenings = new ArrayList<>();
 
   public IfcBuildingStoreySpaceFurnishingelement() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

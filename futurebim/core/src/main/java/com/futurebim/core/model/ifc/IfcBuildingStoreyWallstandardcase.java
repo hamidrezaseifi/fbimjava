@@ -48,6 +48,9 @@ public class IfcBuildingStoreyWallstandardcase extends SerializableModelBase {
   @Column(name = "storey_id")
   private String storeyId;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private LocalDateTime updated;
 
   private int version;
@@ -76,6 +79,14 @@ public class IfcBuildingStoreyWallstandardcase extends SerializableModelBase {
   private List<IfcBuildingStoreyWallstandardcaseProperty> ifcBuildingStoreyWallstandardcaseProperties = new ArrayList<>();
 
   public IfcBuildingStoreyWallstandardcase() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

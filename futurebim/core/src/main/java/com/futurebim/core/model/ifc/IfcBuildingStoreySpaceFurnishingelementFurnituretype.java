@@ -36,6 +36,9 @@ public class IfcBuildingStoreySpaceFurnishingelementFurnituretype extends Serial
   @Column(name = "furnituretype_id")
   private String furnituretypeId;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   @Column(name = "felement_id")
   private String felementId;
 
@@ -50,6 +53,14 @@ public class IfcBuildingStoreySpaceFurnishingelementFurnituretype extends Serial
   public IfcBuildingStoreySpaceFurnishingelementFurnituretype(final String felementId, final String furnituretypeId) {
     this.felementId = felementId;
     this.furnituretypeId = furnituretypeId;
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public Long getId() {

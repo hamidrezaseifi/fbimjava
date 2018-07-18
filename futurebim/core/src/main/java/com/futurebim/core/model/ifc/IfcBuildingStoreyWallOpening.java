@@ -44,6 +44,9 @@ public class IfcBuildingStoreyWallOpening extends SerializableModelBase {
   @Column(name = "wall_id")
   private String wallId;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private short status = 1;
 
   private String tag;
@@ -70,6 +73,14 @@ public class IfcBuildingStoreyWallOpening extends SerializableModelBase {
   private List<IfcBuildingStoreyWallOpeningProperty> ifcBuildingStoreyWallOpeningProperties = new ArrayList<>();
 
   public IfcBuildingStoreyWallOpening() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

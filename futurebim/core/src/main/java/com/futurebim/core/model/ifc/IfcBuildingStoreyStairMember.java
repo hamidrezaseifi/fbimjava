@@ -35,6 +35,9 @@ public class IfcBuildingStoreyStairMember extends SerializableModelBase {
 
   private LocalDateTime created;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   @Column(name = "member_name")
   private String memberName;
 
@@ -68,6 +71,14 @@ public class IfcBuildingStoreyStairMember extends SerializableModelBase {
   private List<IfcBuildingStoreyStairMemberProperty> ifcBuildingStoreyStairMemberProperties = new ArrayList<>();
 
   public IfcBuildingStoreyStairMember() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

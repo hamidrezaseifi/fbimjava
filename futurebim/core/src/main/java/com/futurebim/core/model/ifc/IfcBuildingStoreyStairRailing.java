@@ -47,6 +47,9 @@ public class IfcBuildingStoreyStairRailing extends SerializableModelBase {
   @Column(name = "predefined_type")
   private String predefinedType;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private short status = 1;
 
   private String tag;
@@ -71,6 +74,14 @@ public class IfcBuildingStoreyStairRailing extends SerializableModelBase {
   private List<IfcBuildingStoreyStairRailingProperty> ifcBuildingStoreyStairRailingProperties = new ArrayList<>();
 
   public IfcBuildingStoreyStairRailing() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

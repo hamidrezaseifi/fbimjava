@@ -33,6 +33,9 @@ public class IfcBuildingStoreyStairFlight extends SerializableModelBase {
   @Id
   private String id;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private LocalDateTime created;
 
   @Column(name = "flight_name")
@@ -80,6 +83,14 @@ public class IfcBuildingStoreyStairFlight extends SerializableModelBase {
   private List<IfcBuildingStoreyStairFlightProperty> ifcBuildingStoreyStairFlightProperties = new ArrayList<>();
 
   public IfcBuildingStoreyStairFlight() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

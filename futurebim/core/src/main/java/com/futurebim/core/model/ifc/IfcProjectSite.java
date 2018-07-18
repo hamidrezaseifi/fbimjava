@@ -59,6 +59,9 @@ public class IfcProjectSite extends SerializableModelBase {
   @Column(name = "project_id")
   private String projectId;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private short status = 1;
 
   private LocalDateTime updated;
@@ -76,6 +79,14 @@ public class IfcProjectSite extends SerializableModelBase {
   private IfcProject ifcProject;
 
   public IfcProjectSite() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

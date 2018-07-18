@@ -33,6 +33,9 @@ public class IfcBuilding extends SerializableModelBase {
   @Id
   private String id;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   @Column(name = "building_name")
   private String buildingName;
 
@@ -69,6 +72,14 @@ public class IfcBuilding extends SerializableModelBase {
   private List<IfcBuildingStorey> ifcBuildingStoreys = new ArrayList<>();
 
   public IfcBuilding() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

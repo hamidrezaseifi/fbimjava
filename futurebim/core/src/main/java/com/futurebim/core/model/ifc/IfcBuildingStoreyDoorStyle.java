@@ -29,6 +29,9 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private LocalDateTime created;
 
   private short status = 1;
@@ -50,6 +53,14 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
   public IfcBuildingStoreyDoorStyle(final String doorId, final String doorstyleId) {
     this.doorId = doorId;
     this.doorstyleId = doorstyleId;
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public Long getId() {

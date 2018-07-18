@@ -33,6 +33,9 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
   @Id
   private String id;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private LocalDateTime created;
 
   @Column(name = "object_placement")
@@ -79,6 +82,14 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
   private List<IfcBuildingStoreySlabOpening> ifcBuildingStoreySlabOpenings = new ArrayList<>();
 
   public IfcBuildingStoreySlab() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

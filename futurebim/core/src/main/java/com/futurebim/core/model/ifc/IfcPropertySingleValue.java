@@ -33,6 +33,9 @@ public class IfcPropertySingleValue extends SerializableModelBase {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   @Column(name = "property_id")
   private String propertyId;
 
@@ -58,6 +61,14 @@ public class IfcPropertySingleValue extends SerializableModelBase {
   private IfcProperty ifcProperty;
 
   public IfcPropertySingleValue() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public Long getId() {

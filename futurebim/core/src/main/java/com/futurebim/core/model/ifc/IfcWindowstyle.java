@@ -41,6 +41,9 @@ public class IfcWindowstyle extends SerializableModelBase {
 
   private short status = 1;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private String tag;
 
   @Column(name = "type_name")
@@ -55,6 +58,14 @@ public class IfcWindowstyle extends SerializableModelBase {
   private ProjectIfc projectIfc;
 
   public IfcWindowstyle() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

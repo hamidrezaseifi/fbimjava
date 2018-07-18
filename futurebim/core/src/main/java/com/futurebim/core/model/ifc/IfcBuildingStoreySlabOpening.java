@@ -32,6 +32,9 @@ public class IfcBuildingStoreySlabOpening implements Serializable {
   @Id
   private String id;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   private LocalDateTime created;
 
   @Column(name = "object_placement")
@@ -70,6 +73,14 @@ public class IfcBuildingStoreySlabOpening implements Serializable {
   private List<IfcBuildingStoreySlabOpeningProperty> ifcBuildingStoreySlabOpeningProperties = new ArrayList<>();
 
   public IfcBuildingStoreySlabOpening() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {

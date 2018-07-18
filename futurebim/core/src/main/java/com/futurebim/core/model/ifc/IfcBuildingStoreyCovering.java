@@ -33,6 +33,9 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
   @Id
   private String id;
 
+  @Column(name = "ifc_id")
+  private Long ifcId;
+
   @Column(name = "covering_name")
   private String coveringName;
 
@@ -74,6 +77,14 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
   private List<IfcBuildingStoreyCoveringProperty> ifcBuildingStoreyCoveringProperties = new ArrayList<>();
 
   public IfcBuildingStoreyCovering() {
+  }
+
+  public Long getIfcId() {
+    return ifcId;
+  }
+
+  public void setIfcId(final Long ifcId) {
+    this.ifcId = ifcId;
   }
 
   public String getId() {
