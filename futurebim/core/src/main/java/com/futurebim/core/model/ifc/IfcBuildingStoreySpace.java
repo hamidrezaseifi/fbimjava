@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.futurebim.common.model.edo.ifc.IfcSpaceEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -64,14 +67,17 @@ public class IfcBuildingStoreySpace extends SerializableModelBase {
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpacePresentationlayer
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "spaceId", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpacePresentationlayer> ifcBuildingStoreySpacePresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceProperty
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "spaceId", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceProperty> ifcBuildingStoreySpaceProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceProperty
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "spaceId", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceFurnishingelement> furnishingElementList = new ArrayList<>();
 

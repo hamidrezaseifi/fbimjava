@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.futurebim.common.model.edo.ifc.IfcWindowEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -61,14 +64,17 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindowPresentationlayer
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreyWindow", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyWindowPresentationlayer> ifcBuildingStoreyWindowPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindowProperty
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreyWindow", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyWindowProperty> ifcBuildingStoreyWindowProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindowStyle
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreyWindow", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyWindowStyle> ifcBuildingStoreyWindowStyles = new ArrayList<>();
 

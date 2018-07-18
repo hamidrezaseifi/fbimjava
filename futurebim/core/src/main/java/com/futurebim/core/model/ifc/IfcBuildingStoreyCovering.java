@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.futurebim.common.model.edo.ifc.IfcCoveringEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -61,10 +64,12 @@ public class IfcBuildingStoreyCovering extends SerializableModelBase {
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyCoveringPresentationlayer
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreyCovering", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyCoveringPresentationlayer> ifcBuildingStoreyCoveringPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyCoveringProperty
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreyCovering", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyCoveringProperty> ifcBuildingStoreyCoveringProperties = new ArrayList<>();
 

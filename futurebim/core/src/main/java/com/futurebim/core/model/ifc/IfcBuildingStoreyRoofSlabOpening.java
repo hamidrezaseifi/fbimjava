@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.futurebim.common.model.edo.ifc.IfcOpeningElementEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -57,10 +60,12 @@ public class IfcBuildingStoreyRoofSlabOpening extends SerializableModelBase {
   private IfcBuildingStoreyRoofSlab ifcBuildingStoreyRoofSlab;
 
   // bi-directional many-to-one association to IfcBuildingStoreyRoofSlabOpeningPresentationlayer
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreyRoofSlabOpening", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyRoofSlabOpeningPresentationlayer> ifcBuildingStoreyRoofSlabOpeningPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyRoofSlabOpeningProperty
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreyRoofSlabOpening", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyRoofSlabOpeningProperty> ifcBuildingStoreyRoofSlabOpeningProperties = new ArrayList<>();
 

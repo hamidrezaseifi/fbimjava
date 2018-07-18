@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.futurebim.common.model.edo.ifc.IfcBuildingStoreyEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -58,47 +61,59 @@ public class IfcBuildingStorey extends SerializableModelBase {
   private IfcBuilding ifcBuilding;
 
   // bi-directional many-to-one association to IfcBuildingStoreyBeam
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyBeam> ifcBuildingStoreyBeams = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyCovering
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyCovering> ifcBuildingStoreyCoverings = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyDoor
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyDoor> ifcBuildingStoreyDoors = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyProperty
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyProperty> ifcBuildingStoreyProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySlab
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySlab> ifcBuildingStoreySlabs = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpace
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpace> ifcBuildingStoreySpaces = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyStair
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyStair> ifcBuildingStoreyStairs = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWall
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyWall> ifcBuildingStoreyWalls = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyWindow
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyWindow> ifcBuildingStoreyWindows = new ArrayList<>();
 
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyWallstandardcase> ifcBuildingStoreyWallCases = new ArrayList<>();
 
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyFooting> ifcBuildingStoreyFootings = new ArrayList<>();
 
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStorey", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyRoof> ifcBuildingStoreyRoofs = new ArrayList<>();
 

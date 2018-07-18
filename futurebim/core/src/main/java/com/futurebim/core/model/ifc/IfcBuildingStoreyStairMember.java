@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.futurebim.common.model.edo.ifc.IfcStairMemberEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -55,10 +58,12 @@ public class IfcBuildingStoreyStairMember extends SerializableModelBase {
   private IfcBuildingStoreyStair ifcBuildingStoreyStair;
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairMemberPresentationlayer
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreyStairMember", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyStairMemberPresentationlayer> ifcBuildingStoreyStairMemberPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairMemberProperty
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreyStairMember", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreyStairMemberProperty> ifcBuildingStoreyStairMemberProperties = new ArrayList<>();
 

@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import com.futurebim.common.model.edo.ifc.IfcPropertySetEdo;
@@ -21,7 +20,6 @@ import com.futurebim.common.model.edo.ifc.IfcPropertySetEdo;
  */
 @Entity
 @Table(name = "ifc_building_storey_slab_opening_properties")
-@NamedQuery(name = "IfcBuildingStoreySlabOpeningProperty.findAll", query = "SELECT i FROM IfcBuildingStoreySlabOpeningProperty i")
 public class IfcBuildingStoreySlabOpeningProperty implements Serializable {
 
   private static final long serialVersionUID = 1L;

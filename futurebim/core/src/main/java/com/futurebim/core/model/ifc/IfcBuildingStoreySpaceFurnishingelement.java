@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.futurebim.common.model.edo.ifc.IfcFurnishingElementEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -58,19 +61,23 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
   private IfcBuildingStoreySpace ifcBuildingStoreySpace;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementFurnituretype
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelement", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceFurnishingelementFurnituretype> ifcBuildingStoreySpaceFurnishingelementFurnituretypes =
                                                                                                                            new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementPresentationlayer
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelement", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceFurnishingelementPresentationlayer> ifcBuildingStoreySpaceFurnishingelementPresentationlayers =
                                                                                                                                    new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementProperty
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelement", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceFurnishingelementProperty> ifcBuildingStoreySpaceFurnishingelementProperties = new ArrayList<>();
 
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "elementId", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceFurnishingelementOpening> IfcBuildingStoreySpaceFurnishingelementOpenings = new ArrayList<>();
 

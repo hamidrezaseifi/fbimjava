@@ -11,9 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.futurebim.common.model.edo.ifc.IfcOpeningElementEdo;
 
@@ -23,7 +25,6 @@ import com.futurebim.common.model.edo.ifc.IfcOpeningElementEdo;
  */
 @Entity
 @Table(name = "ifc_building_storey_slab_opening")
-@NamedQuery(name = "IfcBuildingStoreySlabOpening.findAll", query = "SELECT i FROM IfcBuildingStoreySlabOpening i")
 public class IfcBuildingStoreySlabOpening implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -59,10 +60,12 @@ public class IfcBuildingStoreySlabOpening implements Serializable {
   private IfcBuildingStoreySlab ifcBuildingStoreySlab;
 
   // bi-directional many-to-one association to IfcBuildingStoreySlabOpeningPresentationlayer
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreySlabOpening", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySlabOpeningPresentationlayer> ifcBuildingStoreySlabOpeningPresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySlabOpeningProperty
+  @LazyCollection(LazyCollectionOption.FALSE)
   @OneToMany(mappedBy = "ifcBuildingStoreySlabOpening", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySlabOpeningProperty> ifcBuildingStoreySlabOpeningProperties = new ArrayList<>();
 
