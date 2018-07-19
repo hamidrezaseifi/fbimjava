@@ -36,19 +36,15 @@ public class IfcBuildingStoreyWindowStyle extends SerializableModelBase {
   @Column(name = "style_id")
   private String styleId;
 
-  @Column(name = "window_id")
-  private Long windowId;
-
   // bi-directional many-to-one association to IfcBuildingStoreyWindow
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "window_id", updatable = false, insertable = false)
+  @JoinColumn(name = "window_id")
   private IfcBuildingStoreyWindow ifcBuildingStoreyWindow;
 
   public IfcBuildingStoreyWindowStyle() {
   }
 
-  public IfcBuildingStoreyWindowStyle(final Long windowId, final String styleId) {
-    this.windowId = windowId;
+  public IfcBuildingStoreyWindowStyle(final String styleId) {
     this.styleId = styleId;
   }
 
@@ -90,14 +86,6 @@ public class IfcBuildingStoreyWindowStyle extends SerializableModelBase {
 
   public void setStyleId(final String styleId) {
     this.styleId = styleId;
-  }
-
-  public Long getWindowId() {
-    return windowId;
-  }
-
-  public void setWindowId(final Long windowId) {
-    this.windowId = windowId;
   }
 
   public IfcWindowStyleSetEdo toEdo() {

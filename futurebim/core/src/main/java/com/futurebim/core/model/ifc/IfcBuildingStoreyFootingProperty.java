@@ -34,21 +34,17 @@ public class IfcBuildingStoreyFootingProperty extends SerializableModelBase {
   @Column(name = "property_id")
   private String propertyId;
 
-  @Column(name = "footing_id")
-  private Long footingId;
-
   private short status;
 
   // bi-directional many-to-one association to IfcBuildingStoreyFooting
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "footing_id", updatable = false, insertable = false)
+  @JoinColumn(name = "footing_id")
   private IfcBuildingStoreyFooting ifcBuildingStoreyFooting;
 
   public IfcBuildingStoreyFootingProperty() {
   }
 
-  public IfcBuildingStoreyFootingProperty(final Long footingId, final String propertyId) {
-    this.footingId = footingId;
+  public IfcBuildingStoreyFootingProperty(final String propertyId) {
     this.propertyId = propertyId;
   }
 
@@ -90,14 +86,6 @@ public class IfcBuildingStoreyFootingProperty extends SerializableModelBase {
 
   public void setIfcBuildingStoreyFooting(final IfcBuildingStoreyFooting ifcBuildingStoreyFooting) {
     this.ifcBuildingStoreyFooting = ifcBuildingStoreyFooting;
-  }
-
-  public Long getFootingId() {
-    return footingId;
-  }
-
-  public void setFootingId(final Long footingId) {
-    this.footingId = footingId;
   }
 
   public IfcPropertySetEdo toEdo() {

@@ -51,9 +51,6 @@ public class IfcBuildingStoreyWallstandardcase extends SerializableModelBase {
 
   private String tag;
 
-  @Column(name = "storey_id")
-  private String storeyId;
-
   private LocalDateTime updated;
 
   private int version;
@@ -63,7 +60,7 @@ public class IfcBuildingStoreyWallstandardcase extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "storey_id", insertable = false, updatable = false)
+  @JoinColumn(name = "storey_id")
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcaseOpening
@@ -245,14 +242,6 @@ public class IfcBuildingStoreyWallstandardcase extends SerializableModelBase {
     ifcBuildingStoreyWallstandardcaseProperty.setIfcBuildingStoreyWallstandardcase(null);
 
     return ifcBuildingStoreyWallstandardcaseProperty;
-  }
-
-  public String getStoreyId() {
-    return storeyId;
-  }
-
-  public void setStoreyId(final String storeyId) {
-    this.storeyId = storeyId;
   }
 
   public IfcWallStandardCaseEdo toEdo() {

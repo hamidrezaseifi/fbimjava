@@ -33,12 +33,6 @@ public class IfcPropertySingleValue extends SerializableModelBase {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
-  @Column(name = "property_id")
-  private String propertyId;
-
   private LocalDateTime created;
 
   @JacksonXmlProperty(localName = "NominalValue")
@@ -57,18 +51,10 @@ public class IfcPropertySingleValue extends SerializableModelBase {
 
   @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "property_id", insertable = false, updatable = false)
+  @JoinColumn(name = "property_id")
   private IfcProperty ifcProperty;
 
   public IfcPropertySingleValue() {
-  }
-
-  public Long getIfcId() {
-    return ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
   }
 
   public Long getId() {
@@ -133,14 +119,6 @@ public class IfcPropertySingleValue extends SerializableModelBase {
 
   public void setIfcProperty(final IfcProperty ifcProperty) {
     this.ifcProperty = ifcProperty;
-  }
-
-  public String getPropertyId() {
-    return propertyId;
-  }
-
-  public void setPropertyId(final String propertyId) {
-    this.propertyId = propertyId;
   }
 
   public IfcPropertyValueEdo toEdo() {

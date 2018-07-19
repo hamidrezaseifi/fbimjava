@@ -45,9 +45,6 @@ public class IfcBuilding extends SerializableModelBase {
   @Column(name = "composition_type")
   private String compositionType;
 
-  @Column(name = "site_id")
-  private Long siteId;
-
   private LocalDateTime created;
 
   @Column(name = "object_placement")
@@ -61,17 +58,17 @@ public class IfcBuilding extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcProjectSite
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "site_id", updatable = false, insertable = false)
+  @JoinColumn(name = "site_id")
   private IfcProjectSite ifcProjectSite;
 
   // bi-directional many-to-one association to IfcBuildingProperty
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "buildingId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcBuilding", cascade = CascadeType.ALL)
   private List<IfcBuildingProperty> ifcBuildingProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "buildingId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcBuilding", cascade = CascadeType.ALL)
   private List<IfcBuildingStorey> ifcBuildingStoreys = new ArrayList<>();
 
   public IfcBuilding() {
@@ -199,14 +196,6 @@ public class IfcBuilding extends SerializableModelBase {
     ifcBuildingStorey.setIfcBuilding(null);
 
     return ifcBuildingStorey;
-  }
-
-  public Long getSiteId() {
-    return siteId;
-  }
-
-  public void setSiteId(final Long siteId) {
-    this.siteId = siteId;
   }
 
   public IfcBuildingEdo toEdo() {

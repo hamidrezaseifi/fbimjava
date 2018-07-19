@@ -62,21 +62,20 @@ public class IfcSlabRender {
   public IfcBuildingStoreySlab toModel(final IfcBuildingStorey model) {
 
     final IfcBuildingStoreySlab p = new IfcBuildingStoreySlab();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
     p.setIfcBuildingStorey(model);
-    p.setStoreyId(model.getId());
     p.setSlabName(name);
     p.setPredefinedType(predefinedType);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreySlabProperty(new IfcBuildingStoreySlabProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreySlabProperty(new IfcBuildingStoreySlabProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreySlabPresentationlayer(new IfcBuildingStoreySlabPresentationlayer(id, layer.getPropertyId()));
+      p.addIfcBuildingStoreySlabPresentationlayer(new IfcBuildingStoreySlabPresentationlayer(layer.getPropertyId()));
     }
 
     for (final IfcOpeningElementRender element : openingElementList) {
@@ -84,18 +83,17 @@ public class IfcSlabRender {
       final IfcOpeningElementProxy px = element.toProxy();
 
       final IfcBuildingStoreySlabOpening open = new IfcBuildingStoreySlabOpening();
-      open.setSlabId(id);
-      open.setId(px.getId());
+      open.setIfcBuildingStoreySlab(p);
+      open.setGuid(px.getId());
       open.setObjectPlacement(px.getObjectPlacement());
       open.setObjectType(px.getObjectType());
       open.setOpeningName(px.getName());
       open.setTag(px.getTag());
       for (final IfcPropertySetProxy prp : px.getPropertySetList()) {
-        open.addIfcBuildingStoreySlabOpeningProperty(new IfcBuildingStoreySlabOpeningProperty(px.getId(), prp.getPropertyId()));
+        open.addIfcBuildingStoreySlabOpeningProperty(new IfcBuildingStoreySlabOpeningProperty(prp.getPropertyId()));
       }
       for (final IfcPresentationLayerAssignmentSetProxy pl : px.getPresentationLayerAssignmentList()) {
-        open.addIfcBuildingStoreySlabOpeningPresentationlayer(new IfcBuildingStoreySlabOpeningPresentationlayer(px.getId(),
-                                                                                                                pl.getPropertyId()));
+        open.addIfcBuildingStoreySlabOpeningPresentationlayer(new IfcBuildingStoreySlabOpeningPresentationlayer(pl.getPropertyId()));
       }
 
       p.addIfcBuildingStoreySlabOpening(open);
@@ -107,7 +105,7 @@ public class IfcSlabRender {
   public IfcBuildingStoreyRoofSlab toRoolSlabModel(final IfcBuildingStoreyRoof model) {
 
     final IfcBuildingStoreyRoofSlab p = new IfcBuildingStoreyRoofSlab();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
@@ -117,11 +115,11 @@ public class IfcSlabRender {
     p.setPredefinedType(predefinedType);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyRoofSlabProperty(new IfcBuildingStoreyRoofSlabProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyRoofSlabProperty(new IfcBuildingStoreyRoofSlabProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyRoofSlabPresentationlayer(new IfcBuildingStoreyRoofSlabPresentationlayer(id, layer.getPropertyId()));
+      p.addIfcBuildingStoreyRoofSlabPresentationlayer(new IfcBuildingStoreyRoofSlabPresentationlayer(layer.getPropertyId()));
     }
 
     for (final IfcOpeningElementRender element : openingElementList) {
@@ -129,18 +127,17 @@ public class IfcSlabRender {
       final IfcOpeningElementProxy px = element.toProxy();
 
       final IfcBuildingStoreyRoofSlabOpening open = new IfcBuildingStoreyRoofSlabOpening();
-      open.setSlabId(id);
-      open.setId(px.getId());
+      open.setIfcBuildingStoreyRoofSlab(p);
+      open.setGuid(px.getId());
       open.setObjectPlacement(px.getObjectPlacement());
       open.setObjectType(px.getObjectType());
       open.setOpeningName(px.getName());
       open.setTag(px.getTag());
       for (final IfcPropertySetProxy prp : px.getPropertySetList()) {
-        open.addIfcBuildingStoreyRoofSlabOpeningProperty(new IfcBuildingStoreyRoofSlabOpeningProperty(px.getId(), prp.getPropertyId()));
+        open.addIfcBuildingStoreyRoofSlabOpeningProperty(new IfcBuildingStoreyRoofSlabOpeningProperty(prp.getPropertyId()));
       }
       for (final IfcPresentationLayerAssignmentSetProxy pl : px.getPresentationLayerAssignmentList()) {
-        open.addIfcBuildingStoreyRoofSlabOpeningPresentationlayer(new IfcBuildingStoreyRoofSlabOpeningPresentationlayer(px.getId(),
-                                                                                                                        pl.getPropertyId()));
+        open.addIfcBuildingStoreyRoofSlabOpeningPresentationlayer(new IfcBuildingStoreyRoofSlabOpeningPresentationlayer(pl.getPropertyId()));
       }
 
       p.addIfcBuildingStoreyRoofSlabOpening(open);

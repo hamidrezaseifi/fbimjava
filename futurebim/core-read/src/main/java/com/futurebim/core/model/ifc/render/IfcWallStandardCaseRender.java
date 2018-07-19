@@ -49,20 +49,19 @@ public class IfcWallStandardCaseRender {
   public IfcBuildingStoreyWallstandardcase toModel(final IfcBuildingStorey model) {
 
     final IfcBuildingStoreyWallstandardcase p = new IfcBuildingStoreyWallstandardcase();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
     p.setIfcBuildingStorey(model);
-    p.setStoreyId(model.getId());
     p.setWallName(name);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyWallstandardcaseProperty(new IfcBuildingStoreyWallstandardcaseProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyWallstandardcaseProperty(new IfcBuildingStoreyWallstandardcaseProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyWallstandardcasePresentationlayer(new IfcBuildingStoreyWallstandardcasePresentationlayer(id,
+      p.addIfcBuildingStoreyWallstandardcasePresentationlayer(new IfcBuildingStoreyWallstandardcasePresentationlayer(
                                                                                                                      layer.getPropertyId()));
     }
 
@@ -71,19 +70,19 @@ public class IfcWallStandardCaseRender {
       final IfcOpeningElementProxy px = element.toProxy();
 
       final IfcBuildingStoreyWallstandardcaseOpening open = new IfcBuildingStoreyWallstandardcaseOpening();
-      open.setWallId(id);
-      open.setId(px.getId());
+      open.setGuid(px.getId());
       open.setObjectPlacement(px.getObjectPlacement());
       open.setObjectType(px.getObjectType());
       open.setOpeningName(px.getName());
       open.setTag(px.getTag());
+      open.setIfcBuildingStoreyWallstandardcase(p);
+
       for (final IfcPropertySetProxy prp : px.getPropertySetList()) {
-        open.addIfcBuildingStoreyWallstandardcaseOpeningProperty(new IfcBuildingStoreyWallstandardcaseOpeningProperty(px.getId(),
+        open.addIfcBuildingStoreyWallstandardcaseOpeningProperty(new IfcBuildingStoreyWallstandardcaseOpeningProperty(
                                                                                                                       prp.getPropertyId()));
       }
       for (final IfcPresentationLayerAssignmentSetProxy pl : px.getPresentationLayerAssignmentList()) {
-        open.addIfcBuildingStoreyWallstandardcaseOpeningPresentationlayer(new IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer(px.getId(),
-                                                                                                                                        pl.getPropertyId()));
+        open.addIfcBuildingStoreyWallstandardcaseOpeningPresentationlayer(new IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer(pl.getPropertyId()));
       }
 
       p.addIfcBuildingStoreyWallstandardcaseOpening(open);

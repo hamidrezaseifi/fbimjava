@@ -36,19 +36,16 @@ public class IfcBuildingStoreySpacePresentationlayer extends SerializableModelBa
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
-  @Column(name = "space_id")
-  private Long spaceId;
-
   // bi-directional many-to-one association to IfcBuildingStoreySpace
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "space_id", updatable = false, insertable = false)
+  @JoinColumn(name = "space_id")
   private IfcBuildingStoreySpace ifcBuildingStoreySpace;
 
   public IfcBuildingStoreySpacePresentationlayer() {
   }
 
-  public IfcBuildingStoreySpacePresentationlayer(final Long spaceId, final String presentationlayerId) {
-    this.spaceId = spaceId;
+  public IfcBuildingStoreySpacePresentationlayer(final String presentationlayerId) {
+
     this.presentationlayerId = presentationlayerId;
   }
 
@@ -82,14 +79,6 @@ public class IfcBuildingStoreySpacePresentationlayer extends SerializableModelBa
 
   public void setPresentationlayerId(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
-  }
-
-  public Long getSpaceId() {
-    return spaceId;
-  }
-
-  public void setSpaceId(final Long spaceId) {
-    this.spaceId = spaceId;
   }
 
   public IfcBuildingStoreySpace getIfcBuildingStoreySpace() {

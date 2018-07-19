@@ -33,22 +33,18 @@ public class IfcBuildingStoreyBeamProperty extends SerializableModelBase {
 
   private short status = 1;
 
-  @Column(name = "beam_id")
-  private Long beamId;
-
   @Column(name = "property_id")
   private String propertyId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyBeam
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "beam_id", updatable = false, insertable = false)
+  @JoinColumn(name = "beam_id")
   private IfcBuildingStoreyBeam ifcBuildingStoreyBeam;
 
   public IfcBuildingStoreyBeamProperty() {
   }
 
-  public IfcBuildingStoreyBeamProperty(final Long beamId, final String propertyId) {
-    this.beamId = beamId;
+  public IfcBuildingStoreyBeamProperty(final String propertyId) {
     this.propertyId = propertyId;
   }
 
@@ -74,14 +70,6 @@ public class IfcBuildingStoreyBeamProperty extends SerializableModelBase {
 
   public void setStatus(final short status) {
     this.status = status;
-  }
-
-  public Long getBeamId() {
-    return beamId;
-  }
-
-  public void setBeamId(final Long beamId) {
-    this.beamId = beamId;
   }
 
   public String getPropertyId() {

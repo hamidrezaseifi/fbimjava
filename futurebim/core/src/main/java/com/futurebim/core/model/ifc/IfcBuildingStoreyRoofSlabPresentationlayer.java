@@ -33,21 +33,17 @@ public class IfcBuildingStoreyRoofSlabPresentationlayer extends SerializableMode
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
-  @Column(name = "slab_id")
-  private Long slabId;
-
   private short status;
 
   // bi-directional many-to-one association to IfcBuildingStoreyRoofSlab
   @ManyToOne
-  @JoinColumn(name = "slab_id", updatable = false, insertable = false)
+  @JoinColumn(name = "slab_id")
   private IfcBuildingStoreyRoofSlab ifcBuildingStoreyRoofSlab;
 
   public IfcBuildingStoreyRoofSlabPresentationlayer() {
   }
 
-  public IfcBuildingStoreyRoofSlabPresentationlayer(final Long slabId, final String presentationlayerId) {
-    this.slabId = slabId;
+  public IfcBuildingStoreyRoofSlabPresentationlayer(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
   }
 
@@ -89,14 +85,6 @@ public class IfcBuildingStoreyRoofSlabPresentationlayer extends SerializableMode
 
   public void setIfcBuildingStoreyRoofSlab(final IfcBuildingStoreyRoofSlab ifcBuildingStoreyRoofSlab) {
     this.ifcBuildingStoreyRoofSlab = ifcBuildingStoreyRoofSlab;
-  }
-
-  public Long getSlabId() {
-    return slabId;
-  }
-
-  public void setSlabId(final Long slabId) {
-    this.slabId = slabId;
   }
 
   public IfcPresentationLayerAssignmentSetEdo toEdo() {

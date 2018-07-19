@@ -41,9 +41,6 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
 
   private LocalDateTime created;
 
-  @Column(name = "element_id")
-  private Long elementId;
-
   @Column(name = "object_placement")
   private String objectPlacement;
 
@@ -60,18 +57,18 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
   private int version;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "element_id", insertable = false, updatable = false)
+  @JoinColumn(name = "element_id")
   private IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "openingId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelementOpening", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer> ifcBuildingStoreySpaceFelementOpeningPresentationlayers =
                                                                                                                                         new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementOpeningProperty
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "openingId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelementOpening", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceFurnishingelementOpeningProperty> ifcBuildingStoreySpaceFurnishingelementOpeningProperties =
                                                                                                                                 new ArrayList<>();
 
@@ -100,14 +97,6 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
 
   public void setCreated(final LocalDateTime created) {
     this.created = created;
-  }
-
-  public Long getElementId() {
-    return this.elementId;
-  }
-
-  public void setElementId(final Long elementId) {
-    this.elementId = elementId;
   }
 
   public String getObjectPlacement() {

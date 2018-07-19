@@ -49,20 +49,19 @@ public class IfcWallRender {
   public IfcBuildingStoreyWall toModel(final IfcBuildingStorey model) {
 
     final IfcBuildingStoreyWall p = new IfcBuildingStoreyWall();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
     p.setIfcBuildingStorey(model);
-    p.setStoreyId(model.getId());
     p.setWallName(name);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyWallProperty(new IfcBuildingStoreyWallProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyWallProperty(new IfcBuildingStoreyWallProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyWallPresentationlayer(new IfcBuildingStoreyWallPresentationlayer(id, layer.getPropertyId()));
+      p.addIfcBuildingStoreyWallPresentationlayer(new IfcBuildingStoreyWallPresentationlayer(layer.getPropertyId()));
     }
 
     for (final IfcOpeningElementRender element : openingElementList) {
@@ -70,18 +69,17 @@ public class IfcWallRender {
       final IfcOpeningElementProxy px = element.toProxy();
 
       final IfcBuildingStoreyWallOpening open = new IfcBuildingStoreyWallOpening();
-      open.setWallId(id);
-      open.setId(px.getId());
+      open.setIfcBuildingStoreyWall(p);
+      open.setGuid(px.getId());
       open.setObjectPlacement(px.getObjectPlacement());
       open.setObjectType(px.getObjectType());
       open.setOpeningName(px.getName());
       open.setTag(px.getTag());
       for (final IfcPropertySetProxy prp : px.getPropertySetList()) {
-        open.addIfcBuildingStoreyWallOpeningProperty(new IfcBuildingStoreyWallOpeningProperty(px.getId(), prp.getPropertyId()));
+        open.addIfcBuildingStoreyWallOpeningProperty(new IfcBuildingStoreyWallOpeningProperty(prp.getPropertyId()));
       }
       for (final IfcPresentationLayerAssignmentSetProxy pl : px.getPresentationLayerAssignmentList()) {
-        open.addIfcBuildingStoreyWallOpeningPresentationlayer(new IfcBuildingStoreyWallOpeningPresentationlayer(px.getId(),
-                                                                                                                pl.getPropertyId()));
+        open.addIfcBuildingStoreyWallOpeningPresentationlayer(new IfcBuildingStoreyWallOpeningPresentationlayer(pl.getPropertyId()));
       }
 
       p.addIfcBuildingStoreyWallOpening(open);

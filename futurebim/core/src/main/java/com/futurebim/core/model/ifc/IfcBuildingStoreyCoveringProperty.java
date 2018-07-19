@@ -36,19 +36,15 @@ public class IfcBuildingStoreyCoveringProperty extends SerializableModelBase {
   @Column(name = "property_id")
   private String propertyId;
 
-  @Column(name = "covering_id")
-  private Long coveringId;
-
   // bi-directional many-to-one association to IfcBuildingStoreyCovering
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "covering_id", updatable = false, insertable = false)
+  @JoinColumn(name = "covering_id")
   private IfcBuildingStoreyCovering ifcBuildingStoreyCovering;
 
   public IfcBuildingStoreyCoveringProperty() {
   }
 
-  public IfcBuildingStoreyCoveringProperty(final Long coveringId, final String propertyId) {
-    this.coveringId = coveringId;
+  public IfcBuildingStoreyCoveringProperty(final String propertyId) {
     this.propertyId = propertyId;
   }
 
@@ -82,14 +78,6 @@ public class IfcBuildingStoreyCoveringProperty extends SerializableModelBase {
 
   public void setPropertyId(final String propertyId) {
     this.propertyId = propertyId;
-  }
-
-  public Long getCoveringId() {
-    return coveringId;
-  }
-
-  public void setCoveringId(final Long coveringId) {
-    this.coveringId = coveringId;
   }
 
   public IfcBuildingStoreyCovering getIfcBuildingStoreyCovering() {

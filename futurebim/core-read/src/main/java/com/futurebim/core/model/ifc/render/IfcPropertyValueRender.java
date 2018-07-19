@@ -1,6 +1,7 @@
 package com.futurebim.core.model.ifc.render;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.core.model.ifc.IfcProperty;
 import com.futurebim.core.model.ifc.IfcPropertySingleValue;
 
 /**
@@ -15,10 +16,10 @@ public class IfcPropertyValueRender {
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
   private String valueName;
 
-  public IfcPropertySingleValue toModel(final String propertyId) {
+  public IfcPropertySingleValue toModel(final IfcProperty property) {
 
     final IfcPropertySingleValue val = new IfcPropertySingleValue();
-    val.setPropertyId(propertyId);
+    val.setIfcProperty(property);
     val.setNominalValue(nominalValue);
     val.setValueName(valueName);
 

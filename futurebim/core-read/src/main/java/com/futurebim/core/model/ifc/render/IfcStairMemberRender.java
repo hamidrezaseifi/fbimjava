@@ -39,7 +39,7 @@ public class IfcStairMemberRender {
   public IfcBuildingStoreyStairMember toModel(final IfcBuildingStoreyStair model) {
 
     final IfcBuildingStoreyStairMember p = new IfcBuildingStoreyStairMember();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
@@ -47,11 +47,11 @@ public class IfcStairMemberRender {
     p.setIfcBuildingStoreyStair(model);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyStairMemberProperty(new IfcBuildingStoreyStairMemberProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyStairMemberProperty(new IfcBuildingStoreyStairMemberProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender prop : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyStairMemberPresentationlayer(new IfcBuildingStoreyStairMemberPresentationlayer(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyStairMemberPresentationlayer(new IfcBuildingStoreyStairMemberPresentationlayer(prop.getPropertyId()));
     }
 
     return p;

@@ -36,19 +36,16 @@ public class IfcBuildingStoreyWallPresentationlayer extends SerializableModelBas
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
-  @Column(name = "wall_id")
-  private Long wallId;
-
   // bi-directional many-to-one association to IfcBuildingStoreyWall
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "wall_id", insertable = false, updatable = false)
+  @JoinColumn(name = "wall_id")
   private IfcBuildingStoreyWall ifcBuildingStoreyWall;
 
   public IfcBuildingStoreyWallPresentationlayer() {
   }
 
-  public IfcBuildingStoreyWallPresentationlayer(final Long wallId, final String presentationlayerId) {
-    this.wallId = wallId;
+  public IfcBuildingStoreyWallPresentationlayer(final String presentationlayerId) {
+
     this.presentationlayerId = presentationlayerId;
   }
 
@@ -90,14 +87,6 @@ public class IfcBuildingStoreyWallPresentationlayer extends SerializableModelBas
 
   public void setPresentationlayerId(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
-  }
-
-  public Long getWallId() {
-    return wallId;
-  }
-
-  public void setWallId(final Long wallId) {
-    this.wallId = wallId;
   }
 
   public IfcPresentationLayerAssignmentSetEdo toEdo() {

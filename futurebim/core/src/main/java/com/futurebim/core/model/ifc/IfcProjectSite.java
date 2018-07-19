@@ -62,8 +62,7 @@ public class IfcProjectSite extends SerializableModelBase {
   @Column(name = "site_name")
   private String siteName;
 
-  @Column(name = "project_id")
-  private Long projectId;
+  private String tag;
 
   private short status = 1;
 
@@ -78,7 +77,7 @@ public class IfcProjectSite extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcProject
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "project_id", insertable = false, updatable = false)
+  @JoinColumn(name = "project_id")
   private IfcProject ifcProject;
 
   public IfcProjectSite() {
@@ -218,12 +217,12 @@ public class IfcProjectSite extends SerializableModelBase {
     this.ifcProject = ifcProject;
   }
 
-  public Long getProjectId() {
-    return projectId;
+  public String getTag() {
+    return tag;
   }
 
-  public void setProjectId(final Long projectId) {
-    this.projectId = projectId;
+  public void setTag(final String tag) {
+    this.tag = tag;
   }
 
   public IfcProjectSiteEdo toEdo() {

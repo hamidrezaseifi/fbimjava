@@ -33,8 +33,6 @@ public class UserRich extends SerializableModelBase {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Long companyid;
-
   private LocalDate birthday;
 
   private LocalDateTime created;
@@ -62,7 +60,7 @@ public class UserRich extends SerializableModelBase {
   private int version;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "companyid", insertable = false, updatable = false)
+  @JoinColumn(name = "companyid")
   private Company company;
 
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "id.userid", targetEntity = UserProjectAccess.class)
@@ -77,14 +75,6 @@ public class UserRich extends SerializableModelBase {
 
   public void setId(final Long id) {
     this.id = id;
-  }
-
-  public Long getCompanyid() {
-    return this.companyid;
-  }
-
-  public void setCompanyid(final Long company) {
-    this.companyid = company;
   }
 
   public LocalDate getBirthday() {

@@ -30,10 +30,10 @@ public class IfcPropertyRender {
     final IfcProperty prop = new IfcProperty();
     prop.setProjectIfc(model);
     prop.setPropertyName(propertyName);
-    prop.setId(id);
+    prop.setGuid(id);
 
     for (final IfcPropertyValueRender val : values) {
-      prop.addIfcPropertiesValues(val.toModel(id));
+      prop.addIfcPropertiesValues(val.toModel(prop));
     }
     return prop;
   }

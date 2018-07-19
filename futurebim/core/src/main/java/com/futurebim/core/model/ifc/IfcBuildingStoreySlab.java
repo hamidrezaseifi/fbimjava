@@ -53,9 +53,6 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
   @Column(name = "slab_name")
   private String slabName;
 
-  @Column(name = "storey_id")
-  private Long storeyId;
-
   private short status = 1;
 
   private String tag;
@@ -66,7 +63,7 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "storey_id", updatable = false, insertable = false)
+  @JoinColumn(name = "storey_id")
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreySlabPresentationlayer
@@ -229,14 +226,6 @@ public class IfcBuildingStoreySlab extends SerializableModelBase {
     ifcBuildingStoreySlabProperty.setIfcBuildingStoreySlab(null);
 
     return ifcBuildingStoreySlabProperty;
-  }
-
-  public Long getStoreyId() {
-    return storeyId;
-  }
-
-  public void setStoreyId(final Long storeyId) {
-    this.storeyId = storeyId;
   }
 
   public List<IfcBuildingStoreySlabOpening> getIfcBuildingStoreySlabOpenings() {

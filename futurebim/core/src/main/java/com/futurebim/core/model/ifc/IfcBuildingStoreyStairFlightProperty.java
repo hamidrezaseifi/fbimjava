@@ -36,19 +36,16 @@ public class IfcBuildingStoreyStairFlightProperty extends SerializableModelBase 
   @Column(name = "property_id")
   private String propertyId;
 
-  @Column(name = "flight_id")
-  private Long flightId;
-
   // bi-directional many-to-one association to IfcBuildingStoreyStairFlight
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "flight_id", updatable = false, insertable = false)
+  @JoinColumn(name = "flight_id")
   private IfcBuildingStoreyStairFlight ifcBuildingStoreyStairFlight;
 
   public IfcBuildingStoreyStairFlightProperty() {
   }
 
-  public IfcBuildingStoreyStairFlightProperty(final Long flightId, final String propertyId) {
-    this.flightId = flightId;
+  public IfcBuildingStoreyStairFlightProperty(final String propertyId) {
+
     this.propertyId = propertyId;
   }
 
@@ -90,14 +87,6 @@ public class IfcBuildingStoreyStairFlightProperty extends SerializableModelBase 
 
   public void setPropertyId(final String propertyId) {
     this.propertyId = propertyId;
-  }
-
-  public Long getFlightId() {
-    return flightId;
-  }
-
-  public void setFlightId(final Long flightId) {
-    this.flightId = flightId;
   }
 
   public IfcPropertySetEdo toEdo() {

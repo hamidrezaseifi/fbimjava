@@ -36,19 +36,15 @@ public class IfcBuildingStoreyWallOpeningPresentationlayer extends SerializableM
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
-  @Column(name = "opening_id")
-  private Long openingId;
-
   // bi-directional many-to-one association to IfcBuildingStoreyWallOpening
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "opening_id", insertable = false, updatable = false)
+  @JoinColumn(name = "opening_id")
   private IfcBuildingStoreyWallOpening ifcBuildingStoreyWallOpening;
 
   public IfcBuildingStoreyWallOpeningPresentationlayer() {
   }
 
-  public IfcBuildingStoreyWallOpeningPresentationlayer(final Long openingId, final String presentationlayerId) {
-    this.openingId = openingId;
+  public IfcBuildingStoreyWallOpeningPresentationlayer(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
   }
 
@@ -90,14 +86,6 @@ public class IfcBuildingStoreyWallOpeningPresentationlayer extends SerializableM
 
   public void setPresentationlayerId(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
-  }
-
-  public Long getWallId() {
-    return openingId;
-  }
-
-  public void setWallId(final Long openingId) {
-    this.openingId = openingId;
   }
 
   public IfcPresentationLayerAssignmentSetEdo toEdo() {

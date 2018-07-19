@@ -149,6 +149,7 @@ public class IfcProject extends SerializableModelBase {
 
   public void addIfcProjectSites(final IfcProjectSite ifcProjectSite) {
     this.ifcProjectSites.add(ifcProjectSite);
+    ifcProjectSite.setIfcProject(this);
   }
 
   public IfcProjectSite addIfcProjectSite(final IfcProjectSite ifcProjectSite) {

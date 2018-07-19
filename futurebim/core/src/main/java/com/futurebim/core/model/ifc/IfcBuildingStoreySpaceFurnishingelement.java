@@ -50,9 +50,6 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
   @Column(name = "object_type")
   private String objectType;
 
-  @Column(name = "space_id")
-  private Long spaceId;
-
   private short status = 1;
 
   private String tag;
@@ -63,7 +60,7 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "space_id", insertable = false, updatable = false)
+  @JoinColumn(name = "space_id")
   private IfcBuildingStoreySpace ifcBuildingStoreySpace;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementFurnituretype
@@ -84,7 +81,7 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
   private List<IfcBuildingStoreySpaceFurnishingelementProperty> ifcBuildingStoreySpaceFurnishingelementProperties = new ArrayList<>();
 
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "elementId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcBuildingStoreySpaceFurnishingelement", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceFurnishingelementOpening> IfcBuildingStoreySpaceFurnishingelementOpenings = new ArrayList<>();
 
   public IfcBuildingStoreySpaceFurnishingelement() {
@@ -274,14 +271,6 @@ public class IfcBuildingStoreySpaceFurnishingelement extends SerializableModelBa
          addIfcBuildingStoreySpaceFurnishingelementOpening(final IfcBuildingStoreySpaceFurnishingelementOpening ifcBuildingStoreySpaceFurnishingelementOpening) {
     ifcBuildingStoreySpaceFurnishingelementOpening.setIfcBuildingStoreySpaceFurnishingelement(this);
     IfcBuildingStoreySpaceFurnishingelementOpenings.add(ifcBuildingStoreySpaceFurnishingelementOpening);
-  }
-
-  public Long getSpaceId() {
-    return spaceId;
-  }
-
-  public void setSpaceId(final Long spaceId) {
-    this.spaceId = spaceId;
   }
 
   public IfcFurnishingElementEdo toEdo() {

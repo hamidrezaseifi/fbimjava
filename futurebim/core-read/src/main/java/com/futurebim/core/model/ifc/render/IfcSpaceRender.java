@@ -50,7 +50,7 @@ public class IfcSpaceRender {
   public IfcBuildingStoreySpace toModel(final IfcBuildingStorey model) {
 
     final IfcBuildingStoreySpace p = new IfcBuildingStoreySpace();
-    p.setId(id);
+    p.setGuid(id);
     p.setCompositionType(compositionType);
     p.setObjectPlacement(objectPlacement);
     p.setDescription(description);
@@ -58,18 +58,17 @@ public class IfcSpaceRender {
     p.setLongName(longName);
     p.setSpaceName(name);
     p.setInteriorOrExteriorSpace(interiorOrExteriorSpace);
-    p.setStoreyId(model.getId());
 
     for (final IfcFurnishingElementRender element : furnishingElementList) {
       p.addFurnishingElement(element.toModel(p));
     }
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreySpaceProperty(new IfcBuildingStoreySpaceProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreySpaceProperty(new IfcBuildingStoreySpaceProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreySpacePresentationlayer(new IfcBuildingStoreySpacePresentationlayer(id, layer.getPropertyId()));
+      p.addIfcBuildingStoreySpacePresentationlayer(new IfcBuildingStoreySpacePresentationlayer(layer.getPropertyId()));
     }
 
     return p;

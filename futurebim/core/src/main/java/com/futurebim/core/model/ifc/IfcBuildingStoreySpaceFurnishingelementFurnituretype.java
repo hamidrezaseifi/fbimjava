@@ -36,19 +36,16 @@ public class IfcBuildingStoreySpaceFurnishingelementFurnituretype extends Serial
   @Column(name = "furnituretype_id")
   private String furnituretypeId;
 
-  @Column(name = "felement_id")
-  private Long felementId;
-
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelement
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "felement_id", updatable = false, insertable = false)
+  @JoinColumn(name = "felement_id")
   private IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement;
 
   public IfcBuildingStoreySpaceFurnishingelementFurnituretype() {
   }
 
-  public IfcBuildingStoreySpaceFurnishingelementFurnituretype(final Long felementId, final String furnituretypeId) {
-    this.felementId = felementId;
+  public IfcBuildingStoreySpaceFurnishingelementFurnituretype(final String furnituretypeId) {
+
     this.furnituretypeId = furnituretypeId;
   }
 
@@ -91,14 +88,6 @@ public class IfcBuildingStoreySpaceFurnishingelementFurnituretype extends Serial
 
   public void setFurnituretypeId(final String furnituretypeId) {
     this.furnituretypeId = furnituretypeId;
-  }
-
-  public Long getFelementId() {
-    return felementId;
-  }
-
-  public void setFelementId(final Long felementId) {
-    this.felementId = felementId;
   }
 
   public IfcFurnitureTypeSetEdo toEdo() {

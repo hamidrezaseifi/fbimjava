@@ -21,7 +21,7 @@ public class IfcPresentationlayerRender {
   public IfcPresentationlayer toModel(final ProjectIfc model) {
 
     final IfcPresentationlayer layer = new IfcPresentationlayer();
-    layer.setId(id);
+    layer.setGuid(id);
     layer.setLayerName(layerName);
     layer.setProjectIfc(model);
 

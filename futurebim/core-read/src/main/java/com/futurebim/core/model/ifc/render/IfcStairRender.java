@@ -53,17 +53,16 @@ public class IfcStairRender {
   public IfcBuildingStoreyStair toModel(final IfcBuildingStorey model) {
 
     final IfcBuildingStoreyStair p = new IfcBuildingStoreyStair();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
-    p.setIfcBuildingStorey(model);
     p.setIfcBuildingStorey(model);
     p.setStairName(name);
     p.setShapeType(shapeType);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyStairProperty(new IfcBuildingStoreyStairProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyStairProperty(new IfcBuildingStoreyStairProperty(prop.getPropertyId()));
     }
 
     for (final IfcStairFlightRender prop : stairFlightList) {

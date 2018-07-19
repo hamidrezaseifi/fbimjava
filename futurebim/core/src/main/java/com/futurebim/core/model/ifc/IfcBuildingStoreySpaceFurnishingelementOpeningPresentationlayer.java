@@ -31,9 +31,6 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer ext
 
   private LocalDateTime created;
 
-  @Column(name = "opening_id")
-  private Long openingId;
-
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
@@ -41,15 +38,14 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer ext
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementOpening
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "opening_id", insertable = false, updatable = false)
+  @JoinColumn(name = "opening_id")
   private IfcBuildingStoreySpaceFurnishingelementOpening ifcBuildingStoreySpaceFurnishingelementOpening;
 
   public IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer() {
   }
 
-  public IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer(final Long openingId, final String presentationlayerId) {
+  public IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
-    this.openingId = openingId;
   }
 
   public Long getId() {
@@ -91,14 +87,6 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer ext
   public void
          setIfcBuildingStoreySpaceFurnishingelementOpening(final IfcBuildingStoreySpaceFurnishingelementOpening ifcBuildingStoreySpaceFurnishingelementOpening) {
     this.ifcBuildingStoreySpaceFurnishingelementOpening = ifcBuildingStoreySpaceFurnishingelementOpening;
-  }
-
-  public Long getOpeningId() {
-    return openingId;
-  }
-
-  public void setOpeningId(final Long openingId) {
-    this.openingId = openingId;
   }
 
   public IfcPresentationLayerAssignmentSetEdo toEdo() {

@@ -47,9 +47,6 @@ public class IfcWindowstyle extends SerializableModelBase {
 
   private short status = 1;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
   private String tag;
 
   @Column(name = "type_name")
@@ -60,18 +57,10 @@ public class IfcWindowstyle extends SerializableModelBase {
   private int version = 1;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ifc_id", insertable = false, updatable = false)
+  @JoinColumn(name = "ifc_id")
   private ProjectIfc projectIfc;
 
   public IfcWindowstyle() {
-  }
-
-  public Long getIfcId() {
-    return ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
   }
 
   public Long getId() {

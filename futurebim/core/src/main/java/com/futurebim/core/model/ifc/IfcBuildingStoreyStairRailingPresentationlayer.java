@@ -36,19 +36,16 @@ public class IfcBuildingStoreyStairRailingPresentationlayer extends Serializable
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
-  @Column(name = "railing_id")
-  private Long railingId;
-
   // bi-directional many-to-one association to IfcBuildingStoreyStairRailing
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "railing_id", updatable = false, insertable = false)
+  @JoinColumn(name = "railing_id")
   private IfcBuildingStoreyStairRailing ifcBuildingStoreyStairRailing;
 
   public IfcBuildingStoreyStairRailingPresentationlayer() {
   }
 
-  public IfcBuildingStoreyStairRailingPresentationlayer(final Long railingId, final String presentationlayerId) {
-    this.railingId = railingId;
+  public IfcBuildingStoreyStairRailingPresentationlayer(final String presentationlayerId) {
+
     this.presentationlayerId = presentationlayerId;
   }
 
@@ -82,14 +79,6 @@ public class IfcBuildingStoreyStairRailingPresentationlayer extends Serializable
 
   public void setPresentationlayerId(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
-  }
-
-  public Long getRailingId() {
-    return railingId;
-  }
-
-  public void setRailingId(final Long railingId) {
-    this.railingId = railingId;
   }
 
   public IfcBuildingStoreyStairRailing getIfcBuildingStoreyStairRailing() {

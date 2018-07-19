@@ -40,19 +40,18 @@ public class IfcBuildingRender {
   public IfcBuilding toModel(final IfcProjectSite model) {
 
     final IfcBuilding p = new IfcBuilding();
-    p.setId(id);
+    p.setGuid(id);
     p.setCompositionType(compositionType);
     p.setObjectPlacement(objectPlacement);
     p.setBuildingName(buildingName);
     p.setIfcProjectSite(model);
-    p.setSiteId(model.getId());
 
     for (final IfcBuildingStoreyRender buildingStorey : buildingStoreyList) {
       p.addIfcBuildingStorey(buildingStorey.toModel(p));
     }
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingProperty(new IfcBuildingProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingProperty(new IfcBuildingProperty(prop.getPropertyId()));
     }
 
     return p;

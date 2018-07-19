@@ -33,21 +33,18 @@ public class IfcBuildingStoreySlabOpeningProperty implements Serializable {
   @Column(name = "property_id")
   private String propertyId;
 
-  @Column(name = "opening_id")
-  private Long openingId;
-
   private short status;
 
   // bi-directional many-to-one association to IfcBuildingStoreySlabOpening
   @ManyToOne
-  @JoinColumn(name = "opening_id", insertable = false, updatable = false)
+  @JoinColumn(name = "opening_id")
   private IfcBuildingStoreySlabOpening ifcBuildingStoreySlabOpening;
 
   public IfcBuildingStoreySlabOpeningProperty() {
   }
 
-  public IfcBuildingStoreySlabOpeningProperty(final Long openingId, final String propertyId) {
-    this.openingId = openingId;
+  public IfcBuildingStoreySlabOpeningProperty(final String propertyId) {
+
     this.propertyId = propertyId;
   }
 
@@ -89,14 +86,6 @@ public class IfcBuildingStoreySlabOpeningProperty implements Serializable {
 
   public void setIfcBuildingStoreySlabOpening(final IfcBuildingStoreySlabOpening ifcBuildingStoreySlabOpening) {
     this.ifcBuildingStoreySlabOpening = ifcBuildingStoreySlabOpening;
-  }
-
-  public Long getOpeningId() {
-    return openingId;
-  }
-
-  public void setOpeningId(final Long openingId) {
-    this.openingId = openingId;
   }
 
   public IfcPropertySetEdo toEdo() {

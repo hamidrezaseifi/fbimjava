@@ -36,19 +36,16 @@ public class IfcBuildingStoreySpaceProperty extends SerializableModelBase {
   @Column(name = "property_id")
   private String propertyId;
 
-  @Column(name = "space_id")
-  private Long spaceId;
-
   // bi-directional many-to-one association to IfcBuildingStoreySpace
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "space_id", insertable = false, updatable = false)
+  @JoinColumn(name = "space_id")
   private IfcBuildingStoreySpace ifcBuildingStoreySpace;
 
   public IfcBuildingStoreySpaceProperty() {
   }
 
-  public IfcBuildingStoreySpaceProperty(final Long spaceId, final String propertyId) {
-    this.spaceId = spaceId;
+  public IfcBuildingStoreySpaceProperty(final String propertyId) {
+
     this.propertyId = propertyId;
   }
 
@@ -82,14 +79,6 @@ public class IfcBuildingStoreySpaceProperty extends SerializableModelBase {
 
   public void setPropertyId(final String propertyId) {
     this.propertyId = propertyId;
-  }
-
-  public Long getSpaceId() {
-    return spaceId;
-  }
-
-  public void setSpaceId(final Long spaceId) {
-    this.spaceId = spaceId;
   }
 
   public IfcBuildingStoreySpace getIfcBuildingStoreySpace() {

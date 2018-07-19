@@ -77,12 +77,11 @@ public class IfcBuildingStoreyRender {
   public IfcBuildingStorey toModel(final IfcBuilding model) {
 
     final IfcBuildingStorey p = new IfcBuildingStorey();
-    p.setId(id);
+    p.setGuid(id);
     p.setCompositionType(compositionType);
     p.setObjectPlacement(objectPlacement);
     p.setElevation(elevation);
     p.setIfcBuilding(model);
-    p.setBuildingId(model.getId());
     p.setStoreyName(storeyName);
 
     for (final IfcWallStandardCaseRender wall : wallStandardCaseList) {
@@ -135,7 +134,7 @@ public class IfcBuildingStoreyRender {
     }
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyProperty(new IfcBuildingStoreyProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyProperty(new IfcBuildingStoreyProperty(prop.getPropertyId()));
     }
 
     return p;

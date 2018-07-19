@@ -55,9 +55,6 @@ public class IfcBuildingStoreyFooting extends SerializableModelBase {
 
   private short status;
 
-  @Column(name = "storey_id")
-  private Long storeyId;
-
   private String tag;
 
   private LocalDateTime updated;
@@ -75,7 +72,7 @@ public class IfcBuildingStoreyFooting extends SerializableModelBase {
   private List<IfcBuildingStoreyFootingProperty> ifcBuildingStoreyFootingProperties = new ArrayList<>();
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "storey_id", updatable = false, insertable = false)
+  @JoinColumn(name = "storey_id")
   private IfcBuildingStorey ifcBuildingStorey;
 
   public IfcBuildingStoreyFooting() {
@@ -143,14 +140,6 @@ public class IfcBuildingStoreyFooting extends SerializableModelBase {
 
   public void setStatus(final short status) {
     this.status = status;
-  }
-
-  public Long getStoreyId() {
-    return this.storeyId;
-  }
-
-  public void setStoreyId(final Long storeyId) {
-    this.storeyId = storeyId;
   }
 
   public String getTag() {

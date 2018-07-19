@@ -58,9 +58,6 @@ public class IfcBuildingStoreySpace extends SerializableModelBase {
   @Column(name = "space_name")
   private String spaceName;
 
-  @Column(name = "storey_id")
-  private Long storeyId;
-
   private short status = 1;
 
   private LocalDateTime updated;
@@ -69,22 +66,22 @@ public class IfcBuildingStoreySpace extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "storey_id", updatable = false, insertable = false)
+  @JoinColumn(name = "storey_id")
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpacePresentationlayer
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "spaceId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcBuildingStoreySpace", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpacePresentationlayer> ifcBuildingStoreySpacePresentationlayers = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceProperty
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "spaceId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcBuildingStoreySpace", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceProperty> ifcBuildingStoreySpaceProperties = new ArrayList<>();
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceProperty
   @LazyCollection(LazyCollectionOption.FALSE)
-  @OneToMany(mappedBy = "spaceId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ifcBuildingStoreySpace", cascade = CascadeType.ALL)
   private List<IfcBuildingStoreySpaceFurnishingelement> furnishingElementList = new ArrayList<>();
 
   public IfcBuildingStoreySpace() {
@@ -241,14 +238,6 @@ public class IfcBuildingStoreySpace extends SerializableModelBase {
     ifcBuildingStoreySpaceProperty.setIfcBuildingStoreySpace(null);
 
     return ifcBuildingStoreySpaceProperty;
-  }
-
-  public Long getStoreyId() {
-    return storeyId;
-  }
-
-  public void setStoreyId(final Long storeyId) {
-    this.storeyId = storeyId;
   }
 
   public List<IfcBuildingStoreySpaceFurnishingelement> getFurnishingElementList() {

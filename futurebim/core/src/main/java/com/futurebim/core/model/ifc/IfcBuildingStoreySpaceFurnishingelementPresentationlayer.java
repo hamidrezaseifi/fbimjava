@@ -36,19 +36,15 @@ public class IfcBuildingStoreySpaceFurnishingelementPresentationlayer extends Se
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
-  @Column(name = "felement_id")
-  private Long felementId;
-
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelement
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "felement_id", updatable = false, insertable = false)
+  @JoinColumn(name = "felement_id")
   private IfcBuildingStoreySpaceFurnishingelement ifcBuildingStoreySpaceFurnishingelement;
 
   public IfcBuildingStoreySpaceFurnishingelementPresentationlayer() {
   }
 
-  public IfcBuildingStoreySpaceFurnishingelementPresentationlayer(final Long felementId, final String presentationlayerId) {
-    this.felementId = felementId;
+  public IfcBuildingStoreySpaceFurnishingelementPresentationlayer(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
   }
 
@@ -91,14 +87,6 @@ public class IfcBuildingStoreySpaceFurnishingelementPresentationlayer extends Se
 
   public void setPresentationlayerId(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
-  }
-
-  public Long getFelementId() {
-    return felementId;
-  }
-
-  public void setFelementId(final Long felementId) {
-    this.felementId = felementId;
   }
 
   public IfcPresentationLayerAssignmentSetEdo toEdo() {

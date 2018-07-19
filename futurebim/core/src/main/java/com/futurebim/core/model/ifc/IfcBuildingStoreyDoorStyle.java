@@ -36,19 +36,16 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
   @Column(name = "style_id")
   private String doorstyleId;
 
-  @Column(name = "door_id")
-  private Long doorId;
-
   // bi-directional many-to-one association to IfcBuildingStoreyDoor
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "door_id", updatable = false, insertable = false)
+  @JoinColumn(name = "door_id")
   private IfcBuildingStoreyDoor ifcBuildingStoreyDoor;
 
   public IfcBuildingStoreyDoorStyle() {
   }
 
-  public IfcBuildingStoreyDoorStyle(final Long doorId, final String doorstyleId) {
-    this.doorId = doorId;
+  public IfcBuildingStoreyDoorStyle(final String doorstyleId) {
+
     this.doorstyleId = doorstyleId;
   }
 
@@ -90,14 +87,6 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
 
   public void setDoorstyleId(final String doorstyleId) {
     this.doorstyleId = doorstyleId;
-  }
-
-  public Long getDoorId() {
-    return doorId;
-  }
-
-  public void setDoorId(final Long doorId) {
-    this.doorId = doorId;
   }
 
   public IfcDoorStyleSetEdo toEdo() {

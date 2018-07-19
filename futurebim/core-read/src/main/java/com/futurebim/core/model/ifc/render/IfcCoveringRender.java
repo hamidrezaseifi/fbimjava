@@ -41,21 +41,20 @@ public class IfcCoveringRender {
   public IfcBuildingStoreyCovering toModel(final IfcBuildingStorey model) {
 
     final IfcBuildingStoreyCovering p = new IfcBuildingStoreyCovering();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setCoveringName(name);
     p.setObjectType(objectType);
     p.setTag(tag);
     p.setIfcBuildingStorey(model);
-    p.setStoreyId(model.getId());
     p.setPredefinedType(predefinedType);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyCoveringProperty(new IfcBuildingStoreyCoveringProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyCoveringProperty(new IfcBuildingStoreyCoveringProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyCoveringPresentationlayer(new IfcBuildingStoreyCoveringPresentationlayer(id, layer.getPropertyId()));
+      p.addIfcBuildingStoreyCoveringPresentationlayer(new IfcBuildingStoreyCoveringPresentationlayer(layer.getPropertyId()));
     }
 
     return p;

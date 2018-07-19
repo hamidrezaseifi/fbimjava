@@ -34,21 +34,17 @@ public class IfcBuildingStoreyWallstandardcaseProperty extends SerializableModel
   @Column(name = "property_id")
   private String propertyId;
 
-  @Column(name = "wall_id")
-  private Long wallId;
-
   private short status;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcase
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "wall_id", insertable = false, updatable = false)
+  @JoinColumn(name = "wall_id")
   private IfcBuildingStoreyWallstandardcase ifcBuildingStoreyWallstandardcase;
 
   public IfcBuildingStoreyWallstandardcaseProperty() {
   }
 
-  public IfcBuildingStoreyWallstandardcaseProperty(final Long wallId, final String propertyId) {
-    this.wallId = wallId;
+  public IfcBuildingStoreyWallstandardcaseProperty(final String propertyId) {
     this.propertyId = propertyId;
   }
 
@@ -90,14 +86,6 @@ public class IfcBuildingStoreyWallstandardcaseProperty extends SerializableModel
 
   public void setIfcBuildingStoreyWallstandardcase(final IfcBuildingStoreyWallstandardcase ifcBuildingStoreyWallstandardcase) {
     this.ifcBuildingStoreyWallstandardcase = ifcBuildingStoreyWallstandardcase;
-  }
-
-  public Long getWallId() {
-    return wallId;
-  }
-
-  public void setWallId(final Long wallId) {
-    this.wallId = wallId;
   }
 
   public IfcPropertySetEdo toEdo() {

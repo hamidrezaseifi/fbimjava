@@ -33,21 +33,17 @@ public class IfcBuildingStoreyRoofProperty extends SerializableModelBase {
   @Column(name = "property_id")
   private String propertyId;
 
-  @Column(name = "roof_id")
-  private Long roofId;
-
   private short status;
 
   // bi-directional many-to-one association to IfcBuildingStoreyRoof
   @ManyToOne
-  @JoinColumn(name = "roof_id", updatable = false, insertable = false)
+  @JoinColumn(name = "roof_id")
   private IfcBuildingStoreyRoof ifcBuildingStoreyRoof;
 
   public IfcBuildingStoreyRoofProperty() {
   }
 
-  public IfcBuildingStoreyRoofProperty(final Long roofId, final String propertyId) {
-    this.roofId = roofId;
+  public IfcBuildingStoreyRoofProperty(final String propertyId) {
     this.propertyId = propertyId;
   }
 
@@ -89,14 +85,6 @@ public class IfcBuildingStoreyRoofProperty extends SerializableModelBase {
 
   public void setIfcBuildingStoreyRoof(final IfcBuildingStoreyRoof ifcBuildingStoreyRoof) {
     this.ifcBuildingStoreyRoof = ifcBuildingStoreyRoof;
-  }
-
-  public Long getRoofId() {
-    return roofId;
-  }
-
-  public void setRoofId(final Long roofId) {
-    this.roofId = roofId;
   }
 
   public IfcPropertySetEdo toEdo() {

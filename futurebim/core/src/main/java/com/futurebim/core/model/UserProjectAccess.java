@@ -30,7 +30,7 @@ public class UserProjectAccess extends SerializableModelBase {
   private EStatus status;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "access_type", insertable = false, updatable = false)
+  @JoinColumn(name = "access_type")
   private ProjectAccessType projectAccessType;
 
   public UserProjectAccess() {

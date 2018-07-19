@@ -38,20 +38,19 @@ public class IfcBeamRender {
   public IfcBuildingStoreyBeam toModel(final IfcBuildingStorey model) {
 
     final IfcBuildingStoreyBeam p = new IfcBuildingStoreyBeam();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setBeamName(name);
     p.setObjectType(objectType);
     p.setTag(tag);
     p.setIfcBuildingStorey(model);
-    p.setStoreyId(model.getId());
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyBeamProperty(new IfcBuildingStoreyBeamProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyBeamProperty(new IfcBuildingStoreyBeamProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyBeamPresentationlayer(new IfcBuildingStoreyBeamPresentationlayer(id, layer.getPropertyId()));
+      p.addIfcBuildingStoreyBeamPresentationlayer(new IfcBuildingStoreyBeamPresentationlayer(layer.getPropertyId()));
     }
 
     return p;

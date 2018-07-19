@@ -36,19 +36,15 @@ public class IfcBuildingStoreySlabProperty extends SerializableModelBase {
   @Column(name = "property_id")
   private String propertyId;
 
-  @Column(name = "slab_id")
-  private Long slabId;
-
   // bi-directional many-to-one association to IfcBuildingStoreySlab
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "slab_id", updatable = false, insertable = false)
+  @JoinColumn(name = "slab_id")
   private IfcBuildingStoreySlab ifcBuildingStoreySlab;
 
   public IfcBuildingStoreySlabProperty() {
   }
 
-  public IfcBuildingStoreySlabProperty(final Long slabId, final String propertyId) {
-    this.slabId = slabId;
+  public IfcBuildingStoreySlabProperty(final String propertyId) {
     this.propertyId = propertyId;
   }
 
@@ -82,14 +78,6 @@ public class IfcBuildingStoreySlabProperty extends SerializableModelBase {
 
   public void setPropertyId(final String propertyId) {
     this.propertyId = propertyId;
-  }
-
-  public Long getSlabId() {
-    return slabId;
-  }
-
-  public void setSlabId(final Long slabId) {
-    this.slabId = slabId;
   }
 
   public IfcBuildingStoreySlab getIfcBuildingStoreySlab() {

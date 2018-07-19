@@ -53,9 +53,6 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
   @Column(name = "shape_type")
   private String shapeType;
 
-  @Column(name = "storey_id")
-  private Long storeyId;
-
   private short status;
 
   private String tag;
@@ -66,7 +63,7 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
 
   // bi-directional many-to-one association to IfcBuildingStorey
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "storey_id", updatable = false, insertable = false)
+  @JoinColumn(name = "storey_id")
   private IfcBuildingStorey ifcBuildingStorey;
 
   // bi-directional many-to-one association to IfcBuildingStoreyRoofPresentationlayer
@@ -269,14 +266,6 @@ public class IfcBuildingStoreyRoof extends SerializableModelBase {
   public void addIfcBuildingStoreyRoofOpening(final IfcBuildingStoreyRoofOpening ifcBuildingStoreyRoofOpening) {
     this.ifcBuildingStoreyRoofOpenings.add(ifcBuildingStoreyRoofOpening);
     ifcBuildingStoreyRoofOpening.setIfcBuildingStoreyRoof(this);
-  }
-
-  public Long getStoreyId() {
-    return storeyId;
-  }
-
-  public void setStoreyId(final Long storeyId) {
-    this.storeyId = storeyId;
   }
 
   public IfcRoofEdo toEdo() {

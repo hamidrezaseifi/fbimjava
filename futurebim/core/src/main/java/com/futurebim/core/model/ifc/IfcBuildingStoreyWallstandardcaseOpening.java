@@ -49,9 +49,6 @@ public class IfcBuildingStoreyWallstandardcaseOpening extends SerializableModelB
 
   private String tag;
 
-  @Column(name = "wall_id")
-  private String wallId;
-
   private LocalDateTime updated;
 
   private int version;
@@ -61,7 +58,7 @@ public class IfcBuildingStoreyWallstandardcaseOpening extends SerializableModelB
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcase
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "wall_id", insertable = false, updatable = false)
+  @JoinColumn(name = "wall_id")
   private IfcBuildingStoreyWallstandardcase ifcBuildingStoreyWallstandardcase;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer
@@ -213,14 +210,6 @@ public class IfcBuildingStoreyWallstandardcaseOpening extends SerializableModelB
     ifcBuildingStoreyWallstandardcaseOpeningProperty.setIfcBuildingStoreyWallstandardcaseOpening(null);
 
     return ifcBuildingStoreyWallstandardcaseOpeningProperty;
-  }
-
-  public String getWallId() {
-    return wallId;
-  }
-
-  public void setWallId(final String wallId) {
-    this.wallId = wallId;
   }
 
   public IfcOpeningElementEdo toEdo() {

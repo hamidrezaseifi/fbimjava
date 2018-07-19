@@ -31,9 +31,6 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty extends Seri
 
   private LocalDateTime created;
 
-  @Column(name = "opening_id")
-  private Long openingId;
-
   @Column(name = "property_id")
   private String propertyId;
 
@@ -41,15 +38,14 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty extends Seri
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelementOpening
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "opening_id", insertable = false, updatable = false)
+  @JoinColumn(name = "opening_id")
   private IfcBuildingStoreySpaceFurnishingelementOpening ifcBuildingStoreySpaceFurnishingelementOpening;
 
   public IfcBuildingStoreySpaceFurnishingelementOpeningProperty() {
   }
 
-  public IfcBuildingStoreySpaceFurnishingelementOpeningProperty(final Long openingId, final String propertyId) {
+  public IfcBuildingStoreySpaceFurnishingelementOpeningProperty(final String propertyId) {
     this.propertyId = propertyId;
-    this.openingId = openingId;
   }
 
   public Long getId() {
@@ -91,14 +87,6 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty extends Seri
   public void
          setIfcBuildingStoreySpaceFurnishingelementOpening(final IfcBuildingStoreySpaceFurnishingelementOpening ifcBuildingStoreySpaceFurnishingelementOpening) {
     this.ifcBuildingStoreySpaceFurnishingelementOpening = ifcBuildingStoreySpaceFurnishingelementOpening;
-  }
-
-  public Long getOpeningId() {
-    return openingId;
-  }
-
-  public void setOpeningId(final Long openingId) {
-    this.openingId = openingId;
   }
 
   public IfcPropertySetEdo toEdo() {

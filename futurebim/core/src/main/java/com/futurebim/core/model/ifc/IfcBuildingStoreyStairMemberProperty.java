@@ -36,19 +36,16 @@ public class IfcBuildingStoreyStairMemberProperty extends SerializableModelBase 
   @Column(name = "property_id")
   private String propertyId;
 
-  @Column(name = "member_id")
-  private Long memberId;
-
   // bi-directional many-to-one association to IfcBuildingStoreyStairMember
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "member_id", updatable = false, insertable = false)
+  @JoinColumn(name = "member_id")
   private IfcBuildingStoreyStairMember ifcBuildingStoreyStairMember;
 
   public IfcBuildingStoreyStairMemberProperty() {
   }
 
-  public IfcBuildingStoreyStairMemberProperty(final Long memberId, final String propertyId) {
-    this.memberId = memberId;
+  public IfcBuildingStoreyStairMemberProperty(final String propertyId) {
+
     this.propertyId = propertyId;
   }
 
@@ -82,14 +79,6 @@ public class IfcBuildingStoreyStairMemberProperty extends SerializableModelBase 
 
   public void setPropertyId(final String propertyId) {
     this.propertyId = propertyId;
-  }
-
-  public Long getMemberId() {
-    return memberId;
-  }
-
-  public void setMemberId(final Long memberId) {
-    this.memberId = memberId;
   }
 
   public IfcBuildingStoreyStairMember getIfcBuildingStoreyStairMember() {

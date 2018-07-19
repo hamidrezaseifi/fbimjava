@@ -50,7 +50,7 @@ public class IfcStairFlightRender {
   public IfcBuildingStoreyStairFlight toModel(final IfcBuildingStoreyStair model) {
 
     final IfcBuildingStoreyStairFlight p = new IfcBuildingStoreyStairFlight();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
@@ -62,11 +62,11 @@ public class IfcStairFlightRender {
     p.setTreadLength(treadLength);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyStairFlightProperty(new IfcBuildingStoreyStairFlightProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyStairFlightProperty(new IfcBuildingStoreyStairFlightProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender prop : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyStairFlightPresentationlayer(new IfcBuildingStoreyStairFlightPresentationlayer(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyStairFlightPresentationlayer(new IfcBuildingStoreyStairFlightPresentationlayer(prop.getPropertyId()));
     }
 
     return p;

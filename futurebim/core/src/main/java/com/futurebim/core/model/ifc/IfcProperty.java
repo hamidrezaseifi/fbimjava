@@ -131,6 +131,7 @@ public class IfcProperty extends SerializableModelBase {
 
   public void addIfcPropertiesValues(final IfcPropertySingleValue ifcPropertiesValue) {
     this.ifcPropertySingleValue.add(ifcPropertiesValue);
+    ifcPropertiesValue.setIfcProperty(this);
   }
 
   public ProjectIfc getProjectIfc() {

@@ -34,21 +34,17 @@ public class IfcBuildingStoreyFootingPresentationlayer extends SerializableModel
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
-  @Column(name = "footing_id")
-  private Long footingId;
-
   private short status;
 
   // bi-directional many-to-one association to IfcBuildingStoreyFooting
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "footing_id", updatable = false, insertable = false)
+  @JoinColumn(name = "footing_id")
   private IfcBuildingStoreyFooting ifcBuildingStoreyFooting;
 
   public IfcBuildingStoreyFootingPresentationlayer() {
   }
 
-  public IfcBuildingStoreyFootingPresentationlayer(final Long footingId, final String presentationlayerId) {
-    this.footingId = footingId;
+  public IfcBuildingStoreyFootingPresentationlayer(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
   }
 
@@ -90,14 +86,6 @@ public class IfcBuildingStoreyFootingPresentationlayer extends SerializableModel
 
   public void setIfcBuildingStoreyFooting(final IfcBuildingStoreyFooting ifcBuildingStoreyFooting) {
     this.ifcBuildingStoreyFooting = ifcBuildingStoreyFooting;
-  }
-
-  public Long getFootingId() {
-    return footingId;
-  }
-
-  public void setFootingId(final Long footingId) {
-    this.footingId = footingId;
   }
 
   public IfcPresentationLayerAssignmentSetEdo toEdo() {

@@ -46,7 +46,7 @@ public class IfcProjectSiteRender {
   public IfcProjectSite toModel(final IfcProject model) {
 
     final IfcProjectSite p = new IfcProjectSite();
-    p.setId(id);
+    p.setGuid(id);
     p.setCompositionType(compositionType);
     p.setIfcProject(model);
     p.setObjectPlacement(objectPlacement);
@@ -55,7 +55,7 @@ public class IfcProjectSiteRender {
     p.setRefLatitude(refLatitude);
     p.setRefLongitude(refLongitude);
     p.setSiteName(siteName);
-    p.setProjectId(model.getId());
+    p.setTag("");
 
     for (final IfcBuildingRender building : buildingList) {
       p.addIfcBuilding(building.toModel(p));

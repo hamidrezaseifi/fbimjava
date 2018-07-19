@@ -42,7 +42,7 @@ public class IfcStairRailingRender {
   public IfcBuildingStoreyStairRailing toModel(final IfcBuildingStoreyStair model) {
 
     final IfcBuildingStoreyStairRailing p = new IfcBuildingStoreyStairRailing();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
@@ -51,11 +51,11 @@ public class IfcStairRailingRender {
     p.setPredefinedType(predefinedType);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyStairRailingProperty(new IfcBuildingStoreyStairRailingProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyStairRailingProperty(new IfcBuildingStoreyStairRailingProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender prop : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyStairRailingPresentationlayer(new IfcBuildingStoreyStairRailingPresentationlayer(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyStairRailingPresentationlayer(new IfcBuildingStoreyStairRailingPresentationlayer(prop.getPropertyId()));
     }
 
     return p;

@@ -35,7 +35,7 @@ public class IfcDoorstyleRender {
 
     final IfcDoorstyle type = new IfcDoorstyle();
 
-    type.setId(id);
+    type.setGuid(id);
     type.setProjectIfc(model);
     type.setTypeName(typeName);
     type.setTag(tag);

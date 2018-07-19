@@ -119,7 +119,7 @@ public class ReadProjectIcfController {
     }
 
     final ProjectIfc model = ifc.toModel();
-    model.setProjectId(1L);
+    model.setProjectId(2L);
 
     final ProjectIfc res = projectIcfDao.addProjectIfc(model);
 

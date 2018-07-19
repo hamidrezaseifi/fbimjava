@@ -56,49 +56,44 @@ public class IfcFurnishingElementRender {
   public IfcBuildingStoreySpaceFurnishingelement toModel(final IfcBuildingStoreySpace model) {
 
     final IfcBuildingStoreySpaceFurnishingelement p = new IfcBuildingStoreySpaceFurnishingelement();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setIfcBuildingStorey(model);
     p.setElementName(name);
     p.setObjectType(objectType);
     p.setTag(tag);
-    p.setSpaceId(model.getId());
 
     for (final IfcOpeningElementRender element : openingElementList) {
 
       final IfcOpeningElementProxy px = element.toProxy();
 
       final IfcBuildingStoreySpaceFurnishingelementOpening open = new IfcBuildingStoreySpaceFurnishingelementOpening();
-      open.setElementId(id);
-      open.setId(px.getId());
+      open.setIfcBuildingStoreySpaceFurnishingelement(p);
+      open.setGuid(px.getId());
       open.setObjectPlacement(px.getObjectPlacement());
       open.setObjectType(px.getObjectType());
       open.setOpenName(px.getName());
       open.setTag(px.getTag());
       for (final IfcPropertySetProxy prp : px.getPropertySetList()) {
-        open.addIfcBuildingStoreySpaceFurnishingelementOpeningProperty(new IfcBuildingStoreySpaceFurnishingelementOpeningProperty(px.getId(),
-                                                                                                                                  prp.getPropertyId()));
+        open.addIfcBuildingStoreySpaceFurnishingelementOpeningProperty(new IfcBuildingStoreySpaceFurnishingelementOpeningProperty(prp.getPropertyId()));
       }
       for (final IfcPresentationLayerAssignmentSetProxy pl : px.getPresentationLayerAssignmentList()) {
-        open.addIfcBuildingStoreySpaceFelementOpeningPresentationlayer(new IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer(px.getId(),
-                                                                                                                                           pl.getPropertyId()));
+        open.addIfcBuildingStoreySpaceFelementOpeningPresentationlayer(new IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer(pl.getPropertyId()));
       }
 
       p.addIfcBuildingStoreySpaceFurnishingelementOpening(open);
     }
 
     for (final IfcFurnitureTypeSetRender type : furnitureTypeList) {
-      p.addIfcBuildingStoreySpaceFurnishingelementFurnituretype(new IfcBuildingStoreySpaceFurnishingelementFurnituretype(id,
-                                                                                                                         type.getPropertyId()));
+      p.addIfcBuildingStoreySpaceFurnishingelementFurnituretype(new IfcBuildingStoreySpaceFurnishingelementFurnituretype(type.getPropertyId()));
     }
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreySpaceFurnishingelementProperty(new IfcBuildingStoreySpaceFurnishingelementProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreySpaceFurnishingelementProperty(new IfcBuildingStoreySpaceFurnishingelementProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreySpaceFurnishingelementPresentationlayer(new IfcBuildingStoreySpaceFurnishingelementPresentationlayer(id,
-                                                                                                                                 layer.getPropertyId()));
+      p.addIfcBuildingStoreySpaceFurnishingelementPresentationlayer(new IfcBuildingStoreySpaceFurnishingelementPresentationlayer(layer.getPropertyId()));
     }
 
     return p;

@@ -53,7 +53,7 @@ public class IfcDoorRender {
   public IfcBuildingStoreyDoor toModel(final IfcBuildingStorey model) {
 
     final IfcBuildingStoreyDoor p = new IfcBuildingStoreyDoor();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
@@ -63,15 +63,15 @@ public class IfcDoorRender {
     p.setOverallWidth(overallWidth);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyDoorProperty(new IfcBuildingStoreyDoorProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyDoorProperty(new IfcBuildingStoreyDoorProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender prop : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyDoorPresentationlayer(new IfcBuildingStoreyDoorPresentationlayer(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyDoorPresentationlayer(new IfcBuildingStoreyDoorPresentationlayer(prop.getPropertyId()));
     }
 
     for (final IfcDoorStyleSetRender style : doorStyleList) {
-      p.addIfcBuildingStoreyDoorStyle(new IfcBuildingStoreyDoorStyle(id, style.getStyleId()));
+      p.addIfcBuildingStoreyDoorStyle(new IfcBuildingStoreyDoorStyle(style.getStyleId()));
     }
 
     return p;

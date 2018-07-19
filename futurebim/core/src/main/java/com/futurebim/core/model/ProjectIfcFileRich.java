@@ -32,7 +32,7 @@ public class ProjectIfcFileRich extends SerializableModelBase {
   private Long projectid;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "projectid", insertable = false, updatable = false)
+  @JoinColumn(name = "projectid")
   private Project project;
 
   public ProjectIfcFileRich() {

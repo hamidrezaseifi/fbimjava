@@ -49,7 +49,7 @@ public class IfcWindowRender {
   public IfcBuildingStoreyWindow toModel(final IfcBuildingStorey model) {
 
     final IfcBuildingStoreyWindow p = new IfcBuildingStoreyWindow();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
@@ -60,15 +60,15 @@ public class IfcWindowRender {
     p.setOverallWidth(overallWidth);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyWindowProperty(new IfcBuildingStoreyWindowProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyWindowProperty(new IfcBuildingStoreyWindowProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyWindowPresentationlayer(new IfcBuildingStoreyWindowPresentationlayer(id, layer.getPropertyId()));
+      p.addIfcBuildingStoreyWindowPresentationlayer(new IfcBuildingStoreyWindowPresentationlayer(layer.getPropertyId()));
     }
 
     for (final IfcWindowStyleSetRender style : windowStyleSetList) {
-      p.addIfcBuildingStoreyWindowStyle(new IfcBuildingStoreyWindowStyle(id, style.getStyleId()));
+      p.addIfcBuildingStoreyWindowStyle(new IfcBuildingStoreyWindowStyle(style.getStyleId()));
     }
 
     return p;

@@ -34,21 +34,17 @@ public class IfcBuildingStoreyStairPresentationlayer extends SerializableModelBa
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
 
-  @Column(name = "stair_id")
-  private Long stairId;
-
   private short status;
 
   // bi-directional many-to-one association to IfcBuildingStoreyStair
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "stair_id", insertable = false, updatable = false)
+  @JoinColumn(name = "stair_id")
   private IfcBuildingStoreyStair ifcBuildingStoreyStair;
 
   public IfcBuildingStoreyStairPresentationlayer() {
   }
 
-  public IfcBuildingStoreyStairPresentationlayer(final Long stairId, final String presentationlayerId) {
-    this.stairId = stairId;
+  public IfcBuildingStoreyStairPresentationlayer(final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
   }
 
@@ -90,14 +86,6 @@ public class IfcBuildingStoreyStairPresentationlayer extends SerializableModelBa
 
   public void setIfcBuildingStoreyStair(final IfcBuildingStoreyStair ifcBuildingStoreyStair) {
     this.ifcBuildingStoreyStair = ifcBuildingStoreyStair;
-  }
-
-  public Long getStairId() {
-    return stairId;
-  }
-
-  public void setStairId(final Long stairId) {
-    this.stairId = stairId;
   }
 
   public IfcPresentationLayerAssignmentSetEdo toEdo() {

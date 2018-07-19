@@ -41,21 +41,20 @@ public class IfcFootingRender {
   public IfcBuildingStoreyFooting toModel(final IfcBuildingStorey model) {
 
     final IfcBuildingStoreyFooting p = new IfcBuildingStoreyFooting();
-    p.setId(id);
+    p.setGuid(id);
     p.setObjectPlacement(objectPlacement);
     p.setObjectType(objectType);
     p.setTag(tag);
     p.setIfcBuildingStorey(model);
-    p.setStoreyId(model.getId());
     p.setFootingName(name);
     p.setPredefinedType(predefinedType);
 
     for (final IfcPropertySetRender prop : propertySetList) {
-      p.addIfcBuildingStoreyFootingProperty(new IfcBuildingStoreyFootingProperty(id, prop.getPropertyId()));
+      p.addIfcBuildingStoreyFootingProperty(new IfcBuildingStoreyFootingProperty(prop.getPropertyId()));
     }
 
     for (final IfcPresentationLayerAssignmentSetRender layer : presentationLayerAssignmentList) {
-      p.addIfcBuildingStoreyFootingPresentationlayer(new IfcBuildingStoreyFootingPresentationlayer(id, layer.getPropertyId()));
+      p.addIfcBuildingStoreyFootingPresentationlayer(new IfcBuildingStoreyFootingPresentationlayer(layer.getPropertyId()));
     }
 
     return p;
