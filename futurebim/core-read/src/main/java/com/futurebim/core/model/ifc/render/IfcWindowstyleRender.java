@@ -35,7 +35,7 @@ public class IfcWindowstyleRender {
 
     final IfcWindowstyle type = new IfcWindowstyle();
 
-    type.setId(id);
+    type.setGuid(id);
     // type.setProjectIfcId(model.getId());
     // type.setProjectIfc(model);
     type.setProjectIfc(model);

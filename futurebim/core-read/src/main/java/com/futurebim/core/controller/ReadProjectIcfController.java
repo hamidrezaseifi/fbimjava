@@ -6,7 +6,6 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -31,11 +30,8 @@ import com.futurebim.common.model.reponse.FutureBimUiRestResponse;
 import com.futurebim.common.model.reponse.ProjectIfcListRestResponse;
 import com.futurebim.common.model.reponse.ProjectIfcRestResponse;
 import com.futurebim.core.bl.ProjectIcfReadHandler;
-import com.futurebim.core.dao.ifc.IfcPropertyDao;
 import com.futurebim.core.dao.ifc.ProjectIcfDao;
 import com.futurebim.core.model.ifc.IfcFurnituretype;
-import com.futurebim.core.model.ifc.IfcProperty;
-import com.futurebim.core.model.ifc.IfcPropertySingleValue;
 import com.futurebim.core.model.ifc.ProjectIfc;
 import com.futurebim.core.model.ifc.render.ProjectIfcRender;
 
@@ -49,9 +45,6 @@ public class ReadProjectIcfController {
 
   @Autowired
   private ResourceLoader resourceLoader;
-
-  @Autowired
-  private IfcPropertyDao ifcPropertyDao;
 
   @Autowired
   private ProjectIcfDao projectIcfDao;
@@ -84,47 +77,8 @@ public class ReadProjectIcfController {
     final XmlMapper xmlMapper = (XmlMapper) xmlConverter.getObjectMapper();
     xmlMapper.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true);
     xmlMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-    xmlMapper.configure(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS, true);
 
     return new ProjectIfcRender(projectIcfReadHandler.getById(ifcId));
-  }
-
-  @RequestMapping(value = "/readprop", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody List<String> readProperties() throws IOException {
-
-    List<IfcProperty> proplist = null;
-    final XmlMapper mapper = new XmlMapper();
-    final Resource resource = resourceLoader.getResource("classpath:mdata/inm.xml");
-    try (final InputStream is = resource.getInputStream()) {
-
-      proplist = mapper.readValue(is, new TypeReference<List<IfcProperty>>() {
-      });
-
-    }
-
-    final List<String> idlist = new ArrayList<>();
-
-    for (final IfcProperty prop : proplist) {
-      // prop.setIfcId("Duplex_A_20110907_optimized");
-      for (final IfcPropertySingleValue val : prop.getIfcPropertiesValues()) {
-
-        val.setPropertyId(prop.getId());
-      }
-
-      if (ifcPropertyDao.addIfcProperty(prop) != null) {
-
-        /*
-         * for (final IfcPropertySingleValue val : prop.getIfcPropertiesValues()) { val.setPropertyId(prop.getId());
-         * logger.error("nominal: " + val.getNominalValue().length() + " , " + prop.getId()); if (val.getNominalValue().length() > 49) { }
-         * if (ifcPropertySingleValueDao.addIfcPropertySingleValue(val) != null) { idlist.add(prop.getId()); } }
-         */
-
-        idlist.add(prop.getId());
-      }
-    }
-
-    return idlist;
-
   }
 
   @RequestMapping(value = "/readtypes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
