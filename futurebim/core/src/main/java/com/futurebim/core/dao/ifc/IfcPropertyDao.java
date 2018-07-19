@@ -12,7 +12,7 @@ public interface IfcPropertyDao {
 
   public boolean removeIfcProperty(String id);
 
-  public IfcProperty getById(String id);
+  public IfcProperty getById(Long id);
 
   public List<IfcProperty> listIfcProperties(String ifcId);
 

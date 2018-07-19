@@ -58,7 +58,7 @@ public class IfcPropertyDaoImpl implements IfcPropertyDao {
   }
 
   @Override
-  public IfcProperty getById(final String id) {
+  public IfcProperty getById(final Long id) {
     final Session session = this.sessionFactory.getCurrentSession();
     final IfcProperty pifc = session.get(IfcProperty.class, id);
     if (pifc != null) {
