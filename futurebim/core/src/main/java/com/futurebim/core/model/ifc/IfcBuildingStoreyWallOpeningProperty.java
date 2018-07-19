@@ -37,7 +37,7 @@ public class IfcBuildingStoreyWallOpeningProperty extends SerializableModelBase 
   private short status = 1;
 
   @Column(name = "opening_id")
-  private String openingId;
+  private Long openingId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallOpening
   @ManyToOne(fetch = FetchType.LAZY)
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyWallOpeningProperty extends SerializableModelBase 
   public IfcBuildingStoreyWallOpeningProperty() {
   }
 
-  public IfcBuildingStoreyWallOpeningProperty(final String openingId, final String propertyId) {
+  public IfcBuildingStoreyWallOpeningProperty(final Long openingId, final String propertyId) {
     this.openingId = openingId;
     this.propertyId = propertyId;
   }
@@ -92,11 +92,11 @@ public class IfcBuildingStoreyWallOpeningProperty extends SerializableModelBase 
     this.ifcBuildingStoreyWallOpening = ifcBuildingStoreyWallOpening;
   }
 
-  public String getOpeningId() {
+  public Long getOpeningId() {
     return openingId;
   }
 
-  public void setOpeningId(final String openingId) {
+  public void setOpeningId(final Long openingId) {
     this.openingId = openingId;
   }
 

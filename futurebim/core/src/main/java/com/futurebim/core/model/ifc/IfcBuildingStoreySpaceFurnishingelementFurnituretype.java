@@ -36,11 +36,8 @@ public class IfcBuildingStoreySpaceFurnishingelementFurnituretype extends Serial
   @Column(name = "furnituretype_id")
   private String furnituretypeId;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
   @Column(name = "felement_id")
-  private String felementId;
+  private Long felementId;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelement
   @ManyToOne(fetch = FetchType.LAZY)
@@ -50,17 +47,9 @@ public class IfcBuildingStoreySpaceFurnishingelementFurnituretype extends Serial
   public IfcBuildingStoreySpaceFurnishingelementFurnituretype() {
   }
 
-  public IfcBuildingStoreySpaceFurnishingelementFurnituretype(final String felementId, final String furnituretypeId) {
+  public IfcBuildingStoreySpaceFurnishingelementFurnituretype(final Long felementId, final String furnituretypeId) {
     this.felementId = felementId;
     this.furnituretypeId = furnituretypeId;
-  }
-
-  public Long getIfcId() {
-    return ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
   }
 
   public Long getId() {
@@ -104,11 +93,11 @@ public class IfcBuildingStoreySpaceFurnishingelementFurnituretype extends Serial
     this.furnituretypeId = furnituretypeId;
   }
 
-  public String getFelementId() {
+  public Long getFelementId() {
     return felementId;
   }
 
-  public void setFelementId(final String felementId) {
+  public void setFelementId(final Long felementId) {
     this.felementId = felementId;
   }
 

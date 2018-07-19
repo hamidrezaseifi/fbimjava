@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.futurebim.common.model.edo.ifc.IfcFurnituretypeEdo;
 import com.futurebim.core.model.base.SerializableModelBase;
 
@@ -21,32 +21,30 @@ import com.futurebim.core.model.base.SerializableModelBase;
  */
 @Entity
 @Table(name = "ifc_furnituretypes")
-@JacksonXmlRootElement(localName = "IfcFurnitureType")
 public class IfcFurnituretype extends SerializableModelBase {
 
   private static final long serialVersionUID = 1L;
 
   @Id
-  @JacksonXmlProperty(localName = "id")
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-  @JacksonXmlProperty(localName = "AssemblyPlace")
+  @Column(name = "guid")
+  private String guid;
+
   @Column(name = "assembly_place")
   private String assemblyPlace;
 
   private LocalDateTime created;
 
-  @JacksonXmlProperty(localName = "ElementType")
   @Column(name = "element_type")
   private String elementType;
 
   private short status = 1;
 
-  @JacksonXmlProperty(localName = "Name")
   @Column(name = "type_name")
   private String typeName;
 
-  @JacksonXmlProperty(localName = "Tag")
   @Column(name = "tag")
   private String tag;
 
@@ -61,12 +59,20 @@ public class IfcFurnituretype extends SerializableModelBase {
   public IfcFurnituretype() {
   }
 
-  public String getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final String id) {
+  public void setId(final Long id) {
     this.id = id;
+  }
+
+  public String getGuid() {
+    return guid;
+  }
+
+  public void setGuid(final String guid) {
+    this.guid = guid;
   }
 
   public String getAssemblyPlace() {
@@ -143,7 +149,7 @@ public class IfcFurnituretype extends SerializableModelBase {
 
   public IfcFurnituretypeEdo toEdo() {
     final IfcFurnituretypeEdo edo = new IfcFurnituretypeEdo();
-    edo.setId(id);
+    edo.setId(guid);
     edo.setTag(tag);
     edo.setTypeName(typeName);
     edo.setAssemblyPlace(assemblyPlace);

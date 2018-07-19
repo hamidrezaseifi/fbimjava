@@ -34,7 +34,7 @@ public class IfcBuildingStoreyRoofSlabOpeningPresentationlayer extends Serializa
   private String presentationlayerId;
 
   @Column(name = "opening_id")
-  private String openingId;
+  private Long openingId;
 
   private short status;
 
@@ -46,7 +46,7 @@ public class IfcBuildingStoreyRoofSlabOpeningPresentationlayer extends Serializa
   public IfcBuildingStoreyRoofSlabOpeningPresentationlayer() {
   }
 
-  public IfcBuildingStoreyRoofSlabOpeningPresentationlayer(final String openingId, final String presentationlayerId) {
+  public IfcBuildingStoreyRoofSlabOpeningPresentationlayer(final Long openingId, final String presentationlayerId) {
     this.openingId = openingId;
     this.presentationlayerId = presentationlayerId;
   }
@@ -91,11 +91,11 @@ public class IfcBuildingStoreyRoofSlabOpeningPresentationlayer extends Serializa
     this.ifcBuildingStoreyRoofSlabOpening = ifcBuildingStoreyRoofSlabOpening;
   }
 
-  public String getOpeningId() {
+  public Long getOpeningId() {
     return openingId;
   }
 
-  public void setOpeningId(final String openingId) {
+  public void setOpeningId(final Long openingId) {
     this.openingId = openingId;
   }
 

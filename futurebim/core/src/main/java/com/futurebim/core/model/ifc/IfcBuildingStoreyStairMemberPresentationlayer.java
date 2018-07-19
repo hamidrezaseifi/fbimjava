@@ -37,7 +37,7 @@ public class IfcBuildingStoreyStairMemberPresentationlayer extends SerializableM
   private String presentationlayerId;
 
   @Column(name = "member_id")
-  private String memberId;
+  private Long memberId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairMember
   @ManyToOne(fetch = FetchType.LAZY)
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyStairMemberPresentationlayer extends SerializableM
   public IfcBuildingStoreyStairMemberPresentationlayer() {
   }
 
-  public IfcBuildingStoreyStairMemberPresentationlayer(final String memberId, final String presentationlayerId) {
+  public IfcBuildingStoreyStairMemberPresentationlayer(final Long memberId, final String presentationlayerId) {
     this.memberId = memberId;
     this.presentationlayerId = presentationlayerId;
   }
@@ -92,11 +92,11 @@ public class IfcBuildingStoreyStairMemberPresentationlayer extends SerializableM
     this.presentationlayerId = presentationlayerId;
   }
 
-  public String getMemberId() {
+  public Long getMemberId() {
     return memberId;
   }
 
-  public void setMemberId(final String memberId) {
+  public void setMemberId(final Long memberId) {
     this.memberId = memberId;
   }
 

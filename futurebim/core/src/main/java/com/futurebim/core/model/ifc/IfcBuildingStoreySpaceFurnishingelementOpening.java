@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,15 +33,16 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
   private static final long serialVersionUID = 1L;
 
   @Id
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
+  @Column(name = "guid")
+  private String guid;
 
   private LocalDateTime created;
 
   @Column(name = "element_id")
-  private String elementId;
+  private Long elementId;
 
   @Column(name = "object_placement")
   private String objectPlacement;
@@ -75,20 +78,20 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
   public IfcBuildingStoreySpaceFurnishingelementOpening() {
   }
 
-  public Long getIfcId() {
-    return ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
-  }
-
-  public String getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final String id) {
+  public void setId(final Long id) {
     this.id = id;
+  }
+
+  public String getGuid() {
+    return guid;
+  }
+
+  public void setGuid(final String guid) {
+    this.guid = guid;
   }
 
   public LocalDateTime getCreated() {
@@ -99,11 +102,11 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
     this.created = created;
   }
 
-  public String getElementId() {
+  public Long getElementId() {
     return this.elementId;
   }
 
-  public void setElementId(final String elementId) {
+  public void setElementId(final Long elementId) {
     this.elementId = elementId;
   }
 
@@ -218,7 +221,7 @@ public class IfcBuildingStoreySpaceFurnishingelementOpening extends Serializable
   public IfcOpeningElementEdo toEdo() {
 
     final IfcOpeningElementEdo edo = new IfcOpeningElementEdo();
-    edo.setId(id);
+    edo.setId(guid);
     edo.setName(openName);
     edo.setObjectPlacement(objectPlacement);
     edo.setObjectType(objectType);

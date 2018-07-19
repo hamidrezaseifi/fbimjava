@@ -35,7 +35,7 @@ public class IfcBuildingStoreyWallstandardcaseProperty extends SerializableModel
   private String propertyId;
 
   @Column(name = "wall_id")
-  private String wallId;
+  private Long wallId;
 
   private short status;
 
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyWallstandardcaseProperty extends SerializableModel
   public IfcBuildingStoreyWallstandardcaseProperty() {
   }
 
-  public IfcBuildingStoreyWallstandardcaseProperty(final String wallId, final String propertyId) {
+  public IfcBuildingStoreyWallstandardcaseProperty(final Long wallId, final String propertyId) {
     this.wallId = wallId;
     this.propertyId = propertyId;
   }
@@ -92,11 +92,11 @@ public class IfcBuildingStoreyWallstandardcaseProperty extends SerializableModel
     this.ifcBuildingStoreyWallstandardcase = ifcBuildingStoreyWallstandardcase;
   }
 
-  public String getWallId() {
+  public Long getWallId() {
     return wallId;
   }
 
-  public void setWallId(final String wallId) {
+  public void setWallId(final Long wallId) {
     this.wallId = wallId;
   }
 

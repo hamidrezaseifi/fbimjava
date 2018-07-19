@@ -35,7 +35,7 @@ public class IfcBuildingStoreyWallstandardcaseOpeningProperty extends Serializab
   private String propertyId;
 
   @Column(name = "opening_id")
-  private String openingId;
+  private Long openingId;
 
   private short status;
 
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyWallstandardcaseOpeningProperty extends Serializab
   public IfcBuildingStoreyWallstandardcaseOpeningProperty() {
   }
 
-  public IfcBuildingStoreyWallstandardcaseOpeningProperty(final String openingId, final String propertyId) {
+  public IfcBuildingStoreyWallstandardcaseOpeningProperty(final Long openingId, final String propertyId) {
     this.openingId = openingId;
     this.propertyId = propertyId;
   }
@@ -93,11 +93,11 @@ public class IfcBuildingStoreyWallstandardcaseOpeningProperty extends Serializab
     this.ifcBuildingStoreyWallstandardcaseOpening = ifcBuildingStoreyWallstandardcaseOpening;
   }
 
-  public String getOpeningId() {
+  public Long getOpeningId() {
     return openingId;
   }
 
-  public void setOpeningId(final String openingId) {
+  public void setOpeningId(final Long openingId) {
     this.openingId = openingId;
   }
 

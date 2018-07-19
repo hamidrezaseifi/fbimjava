@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,10 +33,11 @@ public class IfcBuildingStoreyFooting extends SerializableModelBase {
   private static final long serialVersionUID = 1L;
 
   @Id
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
+  @Column(name = "guid")
+  private String guid;
 
   private LocalDateTime created;
 
@@ -53,7 +56,7 @@ public class IfcBuildingStoreyFooting extends SerializableModelBase {
   private short status;
 
   @Column(name = "storey_id")
-  private String storeyId;
+  private Long storeyId;
 
   private String tag;
 
@@ -78,20 +81,20 @@ public class IfcBuildingStoreyFooting extends SerializableModelBase {
   public IfcBuildingStoreyFooting() {
   }
 
-  public Long getIfcId() {
-    return ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
-  }
-
-  public String getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final String id) {
+  public void setId(final Long id) {
     this.id = id;
+  }
+
+  public String getGuid() {
+    return guid;
+  }
+
+  public void setGuid(final String guid) {
+    this.guid = guid;
   }
 
   public LocalDateTime getCreated() {
@@ -142,11 +145,11 @@ public class IfcBuildingStoreyFooting extends SerializableModelBase {
     this.status = status;
   }
 
-  public String getStoreyId() {
+  public Long getStoreyId() {
     return this.storeyId;
   }
 
-  public void setStoreyId(final String storeyId) {
+  public void setStoreyId(final Long storeyId) {
     this.storeyId = storeyId;
   }
 
@@ -234,7 +237,7 @@ public class IfcBuildingStoreyFooting extends SerializableModelBase {
   public IfcFootingEdo toEdo() {
 
     final IfcFootingEdo edo = new IfcFootingEdo();
-    edo.setId(id);
+    edo.setId(guid);
     edo.setName(footingName);
     edo.setObjectPlacement(objectPlacement);
     edo.setObjectType(objectType);

@@ -35,7 +35,7 @@ public class IfcBuildingStoreyWallstandardcasePresentationlayer extends Serializ
   private String presentationlayerId;
 
   @Column(name = "wall_id")
-  private String wallId;
+  private Long wallId;
 
   private short status;
 
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyWallstandardcasePresentationlayer extends Serializ
   public IfcBuildingStoreyWallstandardcasePresentationlayer() {
   }
 
-  public IfcBuildingStoreyWallstandardcasePresentationlayer(final String wallId, final String presentationlayerId) {
+  public IfcBuildingStoreyWallstandardcasePresentationlayer(final Long wallId, final String presentationlayerId) {
     this.wallId = wallId;
     this.presentationlayerId = presentationlayerId;
   }
@@ -92,11 +92,11 @@ public class IfcBuildingStoreyWallstandardcasePresentationlayer extends Serializ
     this.ifcBuildingStoreyWallstandardcase = ifcBuildingStoreyWallstandardcase;
   }
 
-  public String getWallId() {
+  public Long getWallId() {
     return wallId;
   }
 
-  public void setWallId(final String wallId) {
+  public void setWallId(final Long wallId) {
     this.wallId = wallId;
   }
 

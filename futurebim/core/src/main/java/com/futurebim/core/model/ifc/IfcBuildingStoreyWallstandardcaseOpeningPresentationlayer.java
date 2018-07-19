@@ -37,7 +37,7 @@ public class IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer extends S
   private short status;
 
   @Column(name = "opening_id")
-  private String openingId;
+  private Long openingId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyWallstandardcaseOpening
   @ManyToOne(fetch = FetchType.LAZY)
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer extends S
   public IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer() {
   }
 
-  public IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer(final String openingId, final String presentationlayerId) {
+  public IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer(final Long openingId, final String presentationlayerId) {
     this.openingId = openingId;
     this.presentationlayerId = presentationlayerId;
   }
@@ -93,11 +93,11 @@ public class IfcBuildingStoreyWallstandardcaseOpeningPresentationlayer extends S
     this.ifcBuildingStoreyWallstandardcaseOpening = ifcBuildingStoreyWallstandardcaseOpening;
   }
 
-  public String getOpeningId() {
+  public Long getOpeningId() {
     return openingId;
   }
 
-  public void setOpeningId(final String openingId) {
+  public void setOpeningId(final Long openingId) {
     this.openingId = openingId;
   }
 

@@ -34,7 +34,7 @@ public class IfcBuildingStoreyRoofSlabPresentationlayer extends SerializableMode
   private String presentationlayerId;
 
   @Column(name = "slab_id")
-  private String slabId;
+  private Long slabId;
 
   private short status;
 
@@ -46,7 +46,7 @@ public class IfcBuildingStoreyRoofSlabPresentationlayer extends SerializableMode
   public IfcBuildingStoreyRoofSlabPresentationlayer() {
   }
 
-  public IfcBuildingStoreyRoofSlabPresentationlayer(final String slabId, final String presentationlayerId) {
+  public IfcBuildingStoreyRoofSlabPresentationlayer(final Long slabId, final String presentationlayerId) {
     this.slabId = slabId;
     this.presentationlayerId = presentationlayerId;
   }
@@ -91,11 +91,11 @@ public class IfcBuildingStoreyRoofSlabPresentationlayer extends SerializableMode
     this.ifcBuildingStoreyRoofSlab = ifcBuildingStoreyRoofSlab;
   }
 
-  public String getSlabId() {
+  public Long getSlabId() {
     return slabId;
   }
 
-  public void setSlabId(final String slabId) {
+  public void setSlabId(final Long slabId) {
     this.slabId = slabId;
   }
 

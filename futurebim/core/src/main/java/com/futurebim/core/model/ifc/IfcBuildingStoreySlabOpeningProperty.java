@@ -26,7 +26,7 @@ public class IfcBuildingStoreySlabOpeningProperty implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   private LocalDateTime created;
 
@@ -34,7 +34,7 @@ public class IfcBuildingStoreySlabOpeningProperty implements Serializable {
   private String propertyId;
 
   @Column(name = "opening_id")
-  private String openingId;
+  private Long openingId;
 
   private short status;
 
@@ -46,16 +46,16 @@ public class IfcBuildingStoreySlabOpeningProperty implements Serializable {
   public IfcBuildingStoreySlabOpeningProperty() {
   }
 
-  public IfcBuildingStoreySlabOpeningProperty(final String openingId, final String propertyId) {
+  public IfcBuildingStoreySlabOpeningProperty(final Long openingId, final String propertyId) {
     this.openingId = openingId;
     this.propertyId = propertyId;
   }
 
-  public int getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final int id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 
@@ -91,11 +91,11 @@ public class IfcBuildingStoreySlabOpeningProperty implements Serializable {
     this.ifcBuildingStoreySlabOpening = ifcBuildingStoreySlabOpening;
   }
 
-  public String getOpeningId() {
+  public Long getOpeningId() {
     return openingId;
   }
 
-  public void setOpeningId(final String openingId) {
+  public void setOpeningId(final Long openingId) {
     this.openingId = openingId;
   }
 

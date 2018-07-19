@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,7 +33,11 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
   private static final long serialVersionUID = 1L;
 
   @Id
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Column(name = "guid")
+  private String guid;
 
   private LocalDateTime created;
 
@@ -46,9 +52,6 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
 
   @Column(name = "overall_width")
   private String overallWidth;
-
-  @Column(name = "ifc_id")
-  private Long ifcId;
 
   private short status = 1;
 
@@ -84,20 +87,20 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
   public IfcBuildingStoreyWindow() {
   }
 
-  public Long getIfcId() {
-    return ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
-  }
-
-  public String getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final String id) {
+  public void setId(final Long id) {
     this.id = id;
+  }
+
+  public String getGuid() {
+    return guid;
+  }
+
+  public void setGuid(final String guid) {
+    this.guid = guid;
   }
 
   public LocalDateTime getCreated() {
@@ -262,7 +265,7 @@ public class IfcBuildingStoreyWindow extends SerializableModelBase {
   public IfcWindowEdo toEdo() {
 
     final IfcWindowEdo edo = new IfcWindowEdo();
-    edo.setId(id);
+    edo.setId(guid);
     edo.setName(windowName);
     edo.setObjectPlacement(objectPlacement);
     edo.setObjectType(objectType);

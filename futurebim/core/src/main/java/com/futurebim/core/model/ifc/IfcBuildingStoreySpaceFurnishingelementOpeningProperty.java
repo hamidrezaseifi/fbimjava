@@ -32,7 +32,7 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty extends Seri
   private LocalDateTime created;
 
   @Column(name = "opening_id")
-  private String openingId;
+  private Long openingId;
 
   @Column(name = "property_id")
   private String propertyId;
@@ -47,7 +47,7 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty extends Seri
   public IfcBuildingStoreySpaceFurnishingelementOpeningProperty() {
   }
 
-  public IfcBuildingStoreySpaceFurnishingelementOpeningProperty(final String openingId, final String propertyId) {
+  public IfcBuildingStoreySpaceFurnishingelementOpeningProperty(final Long openingId, final String propertyId) {
     this.propertyId = propertyId;
     this.openingId = openingId;
   }
@@ -93,11 +93,11 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningProperty extends Seri
     this.ifcBuildingStoreySpaceFurnishingelementOpening = ifcBuildingStoreySpaceFurnishingelementOpening;
   }
 
-  public String getOpeningId() {
+  public Long getOpeningId() {
     return openingId;
   }
 
-  public void setOpeningId(final String openingId) {
+  public void setOpeningId(final Long openingId) {
     this.openingId = openingId;
   }
 

@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,10 +33,11 @@ public class IfcBuildingStorey extends SerializableModelBase {
   private static final long serialVersionUID = 1L;
 
   @Id
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
+  @Column(name = "guid")
+  private String guid;
 
   @Column(name = "composition_type")
   private String compositionType;
@@ -47,7 +50,7 @@ public class IfcBuildingStorey extends SerializableModelBase {
   private String objectPlacement;
 
   @Column(name = "building_id")
-  private String buildingId;
+  private Long buildingId;
 
   private short status = 1;
 
@@ -123,20 +126,20 @@ public class IfcBuildingStorey extends SerializableModelBase {
   public IfcBuildingStorey() {
   }
 
-  public Long getIfcId() {
-    return ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
-  }
-
-  public String getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final String id) {
+  public void setId(final Long id) {
     this.id = id;
+  }
+
+  public String getGuid() {
+    return guid;
+  }
+
+  public void setGuid(final String guid) {
+    this.guid = guid;
   }
 
   public String getCompositionType() {
@@ -409,11 +412,11 @@ public class IfcBuildingStorey extends SerializableModelBase {
     return ifcBuildingStoreyWindow;
   }
 
-  public String getBuildingId() {
+  public Long getBuildingId() {
     return buildingId;
   }
 
-  public void setBuildingId(final String buildingId) {
+  public void setBuildingId(final Long buildingId) {
     this.buildingId = buildingId;
   }
 
@@ -459,10 +462,9 @@ public class IfcBuildingStorey extends SerializableModelBase {
     final IfcBuildingStoreyEdo edo = new IfcBuildingStoreyEdo();
     edo.setCompositionType(compositionType);
     edo.setElevation(elevation);
-    edo.setId(buildingId);
     edo.setObjectPlacement(objectPlacement);
     edo.setStoreyName(storeyName);
-    edo.setId(id);
+    edo.setId(guid);
 
     for (final IfcBuildingStoreyBeam item : ifcBuildingStoreyBeams) {
       edo.addBeam(item.toEdo());

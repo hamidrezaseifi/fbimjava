@@ -32,7 +32,7 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer ext
   private LocalDateTime created;
 
   @Column(name = "opening_id")
-  private String openingId;
+  private Long openingId;
 
   @Column(name = "presentationlayer_id")
   private String presentationlayerId;
@@ -47,7 +47,7 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer ext
   public IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer() {
   }
 
-  public IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer(final String openingId, final String presentationlayerId) {
+  public IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer(final Long openingId, final String presentationlayerId) {
     this.presentationlayerId = presentationlayerId;
     this.openingId = openingId;
   }
@@ -93,11 +93,11 @@ public class IfcBuildingStoreySpaceFurnishingelementOpeningPresentationlayer ext
     this.ifcBuildingStoreySpaceFurnishingelementOpening = ifcBuildingStoreySpaceFurnishingelementOpening;
   }
 
-  public String getOpeningId() {
+  public Long getOpeningId() {
     return openingId;
   }
 
-  public void setOpeningId(final String openingId) {
+  public void setOpeningId(final Long openingId) {
     this.openingId = openingId;
   }
 

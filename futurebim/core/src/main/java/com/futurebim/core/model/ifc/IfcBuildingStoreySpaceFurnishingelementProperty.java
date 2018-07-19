@@ -37,7 +37,7 @@ public class IfcBuildingStoreySpaceFurnishingelementProperty extends Serializabl
   private String propertyId;
 
   @Column(name = "felement_id")
-  private String felementId;
+  private Long felementId;
 
   // bi-directional many-to-one association to IfcBuildingStoreySpaceFurnishingelement
   @ManyToOne(fetch = FetchType.LAZY)
@@ -47,7 +47,7 @@ public class IfcBuildingStoreySpaceFurnishingelementProperty extends Serializabl
   public IfcBuildingStoreySpaceFurnishingelementProperty() {
   }
 
-  public IfcBuildingStoreySpaceFurnishingelementProperty(final String felementId, final String propertyId) {
+  public IfcBuildingStoreySpaceFurnishingelementProperty(final Long felementId, final String propertyId) {
     this.felementId = felementId;
     this.propertyId = propertyId;
   }
@@ -84,11 +84,11 @@ public class IfcBuildingStoreySpaceFurnishingelementProperty extends Serializabl
     this.propertyId = propertyId;
   }
 
-  public String getSpaceId() {
+  public Long getSpaceId() {
     return felementId;
   }
 
-  public void setSpaceId(final String spaceId) {
+  public void setSpaceId(final Long spaceId) {
     this.felementId = spaceId;
   }
 

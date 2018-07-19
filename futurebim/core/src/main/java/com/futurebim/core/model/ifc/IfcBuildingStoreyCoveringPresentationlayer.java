@@ -37,7 +37,7 @@ public class IfcBuildingStoreyCoveringPresentationlayer extends SerializableMode
   private String presentationlayerId;
 
   @Column(name = "covering_id")
-  private String coveringId;
+  private Long coveringId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyCovering
   @ManyToOne(fetch = FetchType.LAZY)
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyCoveringPresentationlayer extends SerializableMode
   public IfcBuildingStoreyCoveringPresentationlayer() {
   }
 
-  public IfcBuildingStoreyCoveringPresentationlayer(final String coveringId, final String presentationlayerId) {
+  public IfcBuildingStoreyCoveringPresentationlayer(final Long coveringId, final String presentationlayerId) {
     this.coveringId = coveringId;
     this.presentationlayerId = presentationlayerId;
   }
@@ -92,11 +92,11 @@ public class IfcBuildingStoreyCoveringPresentationlayer extends SerializableMode
     this.presentationlayerId = presentationlayerId;
   }
 
-  public String getCoveringId() {
+  public Long getCoveringId() {
     return coveringId;
   }
 
-  public void setCoveringId(final String coveringId) {
+  public void setCoveringId(final Long coveringId) {
     this.coveringId = coveringId;
   }
 

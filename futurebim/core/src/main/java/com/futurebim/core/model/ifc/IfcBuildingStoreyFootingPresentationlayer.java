@@ -35,7 +35,7 @@ public class IfcBuildingStoreyFootingPresentationlayer extends SerializableModel
   private String presentationlayerId;
 
   @Column(name = "footing_id")
-  private String footingId;
+  private Long footingId;
 
   private short status;
 
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyFootingPresentationlayer extends SerializableModel
   public IfcBuildingStoreyFootingPresentationlayer() {
   }
 
-  public IfcBuildingStoreyFootingPresentationlayer(final String footingId, final String presentationlayerId) {
+  public IfcBuildingStoreyFootingPresentationlayer(final Long footingId, final String presentationlayerId) {
     this.footingId = footingId;
     this.presentationlayerId = presentationlayerId;
   }
@@ -92,11 +92,11 @@ public class IfcBuildingStoreyFootingPresentationlayer extends SerializableModel
     this.ifcBuildingStoreyFooting = ifcBuildingStoreyFooting;
   }
 
-  public String getFootingId() {
+  public Long getFootingId() {
     return footingId;
   }
 
-  public void setFootingId(final String footingId) {
+  public void setFootingId(final Long footingId) {
     this.footingId = footingId;
   }
 

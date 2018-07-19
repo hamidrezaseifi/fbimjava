@@ -26,7 +26,7 @@ public class IfcBuildingStoreyRoofProperty extends SerializableModelBase {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   private LocalDateTime created;
 
@@ -34,7 +34,7 @@ public class IfcBuildingStoreyRoofProperty extends SerializableModelBase {
   private String propertyId;
 
   @Column(name = "roof_id")
-  private String roofId;
+  private Long roofId;
 
   private short status;
 
@@ -46,16 +46,16 @@ public class IfcBuildingStoreyRoofProperty extends SerializableModelBase {
   public IfcBuildingStoreyRoofProperty() {
   }
 
-  public IfcBuildingStoreyRoofProperty(final String roofId, final String propertyId) {
+  public IfcBuildingStoreyRoofProperty(final Long roofId, final String propertyId) {
     this.roofId = roofId;
     this.propertyId = propertyId;
   }
 
-  public int getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final int id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 
@@ -91,11 +91,11 @@ public class IfcBuildingStoreyRoofProperty extends SerializableModelBase {
     this.ifcBuildingStoreyRoof = ifcBuildingStoreyRoof;
   }
 
-  public String getRoofId() {
+  public Long getRoofId() {
     return roofId;
   }
 
-  public void setRoofId(final String roofId) {
+  public void setRoofId(final Long roofId) {
     this.roofId = roofId;
   }
 

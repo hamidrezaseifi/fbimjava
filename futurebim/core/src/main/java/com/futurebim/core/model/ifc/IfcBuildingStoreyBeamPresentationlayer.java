@@ -37,7 +37,7 @@ public class IfcBuildingStoreyBeamPresentationlayer extends SerializableModelBas
   private String presentationlayerId;
 
   @Column(name = "beam_id")
-  private String beamId;
+  private Long beamId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyBeam
   @ManyToOne(fetch = FetchType.LAZY)
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyBeamPresentationlayer extends SerializableModelBas
   public IfcBuildingStoreyBeamPresentationlayer() {
   }
 
-  public IfcBuildingStoreyBeamPresentationlayer(final String beamId, final String presentationlayerId) {
+  public IfcBuildingStoreyBeamPresentationlayer(final Long beamId, final String presentationlayerId) {
     this.beamId = beamId;
     this.presentationlayerId = presentationlayerId;
   }
@@ -92,11 +92,11 @@ public class IfcBuildingStoreyBeamPresentationlayer extends SerializableModelBas
     this.presentationlayerId = presentationlayerId;
   }
 
-  public String getBeamId() {
+  public Long getBeamId() {
     return beamId;
   }
 
-  public void setBeamId(final String beamId) {
+  public void setBeamId(final Long beamId) {
     this.beamId = beamId;
   }
 

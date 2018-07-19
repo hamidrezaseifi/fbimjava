@@ -37,7 +37,7 @@ public class IfcBuildingStoreyStairFlightProperty extends SerializableModelBase 
   private String propertyId;
 
   @Column(name = "flight_id")
-  private String flightId;
+  private Long flightId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyStairFlight
   @ManyToOne(fetch = FetchType.LAZY)
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyStairFlightProperty extends SerializableModelBase 
   public IfcBuildingStoreyStairFlightProperty() {
   }
 
-  public IfcBuildingStoreyStairFlightProperty(final String flightId, final String propertyId) {
+  public IfcBuildingStoreyStairFlightProperty(final Long flightId, final String propertyId) {
     this.flightId = flightId;
     this.propertyId = propertyId;
   }
@@ -92,11 +92,11 @@ public class IfcBuildingStoreyStairFlightProperty extends SerializableModelBase 
     this.propertyId = propertyId;
   }
 
-  public String getFlightId() {
+  public Long getFlightId() {
     return flightId;
   }
 
-  public void setFlightId(final String flightId) {
+  public void setFlightId(final Long flightId) {
     this.flightId = flightId;
   }
 

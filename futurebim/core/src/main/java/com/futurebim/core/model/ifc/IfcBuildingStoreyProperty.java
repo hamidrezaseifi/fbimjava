@@ -34,7 +34,7 @@ public class IfcBuildingStoreyProperty extends SerializableModelBase {
   private short status = 1;
 
   @Column(name = "storey_id")
-  private String storeyId;
+  private Long storeyId;
 
   @Column(name = "property_id")
   private String propertyId;
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyProperty extends SerializableModelBase {
   public IfcBuildingStoreyProperty() {
   }
 
-  public IfcBuildingStoreyProperty(final String storeyId, final String propertyId) {
+  public IfcBuildingStoreyProperty(final Long storeyId, final String propertyId) {
     this.storeyId = storeyId;
     this.propertyId = propertyId;
   }
@@ -84,11 +84,11 @@ public class IfcBuildingStoreyProperty extends SerializableModelBase {
     this.ifcBuildingStorey = ifcBuildingStorey;
   }
 
-  public String getStoreyId() {
+  public Long getStoreyId() {
     return storeyId;
   }
 
-  public void setStoreyId(final String storeyId) {
+  public void setStoreyId(final Long storeyId) {
     this.storeyId = storeyId;
   }
 

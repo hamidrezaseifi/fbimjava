@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,10 +32,11 @@ public class IfcBuildingStoreyRoofOpening extends SerializableModelBase {
   private static final long serialVersionUID = 1L;
 
   @Id
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
+  @Column(name = "guid")
+  private String guid;
 
   private Timestamp created;
 
@@ -72,20 +75,20 @@ public class IfcBuildingStoreyRoofOpening extends SerializableModelBase {
   public IfcBuildingStoreyRoofOpening() {
   }
 
-  public Long getIfcId() {
-    return ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
-  }
-
-  public String getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final String id) {
+  public void setId(final Long id) {
     this.id = id;
+  }
+
+  public String getGuid() {
+    return guid;
+  }
+
+  public void setGuid(final String guid) {
+    this.guid = guid;
   }
 
   public Timestamp getCreated() {
@@ -213,7 +216,7 @@ public class IfcBuildingStoreyRoofOpening extends SerializableModelBase {
   public IfcOpeningElementEdo toEdo() {
 
     final IfcOpeningElementEdo edo = new IfcOpeningElementEdo();
-    edo.setId(id);
+    edo.setId(guid);
     edo.setName(openingName);
     edo.setObjectPlacement(objectPlacement);
     edo.setObjectType(objectType);

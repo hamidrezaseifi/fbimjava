@@ -27,7 +27,7 @@ public class IfcBuildingStoreyStairPresentationlayer extends SerializableModelBa
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   private Timestamp created;
 
@@ -35,7 +35,7 @@ public class IfcBuildingStoreyStairPresentationlayer extends SerializableModelBa
   private String presentationlayerId;
 
   @Column(name = "stair_id")
-  private String stairId;
+  private Long stairId;
 
   private short status;
 
@@ -47,16 +47,16 @@ public class IfcBuildingStoreyStairPresentationlayer extends SerializableModelBa
   public IfcBuildingStoreyStairPresentationlayer() {
   }
 
-  public IfcBuildingStoreyStairPresentationlayer(final String stairId, final String presentationlayerId) {
+  public IfcBuildingStoreyStairPresentationlayer(final Long stairId, final String presentationlayerId) {
     this.stairId = stairId;
     this.presentationlayerId = presentationlayerId;
   }
 
-  public int getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final int id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 
@@ -92,11 +92,11 @@ public class IfcBuildingStoreyStairPresentationlayer extends SerializableModelBa
     this.ifcBuildingStoreyStair = ifcBuildingStoreyStair;
   }
 
-  public String getStairId() {
+  public Long getStairId() {
     return stairId;
   }
 
-  public void setStairId(final String stairId) {
+  public void setStairId(final Long stairId) {
     this.stairId = stairId;
   }
 

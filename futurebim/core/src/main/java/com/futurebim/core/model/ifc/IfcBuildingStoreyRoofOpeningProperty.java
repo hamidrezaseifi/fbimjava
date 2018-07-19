@@ -26,7 +26,7 @@ public class IfcBuildingStoreyRoofOpeningProperty extends SerializableModelBase 
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
 
   private Timestamp created;
 
@@ -34,7 +34,7 @@ public class IfcBuildingStoreyRoofOpeningProperty extends SerializableModelBase 
   private String propertyId;
 
   @Column(name = "opening_id")
-  private String openingId;
+  private Long openingId;
 
   private short status;
 
@@ -46,16 +46,16 @@ public class IfcBuildingStoreyRoofOpeningProperty extends SerializableModelBase 
   public IfcBuildingStoreyRoofOpeningProperty() {
   }
 
-  public IfcBuildingStoreyRoofOpeningProperty(final String openingId, final String propertyId) {
+  public IfcBuildingStoreyRoofOpeningProperty(final Long openingId, final String propertyId) {
     this.openingId = openingId;
     this.propertyId = propertyId;
   }
 
-  public int getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final int id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 
@@ -91,11 +91,11 @@ public class IfcBuildingStoreyRoofOpeningProperty extends SerializableModelBase 
     this.ifcBuildingStoreyRoofOpening = ifcBuildingStoreyRoofOpening;
   }
 
-  public String getOpeningId() {
+  public Long getOpeningId() {
     return openingId;
   }
 
-  public void setOpeningId(final String openingId) {
+  public void setOpeningId(final Long openingId) {
     this.openingId = openingId;
   }
 

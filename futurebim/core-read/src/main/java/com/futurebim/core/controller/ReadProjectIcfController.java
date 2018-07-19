@@ -2,6 +2,10 @@ package com.futurebim.core.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -170,6 +174,29 @@ public class ReadProjectIcfController {
 
     return ifc;
 
+  }
+
+  @RequestMapping(value = "/test", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+  public @ResponseBody String test() throws IOException {
+
+    final Path path = Paths.get(URI.create("file:/D:/users1.xml"));
+    final List<String> lines = Files.readAllLines(path);
+
+    String xml = "";
+    for (final String s : lines) {
+      xml += s + "\n";
+    }
+
+    final XmlMapper mapper = new XmlMapper();
+    final TestListReader r = mapper.readValue(xml, TestListReader.class);
+
+    String res = "";
+
+    for (final String cell : r.getCell()) {
+      res += cell + "<br>\n";
+    }
+
+    return res;
   }
 
 }

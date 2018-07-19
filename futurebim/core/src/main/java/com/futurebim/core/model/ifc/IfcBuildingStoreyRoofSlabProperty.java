@@ -34,7 +34,7 @@ public class IfcBuildingStoreyRoofSlabProperty extends SerializableModelBase {
   private String propertyId;
 
   @Column(name = "slab_id")
-  private String slabId;
+  private Long slabId;
 
   private short status;
 
@@ -46,7 +46,7 @@ public class IfcBuildingStoreyRoofSlabProperty extends SerializableModelBase {
   public IfcBuildingStoreyRoofSlabProperty() {
   }
 
-  public IfcBuildingStoreyRoofSlabProperty(final String slabId, final String propertyId) {
+  public IfcBuildingStoreyRoofSlabProperty(final Long slabId, final String propertyId) {
     this.slabId = slabId;
     this.propertyId = propertyId;
   }
@@ -91,11 +91,11 @@ public class IfcBuildingStoreyRoofSlabProperty extends SerializableModelBase {
     this.ifcBuildingStoreyRoofSlab = ifcBuildingStoreyRoofSlab;
   }
 
-  public String getSlabId() {
+  public Long getSlabId() {
     return slabId;
   }
 
-  public void setSlabId(final String slabId) {
+  public void setSlabId(final Long slabId) {
     this.slabId = slabId;
   }
 

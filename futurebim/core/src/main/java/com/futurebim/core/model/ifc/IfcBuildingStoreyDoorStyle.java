@@ -29,9 +29,6 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "ifc_id")
-  private Long ifcId;
-
   private LocalDateTime created;
 
   private short status = 1;
@@ -40,7 +37,7 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
   private String doorstyleId;
 
   @Column(name = "door_id")
-  private String doorId;
+  private Long doorId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyDoor
   @ManyToOne(fetch = FetchType.LAZY)
@@ -50,17 +47,9 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
   public IfcBuildingStoreyDoorStyle() {
   }
 
-  public IfcBuildingStoreyDoorStyle(final String doorId, final String doorstyleId) {
+  public IfcBuildingStoreyDoorStyle(final Long doorId, final String doorstyleId) {
     this.doorId = doorId;
     this.doorstyleId = doorstyleId;
-  }
-
-  public Long getIfcId() {
-    return ifcId;
-  }
-
-  public void setIfcId(final Long ifcId) {
-    this.ifcId = ifcId;
   }
 
   public Long getId() {
@@ -103,18 +92,18 @@ public class IfcBuildingStoreyDoorStyle extends SerializableModelBase {
     this.doorstyleId = doorstyleId;
   }
 
-  public String getDoorId() {
+  public Long getDoorId() {
     return doorId;
   }
 
-  public void setDoorId(final String doorId) {
+  public void setDoorId(final Long doorId) {
     this.doorId = doorId;
   }
 
   public IfcDoorStyleSetEdo toEdo() {
 
     final IfcDoorStyleSetEdo edo = new IfcDoorStyleSetEdo();
-    edo.setHref(doorId);
+    edo.setHref(doorstyleId);
 
     return edo;
   }

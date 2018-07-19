@@ -34,7 +34,7 @@ public class IfcBuildingStoreyBeamProperty extends SerializableModelBase {
   private short status = 1;
 
   @Column(name = "beam_id")
-  private String beamId;
+  private Long beamId;
 
   @Column(name = "property_id")
   private String propertyId;
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyBeamProperty extends SerializableModelBase {
   public IfcBuildingStoreyBeamProperty() {
   }
 
-  public IfcBuildingStoreyBeamProperty(final String beamId, final String propertyId) {
+  public IfcBuildingStoreyBeamProperty(final Long beamId, final String propertyId) {
     this.beamId = beamId;
     this.propertyId = propertyId;
   }
@@ -76,11 +76,11 @@ public class IfcBuildingStoreyBeamProperty extends SerializableModelBase {
     this.status = status;
   }
 
-  public String getBeamId() {
+  public Long getBeamId() {
     return beamId;
   }
 
-  public void setBeamId(final String beamId) {
+  public void setBeamId(final Long beamId) {
     this.beamId = beamId;
   }
 

@@ -37,7 +37,7 @@ public class IfcBuildingStoreyDoorPresentationlayer extends SerializableModelBas
   private String presentationlayerId;
 
   @Column(name = "door_id")
-  private String doorId;
+  private Long doorId;
 
   // bi-directional many-to-one association to IfcBuildingStoreyDoor
   @ManyToOne(fetch = FetchType.LAZY)
@@ -47,7 +47,7 @@ public class IfcBuildingStoreyDoorPresentationlayer extends SerializableModelBas
   public IfcBuildingStoreyDoorPresentationlayer() {
   }
 
-  public IfcBuildingStoreyDoorPresentationlayer(final String doorId, final String presentationlayerId) {
+  public IfcBuildingStoreyDoorPresentationlayer(final Long doorId, final String presentationlayerId) {
     this.doorId = doorId;
     this.presentationlayerId = presentationlayerId;
   }
@@ -92,11 +92,11 @@ public class IfcBuildingStoreyDoorPresentationlayer extends SerializableModelBas
     this.presentationlayerId = presentationlayerId;
   }
 
-  public String getDoorId() {
+  public Long getDoorId() {
     return doorId;
   }
 
-  public void setDoorId(final String doorId) {
+  public void setDoorId(final Long doorId) {
     this.doorId = doorId;
   }
 
