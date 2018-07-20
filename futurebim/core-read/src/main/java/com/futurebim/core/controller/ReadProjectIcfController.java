@@ -65,8 +65,14 @@ public class ReadProjectIcfController {
     return ProjectIfcListRestResponse.createData(ProjectIfc.toEdoList(projectIcfReadHandler.listProjectIfcs(projectId)));
   }
 
-  @RequestMapping(value = "/get/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
-  public @ResponseBody ProjectIfcRestResponse getIfc(@PathVariable final Long ifcId) {
+  @RequestMapping(value = "/getxml/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+  public @ResponseBody ProjectIfcRestResponse getIfcXml(@PathVariable final Long ifcId) {
+
+    return ProjectIfcRestResponse.createData(projectIcfReadHandler.getById(ifcId).toEdo());
+  }
+
+  @RequestMapping(value = "/getjson/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody ProjectIfcRestResponse getIfcJson(@PathVariable final Long ifcId) {
 
     return ProjectIfcRestResponse.createData(projectIcfReadHandler.getById(ifcId).toEdo());
   }

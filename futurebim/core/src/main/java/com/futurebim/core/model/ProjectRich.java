@@ -16,10 +16,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.futurebim.common.model.edo.ProjectEdo;
 import com.futurebim.common.model.enums.EStatus;
 import com.futurebim.core.model.base.SerializableModelBase;
+import com.futurebim.core.model.ifc.ProjectIfcProxy;
 
 /**
  * The persistent class for the projects database table.
@@ -54,11 +57,10 @@ public class ProjectRich extends SerializableModelBase {
 
   private int version;
 
-  /*
-   * private List<ProjectBcfFile> projectBcfFiles; private List<ProjectIfcFile> projectIfcFiles; private List<ProjectTask> projectTasks;
-   */
+  @LazyCollection(LazyCollectionOption.FALSE)
+  @OneToMany(mappedBy = "project")
+  private List<ProjectIfcProxy> ProjectIfcProxyList = new ArrayList<>();
 
-  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "companyid", insertable = false, updatable = false)
   private Company companyBean;
@@ -169,6 +171,14 @@ public class ProjectRich extends SerializableModelBase {
     return userProjectAccess;
   }
 
+  public List<ProjectIfcProxy> getProjectIfcProxyList() {
+    return ProjectIfcProxyList;
+  }
+
+  public void setProjectIfcProxyList(final List<ProjectIfcProxy> projectIfcProxyList) {
+    ProjectIfcProxyList = projectIfcProxyList;
+  }
+
   public ProjectEdo toEdo() {
     final ProjectEdo edo = new ProjectEdo();
     edo.setCompanyid(companyid);
@@ -180,6 +190,10 @@ public class ProjectRich extends SerializableModelBase {
     edo.setStatus(status);
     edo.setUpdated(updated);
     edo.setVersion(version);
+
+    for (final ProjectIfcProxy ifc : ProjectIfcProxyList) {
+      edo.addProjectIfcProxy(ifc.toEdo());
+    }
 
     return edo;
   }

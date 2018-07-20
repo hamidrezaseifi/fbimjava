@@ -78,8 +78,12 @@ mdmApp.controller('IfcViewerController', function ($scope, $http, $sce, $element
 		    	        // The clicked node is 'event.node'
 		    	        var node = event.node;
 		    	        if(node.type == "ifc"){
-		    	        	ifc_id = node.id;
-		    	        	require(["/js/gltf_app.js"]);
+		    	        	//ifc_id = node.id;
+		    	        	//require(["/js/ifcview/gltf_app.js"]);
+		    	        	startSurfer(node.id, false, "modeldetail");
+		    	        }
+		    	        if(node.type == "project"){
+		    	        	stopSurfer(false, "modeldetail");
 		    	        }
 		    	    }
 		    	);
@@ -98,7 +102,16 @@ mdmApp.controller('IfcViewerController', function ($scope, $http, $sce, $element
 		
 		for(idx in projectData){
 			var project = projectData[idx];
-			var node = {name : project.projectName, id: 1, type: "project", children: [{name: "ifc1", id: 1, type: "ifc"}, {name: "ifc2", id: 2, type: "ifc"}]};
+			
+			var node = {name : project.projectName, id: 1, type: "project", children: []};
+			
+			for(var idx in project.ifcList){
+				var ifc = project.ifcList[idx];
+				node.children.push({name: ifc.ifcName, id: ifc.id, type: "ifc"});
+			}
+			
+			//node.children.push({name: "ifc1", id: 1, type: "ifc"});
+			
 			res.push(node);
 		}
 		

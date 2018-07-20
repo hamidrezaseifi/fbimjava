@@ -14,7 +14,7 @@
 	padding: 10px;
 	padding-top: 0px;
 	
-	z-index: 1000;
+	z-index: 50;
 }
 
 .ifcviewer-projects-container ul.jqtree-tree .jqtree-title {
@@ -82,6 +82,6 @@
 	overflow: auto;
 	padding: 10px;
 	padding-top: 0px;
-	z-index: 1000;
+	z-index: 50;
 }
 

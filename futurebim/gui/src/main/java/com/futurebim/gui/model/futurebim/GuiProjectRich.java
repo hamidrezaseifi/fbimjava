@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.futurebim.common.model.edo.ProjectEdo;
+import com.futurebim.common.model.edo.ifc.ProjectIfcProxyEdo;
 import com.futurebim.common.model.enums.EStatus;
 
 /**
@@ -33,6 +34,7 @@ public class GuiProjectRich  {
 
   private int version;
 
+  private List<GuiProjectIfcProxy> ProjectIfcProxyList = new ArrayList<>();
 
 
 
@@ -50,6 +52,10 @@ public class GuiProjectRich  {
     this.setStatus(edo.getStatus());
     this.setUpdated(edo.getUpdated());
     this.setVersion(edo.getVersion());
+    
+    for(final ProjectIfcProxyEdo ifcedo  : edo.getProjectIfcProxyList()) {
+      this.addProjectIfcProxy(new GuiProjectIfcProxy(ifcedo));
+    }
   }
 
 
@@ -138,7 +144,21 @@ public class GuiProjectRich  {
   public void setStatus(final EStatus status) {
     this.status = status;
   }
-
-
-
+  
+  public List<GuiProjectIfcProxy> getProjectIfcProxyList() {
+    return ProjectIfcProxyList;
+  }
+  
+  public List<GuiProjectIfcProxy> getIfcList() {
+    return ProjectIfcProxyList;
+  }
+  
+  public void setProjectIfcProxyList(final List<GuiProjectIfcProxy> projectIfcProxyList) {
+    ProjectIfcProxyList = projectIfcProxyList;
+  }
+  
+  public void addProjectIfcProxy(final GuiProjectIfcProxy projectIfcProxy) {
+    ProjectIfcProxyList.add(projectIfcProxy);
+  }
+  
 }

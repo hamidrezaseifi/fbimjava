@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.futurebim.common.model.reponse.ProjectListRestResponse;
+import com.futurebim.common.model.reponse.ProjectRestResponse;
 import com.futurebim.core.bl.ProjectReadHandler;
 import com.futurebim.core.model.ProjectRich;
 
@@ -31,6 +32,12 @@ public class ReadProjectController {
   public @ResponseBody ProjectListRestResponse readAll(@PathVariable final Long companyId) {
     logger.debug("read projects list");
     return ProjectListRestResponse.createList(ProjectRich.toEdoList(projectReadHandler.listProjects(companyId)));
+  }
+
+  @RequestMapping(value = "/get/{projectId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public @ResponseBody ProjectRestResponse getProject(@PathVariable final Long projectId) {
+    logger.debug("read projects list");
+    return ProjectRestResponse.createData(projectReadHandler.getById(projectId).toEdo());
   }
 
 }
