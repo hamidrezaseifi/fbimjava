@@ -1,10 +1,12 @@
 package com.futurebim.common.model.edo.ifc;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class IfcPropertySetEdo {
 
   @JacksonXmlProperty(namespace = "xlink", localName = "href", isAttribute = true)
+  @JsonProperty(value = "href")
   private String href;
 
   public String getHref() {

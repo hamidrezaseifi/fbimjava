@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -26,12 +27,14 @@ public class ProjectIfcEdo {
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(localName = "properties")
+  @JsonProperty(value = "properties")
   private List<IfcPropertyEdo> properties = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "types")
   private IfcTypeWrapperEdo types;
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
+  @JsonProperty(value = "layers")
   private List<IfcPresentationlayerEdo> layers = new ArrayList<>();
 
   @JacksonXmlElementWrapper(localName = "decomposition")

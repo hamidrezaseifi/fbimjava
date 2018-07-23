@@ -3,6 +3,7 @@ package com.futurebim.common.model.edo.ifc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -13,19 +14,24 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 public class IfcProjectEdo {
 
   @JacksonXmlProperty(localName = "id", isAttribute = true)
+  @JsonProperty(value = "guid")
   private String id;
 
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
+  @JsonProperty(value = "name")
   private String projectName;
 
   @JacksonXmlProperty(localName = "LongName", isAttribute = true)
+  @JsonProperty(value = "LongName")
   private String projectLongName;
 
   @JacksonXmlProperty(localName = "Phase", isAttribute = true)
+  @JsonProperty(value = "Phase")
   private String phase;
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcSite")
+  @JsonProperty(value = "IfcSite")
   private List<IfcProjectSiteEdo> sites = new ArrayList<>();
 
   public String getId() {

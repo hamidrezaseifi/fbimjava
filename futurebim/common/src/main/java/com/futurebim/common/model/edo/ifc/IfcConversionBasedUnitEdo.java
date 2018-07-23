@@ -1,5 +1,6 @@
 package com.futurebim.common.model.edo.ifc;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -11,12 +12,15 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 public class IfcConversionBasedUnitEdo {
 
   @JacksonXmlProperty(localName = "SI_equivalent", isAttribute = true)
+  @JsonProperty(value = "SI_equivalent")
   private String equivalent;
 
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
+  @JsonProperty(value = "name")
   private String unitName;
 
   @JacksonXmlProperty(localName = "UnitType", isAttribute = true)
+  @JsonProperty(value = "UnitType")
   private String unitType;
 
   public String getEquivalent() {

@@ -3,6 +3,7 @@ package com.futurebim.common.model.edo.ifc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -16,14 +17,17 @@ public class IfcTypeWrapperEdo {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcFurnitureType")
+  @JsonProperty(value = "IfcFurnitureType")
   private List<IfcFurnituretypeEdo> furnitureTypes = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcDoorStyle")
+  @JsonProperty(value = "IfcDoorStyle")
   private List<IfcDoorstyleEdo> doorTypes = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcWindowStyle")
+  @JsonProperty(value = "IfcWindowStyle")
   private List<IfcWindowstyleEdo> windowTypes = new ArrayList<>();
 
   public List<IfcFurnituretypeEdo> getFurnitureTypes() {
