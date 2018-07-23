@@ -123,6 +123,14 @@ define(["./EventHandler", "./Request", "./Utils"], function(EventHandler, Reques
                         models[args.id] = m;
                         resolve(m);
                     });
+                } else {
+                	if(args.modelJson){
+                        loadModelFromJson(args.modelJson).then(function(m) {
+                            models[args.id] = m;
+                            resolve(m);
+                        });
+                		
+                	}
                 }
             });
         };

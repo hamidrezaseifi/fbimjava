@@ -79,7 +79,7 @@ mdmApp.controller('IfcViewerController', function ($scope, $http, $sce, $element
 		    	        var node = event.node;
 		    	        if(node.type == "ifc"){
 		    	        	//ifc_id = node.id;
-		    	        	//require(["/js/ifcview/gltf_app.js"]);
+		    	        	//require(["/js/ifcview/ifcLoader.js"]);
 		    	        	startSurfer(node.id, false, "modeldetail");
 		    	        }
 		    	        if(node.type == "project"){
