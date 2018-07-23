@@ -104,6 +104,57 @@ define(["./EventHandler", "./Request", "./Utils"], function(EventHandler, Reques
             });
         });
     }
+
+    
+    function loadModelFromJson(modelJson) {
+        return new Promise(function (resolve, reject) {
+
+                var json = modelJson; //Utils.XmlToJson(xml, {'Name': 'name', 'id': 'guid'});
+                
+                var psets = Utils.FindNodeOfType(json, "properties")[0];
+                var project = Utils.FindNodeOfType(json, "decomposition")[0].children[0];
+                var types = Utils.FindNodeOfType(json, "types")[0];
+                
+                var objects = {};
+                var typeObjects = {};
+                var properties = {};
+                psets.children.forEach(function(pset) {
+                    properties[pset.guid] = pset;
+                });
+                
+                var visitObject = function(parent, node) {
+                    var props = [];
+                    var o = (parent && parent.ObjectPlacement) ? objects : typeObjects;
+                    
+                    if (node["xlink:href"]) {
+                        if (!o[parent.guid]) {
+                            var p = Utils.Clone(parent);
+                            p.GlobalId = p.guid;
+                            o[p.guid] = p;
+                            o[p.guid].properties = []
+                        }
+                        var g = node["xlink:href"].substr(1);
+                        var p = properties[g];
+                        if (p) {
+                            o[parent.guid].properties.push(p);
+                        } else if (typeObjects[g]) {
+                            // If not a pset, it is a type, so concatenate type props
+                            o[parent.guid].properties = o[parent.guid].properties.concat(typeObjects[g].properties);
+                        }
+                    }
+                    node.children.forEach(function(n) {
+                        visitObject(node, n);
+                    });
+                };
+                
+                visitObject(null, types);
+                visitObject(null, project);
+                
+                resolve({model: {objects: objects, source: 'XML'}});
+            
+        });
+    }
+
     
     function MetaDataRenderer(args) {
         

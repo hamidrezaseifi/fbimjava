@@ -1,8 +1,5 @@
 package com.futurebim.gui.helper;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
@@ -33,71 +30,36 @@ public class UiConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Value("${core.rest.url.base}")
-    private String baseUrlString;
-
     @Value("${core.rest.url.projects}")
-    private String projectsPath;
+    private String allProjectsReadPath;
 
     @Value("${core.rest.url.ifc}")
-    private String ifcPath;
+    private String ifcReadPath;
 
 
-    public URI getBaseUri() {
-      return URI.create(baseUrlString);
-    }
 
     @PostConstruct
     private void init() {
-      log.info("CORE Base URL: {}", baseUrlString);
-      log.info("CORE Project URL: {}", getProjectsPath(""));
-      log.info("CORE IFC URL: {}", getIfcPath());
-      log.info(" German Date Format: {}", GERMAN_DATE_FORMAT);
-      log.info(" ISO Date Format: {}", ISO_DATE_FORMAT);
-      log.info(" ISO Date-Time Format: {}", ISO_DATE_TIME_FORMAT);
+
     }
 
-
-
-
-    public String getProjectsPath(final String additionalPath) {
-      return buildPath(projectsPath + additionalPath);
+    public String getAllProjectsReadPath(final String additionalPath) {
+      return allProjectsReadPath + additionalPath;
+    }
+    
+    public void setAllProjectsReadPath(final String allProjectsReadPath) {
+      this.allProjectsReadPath = allProjectsReadPath;
     }
 
-
-    public void setProjectsPath(final String projectsPath) {
-      this.projectsPath = projectsPath;
+    public String getIfcReadPath() {
+      return ifcReadPath;
     }
 
-
-    public String getIfcPath() {
-      return buildPath(ifcPath);
+    public void setIfcReadPath(final String ifcReadPath) {
+      this.ifcReadPath = ifcReadPath;
     }
+    
 
-
-    public void setIfcPath(final String ifcPath) {
-      this.ifcPath = ifcPath;
-    }
-
-
-
-
-
-    private URI buildUri(final String relativePath) {
-
-      try {
-        final String url = baseUrlString + "/" + relativePath;
-        return new URI(url).normalize();
-      }
-      catch (final URISyntaxException e) {
-        throw new RuntimeException(e);
-      }
-    }
-
-    private String buildPath(final String relativePath) {
-
-      return baseUrlString + "/" + relativePath;
-    }
 
   }
 

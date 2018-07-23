@@ -5,17 +5,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.futurebim.gui.bl.ProjectsHandler;
 import com.futurebim.gui.controller.base.UiControllerBase;
 import com.futurebim.gui.helper.PageMenuLoader;
+import com.futurebim.gui.helper.UiConfiguration.CoreAccessConfig;
 import com.futurebim.gui.model.MenuItem;
 import com.futurebim.gui.model.futurebim.GuiProjectRich;
 import com.futurebim.gui.service.GuiLoggedDataService;
@@ -27,25 +26,21 @@ public class IfcViewerController extends UiControllerBase {
   @Autowired
   private PageMenuLoader pageMenuLoader;
 
-
   @Autowired
   ProjectsHandler projectsHandler;
 
   @Autowired
-  private ObjectMapper                           objectMapper;
+  private CoreAccessConfig coreAccessConfig;
 
   @Autowired
   GuiLoggedDataService guiLoggedDataService;
-
-  @Autowired
-  private MappingJackson2XmlHttpMessageConverter xmlConverter;
-
 
   @RequestMapping(path = "/")
   public String index(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
 
     model.addAttribute("msg" , "IFC Viewer Index Page");
+    model.addAttribute("loadIfcUrl" , coreAccessConfig.getIfcReadPath());
 
     if(guiLoggedDataService.isLoggedIn()){
       model.addAttribute("projects" , projectsHandler.listProjects(guiLoggedDataService.getLoggedData().getUser().getCompanyid()));
@@ -53,8 +48,6 @@ public class IfcViewerController extends UiControllerBase {
     else{
       model.addAttribute("projects" , projectsHandler.listProjects(0L));
     }
-
-
 
     return "ifcviewer/index";
   }

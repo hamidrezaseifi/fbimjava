@@ -33,7 +33,7 @@ function stopSurfer(viewerContainer, detailsContainerId){
 	$("#" + detailsContainerId).html("");
 }
 
-function startSurfer(ifcId, viewerContainerId, detailsContainerId){
+function startSurfer(ifcId, viewerContainerId, detailsContainerId, ifcData){
 
 	require([
 	    "../bimsurfer/src/BimSurfer",
@@ -71,7 +71,8 @@ function startSurfer(ifcId, viewerContainerId, detailsContainerId){
 	        domNode: detailsContainerId
 	    });
 	    //data.addModel({id: 1, src: modelName + ".xml"});
-	    data.addModel({id: 1, src: "http://localhost:1010/pifc/read/get/" + ifcId});
+	    //data.addModel({id: 1, src: "http://localhost:1010/pifc/read/get/" + ifcId});
+	    data.addModel({id: 1, modelJson: ifcData});
 	    
 	    bimSurfer.load({
 	        src: modelName + ".gltf"
