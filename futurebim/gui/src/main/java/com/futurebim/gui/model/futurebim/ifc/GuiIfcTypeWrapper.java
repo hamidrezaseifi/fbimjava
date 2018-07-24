@@ -7,6 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.futurebim.common.model.edo.ifc.IfcDoorstyleEdo;
+import com.futurebim.common.model.edo.ifc.IfcFurnituretypeEdo;
+import com.futurebim.common.model.edo.ifc.IfcWindowstyleEdo;
+import com.futurebim.common.model.edo.ifc.ProjectIfcEdo;
 
 /**
  * The persistent class for the ifc_units database table.
@@ -29,6 +33,20 @@ public class GuiIfcTypeWrapper {
   @JacksonXmlProperty(localName = "IfcWindowStyle")
   @JsonProperty(value = "IfcWindowStyle")
   private List<GuiIfcWindowstyle> windowTypes = new ArrayList<>();
+
+  public GuiIfcTypeWrapper(final ProjectIfcEdo edo){
+    for(final IfcDoorstyleEdo edoType : edo.getTypes().getDoorTypes()){
+      addDoorType(new GuiIfcDoorstyle(edoType));
+    }
+    for(final IfcFurnituretypeEdo edoType : edo.getTypes().getFurnitureTypes()){
+      addFurnitureType(new GuiIfcFurnituretype(edoType));
+    }
+    for(final IfcWindowstyleEdo edoType : edo.getTypes().getWindowTypes()){
+      addWindowType(new GuiIfcWindowstyle(edoType));
+    }
+    
+
+  }
 
   public List<GuiIfcFurnituretype> getFurnitureTypes() {
     return furnitureTypes;

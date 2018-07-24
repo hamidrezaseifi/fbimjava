@@ -10,14 +10,14 @@ public class FutureBimUiRestResponse {
 
   public static String NoError = "NoError";
 
-  protected FutureBimUiRestResponse() {
+  public FutureBimUiRestResponse() {
     this.status = HttpStatus.OK;
     this.errorType = NoError;
     this.message = "";
 
   }
 
-  protected FutureBimUiRestResponse(final HttpStatus status, final String errorType, final String message) {
+  public FutureBimUiRestResponse(final HttpStatus status, final String errorType, final String message) {
     this.status = status;
     this.errorType = errorType;
     this.message = message;

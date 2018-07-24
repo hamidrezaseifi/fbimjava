@@ -1,7 +1,11 @@
 package com.futurebim.gui.model.futurebim.ifc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.common.model.edo.ifc.IfcDoorstyleEdo;
 
 /**
  * The persistent class for the ifc_doorstyle database table.
@@ -37,6 +41,23 @@ public class GuiIfcDoorstyle {
   @JsonProperty(value = "Sizeable")
   private String sizeable;
 
+  private final String type = "IfcDoorstyle";
+
+  private final List children = new ArrayList<>();
+
+
+  public GuiIfcDoorstyle(final IfcDoorstyleEdo edo){
+    this.setConstructionType(edo.getConstructionType());
+    this.setId(edo.getId());
+    this.setOperationType(edo.getOperationType());
+    this.setParameterTakesPrecedence(edo.getParameterTakesPrecedence());
+    this.setSizeable(edo.getSizeable());
+    this.setTag(edo.getTag());
+    this.setTypeName(edo.getTypeName());
+    
+  }
+
+  
   public String getId() {
     return id;
   }
@@ -91,6 +112,14 @@ public class GuiIfcDoorstyle {
 
   public void setSizeable(final String sizeable) {
     this.sizeable = sizeable;
+  }
+
+  public String getType() {
+    return type;
+  }
+  
+  public List getChildren() {
+    return children;
   }
 
 }

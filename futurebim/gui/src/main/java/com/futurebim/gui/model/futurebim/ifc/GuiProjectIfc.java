@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.futurebim.common.model.edo.ifc.ProjectIfcEdo;
 
 /**
  * The persistent class for the project_ifc database table.
@@ -43,18 +44,18 @@ public class GuiProjectIfc {
   public GuiProjectIfc() {
 
     createHeader("");
-    this.units = new GuiIfcUnitWrapper();
-    this.types = new GuiIfcTypeWrapper();
-    this.decomposition = new GuiIfcDecompositionWrapper();
+    this.units = new GuiIfcUnitWrapper(null);
+    this.types = new GuiIfcTypeWrapper(null);
+    this.decomposition = new GuiIfcDecompositionWrapper(null);
 
   }
 
-  public GuiProjectIfc(final String name) {
+  public GuiProjectIfc(final ProjectIfcEdo edo) {
 
-    createHeader(name);
-    this.units = new GuiIfcUnitWrapper();
-    this.types = new GuiIfcTypeWrapper();
-    this.decomposition = new GuiIfcDecompositionWrapper();
+    createHeader(edo.getName());
+    this.units = new GuiIfcUnitWrapper(edo);
+    this.types = new GuiIfcTypeWrapper(edo);
+    this.decomposition = new GuiIfcDecompositionWrapper(edo);
 
   }
 
@@ -175,4 +176,61 @@ public class GuiProjectIfc {
     this.decomposition.addProject(project);
   }
 
+  public Map<String, Object> toIfcMap(){
+    final Map<String, Object> root = new HashMap<>();
+    root.put("type", "#document");
+
+    final Map<String, Object> map = new HashMap<>();
+    List<Object> children = new ArrayList<>();
+
+    map.put("type", "ifc");
+    
+    final Map<String, Object> map1 = new HashMap<>();
+    map1.put("type", "header");
+    map1.put("children", this.headerToIfcMap(this.header));
+    
+    children.add(map1);
+
+    children.add(this.units.toIfcMap());
+    /*children.add(this.layers.toIfcMap());
+    children.add(this.properties.toIfcMap());
+    children.add(this.types.toIfcMap());
+    children.add(this.decomposition.toIfcMap());*/
+
+    map.put("children", children);
+
+    children = new ArrayList<>();
+    children.add(map);
+    root.put("children", children);
+    
+    return root;
+  }
+  
+  private List<Object> headerToIfcMap(final Object oRoot){
+
+    final List<Object> list = new ArrayList<>();
+    if(oRoot instanceof  String ){
+
+      list.add(oRoot.toString());
+      return list;
+    }
+
+    if(oRoot instanceof  Map ){
+      final Map<String, Object> root = (Map<String, Object>)oRoot;
+      
+      for(final String key: root.keySet()){
+        final Object o = root.get(key);
+        
+        final Map<String, Object> map = new HashMap<>();
+        map.put("type", key);
+        map.put("children", headerToIfcMap(o));
+
+        list.add(map);
+      }
+
+      return list;
+    }
+
+    return null;
+  }
 }

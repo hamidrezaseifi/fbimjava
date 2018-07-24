@@ -2,6 +2,7 @@ package com.futurebim.gui.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.futurebim.common.model.reponse.ProjectIfcRestResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.futurebim.gui.bl.IfcHandler;
 import com.futurebim.gui.bl.ProjectsHandler;
 import com.futurebim.gui.controller.base.UiControllerBase;
@@ -20,6 +22,7 @@ import com.futurebim.gui.helper.PageMenuLoader;
 import com.futurebim.gui.helper.UiConfiguration.CoreAccessConfig;
 import com.futurebim.gui.model.MenuItem;
 import com.futurebim.gui.model.futurebim.GuiProjectRich;
+import com.futurebim.gui.model.futurebim.ifc.GuiProjectIfc;
 import com.futurebim.gui.service.GuiLoggedDataService;
 
 @Controller
@@ -41,6 +44,9 @@ public class IfcViewerController extends UiControllerBase {
   @Autowired
   GuiLoggedDataService guiLoggedDataService;
   
+  @Autowired
+  ObjectMapper objectMapper;
+  
   @RequestMapping(path = "/")
   public String index(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
@@ -59,9 +65,13 @@ public class IfcViewerController extends UiControllerBase {
   }
   
   @RequestMapping(value = "/getjson/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody ProjectIfcRestResponse getIfcJson(@PathVariable final Long ifcId) {
+  public @ResponseBody Map<String, Object> getIfcJson(@PathVariable final Long ifcId) {
     
-    return ProjectIfcRestResponse.createData(ifcHandler.getById(ifcId));
+    final GuiProjectIfc g = new GuiProjectIfc(ifcHandler.getById(ifcId));
+
+    objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+    
+    return g.toIfcMap();
   }
   
   @RequestMapping(value = "/data/projects/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
