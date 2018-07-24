@@ -61,6 +61,8 @@ define(["./EventHandler", "./Request", "./Utils"], function(EventHandler, Reques
             Request.Make({url: src}).then(function(xml) {
                 var json = Utils.XmlToJson(xml, {'Name': 'name', 'id': 'guid'});
                 
+                $("#dvtest").html(JSON.stringify(json));
+                
                 var psets = Utils.FindNodeOfType(json, "properties")[0];
                 var project = Utils.FindNodeOfType(json, "decomposition")[0].children[0];
                 var types = Utils.FindNodeOfType(json, "types")[0];
@@ -114,6 +116,8 @@ define(["./EventHandler", "./Request", "./Utils"], function(EventHandler, Reques
                 var psets = Utils.FindNodeOfType(json, "properties")[0];
                 var project = Utils.FindNodeOfType(json, "decomposition")[0].children[0];
                 var types = Utils.FindNodeOfType(json, "types")[0];
+                
+                alert("psets" + psets);
                 
                 var objects = {};
                 var typeObjects = {};
@@ -169,20 +173,19 @@ define(["./EventHandler", "./Request", "./Utils"], function(EventHandler, Reques
                 if (args.model) {
                     models[args.id] = args.model;
                     resolve(args.model);
-                } else {
+                } else if(args.src) {
                     loadModelFromSource(args.src).then(function(m) {
                         models[args.id] = m;
                         resolve(m);
                     });
-                } else {
-                	if(args.modelJson){
+                } else if(args.modelJson){
                         loadModelFromJson(args.modelJson).then(function(m) {
                             models[args.id] = m;
                             resolve(m);
                         });
                 		
                 	}
-                }
+                
             });
         };
         

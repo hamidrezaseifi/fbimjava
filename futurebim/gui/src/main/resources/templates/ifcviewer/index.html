@@ -13,8 +13,8 @@
 		<link rel="stylesheet" th:href="@{/css/ifcviewer.css}" />
 		
 		<script type="text/javascript" th:src="@{/bimsurfer/lib/require.js}"></script>
+
 		
-    
 
 		
     </head>
@@ -47,11 +47,12 @@
 			
 		</div>
 		
+		<div id="dvtest" style="border:1px solid black; min-height: 100px"></div>
 		
         <footer th:replace="layout/mainLayout :: footer" ></footer>
         
         <script type="text/javascript">
-			var loadIfcUrl = [[${loadIfcUrl}]] "";
+			var loadIfcUrl = "[[${loadIfcUrl}]]";
         </script>
     </body>
 </html>

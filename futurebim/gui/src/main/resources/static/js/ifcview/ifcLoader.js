@@ -33,7 +33,7 @@ function stopSurfer(viewerContainer, detailsContainerId){
 	$("#" + detailsContainerId).html("");
 }
 
-function startSurfer(ifcId, viewerContainerId, detailsContainerId, ifcData){
+function startSurfer(ifcId, viewerContainerId, detailsContainerId, $scope, $http, loadurl){
 
 	require([
 	    "../bimsurfer/src/BimSurfer",
@@ -67,43 +67,83 @@ function startSurfer(ifcId, viewerContainerId, detailsContainerId, ifcData){
 	    
 	    //tree.on("click", highlight);
 	    
-	    var data = new MetaDataRenderer({
+	    /*var data = new MetaDataRenderer({
 	        domNode: detailsContainerId
 	    });
-	    //data.addModel({id: 1, src: modelName + ".xml"});
-	    //data.addModel({id: 1, src: "http://localhost:1010/pifc/read/get/" + ifcId});
-	    data.addModel({id: 1, modelJson: ifcData});
+	    data.addModel({id: 1, src: modelName + ".xml"});*/
 	    
-	    bimSurfer.load({
-	        src: modelName + ".gltf"
-	    }).then(function (model) {
-	        
-	        var scene = bimSurfer.viewer.scene;
-	        
-	        var aabb = scene.worldBoundary.aabb;
-	        
-	        var diag = xeogl.math.subVec3(aabb.slice(3), aabb, xeogl.math.vec3()); 
-	        var modelExtent = xeogl.math.lenVec3(diag); 
-	    
-	        scene.camera.project.near = modelExtent / 1000.;
-	        scene.camera.project.far = modelExtent * 100.;
-	       
-	        scene.camera.view.eye = [-1,-1,5];
-	        scene.camera.view.up = [0,0,1];
-	        bimSurfer.viewFit({centerModel:true});
-	        
-	        bimSurfer.viewer.scene.canvas.canvas.style.display = 'block';
-	        bimSurfer.viewer.scene.canvas.canvas.style.width = "1660px";
-	        bimSurfer.viewer.scene.canvas.canvas.style.height = "660px";
-	    });
+	    $http({
+			method: "GET",
+			url: loadurl, 
+			timeout: $scope.requestTimeout
+		}).then(function(response){
+			
+			if(response.data.status == "OK"){
+				//alert("data loaded.\n ifc name:  " + response.data.projectIfc.header.file_schema.schema_identifiers);
+				if(response.data.projectIfc){
+					//startSurfer(id, false, "modeldetail", response.data.projectIfc);
+					
+					
+				    var data = new MetaDataRenderer({
+				        domNode: detailsContainerId
+				    });
+				    //data.addModel({id: 1, src: modelName + ".xml"});
+				    //data.addModel({id: 1, src: "http://localhost:1010/pifc/read/get/" + ifcId});
+				    data.addModel({id: 1, modelJson: response.data.projectIfc});
+				    
+				    bimSurfer.load({
+				        src: modelName + ".gltf"
+				    }).then(function (model) {
+				        
+				        var scene = bimSurfer.viewer.scene;
+				        
+				        var aabb = scene.worldBoundary.aabb;
+				        
+				        var diag = xeogl.math.subVec3(aabb.slice(3), aabb, xeogl.math.vec3()); 
+				        var modelExtent = xeogl.math.lenVec3(diag); 
+				    
+				        scene.camera.project.near = modelExtent / 1000.;
+				        scene.camera.project.far = modelExtent * 100.;
+				       
+				        scene.camera.view.eye = [-1,-1,5];
+				        scene.camera.view.up = [0,0,1];
+				        bimSurfer.viewFit({centerModel:true});
+				        
+				        bimSurfer.viewer.scene.canvas.canvas.style.display = 'block';
+				        bimSurfer.viewer.scene.canvas.canvas.style.width = "1660px";
+				        bimSurfer.viewer.scene.canvas.canvas.style.height = "660px";
+				    });
 
-	    bimSurfer.on("selection-changed", function(selected) {  //alert(selected);
-	        data.setSelected(selected.map(function(id) { //alert(Utils.CompressGuid(id.split("#")[1].substr(8, 36).replace(/-/g, "")));
-	            return Utils.CompressGuid(id.split("#")[1].substr(8, 36).replace(/-/g, ""));
-	        }));
-	    });
+				    bimSurfer.on("selection-changed", function(selected) {  //alert(selected);
+				        data.setSelected(selected.map(function(id) { //alert(Utils.CompressGuid(id.split("#")[1].substr(8, 36).replace(/-/g, "")));
+				            return Utils.CompressGuid(id.split("#")[1].substr(8, 36).replace(/-/g, ""));
+				        }));
+				    });
+				    
+				    // Lets us play with the Surfer in the console
+				    window.bimSurfer = bimSurfer;
+				    
+				}
+			}
+			else{
+				alert(response.data.message);
+			}
+			
+
+		}, function errorCallback(response){
+      
+			if(response.status == -1){
+				
+				alert("Connection Error!");
+			}
+			else{
+				alert(response.data.message);
+			}
+			
+			
+			
+		});	
 	    
-	    // Lets us play with the Surfer in the console
-	    window.bimSurfer = bimSurfer;
+
 	});	
 }

@@ -81,7 +81,7 @@ mdmApp.controller('IfcViewerController', function ($scope, $http, $sce, $element
 		    	        if(node.type == "ifc"){
 		    	        	//ifc_id = node.id;
 		    	        	//require(["/js/ifcview/ifcLoader.js"]);
-		    	        	
+		    	        	loadIfcData(node.id);
 		    	        }
 		    	        if(node.type == "project"){
 		    	        	stopSurfer(false, "modeldetail");
@@ -121,36 +121,10 @@ mdmApp.controller('IfcViewerController', function ($scope, $http, $sce, $element
 	
 	function loadIfcData(id){
 		
-		$http({
-			method: "GET",
-			url: loadIfcUrl + id, 
-			timeout: $scope.requestTimeout
-		}).then(function(response){
-			
-			if(response.data.status == "OK"){
-				alert("data loaded.\n ifc name:  " + response.data.projectIfc.header.file_schema.schema_identifiers);
-				if(false){
-					startSurfer(node.id, false, "modeldetail", response.data.projectIfc);
-				}
-			}
-			else{
-				alert(response.data.message);
-			}
-			
-
-		}, function errorCallback(response){
-      
-			if(response.status == -1){
-				
-				alert("Connection Error!");
-			}
-			else{
-				alert(response.data.message);
-			}
-			
-			dialogScope.lockEdit = false;
-			
-		});	
+		var loadurl = "getjson/" + id;
+		startSurfer(id, false, "modeldetail", $scope, $http, loadurl);
+		
+		
 		
 	}
 
