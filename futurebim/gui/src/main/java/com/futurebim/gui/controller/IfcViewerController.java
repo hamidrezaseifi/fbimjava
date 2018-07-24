@@ -2,7 +2,6 @@ package com.futurebim.gui.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,6 +22,7 @@ import com.futurebim.gui.helper.UiConfiguration.CoreAccessConfig;
 import com.futurebim.gui.model.MenuItem;
 import com.futurebim.gui.model.futurebim.GuiProjectRich;
 import com.futurebim.gui.model.futurebim.ifc.GuiProjectIfc;
+import com.futurebim.gui.restresponse.GuiProjectIfcRestResponse;
 import com.futurebim.gui.service.GuiLoggedDataService;
 
 @Controller
@@ -65,13 +65,12 @@ public class IfcViewerController extends UiControllerBase {
   }
   
   @RequestMapping(value = "/getjson/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody Map<String, Object> getIfcJson(@PathVariable final Long ifcId) {
+  public @ResponseBody GuiProjectIfcRestResponse getIfcJson(@PathVariable final Long ifcId) {
     
-    final GuiProjectIfc g = new GuiProjectIfc(ifcHandler.getById(ifcId));
-
+    final GuiProjectIfcRestResponse response = GuiProjectIfcRestResponse.createData(new GuiProjectIfc(ifcHandler.getById(ifcId)));
     objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
     
-    return g.toIfcMap();
+    return response;
   }
   
   @RequestMapping(value = "/data/projects/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

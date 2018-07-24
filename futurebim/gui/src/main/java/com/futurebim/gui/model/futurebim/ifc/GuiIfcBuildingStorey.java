@@ -3,6 +3,7 @@ package com.futurebim.gui.model.futurebim.ifc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -44,62 +45,62 @@ public class GuiIfcBuildingStorey {
 
   @JacksonXmlProperty(localName = "IfcWallStandardCase")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcWallStandardCase")
+  @JsonIgnore
   private List<GuiIfcWallStandardCase> wallStandardCaseList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcWall")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcWall")
+  @JsonIgnore
   private List<GuiIfcWall> wallList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcFooting")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcFooting")
+  @JsonIgnore
   private List<GuiIfcFooting> footingList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcRoof")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcRoof")
+  @JsonIgnore
   private List<GuiIfcRoof> roofList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcSlab")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcSlab")
+  @JsonIgnore
   private List<GuiIfcSlab> slabList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcWindow")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcWindow")
+  @JsonIgnore
   private List<GuiIfcWindow> windowList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcDoor")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcDoor")
+  @JsonIgnore
   private List<GuiIfcDoor> doorList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcStair")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcStair")
+  @JsonIgnore
   private List<GuiIfcStair> stairList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcCovering")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcCovering")
+  @JsonIgnore
   private List<GuiIfcCovering> coveringList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcBeam")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcBeam")
+  @JsonIgnore
   private List<GuiIfcBeam> beamList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcSpace")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcSpace")
+  @JsonIgnore
   private List<GuiIfcSpace> spaceList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcPropertySet")
+  @JsonIgnore
   private List<GuiIfcPropertySet> propertySetList = new ArrayList<>();
 
   private final String type = "IfcBuildingStorey";
@@ -111,48 +112,46 @@ public class GuiIfcBuildingStorey {
     setElevation(edo.getElevation());
     setStoreyName(edo.getStoreyName());
 
-    
-
     for(final IfcWallStandardCaseEdo item: edo.getWallStandardCaseList()){
       addWallStandardCase(new GuiIfcWallStandardCase(item));
     }
-    
+
     for(final IfcWallEdo item: edo.getWallList()){
       addWall(new GuiIfcWall(item));
     }
-    
+
     for(final IfcFootingEdo item: edo.getFootingList()){
       addFooting(new GuiIfcFooting(item));
     }
-    
+
     for(final IfcSpaceEdo item: edo.getSpaceList()){
       addSpace(new GuiIfcSpace(item));
     }
-    
+
     for(final IfcBeamEdo item: edo.getBeamList()){
       addBeam(new GuiIfcBeam(item));
     }
-    
+
     for(final IfcCoveringEdo item: edo.getCoveringList()){
       addCovering(new GuiIfcCovering(item));
     }
-    
+
     for(final IfcStairEdo item: edo.getStairList()){
       addStair(new GuiIfcStair(item));
     }
-    
+
     for(final IfcDoorEdo item: edo.getDoorList()){
       addDoor(new GuiIfcDoor(item));
     }
-    
+
     for(final IfcWindowEdo item: edo.getWindowList()){
       addWindow(new GuiIfcWindow(item));
     }
-    
+
     for(final IfcSlabEdo item: edo.getSlabList()){
       addSlab(new GuiIfcSlab(item));
     }
-    
+
     for(final IfcRoofEdo item: edo.getRoofList()){
       addRoof(new GuiIfcRoof(item));
     }
@@ -354,53 +353,18 @@ public class GuiIfcBuildingStorey {
     
     final List<Object> children = new ArrayList<>();
 
-    for(final GuiIfcWallStandardCase item: wallStandardCaseList){
-      children.add(item);
-    }
-    
-    for(final GuiIfcWall item: wallList){
-      children.add(item);
-    }
-    
-    for(final GuiIfcFooting item: footingList){
-      children.add(item);
-    }
-    
-    for(final GuiIfcSpace item: spaceList){
-      children.add(item);
-    }
-    
-    for(final GuiIfcBeam item: beamList){
-      children.add(item);
-    }
-    
-    for(final GuiIfcCovering item: coveringList){
-      children.add(item);
-    }
-    
-    for(final GuiIfcStair item: stairList){
-      children.add(item);
-    }
-    
-    for(final GuiIfcDoor item: doorList){
-      children.add(item);
-    }
-    
-    for(final GuiIfcWindow item: windowList){
-      children.add(item);
-    }
-    
-    for(final GuiIfcSlab item: slabList){
-      children.add(item);
-    }
-    
-    for(final GuiIfcRoof item: roofList){
-      children.add(item);
-    }
-
-    for(final GuiIfcPropertySet item: propertySetList){
-      children.add(item);
-    }
+    children.addAll(wallStandardCaseList);
+    children.addAll(wallList);
+    children.addAll(footingList);
+    children.addAll(spaceList);
+    children.addAll(beamList);
+    children.addAll(coveringList);
+    children.addAll(stairList);
+    children.addAll(doorList);
+    children.addAll(windowList);
+    children.addAll(slabList);
+    children.addAll(roofList);
+    children.addAll(propertySetList);
     
     return children;
   }

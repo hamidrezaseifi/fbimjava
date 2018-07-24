@@ -1,11 +1,9 @@
 package com.futurebim.gui.model.futurebim.ifc;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -23,19 +21,21 @@ public class GuiIfcTypeWrapper {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcFurnitureType")
-  @JsonProperty(value = "IfcFurnitureType")
+  @JsonIgnore
   private List<GuiIfcFurnituretype> furnitureTypes = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcDoorStyle")
-  @JsonProperty(value = "IfcDoorStyle")
+  @JsonIgnore
   private List<GuiIfcDoorstyle> doorTypes = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcWindowStyle")
-  @JsonProperty(value = "IfcWindowStyle")
+  @JsonIgnore
   private List<GuiIfcWindowstyle> windowTypes = new ArrayList<>();
-
+  
+  private final String type = "types";
+  
   public GuiIfcTypeWrapper(final ProjectIfcEdo edo){
     for(final IfcDoorstyleEdo edoType : edo.getTypes().getDoorTypes()){
       addDoorType(new GuiIfcDoorstyle(edoType));
@@ -86,22 +86,19 @@ public class GuiIfcTypeWrapper {
     this.windowTypes.add(windowType);
   }
 
-  public Map<String, Object> toIfcMap(){
-    final Map<String, Object> root = new HashMap<>();
-    root.put("type", "types");
-    
-    final List<Object> children = new ArrayList<>();
-    for(final GuiIfcFurnituretype item: furnitureTypes){
-      children.add(item);
-    }
-    for(final GuiIfcDoorstyle item: doorTypes){
-      children.add(item);
-    }
-    for(final GuiIfcWindowstyle item: windowTypes){
-      children.add(item);
-    }
-    root.put("children", children);
-
-    return root;
+  public String getType() {
+    return type;
   }
+
+  public List<Object> getChildren() {
+
+    final List<Object> children = new ArrayList<>();
+
+    children.addAll(furnitureTypes);
+    children.addAll(doorTypes);
+    children.addAll(windowTypes);
+
+    return children;
+  }
+
 }

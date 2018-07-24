@@ -1,11 +1,9 @@
 package com.futurebim.gui.model.futurebim.ifc;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -19,16 +17,18 @@ import com.futurebim.common.model.edo.ifc.ProjectIfcEdo;
  */
 @JacksonXmlRootElement(localName = "units")
 public class GuiIfcUnitWrapper {
-  
+
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcSIUnit")
-  @JsonProperty(value = "IfcSIUnit")
+  @JsonIgnore
   private List<GuiIfcUnit> units = new ArrayList<>();
-  
+
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcConversionBasedUnit")
-  @JsonProperty(value = "IfcConversionBasedUnit")
+  @JsonIgnore
   private List<GuiIfcConversionBasedUnit> conversionUnits = new ArrayList<>();
+
+  private final String type = "units";
   
   public GuiIfcUnitWrapper(final ProjectIfcEdo edo){
     if(edo != null){
@@ -40,44 +40,43 @@ public class GuiIfcUnitWrapper {
       }
     }
   }
-
+  
   public void setUnits(final List<GuiIfcUnit> units) {
     this.units = units;
   }
-  
+
   public void addUnit(final GuiIfcUnit unit) {
     this.units.add(unit);
   }
-  
+
   public List<GuiIfcConversionBasedUnit> getConversionUnits() {
     return conversionUnits;
   }
-  
+
   public void setConversionUnits(final List<GuiIfcConversionBasedUnit> conversionUnits) {
     this.conversionUnits = conversionUnits;
   }
-  
+
   public void addConversionUnit(final GuiIfcConversionBasedUnit conversion) {
     this.conversionUnits.add(conversion);
   }
-  
+
   public List<GuiIfcUnit> getUnits() {
     return units;
   }
-  
-  public Map<String, Object> toIfcMap(){
-    final Map<String, Object> root = new HashMap<>();
-    root.put("type", "units");
-    
-    final List<Object> children = new ArrayList<>();
-    for(final GuiIfcUnit unit: units){
-      children.add(unit);
-    }
-    for(final GuiIfcConversionBasedUnit unit: conversionUnits){
-      children.add(unit);
-    }
-    root.put("children", children);
 
-    return root;
+  public String getType() {
+    return type;
   }
+
+  public List<Object> getChildren() {
+
+    final List<Object> children = new ArrayList<>();
+
+    children.addAll(units);
+    children.addAll(conversionUnits);
+
+    return children;
+  }
+
 }

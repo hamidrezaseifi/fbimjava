@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -23,26 +22,32 @@ import com.futurebim.common.model.edo.ifc.ProjectIfcEdo;
 public class GuiProjectIfc {
   
   @JacksonXmlProperty(localName = "header")
+  @JsonIgnore
   private Map<String, Object> header;
   
   @JacksonXmlProperty(localName = "units")
+  @JsonIgnore
   private GuiIfcUnitWrapper units;
   
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(localName = "properties")
-  @JsonProperty(value = "properties")
+  @JsonIgnore
   private List<GuiIfcProperty> properties = new ArrayList<>();
   
   @JacksonXmlProperty(localName = "types")
+  @JsonIgnore
   private GuiIfcTypeWrapper types;
   
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
-  @JsonProperty(value = "layers")
+  @JsonIgnore
   private List<GuiIfcPresentationlayer> layers = new ArrayList<>();
   
   @JacksonXmlElementWrapper(localName = "decomposition")
+  @JsonIgnore
   private GuiIfcDecompositionWrapper decomposition;
   
+  private final String type = "#document";
+
   public GuiProjectIfc() {
     
     createHeader("");
@@ -185,37 +190,6 @@ public class GuiProjectIfc {
   public void addProject(final GuiIfcProject project) {
     this.decomposition.addChild(project);
   }
-  
-  public Map<String, Object> toIfcMap(){
-    final Map<String, Object> root = new HashMap<>();
-    root.put("type", "#document");
-    
-    final Map<String, Object> map = new HashMap<>();
-    List<Object> children = new ArrayList<>();
-    
-    map.put("type", "ifc");
-
-    final Map<String, Object> map1 = new HashMap<>();
-    map1.put("type", "header");
-    map1.put("children", this.headerToIfcMap(this.header));
-
-    children.add(map1);
-    
-    children.add(this.units.toIfcMap());
-    children.add(this.types.toIfcMap());
-    children.add(listToMap(this.layers, "layers"));
-    children.add(listToMap(this.properties, "properties"));
-    
-    children.add(this.decomposition);
-    
-    map.put("children", children);
-    
-    children = new ArrayList<>();
-    children.add(map);
-    root.put("children", children);
-
-    return root;
-  }
 
   private Map<String, Object> listToMap(final Object children, final String type){
     final Map<String, Object> root = new HashMap<>();
@@ -252,4 +226,39 @@ public class GuiProjectIfc {
     
     return null;
   }
+  
+  public String getType() {
+    return type;
+  }
+  
+  public List<Object> getChildren() {
+    
+    final Map<String, Object> map = new HashMap<>();
+    
+    List<Object> children = new ArrayList<>();
+    
+    map.put("type", "ifc");
+
+    final Map<String, Object> map1 = new HashMap<>();
+    map1.put("type", "header");
+    map1.put("children", this.headerToIfcMap(this.header));
+
+    children.add(map1);
+    
+    children.add(this.units);
+    children.add(this.types);
+    children.add(listToMap(this.layers, "layers"));
+    children.add(listToMap(this.properties, "properties"));
+    
+    children.add(this.decomposition);
+    
+    map.put("children", children);
+    
+    children = new ArrayList<>();
+    children.add(map);
+
+    
+    return children;
+  }
+
 }
