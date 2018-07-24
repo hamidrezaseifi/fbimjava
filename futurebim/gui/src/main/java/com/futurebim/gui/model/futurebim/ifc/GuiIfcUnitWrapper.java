@@ -3,6 +3,7 @@ package com.futurebim.gui.model.futurebim.ifc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -16,10 +17,12 @@ public class GuiIfcUnitWrapper {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcSIUnit")
+  @JsonProperty(value = "IfcSIUnit")
   private List<GuiIfcUnit> units = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcConversionBasedUnit")
+  @JsonProperty(value = "IfcConversionBasedUnit")
   private List<GuiIfcConversionBasedUnit> conversionUnits = new ArrayList<>();
 
   public void setUnits(final List<GuiIfcUnit> units) {

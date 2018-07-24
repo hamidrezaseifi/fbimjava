@@ -3,6 +3,7 @@ package com.futurebim.gui.model.futurebim.ifc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -16,14 +17,17 @@ public class GuiIfcTypeWrapper {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcFurnitureType")
+  @JsonProperty(value = "IfcFurnitureType")
   private List<GuiIfcFurnituretype> furnitureTypes = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcDoorStyle")
+  @JsonProperty(value = "IfcDoorStyle")
   private List<GuiIfcDoorstyle> doorTypes = new ArrayList<>();
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcWindowStyle")
+  @JsonProperty(value = "IfcWindowStyle")
   private List<GuiIfcWindowstyle> windowTypes = new ArrayList<>();
 
   public List<GuiIfcFurnituretype> getFurnitureTypes() {

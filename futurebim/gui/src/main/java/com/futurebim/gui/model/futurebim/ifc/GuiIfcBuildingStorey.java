@@ -3,72 +3,90 @@ package com.futurebim.gui.model.futurebim.ifc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class GuiIfcBuildingStorey {
 
   @JacksonXmlProperty(localName = "id", isAttribute = true)
+  @JsonProperty(value = "guid")
   private String id;
 
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
+  @JsonProperty(value = "name")
   private String storeyName;
 
   @JacksonXmlProperty(localName = "ObjectPlacement", isAttribute = true)
+  @JsonProperty(value = "ObjectPlacement")
   private String objectPlacement;
 
   @JacksonXmlProperty(localName = "CompositionType", isAttribute = true)
+  @JsonProperty(value = "CompositionType")
   private String compositionType;
 
   @JacksonXmlProperty(localName = "Elevation", isAttribute = true)
+  @JsonProperty(value = "Elevation")
   private String elevation;
 
   @JacksonXmlProperty(localName = "IfcWallStandardCase")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcWallStandardCase")
   private List<GuiIfcWallStandardCase> wallStandardCaseList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcWall")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcWall")
   private List<GuiIfcWall> wallList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcFooting")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcFooting")
   private List<GuiIfcFooting> footingList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcRoof")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcRoof")
   private List<GuiIfcRoof> roofList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcSlab")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcSlab")
   private List<GuiIfcSlab> slabList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcWindow")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcWindow")
   private List<GuiIfcWindow> windowList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcDoor")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcDoor")
   private List<GuiIfcDoor> doorList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcStair")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcStair")
   private List<GuiIfcStair> stairList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcCovering")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcCovering")
   private List<GuiIfcCovering> coveringList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcBeam")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcBeam")
   private List<GuiIfcBeam> beamList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcSpace")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcSpace")
   private List<GuiIfcSpace> spaceList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcPropertySet")
   private List<GuiIfcPropertySet> propertySetList = new ArrayList<>();
 
   public String getId() {

@@ -3,42 +3,53 @@ package com.futurebim.gui.model.futurebim.ifc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class GuiIfcSpace {
 
   @JacksonXmlProperty(localName = "id", isAttribute = true)
+  @JsonProperty(value = "guid")
   private String id;
 
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
+  @JsonProperty(value = "name")
   private String name;
 
   @JacksonXmlProperty(localName = "Description", isAttribute = true)
+  @JsonProperty(value = "Description")
   private String description;
 
   @JacksonXmlProperty(localName = "ObjectPlacement", isAttribute = true)
+  @JsonProperty(value = "ObjectPlacement")
   private String objectPlacement;
 
   @JacksonXmlProperty(localName = "LongName", isAttribute = true)
+  @JsonProperty(value = "LongName")
   private String longName;
 
   @JacksonXmlProperty(localName = "CompositionType", isAttribute = true)
+  @JsonProperty(value = "CompositionType")
   private String compositionType;
 
   @JacksonXmlProperty(localName = "InteriorOrExteriorSpace", isAttribute = true)
+  @JsonProperty(value = "InteriorOrExteriorSpace")
   private String interiorOrExteriorSpace;
 
   @JacksonXmlProperty(localName = "IfcFurnishingElement")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcFurnishingElement")
   private List<GuiIfcFurnishingElement> furnishingElementList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcPropertySet")
   private List<GuiIfcPropertySet> propertySetList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcPresentationLayerAssignment")
   private List<GuiIfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
 
   public String getId() {

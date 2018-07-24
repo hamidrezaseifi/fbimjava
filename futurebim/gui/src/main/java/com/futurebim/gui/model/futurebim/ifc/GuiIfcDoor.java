@@ -3,42 +3,53 @@ package com.futurebim.gui.model.futurebim.ifc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class GuiIfcDoor {
 
   @JacksonXmlProperty(localName = "id", isAttribute = true)
+  @JsonProperty(value = "guid")
   private String id;
 
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
+  @JsonProperty(value = "name")
   private String name;
 
   @JacksonXmlProperty(localName = "ObjectType", isAttribute = true)
+  @JsonProperty(value = "ObjectType")
   private String objectType;
 
   @JacksonXmlProperty(localName = "ObjectPlacement", isAttribute = true)
+  @JsonProperty(value = "ObjectPlacement")
   private String objectPlacement;
 
   @JacksonXmlProperty(localName = "Tag", isAttribute = true)
+  @JsonProperty(value = "Tag")
   private String tag;
 
   @JacksonXmlProperty(localName = "OverallHeight", isAttribute = true)
+  @JsonProperty(value = "OverallHeight")
   private String overallHeight;
 
   @JacksonXmlProperty(localName = "OverallWidth", isAttribute = true)
+  @JsonProperty(value = "OverallWidth")
   private String overallWidth;
 
   @JacksonXmlProperty(localName = "IfcDoorStyle")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcDoorStyle")
   private List<GuiIfcDoorStyleSet> doorStyleList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcPropertySet")
   private List<GuiIfcPropertySet> propertySetList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
+  @JsonProperty(value = "IfcPresentationLayerAssignment")
   private List<GuiIfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
 
   public String getId() {

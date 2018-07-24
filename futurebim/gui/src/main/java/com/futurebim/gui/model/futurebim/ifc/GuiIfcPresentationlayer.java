@@ -1,5 +1,6 @@
 package com.futurebim.gui.model.futurebim.ifc;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -11,9 +12,11 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 public class GuiIfcPresentationlayer {
 
   @JacksonXmlProperty(localName = "id", isAttribute = true)
+  @JsonProperty(value = "guid")
   private String id;
 
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
+  @JsonProperty(value = "name")
   private String layerName;
 
   public String getId() {

@@ -1,5 +1,6 @@
 package com.futurebim.gui.model.futurebim.ifc;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
@@ -9,24 +10,31 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 public class GuiIfcDoorstyle {
 
   @JacksonXmlProperty(localName = "id", isAttribute = true)
+  @JsonProperty(value = "guid")
   private String id;
 
   @JacksonXmlProperty(localName = "Name", isAttribute = true)
+  @JsonProperty(value = "name")
   private String typeName;
 
   @JacksonXmlProperty(localName = "Tag", isAttribute = true)
+  @JsonProperty(value = "Tag")
   private String tag;
 
   @JacksonXmlProperty(localName = "ConstructionType", isAttribute = true)
+  @JsonProperty(value = "ConstructionType")
   private String constructionType;
 
   @JacksonXmlProperty(localName = "OperationType", isAttribute = true)
+  @JsonProperty(value = "OperationType")
   private String operationType;
 
   @JacksonXmlProperty(localName = "ParameterTakesPrecedence", isAttribute = true)
+  @JsonProperty(value = "ParameterTakesPrecedence")
   private String parameterTakesPrecedence;
 
   @JacksonXmlProperty(localName = "Sizeable", isAttribute = true)
+  @JsonProperty(value = "Sizeable")
   private String sizeable;
 
   public String getId() {
