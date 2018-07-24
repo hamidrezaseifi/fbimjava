@@ -6,6 +6,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.common.model.edo.ifc.IfcBuildingEdo;
+import com.futurebim.common.model.edo.ifc.IfcProjectSiteEdo;
 
 /**
  * The persistent class for the ifc_project_site database table.
@@ -51,6 +53,23 @@ public class GuiIfcProjectSite {
   @JsonProperty(value = "IfcBuilding")
   private List<GuiIfcBuilding> buildingList = new ArrayList<>();
 
+  private final String type = "IfcSite";
+
+  public GuiIfcProjectSite(final IfcProjectSiteEdo edo){
+    setId(edo.getId());
+    setCompositionType(edo.getCompositionType());
+    setObjectPlacement(edo.getObjectPlacement());
+    setObjectType(edo.getObjectType());
+    setRefElevation(edo.getRefElevation());
+    setRefLatitude(edo.getRefLatitude());
+    setRefLongitude(edo.getRefLongitude());
+    setSiteName(edo.getSiteName());
+
+    for(final IfcBuildingEdo item: edo.getBuildingList()){
+      //addChild(new GuiIfcProjectSite(item));
+    }
+  }
+  
   public String getId() {
     return id;
   }
@@ -126,5 +145,8 @@ public class GuiIfcProjectSite {
   public void addBuilding(final GuiIfcBuilding building) {
     this.buildingList.add(building);
   }
-
+  
+  public String getType() {
+    return type;
+  }
 }

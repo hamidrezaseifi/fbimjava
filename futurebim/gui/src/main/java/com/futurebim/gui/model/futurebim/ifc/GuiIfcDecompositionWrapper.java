@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.common.model.edo.ifc.IfcProjectEdo;
 import com.futurebim.common.model.edo.ifc.ProjectIfcEdo;
 
 public class GuiIfcDecompositionWrapper {
@@ -13,22 +14,30 @@ public class GuiIfcDecompositionWrapper {
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcProject")
   @JsonProperty(value = "IfcProject")
-  private List<GuiIfcProject> projects = new ArrayList<>();
+  private List<GuiIfcProject> children = new ArrayList<>();
   
+  private final String type = "decomposition";
+
   public GuiIfcDecompositionWrapper(final ProjectIfcEdo edo){
-    
+    for(final IfcProjectEdo item: edo.getDecomposition().getProjects()){
+      addChild(new GuiIfcProject(item));
+    }
   }
 
-  public List<GuiIfcProject> getProjects() {
-    return projects;
+  public List<GuiIfcProject> getChildren() {
+    return children;
   }
   
-  public void setProjects(final List<GuiIfcProject> projects) {
-    this.projects = projects;
+  public void setChildren(final List<GuiIfcProject> projects) {
+    this.children = projects;
   }
   
-  public void addProject(final GuiIfcProject project) {
-    this.projects.add(project);
+  public void addChild(final GuiIfcProject project) {
+    this.children.add(project);
+  }
+  
+  public String getType() {
+    return type;
   }
   
 }

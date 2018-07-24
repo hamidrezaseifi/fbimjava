@@ -1,7 +1,9 @@
 package com.futurebim.gui.model.futurebim.ifc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
@@ -84,4 +86,22 @@ public class GuiIfcTypeWrapper {
     this.windowTypes.add(windowType);
   }
 
+  public Map<String, Object> toIfcMap(){
+    final Map<String, Object> root = new HashMap<>();
+    root.put("type", "types");
+    
+    final List<Object> children = new ArrayList<>();
+    for(final GuiIfcFurnituretype item: furnitureTypes){
+      children.add(item);
+    }
+    for(final GuiIfcDoorstyle item: doorTypes){
+      children.add(item);
+    }
+    for(final GuiIfcWindowstyle item: windowTypes){
+      children.add(item);
+    }
+    root.put("children", children);
+
+    return root;
+  }
 }
