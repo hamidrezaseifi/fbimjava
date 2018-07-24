@@ -33,7 +33,7 @@ public class GuiIfcProject {
 
   @JacksonXmlElementWrapper(useWrapping = false)
   @JacksonXmlProperty(localName = "IfcSite")
-  @JsonProperty(value = "IfcSite")
+  @JsonProperty(value = "children")
   private List<GuiIfcProjectSite> children = new ArrayList<>();
   
   private final String type = "IfcProject";

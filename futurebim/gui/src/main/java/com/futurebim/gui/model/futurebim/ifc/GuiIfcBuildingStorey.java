@@ -6,6 +6,19 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.common.model.edo.ifc.IfcBeamEdo;
+import com.futurebim.common.model.edo.ifc.IfcBuildingStoreyEdo;
+import com.futurebim.common.model.edo.ifc.IfcCoveringEdo;
+import com.futurebim.common.model.edo.ifc.IfcDoorEdo;
+import com.futurebim.common.model.edo.ifc.IfcFootingEdo;
+import com.futurebim.common.model.edo.ifc.IfcPropertySetEdo;
+import com.futurebim.common.model.edo.ifc.IfcRoofEdo;
+import com.futurebim.common.model.edo.ifc.IfcSlabEdo;
+import com.futurebim.common.model.edo.ifc.IfcSpaceEdo;
+import com.futurebim.common.model.edo.ifc.IfcStairEdo;
+import com.futurebim.common.model.edo.ifc.IfcWallEdo;
+import com.futurebim.common.model.edo.ifc.IfcWallStandardCaseEdo;
+import com.futurebim.common.model.edo.ifc.IfcWindowEdo;
 
 public class GuiIfcBuildingStorey {
 
@@ -88,6 +101,66 @@ public class GuiIfcBuildingStorey {
   @JacksonXmlElementWrapper(useWrapping = false)
   @JsonProperty(value = "IfcPropertySet")
   private List<GuiIfcPropertySet> propertySetList = new ArrayList<>();
+
+  private final String type = "IfcBuildingStorey";
+
+  public GuiIfcBuildingStorey(final IfcBuildingStoreyEdo edo){
+    setId(edo.getId());
+    setCompositionType(edo.getCompositionType());
+    setObjectPlacement(edo.getObjectPlacement());
+    setElevation(edo.getElevation());
+    setStoreyName(edo.getStoreyName());
+
+    
+
+    for(final IfcWallStandardCaseEdo item: edo.getWallStandardCaseList()){
+      addWallStandardCase(new GuiIfcWallStandardCase(item));
+    }
+    
+    for(final IfcWallEdo item: edo.getWallList()){
+      addWall(new GuiIfcWall(item));
+    }
+    
+    for(final IfcFootingEdo item: edo.getFootingList()){
+      addFooting(new GuiIfcFooting(item));
+    }
+    
+    for(final IfcSpaceEdo item: edo.getSpaceList()){
+      addSpace(new GuiIfcSpace(item));
+    }
+    
+    for(final IfcBeamEdo item: edo.getBeamList()){
+      addBeam(new GuiIfcBeam(item));
+    }
+    
+    for(final IfcCoveringEdo item: edo.getCoveringList()){
+      addCovering(new GuiIfcCovering(item));
+    }
+    
+    for(final IfcStairEdo item: edo.getStairList()){
+      addStair(new GuiIfcStair(item));
+    }
+    
+    for(final IfcDoorEdo item: edo.getDoorList()){
+      addDoor(new GuiIfcDoor(item));
+    }
+    
+    for(final IfcWindowEdo item: edo.getWindowList()){
+      addWindow(new GuiIfcWindow(item));
+    }
+    
+    for(final IfcSlabEdo item: edo.getSlabList()){
+      addSlab(new GuiIfcSlab(item));
+    }
+    
+    for(final IfcRoofEdo item: edo.getRoofList()){
+      addRoof(new GuiIfcRoof(item));
+    }
+
+    for(final IfcPropertySetEdo item: edo.getPropertySetList()){
+      this.addPropertySet(new GuiIfcPropertySet(item));
+    }
+  }
 
   public String getId() {
     return id;
@@ -271,6 +344,65 @@ public class GuiIfcBuildingStorey {
 
   public void addPropertySet(final GuiIfcPropertySet propertySet) {
     this.propertySetList.add(propertySet);
+  }
+  
+  public String getType() {
+    return type;
+  }
+  
+  public List<Object> getChildren() {
+    
+    final List<Object> children = new ArrayList<>();
+
+    for(final GuiIfcWallStandardCase item: wallStandardCaseList){
+      children.add(item);
+    }
+    
+    for(final GuiIfcWall item: wallList){
+      children.add(item);
+    }
+    
+    for(final GuiIfcFooting item: footingList){
+      children.add(item);
+    }
+    
+    for(final GuiIfcSpace item: spaceList){
+      children.add(item);
+    }
+    
+    for(final GuiIfcBeam item: beamList){
+      children.add(item);
+    }
+    
+    for(final GuiIfcCovering item: coveringList){
+      children.add(item);
+    }
+    
+    for(final GuiIfcStair item: stairList){
+      children.add(item);
+    }
+    
+    for(final GuiIfcDoor item: doorList){
+      children.add(item);
+    }
+    
+    for(final GuiIfcWindow item: windowList){
+      children.add(item);
+    }
+    
+    for(final GuiIfcSlab item: slabList){
+      children.add(item);
+    }
+    
+    for(final GuiIfcRoof item: roofList){
+      children.add(item);
+    }
+
+    for(final GuiIfcPropertySet item: propertySetList){
+      children.add(item);
+    }
+    
+    return children;
   }
 
 }
