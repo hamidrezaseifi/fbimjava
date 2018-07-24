@@ -3,9 +3,13 @@ package com.futurebim.gui.model.futurebim.ifc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.common.model.edo.ifc.IfcOpeningElementEdo;
+import com.futurebim.common.model.edo.ifc.IfcPresentationLayerAssignmentSetEdo;
+import com.futurebim.common.model.edo.ifc.IfcPropertySetEdo;
 
 public class GuiIfcOpeningElement {
 
@@ -31,14 +35,35 @@ public class GuiIfcOpeningElement {
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcPropertySet")
+  @JsonIgnore
   private List<GuiIfcPropertySet> propertySetList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcPresentationLayerAssignment")
+  @JsonIgnore
   private List<GuiIfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
 
+  private final String type = "IfcOpeningElement";
+
+  public GuiIfcOpeningElement(final IfcOpeningElementEdo edo){
+    setId(edo.getId());
+    setName(edo.getName());
+    setObjectPlacement(edo.getObjectPlacement());
+    setObjectType(edo.getObjectType());
+    setTag(edo.getTag());
+    
+    
+    for(final IfcPropertySetEdo item: edo.getPropertySetList()){
+      this.addPropertySet(new GuiIfcPropertySet(item));
+    }
+    
+    for(final IfcPresentationLayerAssignmentSetEdo item: edo.getPresentationLayerAssignmentList()){
+      this.addPresentationLayerAssignment(new GuiIfcPresentationLayerAssignmentSet(item));
+    }
+    
+  }
+
+  
   public String getId() {
     return id;
   }
@@ -101,6 +126,21 @@ public class GuiIfcOpeningElement {
 
   public void addPresentationLayerAssignment(final GuiIfcPresentationLayerAssignmentSet presentationLayerAssignment) {
     this.presentationLayerAssignmentList.add(presentationLayerAssignment);
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  
+  public List<Object> getChildren() {
+    
+    final List<Object> children = new ArrayList<>();
+
+    children.addAll(presentationLayerAssignmentList);
+    children.addAll(propertySetList);
+    
+    return children;
   }
 
 }
