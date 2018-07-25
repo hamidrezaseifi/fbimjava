@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.futurebim.core.dao.ifc.ProjectIcfDao;
+import com.futurebim.core.dao.ifc.ProjectIfcDao;
 import com.futurebim.core.model.ifc.ProjectIfc;
 
 @Service
-public class ProjectIcfReadHandler {
+public class ProjectIfcReadHandler {
 
-  private ProjectIcfDao projectIcfDao;
+  private ProjectIfcDao projectIcfDao;
 
   @Autowired(required = true)
-  public void setCompanyService(final ProjectIcfDao projectIcfDao) {
+  public void setCompanyService(final ProjectIfcDao projectIcfDao) {
     this.projectIcfDao = projectIcfDao;
   }
 

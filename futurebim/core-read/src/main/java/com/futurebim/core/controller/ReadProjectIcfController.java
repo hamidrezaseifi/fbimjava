@@ -29,8 +29,10 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import com.futurebim.common.model.reponse.FutureBimUiRestResponse;
 import com.futurebim.common.model.reponse.ProjectIfcListRestResponse;
 import com.futurebim.common.model.reponse.ProjectIfcRestResponse;
-import com.futurebim.core.bl.ProjectIcfReadHandler;
-import com.futurebim.core.dao.ifc.ProjectIcfDao;
+import com.futurebim.core.bl.ProjectIfcReadHandler;
+import com.futurebim.core.cach.CatchedProjectIfc;
+import com.futurebim.core.cach.CatchedProjectIfcManager;
+import com.futurebim.core.dao.ifc.ProjectIfcDao;
 import com.futurebim.core.model.ifc.IfcFurnituretype;
 import com.futurebim.core.model.ifc.ProjectIfc;
 import com.futurebim.core.model.ifc.render.ProjectIfcRender;
@@ -41,13 +43,16 @@ public class ReadProjectIcfController {
 
   private final Logger logger = LoggerFactory.getLogger(ReadProjectIcfController.class);
 
-  private ProjectIcfReadHandler projectIcfReadHandler;
+  private ProjectIfcReadHandler projectIcfReadHandler;
 
   @Autowired
   private ResourceLoader resourceLoader;
 
   @Autowired
-  private ProjectIcfDao projectIcfDao;
+  private ProjectIfcDao projectIcfDao;
+
+  @Autowired
+  CatchedProjectIfcManager catchedProjectIfcManager;
 
   @Autowired
   private ObjectMapper                           objectMapper;
@@ -55,7 +60,7 @@ public class ReadProjectIcfController {
   private MappingJackson2XmlHttpMessageConverter xmlConverter;
 
   @Autowired(required = true)
-  public void setPersonService(final ProjectIcfReadHandler projectIcfReadHandler) {
+  public void setPersonService(final ProjectIfcReadHandler projectIcfReadHandler) {
     this.projectIcfReadHandler = projectIcfReadHandler;
   }
 
@@ -68,13 +73,23 @@ public class ReadProjectIcfController {
   @RequestMapping(value = "/getxml/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
   public @ResponseBody ProjectIfcRestResponse getIfcXml(@PathVariable final Long ifcId) {
 
-    return ProjectIfcRestResponse.createData(projectIcfReadHandler.getById(ifcId).toEdo());
+    CatchedProjectIfc catched = catchedProjectIfcManager.getById(ifcId);
+    if (catched == null) {
+      catched = catchedProjectIfcManager.add(projectIcfReadHandler.getById(ifcId).toEdo());
+    }
+
+    return ProjectIfcRestResponse.createData(catched.getProjectIfcEdo());
   }
 
   @RequestMapping(value = "/getjson/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public @ResponseBody ProjectIfcRestResponse getIfcJson(@PathVariable final Long ifcId) {
 
-    return ProjectIfcRestResponse.createData(projectIcfReadHandler.getById(ifcId).toEdo());
+    CatchedProjectIfc catched = catchedProjectIfcManager.getById(ifcId);
+    if (catched == null) {
+      catched = catchedProjectIfcManager.add(projectIcfReadHandler.getById(ifcId).toEdo());
+    }
+
+    return ProjectIfcRestResponse.createData(catched.getProjectIfcEdo());
   }
 
   @RequestMapping(value = "/getrender/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
