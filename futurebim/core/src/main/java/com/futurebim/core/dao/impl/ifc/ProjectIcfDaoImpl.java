@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.futurebim.core.dao.ifc.ProjectIcfDao;
+import com.futurebim.core.dao.ifc.ProjectIfcDao;
 import com.futurebim.core.model.ifc.ProjectIfc;
 
 @Transactional
 @Repository
-public class ProjectIcfDaoImpl implements ProjectIcfDao {
+public class ProjectIcfDaoImpl implements ProjectIfcDao {
 
   private static final Logger logger = LoggerFactory.getLogger(ProjectIcfDaoImpl.class);
 

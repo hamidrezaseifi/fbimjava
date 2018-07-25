@@ -40,12 +40,16 @@ public class ProjectIfcEdo {
   @JacksonXmlElementWrapper(localName = "decomposition")
   private IfcDecompositionWrapperEdo decomposition;
 
+  @JsonIgnore
+  private Long id;
+
   public ProjectIfcEdo() {
 
     createHeader("");
     this.units = new IfcUnitWrapperEdo();
     this.types = new IfcTypeWrapperEdo();
     this.decomposition = new IfcDecompositionWrapperEdo();
+    this.id = 0L;
 
   }
 
@@ -55,7 +59,7 @@ public class ProjectIfcEdo {
     this.units = new IfcUnitWrapperEdo();
     this.types = new IfcTypeWrapperEdo();
     this.decomposition = new IfcDecompositionWrapperEdo();
-
+    this.id = 0L;
   }
 
   private void createHeader(final String name) {
@@ -173,6 +177,14 @@ public class ProjectIfcEdo {
 
   public void addProject(final IfcProjectEdo project) {
     this.decomposition.addProject(project);
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(final Long id) {
+    this.id = id;
   }
 
 }

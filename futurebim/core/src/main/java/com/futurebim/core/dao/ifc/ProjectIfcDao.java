@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.futurebim.core.model.ifc.ProjectIfc;
 
-public interface ProjectIcfDao {
+public interface ProjectIfcDao {
 
   public ProjectIfc addProjectIfc(ProjectIfc c);
 

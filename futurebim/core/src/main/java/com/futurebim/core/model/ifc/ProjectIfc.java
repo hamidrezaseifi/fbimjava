@@ -334,6 +334,8 @@ public class ProjectIfc extends SerializableModelBase {
 
     final ProjectIfcEdo edo = new ProjectIfcEdo(getIfcName());
 
+    edo.setId(id);
+
     for (final IfcPresentationlayer layer : ifcPresentationlayers) {
       edo.addLayer(layer.toEdo());
     }
