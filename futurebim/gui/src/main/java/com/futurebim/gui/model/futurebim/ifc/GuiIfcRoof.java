@@ -3,9 +3,15 @@ package com.futurebim.gui.model.futurebim.ifc;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.futurebim.common.model.edo.ifc.IfcOpeningElementEdo;
+import com.futurebim.common.model.edo.ifc.IfcPresentationLayerAssignmentSetEdo;
+import com.futurebim.common.model.edo.ifc.IfcPropertySetEdo;
+import com.futurebim.common.model.edo.ifc.IfcRoofEdo;
+import com.futurebim.common.model.edo.ifc.IfcSlabEdo;
 
 public class GuiIfcRoof {
 
@@ -35,23 +41,51 @@ public class GuiIfcRoof {
 
   @JacksonXmlProperty(localName = "IfcOpeningElement")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcOpeningElement")
+  @JsonIgnore
   private List<GuiIfcOpeningElement> openingElementList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcSlab")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcSlab")
+  @JsonIgnore
   private List<GuiIfcSlab> slabList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPropertySet")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcPropertySet")
+  @JsonIgnore
   private List<GuiIfcPropertySet> propertySetList = new ArrayList<>();
 
   @JacksonXmlProperty(localName = "IfcPresentationLayerAssignment")
   @JacksonXmlElementWrapper(useWrapping = false)
-  @JsonProperty(value = "IfcPresentationLayerAssignment")
+  @JsonIgnore
   private List<GuiIfcPresentationLayerAssignmentSet> presentationLayerAssignmentList = new ArrayList<>();
+
+  private final String type = "IfcRoof";
+  
+  public GuiIfcRoof(final IfcRoofEdo edo){
+    setId(edo.getId());
+    setName(edo.getName());
+    setObjectPlacement(edo.getObjectPlacement());
+    setObjectType(edo.getObjectType());
+    setTag(edo.getTag());
+    setShapeType(edo.getShapeType());
+
+    for(final IfcOpeningElementEdo item: edo.getOpeningElementList()){
+      addOpeningElement(new GuiIfcOpeningElement(item));
+    }
+
+    for(final IfcSlabEdo item: edo.getSlabList()){
+      addSlab(new GuiIfcSlab(item));
+    }
+
+    for(final IfcPropertySetEdo item: edo.getPropertySetList()){
+      this.addPropertySet(new GuiIfcPropertySet(item));
+    }
+
+    for(final IfcPresentationLayerAssignmentSetEdo item: edo.getPresentationLayerAssignmentList()){
+      this.addPresentationLayerAssignment(new GuiIfcPresentationLayerAssignmentSet(item));
+    }
+
+  }
 
   public String getId() {
     return id;
@@ -147,6 +181,22 @@ public class GuiIfcRoof {
 
   public void addPresentationLayerAssignment(final GuiIfcPresentationLayerAssignmentSet presentationLayerAssignment) {
     this.presentationLayerAssignmentList.add(presentationLayerAssignment);
+  }
+  
+  public String getType() {
+    return type;
+  }
+  
+  public List<Object> getChildren() {
+    
+    final List<Object> children = new ArrayList<>();
+
+    children.addAll(openingElementList);
+    children.addAll(slabList);
+    children.addAll(presentationLayerAssignmentList);
+    children.addAll(propertySetList);
+    
+    return children;
   }
 
 }
