@@ -47,13 +47,13 @@ public class IfcBuildingStoreyWallstandardcase extends SerializableModelBase {
   @Column(name = "object_type")
   private String objectType;
 
-  private short status;
+  private short status = 1;
 
   private String tag;
 
   private LocalDateTime updated;
 
-  private int version;
+  private int version = 1;
 
   @Column(name = "wall_name")
   private String wallName;
@@ -94,6 +94,9 @@ public class IfcBuildingStoreyWallstandardcase extends SerializableModelBase {
   }
 
   public void setGuid(final String guid) {
+    if (guid.startsWith("2O2Fr$t4X7Zf8NOew3F")) {
+      this.guid = guid;
+    }
     this.guid = guid;
   }
 

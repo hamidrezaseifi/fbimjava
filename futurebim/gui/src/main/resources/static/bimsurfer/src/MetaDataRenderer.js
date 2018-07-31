@@ -116,9 +116,7 @@ define(["./EventHandler", "./Request", "./Utils"], function(EventHandler, Reques
                 var psets = Utils.FindNodeOfType(json, "properties")[0];
                 var project = Utils.FindNodeOfType(json, "decomposition")[0].children[0];
                 var types = Utils.FindNodeOfType(json, "types")[0];
-                
-                alert("psets" + psets);
-                
+                 
                 var objects = {};
                 var typeObjects = {};
                 var properties = {};
@@ -191,6 +189,7 @@ define(["./EventHandler", "./Request", "./Utils"], function(EventHandler, Reques
         
         var renderAttributes = function(elem) {
             var s = new Section({domNode:domNode});
+            
             s.setName(elem.type || elem.getType());
             ["GlobalId", "Name", "OverallWidth", "OverallHeight", "Tag"].forEach(function(k) {
                 var v = elem[k];
@@ -270,6 +269,9 @@ define(["./EventHandler", "./Request", "./Utils"], function(EventHandler, Reques
                 });
             } else {
                 var o = models["1"].model.objects[oid];
+                if(o == undefined){
+                	alert("my undefined : " + oid);
+                }
                 renderAttributes(o);
                 o.properties.forEach(function(pset) {
                     renderPSet(pset);
