@@ -1,9 +1,9 @@
 define(["./DataInputStreamReader"], function (DataInputStreamReader) {
 
-    function BimServerGeometryLoader(bimServerApi, viewer, model, roid, globalTransformationMatrix) {
+    function BimServerGeometryLoader(bimServerApi, model, viewer, roid, globalTransformationMatrix) {
 
         var o = this;
-
+        
         o.bimServerApi = bimServerApi;
         o.viewer = viewer;
         o.state = {};
@@ -16,6 +16,7 @@ define(["./DataInputStreamReader"], function (DataInputStreamReader) {
 		
 		o.model = model;
 		o.roid = roid;
+		
 		
 		console.log(globalTransformationMatrix);
 
@@ -78,10 +79,10 @@ define(["./DataInputStreamReader"], function (DataInputStreamReader) {
 
             } else {
             	var obj = [];
-
+            	
                 o.groupId = o.roid;
                 o.infoToOid = o.options.oids;
-
+for(o1 in o.model.apiModel){alert(o1 + ": " + o.model.apiModel[o1]);}
             	for (var k in o.infoToOid) {
             		var oid = parseInt(o.infoToOid[k]);
             		o.model.apiModel.get(oid, function(object){

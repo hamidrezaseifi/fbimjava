@@ -165,7 +165,7 @@
     	                    schema: "ifc2x3tc1" // < TODO: Deduce automatically
     	                })
     	                    .then(function (model) {
-    	                    alert(model);
+    	                    //alert(model);
     	                            // Model is now loaded and rendering.
     	                            // The following sections show what you can do with BIMSurfer at this point.
     	                            //...

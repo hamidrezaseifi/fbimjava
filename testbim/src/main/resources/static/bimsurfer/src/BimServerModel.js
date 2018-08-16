@@ -13,12 +13,13 @@ define(["../lib/text"], function(text) {
     };
     */
     
-    function BimServerModel(apiModel) {
+    function BimServerModel(apiModel, model) {
     	
         this.api = apiModel.bimServerApi;
         this.apiModel = apiModel;
         this.tree = null;
         this.treePromise = null;
+        this.model = model;
     
         this.getTree = function(args) {
             

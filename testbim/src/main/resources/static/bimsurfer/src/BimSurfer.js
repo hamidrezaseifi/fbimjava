@@ -179,9 +179,14 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
         };
 
         this._loadModel = function (model) {
-        
+        	
+        	for(o in model){
+        		//alert(o + " : " + model[o]);
+        	}
+        	//alert(model);
+        	
             model.getTree().then(function (tree) {
-
+            	
                 var oids = [];
                 var oidToGuid = {};
                 var guidToOid = {};
@@ -200,7 +205,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
                     }
                 };
 
-                visit(tree);
+                //visit(tree);
                 
                 self._idMapping.toGuid.push(oidToGuid);
                 self._idMapping.toId.push(guidToOid);
@@ -216,7 +221,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 
                 viewer.createModel(model.model.roid);
 
-                var loader = new GeometryLoader(model.api, models, viewer);
+                var loader = new GeometryLoader(model.api, model, viewer);
 
                 loader.addProgressListener(function (progress, nrObjectsRead, totalNrObjects) {
 					if (progress == "start") {
