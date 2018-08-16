@@ -90,7 +90,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 					params.api.setToken(params.token, function() {
 						resolve(params)
 					}, reject);
-				} else {
+				} else { 
 					params.api.login(params.username, params.password, function() {
 						resolve(params)
 					}, reject);
