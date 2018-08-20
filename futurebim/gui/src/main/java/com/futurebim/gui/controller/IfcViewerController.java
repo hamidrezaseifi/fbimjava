@@ -23,91 +23,96 @@ import com.futurebim.gui.model.MenuItem;
 import com.futurebim.gui.model.futurebim.GuiProjectRich;
 import com.futurebim.gui.model.futurebim.ifc.GuiProjectIfc;
 import com.futurebim.gui.restresponse.GuiProjectIfcRestResponse;
-import com.futurebim.gui.service.GuiLoggedDataService;
+import com.futurebim.gui.service.IGuiLoggedDataService;
 
 @Controller
 @RequestMapping(path = "/ifc")
 public class IfcViewerController extends UiControllerBase {
+
+  private final PageMenuLoader pageMenuLoader;
+
+  private final ProjectsHandler projectsHandler;
+
+  private final IfcHandler ifcHandler;
+
+  private final  CoreAccessConfig coreAccessConfig;
+
+  private final IGuiLoggedDataService guiLoggedDataService;
+
+
+  private final ObjectMapper objectMapper;
   
   @Autowired
-  private PageMenuLoader pageMenuLoader;
-  
-  @Autowired
-  ProjectsHandler projectsHandler;
-  
-  @Autowired
-  IfcHandler ifcHandler;
-  
-  @Autowired
-  private CoreAccessConfig coreAccessConfig;
-  
-  @Autowired
-  GuiLoggedDataService guiLoggedDataService;
-  
-  @Autowired
-  ObjectMapper objectMapper;
-  
+  public IfcViewerController(final ObjectMapper objectMapper, final IGuiLoggedDataService guiLoggedDataService, final CoreAccessConfig coreAccessConfig, final IfcHandler ifcHandler, final ProjectsHandler projectsHandler,  final PageMenuLoader pageMenuLoader){
+    this.pageMenuLoader = pageMenuLoader;
+    this.projectsHandler = projectsHandler;
+    this.ifcHandler = ifcHandler;
+    this.coreAccessConfig = coreAccessConfig;
+    this.guiLoggedDataService = guiLoggedDataService;
+    this.objectMapper = objectMapper;
+  }
+
   @RequestMapping(path = "/")
   public String index(final Model model){
     model.addAttribute("breadCrumb" , new ArrayList<>());
-    
+
     model.addAttribute("msg" , "IFC Viewer Index Page");
     model.addAttribute("loadIfcUrl" , coreAccessConfig.getIfcReadPath());
-    
+
     if(guiLoggedDataService.isLoggedIn()){
       model.addAttribute("projects" , projectsHandler.listProjects(guiLoggedDataService.getLoggedData().getUser().getCompanyid()));
     }
     else{
       model.addAttribute("projects" , projectsHandler.listProjects(0L));
     }
-    
+
     return "ifcviewer/index";
   }
-  
+
   @RequestMapping(value = "/getjson/{ifcId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public @ResponseBody GuiProjectIfcRestResponse getIfcJson(@PathVariable final Long ifcId) {
-    
+
     final GuiProjectIfcRestResponse response = GuiProjectIfcRestResponse.createData(new GuiProjectIfc(ifcHandler.getById(ifcId)));
     objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-    
+
     return response;
   }
-  
+
   @RequestMapping(value = "/data/projects/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public @ResponseBody List<GuiProjectRich> readAll() {
-    
+
     List<GuiProjectRich> list = null;
-    
+
     if(guiLoggedDataService.isLoggedIn()){
       list = projectsHandler.listProjects(guiLoggedDataService.getLoggedData().getUser().getCompanyid());
     }
     else{
       list = projectsHandler.listProjects(0L);
     }
-    
+
     return list;
   }
-  
-  
-  
-  
+
+
+
+
   @Override
   protected String getActiveLeftToolbarId() {
-    
-    
+
+
     return "";
   }
-  
+
   @Override
   protected List<MenuItem> getTopToolbar() {
-    
+
     return pageMenuLoader.getTopMenus("menu.ifc");
   }
-  
+
   @Override
   protected List<MenuItem> getLeftToolbar() {
-    
+
     return new ArrayList<>(); //pageMenuLoader.getLeftMenus("/ifc", getActiveLeftToolbarId());
   }
-  
+
 }

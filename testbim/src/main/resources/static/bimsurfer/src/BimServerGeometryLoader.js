@@ -3,7 +3,7 @@ define(["./DataInputStreamReader"], function (DataInputStreamReader) {
     function BimServerGeometryLoader(bimServerApi, model, viewer, roid, globalTransformationMatrix) {
 
         var o = this;
-        
+        alert(bimServerApi);
         o.bimServerApi = bimServerApi;
         o.viewer = viewer;
         o.state = {};
@@ -82,10 +82,10 @@ define(["./DataInputStreamReader"], function (DataInputStreamReader) {
             	
                 o.groupId = o.roid;
                 o.infoToOid = o.options.oids;
-for(o1 in o.model.apiModel){alert(o1 + ": " + o.model.apiModel[o1]);}
+
             	for (var k in o.infoToOid) {
             		var oid = parseInt(o.infoToOid[k]);
-            		o.model.apiModel.get(oid, function(object){
+            		/*o.model.apiModel.get(oid, function(object){
             			if (object.object._rgeometry != null) {
 							if (object.model.objects[object.object._rgeometry] != null) {
 								// Only if this data is preloaded, otherwise just don't include any gi
@@ -96,7 +96,7 @@ for(o1 in o.model.apiModel){alert(o1 + ": " + o.model.apiModel[o1]);}
 								obj.push({gid: object.object._rgeometry, oid: object.oid, object: object});
 							}
             			}
-            		});
+            		});*/
             	}
             	obj.sort(function(a, b){
         			if (a.info != null && b.info != null) {

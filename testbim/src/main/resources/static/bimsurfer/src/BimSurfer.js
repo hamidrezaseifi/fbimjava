@@ -9,7 +9,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 	} else {
         BimServerApi = window.BimServerClient;
 	}
-    
+    //alert(window.BimServerClient);
     function BimSurfer(cfg) {
 
         var self = this;
@@ -180,13 +180,9 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 
         this._loadModel = function (model) {
         	
-        	for(o in model){
-        		//alert(o + " : " + model[o]);
-        	}
-        	//alert(model);
-        	
-            model.getTree().then(function (tree) {
-            	
+
+            /*model.getTree().then(function (tree) {
+            	alert("tree: " + tree );
                 var oids = [];
                 var oidToGuid = {};
                 var guidToOid = {};
@@ -205,7 +201,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
                     }
                 };
 
-                //visit(tree);
+                visit(tree);
                 
                 self._idMapping.toGuid.push(oidToGuid);
                 self._idMapping.toId.push(guidToOid);
@@ -221,7 +217,7 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
 
                 viewer.createModel(model.model.roid);
 
-                var loader = new GeometryLoader(model.api, model, viewer);
+                var loader = new GeometryLoader(model.api, model.model, viewer);
 
                 loader.addProgressListener(function (progress, nrObjectsRead, totalNrObjects) {
 					if (progress == "start") {
@@ -243,7 +239,71 @@ define(["./Notifier", "./BimServerModel", "./PreloadQuery", "./BimServerGeometry
                 });
 
                 loader.start();
-            });
+            });*/
+        	
+        	var tree = model.getTree()
+        	
+                var oids = [];
+                var oidToGuid = {};
+                var guidToOid = {};
+
+                var visit = function (n) {
+                    if (BIMSERVER_VERSION == "1.4") {
+                        oids.push(n.id);
+                    } else {
+                        oids[n.gid] = n.id;
+                    }
+                    oidToGuid[n.id] = n.guid;
+                    guidToOid[n.guid] = n.id;
+                    
+                    for (var i = 0; i < (n.children || []).length; ++i) {
+                        visit(n.children[i]);
+                    }
+                };
+
+                visit(tree);
+                
+                self._idMapping.toGuid.push(oidToGuid);
+                self._idMapping.toId.push(guidToOid);
+                
+                var models = {};
+
+                // TODO: Ugh. Undecorate some of the newly created classes
+                models[model.model.roid] = model.model;
+
+                // Notify viewer that things are loading, so viewer can
+                // reduce rendering speed and show a spinner.
+                viewer.taskStarted();
+
+                viewer.createModel(model.model.roid);
+                
+                for(o in model.apiModel){
+                	alert(o + " : " + model.apiModel[o])
+                }
+                
+                var loader = new GeometryLoader(model.apiModel, models, viewer, 65539);
+
+                loader.addProgressListener(function (progress, nrObjectsRead, totalNrObjects) {
+					if (progress == "start") {
+						console.log("Started loading geometries");
+						self.fire("loading-started");
+					} else if (progress == "done") {
+						console.log("Finished loading geometries (" + totalNrObjects + " objects received)");
+						self.fire("loading-finished");
+                        viewer.taskFinished();
+					}
+                });
+
+                loader.setLoadOids([model.model.roid], oids);
+
+                // viewer.clear(); // For now, until we support multiple models through the API
+
+                viewer.on("tick", function () { // TODO: Fire "tick" event from xeoViewer
+                    loader.process();
+                });
+
+                loader.start();
+            
         };
         
         // Helper function to traverse over the mappings for individually loaded models

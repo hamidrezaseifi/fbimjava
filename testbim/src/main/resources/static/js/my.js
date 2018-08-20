@@ -153,7 +153,7 @@
 
     	                // Lets us play with the Surfer in the console
     	                window.bimSurfer = bimSurfer;
-
+//params.api.getModel
     	                bimSurfer.load({
     	                    bimserver: "http://localhost:3030/",
     	                    //test: true,
@@ -165,14 +165,17 @@
     	                    schema: "ifc2x3tc1" // < TODO: Deduce automatically
     	                })
     	                    .then(function (model) {
-    	                    //alert(model);
+    	                    //alert("model: " + model);
+    	                    //for(o1 in model.apiModel){alert(o1 + ": " + model.apiModel[o1]);}
     	                            // Model is now loaded and rendering.
     	                            // The following sections show what you can do with BIMSurfer at this point.
     	                            //...
     	                        });
                             	                
     	                // Create a BIMserver API, we only need one of those for every server we connect to
-    	               /* var bimServerClient = new BimServerClient("http://localhost:3030", null);
+    	               /* 
+    	                var token = "40699A0B150277BE02DBC9287817AC42" 
+    	                var bimServerClient = new BimServerClient("http://localhost:3030", null);
     	                bimServerClient.init(function(){
     						bimServerClient.setToken(token, function() {
     			                // Create a model loader, this one is able to load models from a BIMserver and therefore can have BIMserver specific calls
