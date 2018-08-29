@@ -27,5 +27,13 @@ public class MainController {
     
     return "models_loadFromServer";
   }
+  
+  @RequestMapping(path = "/test3")
+  public String test3(final Model model){
+    model.addAttribute("address", "http://localhost:3030");
+    model.addAttribute("apiVersion", 1.5);
+    
+    return "bimserver";
+  }
 
 }
