@@ -21,5 +21,11 @@ public class MainController {
     
     return "example_BIMServer";
   }
+  
+  @RequestMapping(path = "/test2")
+  public String test2(final Model model){
+    
+    return "models_loadFromServer";
+  }
 
 }

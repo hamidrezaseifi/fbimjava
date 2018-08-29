@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <title>Example</title>
@@ -12,16 +12,42 @@
         };
     </script>
 
-    <link rel="stylesheet" href="css/styles.css"/>
-
-    <script type="text/javascript" src="../bimsurfer/lib/require.js"></script>
-    <script type="text/javascript" type="module">
-    	import("http://ec2-18-222-53-244.us-east-2.compute.amazonaws.com:8080/apps/bimserverjavascriptapi/bimserverclient.js").then((bimserverapi) => {
-    		console.log(bimserverapi);
+    <script type="text/javascript" th:src="@{bimsurfer/lib/require.js}"></script>
+    
+    <script type="text/javascript">
+    	import("http://localhost:3030/apps/bimserverjavascriptapi/bimserverclient.js").then((bimserverapi) => {
+        	//alert(bimserverapi);
+    		//console.log(bimserverapi);
     		
-    		var api = new bimserverapi.default("http://ec2-18-222-53-244.us-east-2.compute.amazonaws.com:8080");
+    		var api = new bimserverapi.default("http://localhost:3030");
     		api.init((api, info) => {
-    			console.log(api, info);
+    			//console.log(api, info);
+        		
+        		window.BimServerClient = bimserverapi.default; 
+        		window.BimServerApiPromise = bimserverapi.BimServerApiPromise; 
+        		//resolve(bimserverapi);
+
+    			require([
+    				"bimsurfer/src/BimSurfer","bimsurfer/src/BimServerModelLoader","bimsurfer/src/StaticTreeRenderer","bimsurfer/src/MetaDataRenderer","bimsurfer/lib/domReady!"
+                ], function (BimSurfer, BimServerModelLoader, StaticTreeRenderer, MetaDataRenderer) {
+                    window.bimSurfer = new BimSurfer({
+                        domNode: "fullPageContainer"
+                    });
+                    bimSurfer.load({
+                        bimserver: "http://localhost:3030",
+	                    username: "hamidrezaseifi@gmail.com",
+	                    password: "Elec7342",
+	                    poid: 131073,
+	                    roid: 1,
+	                    schema: "ifc2x3tc1" // < TODO: Deduce automatically
+                    })
+                            .then(function (model) {
+                                // Model is now loaded and rendering.
+                                // The following sections show what you can do with BIMSurfer at this point.
+                                //...
+                            });
+                });
+                    			
     		});
     	});
 //        require([
