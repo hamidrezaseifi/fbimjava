@@ -23,7 +23,7 @@ define(["./DataInputStreamReader"], function (DataInputStreamReader) {
 
         this.processMessage = function(stream) {
             var messageType = stream.readByte();
-
+            alert("do: processMessage: " + messageType );
             if (messageType == 0) {
                 o._readStart(stream);
 			} else if (messageType == 6) {
@@ -56,7 +56,7 @@ define(["./DataInputStreamReader"], function (DataInputStreamReader) {
         /**
          * Starts this loader.
          */
-        this.start = function () {
+        this.start = function () { 
             if (!o.options || o.options.type !== "oids") {
                 throw new Error("Invalid loader configuration");
             }
@@ -346,7 +346,7 @@ define(["./DataInputStreamReader"], function (DataInputStreamReader) {
 						colors[i * 4 + 3] = color.a;
 					}
                 }
-
+                
 				o.geometryIds[geometryId] = [geometryId];
                 this.viewer.createGeometry(geometryId, positions, normals, colors, indices);
                 
@@ -473,7 +473,7 @@ define(["./DataInputStreamReader"], function (DataInputStreamReader) {
                 console.log("Mode is still 0, should be 1");
                 return;
             }
-
+            alert("do: _createObject" );
 
             // o.models[roid].get(oid,
                 // function () {

@@ -52,7 +52,6 @@ define(["./BimServerModel", "./PreloadQuery", "./BimServerGeometryLoader", "./Bi
             
             bimSurfer._idMapping.toGuid.push(oidToGuid);
             bimSurfer._idMapping.toId.push(guidToOid);
-    		
     		var viewer = bimSurfer.viewer;
     		viewer.taskStarted();
 	

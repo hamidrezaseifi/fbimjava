@@ -7,8 +7,8 @@
     
     <link rel="stylesheet" href="css/demo.css"/>
     <link rel="stylesheet" href="css/apiref.css"/>
-    <link rel="stylesheet" href="../css/tree.css"/>
-    <link rel="stylesheet" href="../css/metadata.css"/>
+    <link rel="stylesheet" href="css/tree.css"/>
+    <link rel="stylesheet" href="css/metadata.css"/>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
     
@@ -75,7 +75,7 @@
     	                            domNode: 'dataContainer'
     	                        });
                                 metadata.addModel({name: "", id: roid, model: bimSurferModel});
-    	                        
+
     	                        bimSurfer.on("selection-changed", function(params) {
     	                            domtree.setSelected(params.objects, domtree.SELECT_EXCLUSIVE);
     	                            metadata.setSelected(params.objects);
@@ -173,7 +173,7 @@
     	                });
     	                
     	                bimSurfer.on("loading-finished", function(){
-    	                	document.getElementById("status").innerHTML = "Loading finished";
+    	                	document.getElementById("status").innerHTML = "Loading finished";alert("Loading finished");
                             var domNode = document.getElementById("typeSelector");
                             domNode.innerHTML = "";
                             bimSurfer.getTypes().forEach(function(ifc_type) {
@@ -194,7 +194,7 @@
                             });
     	                });
     	                bimSurfer.on("loading-started", function(){
-    	                	document.getElementById("status").innerHTML = "Loading...";
+    	                	document.getElementById("status").innerHTML = "Loading...";alert("Loading...");
     	                });
 
     	                // Lets us play with the Surfer in the console
@@ -205,7 +205,6 @@
     	                
     	                bimServerClient.init(function(){
 	    	                bimServerClient.login("hamidrezaseifi@gmail.com", "Elec7342", function(){
-	    	                	alert("logedin");
 	
     			                // Create a model loader, this one is able to load models from a BIMserver and therefore can have BIMserver specific calls
     			                var modelLoader = new BimServerModelLoader(bimServerClient, bimSurfer);
