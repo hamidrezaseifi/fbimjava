@@ -28,14 +28,14 @@ public class WriteCompany {
   @RequestMapping(value = "/delete/{companyid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public @ResponseBody FutureBimUiRestResponse deleteCompany(@PathVariable final Long companyid){
 
-    return FutureBimUiRestResponse.createDataResponse(companyDao.removeCompany(companyid));
+    return null;
   }
 
   @RequestMapping(value = "/update", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_UTF8_VALUE
       , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public @ResponseBody FutureBimUiRestResponse updateCompany(@RequestBody(required = true) final Company company){
 
-    return FutureBimUiRestResponse.createDataResponse(companyDao.updateCompany(company));
+    return null;
   }
 
 

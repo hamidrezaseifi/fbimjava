@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.futurebim.common.model.edo.ProjectEdo;
-import com.futurebim.common.model.edo.ifc.ProjectIfcProxyEdo;
 import com.futurebim.common.model.enums.EStatus;
 
 /**
@@ -15,33 +14,31 @@ import com.futurebim.common.model.enums.EStatus;
  */
 
 public class GuiProjectRich  {
-
+  
   private Long id;
-
+  
   private Long companyid;
-
+  
   private LocalDateTime created;
-
+  
   private LocalDate deatline;
-
+  
   private String projectName;
-
+  
   private LocalDate startDate;
-
+  
   private EStatus status;
-
+  
   private LocalDateTime updated;
-
+  
   private int version;
-
-  private List<GuiProjectIfcProxy> ProjectIfcProxyList = new ArrayList<>();
-
-
-
+  
+  
+  
   public GuiProjectRich() {
   }
-
-
+  
+  
   public GuiProjectRich(final ProjectEdo edo) {
     this.setCompanyid(edo.getCompanyid());
     this.setCreated(edo.getCreated());
@@ -52,113 +49,97 @@ public class GuiProjectRich  {
     this.setStatus(edo.getStatus());
     this.setUpdated(edo.getUpdated());
     this.setVersion(edo.getVersion());
-    
-    for(final ProjectIfcProxyEdo ifcedo  : edo.getProjectIfcProxyList()) {
-      this.addProjectIfcProxy(new GuiProjectIfcProxy(ifcedo));
-    }
+
+
   }
-
-
+  
+  
   public static List<GuiProjectRich> fromEdoList(final List<ProjectEdo> edoList) {
-
+    
     final List<GuiProjectRich> list = new ArrayList<>();
     for (final ProjectEdo edo : edoList) {
       list.add(new GuiProjectRich(edo));
     }
     return list;
   }
-
+  
   public Long getId() {
     return this.id;
   }
-
+  
   public void setId(final Long id) {
     this.id = id;
   }
-
+  
   public Long getCompanyid() {
     return companyid;
   }
-
+  
   public void setCompanyid(final Long companyid) {
     this.companyid = companyid;
   }
-
+  
   public LocalDateTime getCreated() {
     return this.created;
   }
-
+  
   public void setCreated(final LocalDateTime created) {
     this.created = created;
   }
-
+  
   public LocalDate getDeatline() {
     return this.deatline;
   }
-
+  
   public void setDeatline(final LocalDate deatline) {
     this.deatline = deatline;
   }
-
+  
   public String getProjectName() {
     return this.projectName;
   }
-
+  
   public void setProjectName(final String projectName) {
     this.projectName = projectName;
   }
-
+  
   public LocalDate getStartDate() {
     return this.startDate;
   }
-
+  
   public void setStartDate(final LocalDate startDate) {
     this.startDate = startDate;
   }
-
+  
   public EStatus getStatus() {
     return this.status;
   }
-
+  
   public void setStatus(final Long status) {
     this.status = EStatus.ofId(status);
   }
-
+  
   public LocalDateTime getUpdated() {
     return this.updated;
   }
-
+  
   public void setUpdated(final LocalDateTime updated) {
     this.updated = updated;
   }
-
+  
   public int getVersion() {
     return this.version;
   }
-
+  
   public void setVersion(final int version) {
     this.version = version;
   }
-
-
+  
+  
   public void setStatus(final EStatus status) {
     this.status = status;
   }
-  
-  public List<GuiProjectIfcProxy> getProjectIfcProxyList() {
-    return ProjectIfcProxyList;
-  }
-  
-  public List<GuiProjectIfcProxy> getIfcList() {
-    return ProjectIfcProxyList;
-  }
-  
-  public void setProjectIfcProxyList(final List<GuiProjectIfcProxy> projectIfcProxyList) {
-    ProjectIfcProxyList = projectIfcProxyList;
-  }
-  
-  public void addProjectIfcProxy(final GuiProjectIfcProxy projectIfcProxy) {
-    ProjectIfcProxyList.add(projectIfcProxy);
-  }
-  
+
+
+
 }

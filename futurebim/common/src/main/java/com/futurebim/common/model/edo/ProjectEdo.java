@@ -2,12 +2,7 @@ package com.futurebim.common.model.edo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.futurebim.common.model.edo.ifc.ProjectIfcProxyEdo;
 import com.futurebim.common.model.enums.EStatus;
 
 /**
@@ -34,10 +29,6 @@ public class ProjectEdo {
   protected LocalDateTime updated;
 
   protected int version;
-
-  @JacksonXmlElementWrapper(localName = "ProjectIfcList")
-  @JacksonXmlProperty(localName = "ProjectIfc")
-  private List<ProjectIfcProxyEdo> ProjectIfcProxyList = new ArrayList<>();
 
   public ProjectEdo() {
   }
@@ -112,18 +103,6 @@ public class ProjectEdo {
 
   public void setVersion(final int version) {
     this.version = version;
-  }
-
-  public List<ProjectIfcProxyEdo> getProjectIfcProxyList() {
-    return ProjectIfcProxyList;
-  }
-
-  public void setProjectIfcProxyList(final List<ProjectIfcProxyEdo> projectIfcProxyList) {
-    ProjectIfcProxyList = projectIfcProxyList;
-  }
-
-  public void addProjectIfcProxy(final ProjectIfcProxyEdo projectIfcProxy) {
-    ProjectIfcProxyList.add(projectIfcProxy);
   }
 
 }
