@@ -268,6 +268,7 @@ define(["./EventHandler", "./Request", "./Utils"], function(EventHandler, Reques
                     }
                 });
             } else {
+            	alert(oid);
                 var o = models["1"].model.objects[oid];
                 if(o == undefined){
                 	alert("my undefined : " + oid);

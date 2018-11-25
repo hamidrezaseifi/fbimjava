@@ -2,11 +2,11 @@ package com.futurebim.core.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -35,6 +40,7 @@ import com.futurebim.core.cach.CatchedProjectIfcManager;
 import com.futurebim.core.dao.ifc.ProjectIfcDao;
 import com.futurebim.core.model.ifc.IfcFurnituretype;
 import com.futurebim.core.model.ifc.ProjectIfc;
+import com.futurebim.core.model.ifc.render.IfcBuildingStoreyRender;
 import com.futurebim.core.model.ifc.render.ProjectIfcRender;
 
 @RestController
@@ -152,26 +158,40 @@ public class ReadProjectIcfController {
   }
 
   @RequestMapping(value = "/test", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-  public @ResponseBody String test() throws IOException {
+  public @ResponseBody String test() throws IOException, ParserConfigurationException, SAXException {
 
-    final Path path = Paths.get(URI.create("file:/D:/users1.xml"));
-    final List<String> lines = Files.readAllLines(path);
-
-    String xml = "";
-    for (final String s : lines) {
-      xml += s + "\n";
-    }
-
+    final IfcBuildingStoreyRender ifc;
     final XmlMapper mapper = new XmlMapper();
-    final TestListReader r = mapper.readValue(xml, TestListReader.class);
 
-    String res = "";
+    final Resource resource = resourceLoader.getResource("classpath:mdata/buildingstroy.xml");
+    try (final InputStream is = resource.getInputStream()) {
 
-    for (final String cell : r.getCell()) {
-      res += cell + "<br>\n";
+      final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      final DocumentBuilder builder = factory.newDocumentBuilder();
+
+      final Document document = builder.parse(is);
+
+      final Element root = document.getDocumentElement();
+
+      final NodeList list = root.getChildNodes();
+      for (int i = 0; i < list.getLength(); i++) {
+        final Node node = list.item(i);
+
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+          final String name = node.getNodeName();
+          final Node attr = node.getAttributes().item(0);
+          String val = attr.getNodeValue();
+          val = val.trim();
+
+        }
+
+      }
+
+      ifc = mapper.readValue(is, IfcBuildingStoreyRender.class);
+
     }
 
-    return res;
+    return ifc.toString();
   }
 
 }
