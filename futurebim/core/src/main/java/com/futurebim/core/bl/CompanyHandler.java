@@ -11,7 +11,7 @@ import com.futurebim.core.model.Company;
 import com.futurebim.core.model.CompanyRich;
 
 @Service
-public class CompanyReadHandler {
+public class CompanyHandler {
 
   @Autowired(required = true)
   @Qualifier("CompanyDaoImpl")

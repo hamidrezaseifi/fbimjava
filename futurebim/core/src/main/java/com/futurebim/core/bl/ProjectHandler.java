@@ -9,7 +9,7 @@ import com.futurebim.core.dao.ProjectDao;
 import com.futurebim.core.model.ProjectRich;
 
 @Service
-public class ProjectReadHandler {
+public class ProjectHandler {
 
   private ProjectDao projectDao;
 

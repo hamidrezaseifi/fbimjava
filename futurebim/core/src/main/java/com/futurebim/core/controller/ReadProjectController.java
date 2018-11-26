@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.futurebim.common.model.reponse.ProjectListRestResponse;
 import com.futurebim.common.model.reponse.ProjectRestResponse;
-import com.futurebim.core.bl.ProjectReadHandler;
+import com.futurebim.core.bl.ProjectHandler;
 import com.futurebim.core.model.ProjectRich;
 
 @RestController
@@ -21,10 +21,10 @@ public class ReadProjectController {
 
   private final Logger logger = LoggerFactory.getLogger(ReadProjectController.class);
 
-  private ProjectReadHandler projectReadHandler;
+  private ProjectHandler projectReadHandler;
 
   @Autowired(required = true)
-  public void setPersonService(final ProjectReadHandler projectReadHandler) {
+  public void setPersonService(final ProjectHandler projectReadHandler) {
     this.projectReadHandler = projectReadHandler;
   }
 
