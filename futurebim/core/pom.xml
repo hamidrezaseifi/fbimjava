@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.seifi.futurebim</groupId>
-    <artifactId>futurebim</artifactId>
+    <groupId>com.seifi.featurebim</groupId>
+    <artifactId>featurebim</artifactId>
     <version>0.0.1</version>
   </parent>
   <artifactId>core</artifactId>
@@ -11,7 +11,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.seifi.futurebim</groupId>
+            <groupId>com.seifi.featurebim</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1</version>
         </dependency>
@@ -63,15 +63,6 @@
 		    <optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-		</dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
@@ -88,19 +79,9 @@
         </dependency>
 
 		<dependency>
-		   <groupId>org.hibernate</groupId>
-		   <artifactId>hibernate-core</artifactId>
-		</dependency>
-
-		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-orm</artifactId>
 		</dependency>
-
-		<dependency>
-		    <groupId>com.h2database</groupId> 
-		    <artifactId>h2</artifactId>
-		</dependency>	
 		
 		<dependency>
 		    <groupId>org.apache.tomcat</groupId>
@@ -113,22 +94,6 @@
 			<artifactId>spring-tx</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency>
 			
     </dependencies>
 
