@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import com.featurebim.common.model.reponse.ProjectListRestResponse;
 import com.featurebim.gui.helper.MessagesHelper;
 import com.featurebim.gui.helper.UiConfiguration;
-import com.featurebim.gui.model.futurebim.GuiProjectRich;
+import com.featurebim.gui.model.futurebim.GuiProject;
 
 
 
@@ -30,17 +30,17 @@ public class ProjectsHandler {
   UiConfiguration.CoreAccessConfig coreAccessConfig;
   
   
-  public GuiProjectRich getById(final Long id) {
+  public GuiProject getById(final Long id) {
     return null;
     
   }
   
-  public List<GuiProjectRich> listProjects(final Long companyId) {
+  public List<GuiProject> listProjects(final Long companyId) {
     
     
     logger.debug("get projects list from core");
     
-    List<GuiProjectRich> list = new ArrayList<>();
+    List<GuiProject> list = new ArrayList<>();
     
     
     logger.info("url:" + coreAccessConfig.getAllProjectsReadPath("/read/all/" + companyId));
@@ -54,7 +54,7 @@ public class ProjectsHandler {
     }
     else
     {
-      list = GuiProjectRich.fromEdoList(responseBody.getProjects()) ;
+      list = GuiProject.fromEdoList(responseBody.getProjects()) ;
     }
     
     return list;

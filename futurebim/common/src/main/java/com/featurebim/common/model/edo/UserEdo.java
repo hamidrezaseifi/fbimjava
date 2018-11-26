@@ -15,29 +15,29 @@ public class UserEdo {
 
   protected Long companyid;
 
-  protected LocalDate birthday;
+  protected String username;
 
-  protected LocalDateTime created;
+  protected LocalDate birthday;
 
   protected String email;
 
   protected String firstname;
 
+  protected String lastname;
+
   protected short gender;
 
   protected String hashPassword;
-
-  protected String lastname;
 
   protected String nameTag;
 
   protected EStatus status;
 
-  protected LocalDateTime updated;
-
-  protected String username;
-
   protected int version;
+
+  protected LocalDateTime created;
+
+  protected LocalDateTime updated;
 
   public UserEdo() {
   }

@@ -149,6 +149,8 @@ public class Project extends SerializableModelBase {
     edo.setId(id);
     edo.setUpdated(updated);
     edo.setVersion(version);
+    edo.setParentProjectId(parentProjectId);
+    edo.setProjectType(projectType);
 
     return edo;
   }

@@ -12,33 +12,42 @@ import com.featurebim.common.model.enums.EStatus;
 
 public class ProjectEdo {
 
-  protected Long id;
+  private Long id;
 
-  protected Long companyid;
+  private Long parentProjectId;
 
-  protected LocalDate deadline;
+  private Long companyid;
 
-  protected String projectName;
+  private int projectType;
 
-  protected LocalDate startDate;
+  private LocalDateTime created;
 
-  protected EStatus status;
+  private LocalDate deadline;
 
-  protected LocalDateTime created;
+  private String projectName;
 
-  protected LocalDateTime updated;
+  private LocalDate startDate;
 
-  protected int version;
+  private EStatus status;
 
-  public ProjectEdo() {
-  }
+  private LocalDateTime updated;
+
+  private int version;
 
   public Long getId() {
-    return this.id;
+    return id;
   }
 
   public void setId(final Long id) {
     this.id = id;
+  }
+
+  public Long getParentProjectId() {
+    return parentProjectId;
+  }
+
+  public void setParentProjectId(final Long parentProjectId) {
+    this.parentProjectId = parentProjectId;
   }
 
   public Long getCompanyid() {
@@ -49,8 +58,16 @@ public class ProjectEdo {
     this.companyid = companyid;
   }
 
+  public int getProjectType() {
+    return projectType;
+  }
+
+  public void setProjectType(final int projectType) {
+    this.projectType = projectType;
+  }
+
   public LocalDateTime getCreated() {
-    return this.created;
+    return created;
   }
 
   public void setCreated(final LocalDateTime created) {
@@ -58,15 +75,15 @@ public class ProjectEdo {
   }
 
   public LocalDate getDeadline() {
-    return this.deadline;
+    return deadline;
   }
 
-  public void setDeadline(final LocalDate deatline) {
-    this.deadline = deatline;
+  public void setDeadline(final LocalDate deadline) {
+    this.deadline = deadline;
   }
 
   public String getProjectName() {
-    return this.projectName;
+    return projectName;
   }
 
   public void setProjectName(final String projectName) {
@@ -74,7 +91,7 @@ public class ProjectEdo {
   }
 
   public LocalDate getStartDate() {
-    return this.startDate;
+    return startDate;
   }
 
   public void setStartDate(final LocalDate startDate) {
@@ -82,7 +99,7 @@ public class ProjectEdo {
   }
 
   public EStatus getStatus() {
-    return this.status;
+    return status;
   }
 
   public void setStatus(final EStatus status) {
@@ -90,7 +107,7 @@ public class ProjectEdo {
   }
 
   public LocalDateTime getUpdated() {
-    return this.updated;
+    return updated;
   }
 
   public void setUpdated(final LocalDateTime updated) {
@@ -98,7 +115,7 @@ public class ProjectEdo {
   }
 
   public int getVersion() {
-    return this.version;
+    return version;
   }
 
   public void setVersion(final int version) {

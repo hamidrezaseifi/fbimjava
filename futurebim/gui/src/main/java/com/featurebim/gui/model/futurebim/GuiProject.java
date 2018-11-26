@@ -13,52 +13,40 @@ import com.featurebim.common.model.enums.EStatus;
  *
  */
 
-public class GuiProjectRich  {
+public class GuiProject  {
   
   private Long id;
-  
+
+  private Long parentProjectId;
+
   private Long companyid;
-  
+
+  private int projectType;
+
   private LocalDateTime created;
-  
-  private LocalDate deatline;
-  
+
+  private LocalDate deadline;
+
   private String projectName;
-  
+
   private LocalDate startDate;
-  
+
   private EStatus status;
-  
+
   private LocalDateTime updated;
-  
+
   private int version;
   
   
   
-  public GuiProjectRich() {
+  public GuiProject() {
   }
   
-  
-  public GuiProjectRich(final ProjectEdo edo) {
-    this.setCompanyid(edo.getCompanyid());
-    this.setCreated(edo.getCreated());
-    this.setDeatline(edo.getDeatline());
-    this.setId(edo.getId());
-    this.setProjectName(edo.getProjectName());
-    this.setStartDate(edo.getStartDate());
-    this.setStatus(edo.getStatus());
-    this.setUpdated(edo.getUpdated());
-    this.setVersion(edo.getVersion());
-
-
-  }
-  
-  
-  public static List<GuiProjectRich> fromEdoList(final List<ProjectEdo> edoList) {
+  public static List<GuiProject> fromEdoList(final List<ProjectEdo> edoList) {
     
-    final List<GuiProjectRich> list = new ArrayList<>();
+    final List<GuiProject> list = new ArrayList<>();
     for (final ProjectEdo edo : edoList) {
-      list.add(new GuiProjectRich(edo));
+      list.add(GuiProject.fromEdo(edo));
     }
     return list;
   }
@@ -87,12 +75,12 @@ public class GuiProjectRich  {
     this.created = created;
   }
   
-  public LocalDate getDeatline() {
-    return this.deatline;
+  public LocalDate getDeadline() {
+    return this.deadline;
   }
   
-  public void setDeatline(final LocalDate deatline) {
-    this.deatline = deatline;
+  public void setDeadline(final LocalDate deatline) {
+    this.deadline = deatline;
   }
   
   public String getProjectName() {
@@ -139,7 +127,65 @@ public class GuiProjectRich  {
   public void setStatus(final EStatus status) {
     this.status = status;
   }
+  
+  
+
+  public Long getParentProjectId() {
+    return parentProjectId;
+  }
+  
+  
+
+  public void setParentProjectId(final Long parentProjectId) {
+    this.parentProjectId = parentProjectId;
+  }
+  
+  
+
+  public int getProjectType() {
+    return projectType;
+  }
+  
+  
+
+  public void setProjectType(final int projectType) {
+    this.projectType = projectType;
+  }
 
 
+  public static GuiProject fromEdo(final ProjectEdo edo) {
+    final GuiProject project = new GuiProject();
+    
+    project.setCompanyid(edo.getCompanyid());
+    project.setCreated(edo.getCreated());
+    project.setDeadline(edo.getDeadline());
+    project.setId(edo.getId());
+    project.setProjectName(edo.getProjectName());
+    project.setStartDate(edo.getStartDate());
+    project.setStatus(edo.getStatus());
+    project.setUpdated(edo.getUpdated());
+    project.setVersion(edo.getVersion());
+    project.setParentProjectId(edo.getParentProjectId());
+    project.setProjectType(edo.getProjectType());
+    
+    return project;
+  }
+
+  public ProjectEdo toEdo() {
+    final ProjectEdo edo = new ProjectEdo();
+    edo.setCompanyid(companyid);
+    edo.setDeadline(deadline);
+    edo.setProjectName(projectName);
+    edo.setStartDate(startDate);
+    edo.setStatus(status);
+    edo.setCreated(created);
+    edo.setId(id);
+    edo.setUpdated(updated);
+    edo.setVersion(version);
+    edo.setParentProjectId(parentProjectId);
+    edo.setProjectType(projectType);
+
+    return edo;
+  }
 
 }

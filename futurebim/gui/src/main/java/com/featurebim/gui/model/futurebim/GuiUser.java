@@ -12,33 +12,33 @@ import com.featurebim.common.model.enums.EStatus;
  */
 public class GuiUser implements Serializable {
 
-  private Long id;
+  protected Long id;
 
-  private Long companyid;
+  protected Long companyid;
 
-  private LocalDate birthday;
+  protected String username;
 
-  private LocalDateTime created;
+  protected LocalDate birthday;
 
-  private String email;
+  protected String email;
 
-  private String firstname;
+  protected String firstname;
 
-  private short gender;
+  protected String lastname;
 
-  private String hashPassword;
+  protected short gender;
 
-  private String lastname;
+  protected String hashPassword;
 
-  private String nameTag;
+  protected String nameTag;
 
-  private EStatus status;
+  protected EStatus status;
 
-  private LocalDateTime updated;
+  protected int version;
 
-  private String username;
+  protected LocalDateTime created;
 
-  private int version;
+  protected LocalDateTime updated;
 
   public GuiUser() {
   }
