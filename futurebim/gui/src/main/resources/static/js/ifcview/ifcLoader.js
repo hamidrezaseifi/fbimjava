@@ -89,7 +89,7 @@ function startSurfer(ifcId, viewerContainerId, detailsContainerId, $scope, $http
 				    });
 				    //data.addModel({id: 1, src: modelName + ".xml"});
 				    //data.addModel({id: 1, src: "http://localhost:1010/pifc/read/get/" + ifcId});
-				    data.addModel({id: 1, modelJson: response.data.projectIfc});
+				    //data.addModel({id: 1, modelJson: response.data.projectIfc});
 				    
 				    bimSurfer.load({
 				        src: modelName + ".gltf"

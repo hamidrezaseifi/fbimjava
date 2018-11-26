@@ -187,7 +187,6 @@ define([
             function (hit) {
 
                 // Get BIM object ID from entity metadata
-
                 var entity = hit.entity;
 
                 if (!entity.meta) {
