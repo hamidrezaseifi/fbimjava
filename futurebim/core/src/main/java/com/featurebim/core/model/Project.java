@@ -145,6 +145,8 @@ public class Project {
     edo.setId(id);
     edo.setUpdated(updated);
     edo.setVersion(version);
+    edo.setParentProjectId(parentProjectId);
+    edo.setProjectType(projectType);
 
     return edo;
   }
