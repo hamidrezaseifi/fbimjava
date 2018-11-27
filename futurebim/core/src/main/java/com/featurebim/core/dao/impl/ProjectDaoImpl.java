@@ -59,7 +59,7 @@ public class ProjectDaoImpl implements ProjectDao {
         ps.setTimestamp(5, Timestamp.valueOf(project.getStartDate().atStartOfDay()));
         ps.setTimestamp(6, Timestamp.valueOf(project.getDeadline().atStartOfDay()));
         ps.setInt(7, project.getVersion());
-        ps.setLong(8, project.getStatus().getDbId());
+        ps.setInt(8, project.getStatus());
 
         return ps;
       }, keyHolder);
@@ -75,7 +75,7 @@ public class ProjectDaoImpl implements ProjectDao {
   }
 
   @Override
-  public boolean updateProject(final Project project) throws StorageException {
+  public Project updateProject(final Project project) throws StorageException {
     logger.debug("Updating Project with id {}...", project.getId());
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
     try {
@@ -92,7 +92,7 @@ public class ProjectDaoImpl implements ProjectDao {
         ps.setTimestamp(5, Timestamp.valueOf(project.getStartDate().atStartOfDay()));
         ps.setTimestamp(6, Timestamp.valueOf(project.getDeadline().atStartOfDay()));
         ps.setInt(7, project.getVersion());
-        ps.setLong(8, project.getStatus().getDbId());
+        ps.setInt(8, project.getStatus());
         ps.setLong(9, project.getId());
 
         return ps;
@@ -109,7 +109,7 @@ public class ProjectDaoImpl implements ProjectDao {
       logger.error("Unable to update Project [id: {}]: {}", project.getId(), e.toString(), e);
       throw new StorageException(e.toString(), e);
     }
-    return true;
+    return getById(project.getId());
   }
 
   @Override
@@ -173,7 +173,6 @@ public class ProjectDaoImpl implements ProjectDao {
     return project;
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public List<Project> listProjects(final Long companyId) throws StorageException {
     logger.info("Dao Read Project List");
@@ -214,7 +213,7 @@ public class ProjectDaoImpl implements ProjectDao {
     project.setUpdated(rs.getTimestamp("updated").toLocalDateTime());
     project.setId(rs.getLong("id"));
     project.setVersion(rs.getInt("version"));
-    project.setStatus(rs.getLong("status"));
+    project.setStatus(rs.getInt("status"));
 
     return project;
   }

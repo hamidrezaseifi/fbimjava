@@ -2,27 +2,25 @@ package com.featurebim.common.model.edo;
 
 import java.time.LocalDateTime;
 
-import com.featurebim.common.model.enums.EStatus;
-
 /**
  * The persistent class for the companies database table.
  *
  */
 public class CompanyEdo {
 
-  protected Long id;
+  private Long id;
 
-  protected String comments;
+  private String comments;
 
-  protected String companyName;
+  private String companyName;
 
-  protected EStatus status;
+  private int status;
 
-  protected int version;
+  private int version;
 
-  protected LocalDateTime created;
+  private LocalDateTime created;
 
-  protected LocalDateTime updated;
+  private LocalDateTime updated;
 
   public CompanyEdo() {
   }
@@ -59,12 +57,12 @@ public class CompanyEdo {
     this.created = created;
   }
 
-  public EStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
-  public void setStatus(final Long status) {
-    this.status = EStatus.ofId(status);
+  public void setStatus(final int status) {
+    this.status = status;
   }
 
   public LocalDateTime getUpdated() {

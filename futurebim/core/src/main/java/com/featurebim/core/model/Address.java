@@ -2,17 +2,13 @@ package com.featurebim.core.model;
 
 import java.time.LocalDateTime;
 
-import com.featurebim.core.model.base.SerializableModelBase;
-
 /**
  * The persistent class for the addresses database table.
  *
  */
-public class Address extends SerializableModelBase {
+public class Address {
 
-  private static final long serialVersionUID = 1L;
-
-  private AddressPK id;
+  private Long id;
 
   private String addressName;
 
@@ -39,11 +35,11 @@ public class Address extends SerializableModelBase {
   public Address() {
   }
 
-  public AddressPK getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final AddressPK id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 

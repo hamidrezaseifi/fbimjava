@@ -3,15 +3,11 @@ package com.featurebim.core.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.featurebim.core.model.base.SerializableModelBase;
-
 /**
  * The persistent class for the project_tasks database table.
  *
  */
-public class ProjectTask extends SerializableModelBase {
-
-  private static final long serialVersionUID = 1L;
+public class ProjectTask {
 
   private int id;
 

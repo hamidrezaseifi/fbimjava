@@ -2,23 +2,21 @@ package com.featurebim.common.model.edo;
 
 import java.time.LocalDateTime;
 
-import com.featurebim.common.model.enums.EStatus;
-
 /**
  * The persistent class for the user_project_access database table.
  *
  */
 public class UserProjectAccessEdo {
 
-  protected Long projectid;
+  private Long projectid;
 
-  protected Long userid;
+  private Long userid;
 
-  protected LocalDateTime created;
+  private LocalDateTime created;
 
-  protected EStatus status;
+  private int status;
 
-  protected ProjectAccessTypeEdo projectAccessType;
+  private ProjectAccessTypeEdo projectAccessType;
 
   public UserProjectAccessEdo() {
   }
@@ -47,12 +45,12 @@ public class UserProjectAccessEdo {
     return this.created;
   }
 
-  public EStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
-  public void setStatus(final Long status) {
-    this.status = EStatus.ofId(status);
+  public void setStatus(final int status) {
+    this.status = status;
   }
 
   public ProjectAccessTypeEdo getProjectAccessType() {

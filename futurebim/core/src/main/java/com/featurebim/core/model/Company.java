@@ -5,16 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.featurebim.common.model.edo.CompanyEdo;
-import com.featurebim.common.model.enums.EStatus;
-import com.featurebim.core.model.base.SerializableModelBase;
 
 /**
  * The persistent class for the companies database table.
  *
  */
-public class Company extends SerializableModelBase {
-
-  private static final long serialVersionUID = 1L;
+public class Company {
 
   private Long id;
 
@@ -22,7 +18,7 @@ public class Company extends SerializableModelBase {
 
   private String companyName;
 
-  private EStatus status;
+  private int status;
 
   private int version;
 
@@ -65,12 +61,12 @@ public class Company extends SerializableModelBase {
     this.created = created;
   }
 
-  public EStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
-  public void setStatus(final Long status) {
-    this.status = EStatus.ofId(status);
+  public void setStatus(final int status) {
+    this.status = status;
   }
 
   public LocalDateTime getUpdated() {
@@ -100,11 +96,25 @@ public class Company extends SerializableModelBase {
     edo.setCompanyName(companyName);
     edo.setCreated(created);
     edo.setId(id);
-    edo.setStatus(status.getDbId());
+    edo.setStatus(status);
     edo.setUpdated(updated);
     edo.setVersion(version);
 
     return edo;
+  }
+
+  public static Company fromEdo(final CompanyEdo edo) {
+    final Company company = new Company();
+
+    company.setComments(edo.getComments());
+    company.setCompanyName(edo.getCompanyName());
+    company.setCreated(edo.getCreated());
+    company.setId(edo.getId());
+    company.setStatus(edo.getStatus());
+    company.setUpdated(edo.getUpdated());
+    company.setVersion(edo.getVersion());
+
+    return company;
   }
 
   public static List<CompanyEdo> toEdoList(final List<Company> list) {

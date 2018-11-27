@@ -6,16 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.featurebim.common.model.edo.ProjectEdo;
-import com.featurebim.common.model.enums.EStatus;
-import com.featurebim.core.model.base.SerializableModelBase;
 
 /**
  * The persistent class for the projects database table.
  *
  */
-public class Project extends SerializableModelBase {
-
-  private static final long serialVersionUID = 1L;
+public class Project {
 
   private Long id;
 
@@ -33,7 +29,7 @@ public class Project extends SerializableModelBase {
 
   private LocalDate startDate;
 
-  private EStatus status;
+  private int status;
 
   private LocalDateTime updated;
 
@@ -114,12 +110,12 @@ public class Project extends SerializableModelBase {
     this.startDate = startDate.toLocalDate();
   }
 
-  public EStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
-  public void setStatus(final Long status) {
-    this.status = EStatus.ofId(status);
+  public void setStatus(final int status) {
+    this.status = status;
   }
 
   public LocalDateTime getUpdated() {
@@ -153,6 +149,23 @@ public class Project extends SerializableModelBase {
     return edo;
   }
 
+  public static Project fromEdo(final ProjectEdo edo) {
+    final Project project = new Project();
+
+    project.setCompanyid(edo.getCompanyid());
+    project.setDeadline(edo.getDeadline());
+    project.setProjectName(edo.getProjectName());
+    project.setStartDate(edo.getStartDate());
+
+    project.setCreated(edo.getCreated());
+    project.setId(edo.getId());
+    project.setStatus(edo.getStatus());
+    project.setUpdated(edo.getUpdated());
+    project.setVersion(edo.getVersion());
+
+    return project;
+  }
+
   public static List<ProjectEdo> toEdoList(final List<Project> list) {
 
     final List<ProjectEdo> edoList = new ArrayList<>();
@@ -160,5 +173,14 @@ public class Project extends SerializableModelBase {
       edoList.add(p.toEdo());
     }
     return edoList;
+  }
+
+  public static List<Project> fromEdoList(final List<ProjectEdo> edoList) {
+
+    final List<Project> list = new ArrayList<>();
+    for (final ProjectEdo edo : edoList) {
+      list.add(Project.fromEdo(edo));
+    }
+    return list;
   }
 }

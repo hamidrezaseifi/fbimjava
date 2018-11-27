@@ -3,8 +3,6 @@ package com.featurebim.common.model.edo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.featurebim.common.model.enums.EStatus;
-
 /**
  * The persistent class for the projects database table.
  *
@@ -12,23 +10,23 @@ import com.featurebim.common.model.enums.EStatus;
 
 public class ProjectEdo {
 
-  protected Long id;
+  private Long id;
 
-  protected Long companyid;
+  private Long companyid;
 
-  protected LocalDate deadline;
+  private LocalDate deadline;
 
-  protected String projectName;
+  private String projectName;
 
-  protected LocalDate startDate;
+  private LocalDate startDate;
 
-  protected EStatus status;
+  private int status;
 
-  protected LocalDateTime created;
+  private LocalDateTime created;
 
-  protected LocalDateTime updated;
+  private LocalDateTime updated;
 
-  protected int version;
+  private int version;
 
   public ProjectEdo() {
   }
@@ -81,11 +79,11 @@ public class ProjectEdo {
     this.startDate = startDate;
   }
 
-  public EStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
-  public void setStatus(final EStatus status) {
+  public void setStatus(final int status) {
     this.status = status;
   }
 

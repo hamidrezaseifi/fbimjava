@@ -3,16 +3,16 @@ package com.featurebim.core.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.featurebim.common.model.edo.CompanyEdo;
 import com.featurebim.common.model.reponse.FeatureBimUiRestResponse;
 import com.featurebim.common.model.reponse.GeneralRestResponse;
+import com.featurebim.core.annotations.FbCoreRequestGetDataMapping;
+import com.featurebim.core.annotations.FbCoreRequestPostDataMapping;
 import com.featurebim.core.bl.CompanyHandler;
 import com.featurebim.core.dao.exceptions.StorageException;
 import com.featurebim.core.model.Company;
@@ -28,30 +28,27 @@ public class CompanyController {
     this.companyReadHandler = companyReadHandler;
   }
 
-  @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody GeneralRestResponse readAll() throws StorageException {
+  @FbCoreRequestGetDataMapping(value = "/all")
+  public GeneralRestResponse readAll() throws StorageException {
     final List<Company> companies = companyReadHandler.listCompanies();
     return GeneralRestResponse.createData(Company.toEdoList(companies));
   }
 
-  @RequestMapping(value = "/read/{companyid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody GeneralRestResponse getCompany(@PathVariable final Long companyid) throws StorageException {
+  @FbCoreRequestGetDataMapping(value = "/read/{companyid}")
+  public GeneralRestResponse getCompany(@PathVariable final Long companyid) throws StorageException {
 
     return GeneralRestResponse.createData((companyReadHandler.getById(companyid).toEdo()));
   }
 
-  @RequestMapping(value = "/delete/{companyid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody FeatureBimUiRestResponse deleteCompany(@PathVariable final Long companyid) {
+  @FbCoreRequestPostDataMapping(value = "/delete")
+  public FeatureBimUiRestResponse deleteCompany(@RequestBody(required = true) final CompanyEdo companyEdo) {
 
     return null;
   }
 
-  @RequestMapping(value = "/update",
-                  method = RequestMethod.POST,
-                  consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-                  produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public @ResponseBody FeatureBimUiRestResponse updateCompany(@RequestBody(required = true) final Company company) {
+  @FbCoreRequestPostDataMapping(value = "/update")
+  public FeatureBimUiRestResponse updateCompany(@RequestBody(required = true) final CompanyEdo companyEdo) throws StorageException {
 
-    return null;
+    return GeneralRestResponse.createData(companyReadHandler.updateCompany(Company.fromEdo(companyEdo)));
   }
 }

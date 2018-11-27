@@ -19,8 +19,8 @@ public class GeneralRestResponse extends FeatureBimUiRestResponse {
     return (GeneralRestResponse) new FeatureBimUiRestResponse(status, ex.getClass().getName(), ex.getMessage());
   }
 
-  public static GeneralRestResponse createData(final Object projects) {
-    return new GeneralRestResponse(projects);
+  public static GeneralRestResponse createData(final Object data) {
+    return new GeneralRestResponse(data);
   }
 
   public Object getData() {

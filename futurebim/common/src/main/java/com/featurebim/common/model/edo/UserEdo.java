@@ -3,41 +3,39 @@ package com.featurebim.common.model.edo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.featurebim.common.model.enums.EStatus;
-
 /**
  * The persistent class for the users database table.
  *
  */
 public class UserEdo {
 
-  protected Long id;
+  private Long id;
 
-  protected Long companyid;
+  private Long companyid;
 
-  protected LocalDate birthday;
+  private String username;
 
-  protected LocalDateTime created;
+  private String hashPassword;
 
-  protected String email;
+  private short gender;
 
-  protected String firstname;
+  private String lastname;
 
-  protected short gender;
+  private String firstname;
 
-  protected String hashPassword;
+  private String nameTag;
 
-  protected String lastname;
+  private LocalDate birthday;
 
-  protected String nameTag;
+  private String email;
 
-  protected EStatus status;
+  private int status;
 
-  protected LocalDateTime updated;
+  private int version;
 
-  protected String username;
+  private LocalDateTime created;
 
-  protected int version;
+  private LocalDateTime updated;
 
   public UserEdo() {
   }
@@ -122,12 +120,12 @@ public class UserEdo {
     this.nameTag = nameTag;
   }
 
-  public EStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
-  public void setStatus(final Long status) {
-    this.status = EStatus.ofId(status);
+  public void setStatus(final int status) {
+    this.status = status;
   }
 
   public LocalDateTime getUpdated() {

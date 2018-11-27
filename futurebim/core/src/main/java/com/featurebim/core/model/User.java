@@ -2,45 +2,44 @@ package com.featurebim.core.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.featurebim.common.model.enums.EStatus;
-import com.featurebim.core.model.base.SerializableModelBase;
+import com.featurebim.common.model.edo.UserEdo;
 
 /**
  * The persistent class for the users database table.
  *
  */
-public class User extends SerializableModelBase {
-
-  private static final long serialVersionUID = 1L;
+public class User {
 
   private Long id;
 
   private Long companyid;
 
-  private LocalDate birthday;
-
-  private LocalDateTime created;
-
-  private String email;
-
-  private String firstname;
-
-  private short gender;
+  private String username;
 
   private String hashPassword;
 
+  private short gender;
+
   private String lastname;
+
+  private String firstname;
 
   private String nameTag;
 
-  private EStatus status;
+  private LocalDate birthday;
 
-  private LocalDateTime updated;
+  private String email;
 
-  private String username;
+  private int status;
 
   private int version;
+
+  private LocalDateTime created;
+
+  private LocalDateTime updated;
 
   public User() {
   }
@@ -125,12 +124,12 @@ public class User extends SerializableModelBase {
     this.nameTag = nameTag;
   }
 
-  public EStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
-  public void setStatus(final Long status) {
-    this.status = EStatus.ofId(status);
+  public void setStatus(final int status) {
+    this.status = status;
   }
 
   public LocalDateTime getUpdated() {
@@ -157,4 +156,64 @@ public class User extends SerializableModelBase {
     this.version = version;
   }
 
+  public UserEdo toEdo() {
+    final UserEdo edo = new UserEdo();
+    edo.setBirthday(birthday);
+    edo.setCompanyid(companyid);
+    edo.setEmail(email);
+    edo.setFirstname(firstname);
+    edo.setGender(gender);
+    edo.setHashPassword(hashPassword);
+    edo.setLastname(lastname);
+    edo.setNameTag(nameTag);
+    edo.setUsername(username);
+
+    edo.setCreated(created);
+    edo.setId(id);
+    edo.setStatus(status);
+    edo.setUpdated(updated);
+    edo.setVersion(version);
+
+    return edo;
+  }
+
+  public static User fromEdo(final UserEdo edo) {
+    final User user = new User();
+
+    user.setBirthday(edo.getBirthday());
+    user.setCompanyid(edo.getCompanyid());
+    user.setEmail(edo.getEmail());
+    user.setFirstname(edo.getFirstname());
+    user.setGender(edo.getGender());
+    user.setHashPassword(edo.getHashPassword());
+    user.setLastname(edo.getLastname());
+    user.setNameTag(edo.getNameTag());
+    user.setUsername(edo.getUsername());
+
+    user.setCreated(edo.getCreated());
+    user.setId(edo.getId());
+    user.setStatus(edo.getStatus());
+    user.setUpdated(edo.getUpdated());
+    user.setVersion(edo.getVersion());
+
+    return user;
+  }
+
+  public static List<UserEdo> toEdoList(final List<User> list) {
+
+    final List<UserEdo> edoList = new ArrayList<>();
+    for (final User p : list) {
+      edoList.add(p.toEdo());
+    }
+    return edoList;
+  }
+
+  public static List<User> fromEdoList(final List<UserEdo> edoList) {
+
+    final List<User> list = new ArrayList<>();
+    for (final UserEdo edo : edoList) {
+      list.add(User.fromEdo(edo));
+    }
+    return list;
+  }
 }

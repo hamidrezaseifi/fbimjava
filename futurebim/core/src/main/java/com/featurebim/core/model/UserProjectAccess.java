@@ -2,33 +2,28 @@ package com.featurebim.core.model;
 
 import java.time.LocalDateTime;
 
-import com.featurebim.common.model.enums.EStatus;
-import com.featurebim.core.model.base.SerializableModelBase;
-
 /**
  * The persistent class for the user_project_access database table.
  *
  */
-public class UserProjectAccess extends SerializableModelBase {
+public class UserProjectAccess {
 
-  private static final long serialVersionUID = 1L;
-
-  private UserProjectAccessPK id;
+  private Long id;
 
   private LocalDateTime created;
 
-  private EStatus status;
+  private int status;
 
   private ProjectAccessType projectAccessType;
 
   public UserProjectAccess() {
   }
 
-  public UserProjectAccessPK getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(final UserProjectAccessPK id) {
+  public void setId(final Long id) {
     this.id = id;
   }
 
@@ -40,12 +35,12 @@ public class UserProjectAccess extends SerializableModelBase {
     return this.created;
   }
 
-  public EStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
-  public void setStatus(final Long status) {
-    this.status = EStatus.ofId(status);
+  public void setStatus(final int status) {
+    this.status = status;
   }
 
   public ProjectAccessType getProjectAccessType() {

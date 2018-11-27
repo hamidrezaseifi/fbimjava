@@ -20,7 +20,7 @@ public class ModelEdoMapper {
     c.setCompanyName(edo.getCompanyName());
     c.setComments(edo.getComments());
     c.setCreated(edo.getCreated());
-    c.setStatus(edo.getStatus().getDbId());
+    c.setStatus(edo.getStatus());
     c.setUpdated(edo.getUpdated());
     c.setVersion(edo.getVersion());
 
@@ -46,7 +46,7 @@ public class ModelEdoMapper {
     c.setCompanyName(edo.getCompanyName());
     c.setComments(edo.getComments());
     c.setCreated(edo.getCreated());
-    c.setStatus(edo.getStatus().getDbId());
+    c.setStatus(edo.getStatus());
     c.setUpdated(edo.getUpdated());
     c.setVersion(edo.getVersion());
 
@@ -72,7 +72,7 @@ public class ModelEdoMapper {
     edo.setCompanyName(c.getCompanyName());
     edo.setComments(c.getComments());
     edo.setCreated(c.getCreated());
-    edo.setStatus(c.getStatus().getDbId());
+    edo.setStatus(c.getStatus());
     edo.setUpdated(c.getUpdated());
     edo.setVersion(c.getVersion());
 
@@ -98,7 +98,7 @@ public class ModelEdoMapper {
     c.setCompanyName(edo.getCompanyName());
     c.setComments(edo.getComments());
     c.setCreated(edo.getCreated());
-    c.setStatus(edo.getStatus().getDbId());
+    c.setStatus(edo.getStatus());
     c.setUpdated(edo.getUpdated());
     c.setVersion(edo.getVersion());
 
@@ -115,7 +115,7 @@ public class ModelEdoMapper {
     p.setId(edo.getId());
     p.setProjectName(edo.getProjectName());
     p.setStartDate(edo.getStartDate());
-    p.setStatus(edo.getStatus().getDbId());
+    p.setStatus(edo.getStatus());
     p.setUpdated(edo.getUpdated());
     p.setVersion(edo.getVersion());
 
@@ -143,7 +143,7 @@ public class ModelEdoMapper {
     p.setId(edo.getId());
     p.setProjectName(edo.getProjectName());
     p.setStartDate(edo.getStartDate());
-    p.setStatus(edo.getStatus().getDbId());
+    p.setStatus(edo.getStatus());
     p.setUpdated(edo.getUpdated());
     p.setVersion(edo.getVersion());
 
@@ -174,7 +174,7 @@ public class ModelEdoMapper {
     u.setId(edo.getId());
     u.setLastname(edo.getLastname());
     u.setNameTag(edo.getNameTag());
-    u.setStatus(edo.getStatus().getDbId());
+    u.setStatus(edo.getStatus());
     u.setUsername(edo.getUsername());
     u.setUpdated(edo.getUpdated());
     u.setVersion(edo.getVersion());

@@ -55,7 +55,7 @@ public class CompanyDaoImpl implements CompanyDao {
         final PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, company.getCompanyName());
         ps.setString(2, company.getComments());
-        ps.setLong(3, company.getStatus().getDbId());
+        ps.setInt(3, company.getStatus());
         ps.setInt(4, company.getVersion());
 
         return ps;
@@ -84,7 +84,7 @@ public class CompanyDaoImpl implements CompanyDao {
         final PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, company.getCompanyName());
         ps.setString(2, company.getComments());
-        ps.setLong(3, company.getStatus().getDbId());
+        ps.setInt(3, company.getStatus());
         ps.setInt(4, company.getVersion());
         ps.setLong(5, company.getId());
 
@@ -166,7 +166,6 @@ public class CompanyDaoImpl implements CompanyDao {
     return company;
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public List<Company> listCompanies() throws StorageException {
     logger.info("Dao Read Company List");
@@ -196,7 +195,7 @@ public class CompanyDaoImpl implements CompanyDao {
     company.setUpdated(rs.getTimestamp("updated").toLocalDateTime());
     company.setId(rs.getLong("id"));
     company.setVersion(rs.getInt("version"));
-    company.setStatus(rs.getLong("status"));
+    company.setStatus(rs.getInt("status"));
 
     return company;
   }

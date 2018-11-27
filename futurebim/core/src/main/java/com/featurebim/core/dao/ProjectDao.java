@@ -9,7 +9,7 @@ public interface ProjectDao {
 
   public Project addProject(Project c) throws StorageException;
 
-  public boolean updateProject(Project c) throws StorageException;
+  public Project updateProject(Project c) throws StorageException;
 
   public boolean removeProject(Long id) throws StorageException;
 

@@ -1,15 +1,10 @@
 package com.featurebim.core.model;
 
-import com.featurebim.common.model.enums.EStatus;
-import com.featurebim.core.model.base.SerializableModelBase;
-
 /**
  * The persistent class for the toolbars database table.
  *
  */
-public class Toolbar extends SerializableModelBase {
-
-  private static final long serialVersionUID = 1L;
+public class Toolbar {
 
   private String id;
 
@@ -21,7 +16,7 @@ public class Toolbar extends SerializableModelBase {
 
   private short pos;
 
-  private EStatus status;
+  private int status;
 
   private String type;
 
@@ -70,12 +65,12 @@ public class Toolbar extends SerializableModelBase {
     this.pos = pos;
   }
 
-  public EStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
-  public void setStatus(final Long status) {
-    this.status = EStatus.ofId(status);
+  public void setStatus(final int status) {
+    this.status = status;
   }
 
   public String getType() {

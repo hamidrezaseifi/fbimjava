@@ -27,4 +27,12 @@ public class ProjectHandler {
     return projectDao.listProjects(companyId);
   }
 
+  public Project addProject(final Project project) throws StorageException {
+    return projectDao.addProject(project);
+  }
+
+  public Project updateProject(final Project project) throws StorageException {
+    return projectDao.updateProject(project);
+  }
+
 }
