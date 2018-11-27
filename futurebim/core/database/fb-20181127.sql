@@ -803,6 +803,49 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Table structure for table `project_status`
+--
+
+DROP TABLE IF EXISTS `project_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `project_status` (
+  `id` smallint(6) NOT NULL,
+  `titleid` varchar(45) NOT NULL,
+  `created` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
+  `updated` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
+  PRIMARY KEY (`id`,`titleid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `project_status`
+--
+
+LOCK TABLES `project_status` WRITE;
+/*!40000 ALTER TABLE `project_status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project_status` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `featurebim`.`project_status_BEFORE_UPDATE` BEFORE UPDATE ON `project_status` FOR EACH ROW
+BEGIN
+set NEW.updated=CURRENT_TIMESTAMP(6);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
 -- Table structure for table `project_types`
 --
 
@@ -1305,6 +1348,49 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Table structure for table `user_status`
+--
+
+DROP TABLE IF EXISTS `user_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_status` (
+  `id` smallint(6) NOT NULL,
+  `titleid` varchar(45) NOT NULL,
+  `created` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
+  `updated` timestamp(6) NOT NULL DEFAULT current_timestamp(6),
+  PRIMARY KEY (`id`,`titleid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_status`
+--
+
+LOCK TABLES `user_status` WRITE;
+/*!40000 ALTER TABLE `user_status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_status` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `featurebim`.`user_status_BEFORE_UPDATE` BEFORE UPDATE ON `user_status` FOR EACH ROW
+BEGIN
+set NEW.updated=CURRENT_TIMESTAMP(6);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
 -- Table structure for table `users`
 --
 
@@ -1502,4 +1588,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-27 12:08:28
+-- Dump completed on 2018-11-27 16:24:28
