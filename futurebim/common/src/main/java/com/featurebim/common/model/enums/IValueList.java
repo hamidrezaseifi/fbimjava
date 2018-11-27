@@ -1,4 +1,4 @@
-package com.featurebim.common.model.enums.base;
+package com.featurebim.common.model.enums;
 
 public interface IValueList {
 	Long getDbId();

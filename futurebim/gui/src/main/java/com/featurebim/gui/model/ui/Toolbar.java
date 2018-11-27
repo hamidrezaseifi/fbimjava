@@ -1,4 +1,4 @@
-package com.featurebim.gui.model;
+package com.featurebim.gui.model.ui;
 
 import java.io.Serializable;
 

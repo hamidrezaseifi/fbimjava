@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.featurebim.gui.controller.base.UiControllerBase;
 import com.featurebim.gui.helper.PageMenuLoader;
-import com.featurebim.gui.model.MenuItem;
+import com.featurebim.gui.model.ui.MenuItem;
 
 @Controller
 @RequestMapping(path = "/bim")

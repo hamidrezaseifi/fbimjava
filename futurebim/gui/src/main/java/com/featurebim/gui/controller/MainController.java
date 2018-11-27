@@ -13,8 +13,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.featurebim.gui.controller.base.UiControllerBase;
 import com.featurebim.gui.helper.PageMenuLoader;
-import com.featurebim.gui.model.GuiLoggedData;
-import com.featurebim.gui.model.MenuItem;
+import com.featurebim.gui.model.ui.GuiLoggedData;
+import com.featurebim.gui.model.ui.MenuItem;
 
 @Controller
 @RequestMapping(path = "/")

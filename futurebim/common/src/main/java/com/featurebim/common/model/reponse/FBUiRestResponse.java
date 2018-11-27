@@ -2,7 +2,7 @@ package com.featurebim.common.model.reponse;
 
 import org.springframework.http.HttpStatus;
 
-public class FeatureBimUiRestResponse {
+public class FBUiRestResponse {
 
   private final HttpStatus status;
   private final String     errorType;
@@ -10,14 +10,14 @@ public class FeatureBimUiRestResponse {
 
   public static String NoError = "NoError";
 
-  public FeatureBimUiRestResponse() {
+  public FBUiRestResponse() {
     this.status = HttpStatus.OK;
     this.errorType = NoError;
     this.message = "";
 
   }
 
-  public FeatureBimUiRestResponse(final HttpStatus status, final String errorType, final String message) {
+  public FBUiRestResponse(final HttpStatus status, final String errorType, final String message) {
     this.status = status;
     this.errorType = errorType;
     this.message = message;
@@ -38,6 +38,15 @@ public class FeatureBimUiRestResponse {
 
   public String getMessage() {
     return message;
+  }
+
+  public static String stackListToString(final StackTraceElement[] list) {
+    String res = "";
+    for (final StackTraceElement el : list) {
+      res += el.toString() + "\n";
+    }
+
+    return res;
   }
 
   @Override

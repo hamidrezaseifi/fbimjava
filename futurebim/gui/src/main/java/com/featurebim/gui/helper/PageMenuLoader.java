@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.featurebim.gui.model.MenuItem;
+import com.featurebim.gui.model.ui.MenuItem;
 
 @Component
 public class PageMenuLoader {

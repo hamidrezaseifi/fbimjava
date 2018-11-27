@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 
 import com.featurebim.common.model.edo.CompanyStatusListEdo;
 
-public class ValueListRestResponse extends FeatureBimUiRestResponse {
+public class ValueListRestResponse extends FBUiRestResponse {
 
   private CompanyStatusListEdo companyStatusList = null;
 
@@ -13,7 +13,7 @@ public class ValueListRestResponse extends FeatureBimUiRestResponse {
   }
 
   public static ValueListRestResponse createError(final HttpStatus status, final Exception ex) {
-    return (ValueListRestResponse) new FeatureBimUiRestResponse(status, ex.getClass().getName(), ex.getMessage());
+    return (ValueListRestResponse) new FBUiRestResponse(status, ex.getClass().getName(), ex.getMessage());
   }
 
   public static ValueListRestResponse createData() {

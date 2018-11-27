@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * read message labels from message property file
- * 
+ *
  * @author rezasei
  *
  */
@@ -32,4 +32,7 @@ public class MessagesHelper {
     return accessor.getMessage(code);
   }
 
+  public String get(final String code, final Object... args) {
+    return String.format(accessor.getMessage(code), args);
+  }
 }

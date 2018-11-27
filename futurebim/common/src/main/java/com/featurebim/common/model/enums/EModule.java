@@ -1,0 +1,21 @@
+package com.featurebim.common.model.enums;
+
+/**
+ * A enumeration of names for MDM used modules
+ *
+ * @author bjoern frohberg
+ */
+public enum EModule {
+  CORE("MDM core service"),
+  GUI("GUI ui service");
+
+  private final String moduleName;
+
+  private EModule(final String moduleName) {
+    this.moduleName = moduleName;
+  }
+
+  public String getModuleName() {
+    return moduleName;
+  }
+}

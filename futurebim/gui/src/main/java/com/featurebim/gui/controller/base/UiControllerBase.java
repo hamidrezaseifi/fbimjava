@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.featurebim.gui.model.MenuItem;
+import com.featurebim.gui.model.ui.MenuItem;
 
 @Controller
 public abstract class UiControllerBase {

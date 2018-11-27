@@ -1,44 +1,46 @@
 package com.featurebim.gui.model.futurebim;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.featurebim.common.model.enums.EStatus;
+import com.featurebim.common.model.edo.UserEdo;
+import com.featurebim.gui.model.enums.EGuiUserStatus;
 
 /**
  * The persistent class for the users database table.
  *
  */
-public class GuiUser implements Serializable {
+public class GuiUser {
 
-  protected Long id;
+  private Long id;
 
-  protected Long companyid;
+  private Long companyid;
 
-  protected String username;
+  private String username;
 
-  protected LocalDate birthday;
+  private String hashPassword;
 
-  protected String email;
+  private short gender;
 
-  protected String firstname;
+  private String lastname;
 
-  protected String lastname;
+  private String firstname;
 
-  protected short gender;
+  private String nameTag;
 
-  protected String hashPassword;
+  private LocalDate birthday;
 
-  protected String nameTag;
+  private String email;
 
-  protected EStatus status;
+  private EGuiUserStatus status;
 
-  protected int version;
+  private int version;
 
-  protected LocalDateTime created;
+  private LocalDateTime created;
 
-  protected LocalDateTime updated;
+  private LocalDateTime updated;
 
   public GuiUser() {
   }
@@ -87,10 +89,6 @@ public class GuiUser implements Serializable {
     return this.firstname;
   }
 
-  public String getFullName() {
-    return this.lastname + ", " + this.firstname;
-  }
-
   public void setFirstname(final String firstname) {
     this.firstname = firstname;
   }
@@ -127,12 +125,12 @@ public class GuiUser implements Serializable {
     this.nameTag = nameTag;
   }
 
-  public EStatus getStatus() {
+  public EGuiUserStatus getStatus() {
     return this.status;
   }
 
-  public void setStatus(final Long status) {
-    this.status = EStatus.ofId(status);
+  public void setStatus(final int status) {
+    this.status = EGuiUserStatus.fromId(status);
   }
 
   public LocalDateTime getUpdated() {
@@ -159,4 +157,64 @@ public class GuiUser implements Serializable {
     this.version = version;
   }
 
+  public UserEdo toEdo() {
+    final UserEdo edo = new UserEdo();
+    edo.setBirthday(birthday);
+    edo.setCompanyid(companyid);
+    edo.setEmail(email);
+    edo.setFirstname(firstname);
+    edo.setGender(gender);
+    edo.setHashPassword(hashPassword);
+    edo.setLastname(lastname);
+    edo.setNameTag(nameTag);
+    edo.setUsername(username);
+
+    edo.setCreated(created);
+    edo.setId(id);
+    edo.setStatus(status.getId());
+    edo.setUpdated(updated);
+    edo.setVersion(version);
+
+    return edo;
+  }
+
+  public static GuiUser fromEdo(final UserEdo edo) {
+    final GuiUser user = new GuiUser();
+
+    user.setBirthday(edo.getBirthday());
+    user.setCompanyid(edo.getCompanyid());
+    user.setEmail(edo.getEmail());
+    user.setFirstname(edo.getFirstname());
+    user.setGender(edo.getGender());
+    user.setHashPassword(edo.getHashPassword());
+    user.setLastname(edo.getLastname());
+    user.setNameTag(edo.getNameTag());
+    user.setUsername(edo.getUsername());
+
+    user.setCreated(edo.getCreated());
+    user.setId(edo.getId());
+    user.setStatus(edo.getStatus());
+    user.setUpdated(edo.getUpdated());
+    user.setVersion(edo.getVersion());
+
+    return user;
+  }
+
+  public static List<UserEdo> toEdoList(final List<GuiUser> list) {
+
+    final List<UserEdo> edoList = new ArrayList<>();
+    for (final GuiUser p : list) {
+      edoList.add(p.toEdo());
+    }
+    return edoList;
+  }
+
+  public static List<GuiUser> fromEdoList(final List<UserEdo> edoList) {
+
+    final List<GuiUser> list = new ArrayList<>();
+    for (final UserEdo edo : edoList) {
+      list.add(GuiUser.fromEdo(edo));
+    }
+    return list;
+  }
 }

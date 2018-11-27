@@ -1,4 +1,4 @@
-package com.featurebim.gui.helper;
+package com.featurebim.gui.configuration;
 
 import javax.annotation.PostConstruct;
 
@@ -33,33 +33,25 @@ public class UiConfiguration {
     @Value("${core.rest.url.projects}")
     private String allProjectsReadPath;
 
-    @Value("${core.rest.url.ifc}")
-    private String ifcReadPath;
-
-
+    @Value("${core.rest.url.user.authenticate}")
+    private String userAuthenticate;
 
     @PostConstruct
     private void init() {
 
     }
 
-    public String getAllProjectsReadPath(final String additionalPath) {
-      return allProjectsReadPath + additionalPath;
-    }
-    
-    public void setAllProjectsReadPath(final String allProjectsReadPath) {
-      this.allProjectsReadPath = allProjectsReadPath;
+    public String getUserAuthenticate() {
+      return userAuthenticate;
     }
 
-    public String getIfcReadPath() {
-      return ifcReadPath;
+    public void setUserAuthenticate(final String userAuthenticate) {
+      this.userAuthenticate = userAuthenticate;
     }
 
-    public void setIfcReadPath(final String ifcReadPath) {
-      this.ifcReadPath = ifcReadPath;
+    public String getAllProjectsReadPath() {
+      return allProjectsReadPath;
     }
-    
-
 
   }
 

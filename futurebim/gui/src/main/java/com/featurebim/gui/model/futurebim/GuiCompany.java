@@ -1,8 +1,11 @@
 package com.featurebim.gui.model.futurebim;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.featurebim.common.model.enums.EStatus;
+import com.featurebim.common.model.edo.CompanyEdo;
+import com.featurebim.gui.model.enums.EGuiCompanyStatus;
 
 /**
  * The persistent class for the companies database table.
@@ -16,7 +19,7 @@ public class GuiCompany {
 
   private String companyName;
 
-  private EStatus status;
+  private EGuiCompanyStatus status;
 
   private int version;
 
@@ -59,12 +62,12 @@ public class GuiCompany {
     this.created = created;
   }
 
-  public EStatus getStatus() {
+  public EGuiCompanyStatus getStatus() {
     return this.status;
   }
 
-  public void setStatus(final Long status) {
-    this.status = EStatus.ofId(status);
+  public void setStatus(final int status) {
+    this.status = EGuiCompanyStatus.fromId(status);
   }
 
   public LocalDateTime getUpdated() {
@@ -88,4 +91,39 @@ public class GuiCompany {
     return "id=" + id + ", name=" + companyName + ", updated=" + updated;
   }
 
+  public CompanyEdo toEdo() {
+    final CompanyEdo edo = new CompanyEdo();
+    edo.setComments(comments);
+    edo.setCompanyName(companyName);
+    edo.setCreated(created);
+    edo.setId(id);
+    edo.setStatus(status.getId());
+    edo.setUpdated(updated);
+    edo.setVersion(version);
+
+    return edo;
+  }
+
+  public static GuiCompany fromEdo(final CompanyEdo edo) {
+    final GuiCompany company = new GuiCompany();
+
+    company.setComments(edo.getComments());
+    company.setCompanyName(edo.getCompanyName());
+    company.setCreated(edo.getCreated());
+    company.setId(edo.getId());
+    company.setStatus(edo.getStatus());
+    company.setUpdated(edo.getUpdated());
+    company.setVersion(edo.getVersion());
+
+    return company;
+  }
+
+  public static List<CompanyEdo> toEdoList(final List<GuiCompany> list) {
+
+    final List<CompanyEdo> edoList = new ArrayList<>();
+    for (final GuiCompany p : list) {
+      edoList.add(p.toEdo());
+    }
+    return edoList;
+  }
 }

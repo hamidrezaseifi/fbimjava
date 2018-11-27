@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.featurebim.common.model.edo.CompanyEdo;
-import com.featurebim.common.model.reponse.FeatureBimUiRestResponse;
+import com.featurebim.common.model.reponse.FBUiRestResponse;
 import com.featurebim.common.model.reponse.GeneralRestResponse;
 import com.featurebim.core.annotations.FbCoreRequestGetDataMapping;
 import com.featurebim.core.annotations.FbCoreRequestPostDataMapping;
@@ -41,13 +41,13 @@ public class CompanyController {
   }
 
   @FbCoreRequestPostDataMapping(value = "/delete")
-  public FeatureBimUiRestResponse deleteCompany(@RequestBody(required = true) final CompanyEdo companyEdo) {
+  public FBUiRestResponse deleteCompany(@RequestBody(required = true) final CompanyEdo companyEdo) {
 
     return null;
   }
 
   @FbCoreRequestPostDataMapping(value = "/update")
-  public FeatureBimUiRestResponse updateCompany(@RequestBody(required = true) final CompanyEdo companyEdo) throws StorageException {
+  public FBUiRestResponse updateCompany(@RequestBody(required = true) final CompanyEdo companyEdo) throws StorageException {
 
     return GeneralRestResponse.createData(companyReadHandler.updateCompany(Company.fromEdo(companyEdo)));
   }

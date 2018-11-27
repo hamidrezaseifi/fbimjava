@@ -12,7 +12,13 @@ public class ProjectEdo {
 
   private Long id;
 
+  private Long parentProjectId;
+
   private Long companyid;
+
+  private int projectType;
+
+  private LocalDateTime created;
 
   private LocalDate deadline;
 
@@ -21,8 +27,6 @@ public class ProjectEdo {
   private LocalDate startDate;
 
   private int status;
-
-  private LocalDateTime created;
 
   private LocalDateTime updated;
 
@@ -101,6 +105,22 @@ public class ProjectEdo {
 
   public void setVersion(final int version) {
     this.version = version;
+  }
+
+  public Long getParentProjectId() {
+    return parentProjectId;
+  }
+
+  public void setParentProjectId(final Long parentProjectId) {
+    this.parentProjectId = parentProjectId;
+  }
+
+  public int getProjectType() {
+    return projectType;
+  }
+
+  public void setProjectType(final int projectType) {
+    this.projectType = projectType;
   }
 
 }

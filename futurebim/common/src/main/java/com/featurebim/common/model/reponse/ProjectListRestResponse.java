@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 
 import com.featurebim.common.model.edo.ProjectEdo;
 
-public class ProjectListRestResponse extends FeatureBimUiRestResponse {
+public class ProjectListRestResponse extends FBUiRestResponse {
 
   private List<ProjectEdo> projects = new ArrayList<>();
 
@@ -21,7 +21,7 @@ public class ProjectListRestResponse extends FeatureBimUiRestResponse {
   }
 
   public static ProjectListRestResponse createError(final HttpStatus status, final Exception ex) {
-    return (ProjectListRestResponse) new FeatureBimUiRestResponse(status, ex.getClass().getName(), ex.getMessage());
+    return (ProjectListRestResponse) new FBUiRestResponse(status, ex.getClass().getName(), ex.getMessage());
   }
 
   public static ProjectListRestResponse createList(final List<ProjectEdo> projects) {
