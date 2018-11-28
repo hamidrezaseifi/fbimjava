@@ -8,7 +8,6 @@ public enum EUiUserRole {
   USER(5L, "Benutzer", "ROLE_USER"),
   VIEW(10L, "Zuschauer", "ROLE_VIEW"),
   GUEST(15L, "Gast", ""),
-  DATA_STEWARD(20L, "Data Stewrard", "ROLE_DATASTEWARD"),
   ADMIN(25L, "Administrator", "ROLE_ADMIN");
 
   private final Long   id;
@@ -40,6 +39,18 @@ public enum EUiUserRole {
     }
     for (final EUiUserRole role : values()) {
       if (role.name().equals(value)) {
+        return role;
+      }
+    }
+    return NOROLE;
+  }
+
+  public static EUiUserRole ofId(final int id) {
+    if (id < 1) {
+      return NOROLE;
+    }
+    for (final EUiUserRole role : values()) {
+      if (role.getId() == id) {
         return role;
       }
     }

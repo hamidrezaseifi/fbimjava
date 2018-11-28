@@ -3,9 +3,8 @@ package org.springframework.security.authentication;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 
-import com.featurebim.gui.model.futurebim.GuiUser;
+import com.featurebim.gui.model.futurebim.GuiUserFull;
 
 public class FBAuthenticationToken extends UsernamePasswordAuthenticationToken {
 
@@ -13,21 +12,21 @@ public class FBAuthenticationToken extends UsernamePasswordAuthenticationToken {
    *
    */
   private static final long serialVersionUID = -7341854439748304108L;
-  private final GuiUser     user;
+  private final GuiUserFull user;
 
-  public FBAuthenticationToken(final GuiUser user) {
-    super(user.getUsername(), user.getHashPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN"));
+  public FBAuthenticationToken(final GuiUserFull user) {
+    super(user.getUsername(), user.getHashPassword(), user.getAuthorities());
 
     this.user = user;
   }
 
-  public GuiUser getUser() {
+  public GuiUserFull getUser() {
     return user;
   }
 
   @Override
   public Collection<GrantedAuthority> getAuthorities() {
-    return AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN");
+    return user.getAuthorities();
   }
 
   @Override

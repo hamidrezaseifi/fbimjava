@@ -1,7 +1,5 @@
 package com.featurebim.gui.authentication;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +9,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.featurebim.gui.model.futurebim.GuiUser;
+import com.featurebim.gui.model.futurebim.GuiUserFull;
 import com.featurebim.gui.model.ui.UiSessionUserInfo;
-import com.featurebim.gui.model.ui.UiUser;
 import com.featurebim.gui.model.ui.enums.EUiUserRole;
 
 /**
@@ -54,10 +51,10 @@ public class UiSessionUserService {
 
       if (debugModeAuthentication.isDebugLoginEnabled()) {
 
-        final GuiUser user = new GuiUser();
+        final GuiUserFull user = new GuiUserFull();
         user.setUsername(debugModeAuthentication.getCurrentDebugLoginUsername());
-        final EUiUserRole[] roles = new EUiUserRole[1];
-        roles[0] = EUiUserRole.ADMIN;
+        user.addRole(EUiUserRole.ADMIN);
+
         return authorizeUser(new FBAuthenticationToken(user), session, true);
 
       }
@@ -91,11 +88,11 @@ public class UiSessionUserService {
       }
       ctx.setAuthentication(token);
     }
-    return setLoggedInUserInfo(new UiUser(token.getUser(), new ArrayList<>()), session);
+    return setLoggedInUserInfo(token.getUser(), session);
 
   }
 
-  public UiSessionUserInfo setLoggedInUserInfo(final UiUser user, final HttpSession session) {
+  public UiSessionUserInfo setLoggedInUserInfo(final GuiUserFull user, final HttpSession session) {
 
     session.setAttribute(UiSessionUserInfo.SESSION_LOGGEDUSERINFO_KEY, new UiSessionUserInfo(user));
 

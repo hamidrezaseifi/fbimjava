@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.context.annotation.Scope;
 
+import com.featurebim.gui.model.futurebim.GuiUserFull;
+
 /**
  * A class to encapsulate session user data
  *
@@ -15,8 +17,8 @@ public class UiSessionUserInfo {
 
   public static String SESSION_LOGGEDUSERINFO_KEY = "fb-session-user";
 
-  private Date   loginTime;
-  private UiUser user;
+  private Date        loginTime;
+  private GuiUserFull user;
 
   public boolean isValid(final int timeOut) {
 
@@ -31,7 +33,7 @@ public class UiSessionUserInfo {
 
   }
 
-  public UiSessionUserInfo(final UiUser user) {
+  public UiSessionUserInfo(final GuiUserFull user) {
     this.user = user;
     this.loginTime = new Date();
 
@@ -49,11 +51,11 @@ public class UiSessionUserInfo {
     this.loginTime = new Date();
   }
 
-  public UiUser getUser() {
+  public GuiUserFull getUser() {
     return user;
   }
 
-  public void setUser(final UiUser user) {
+  public void setUser(final GuiUserFull user) {
     this.user = user;
   }
 

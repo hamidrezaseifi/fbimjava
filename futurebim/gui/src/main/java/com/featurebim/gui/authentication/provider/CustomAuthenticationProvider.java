@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.featurebim.gui.bl.IUserHandler;
 import com.featurebim.gui.configuration.UiConfiguration.CoreAccessConfig;
-import com.featurebim.gui.model.futurebim.GuiUser;
+import com.featurebim.gui.model.futurebim.GuiUserFull;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -34,11 +34,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     final String username = authentication.getName();
     final String password = authentication.getCredentials().toString();
 
-    final GuiUser authUser = userHandler.authenticateUser(username, password);
+    final GuiUserFull authUser = userHandler.authenticateUser(username, password);
 
     if (authUser != null) {
-
-      // final List<GrantedAuthority> grantedAuths = AuthorityUtils.commaSeparatedStringToAuthorityList(login.getRole());
 
       return new FBAuthenticationToken(authUser);
     }

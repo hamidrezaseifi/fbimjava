@@ -15,9 +15,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.featurebim.gui.authentication.UiSessionUserService;
 import com.featurebim.gui.configuration.WebSecurityConfig;
+import com.featurebim.gui.model.futurebim.GuiUserFull;
 import com.featurebim.gui.model.ui.MenuItem;
 import com.featurebim.gui.model.ui.UiSessionUserInfo;
-import com.featurebim.gui.model.ui.UiUser;
 
 @Controller
 public abstract class UiControllerBase {
@@ -76,7 +76,7 @@ public abstract class UiControllerBase {
     return this.getSessionUserInfo().getUser().getUsername();
   }
 
-  protected UiUser getCurrentUser() {
+  protected GuiUserFull getCurrentUser() {
     return this.getSessionUserInfo().getUser();
   }
 }

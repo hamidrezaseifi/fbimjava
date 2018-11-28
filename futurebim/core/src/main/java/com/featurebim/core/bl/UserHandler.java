@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.featurebim.core.dao.UserDao;
 import com.featurebim.core.dao.exceptions.StorageException;
 import com.featurebim.core.model.User;
+import com.featurebim.core.model.UserFull;
 
 @Service
 public class UserHandler implements IUserHandler {
@@ -45,7 +46,7 @@ public class UserHandler implements IUserHandler {
   }
 
   @Override
-  public User getByUsername(final String username) throws StorageException {
+  public UserFull getByUsername(final String username) throws StorageException {
     return userDao.getByUsername(username);
   }
 
@@ -60,9 +61,9 @@ public class UserHandler implements IUserHandler {
   }
 
   @Override
-  public User authenticateUser(final String username, final String password) throws StorageException {
+  public UserFull authenticateUser(final String username, final String password) throws StorageException {
 
-    final User fUser = getByUsername(username);
+    final UserFull fUser = getByUsername(username);
 
     if (fUser != null && passwordEncoder.matches(password, fUser.getHashPassword())) {
       return fUser;

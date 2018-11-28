@@ -1,9 +1,9 @@
 package com.featurebim.gui.bl;
 
-import com.featurebim.gui.model.futurebim.GuiUser;
+import com.featurebim.gui.model.futurebim.GuiUserFull;
 
 public interface IUserHandler {
 
-  public GuiUser authenticateUser(final String username, final String password);
+  public GuiUserFull authenticateUser(final String username, final String password);
 
 }

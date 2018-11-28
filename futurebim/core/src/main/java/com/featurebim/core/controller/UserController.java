@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.featurebim.common.model.edo.UserEdo;
+import com.featurebim.common.model.edo.UserFullEdo;
 import com.featurebim.common.model.edo.UserLoginEdo;
 import com.featurebim.core.annotations.FbCoreRequestGetDataMapping;
 import com.featurebim.core.annotations.FbCoreRequestPostDataMapping;
 import com.featurebim.core.bl.IUserHandler;
 import com.featurebim.core.dao.exceptions.StorageException;
 import com.featurebim.core.model.User;
+import com.featurebim.core.model.UserFull;
 
 @RestController
 @RequestMapping(path = "/user")
@@ -41,10 +43,10 @@ public class UserController {
   }
 
   @FbCoreRequestPostDataMapping(value = "/authenticate")
-  public UserEdo authenticateUser(@RequestBody(required = true) final UserLoginEdo userLoginEdo) throws StorageException {
+  public UserFullEdo authenticateUser(@RequestBody(required = true) final UserLoginEdo userLoginEdo) throws StorageException {
 
-    final User authUser = userHandler.authenticateUser(userLoginEdo.getUsername(), userLoginEdo.getPassword());
-    final UserEdo authUserEdo = authUser != null ? authUser.toEdo() : null;
+    final UserFull authUser = userHandler.authenticateUser(userLoginEdo.getUsername(), userLoginEdo.getPassword());
+    final UserFullEdo authUserEdo = authUser != null ? authUser.toEdo() : null;
     return authUserEdo;
   }
 }
