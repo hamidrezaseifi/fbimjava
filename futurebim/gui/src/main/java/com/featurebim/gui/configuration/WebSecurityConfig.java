@@ -44,7 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     if (debugModeAuthentication.isDebugLoginEnabled()) {
       http.authorizeRequests().antMatchers("/**").permitAll();
-
     }
     else {
       http.authorizeRequests()

@@ -1,10 +1,11 @@
 package com.featurebim.gui.model.ui;
 
 public class MenuItem {
-  private String id;
-  private String label;
-  private String image;
-  private String url;
+
+  private String  id;
+  private String  label;
+  private String  image;
+  private String  url;
   private boolean state;
   private boolean active;
 

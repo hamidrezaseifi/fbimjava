@@ -2,6 +2,9 @@ package com.featurebim.common.model.edo;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.featurebim.common.rest.json.JsonConstants;
+
 /**
  * The persistent class for the users database table.
  *
@@ -12,6 +15,7 @@ public class UserLoginEdo {
 
   private String password;
 
+  @JsonFormat(pattern = JsonConstants.DATETIME_FORMAT_ISO)
   private LocalDateTime created;
 
   public UserLoginEdo() {

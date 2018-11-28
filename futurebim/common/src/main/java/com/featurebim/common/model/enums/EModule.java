@@ -6,7 +6,7 @@ package com.featurebim.common.model.enums;
  * @author bjoern frohberg
  */
 public enum EModule {
-  CORE("MDM core service"),
+  CORE("Core service"),
   GUI("GUI ui service");
 
   private final String moduleName;

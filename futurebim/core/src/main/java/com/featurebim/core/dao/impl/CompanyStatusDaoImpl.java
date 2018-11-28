@@ -20,7 +20,7 @@ import com.featurebim.core.model.CompanyStatusList;
 
 @Transactional
 @Repository
-@Qualifier("CompanyDaoImpl")
+@Qualifier("CompanyStatusDaoImpl")
 public class CompanyStatusDaoImpl implements CompanyStatusDao {
 
   private static final Logger logger = LoggerFactory.getLogger(CompanyStatusDaoImpl.class);

@@ -10,27 +10,31 @@ import com.featurebim.core.dao.exceptions.StorageException;
 import com.featurebim.core.model.Project;
 
 @Service
-public class ProjectHandler {
+public class ProjectHandler implements IProjectHandler {
 
   private ProjectDao projectDao;
 
   @Autowired(required = true)
-  public void setCompanyService(final ProjectDao projectDao) {
+  public void setProjectService(final ProjectDao projectDao) {
     this.projectDao = projectDao;
   }
 
+  @Override
   public Project getById(final Long id) throws StorageException {
     return projectDao.getById(id);
   }
 
+  @Override
   public List<Project> listProjects(final Long companyId) throws StorageException {
     return projectDao.listProjects(companyId);
   }
 
+  @Override
   public Project addProject(final Project project) throws StorageException {
     return projectDao.addProject(project);
   }
 
+  @Override
   public Project updateProject(final Project project) throws StorageException {
     return projectDao.updateProject(project);
   }

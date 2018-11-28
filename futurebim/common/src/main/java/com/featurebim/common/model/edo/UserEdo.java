@@ -3,6 +3,9 @@ package com.featurebim.common.model.edo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.featurebim.common.rest.json.JsonConstants;
+
 /**
  * The persistent class for the users database table.
  *
@@ -25,6 +28,7 @@ public class UserEdo {
 
   private String nameTag;
 
+  @JsonFormat(pattern = JsonConstants.DATE_FORMAT_ISO)
   private LocalDate birthday;
 
   private String email;
@@ -33,8 +37,10 @@ public class UserEdo {
 
   private int version;
 
+  @JsonFormat(pattern = JsonConstants.DATETIME_FORMAT_ISO)
   private LocalDateTime created;
 
+  @JsonFormat(pattern = JsonConstants.DATETIME_FORMAT_ISO)
   private LocalDateTime updated;
 
   public UserEdo() {

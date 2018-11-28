@@ -1,0 +1,13 @@
+﻿<!DOCTYPE html>
+<html ng-app="mdmApp" >
+    <head>
+    	<th:block th:include="layout/mainLayout :: pageheader" />
+        
+    </head>
+    <body ng-controller="BodyController">
+        <header th:replace="layout/mainLayout :: header" ></header>		
+        <div th:replace="layout/mainLayout :: breadcrumb" ></div>
+		<h1>About MDM ...</h1>
+        <footer th:replace="layout/mainLayout :: footer" ></footer>
+    </body>
+</html>

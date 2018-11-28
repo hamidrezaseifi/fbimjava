@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" ng-app="mdmApp" >
+    <head>
+    
+    	<th:block th:include="layout/mainLayout :: pageheader" />
+		<script th:src="@{/js/index.js}"></script>
+    </head>
+    <body ng-controller="BodyController">
+        <header th:replace="layout/mainLayout :: header" ></header>
+        <div th:replace="layout/mainLayout :: breadcrumb" ></div>
+		
+		<div class="error-box-noaccess">
+			<h2 class="error-text" th:text="#{error.noaccess}"></h2>
+			<br>
+			<h5 class="error-text" th:text="${message}"></h5>
+		</div>
+		
+        <footer th:replace="layout/mainLayout :: footer" ></footer>
+    </body>
+</html>

@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.featurebim.common.model.edo.CompanyEdo;
-import com.featurebim.common.model.reponse.FBUiRestResponse;
-import com.featurebim.common.model.reponse.GeneralRestResponse;
 import com.featurebim.core.annotations.FbCoreRequestGetDataMapping;
 import com.featurebim.core.annotations.FbCoreRequestPostDataMapping;
-import com.featurebim.core.bl.CompanyHandler;
+import com.featurebim.core.bl.ICompanyHandler;
 import com.featurebim.core.dao.exceptions.StorageException;
 import com.featurebim.core.model.Company;
 
@@ -21,34 +19,34 @@ import com.featurebim.core.model.Company;
 @RequestMapping(path = "/company")
 public class CompanyController {
 
-  private CompanyHandler companyReadHandler;
+  private ICompanyHandler companyReadHandler;
 
   @Autowired(required = true)
-  public void setPersonService(final CompanyHandler companyReadHandler) {
+  public void setPersonService(final ICompanyHandler companyReadHandler) {
     this.companyReadHandler = companyReadHandler;
   }
 
   @FbCoreRequestGetDataMapping(value = "/all")
-  public GeneralRestResponse readAll() throws StorageException {
+  public List<CompanyEdo> readAll() throws StorageException {
     final List<Company> companies = companyReadHandler.listCompanies();
-    return GeneralRestResponse.createData(Company.toEdoList(companies));
+    return Company.toEdoList(companies);
   }
 
   @FbCoreRequestGetDataMapping(value = "/read/{companyid}")
-  public GeneralRestResponse getCompany(@PathVariable final Long companyid) throws StorageException {
+  public CompanyEdo getCompany(@PathVariable final Long companyid) throws StorageException {
 
-    return GeneralRestResponse.createData((companyReadHandler.getById(companyid).toEdo()));
+    return companyReadHandler.getById(companyid).toEdo();
   }
 
   @FbCoreRequestPostDataMapping(value = "/delete")
-  public FBUiRestResponse deleteCompany(@RequestBody(required = true) final CompanyEdo companyEdo) {
+  public boolean deleteCompany(@RequestBody(required = true) final CompanyEdo companyEdo) {
 
-    return null;
+    return false;
   }
 
   @FbCoreRequestPostDataMapping(value = "/update")
-  public FBUiRestResponse updateCompany(@RequestBody(required = true) final CompanyEdo companyEdo) throws StorageException {
+  public CompanyEdo updateCompany(@RequestBody(required = true) final CompanyEdo companyEdo) throws StorageException {
 
-    return GeneralRestResponse.createData(companyReadHandler.updateCompany(Company.fromEdo(companyEdo)));
+    return companyReadHandler.updateCompany(Company.fromEdo(companyEdo)).toEdo();
   }
 }

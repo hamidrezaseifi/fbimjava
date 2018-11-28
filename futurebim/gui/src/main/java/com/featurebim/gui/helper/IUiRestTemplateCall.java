@@ -2,8 +2,6 @@ package com.featurebim.gui.helper;
 
 import java.net.URI;
 
-import org.springframework.stereotype.Component;
-
 import com.featurebim.common.model.enums.EModule;
 import com.featurebim.gui.exception.UiCustomizedException;
 
@@ -11,7 +9,6 @@ import com.featurebim.gui.exception.UiCustomizedException;
  * @author rezasei
  *
  */
-@Component
 public interface IUiRestTemplateCall {
 
   /**

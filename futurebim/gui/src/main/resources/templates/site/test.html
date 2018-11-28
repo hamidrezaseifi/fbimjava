@@ -1,0 +1,31 @@
+<html ng-app="mdmApp" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" >
+    <head>
+    	<th:block th:include="layout/mainLayout :: pageheader" />
+
+		
+ 		<script th:src="@{/js/test.js}"></script>
+  
+    </head>
+    <body ng-controller="BodyController">
+        <header th:replace="layout/mainLayout :: header" ></header>
+	
+	
+	    <div ng-controller="TestController">
+		
+			<br><br><br>
+			
+			<form method="post">
+			    <textarea ui-tinymce
+			      ng-model="tinymce"
+			      ng-change="updateHtml()"></textarea>
+			</form>
+  
+		
+			<br><hr><br>
+			<div ng-bind-html="tinymceHtml"></div>
+	
+	    </div>
+	
+
+    </body>
+</html>

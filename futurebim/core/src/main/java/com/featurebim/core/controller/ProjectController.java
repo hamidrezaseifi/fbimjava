@@ -1,5 +1,7 @@
 package com.featurebim.core.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.featurebim.common.model.edo.ProjectEdo;
-import com.featurebim.common.model.reponse.GeneralRestResponse;
-import com.featurebim.common.model.reponse.ProjectListRestResponse;
-import com.featurebim.common.model.reponse.ProjectRestResponse;
 import com.featurebim.core.annotations.FbCoreRequestGetDataMapping;
 import com.featurebim.core.annotations.FbCoreRequestPostDataMapping;
-import com.featurebim.core.bl.ProjectHandler;
+import com.featurebim.core.bl.IProjectHandler;
 import com.featurebim.core.dao.exceptions.StorageException;
 import com.featurebim.core.model.Project;
 
@@ -24,35 +23,35 @@ public class ProjectController {
 
   private final Logger logger = LoggerFactory.getLogger(ProjectController.class);
 
-  private ProjectHandler projectHandler;
+  private IProjectHandler projectHandler;
 
   @Autowired(required = true)
-  public void setPersonService(final ProjectHandler projectReadHandler) {
+  public void setPersonService(final IProjectHandler projectReadHandler) {
     this.projectHandler = projectReadHandler;
   }
 
   @FbCoreRequestGetDataMapping(value = "/all/{companyId}")
-  public ProjectListRestResponse readAll(@PathVariable final Long companyId) throws StorageException {
+  public List<ProjectEdo> readAll(@PathVariable final Long companyId) throws StorageException {
     logger.debug("read projects list");
-    return ProjectListRestResponse.createList(Project.toEdoList(projectHandler.listProjects(companyId)));
+    return Project.toEdoList(projectHandler.listProjects(companyId));
   }
 
   @FbCoreRequestPostDataMapping(value = "/create")
-  public GeneralRestResponse createProject(@RequestBody(required = true) final ProjectEdo projectEdo) throws StorageException {
+  public ProjectEdo createProject(@RequestBody(required = true) final ProjectEdo projectEdo) throws StorageException {
     logger.debug("read projects list");
-    return GeneralRestResponse.createData(projectHandler.addProject(Project.fromEdo(projectEdo)));
+    return projectHandler.addProject(Project.fromEdo(projectEdo)).toEdo();
   }
 
   @FbCoreRequestPostDataMapping(value = "/update")
-  public GeneralRestResponse updateProject(@RequestBody(required = true) final ProjectEdo projectEdo) throws StorageException {
+  public ProjectEdo updateProject(@RequestBody(required = true) final ProjectEdo projectEdo) throws StorageException {
     logger.debug("read projects list");
-    return GeneralRestResponse.createData(projectHandler.updateProject(Project.fromEdo(projectEdo)));
+    return projectHandler.updateProject(Project.fromEdo(projectEdo)).toEdo();
   }
 
   @FbCoreRequestGetDataMapping(value = "/read/{projectId}")
-  public ProjectRestResponse getProject(@PathVariable final Long projectId) throws StorageException {
+  public ProjectEdo getProject(@PathVariable final Long projectId) throws StorageException {
     logger.debug("read projects list");
-    return ProjectRestResponse.createData(projectHandler.getById(projectId).toEdo());
+    return projectHandler.getById(projectId).toEdo();
   }
 
 }
