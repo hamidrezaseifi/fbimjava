@@ -1,23 +1,18 @@
 package com.featurebim.gui.authentication.provider;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.FBAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
 
-import com.featurebim.common.model.edo.UserEdo;
-import com.featurebim.common.model.edo.UserLoginEdo;
-import com.featurebim.common.model.enums.EModule;
+import com.featurebim.gui.bl.IUserHandler;
 import com.featurebim.gui.configuration.UiConfiguration.CoreAccessConfig;
-import com.featurebim.gui.helper.IUiRestTemplateCall;
+import com.featurebim.gui.model.futurebim.GuiUser;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
@@ -26,7 +21,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   CoreAccessConfig coreAccessConfig;
 
   @Autowired
-  private IUiRestTemplateCall restTemplateCall;
+  private IUserHandler userHandler;
 
   @PostConstruct
   private void init() {
@@ -36,32 +31,20 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   @Override
   public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
 
-    final String name = authentication.getName();
+    final String username = authentication.getName();
     final String password = authentication.getCredentials().toString();
 
-    final UserLoginEdo loginEdo = new UserLoginEdo(name, password);
+    final GuiUser authUser = userHandler.authenticateUser(username, password);
 
-    try {
-      final UserEdo userEdo = restTemplateCall.callRestPost(coreAccessConfig.getUserAuthenticate(),
-                                                            EModule.CORE,
-                                                            loginEdo,
-                                                            UserEdo.class,
-                                                            true);
+    if (authUser != null) {
 
-      if (userEdo != null) {
+      // final List<GrantedAuthority> grantedAuths = AuthorityUtils.commaSeparatedStringToAuthorityList(login.getRole());
 
-        // final List<GrantedAuthority> grantedAuths = AuthorityUtils.commaSeparatedStringToAuthorityList(login.getRole());
-        final List<GrantedAuthority> grantedAuths = AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN");
-
-        return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
-      }
-      else {
-        return null;
-      }
+      return new FBAuthenticationToken(authUser);
     }
-    catch (final Exception e) {
-      return null;
-    }
+
+    return null;
+
   }
 
   @Override

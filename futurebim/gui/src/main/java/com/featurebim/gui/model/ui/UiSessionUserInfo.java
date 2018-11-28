@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Scope;
 @Scope("session")
 public class UiSessionUserInfo {
 
-  public static String SESSION_LOGGEDUSERINFO_KEY = "mdm-session-user";
+  public static String SESSION_LOGGEDUSERINFO_KEY = "fb-session-user";
 
   private Date   loginTime;
   private UiUser user;

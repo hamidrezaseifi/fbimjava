@@ -3,6 +3,7 @@ package com.featurebim.core.bl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.featurebim.core.dao.UserDao;
@@ -14,13 +15,17 @@ public class UserHandler implements IUserHandler {
 
   private UserDao userDao;
 
+  private PasswordEncoder passwordEncoder;
+
   @Autowired(required = true)
-  public void setUserService(final UserDao userDao) {
+  public void setUserService(final UserDao userDao, final PasswordEncoder passwordEncoder) {
     this.userDao = userDao;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Override
   public User addUser(final User user) throws StorageException {
+    user.setHashPassword(passwordEncoder.encode(user.getHashPassword()));
     return userDao.addUser(user);
   }
 
@@ -56,9 +61,10 @@ public class UserHandler implements IUserHandler {
 
   @Override
   public User authenticateUser(final String username, final String password) throws StorageException {
+
     final User fUser = getByUsername(username);
 
-    if (fUser != null && fUser.getHashPassword().equals(password)) {
+    if (fUser != null && passwordEncoder.matches(password, fUser.getHashPassword())) {
       return fUser;
     }
     return null;

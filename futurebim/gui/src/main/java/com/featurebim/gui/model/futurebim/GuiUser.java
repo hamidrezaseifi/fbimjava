@@ -179,6 +179,10 @@ public class GuiUser {
   }
 
   public static GuiUser fromEdo(final UserEdo edo) {
+    if (edo == null) {
+      return null;
+    }
+
     final GuiUser user = new GuiUser();
 
     user.setBirthday(edo.getBirthday());

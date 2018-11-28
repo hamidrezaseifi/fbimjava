@@ -1,19 +1,17 @@
 package com.featurebim.gui.authentication;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.authentication.FBAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.featurebim.common.model.edo.UserEdo;
+import com.featurebim.gui.model.futurebim.GuiUser;
 import com.featurebim.gui.model.ui.UiSessionUserInfo;
 import com.featurebim.gui.model.ui.UiUser;
 import com.featurebim.gui.model.ui.enums.EUiUserRole;
@@ -56,11 +54,11 @@ public class UiSessionUserService {
 
       if (debugModeAuthentication.isDebugLoginEnabled()) {
 
-        final UserEdo edo = new UserEdo();
-        edo.setUsername(debugModeAuthentication.getCurrentDebugLoginUsername());
+        final GuiUser user = new GuiUser();
+        user.setUsername(debugModeAuthentication.getCurrentDebugLoginUsername());
         final EUiUserRole[] roles = new EUiUserRole[1];
         roles[0] = EUiUserRole.ADMIN;
-        return authorizeUser(edo, roles, session, true);
+        return authorizeUser(new FBAuthenticationToken(user), session, true);
 
       }
       else {
@@ -82,8 +80,7 @@ public class UiSessionUserService {
    * @param setContext
    * @return the new UiSessionUserInfo or null
    */
-  public UiSessionUserInfo authorizeUser(final UserEdo edoUser,
-                                         final EUiUserRole[] roles,
+  public UiSessionUserInfo authorizeUser(final FBAuthenticationToken token,
                                          final HttpSession session,
                                          final boolean setContext) {
 
@@ -92,10 +89,9 @@ public class UiSessionUserService {
       if (ctx == null) {
         ctx = SecurityContextHolder.createEmptyContext();
       }
-      final List<GrantedAuthority> grantedAuths = AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN");
-      ctx.setAuthentication(new UsernamePasswordAuthenticationToken(edoUser.getUsername(), "", grantedAuths));
+      ctx.setAuthentication(token);
     }
-    return setLoggedInUserInfo(new UiUser(edoUser, roles), session);
+    return setLoggedInUserInfo(new UiUser(token.getUser(), new ArrayList<>()), session);
 
   }
 

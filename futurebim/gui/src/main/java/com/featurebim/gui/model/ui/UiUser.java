@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.featurebim.common.model.edo.UserEdo;
 import com.featurebim.gui.model.futurebim.GuiUser;
 import com.featurebim.gui.model.ui.enums.EUiUserRole;
 
@@ -22,18 +21,17 @@ public class UiUser {
     this.roles = new ArrayList<>();
   }
 
-  public UiUser(final UserEdo edoUser,
+  public UiUser(final GuiUser user,
                 final EUiUserRole[] roles) {
 
-    user = GuiUser.fromEdo(edoUser);
-
+    this.user = user;
     this.roles = Arrays.asList(roles);
   }
 
-  public UiUser(final UserEdo edoUser,
+  public UiUser(final GuiUser user,
                 final List<EUiUserRole> roles) {
 
-    user = GuiUser.fromEdo(edoUser);
+    this.user = user;
 
     this.roles = new ArrayList<>();
     this.roles.addAll(roles);
