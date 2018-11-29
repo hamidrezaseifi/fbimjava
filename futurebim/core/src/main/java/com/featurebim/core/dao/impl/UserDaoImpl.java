@@ -176,4 +176,10 @@ public class UserDaoImpl implements UserDao {
 
     return list;
   }
+
+  @Override
+  public boolean setUserPassword(final Long id, final String password) {
+    // TODO Auto-generated method stub
+    return false;
+  }
 }

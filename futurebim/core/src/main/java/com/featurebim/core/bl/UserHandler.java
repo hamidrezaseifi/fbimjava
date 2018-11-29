@@ -71,4 +71,11 @@ public class UserHandler implements IUserHandler {
     return null;
   }
 
+  @Override
+  public boolean setUserPassword(final Long id, final String password) throws StorageException {
+    final String encrypedPassword = passwordEncoder.encode(password);
+
+    return userDao.setUserPassword(id, encrypedPassword);
+  }
+
 }

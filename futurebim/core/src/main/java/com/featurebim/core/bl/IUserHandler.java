@@ -24,4 +24,6 @@ public interface IUserHandler {
 
   public UserFull authenticateUser(final String username, final String password) throws StorageException;
 
+  public boolean setUserPassword(final Long id, final String password) throws StorageException;
+
 }

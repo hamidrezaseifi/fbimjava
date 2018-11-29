@@ -24,4 +24,6 @@ public interface UserDao {
 
   public List<Integer> listUserRoles(final Long userId) throws StorageException;
 
+  public boolean setUserPassword(final Long id, final String password);
+
 }
