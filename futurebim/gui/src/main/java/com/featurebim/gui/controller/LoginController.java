@@ -1,6 +1,7 @@
 package com.featurebim.gui.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -56,7 +57,13 @@ public class LoginController {
 
     model.addAttribute("logginMessage", message);
 
-    return "site/login";
+    return "auth/login";
   }
 
+  @RequestMapping(path = "/init")
+  public String initAll(final Model model) {
+    model.addAttribute("breadCrumb", new ArrayList<>());
+
+    return "auth/init_all";
+  }
 }

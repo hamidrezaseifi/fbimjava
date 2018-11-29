@@ -1,13 +1,10 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:ng="http://angularjs.org" ng-app="mdmApp" >
     <head>
+    
     	<th:block th:include="layout/mainLayout :: pageheader" />
-        
+		<script th:src="@{/js/init_all.js}"></script>
     </head>
     <body ng-controller="BodyController">
-        <header th:replace="layout/mainLayout :: header" ></header>		
-        <div th:replace="layout/mainLayout :: breadcrumb" ></div>
-		<h1>About MDM ...</h1>
-        <footer th:replace="layout/mainLayout :: footer" ></footer>
+		<h1>Init All ...</h1>
     </body>
 </html>

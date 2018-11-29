@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.featurebim.gui.authentication.UiSessionUserService;
 import com.featurebim.gui.configuration.WebSecurityConfig;
+import com.featurebim.gui.model.enums.EGuiUserStatus;
 import com.featurebim.gui.model.futurebim.GuiUserFull;
 import com.featurebim.gui.model.ui.MenuItem;
 import com.featurebim.gui.model.ui.UiSessionUserInfo;
@@ -57,6 +58,10 @@ public abstract class UiControllerBase {
 
     if (sessionUserInfo == null) {
       response.sendRedirect(WebSecurityConfig.LOGIN_URL);
+    }
+
+    if (sessionUserInfo.getUser().getStatus() == EGuiUserStatus.NOT_INITIALIZED) {
+      response.sendRedirect(WebSecurityConfig.INITUSER_URL);
     }
 
     model.addAttribute("pageTopToolList", getTopToolbar());
