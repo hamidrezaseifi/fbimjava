@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public static String USERNAME_FIELD_NAME = "username";
   public static String PASSWORD_FIELD_NAME = "password";
   public static String LOGIN_URL           = "/auth/login";
-  public static String INITUSER_URL        = "/auth/init";
+  public static String INITUSER_URL        = "/activation/inituser";
   public static String ROOT_URL            = "/";
 
   @Autowired

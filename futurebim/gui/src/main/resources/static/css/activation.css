@@ -1,0 +1,56 @@
+
+
+
+.form-horizontal .form-group {
+    margin-right: 0; 
+    margin-left: 0; 
+}
+
+.activation-pannel 
+{
+    width: 440px;
+    margin: 40px auto;
+}
+
+.activation-pannel label 
+{
+    width: 100px;
+    float: none;
+    text-align: left !important;
+    padding: 0;
+    margin: 0;
+}
+
+.activation-pannel input[type="text"],
+.activation-pannel input[type="password"],
+.activation-pannel input[type="date"] 
+{
+    width: 300px;
+    float: none;
+    display: inline-block;
+}
+
+.gender-panel
+{
+	margin: 10px 0;
+	width: 400px;
+	padding: 0;
+}
+
+.input-group.group-email
+{
+	width: 300px;
+    float: right;
+    margin-right: 5px;	
+}
+
+label.radio-inline1 {
+    padding-top: 0px !important;
+    margin-left: 20px;
+    margin-right: 10px;
+    width: inherit;
+}
+
+input[type=checkbox], input[type=radio] {
+    margin: 0;
+}
