@@ -105,7 +105,7 @@ public class UserDaoImpl implements UserDao {
     user.setId(rs.getLong("id"));
     user.setCompanyid(rs.getLong("companyid"));
     user.setUsername(rs.getString("username"));
-    user.setBirthday(rs.getTimestamp("birthday").toLocalDateTime().toLocalDate());
+    user.setBirthdate(rs.getTimestamp("birthday").toLocalDateTime().toLocalDate());
     user.setEmail(rs.getString("email"));
     user.setFirstname(rs.getString("firstname"));
     user.setGender(rs.getShort("gender"));
@@ -125,7 +125,7 @@ public class UserDaoImpl implements UserDao {
     user.setId(rs.getLong("id"));
     user.setCompanyid(rs.getLong("companyid"));
     user.setUsername(rs.getString("username"));
-    user.setBirthday(rs.getTimestamp("birthday").toLocalDateTime().toLocalDate());
+    user.setBirthdate(rs.getTimestamp("birthday").toLocalDateTime().toLocalDate());
     user.setEmail(rs.getString("email"));
     user.setFirstname(rs.getString("firstname"));
     user.setGender(rs.getShort("gender"));

@@ -1,46 +1,12 @@
 
 var mdmApp = angular.module('fbimApp', ['ngMaterial', 'ngTable', 'ngMaterialAccordion', 'ngSanitize']);
 
-/*mdmApp.config(function($mdDateLocaleProvider) {
-
-    // Example of a French localization.
-    $mdDateLocaleProvider.months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni','Juli', 'August', 'September', 'October', 'November', 'Dezember',];
-    $mdDateLocaleProvider.shortMonths = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez',];
-    $mdDateLocaleProvider.days = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag',];
-    $mdDateLocaleProvider.shortDays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So',];
-
-
-    // Example uses moment.js to parse and format dates.
-    $mdDateLocaleProvider.parseDate = function(dateString) { 
-    	//alert(dateString);
-
-      if(dateString == null || dateString == ""){
-    	  return dateString;
-      }
-      else{
-    	  var m = moment(dateString, 'D.M.YYYY', true);
-    	  if(!m.isValid()){
-         	  return dateString;
-          }
-          
-          return m.isValid() ? m.toDate() : new Date(NaN);
-      }
-      
-      
-    };
-
-    $mdDateLocaleProvider.formatDate = function(date) {
-      var m = moment(date);
-      return m.isValid() ? m.format('DD.MM.YYYY') : '';
-    };
-
-});*/
 
 mdmApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.timeout = 10000;
 }]);
 
-mdmApp.controller('BodyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav, $mdComponentRegistry) {
+mdmApp.controller('BodyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
 
 	$scope.showloading = false;
 	$scope.isShowError = true;

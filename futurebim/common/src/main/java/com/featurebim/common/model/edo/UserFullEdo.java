@@ -31,7 +31,7 @@ public class UserFullEdo {
   private String nameTag;
 
   @JsonFormat(pattern = JsonConstants.DATE_FORMAT_ISO)
-  private LocalDate birthday;
+  private LocalDate birthdate;
 
   private String email;
 
@@ -66,12 +66,12 @@ public class UserFullEdo {
     this.companyid = company;
   }
 
-  public LocalDate getBirthday() {
-    return this.birthday;
+  public LocalDate getBirthdate() {
+    return this.birthdate;
   }
 
-  public void setBirthday(final LocalDate birthday) {
-    this.birthday = birthday;
+  public void setBirthdate(final LocalDate birthdate) {
+    this.birthdate = birthdate;
   }
 
   public LocalDateTime getCreated() {

@@ -30,7 +30,7 @@ public class GuiUser {
 
   private String nameTag;
 
-  private LocalDate birthday;
+  private LocalDate birthdate;
 
   private String email;
 
@@ -61,12 +61,12 @@ public class GuiUser {
     this.companyid = company;
   }
 
-  public LocalDate getBirthday() {
-    return this.birthday;
+  public LocalDate getBirthdate() {
+    return this.birthdate;
   }
 
-  public void setBirthday(final LocalDate birthday) {
-    this.birthday = birthday;
+  public void setBirthdate(final LocalDate birthdate) {
+    this.birthdate = birthdate;
   }
 
   public LocalDateTime getCreated() {
@@ -159,7 +159,7 @@ public class GuiUser {
 
   public UserEdo toEdo() {
     final UserEdo edo = new UserEdo();
-    edo.setBirthday(birthday);
+    edo.setBirthdate(birthdate);
     edo.setCompanyid(companyid);
     edo.setEmail(email);
     edo.setFirstname(firstname);
@@ -185,7 +185,7 @@ public class GuiUser {
 
     final GuiUser user = new GuiUser();
 
-    user.setBirthday(edo.getBirthday());
+    user.setBirthdate(edo.getBirthdate());
     user.setCompanyid(edo.getCompanyid());
     user.setEmail(edo.getEmail());
     user.setFirstname(edo.getFirstname());

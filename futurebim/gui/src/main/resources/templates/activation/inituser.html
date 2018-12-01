@@ -1,62 +1,69 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:ng="http://angularjs.org" ng-app="mdmApp" >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" xmlns:ng="http://angularjs.org" ng-app="fbimApp" >
     <head>
     
 		<th:block th:include="layout/loginLayout :: pageheader" />
-		<script th:src="@{/js/init_all.js}"></script>
+		<script th:src="@{/js/inituser.js}"></script>
     	<link th:href="@{/css/activation.css}" rel="stylesheet" />
     </head>
     <body ng-controller="BodyController">
 	    <header th:replace="layout/loginLayout :: header" ></header>
-	    
-	    <h2>[[#{user.useractivation}]]</h2>
-	    
-	    <div class="panel panel-default activation-pannel">
-	    	<div class="panel-heading">[[#{user.useractivation}]]</div>
+	    	    
+	    <div class="panel panel-default activation-pannel" ng-controller="ActivationUserController">
+	    	<div class="panel-heading"><h4>[[#{user.useractivation}]]</h4></div>
 	    	<div class="panel-body">
 			    <form class="form-horizontal">
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">[[#{user.firstname}]]</label>
-				      <input type="text" class="form-control" th:value="${loggedUser.getUser().getFirstname()}" th:placeholder="#{user.firstnameplaceholder}">
+				      <input type="text" required class="form-control" ng-model="user.firstname" th:placeholder="#{user.firstnameplaceholder}">
 
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">[[#{user.lastname}]]</label>
-				      <input type="text" class="form-control" th:value="${loggedUser.getUser().getLastname()}" th:placeholder="#{user.lastnameplaceholder}">
+				      <input type="text" required class="form-control" ng-model="user.lastname" th:placeholder="#{user.lastnameplaceholder}">
 
 				    </div>	    
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">[[#{user.email}]]</label>
 				      <div class="input-group group-email">
 					  	<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					  	<input type="email" class="form-control" th:placeholder="#{user.emailplaceholder}">
+					  	<input type="email" required class="form-control" ng-model="user.email" th:placeholder="#{user.emailplaceholder}">
 					  </div>
 
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">[[#{user.birthdate}]]</label>
-				      <input type="date" class="form-control" th:placeholder="#{user.birthdateplaceholder}">
+				      <input type="date" required class="form-control" ng-model="user.birthdateDate" th:placeholder="#{user.birthdateplaceholder}">
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="pwd">[[#{user.password}]]</label>
-				      <input type="password" class="form-control" th:placeholder="#{user.passwordplaceholder}">
+				      <input type="password" required class="form-control" th:placeholder="#{user.passwordplaceholder}">
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="pwd">[[#{user.passwordconfirm}]]</label>
-				      <input type="password" class="form-control" th:placeholder="#{user.passwordconfirmplaceholder}">
+				      <input type="password" required class="form-control" th:placeholder="#{user.passwordconfirmplaceholder}">
 				    </div>
 					
 					<div class="container gender-panel">
 					  <div class="panel panel-default">
 					    <div class="panel-heading">[[#{user.gender}]]</div>
 					    <div class="panel-body">
-							<label class="radio-inline1">[[#{user.genderman}]]</label><input type="radio" name="gender" />
-							<label class="radio-inline1">[[#{user.genderwoman}]]</label><input type="radio" name="gender" />
+							<label class="radio-inline1">[[#{user.genderman}]]</label><input type="radio" name="gender" ng-model="user.gender" ng-value="1"/>
+							<label class="radio-inline1">[[#{user.genderwoman}]]</label><input type="radio" name="gender" ng-model="user.gender" ng-value="2"/>
 						</div>
 					  </div>
 					</div>
+					
+					<div>
+						<button type="button" class="btn btn-primary save" ng-click="saveUser()">[[#{common.save}]]</button>
+					</div>
+
+					<input type="hidden" th:value="${loggedUser.getUser().getId()}" />
+					
 			    </form>
 			</div>
 		</div>
+		
+		
 		
 		<footer th:replace="layout/loginLayout :: footer" ></footer>
     </body>
