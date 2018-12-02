@@ -30,11 +30,11 @@ public class UiAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
 
       final FBAuthenticationToken tbToken = (FBAuthenticationToken) auth;
 
-      String url = tbToken.getUser().getStatus() == EGuiUserStatus.NOT_INITIALIZED ? WebSecurityConfig.INITUSER_URL
-                                                                                   : WebSecurityConfig.ROOT_URL;
+      String url = tbToken.getUser().getStatusEnum() == EGuiUserStatus.NOT_INITIALIZED ? WebSecurityConfig.INITUSER_URL
+                                                                                       : WebSecurityConfig.ROOT_URL;
 
-      if (tbToken.getUser().getStatus() == EGuiUserStatus.DEACTIVE || tbToken.getUser().getStatus() == EGuiUserStatus.ACTIVE
-          || tbToken.getUser().getStatus() == EGuiUserStatus.UNKNOWN) {
+      if (tbToken.getUser().getStatusEnum() == EGuiUserStatus.DEACTIVE || tbToken.getUser().getStatusEnum() == EGuiUserStatus.ACTIVE
+          || tbToken.getUser().getStatusEnum() == EGuiUserStatus.UNKNOWN) {
         url = UiAuthenticationErrorUrlCreator.getErrorUrl("access",
                                                           request.getParameter(WebSecurityConfig.USERNAME_FIELD_NAME),
                                                           request.getParameter(WebSecurityConfig.PASSWORD_FIELD_NAME));

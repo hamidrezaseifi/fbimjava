@@ -11,11 +11,10 @@
 	    <div class="panel panel-default activation-pannel" ng-controller="ActivationUserController">
 	    	<div class="panel-heading"><h4>[[#{user.useractivation}]]</h4></div>
 	    	<div class="panel-body">
-			    <form class="form-horizontal">
+			    <form class="form-horizontal" id="userform" method="post" th:action="@{/activation/data/saveuser}" enctype="application/json" target="_blank">
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">[[#{user.firstname}]]</label>
-				      <input type="text" required class="form-control" ng-model="user.firstname" th:placeholder="#{user.firstnameplaceholder}">
-
+				      <input type="text" required class="form-control invalid" ng-model="user.firstname" th:placeholder="#{user.firstnameplaceholder}">
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">[[#{user.lastname}]]</label>
@@ -34,13 +33,19 @@
 				      <label class="control-label col-sm-2" for="email">[[#{user.birthdate}]]</label>
 				      <input type="date" required class="form-control" ng-model="user.birthdateDate" th:placeholder="#{user.birthdateplaceholder}">
 				    </div>
-				    <div class="form-group">
-				      <label class="control-label col-sm-2" for="pwd">[[#{user.password}]]</label>
-				      <input type="password" required class="form-control" th:placeholder="#{user.passwordplaceholder}">
-				    </div>
-				    <div class="form-group">
-				      <label class="control-label col-sm-2" for="pwd">[[#{user.passwordconfirm}]]</label>
-				      <input type="password" required class="form-control" th:placeholder="#{user.passwordconfirmplaceholder}">
+				    
+				    <div class="panel panel-default security-panel">
+				    	<div class="panel-heading">[[#{common.security}]]</div>
+				    	<div class="panel-body">
+						    <div class="form-group">
+						      <label class="control-label col-sm-2" for="pwd">[[#{user.password}]]</label>
+						      <input type="password" required class="form-control" th:placeholder="#{user.passwordplaceholder}">
+						    </div>
+						    <div class="form-group">
+						      <label class="control-label col-sm-2" for="pwd">[[#{user.passwordconfirm}]]</label>
+						      <input type="password" required class="form-control" th:placeholder="#{user.passwordconfirmplaceholder}">
+						    </div>
+					    </div>
 				    </div>
 					
 					<div class="container gender-panel">
@@ -61,9 +66,11 @@
 					
 			    </form>
 			</div>
+		
+		<div>
+		{{test}}
 		</div>
-		
-		
+		</div>
 		
 		<footer th:replace="layout/loginLayout :: footer" ></footer>
     </body>

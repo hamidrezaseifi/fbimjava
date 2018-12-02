@@ -1,7 +1,5 @@
 package com.featurebim.gui.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 public enum EGuiUserStatus {
   UNKNOWN(0),
   ACTIVE(1),
@@ -15,7 +13,6 @@ public enum EGuiUserStatus {
     this.id = id;
   }
 
-  @JsonCreator
   public static EGuiUserStatus fromId(final int id) {
     for (final EGuiUserStatus at : values()) {
       if (at.getId() == id) {

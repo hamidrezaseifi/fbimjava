@@ -38,7 +38,7 @@ public class GuiUserFull {
 
   private String email;
 
-  private EGuiUserStatus status;
+  private int status;
 
   private int version;
 
@@ -131,12 +131,16 @@ public class GuiUserFull {
     this.nameTag = nameTag;
   }
 
-  public EGuiUserStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
+  public EGuiUserStatus getStatusEnum() {
+    return EGuiUserStatus.fromId(this.status);
+  }
+
   public void setStatus(final int status) {
-    this.status = EGuiUserStatus.fromId(status);
+    this.status = status;
   }
 
   public LocalDateTime getUpdated() {
@@ -206,7 +210,7 @@ public class GuiUserFull {
 
     edo.setCreated(created);
     edo.setId(id);
-    edo.setStatus(status.getId());
+    edo.setStatus(status);
     edo.setUpdated(updated);
     edo.setVersion(version);
 

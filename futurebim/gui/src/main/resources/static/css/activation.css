@@ -33,7 +33,7 @@
 .gender-panel
 {
 	margin: 10px 0;
-	width: 400px;
+	width: 405px;
 	padding: 0;
 }
 
@@ -59,4 +59,22 @@ button.btn.save
 {
 	float: right;	
 	margin-right: 10px;
+}
+
+.security-panel
+{
+	margin: 10px 0;
+	width: 405px;
+	padding: 0;
+}
+
+.security-panel input[type="password"]
+{
+	width: 269px !important;
+}
+
+.form-control.invalid
+{
+	border-color: #dc3545;
+	outline: 
 }

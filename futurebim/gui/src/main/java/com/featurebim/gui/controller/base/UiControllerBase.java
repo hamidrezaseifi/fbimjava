@@ -60,7 +60,7 @@ public abstract class UiControllerBase {
       response.sendRedirect(WebSecurityConfig.LOGIN_URL);
     }
 
-    if (sessionUserInfo.getUser().getStatus() == EGuiUserStatus.NOT_INITIALIZED) {
+    if (sessionUserInfo.getUser().getStatusEnum() == EGuiUserStatus.NOT_INITIALIZED) {
       response.sendRedirect(WebSecurityConfig.INITUSER_URL);
     }
 
