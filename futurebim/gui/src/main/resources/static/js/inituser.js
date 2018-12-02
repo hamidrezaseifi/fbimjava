@@ -3,7 +3,7 @@
 mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
 	
 	$scope.user = {};
-	$scope.dataValidation = {'firstname' : true, 'firstname' : true, 'firstname' : true, };
+	$scope.dataValidation = {'firstname' : true, 'lastname' : true, 'hashPassword' : true, 'passwordconfirm' : true, 'birthdate' : true, 'email' : true, };
 	$scope.isValidate = true;
 	
 	$http({
@@ -16,15 +16,9 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 		delete $scope.user.created;
 		delete $scope.user.updated;
 		$scope.user.hashPassword = "";
-		
-		
-		for(o in $scope.user){
-			$scope.datavalidation[o] = true;
-			$scope.validate(o);
-		}
+		$scope.user.passwordconfirm = "";
 		
 		$scope.user.birthdateDate = new Date($scope.user.birthdate);
-		$scope.userjson = JSON.stringify($scope.user);
 
 	  //$scope.$parent.showloading = false;
 		
@@ -61,10 +55,34 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 	}
 	
 	$scope.validate = function(item){
-		if($scope.user[item] == undefined || $scope.user[item] == null){
+		
+		$scope.dataValidation[item] = true;
+		$scope.isValidate = true;
+		
+		if(item == 'birthdate'){
+			if($scope.user.birthdateDate == null){
+				$scope.dataValidation[item] = false;
+				$scope.isValidate = false;
+				return false;
+			}
+			else{
+				$scope.user[item] = moment($scope.user.birthdateDate).format("YYYY-MM-DD");
+				return true;
+			}
+		}
+		
+		if($scope.user[item] == undefined || $scope.user[item] == null || $scope.user[item].length < 3){
 			$scope.dataValidation[item] = false;
 			$scope.isValidate = false;
 			return false;
+		}
+		
+		if(item == 'hashPassword' || item == 'passwordconfirm'){
+			if($scope.user.hashPassword !== $scope.user.passwordconfirm){
+				$scope.dataValidation['passwordconfirm'] = false;
+				$scope.isValidate = false;
+				return false;
+			}
 		}
 		
 		return true;
