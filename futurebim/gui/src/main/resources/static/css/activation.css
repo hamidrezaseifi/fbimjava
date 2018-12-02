@@ -76,5 +76,6 @@ button.btn.save
 .form-control.invalid
 {
 	border-color: #dc3545;
-	outline: 
+	box-shadow: 1px 1px 4px #dc3545;
+	background-color: #f8d1d6;
 }
