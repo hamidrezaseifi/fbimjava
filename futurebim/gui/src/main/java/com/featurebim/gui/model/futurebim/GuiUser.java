@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.featurebim.common.model.edo.UserEdo;
-import com.featurebim.gui.model.enums.EGuiUserStatus;
 
 /**
  * The persistent class for the users database table.
@@ -34,7 +33,7 @@ public class GuiUser {
 
   private String email;
 
-  private EGuiUserStatus status;
+  private int status;
 
   private int version;
 
@@ -125,12 +124,12 @@ public class GuiUser {
     this.nameTag = nameTag;
   }
 
-  public EGuiUserStatus getStatus() {
+  public int getStatus() {
     return this.status;
   }
 
   public void setStatus(final int status) {
-    this.status = EGuiUserStatus.fromId(status);
+    this.status = status;
   }
 
   public LocalDateTime getUpdated() {
@@ -171,7 +170,7 @@ public class GuiUser {
 
     edo.setCreated(created);
     edo.setId(id);
-    edo.setStatus(status.getId());
+    edo.setStatus(status);
     edo.setUpdated(updated);
     edo.setVersion(version);
 

@@ -196,6 +196,27 @@ public class GuiUserFull {
     return list;
   }
 
+  public GuiUser toUser() {
+    final GuiUser user = new GuiUser();
+    user.setBirthdate(birthdate);
+    user.setCompanyid(companyid);
+    user.setEmail(email);
+    user.setFirstname(firstname);
+    user.setGender(gender);
+    user.setHashPassword(hashPassword);
+    user.setLastname(lastname);
+    user.setNameTag(nameTag);
+    user.setUsername(username);
+
+    user.setCreated(created);
+    user.setId(id);
+    user.setStatus(status);
+    user.setUpdated(updated);
+    user.setVersion(version);
+
+    return user;
+  }
+
   public UserFullEdo toEdo() {
     final UserFullEdo edo = new UserFullEdo();
     edo.setBirthdate(birthdate);

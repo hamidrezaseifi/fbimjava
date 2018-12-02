@@ -13,16 +13,20 @@
 	    	<div class="panel-body">
 			    <form class="form-horizontal" id="userform" method="post" th:action="@{/activation/data/saveuser}" enctype="application/json" target="_blank">
 				    <div class="form-group">
-				      <label class="control-label col-sm-2" for="email">[[#{user.firstname}]]</label>
-				      <input type="text" required class="form-control invalid" ng-model="user.firstname" th:placeholder="#{user.firstnameplaceholder}">
+				      <label class="control-label col-sm-2">[[#{user.username}]]</label>
+				      <input type="text" disabled class="form-control" ng-model="user.username">
 				    </div>
 				    <div class="form-group">
-				      <label class="control-label col-sm-2" for="email">[[#{user.lastname}]]</label>
+				      <label class="control-label col-sm-2">[[#{user.firstname}]]</label>
+				      <input type="text" ng-class="{'invalid' : dataValidation['firstname']}" required class="form-control" ng-change="validate('firstname')" ng-model="user.firstname" th:placeholder="#{user.firstnameplaceholder}">
+				    </div>
+				    <div class="form-group">
+				      <label class="control-label col-sm-2">[[#{user.lastname}]]</label>
 				      <input type="text" required class="form-control" ng-model="user.lastname" th:placeholder="#{user.lastnameplaceholder}">
 
 				    </div>	    
 				    <div class="form-group">
-				      <label class="control-label col-sm-2" for="email">[[#{user.email}]]</label>
+				      <label class="control-label col-sm-2">[[#{user.email}]]</label>
 				      <div class="input-group group-email">
 					  	<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 					  	<input type="email" required class="form-control" ng-model="user.email" th:placeholder="#{user.emailplaceholder}">
@@ -30,7 +34,7 @@
 
 				    </div>
 				    <div class="form-group">
-				      <label class="control-label col-sm-2" for="email">[[#{user.birthdate}]]</label>
+				      <label class="control-label col-sm-2">[[#{user.birthdate}]]</label>
 				      <input type="date" required class="form-control" ng-model="user.birthdateDate" th:placeholder="#{user.birthdateplaceholder}">
 				    </div>
 				    
@@ -38,11 +42,11 @@
 				    	<div class="panel-heading">[[#{common.security}]]</div>
 				    	<div class="panel-body">
 						    <div class="form-group">
-						      <label class="control-label col-sm-2" for="pwd">[[#{user.password}]]</label>
+						      <label class="control-label col-sm-2">[[#{user.password}]]</label>
 						      <input type="password" required class="form-control" th:placeholder="#{user.passwordplaceholder}">
 						    </div>
 						    <div class="form-group">
-						      <label class="control-label col-sm-2" for="pwd">[[#{user.passwordconfirm}]]</label>
+						      <label class="control-label col-sm-2">[[#{user.passwordconfirm}]]</label>
 						      <input type="password" required class="form-control" th:placeholder="#{user.passwordconfirmplaceholder}">
 						    </div>
 					    </div>
@@ -68,7 +72,7 @@
 			</div>
 		
 		<div>
-		{{test}}
+		{{dataValidation}}
 		</div>
 		</div>
 		

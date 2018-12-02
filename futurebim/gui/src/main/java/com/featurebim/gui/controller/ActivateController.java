@@ -9,7 +9,6 @@ import com.featurebim.gui.anotations.FbGuiRequestGetDataMapping;
 import com.featurebim.gui.anotations.FbGuiRequestPostDataMapping;
 import com.featurebim.gui.controller.base.UiActivationControllerBase;
 import com.featurebim.gui.model.futurebim.GuiUser;
-import com.featurebim.gui.model.futurebim.GuiUserFull;
 
 @Controller
 @RequestMapping(path = "/activation")
@@ -22,9 +21,9 @@ public class ActivateController extends UiActivationControllerBase {
   }
 
   @FbGuiRequestGetDataMapping(value = "/data/curuser")
-  public GuiUserFull initUserData() {
+  public GuiUser initUserData() {
 
-    return this.getCurrentUser();
+    return this.getCurrentUser().toUser();
   }
 
   @FbGuiRequestPostDataMapping(value = "/data/saveuser")

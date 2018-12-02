@@ -3,6 +3,8 @@
 mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
 	
 	$scope.user = {};
+	$scope.dataValidation = {'firstname' : true, 'firstname' : true, 'firstname' : true, };
+	$scope.isValidate = true;
 	
 	$http({
 		method: "GET",
@@ -11,6 +13,16 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 	}).then(function(response){
 	  
 		$scope.user = response.data;
+		delete $scope.user.created;
+		delete $scope.user.updated;
+		$scope.user.hashPassword = "";
+		
+		
+		for(o in $scope.user){
+			$scope.datavalidation[o] = true;
+			$scope.validate(o);
+		}
+		
 		$scope.user.birthdateDate = new Date($scope.user.birthdate);
 		$scope.userjson = JSON.stringify($scope.user);
 
@@ -46,6 +58,16 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 			
 		});		
 		
+	}
+	
+	$scope.validate = function(item){
+		if($scope.user[item] == undefined || $scope.user[item] == null){
+			$scope.dataValidation[item] = false;
+			$scope.isValidate = false;
+			return false;
+		}
+		
+		return true;
 	}
 	
 });
