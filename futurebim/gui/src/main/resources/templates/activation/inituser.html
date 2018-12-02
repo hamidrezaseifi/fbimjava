@@ -11,7 +11,7 @@
 	    <div class="panel panel-default activation-pannel" ng-controller="ActivationUserController">
 	    	<div class="panel-heading"><h4>[[#{user.useractivation}]]</h4></div>
 	    	<div class="panel-body">
-			    <form class="form-horizontal" id="userform" method="post" th:action="@{/activation/data/saveuser}" enctype="application/json" target="_blank">
+			    <form class="form-horizontal" id="userform" name="userform" method="post" th:action="@{/activation/data/saveuser}" enctype="application/json" target="_blank">
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{user.username}]]</label>
 				      <input type="text" disabled class="form-control" ng-model="user.username">
@@ -44,6 +44,7 @@
 						    <div class="form-group">
 						      <label class="control-label col-sm-2">[[#{user.password}]]</label>
 						      <input type="password" ng-class="{'invalid' : !dataValidation['hashPassword']}" ng-change="validate('hashPassword')" required ng-model="user.hashPassword" class="form-control" th:placeholder="#{user.passwordplaceholder}">
+						      <div ng-style="passwordStrength"></div>
 						    </div>
 						    <div class="form-group">
 						      <label class="control-label col-sm-2">[[#{user.passwordconfirm}]]</label>
