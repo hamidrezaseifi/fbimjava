@@ -24,7 +24,7 @@ public class CoreApp {
   @Configuration
   @Import(XmlRestConfig.class)
   static class CoreXmlRestConfig {
-
+    
   }
 
   public static void main(final String[] args) {
