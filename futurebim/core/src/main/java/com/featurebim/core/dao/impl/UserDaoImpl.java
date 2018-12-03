@@ -1,5 +1,6 @@
 package com.featurebim.core.dao.impl;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.featurebim.core.dao.UserDao;
 import com.featurebim.core.dao.exceptions.StorageException;
-import com.featurebim.core.model.User;
 import com.featurebim.core.model.UserFull;
 
 @Transactional
@@ -34,15 +36,68 @@ public class UserDaoImpl implements UserDao {
   }
 
   @Override
-  public User addUser(final User user) {
+  public UserFull addUser(final UserFull user) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public User updateUser(final User user) {
-    // TODO Auto-generated method stub
-    return null;
+  public UserFull updateUser(final UserFull user) throws StorageException {
+    logger.debug("Updating user with id {}...", user.getId());
+    final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
+    try {
+      
+      final String sql = "UPDATE users SET username = ?, gender = ?, firstname = ?, lastname = ?, name_tag = ?"
+          + ", birthday = ?, email = ?, status = ?, version = ?, WHERE id = ?;";
+      //@formatter:on
+      
+      final int changedRows = jdbcTemplate.update(con -> {
+        final PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, user.getUsername());
+        ps.setInt(2, user.getGender());
+        ps.setString(3, user.getFirstname());
+        ps.setString(4, user.getLastname());
+        ps.setString(5, user.getNameTag());
+        ps.setDate(6, Date.valueOf(user.getBirthdate()));
+        ps.setString(7, user.getEmail());
+        ps.setInt(8, user.getStatus());
+        ps.setInt(9, user.getVersion());
+        ps.setLong(10, user.getId());
+        
+        return ps;
+      });
+      
+      if (changedRows != 1) {
+        throw new StorageException(String.format("Unable to update user [id: {}]", user.getId()));
+      }
+      
+      final String sqldelrole = "DELETE FROM user_roles WHERE userid = ? ";
+      //@formatter:on
+      
+      this.jdbcTemplate.update(con -> {
+        final PreparedStatement ps = con.prepareStatement(sqldelrole);
+        ps.setLong(1, user.getId());
+        return ps;
+      });
+      
+      final String sqlinsrole = "INSERT INTO user_roles(userid, roleid) VALUES(?, ?);";
+      for (final Integer role : user.getRoles()) {
+        this.jdbcTemplate.update(con -> {
+          final PreparedStatement ps = con.prepareStatement(sqlinsrole);
+          ps.setLong(1, user.getId());
+          ps.setInt(2, role);
+          return ps;
+        });
+      }
+      
+      this.platformTransactionManager.commit(transactionStatus);
+    }
+    catch (final Exception e) {
+      platformTransactionManager.rollback(transactionStatus);
+      logger.error("Unable to update user [id: {}]: {}", user.getId(), e.toString(), e);
+      throw new StorageException(e.toString(), e);
+    }
+    return getById(user.getId());
   }
 
   @Override
@@ -52,14 +107,14 @@ public class UserDaoImpl implements UserDao {
   }
 
   @Override
-  public User getById(final Long id) {
+  public UserFull getById(final Long id) {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
   public UserFull getByUsername(final String username) throws StorageException {
-    logger.info("Dao Read User by username: " + username);
+    logger.info("Dao Read UserFull by username: " + username);
     final String sqlSelect = "SELECT * FROM users where username=?";
 
     UserFull user;
@@ -82,44 +137,24 @@ public class UserDaoImpl implements UserDao {
 
     }
     catch (final Exception e) {
-      throw new StorageException("Unable to retrieve User data: " + e.toString());
+      throw new StorageException("Unable to retrieve UserFull data: " + e.toString());
     }
 
     return user;
   }
 
   @Override
-  public List<User> listUsers() {
+  public List<UserFull> listUsers() {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public List<User> listCompanyUsers(final Long companyId) {
+  public List<UserFull> listCompanyUsers(final Long companyId) {
     // TODO Auto-generated method stub
     return null;
   }
-
-  private User userFromResultSet(final ResultSet rs) throws SQLException {
-    final User user = new User();
-    user.setId(rs.getLong("id"));
-    user.setCompanyid(rs.getLong("companyid"));
-    user.setUsername(rs.getString("username"));
-    user.setBirthdate(rs.getTimestamp("birthday").toLocalDateTime().toLocalDate());
-    user.setEmail(rs.getString("email"));
-    user.setFirstname(rs.getString("firstname"));
-    user.setGender(rs.getShort("gender"));
-    user.setHashPassword(rs.getString("hash_password"));
-    user.setLastname(rs.getString("lastname"));
-    user.setNameTag(rs.getString("name_tag"));
-    user.setStatus(rs.getInt("status"));
-    user.setCreated(rs.getTimestamp("created").toLocalDateTime());
-    user.setUpdated(rs.getTimestamp("updated").toLocalDateTime());
-    user.setVersion(rs.getInt("version"));
-
-    return user;
-  }
-
+  
   private UserFull userFullFromResultSet(final ResultSet rs) throws SQLException {
     final UserFull user = new UserFull();
     user.setId(rs.getLong("id"));
