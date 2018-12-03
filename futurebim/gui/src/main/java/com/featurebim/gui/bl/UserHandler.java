@@ -3,8 +3,10 @@ package com.featurebim.gui.bl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 
+import com.featurebim.common.model.edo.EncryptedContentEdo;
 import com.featurebim.common.model.edo.UserFullEdo;
 import com.featurebim.common.model.edo.UserLoginEdo;
 import com.featurebim.common.model.enums.EModule;
@@ -26,21 +28,38 @@ public class UserHandler implements IUserHandler {
 
   @Autowired
   private IUiRestTemplateCall restTemplateCall;
-
+  
+  @Autowired
+  private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter;
+  
   @Override
   public GuiUserFull authenticateUser(final String username, final String password) {
-
+    
     logger.debug("get projects list from core");
-
+    
     final UserLoginEdo loginEdo = new UserLoginEdo(username, password);
-
-    final UserFullEdo userEdo = restTemplateCall.callRestPost(coreAccessConfig.getUserAuthenticate(),
-                                                              EModule.CORE,
-                                                              loginEdo,
-                                                              UserFullEdo.class,
-                                                              false);
-
-    return GuiUserFull.fromEdo(userEdo);
+    final EncryptedContentEdo encrypedEdo = new EncryptedContentEdo();
+    
+    try {
+      encrypedEdo.setContentObject(loginEdo, mappingJackson2HttpMessageConverter.getObjectMapper());
+    }
+    catch (final Exception e) {
+      return null;
+    }
+    
+    final EncryptedContentEdo encrypedResEdo = restTemplateCall.callRestPost(coreAccessConfig.getUserAuthenticate(),
+        EModule.CORE,
+        encrypedEdo,
+        EncryptedContentEdo.class,
+        false);
+    
+    try {
+      final UserFullEdo userEdo = encrypedResEdo.getObjectContent(UserFullEdo.class, mappingJackson2HttpMessageConverter.getObjectMapper());
+      return GuiUserFull.fromEdo(userEdo);
+    }
+    catch (final Exception e) {
+      return null;
+    }
   }
 
 }

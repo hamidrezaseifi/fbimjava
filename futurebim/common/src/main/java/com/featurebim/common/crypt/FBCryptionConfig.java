@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @Qualifier(value = "CryptionConfig")
-public class CryptionConfig {
+public class FBCryptionConfig {
 
   @Bean
   public PasswordEncoder passwordEncoder() {
