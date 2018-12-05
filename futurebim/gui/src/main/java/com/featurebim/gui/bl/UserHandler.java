@@ -62,4 +62,27 @@ public class UserHandler implements IUserHandler {
     }
   }
 
+  @Override
+  public GuiUserFull saveUser(final GuiUserFull user) {
+    final UserFullEdo edo = user.toEdo();
+    final EncryptedContentEdo encrypedEdo = new EncryptedContentEdo();
+    
+    try {
+      encrypedEdo.setContentObject(edo, mappingJackson2HttpMessageConverter.getObjectMapper());
+      
+      final EncryptedContentEdo encrypedResEdo = restTemplateCall.callRestPost(coreAccessConfig.getUserSave(),
+          EModule.CORE,
+          encrypedEdo,
+          EncryptedContentEdo.class,
+          false);
+      final UserFullEdo userEdo = encrypedResEdo.getObjectContent(UserFullEdo.class, mappingJackson2HttpMessageConverter.getObjectMapper());
+      return GuiUserFull.fromEdo(userEdo);
+      
+    }
+    catch (final Exception e) {
+      return null;
+    }
+
+  }
+
 }

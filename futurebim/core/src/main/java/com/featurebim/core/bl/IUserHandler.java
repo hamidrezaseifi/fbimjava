@@ -11,7 +11,7 @@ public interface IUserHandler {
   
   public UserFull updateUser(final UserFull user) throws StorageException;
   
-  public boolean removeUser(final Long id) throws StorageException;
+  public boolean removeUser(final UserFull user) throws StorageException;
   
   public UserFull getById(final Long id) throws StorageException;
   
@@ -23,6 +23,6 @@ public interface IUserHandler {
   
   public UserFull authenticateUser(final String username, final String password) throws StorageException;
   
-  public boolean setUserPassword(final Long id, final String password) throws StorageException;
+  public boolean setUserPassword(final UserFull user) throws StorageException;
   
 }

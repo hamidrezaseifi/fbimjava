@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.featurebim.common.exceptions.EExceptionType;
+import com.featurebim.common.exceptions.FBCustomizedException;
+import com.featurebim.common.model.enums.EModule;
 import com.featurebim.core.dao.UserDao;
 import com.featurebim.core.dao.exceptions.StorageException;
 import com.featurebim.core.model.UserFull;
@@ -31,13 +34,13 @@ public class UserHandler implements IUserHandler {
   
   @Override
   public UserFull updateUser(final UserFull user) throws StorageException {
-
+    checkUserVersion(user);
     return userDao.updateUser(user);
   }
   
   @Override
-  public boolean removeUser(final Long id) throws StorageException {
-    return userDao.removeUser(id);
+  public boolean removeUser(final UserFull user) throws StorageException {
+    return userDao.removeUser(user.getId());
   }
   
   @Override
@@ -65,6 +68,11 @@ public class UserHandler implements IUserHandler {
     
     final UserFull fUser = getByUsername(username);
     
+    // fUser.setHashPassword(password);
+    // setUserPassword(fUser);
+
+    // fUser = getByUsername(username);
+    
     if (fUser != null && passwordEncoder.matches(password, fUser.getHashPassword())) {
       return fUser;
     }
@@ -72,10 +80,22 @@ public class UserHandler implements IUserHandler {
   }
   
   @Override
-  public boolean setUserPassword(final Long id, final String password) throws StorageException {
-    final String encrypedPassword = passwordEncoder.encode(password);
+  public boolean setUserPassword(final UserFull user) throws StorageException {
     
-    return userDao.setUserPassword(id, encrypedPassword);
+    checkUserVersion(user);
+
+    final String encrypedPassword = passwordEncoder.encode(user.getHashPassword());
+    
+    return userDao.setUserPassword(user.getId(), encrypedPassword);
+  }
+
+  private boolean checkUserVersion(final UserFull user) throws StorageException {
+    final UserFull existsUser = userDao.getById(user.getId());
+    if (existsUser.getVersion() > user.getVersion()) {
+      throw new FBCustomizedException(EExceptionType.VersionMismatch.name(), "", EModule.CORE.getModuleName());
+    }
+    
+    return true;
   }
   
 }

@@ -3,35 +3,35 @@ package com.featurebim.gui.model.ui.enums;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum EUiUserRole {
-
-  NOROLE(1L, "No Role", ""),
-  USER(5L, "Benutzer", "ROLE_USER"),
-  VIEW(10L, "Zuschauer", "ROLE_VIEW"),
-  GUEST(15L, "Gast", ""),
-  ADMIN(25L, "Administrator", "ROLE_ADMIN");
-
-  private final Long   id;
+  
+  NOROLE(1, "No Role", ""),
+  USER(5, "Benutzer", "ROLE_USER"),
+  VIEW(10, "Zuschauer", "ROLE_VIEW"),
+  GUEST(15, "Gast", ""),
+  ADMIN(25, "Administrator", "ROLE_ADMIN");
+  
+  private final int    id;
   private final String name;
   private final String authority;
-
-  private EUiUserRole(final Long id, final String name, final String authority) {
+  
+  private EUiUserRole(final int id, final String name, final String authority) {
     this.id = id;
     this.name = name;
     this.authority = authority;
   }
-
-  public Long getId() {
+  
+  public int getId() {
     return id;
   }
-
+  
   public String getName() {
     return name;
   }
-
+  
   public String getAuthority() {
     return authority;
   }
-
+  
   @JsonCreator
   public static EUiUserRole ofValue(final String value) {
     if (value == null) {
@@ -44,7 +44,7 @@ public enum EUiUserRole {
     }
     return NOROLE;
   }
-
+  
   public static EUiUserRole ofId(final int id) {
     if (id < 1) {
       return NOROLE;
@@ -56,5 +56,5 @@ public enum EUiUserRole {
     }
     return NOROLE;
   }
-
+  
 }

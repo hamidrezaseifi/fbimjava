@@ -18,24 +18,24 @@
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{user.firstname}]]</label>
-				      <input type="text" ng-class="{'invalid' : !dataValidation['firstname']}" ng-change="validate('firstname')" required class="form-control" ng-model="user.firstname" th:placeholder="#{user.firstnameplaceholder}">
+				      <input type="text" ng-class="{'invalid' : !dataValidation['firstname']}" ng-change="validate()" required class="form-control" ng-model="user.firstname" th:placeholder="#{user.firstnameplaceholder}">
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{user.lastname}]]</label>
-				      <input type="text" ng-class="{'invalid' : !dataValidation['lastname']}" ng-change="validate('lastname')" required class="form-control" ng-model="user.lastname" th:placeholder="#{user.lastnameplaceholder}">
+				      <input type="text" ng-class="{'invalid' : !dataValidation['lastname']}" ng-change="validate()" required class="form-control" ng-model="user.lastname" th:placeholder="#{user.lastnameplaceholder}">
 
 				    </div>	    
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{user.email}]]</label>
 				      <div class="input-group group-email">
 					  	<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-					  	<input type="email" ng-class="{'invalid' : !dataValidation['email']}" ng-change="validate('email')" required class="form-control" ng-model="user.email" th:placeholder="#{user.emailplaceholder}">
+					  	<input type="email" ng-class="{'invalid' : !dataValidation['email']}" ng-change="validate()" required class="form-control" ng-model="user.email" th:placeholder="#{user.emailplaceholder}">
 					  </div>
 
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{user.birthdate}]]</label>
-				      <input type="date" ng-class="{'invalid' : !dataValidation['birthdate']}" ng-change="validate('birthdate')" required class="form-control" ng-model="user.birthdateDate" th:placeholder="#{user.birthdateplaceholder}">
+				      <input type="date" ng-class="{'invalid' : !dataValidation['birthdate']}" ng-change="validate()" required class="form-control" ng-model="user.birthdateDate" th:placeholder="#{user.birthdateplaceholder}">
 				    </div>
 				    
 				    <div class="panel panel-default security-panel">
@@ -43,12 +43,12 @@
 				    	<div class="panel-body">
 						    <div class="form-group">
 						      <label class="control-label col-sm-2">[[#{user.password}]]</label>
-						      <input type="password" ng-class="{'invalid' : !dataValidation['hashPassword']}" ng-change="validate('hashPassword')" required ng-model="user.hashPassword" class="form-control" th:placeholder="#{user.passwordplaceholder}">
+						      <input type="password" ng-class="{'invalid' : !dataValidation['hashPassword']}" ng-change="validate()" required ng-model="user.hashPassword" class="form-control" th:placeholder="#{user.passwordplaceholder}">
 						      <div ng-style="passwordStrength"></div>
 						    </div>
 						    <div class="form-group">
 						      <label class="control-label col-sm-2">[[#{user.passwordconfirm}]]</label>
-						      <input type="password" ng-class="{'invalid' : !dataValidation['passwordconfirm']}" ng-change="validate('passwordconfirm')" required ng-model="user.passwordconfirm" class="form-control" th:placeholder="#{user.passwordconfirmplaceholder}">
+						      <input type="password" ng-class="{'invalid' : !dataValidation['passwordconfirm']}" ng-change="validate()" required ng-model="user.passwordconfirm" class="form-control" th:placeholder="#{user.passwordconfirmplaceholder}">
 						    </div>
 					    </div>
 				    </div>

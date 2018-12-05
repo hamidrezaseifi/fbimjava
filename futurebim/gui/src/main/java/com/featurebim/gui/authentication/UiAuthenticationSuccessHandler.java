@@ -17,42 +17,41 @@ import com.featurebim.gui.model.enums.EGuiUserStatus;
 
 @Component
 public class UiAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-
+  
   @Autowired
   private UiSessionUserService sessionUserService;
-
+  
   @Override
   public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication auth)
-                                                                                                                                       throws IOException,
-                                                                                                                                       ServletException {
-
+      throws IOException,
+      ServletException {
+    
     if (auth instanceof FBAuthenticationToken == true) {
-
+      
       final FBAuthenticationToken tbToken = (FBAuthenticationToken) auth;
-
+      
       String url = tbToken.getUser().getStatusEnum() == EGuiUserStatus.NOT_INITIALIZED ? WebSecurityConfig.INITUSER_URL
-                                                                                       : WebSecurityConfig.ROOT_URL;
-
-      if (tbToken.getUser().getStatusEnum() == EGuiUserStatus.DEACTIVE || tbToken.getUser().getStatusEnum() == EGuiUserStatus.ACTIVE
-          || tbToken.getUser().getStatusEnum() == EGuiUserStatus.UNKNOWN) {
+          : WebSecurityConfig.ROOT_URL;
+      
+      if (tbToken.getUser().getStatusEnum() == EGuiUserStatus.DEACTIVE || tbToken.getUser().getStatusEnum() == EGuiUserStatus.UNKNOWN) {
         url = UiAuthenticationErrorUrlCreator.getErrorUrl("access",
-                                                          request.getParameter(WebSecurityConfig.USERNAME_FIELD_NAME),
-                                                          request.getParameter(WebSecurityConfig.PASSWORD_FIELD_NAME));
+            request.getParameter(WebSecurityConfig.USERNAME_FIELD_NAME),
+            request.getParameter(WebSecurityConfig.PASSWORD_FIELD_NAME));
       }
       else {
-
+        
         if (sessionUserService.authorizeUser(tbToken, request.getSession(), true) == null) {
-
+          
           url = UiAuthenticationErrorUrlCreator.getErrorUrl("access",
-                                                            request.getParameter(WebSecurityConfig.USERNAME_FIELD_NAME),
-                                                            request.getParameter(WebSecurityConfig.PASSWORD_FIELD_NAME));
+              request.getParameter(WebSecurityConfig.USERNAME_FIELD_NAME),
+              request.getParameter(WebSecurityConfig.PASSWORD_FIELD_NAME));
         }
-
+        
       }
-
+      
       getRedirectStrategy().sendRedirect(request, response, url);
     }
-
+    
   }
-
+  
 }

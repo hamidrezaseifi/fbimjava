@@ -177,6 +177,28 @@ public class GuiUser {
     return edo;
   }
 
+  public GuiUserFull toUserFull() {
+    final GuiUserFull userFull = new GuiUserFull();
+    userFull.setBirthdate(birthdate);
+    userFull.setCompanyid(companyid);
+    userFull.setEmail(email);
+    userFull.setFirstname(firstname);
+    userFull.setGender(gender);
+    userFull.setHashPassword(hashPassword);
+    userFull.setLastname(lastname);
+    userFull.setNameTag(nameTag);
+    userFull.setUsername(username);
+
+    userFull.setCreated(created);
+    userFull.setId(id);
+    userFull.setStatus(status);
+    userFull.setUpdated(updated);
+    userFull.setVersion(version);
+
+    userFull.setRoles(new ArrayList<>());
+    return userFull;
+  }
+
   public static GuiUser fromEdo(final UserEdo edo) {
     if (edo == null) {
       return null;

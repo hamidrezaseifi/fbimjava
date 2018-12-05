@@ -6,6 +6,7 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 	$scope.dataValidation = {'firstname' : true, 'lastname' : true, 'hashPassword' : true, 'passwordconfirm' : true, 'birthdate' : true, 'email' : true, };
 	$scope.isValidate = true;
 	
+	var weakRegex = new RegExp("^(((?=.*[a-z])))(?=.{4,})");
 	var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 	var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 	
@@ -33,8 +34,7 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 		
 		$scope.user.birthdateDate = new Date($scope.user.birthdate);
 		
-		$scope.validate('hashPassword');
-		$scope.validate('passwordconfirm');
+		$scope.validate();
 
 	  //$scope.$parent.showloading = false;
 		
@@ -70,50 +70,43 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 		
 	}
 	
-	$scope.validate = function(item){
+	$scope.validate = function(){
 		
-		$scope.dataValidation[item] = true;
 		$scope.isValidate = true;
-		
-		if(item == 'birthdate'){
-			if($scope.user.birthdateDate == null){
-				$scope.dataValidation[item] = false;
-				$scope.isValidate = false;
-				return false;
-			}
-			else{
-				$scope.user[item] = moment($scope.user.birthdateDate).format("YYYY-MM-DD");
-				return true;
-			}
+		for(dataItem in $scope.dataValidation){
+			$scope.dataValidation[dataItem] = true;
 		}
 		
-		if(item == 'passwordconfirm'){
-			
-			if($scope.user.hashPassword !== $scope.user.passwordconfirm){
-				$scope.dataValidation['passwordconfirm'] = false;
-				$scope.isValidate = false;
-				return false;
-			}
-			
-			return true;
-		}
-		
-		if(item == 'hashPassword'){
-			if(!$scope.analyzePassword($scope.user['hashPassword'])){
-				$scope.dataValidation['hashPassword'] = false;
-				$scope.isValidate = false;
-				return false;
-			}
-			return true;
-		}
-		
-		if($scope.user[item] == undefined || $scope.user[item] == null || $scope.user[item].length < 3){
-			$scope.dataValidation[item] = false;
+		if($scope.user.birthdateDate == null){
+			$scope.dataValidation['birthdate'] = false;
 			$scope.isValidate = false;
 			return false;
 		}
+		else{
+			$scope.user['birthdate'] = moment($scope.user.birthdateDate).format("YYYY-MM-DD");
+		}
 		
-		return true;
+		if($scope.user.hashPassword !== $scope.user.passwordconfirm){
+			$scope.dataValidation['passwordconfirm'] = false;
+			$scope.isValidate = false;
+
+		}
+
+		if(!$scope.analyzePassword($scope.user['hashPassword'])){
+			$scope.dataValidation['hashPassword'] = false;
+			$scope.isValidate = false; 
+		}
+	
+		for(dataItem in $scope.dataValidation){
+
+			if($scope.user[dataItem] == undefined || $scope.user[dataItem] == null || $scope.user[dataItem].length < 3){
+				$scope.dataValidation[dataItem] = false;
+				$scope.isValidate = false;
+			}		
+		}
+		
+		
+		return $scope.isValidate;
 	}
 	
 	$scope.analyzePassword = function(value) {
@@ -122,6 +115,9 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
             return true;
         } else if(mediumRegex.test(value)) {
             $scope.passwordStrength["background-color"] = "orange";
+            return true;
+        } else if(weakRegex.test(value)) {
+            $scope.passwordStrength["background-color"] = "blue";
             return true;
         } else {
             $scope.passwordStrength["background-color"] = "red";
