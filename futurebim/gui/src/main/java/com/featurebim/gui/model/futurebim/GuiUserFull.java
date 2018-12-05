@@ -24,8 +24,6 @@ public class GuiUserFull {
   
   private String username;
   
-  private String hashPassword;
-  
   private short gender;
   
   private String lastname;
@@ -105,14 +103,6 @@ public class GuiUserFull {
   
   public void setGender(final short gender) {
     this.gender = gender;
-  }
-  
-  public String getHashPassword() {
-    return this.hashPassword;
-  }
-  
-  public void setHashPassword(final String hashPassword) {
-    this.hashPassword = hashPassword;
   }
   
   public String getLastname() {
@@ -203,7 +193,6 @@ public class GuiUserFull {
     user.setEmail(email);
     user.setFirstname(firstname);
     user.setGender(gender);
-    user.setHashPassword(hashPassword);
     user.setLastname(lastname);
     user.setNameTag(nameTag);
     user.setUsername(username);
@@ -224,7 +213,6 @@ public class GuiUserFull {
     edo.setEmail(email);
     edo.setFirstname(firstname);
     edo.setGender(gender);
-    edo.setHashPassword(hashPassword);
     edo.setLastname(lastname);
     edo.setNameTag(nameTag);
     edo.setUsername(username);
@@ -254,7 +242,6 @@ public class GuiUserFull {
     user.setEmail(edo.getEmail());
     user.setFirstname(edo.getFirstname());
     user.setGender(edo.getGender());
-    user.setHashPassword(edo.getHashPassword());
     user.setLastname(edo.getLastname());
     user.setNameTag(edo.getNameTag());
     user.setUsername(edo.getUsername());

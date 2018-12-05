@@ -172,6 +172,10 @@ public class UserFull {
     this.roles.add(role);
   }
 
+  public boolean isNew() {
+    return id > 0;
+  }
+
   public UserFullEdo toEdo() {
     final UserFullEdo edo = new UserFullEdo();
     edo.setBirthdate(birthdate);
@@ -179,7 +183,6 @@ public class UserFull {
     edo.setEmail(email);
     edo.setFirstname(firstname);
     edo.setGender(gender);
-    edo.setHashPassword(hashPassword);
     edo.setLastname(lastname);
     edo.setNameTag(nameTag);
     edo.setUsername(username);
@@ -202,7 +205,6 @@ public class UserFull {
     user.setEmail(edo.getEmail());
     user.setFirstname(edo.getFirstname());
     user.setGender(edo.getGender());
-    user.setHashPassword(edo.getHashPassword());
     user.setLastname(edo.getLastname());
     user.setNameTag(edo.getNameTag());
     user.setUsername(edo.getUsername());
