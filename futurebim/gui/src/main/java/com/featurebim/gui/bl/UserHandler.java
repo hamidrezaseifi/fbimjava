@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.featurebim.common.model.edo.EncryptedContentEdo;
 import com.featurebim.common.model.edo.UserFullEdo;
 import com.featurebim.common.model.edo.UserLoginEdo;
+import com.featurebim.common.model.edo.UserPasswordEdo;
 import com.featurebim.common.model.enums.EModule;
 import com.featurebim.gui.configuration.UiConfiguration;
 import com.featurebim.gui.helper.IUiRestTemplateCall;
@@ -51,7 +52,7 @@ public class UserHandler implements IUserHandler {
         EModule.CORE,
         encrypedEdo,
         EncryptedContentEdo.class,
-        false);
+        true);
     
     try {
       final UserFullEdo userEdo = encrypedResEdo.getObjectContent(UserFullEdo.class, mappingJackson2HttpMessageConverter.getObjectMapper());
@@ -74,8 +75,45 @@ public class UserHandler implements IUserHandler {
           EModule.CORE,
           encrypedEdo,
           EncryptedContentEdo.class,
-          false);
+          true);
       final UserFullEdo userEdo = encrypedResEdo.getObjectContent(UserFullEdo.class, mappingJackson2HttpMessageConverter.getObjectMapper());
+      return GuiUserFull.fromEdo(userEdo);
+      
+    }
+    catch (final Exception e) {
+      return null;
+    }
+
+  }
+
+  @Override
+  public GuiUserFull saveUserPassword(final GuiUserFull user, final String password) {
+    UserFullEdo userEdo = user.toEdo();
+
+    final EncryptedContentEdo encrypedEdo = new EncryptedContentEdo();
+    
+    try {
+      encrypedEdo.setContentObject(userEdo, mappingJackson2HttpMessageConverter.getObjectMapper());
+      
+      final EncryptedContentEdo encrypedResEdo = restTemplateCall.callRestPost(coreAccessConfig.getUserSave(),
+          EModule.CORE,
+          encrypedEdo,
+          EncryptedContentEdo.class,
+          true);
+
+      userEdo = encrypedResEdo.getObjectContent(UserFullEdo.class, mappingJackson2HttpMessageConverter.getObjectMapper());
+
+      final UserPasswordEdo edoPassword = new UserPasswordEdo();
+      edoPassword.setPassword(password);
+      edoPassword.setUser(GuiUserFull.fromEdo(userEdo).toUser().toEdo());
+      encrypedEdo.setContentObject(edoPassword, mappingJackson2HttpMessageConverter.getObjectMapper());
+      
+      restTemplateCall.callRestPost(coreAccessConfig.getUserSetPassword(),
+          EModule.CORE,
+          encrypedEdo,
+          Void.class,
+          true);
+
       return GuiUserFull.fromEdo(userEdo);
       
     }

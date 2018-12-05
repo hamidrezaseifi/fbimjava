@@ -28,13 +28,20 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
 
   @Override
   public <I, O> O callRestPost(final URI uri,
-                               final EModule service,
-                               final I edo,
-                               final Class<O> responseClass,
-                               final boolean throwError) throws UiCustomizedException {
+      final EModule service,
+      final I edo,
+      final Class<O> responseClass,
+      final boolean throwError) throws UiCustomizedException {
 
     try {
-      return restTemplate.postForObject(uri, edo, responseClass);
+      
+      if (responseClass.equals(Void.class)) {
+        restTemplate.postForObject(uri, edo, responseClass);
+        return null;
+      }
+      else {
+        return restTemplate.postForObject(uri, edo, responseClass);
+      }
 
     }
     catch (final RestClientResponseException e) {
@@ -58,29 +65,42 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
         return null;
       }
       throw new UiCustomizedException(messages.get("error.invalidservicestatusorurl", service.getModuleName(), uri),
-                                      FBUiRestResponse.stackListToString(e.getStackTrace()),
-                                      EModule.GUI.getModuleName());
+          FBUiRestResponse.stackListToString(e.getStackTrace()),
+          EModule.GUI.getModuleName());
     }
   }
 
   @Override
   public <I, O> O callRestPost(final String url,
-                               final EModule service,
-                               final I edo,
-                               final Class<O> response,
-                               final boolean throwError) throws UiCustomizedException {
+      final EModule service,
+      final I edo,
+      final Class<O> response,
+      final boolean throwError) throws UiCustomizedException {
 
-    return callRestPost(URI.create(url), service, edo, response, throwError);
+    if (response.equals(Void.class)) {
+      callRestPost(URI.create(url), service, edo, response, throwError);
+      return null;
+    }
+    else {
+      return callRestPost(URI.create(url), service, edo, response, throwError);
+    }
   }
 
   @Override
   public <I, O> O callRestGet(final String url,
-                              final EModule service,
-                              final Class<O> responseClass,
-                              final boolean throwError,
-                              final Object... args) throws UiCustomizedException {
+      final EModule service,
+      final Class<O> responseClass,
+      final boolean throwError,
+      final Object... args) throws UiCustomizedException {
     try {
-      return restTemplate.getForObject(url, responseClass, args);
+      
+      if (responseClass.equals(Void.class)) {
+        restTemplate.getForObject(url, responseClass, args);
+        return null;
+      }
+      else {
+        return restTemplate.getForObject(url, responseClass, args);
+      }
 
     }
     catch (final RestClientResponseException e) {
@@ -109,19 +129,26 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
       }
 
       throw new UiCustomizedException(messages.get("error.invalidservicestatusorurl", service.getModuleName(), propUrl),
-                                      FBUiRestResponse.stackListToString(e.getStackTrace()),
-                                      EModule.GUI.getModuleName());
+          FBUiRestResponse.stackListToString(e.getStackTrace()),
+          EModule.GUI.getModuleName());
     }
   }
 
   @Override
   public <I, O> O callRestGet(final URI uri,
-                              final EModule service,
-                              final Class<O> responseClass,
-                              final boolean throwError,
-                              final Object... args) throws UiCustomizedException {
+      final EModule service,
+      final Class<O> responseClass,
+      final boolean throwError,
+      final Object... args) throws UiCustomizedException {
 
-    return callRestGet(uri.toString(), service, responseClass, throwError, args);
+    if (responseClass.equals(Void.class)) {
+      callRestGet(uri.toString(), service, responseClass, throwError, args);
+      return null;
+    }
+    else {
+      return callRestGet(uri.toString(), service, responseClass, throwError, args);
+    }
+    
   }
 
   private boolean exceptionHasUrl(final RestClientException e) {
