@@ -38,7 +38,9 @@
     
     <script th:src="@{/js/jquery-ui.min.js}"></script>
     <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}">
-    
+    <script th:inline="javascript">
+    	var rooturl = /*[[${rooturl}]]*/ "";
+    </script>
   </head>
     <body ng-controller="BodyController">
         

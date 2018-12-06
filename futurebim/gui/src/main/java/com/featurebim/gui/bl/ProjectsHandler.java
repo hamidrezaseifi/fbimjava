@@ -15,41 +15,43 @@ import com.featurebim.gui.helper.MessagesHelper;
 import com.featurebim.gui.model.futurebim.GuiProject;
 
 @Service
-public class ProjectsHandler {
-
+public class ProjectsHandler implements IProjectsHandler {
+  
   private final Logger logger = LoggerFactory.getLogger(ProjectsHandler.class);
-
+  
   @Autowired
   MessagesHelper messages;
-
+  
   @Autowired
   UiConfiguration.CoreAccessConfig coreAccessConfig;
-
+  
+  @Override
   public GuiProject getById(final Long id) {
     return null;
-
+    
   }
-
+  
+  @Override
   public List<GuiProject> listProjects(final Long companyId) {
-
+    
     logger.debug("get projects list from core");
-
+    
     List<GuiProject> list = new ArrayList<>();
-
+    
     logger.info("url:" + coreAccessConfig.getAllProjectsReadPath());
-
+    
     final RestTemplate restTemplate = new RestTemplate();
     final ProjectListRestResponse responseBody = restTemplate.getForObject(coreAccessConfig.getAllProjectsReadPath(),
-                                                                           ProjectListRestResponse.class);
-
+        ProjectListRestResponse.class);
+    
     if (responseBody.getProjects() == null || responseBody.hasError()) {
       // throw new CustomerNotFoundException(messages.get("error.customergeterror"));
     }
     else {
       list = GuiProject.fromEdoList(responseBody.getProjects());
     }
-
+    
     return list;
   }
-
+  
 }

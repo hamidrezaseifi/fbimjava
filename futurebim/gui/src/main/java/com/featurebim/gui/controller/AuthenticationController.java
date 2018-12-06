@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.featurebim.gui.authentication.UiAuthenticationErrorUrlCreator;
+import com.featurebim.gui.configuration.WebSecurityConfig;
 import com.featurebim.gui.helper.MessagesHelper;
 
 /**
@@ -24,39 +25,40 @@ import com.featurebim.gui.helper.MessagesHelper;
 @Controller
 @RequestMapping(path = "/auth")
 public class AuthenticationController {
-
+  
   @Autowired
   private MessagesHelper messages;
-
+  
   @GetMapping("/login")
   public String showLogin(final Model model, final HttpServletRequest request) throws ServletException, UnsupportedEncodingException {
-
+    
     String message = "";
     String username = "";
     final String password = "";
-
+    
     if (request.getParameter("error") != null) {
-
+      
       final Map<String, String> params = UiAuthenticationErrorUrlCreator.decodeErrorUrl(request.getParameter("error"));
-
+      
       if (params.get("err").equals("auth")) {
         message = messages.get("common.invalidlogin");
       }
       if (params.get("err").equals("access")) {
         message = messages.get("common.noaccesssite");
       }
-
+      
       username = params.get("u");
       // no password in error url // password = params.get("u");
-
+      
     }
-
+    
     model.addAttribute("username", username);
     model.addAttribute("password", password);
-
+    
     model.addAttribute("logginMessage", message);
-
+    model.addAttribute("rooturl", WebSecurityConfig.ROOT_URL);
+    
     return "auth/login";
   }
-
+  
 }

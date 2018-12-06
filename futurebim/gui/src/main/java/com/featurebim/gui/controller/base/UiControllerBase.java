@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.featurebim.gui.authentication.UiSessionUserService;
 import com.featurebim.gui.configuration.WebSecurityConfig;
+import com.featurebim.gui.model.enums.EGuiCompanyStatus;
 import com.featurebim.gui.model.enums.EGuiUserStatus;
 import com.featurebim.gui.model.futurebim.GuiUserFull;
 import com.featurebim.gui.model.ui.MenuItem;
@@ -46,9 +47,9 @@ public abstract class UiControllerBase {
 
   @ModelAttribute
   public void addAttributes(final Model model,
-                            final HttpSession session,
-                            final HttpServletResponse response,
-                            final HttpServletRequest request) throws IOException {
+      final HttpSession session,
+      final HttpServletResponse response,
+      final HttpServletRequest request) throws IOException {
 
     sessionUserInfo = sessionUserService.getUserFromSession(session);
 
@@ -64,10 +65,15 @@ public abstract class UiControllerBase {
       response.sendRedirect(WebSecurityConfig.INITUSER_URL);
     }
 
+    if (sessionUserInfo.getCompany().getStatus() == EGuiCompanyStatus.DEACTIVE) {
+      response.sendRedirect(WebSecurityConfig.INITCOMPANY_URL);
+    }
+
     model.addAttribute("pageTopToolList", getTopToolbar());
     model.addAttribute("pageLeftToolList", getLeftToolbar());
     model.addAttribute("isLogged", getSessionUserInfo() != null);
     model.addAttribute("loggedUser", getSessionUserInfo());
+    model.addAttribute("rooturl", WebSecurityConfig.ROOT_URL);
 
     model.addAttribute("url", getCurrentRelatedUrl());
 

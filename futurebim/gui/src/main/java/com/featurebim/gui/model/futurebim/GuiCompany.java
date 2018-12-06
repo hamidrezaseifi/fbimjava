@@ -65,7 +65,7 @@ public class GuiCompany {
   public EGuiCompanyStatus getStatus() {
     return this.status;
   }
-
+  
   public void setStatus(final int status) {
     this.status = EGuiCompanyStatus.fromId(status);
   }

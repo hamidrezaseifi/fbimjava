@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.featurebim.gui.bl.ICompanyHandler;
+import com.featurebim.gui.model.futurebim.GuiCompany;
 import com.featurebim.gui.model.futurebim.GuiUserFull;
 import com.featurebim.gui.model.ui.UiSessionUserInfo;
 import com.featurebim.gui.model.ui.enums.EUiUserRole;
@@ -24,6 +26,9 @@ public class UiSessionUserService {
 
   @Autowired
   private DebugModeAuthentication debugModeAuthentication;
+  
+  @Autowired
+  ICompanyHandler companyHandler;
 
   @Value("${server.session.timeout}")
   private int sessionTimeOut;
@@ -78,8 +83,8 @@ public class UiSessionUserService {
    * @return the new UiSessionUserInfo or null
    */
   public UiSessionUserInfo authorizeUser(final FBAuthenticationToken token,
-                                         final HttpSession session,
-                                         final boolean setContext) {
+      final HttpSession session,
+      final boolean setContext) {
 
     if (setContext) {
       SecurityContext ctx = SecurityContextHolder.getContext();
@@ -94,7 +99,9 @@ public class UiSessionUserService {
 
   public UiSessionUserInfo setLoggedInUserInfo(final GuiUserFull user, final HttpSession session) {
 
-    session.setAttribute(UiSessionUserInfo.SESSION_LOGGEDUSERINFO_KEY, new UiSessionUserInfo(user));
+    final GuiCompany company = companyHandler.getById(user.getCompanyid());
+
+    session.setAttribute(UiSessionUserInfo.SESSION_LOGGEDUSERINFO_KEY, new UiSessionUserInfo(user, company));
 
     return getUserFromSession(session);
   }

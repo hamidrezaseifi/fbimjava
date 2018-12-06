@@ -22,28 +22,29 @@ import com.featurebim.gui.authentication.provider.CustomAuthenticationProvider;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
+  
   public static String USERNAME_FIELD_NAME = "username";
   public static String PASSWORD_FIELD_NAME = "password";
   public static String LOGIN_URL           = "/auth/login";
   public static String INITUSER_URL        = "/activation/user";
+  public static String INITCOMPANY_URL     = "/activation/company";
   public static String ROOT_URL            = "/";
-
+  
   @Autowired
   private UiAuthenticationSuccessHandler uiAuthenticationSuccessHandler;
-
+  
   @Autowired
   private UiAuthenticationFailureHandler authenticationFailureHandler;
-
+  
   @Autowired
   private CustomAuthenticationProvider customAuthenticationProvider;
-
+  
   @Autowired
   private DebugModeAuthentication debugModeAuthentication;
-
+  
   @Override
   protected void configure(final HttpSecurity http) throws Exception {
-
+    
     if (debugModeAuthentication.isDebugLoginEnabled()) {
       http.authorizeRequests().antMatchers("/**").permitAll();
     }
@@ -77,13 +78,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .hasAnyRole("ADMIN")
           .antMatchers("/**")
           .authenticated();
-
+      
       http.exceptionHandling().accessDeniedPage("/noaccess");
-
+      
     }
-
+    
     http.csrf().disable();
-
+    
     http
         .formLogin()
         .loginPage(LOGIN_URL)
@@ -94,19 +95,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .successHandler(uiAuthenticationSuccessHandler)
         .failureHandler(authenticationFailureHandler)
         .permitAll();
-
+    
     http
         .logout()
         .logoutUrl("/logout")
         .logoutSuccessUrl("/");
-
+    
   }
-
+  
   @Override
   @Bean
   public AuthenticationManager authenticationManager() throws Exception {
     final AuthenticationManager authenticationManager = new ProviderManager(Arrays.asList(customAuthenticationProvider));
     return authenticationManager;
   }
-
+  
 }
