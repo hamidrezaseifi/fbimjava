@@ -1,6 +1,6 @@
 
 
-mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
+mdmApp.controller('ActivationCompanyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
 	
 	$scope.savedata = {user:{}, "password":"", "passwordconfirm":"", };
 	$scope.dataValidation = {'firstname' : true, 'lastname' : true, 'password' : true, 'passwordconfirm' : true, 'birthdate' : true, 'email' : true, };
@@ -22,25 +22,24 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 	
 	$http({
 		method: "GET",
-		url: "/activation/data/curuser", 
+		url: "/activation/data/curcompany", 
 		timeout: 10000				
 	}).then(function(response){
 	  
-		$scope.savedata.user = response.data;
+		/*$scope.savedata.user = response.data;
 		delete $scope.savedata.user.created;
 		delete $scope.savedata.user.updated;
 		$scope.savedata.password = "";
 		$scope.savedata.passwordconfirm = "";
 		
-		$scope.savedata.user.birthdateDate = new Date($scope.savedata.user.birthdate);
+		$scope.savedata.user.birthdateDate = new Date($scope.savedata.user.birthdate);*/
 		
 		$scope.validate();
 
 	  //$scope.$parent.showloading = false;
 		
 	}, function errorCallback(response){ 
-		$scope.$parent.showloading = false;	
-		alert(response.data);
+		$scope.$parent.showloading = false;		
 		
 	});		
 	
@@ -59,19 +58,13 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 			}
 		}).then(function(response){
 		  
-			//$scope.test = response.data;
+			$scope.test = response.data;
 			
-			//alert(response.data);
 			  //$scope.$parent.showloading = false;
 			
-			//if(response.data == 'ok'){
-			
-				window.location = rooturl;
-			//}
 			
 		}, function errorCallback(response){ 
 			$scope.$parent.showloading = false;		
-			alert(response.data);
 			
 		});		
 		

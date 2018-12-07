@@ -10,7 +10,9 @@ import com.featurebim.gui.anotations.FbGuiRequestGetDataMapping;
 import com.featurebim.gui.anotations.FbGuiRequestPostDataMapping;
 import com.featurebim.gui.bl.IUserHandler;
 import com.featurebim.gui.controller.base.UiActivationControllerBase;
+import com.featurebim.gui.model.futurebim.GuiCompany;
 import com.featurebim.gui.model.futurebim.GuiUser;
+import com.featurebim.gui.model.futurebim.GuiUserFull;
 import com.featurebim.gui.model.futurebim.GuiUserPassword;
 import com.featurebim.gui.model.ui.enums.EUiUserRole;
 
@@ -26,6 +28,12 @@ public class ActivateController extends UiActivationControllerBase {
 
     return "activation/inituser";
   }
+  
+  @RequestMapping(path = "/company")
+  public String showActivateCompany(final Model model) {
+
+    return "activation/initcompany";
+  }
 
   @FbGuiRequestGetDataMapping(value = "/data/curuser")
   public GuiUser initUserData() {
@@ -33,17 +41,24 @@ public class ActivateController extends UiActivationControllerBase {
     return this.getCurrentUser().toUser();
   }
 
+  @FbGuiRequestGetDataMapping(value = "/data/curcompany")
+  public GuiCompany initCompanyData() {
+
+    return this.getSessionUserInfo().getCompany();
+  }
+
   @FbGuiRequestPostDataMapping(value = "/data/saveuser")
-  public String saveUserData(@RequestBody(required = true) final GuiUserPassword userPassword) {
+  public GuiUserFull saveUserData(@RequestBody(required = true) final GuiUserPassword userPassword) {
 
     userPassword.getUser().setStatus(1);
 
     if (userPassword.getUser().getRoles().size() == 0) {
       userPassword.getUser().addRole(EUiUserRole.ADMIN);
     }
-    userHandler.saveUserPassword(userPassword.getUser(), userPassword.getPassword());
+    final GuiUserFull user = userHandler.saveUserPassword(userPassword.getUser(), userPassword.getPassword());
 
-    return "ok";
+    this.getSessionUserInfo().setUser(user);
+    return user;
   }
 
 }
