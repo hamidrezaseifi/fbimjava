@@ -1,0 +1,74 @@
+
+
+
+.form-horizontal .form-group {
+    margin-right: 0; 
+    margin-left: 0; 
+}
+
+.activation-pannel 
+{
+    width: 600px;
+    margin: 40px auto;
+}
+
+.activation-pannel label 
+{
+    width: 140px;
+    float: none;
+    text-align: left !important;
+    padding: 0;
+    margin: 0;
+}
+
+.activation-pannel input[type="text"],
+.activation-pannel input[type="password"],
+.activation-pannel input[type="date"], 
+.activation-pannel select 
+{
+    width: calc(100% - 150px);
+    float: none;
+    display: inline-block;
+}
+
+.gender-panel
+{
+	margin: 10px 0;
+	width: 405px;
+	padding: 0;
+}
+
+label.radio-inline1 {
+    padding-top: 0px !important;
+    margin-left: 20px;
+    margin-right: 10px;
+    width: inherit;
+}
+
+input[type=checkbox], input[type=radio] {
+    margin: 0;
+}
+
+button.btn.save
+{
+	float: right;	
+	margin-right: 10px;
+}
+
+.security-panel
+{
+	margin: 10px 0;
+	padding: 0;
+}
+
+.security-panel input[type="password"]
+{
+	width: 269px !important;
+}
+
+.form-control.invalid
+{
+	border-color: #dc3545;
+	box-shadow: 1px 1px 4px #dc3545;
+	background-color: #f8d1d6;
+}

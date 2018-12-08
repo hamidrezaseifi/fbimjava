@@ -39,6 +39,9 @@ public class UiConfiguration {
     @Value("${core.rest.url.user.save}")
     private String userSave;
     
+    @Value("${core.rest.url.user.companyusers}")
+    private String userCompanyUserList;
+    
     @Value("${core.rest.url.user.setpassword}")
     private String userSetPassword;
     
@@ -135,6 +138,20 @@ public class UiConfiguration {
      */
     public void setCompanyUpdate(final String companyUpdate) {
       this.companyUpdate = companyUpdate;
+    }
+    
+    /**
+     * @return the userCompanyUserList
+     */
+    public String getUserCompanyUserList() {
+      return userCompanyUserList;
+    }
+    
+    /**
+     * @param userCompanyUserList the userCompanyUserList to set
+     */
+    public void setUserCompanyUserList(final String userCompanyUserList) {
+      this.userCompanyUserList = userCompanyUserList;
     }
 
   }

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -242,9 +243,30 @@ public class UserDaoImpl implements UserDao {
   }
 
   @Override
-  public List<UserFull> listCompanyUsers(final Long companyId) {
-    // TODO Auto-generated method stub
-    return null;
+  public List<UserFull> listCompanyUsers(final Long companyId) throws StorageException {
+    logger.info("Dao Read User list by companyId: " + companyId);
+    final String sqlSelect = "SELECT * FROM users where companyid=?";
+
+    List<UserFull> list = new ArrayList<>();
+
+    try {
+      list = jdbcTemplate.query(con -> {
+        final PreparedStatement ps = con.prepareStatement(sqlSelect);
+        ps.setLong(1, companyId);
+        return ps;
+
+      }, (rs, rowNum) -> {
+
+        return userFullFromResultSet(rs);
+
+      });
+
+    }
+    catch (final Exception e) {
+      throw new StorageException("Unable to Read User list by companyID: " + e.toString());
+    }
+
+    return list;
   }
   
   private UserFull userFullFromResultSet(final ResultSet rs) throws SQLException {
@@ -252,7 +274,6 @@ public class UserDaoImpl implements UserDao {
     user.setId(rs.getLong("id"));
     user.setCompanyid(rs.getLong("companyid"));
     user.setUsername(rs.getString("username"));
-    user.setBirthdate(rs.getTimestamp("birthday").toLocalDateTime().toLocalDate());
     user.setEmail(rs.getString("email"));
     user.setFirstname(rs.getString("firstname"));
     user.setGender(rs.getShort("gender"));
@@ -263,14 +284,19 @@ public class UserDaoImpl implements UserDao {
     user.setCreated(rs.getTimestamp("created").toLocalDateTime());
     user.setUpdated(rs.getTimestamp("updated").toLocalDateTime());
     user.setVersion(rs.getInt("version"));
+    
+    final Timestamp ts = rs.getTimestamp("birthday");
 
+    if (ts != null) {
+      user.setBirthdate(ts.toLocalDateTime().toLocalDate());
+    }
+    
     List<Integer> roles;
     try {
       roles = listUserRoles(user.getId());
       user.setRoles(roles);
     }
     catch (final StorageException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
 

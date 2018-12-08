@@ -1,6 +1,8 @@
 package com.featurebim.common.model.edo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The persistent class for the companies database table.
@@ -8,82 +10,125 @@ import java.time.LocalDateTime;
  */
 public class CompanyEdo {
 
-  private Long id;
+	private Long id;
 
-  private String comments;
+	private String comments;
 
-  private String companyName;
+	private String companyName;
 
-  private int status;
+	private int status;
 
-  private int version;
+	private int version;
 
-  private LocalDateTime created;
+	private LocalDateTime created;
 
-  private LocalDateTime updated;
+	private LocalDateTime updated;
 
-  public CompanyEdo() {
-  }
+	List<CompanyPostalAddressEdo> postalAddresses = new ArrayList<>();
 
-  public Long getId() {
-    return this.id;
-  }
+	List<CompanyPhoneNumberEdo> phoneNumbers = new ArrayList<>();
 
-  public void setId(final Long id) {
-    this.id = id;
-  }
+	List<CompanyEmailEdo> emails = new ArrayList<>();
 
-  public String getComments() {
-    return this.comments;
-  }
+	public CompanyEdo() {
+	}
 
-  public void setComments(final String comments) {
-    this.comments = comments;
-  }
+	public Long getId() {
+		return this.id;
+	}
 
-  public String getCompanyName() {
-    return this.companyName;
-  }
+	public void setId(final Long id) {
+		this.id = id;
+	}
 
-  public void setCompanyName(final String companyName) {
-    this.companyName = companyName;
-  }
+	public String getComments() {
+		return this.comments;
+	}
 
-  public LocalDateTime getCreated() {
-    return this.created;
-  }
+	public void setComments(final String comments) {
+		this.comments = comments;
+	}
 
-  public void setCreated(final LocalDateTime created) {
-    this.created = created;
-  }
+	public String getCompanyName() {
+		return this.companyName;
+	}
 
-  public int getStatus() {
-    return this.status;
-  }
+	public void setCompanyName(final String companyName) {
+		this.companyName = companyName;
+	}
 
-  public void setStatus(final int status) {
-    this.status = status;
-  }
+	public LocalDateTime getCreated() {
+		return this.created;
+	}
 
-  public LocalDateTime getUpdated() {
-    return this.updated;
-  }
+	public void setCreated(final LocalDateTime created) {
+		this.created = created;
+	}
 
-  public void setUpdated(final LocalDateTime updated) {
-    this.updated = updated;
-  }
+	public int getStatus() {
+		return this.status;
+	}
 
-  public int getVersion() {
-    return this.version;
-  }
+	public void setStatus(final int status) {
+		this.status = status;
+	}
 
-  public void setVersion(final int version) {
-    this.version = version;
-  }
+	public LocalDateTime getUpdated() {
+		return this.updated;
+	}
 
-  @Override
-  public String toString() {
-    return "id=" + id + ", name=" + companyName + ", updated=" + updated;
-  }
+	public void setUpdated(final LocalDateTime updated) {
+		this.updated = updated;
+	}
+
+	public int getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(final int version) {
+		this.version = version;
+	}
+
+	/**
+	 * @return the postalAddress
+	 */
+	public List<CompanyPostalAddressEdo> getPostalAddresses() {
+		return postalAddresses;
+	}
+
+	/**
+	 * @param postalAddress the postalAddress to set
+	 */
+	public void setPostalAddresses(final List<CompanyPostalAddressEdo> postalAddresses) {
+		this.postalAddresses = postalAddresses;
+	}
+
+	/**
+	 * @return the phoneNumbers
+	 */
+	public List<CompanyPhoneNumberEdo> getPhoneNumbers() {
+		return phoneNumbers;
+	}
+
+	/**
+	 * @param phoneNumbers the phoneNumbers to set
+	 */
+	public void setPhoneNumbers(final List<CompanyPhoneNumberEdo> phoneNumbers) {
+		this.phoneNumbers = phoneNumbers;
+	}
+
+	/**
+	 * @return the emails
+	 */
+	public List<CompanyEmailEdo> getEmails() {
+		return emails;
+	}
+
+	/**
+	 * @param emails the emails to set
+	 */
+	public void setEmails(final List<CompanyEmailEdo> emails) {
+		this.emails = emails;
+	}
 
 }

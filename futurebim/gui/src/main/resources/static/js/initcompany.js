@@ -2,14 +2,10 @@
 
 mdmApp.controller('ActivationCompanyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
 	
-	$scope.savedata = {user:{}, "password":"", "passwordconfirm":"", };
-	$scope.dataValidation = {'firstname' : true, 'lastname' : true, 'password' : true, 'passwordconfirm' : true, 'birthdate' : true, 'email' : true, };
+	$scope.savedata = {company:{}, contactperson: -1, };
+	$scope.dataValidation = {'companyname' : true, 'contactperson' : true, };
 	$scope.isValidate = true;
-	
-	var weakRegex = new RegExp("^(((?=.*[a-z])))(?=.{4,})");
-	var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
-	var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-	
+		
 	$scope.passwordStrength = {
 		    //"float": "left",
 		    "width": "265px",
@@ -26,13 +22,9 @@ mdmApp.controller('ActivationCompanyController', function ($scope, $http, $sce, 
 		timeout: 10000				
 	}).then(function(response){
 	  
-		/*$scope.savedata.user = response.data;
-		delete $scope.savedata.user.created;
-		delete $scope.savedata.user.updated;
-		$scope.savedata.password = "";
-		$scope.savedata.passwordconfirm = "";
-		
-		$scope.savedata.user.birthdateDate = new Date($scope.savedata.user.birthdate);*/
+		$scope.savedata.company = response.data;
+		delete $scope.savedata.company.created;
+		delete $scope.savedata.company.updated;
 		
 		$scope.validate();
 
@@ -77,24 +69,7 @@ mdmApp.controller('ActivationCompanyController', function ($scope, $http, $sce, 
 			$scope.dataValidation[dataItem] = true;
 		}
 		
-		if($scope.savedata.user.birthdateDate == null){
-			$scope.dataValidation['birthdate'] = false;
-			$scope.isValidate = false;
-		}
-		else{
-			$scope.savedata.user['birthdate'] = moment($scope.savedata.user.birthdateDate).format("YYYY-MM-DD");
-		}
 		
-		if($scope.savedata.password !== $scope.savedata.passwordconfirm){
-			$scope.dataValidation['passwordconfirm'] = false;
-			$scope.isValidate = false;
-
-		}
-		
-		if(!$scope.analyzePassword($scope.savedata['password'])){
-			$scope.dataValidation['password'] = false;
-			$scope.isValidate = false; 
-		}
 	
 		for(dataItem in $scope.dataValidation){
 
@@ -117,21 +92,5 @@ mdmApp.controller('ActivationCompanyController', function ($scope, $http, $sce, 
 		return $scope.isValidate;
 	}
 	
-	$scope.analyzePassword = function(value) { var dt = new Date(); $scope.test = "test password: " + dt.toLocaleString("de-DE") + ": " + value;
-        if(strongRegex.test(value)) {
-            $scope.passwordStrength["background-color"] = "green";
-            return true;
-        } else if(mediumRegex.test(value)) {
-            $scope.passwordStrength["background-color"] = "orange";
-            return true;
-        } else if(weakRegex.test(value)) {
-            $scope.passwordStrength["background-color"] = "blue";
-            return true;
-        } else {
-            $scope.passwordStrength["background-color"] = "red";
-            return false;
-        }
-        return false;
-    };
 	
 });
