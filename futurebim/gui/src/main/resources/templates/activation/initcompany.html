@@ -14,42 +14,67 @@
 			    <form class="form-horizontal" id="userform" name="userform" method="post" enctype="application/json" target="_blank">
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{company.companyname}]]</label>
-				      <input type="text" class="form-control" ng-model="savedata.company.companyName">
+				      <input type="text" ng-change="validate()" class="form-control" ng-model="savedata.company.companyName">
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{company.contactperson}]]</label>
-				      <select class="form-control" ng-class="{'invalid' : !dataValidation['contactperson']}" ng-model="savedata.contactperson">
+				      <select class="form-control" ng-change="validate()" ng-class="{'invalid' : savedata.contactperson == -1]}" ng-model="savedata.contactperson">
 				      	<option th:each="user : ${users}" th:value="${user.getId()}">[[${user.getFullname()}]]</option>
 				      </select>
 				    </div>
 				    
 				    <div class="panel panel-default security-panel">
-				    	<div class="panel-heading">[[#{common.addresslist}]]</div>
+				    	<div class="panel-heading">
+				    		<span>[[#{common.addresslist}]]</span>
+				    		<i class="material-icons list-icon" ng-click="addAddress()">playlist_add</i>				    	
+				    	</div>
 				    	<div class="panel-body">
-						    <div class="form-group">
-						      <label class="control-label col-sm-2">[[#{user.password}]]</label>
-						      <input type="text" ng-class="{'invalid' : !dataValidation['password']}" ng-change="validate()" required ng-model="savedata.password" class="form-control" th:placeholder="#{user.passwordplaceholder}">
-						      <div ng-style="passwordStrength"></div>
-						    </div>
-						    <div class="form-group">
-						      <label class="control-label col-sm-2">[[#{user.passwordconfirm}]]</label>
-						      <input type="text" ng-class="{'invalid' : !dataValidation['passwordconfirm']}" ng-change="validate()" required ng-model="savedata.passwordconfirm" class="form-control" th:placeholder="#{user.passwordconfirmplaceholder}">
-						    </div>
+					    	<div ng-repeat="(key, addr) in savedata.company.postalAddresses" class="group-item">
+								<label class="control-label col-sm-2">[[#{common.address}]]</label>
+								<input type="text" ng-change="validate()" required ng-model="addr.addressName" class="form-control email-name" th:placeholder="#{common.telephonenumbername}">
+								<input type="text" ng-change="validate()" required ng-model="addr.country" class="form-control email-name" th:placeholder="#{common.telephonenumber}">
+								<i class="material-icons list-icon" ng-click="deleteAddress(key)">delete</i>
+								<br>
+								<input type="text" ng-change="validate()" required ng-model="addr.city" class="form-control email-name" th:placeholder="#{common.telephonenumbername}">
+								<input type="text" ng-change="validate()" required ng-model="addr.postcode" class="form-control email-name" th:placeholder="#{common.telephonenumber}">
+								<br>
+								<input type="text" ng-change="validate()" required ng-model="addr.street" class="form-control email-name" th:placeholder="#{common.telephonenumbername}">
+								<input type="text" ng-change="validate()" required ng-model="addr.houseNumber" class="form-control email-name" th:placeholder="#{common.telephonenumber}">
+								<br>
+								<input type="text" ng-change="validate()" required ng-model="addr.additionalAddress" class="form-control" th:placeholder="#{common.telephonenumber}">
+								<br>
+								
+					    	</div>
 					    </div>
 				    </div>
 				    
 				    <div class="panel panel-default security-panel">
-				    	<div class="panel-heading">[[#{common.telephonenumbers}]]</div>
+				    	<div class="panel-heading">
+				    		<span>[[#{common.telephonenumbers}]]</span>
+				    		<i class="material-icons list-icon" ng-click="addTel()">playlist_add</i>				    	
+				    	</div>
 				    	<div class="panel-body">
-						    <div class="form-group">
-						      <label class="control-label col-sm-2">[[#{user.password}]]</label>
-						      <input type="text" ng-class="{'invalid' : !dataValidation['password']}" ng-change="validate()" required ng-model="savedata.password" class="form-control" th:placeholder="#{user.passwordplaceholder}">
-						      <div ng-style="passwordStrength"></div>
-						    </div>
-						    <div class="form-group">
-						      <label class="control-label col-sm-2">[[#{user.passwordconfirm}]]</label>
-						      <input type="text" ng-class="{'invalid' : !dataValidation['passwordconfirm']}" ng-change="validate()" required ng-model="savedata.passwordconfirm" class="form-control" th:placeholder="#{user.passwordconfirmplaceholder}">
-						    </div>
+					    	<div ng-repeat="(key, tel) in savedata.company.phoneNumbers" class="group-item">
+								<label class="control-label col-sm-2">[[#{common.telephonenumber}]]</label>
+								<input type="text" ng-change="validate()" required ng-model="tel.telephoneName" class="form-control email-name" th:placeholder="#{common.telephonenumbername}">
+								<input type="text" ng-change="validate()" required ng-model="tel.phonenumner" class="form-control email-address" th:placeholder="#{common.telephonenumber}">
+								<i class="material-icons list-icon" ng-click="deleteTel(key)">delete</i>
+					    	</div>
+					    </div>
+				    </div>
+				    
+				    <div class="panel panel-default security-panel">
+				    	<div class="panel-heading">
+				    		<span>[[#{common.emails}]]</span>
+				    		<i class="material-icons list-icon" ng-click="addEmail()">playlist_add</i>
+				    	</div>
+				    	<div class="panel-body">
+					    	<div ng-repeat="(key, email) in savedata.company.emails" class="group-item">
+								<label class="control-label col-sm-2">[[#{common.email}]]</label>
+								<input type="text" ng-change="validate()" required ng-model="email.emailName" class="form-control email-name" th:placeholder="#{common.emailname}">
+								<input type="text" ng-change="validate()" required ng-model="email.email" class="form-control email-address" th:placeholder="#{common.email}">
+								<i class="material-icons list-icon" ng-click="deleteEmail(key)">delete</i>
+					    	</div>
 					    </div>
 				    </div>
 					

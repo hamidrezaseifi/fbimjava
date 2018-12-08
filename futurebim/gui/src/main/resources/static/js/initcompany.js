@@ -3,7 +3,7 @@
 mdmApp.controller('ActivationCompanyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
 	
 	$scope.savedata = {company:{}, contactperson: -1, };
-	$scope.dataValidation = {'companyname' : true, 'contactperson' : true, };
+	$scope.dataValidation = {'companyName' : true, 'contactperson' : true, };
 	$scope.isValidate = true;
 		
 	$scope.passwordStrength = {
@@ -34,6 +34,30 @@ mdmApp.controller('ActivationCompanyController', function ($scope, $http, $sce, 
 		$scope.$parent.showloading = false;		
 		
 	});		
+	
+	$scope.addEmail = function(){
+		$scope.savedata.company.emails = $scope.savedata.company.emails.concat({});
+	}
+	
+	$scope.deleteEmail = function(id){
+		$scope.savedata.company.emails.splice(id, 1);
+	}
+	
+	$scope.addTel = function(){
+		$scope.savedata.company.phoneNumbers = $scope.savedata.company.phoneNumbers.concat({});
+	}
+	
+	$scope.deleteTel = function(id){
+		$scope.savedata.company.phoneNumbers.splice(id, 1);
+	}
+	
+	$scope.addAddress = function(){
+		$scope.savedata.company.postalAddresses = $scope.savedata.company.postalAddresses.concat({});
+	}
+	
+	$scope.deleteAddress = function(id){
+		$scope.savedata.company.postalAddresses.splice(id, 1);
+	}
 	
 	$scope.saveUser = function(){
 		//alert("save !!!!");
@@ -80,7 +104,7 @@ mdmApp.controller('ActivationCompanyController', function ($scope, $http, $sce, 
 				}
 			}
 			else{
-				if($scope.savedata.user[dataItem] == undefined || $scope.savedata.user[dataItem] == null || $scope.savedata.user[dataItem].length < 3){
+				if($scope.savedata.company[dataItem] == undefined || $scope.savedata.company[dataItem] == null || $scope.savedata.company[dataItem].length < 3){
 					$scope.dataValidation[dataItem] = false;
 					$scope.isValidate = false;
 				}	

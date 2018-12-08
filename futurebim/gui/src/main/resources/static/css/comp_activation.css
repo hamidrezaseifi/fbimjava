@@ -21,12 +21,27 @@
     margin: 0;
 }
 
-.activation-pannel input[type="text"],
+.activation-pannel input[type="text"]:not(.email-name):not(.email-address),
+.activation-pannel input[type="email"]:not(.email-name):not(.email-address),
 .activation-pannel input[type="password"],
 .activation-pannel input[type="date"], 
 .activation-pannel select 
 {
     width: calc(100% - 150px);
+    float: none;
+    display: inline-block;
+}
+
+.activation-pannel input.email-name
+{
+    width: 100px;
+    float: none;
+    display: inline-block;
+}
+
+.activation-pannel input.email-address
+{
+    width: calc(100% - 278px);
     float: none;
     display: inline-block;
 }
@@ -72,3 +87,34 @@ button.btn.save
 	box-shadow: 1px 1px 4px #dc3545;
 	background-color: #f8d1d6;
 }
+
+.group-item
+{
+	padding: 4px 4px;	
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	margin-bottom: 8px;
+}
+
+.group-item:nth-child(odd)
+{
+	background-color: #ffffec;
+}
+
+.group-item:nth-child(even)
+{
+	background-color: #f7fbff;
+}
+
+.list-icon
+{
+	float: right;	
+	cursor: pointer;
+}
+
+.list-icon:after
+{
+	clear: both;	
+}
+
+

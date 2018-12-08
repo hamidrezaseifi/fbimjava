@@ -27,6 +27,12 @@ public class GuiCompany {
 
   private LocalDateTime updated;
 
+  List<GuiCompanyPostalAddress> postalAddresses = new ArrayList<>();
+
+  List<GuiCompanyPhoneNumber> phoneNumbers = new ArrayList<>();
+
+  List<GuiCompanyEmail> emails = new ArrayList<>();
+
   public GuiCompany() {
   }
 
@@ -85,12 +91,55 @@ public class GuiCompany {
   public void setVersion(final int version) {
     this.version = version;
   }
-
-  @Override
-  public String toString() {
-    return "id=" + id + ", name=" + companyName + ", updated=" + updated;
+  
+  /**
+   * @return the postalAddresses
+   */
+  public List<GuiCompanyPostalAddress> getPostalAddresses() {
+    return postalAddresses;
   }
-
+  
+  /**
+   * @param postalAddresses the postalAddresses to set
+   */
+  public void setPostalAddresses(final List<GuiCompanyPostalAddress> postalAddresses) {
+    if (postalAddresses != null) {
+      this.postalAddresses = postalAddresses;
+    }
+  }
+  
+  /**
+   * @return the phoneNumbers
+   */
+  public List<GuiCompanyPhoneNumber> getPhoneNumbers() {
+    return phoneNumbers;
+  }
+  
+  /**
+   * @param phoneNumbers the phoneNumbers to set
+   */
+  public void setPhoneNumbers(final List<GuiCompanyPhoneNumber> phoneNumbers) {
+    if (phoneNumbers != null) {
+      this.phoneNumbers = phoneNumbers;
+    }
+  }
+  
+  /**
+   * @return the emails
+   */
+  public List<GuiCompanyEmail> getEmails() {
+    return emails;
+  }
+  
+  /**
+   * @param emails the emails to set
+   */
+  public void setEmails(final List<GuiCompanyEmail> emails) {
+    if (emails != null) {
+      this.emails = emails;
+    }
+  }
+  
   public CompanyEdo toEdo() {
     final CompanyEdo edo = new CompanyEdo();
     edo.setComments(comments);
@@ -100,6 +149,9 @@ public class GuiCompany {
     edo.setStatus(status.getId());
     edo.setUpdated(updated);
     edo.setVersion(version);
+    edo.setPostalAddresses(GuiCompanyPostalAddress.toEdoList(postalAddresses));
+    edo.setPhoneNumbers(GuiCompanyPhoneNumber.toEdoList(phoneNumbers));
+    edo.setEmails(GuiCompanyEmail.toEdoList(emails));
 
     return edo;
   }
@@ -114,7 +166,9 @@ public class GuiCompany {
     company.setStatus(edo.getStatus());
     company.setUpdated(edo.getUpdated());
     company.setVersion(edo.getVersion());
-
+    company.setPostalAddresses(GuiCompanyPostalAddress.fromEdoList(edo.getPostalAddresses()));
+    company.setPhoneNumbers(GuiCompanyPhoneNumber.fromEdoList(edo.getPhoneNumbers()));
+    company.setEmails(GuiCompanyEmail.fromEdoList(edo.getEmails()));
     return company;
   }
 

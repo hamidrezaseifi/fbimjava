@@ -100,7 +100,9 @@ public class CompanyEdo {
 	 * @param postalAddress the postalAddress to set
 	 */
 	public void setPostalAddresses(final List<CompanyPostalAddressEdo> postalAddresses) {
-		this.postalAddresses = postalAddresses;
+		if (postalAddresses != null) {
+			this.postalAddresses = postalAddresses;
+		}
 	}
 
 	/**
@@ -114,7 +116,9 @@ public class CompanyEdo {
 	 * @param phoneNumbers the phoneNumbers to set
 	 */
 	public void setPhoneNumbers(final List<CompanyPhoneNumberEdo> phoneNumbers) {
-		this.phoneNumbers = phoneNumbers;
+		if (phoneNumbers != null) {
+			this.phoneNumbers = phoneNumbers;
+		}
 	}
 
 	/**
@@ -128,7 +132,9 @@ public class CompanyEdo {
 	 * @param emails the emails to set
 	 */
 	public void setEmails(final List<CompanyEmailEdo> emails) {
-		this.emails = emails;
+		if (emails != null) {
+			this.emails = emails;
+		}
 	}
 
 }
