@@ -23,12 +23,13 @@ import com.featurebim.gui.authentication.provider.CustomAuthenticationProvider;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   
-  public static String USERNAME_FIELD_NAME = "username";
-  public static String PASSWORD_FIELD_NAME = "password";
-  public static String LOGIN_URL           = "/auth/login";
-  public static String INITUSER_URL        = "/activation/user";
-  public static String INITCOMPANY_URL     = "/activation/company";
-  public static String ROOT_URL            = "/";
+  public static String USERNAME_FIELD_NAME  = "username";
+  public static String PASSWORD_FIELD_NAME  = "password";
+  public static String COMPANYID_FIELD_NAME = "companyid";
+  public static String LOGIN_URL            = "/auth/login";
+  public static String INITUSER_URL         = "/activation/user";
+  public static String INITCOMPANY_URL      = "/activation/company";
+  public static String ROOT_URL             = "/";
   
   @Autowired
   private UiAuthenticationSuccessHandler uiAuthenticationSuccessHandler;
