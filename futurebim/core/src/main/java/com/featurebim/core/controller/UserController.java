@@ -52,9 +52,8 @@ public class UserController {
   @FbCoreRequestPostDataMapping(value = "/authenticate")
   public EncryptedContentEdo authenticateUser(@RequestBody(required = true) final EncryptedContentEdo encrypedEdo) throws Exception {
 
-    final UserLoginEdo userLoginEdo = encrypedEdo.getObjectContent(UserLoginEdo.class,
-        mappingJackson2HttpMessageConverter.getObjectMapper());
-    final UserFull authUser = userHandler.authenticateUser(userLoginEdo.getUsername(), userLoginEdo.getPassword());
+    final UserLoginEdo userLoginEdo = encrypedEdo.getObjectContent(UserLoginEdo.class, mappingJackson2HttpMessageConverter.getObjectMapper());
+    final UserFull authUser = userHandler.authenticateUser(userLoginEdo.getCompanyIdent(), userLoginEdo.getUsername(), userLoginEdo.getPassword());
     final UserFullEdo authUserEdo = authUser != null ? authUser.toEdo() : null;
 
     final EncryptedContentEdo resEncrypedEdo = new EncryptedContentEdo();

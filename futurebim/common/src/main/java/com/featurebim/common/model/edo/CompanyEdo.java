@@ -12,6 +12,8 @@ public class CompanyEdo {
 
 	private Long id;
 
+	private String identname;
+
 	private String comments;
 
 	private String companyName;
@@ -39,6 +41,20 @@ public class CompanyEdo {
 
 	public void setId(final Long id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return the identname
+	 */
+	public String getIdentname() {
+		return identname;
+	}
+
+	/**
+	 * @param identname the identname to set
+	 */
+	public void setIdentname(final String identname) {
+		this.identname = identname;
 	}
 
 	public String getComments() {

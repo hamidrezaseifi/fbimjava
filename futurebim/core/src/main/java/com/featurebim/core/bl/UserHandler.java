@@ -16,17 +16,17 @@ import com.featurebim.core.model.UserFull;
 
 @Service
 public class UserHandler implements IUserHandler {
-
+  
   private UserDao userDao;
-
+  
   private PasswordEncoder passwordEncoder;
-
+  
   @Autowired(required = true)
   public void setUserService(final UserDao userDao, final PasswordEncoder passwordEncoder) {
     this.userDao = userDao;
     this.passwordEncoder = passwordEncoder;
   }
-
+  
   @Override
   public UserFull saveUser(final UserFull user) throws StorageException {
     if (user.isNew()) {
@@ -37,60 +37,60 @@ public class UserHandler implements IUserHandler {
       user.setVersion(user.getVersion() + 1);
       return userDao.updateUser(user);
     }
-    
-  }
 
+  }
+  
   @Override
   public boolean removeUser(final UserFull user) throws StorageException {
     return userDao.removeUser(user.getId());
   }
-
+  
   @Override
   public UserFull getById(final Long id) throws StorageException {
     return userDao.getById(id);
   }
-
+  
   @Override
-  public UserFull getByUsername(final String username) throws StorageException {
-    return userDao.getByUsername(username);
+  public UserFull getByUsername(final String companyIdent, final String username) throws StorageException {
+    return userDao.getByUsername(companyIdent, username);
   }
-
+  
   @Override
   public List<UserFull> listUsers() throws StorageException {
     return userDao.listUsers();
   }
-
+  
   @Override
   public List<UserFull> listCompanyUsers(final Long companyId) throws StorageException {
     return userDao.listCompanyUsers(companyId);
   }
-
+  
   @Override
-  public UserFull authenticateUser(final String username, final String password) throws StorageException {
-
-    final UserFull fUser = getByUsername(username);
+  public UserFull authenticateUser(final String companyIdent, final String username, final String password) throws StorageException {
     
+    final UserFull fUser = getByUsername(companyIdent, username);
+
     if (fUser != null && passwordEncoder.matches(password, fUser.getHashPassword())) {
       return fUser;
     }
     return null;
   }
-
+  
   @Override
   public boolean setUserPassword(final User user, final String password) throws StorageException {
-
+    
     checkUserVersion(user.getId(), user.getVersion());
-
+    
     return userDao.setUserPassword(user.getId(), passwordEncoder.encode(password));
   }
-  
+
   private boolean checkUserVersion(final long userId, final int version) throws StorageException {
     final UserFull existsUser = userDao.getById(userId);
     if (existsUser.getVersion() > version) {
       throw new FBCustomizedException(EExceptionType.VersionMismatch.name(), "", EModule.CORE.getModuleName());
     }
-
+    
     return true;
   }
-
+  
 }

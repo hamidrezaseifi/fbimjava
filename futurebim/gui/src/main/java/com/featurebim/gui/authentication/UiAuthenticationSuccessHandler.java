@@ -35,7 +35,7 @@ public class UiAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
       if (tbToken.getUser().getStatusEnum() == EGuiUserStatus.DEACTIVE || tbToken.getUser().getStatusEnum() == EGuiUserStatus.UNKNOWN) {
         url = UiAuthenticationErrorUrlCreator.getErrorUrl("access",
             request.getParameter(WebSecurityConfig.USERNAME_FIELD_NAME),
-            request.getParameter(WebSecurityConfig.PASSWORD_FIELD_NAME));
+            request.getParameter(WebSecurityConfig.PASSWORD_FIELD_NAME), request.getParameter(WebSecurityConfig.COMPANYID_FIELD_NAME));
       }
       else {
 
@@ -43,7 +43,7 @@ public class UiAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
 
           url = UiAuthenticationErrorUrlCreator.getErrorUrl("access",
               request.getParameter(WebSecurityConfig.USERNAME_FIELD_NAME),
-              request.getParameter(WebSecurityConfig.PASSWORD_FIELD_NAME));
+              request.getParameter(WebSecurityConfig.PASSWORD_FIELD_NAME), request.getParameter(WebSecurityConfig.COMPANYID_FIELD_NAME));
         }
 
       }

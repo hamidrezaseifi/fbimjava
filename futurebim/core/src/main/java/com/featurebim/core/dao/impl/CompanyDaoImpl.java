@@ -51,15 +51,16 @@ public class CompanyDaoImpl implements CompanyDao {
     
     try {
       
-      final String sql = "INSERT INTO companies (company_name, comments, status, version) VALUES (?, ?, ?, ?)";
+      final String sql = "INSERT INTO companies (identname, company_name, comments, status, version) VALUES (?, ?, ?, ?, ?)";
       //@formatter:on
       
       this.jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, company.getCompanyName());
-        ps.setString(2, company.getComments());
-        ps.setInt(3, company.getStatus());
-        ps.setInt(4, company.getVersion());
+        ps.setString(1, company.getIdentname());
+        ps.setString(2, company.getCompanyName());
+        ps.setString(3, company.getComments());
+        ps.setInt(4, company.getStatus());
+        ps.setInt(5, company.getVersion());
         
         return ps;
       }, keyHolder);
@@ -85,16 +86,17 @@ public class CompanyDaoImpl implements CompanyDao {
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
     try {
       
-      final String sql = "UPDATE companies SET company_name = ?, comments = ?, status = ?, version = ? WHERE id = ?";
+      final String sql = "UPDATE companies SET identname = ?, company_name = ?, comments = ?, status = ?, version = ? WHERE id = ?";
       //@formatter:on
       
       final int changedRows = jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, company.getCompanyName());
-        ps.setString(2, company.getComments());
-        ps.setInt(3, company.getStatus());
-        ps.setInt(4, company.getVersion());
-        ps.setLong(5, company.getId());
+        ps.setString(1, company.getIdentname());
+        ps.setString(2, company.getCompanyName());
+        ps.setString(3, company.getComments());
+        ps.setInt(4, company.getStatus());
+        ps.setInt(5, company.getVersion());
+        ps.setLong(6, company.getId());
         
         return ps;
       });
@@ -295,6 +297,7 @@ public class CompanyDaoImpl implements CompanyDao {
   private Company companyFromResultSet(final ResultSet rs) throws SQLException, StorageException {
     final Company company = new Company();
     company.setComments(rs.getString("comments"));
+    company.setIdentname(rs.getString("identname"));
     company.setCompanyName(rs.getString("company_name"));
     company.setCreated(rs.getTimestamp("created").toLocalDateTime());
     company.setUpdated(rs.getTimestamp("updated").toLocalDateTime());

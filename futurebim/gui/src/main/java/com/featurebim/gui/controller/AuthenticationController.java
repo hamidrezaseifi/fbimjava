@@ -34,6 +34,7 @@ public class AuthenticationController {
     
     String message = "";
     String username = "";
+    String company = "";
     final String password = "";
     
     if (request.getParameter("error") != null) {
@@ -48,12 +49,14 @@ public class AuthenticationController {
       }
       
       username = params.get("u");
+      company = params.get("c");
       // no password in error url // password = params.get("u");
       
     }
     
     model.addAttribute("username", username);
     model.addAttribute("password", password);
+    model.addAttribute("companyid", company);
     
     model.addAttribute("logginMessage", message);
     model.addAttribute("rooturl", WebSecurityConfig.ROOT_URL);

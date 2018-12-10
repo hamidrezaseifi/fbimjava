@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
+import com.featurebim.gui.authentication.FBUiAuthenticationDetails;
 import com.featurebim.gui.bl.IUserHandler;
 import com.featurebim.gui.configuration.UiConfiguration.CoreAccessConfig;
 import com.featurebim.gui.model.futurebim.GuiUserFull;
@@ -31,16 +32,20 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   @Override
   public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
 
-    final String username = authentication.getName();
-    final String password = authentication.getCredentials().toString();
+    if (authentication instanceof UsernamePasswordAuthenticationToken && authentication.getDetails() instanceof FBUiAuthenticationDetails) {
+      
+      final String username = authentication.getName();
+      final String password = authentication.getCredentials().toString();
+      final String companyid = ((FBUiAuthenticationDetails) authentication.getDetails()).getCompanyid();
+      
+      final GuiUserFull authUser = userHandler.authenticateUser(username, password, companyid);
 
-    final GuiUserFull authUser = userHandler.authenticateUser(username, password);
+      if (authUser != null) {
 
-    if (authUser != null) {
-
-      return new FBAuthenticationToken(authUser);
+        return new FBAuthenticationToken(authUser);
+      }
     }
-
+    
     return null;
 
   }

@@ -3,17 +3,22 @@ package com.featurebim.gui.configuration;
 
 import java.util.Arrays;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
 import com.featurebim.gui.authentication.DebugModeAuthentication;
+import com.featurebim.gui.authentication.FBUiAuthenticationDetails;
 import com.featurebim.gui.authentication.UiAuthenticationFailureHandler;
 import com.featurebim.gui.authentication.UiAuthenticationSuccessHandler;
 import com.featurebim.gui.authentication.provider.CustomAuthenticationProvider;
@@ -36,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   
   @Autowired
   private UiAuthenticationFailureHandler authenticationFailureHandler;
-  
+
   @Autowired
   private CustomAuthenticationProvider customAuthenticationProvider;
   
@@ -50,7 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       http.authorizeRequests().antMatchers("/**").permitAll();
     }
     else {
-      http.authorizeRequests()
+      http
+          .authorizeRequests()
           .antMatchers("/images/*")
           .permitAll()
           .antMatchers("/js/*")
@@ -78,7 +84,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .antMatchers("/admin/*")
           .hasAnyRole("ADMIN")
           .antMatchers("/**")
-          .authenticated();
+          .authenticated()
+          .and()
+      // .addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+      ;
       
       http.exceptionHandling().accessDeniedPage("/noaccess");
       
@@ -88,6 +97,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     http
         .formLogin()
+        .authenticationDetailsSource(authenticationDetailsSource())
         .loginPage(LOGIN_URL)
         .permitAll()
         .defaultSuccessUrl("/")
@@ -102,6 +112,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .logoutUrl("/logout")
         .logoutSuccessUrl("/");
     
+  }
+
+  private AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> authenticationDetailsSource() {
+
+    return new AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails>() {
+
+      @Override
+      public WebAuthenticationDetails buildDetails(final HttpServletRequest request) {
+        return new FBUiAuthenticationDetails(request);
+      }
+
+    };
+  }
+  
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return authenticationManager();
   }
   
   @Override

@@ -37,11 +37,11 @@ public class UserHandler implements IUserHandler {
   private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter;
 
   @Override
-  public GuiUserFull authenticateUser(final String username, final String password) {
+  public GuiUserFull authenticateUser(final String username, final String password, final String companyIdent) {
 
     logger.debug("get projects list from core");
 
-    final UserLoginEdo loginEdo = new UserLoginEdo(username, password);
+    final UserLoginEdo loginEdo = new UserLoginEdo(username, password, companyIdent);
     final EncryptedContentEdo encrypedEdo = new EncryptedContentEdo();
 
     try {
