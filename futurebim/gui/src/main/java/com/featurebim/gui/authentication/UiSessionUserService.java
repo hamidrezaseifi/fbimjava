@@ -99,8 +99,15 @@ public class UiSessionUserService {
 
   public UiSessionUserInfo setLoggedInUserInfo(final GuiUserFull user, final HttpSession session) {
 
-    final GuiCompany company = companyHandler.getById(user.getCompanyid());
-
+    GuiCompany company = null;
+    try {
+      company = companyHandler.getById(user.getCompanyid());
+    }
+    catch (final Exception e) {
+    }
+    if (company == null) {
+      return null;
+    }
     session.setAttribute(UiSessionUserInfo.SESSION_LOGGEDUSERINFO_KEY, new UiSessionUserInfo(user, company));
 
     return getUserFromSession(session);
