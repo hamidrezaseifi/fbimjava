@@ -5,6 +5,8 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 	$scope.savedata = {user:{}, "password":"", "passwordconfirm":"", };
 	$scope.dataValidation = {'firstname' : true, 'lastname' : true, 'password' : true, 'passwordconfirm' : true, 'birthdate' : true, 'email' : true, };
 	$scope.isValidate = true;
+	$scope.acceptMediumPassword = acceptMediumPassword;
+	$scope.acceptWeakPassword = acceptWeakPassword;
 	
 	var weakRegex = new RegExp("^(((?=.*[a-z])))(?=.{4,})");
 	var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
@@ -126,10 +128,10 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
             return true;
         } else if(mediumRegex.test(value)) {
             $scope.passwordStrength["background-color"] = "#rgb(93, 93, 234)";
-            return true;
+            return $scope.acceptMediumPassword;
         } else if(weakRegex.test(value)) {
             $scope.passwordStrength["background-color"] = "orange";
-            return true;
+            return $scope.acceptWeakPassword;
         } else {
             $scope.passwordStrength["background-color"] = "red";
             return false;

@@ -74,5 +74,16 @@
 		</div>
 		
 		<footer th:replace="layout/loginLayout :: footer" ></footer>
+		
+
+		<script th:inline="javascript">
+    
+		var acceptMediumPassword = /*[[${acceptMediumPassword}]]*/ false;
+
+		var acceptWeakPassword = /*[[${acceptWeakPassword}]]*/ false;
+
+		</script>
+		
     </body>
+    
 </html>

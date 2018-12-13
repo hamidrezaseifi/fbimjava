@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.featurebim.gui.anotations.FbGuiRequestGetDataMapping;
 import com.featurebim.gui.anotations.FbGuiRequestPostDataMapping;
 import com.featurebim.gui.bl.IUserHandler;
+import com.featurebim.gui.configuration.UiConfiguration;
 import com.featurebim.gui.controller.base.UiActivationControllerBase;
 import com.featurebim.gui.model.futurebim.GuiCompany;
 import com.featurebim.gui.model.futurebim.GuiUser;
@@ -23,8 +24,14 @@ public class ActivateController extends UiActivationControllerBase {
   @Autowired
   IUserHandler userHandler;
   
+  @Autowired
+  UiConfiguration uiConfiguration;
+  
   @RequestMapping(path = "/user")
   public String showActivateUser(final Model model) {
+
+    model.addAttribute("acceptMediumPassword", uiConfiguration.isAcceptMediumPassword());
+    model.addAttribute("acceptWeakPassword", uiConfiguration.isAcceptWeakPassword());
 
     return "activation/inituser";
   }

@@ -22,6 +22,40 @@ public class UiConfiguration {
   
   public final static String ISO_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.nnnnnnnnn";
   
+  @Value("${fb.ui.user.password.strength.acceptweak}")
+  private boolean acceptWeakPassword;
+  
+  @Value("${fb.ui.user.password.strength.acceptmedium}")
+  private boolean acceptMediumPassword;
+  
+  /**
+   * @return the acceptWeakPassword
+   */
+  public boolean isAcceptWeakPassword() {
+    return acceptWeakPassword;
+  }
+  
+  /**
+   * @param acceptWeakPassword the acceptWeakPassword to set
+   */
+  public void setAcceptWeakPassword(final boolean acceptWeakPassword) {
+    this.acceptWeakPassword = acceptWeakPassword;
+  }
+  
+  /**
+   * @return the acceptMediumPassword
+   */
+  public boolean isAcceptMediumPassword() {
+    return acceptMediumPassword;
+  }
+  
+  /**
+   * @param acceptMediumPassword the acceptMediumPassword to set
+   */
+  public void setAcceptMediumPassword(final boolean acceptMediumPassword) {
+    this.acceptMediumPassword = acceptMediumPassword;
+  }
+  
   /**
    * configs regarding core
    */

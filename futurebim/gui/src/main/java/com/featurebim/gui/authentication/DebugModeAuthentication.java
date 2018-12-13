@@ -10,37 +10,37 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DebugModeAuthentication {
-
-  @Value("${mdm.ui.debuglogin.profile}")
+  
+  @Value("${fb.ui.debuglogin.profile}")
   private String debugLoginProfile;
-
-  @Value("${mdm.ui.debuglogin.profile.admin.user}")
+  
+  @Value("${fb.ui.debuglogin.profile.admin.user}")
   private String debugLoginAdministratorUsername;
-
-  @Value("${mdm.ui.debuglogin.profile.user.user}")
+  
+  @Value("${fb.ui.debuglogin.profile.user.user}")
   private String debugLoginUserUsername;
-
+  
   private List<String> validProfiles;
-
+  
   @PostConstruct
   public void init() {
     validProfiles = new ArrayList<>();
     validProfiles.add("admin");
     validProfiles.add("user");
   }
-
+  
   public String getDebugLoginProfile() {
     return debugLoginProfile;
   }
-
+  
   public String getDebugLoginAdministratorUsername() {
     return debugLoginAdministratorUsername;
   }
-
+  
   public String getDebugLoginUserUsername() {
     return debugLoginUserUsername;
   }
-
+  
   public String getCurrentDebugLoginUsername() {
     if (debugLoginProfile.toLowerCase().equals("admin")) {
       return debugLoginAdministratorUsername;
@@ -48,14 +48,14 @@ public class DebugModeAuthentication {
     if (debugLoginProfile.toLowerCase().equals("user")) {
       return debugLoginUserUsername;
     }
-
+    
     return "";
   }
-
+  
   public boolean isDebugLoginEnabled() {
     return debugLoginProfile != null && !debugLoginProfile.equals("")
-           && validProfiles.contains(debugLoginProfile)
-           && !getCurrentDebugLoginUsername().isEmpty();
+        && validProfiles.contains(debugLoginProfile)
+        && !getCurrentDebugLoginUsername().isEmpty();
   }
-
+  
 }
