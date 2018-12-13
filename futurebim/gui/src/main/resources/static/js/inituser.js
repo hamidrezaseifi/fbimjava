@@ -11,13 +11,9 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 	var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 	
 	$scope.passwordStrength = {
-		    //"float": "left",
-		    "width": "265px",
-		    "height": "5px",
-		    "margin-left": "106px",
-		    "margin-top": "-5px",
-		    //"background-color": "green",
-		    "position": "relative",
+		    
+		    "background-color": "green",
+
 		};
 	
 	$http({
@@ -126,13 +122,13 @@ mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $el
 	
 	$scope.analyzePassword = function(value) { var dt = new Date(); $scope.test = "test password: " + dt.toLocaleString("de-DE") + ": " + value;
         if(strongRegex.test(value)) {
-            $scope.passwordStrength["background-color"] = "green";
+            $scope.passwordStrength["background-color"] = "rgb(30, 183, 0)";
             return true;
         } else if(mediumRegex.test(value)) {
-            $scope.passwordStrength["background-color"] = "orange";
+            $scope.passwordStrength["background-color"] = "#rgb(93, 93, 234)";
             return true;
         } else if(weakRegex.test(value)) {
-            $scope.passwordStrength["background-color"] = "blue";
+            $scope.passwordStrength["background-color"] = "orange";
             return true;
         } else {
             $scope.passwordStrength["background-color"] = "red";
