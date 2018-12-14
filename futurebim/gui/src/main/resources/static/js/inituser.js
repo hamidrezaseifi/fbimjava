@@ -1,6 +1,6 @@
 
 
-mdmApp.controller('ActivationUserController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
+fbimApp.controller('ActivationUserController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
 	
 	$scope.savedata = {user:{}, "password":"", "passwordconfirm":"", };
 	$scope.dataValidation = {'firstname' : true, 'lastname' : true, 'password' : true, 'passwordconfirm' : true, 'birthdate' : true, 'email' : true, };

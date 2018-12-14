@@ -1,12 +1,12 @@
 
-var mdmApp = angular.module('fbimApp', ['ngMaterial', 'ngTable', 'ngMaterialAccordion', 'ngSanitize']);
+var fbimApp = angular.module('fbimApp', ['ngMaterial', 'ngTable', 'ngMaterialAccordion', 'ngSanitize']);
 
 
-mdmApp.config(['$httpProvider', function($httpProvider) {
+fbimApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.timeout = 10000;
 }]);
 
-mdmApp.controller('BodyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
+fbimApp.controller('BodyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
 
 	$scope.showloading = false;
 	$scope.isShowError = true;
@@ -17,6 +17,13 @@ mdmApp.controller('BodyController', function ($scope, $http, $sce, $element, $co
 
 	$scope.messageTitle = "";
 	$scope.messageContent = "";
+	
+	$scope.$watch(
+			function(scope) { return $('[data-toggle="tooltip"]').length },
+            function(newValue, oldValue) {
+				$('[data-toggle="tooltip"]').tooltip();
+            }
+           );	
 
 	$scope.toggleRight = function(){
 		$mdSidenav('rightSidenav').toggle();

@@ -1,7 +1,7 @@
 
 var ifc_id = -1;
 
-mdmApp.controller('IfcViewerController', function ($scope, $http, $sce, $element, $compile, $mdSidenav, $mdComponentRegistry) {
+fbimApp.controller('IfcViewerController', function ($scope, $http, $sce, $element, $compile, $mdSidenav, $mdComponentRegistry) {
 
 	$scope.requestTimeout = 20000;
 	$scope.showloading = false;

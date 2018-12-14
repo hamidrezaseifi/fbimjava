@@ -21,29 +21,36 @@
     margin: 0;
 }
 
-.activation-pannel input[type="text"]:not(.email-name):not(.email-address),
-.activation-pannel input[type="email"]:not(.email-name):not(.email-address),
-.activation-pannel input[type="password"],
-.activation-pannel input[type="date"], 
+.activation-pannel input, 
 .activation-pannel select 
+{
+    float: none;
+    display: inline-block;
+}
+
+.activation-pannel input.fullline, 
+.activation-pannel select.fullline 
 {
     width: calc(100% - 150px);
     float: none;
     display: inline-block;
 }
 
-.activation-pannel input.email-name
+.activation-pannel input.contact-name
 {
-    width: 100px;
+    width: 120px;
     float: none;
     display: inline-block;
 }
 
+.activation-pannel input.address-contact-name
+{
+    width: calc(100% - 198px);
+}
+
 .activation-pannel input.email-address
 {
-    width: calc(100% - 278px);
-    float: none;
-    display: inline-block;
+    width: calc(100% - 298px);
 }
 
 .gender-panel
@@ -90,7 +97,7 @@ button.btn.save
 
 .group-item
 {
-	padding: 4px 4px;	
+	padding: 8px 8px;	
 	border: 1px solid #ddd;
 	border-radius: 3px;
 	margin-bottom: 8px;
@@ -117,4 +124,36 @@ button.btn.save
 	clear: both;	
 }
 
+.material-icons.listicon
+{
+	padding-top: 5px;
+}
+
+.address-panel .line-container
+{
+	margin-bottom: 8px;	
+}
+
+.address-panel .street
+{
+    width: 320px;
+}
+
+.address-panel .housenumber
+{
+    width: 90px;
+}
+
+.address-panel .city,
+.address-panel .postcode,
+.address-panel .country
+{
+    width: 170px;
+}
+
+.address-panel .additional
+{
+    width: 380px;
+    margin-left: 14px;
+}
 

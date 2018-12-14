@@ -19,6 +19,8 @@ public class GuiCompany {
 
   private String companyName;
 
+  private Long contactPerson;
+
   private EGuiCompanyStatus status;
 
   private int version;
@@ -59,7 +61,21 @@ public class GuiCompany {
   public void setCompanyName(final String companyName) {
     this.companyName = companyName;
   }
-
+  
+  /**
+   * @return the contactPerson
+   */
+  public Long getContactPerson() {
+    return contactPerson;
+  }
+  
+  /**
+   * @param contactPerson the contactPerson to set
+   */
+  public void setContactPerson(final Long contactPerson) {
+    this.contactPerson = contactPerson;
+  }
+  
   public LocalDateTime getCreated() {
     return this.created;
   }

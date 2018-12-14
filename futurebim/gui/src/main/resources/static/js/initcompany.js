@@ -1,6 +1,6 @@
 
 
-mdmApp.controller('ActivationCompanyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
+fbimApp.controller('ActivationCompanyController', function ($scope, $http, $sce, $element, $compile, $mdSidenav) {
 	
 	$scope.savedata = {company:{}, contactperson: -1, };
 	$scope.dataValidation = {'companyName' : true, 'contactperson' : true, };

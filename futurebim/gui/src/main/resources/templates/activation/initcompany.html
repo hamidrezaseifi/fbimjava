@@ -14,11 +14,12 @@
 			    <form class="form-horizontal" id="userform" name="userform" method="post" enctype="application/json" target="_blank">
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{company.companyname}]]</label>
-				      <input type="text" ng-change="validate()" class="form-control" ng-model="savedata.company.companyName">
+				      <input type="text" ng-change="validate()" class="form-control fullline" ng-model="savedata.company.companyName" th:title="#{company.companyname}" data-toggle="tooltip">
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{company.contactperson}]]</label>
-				      <select class="form-control" ng-change="validate()" ng-class="{'invalid' : savedata.contactperson == -1]}" ng-model="savedata.contactperson">
+				      <select class="form-control fullline" ng-change="validate()" ng-class="{'invalid' : savedata.company.contactPerson < 1}" ng-model="savedata.company.contactPerson" th:title="#{company.contactperson}" data-toggle="tooltip">
+						<option value="0"></option>
 				      	<option th:each="user : ${users}" th:value="${user.getId()}">[[${user.getFullname()}]]</option>
 				      </select>
 				    </div>
@@ -28,21 +29,31 @@
 				    		<span>[[#{common.addresslist}]]</span>
 				    		<i class="material-icons list-icon" ng-click="addAddress()">playlist_add</i>				    	
 				    	</div>
-				    	<div class="panel-body">
+				    	<div class="panel-body address-panel">
 					    	<div ng-repeat="(key, addr) in savedata.company.postalAddresses" class="group-item">
-								<label class="control-label col-sm-2">[[#{common.address}]]</label>
-								<input type="text" ng-change="validate()" required ng-model="addr.addressName" class="form-control email-name" th:placeholder="#{common.telephonenumbername}">
-								<input type="text" ng-change="validate()" required ng-model="addr.country" class="form-control email-name" th:placeholder="#{common.telephonenumber}">
-								<i class="material-icons list-icon" ng-click="deleteAddress(key)">delete</i>
-								<br>
-								<input type="text" ng-change="validate()" required ng-model="addr.city" class="form-control email-name" th:placeholder="#{common.telephonenumbername}">
-								<input type="text" ng-change="validate()" required ng-model="addr.postcode" class="form-control email-name" th:placeholder="#{common.telephonenumber}">
-								<br>
-								<input type="text" ng-change="validate()" required ng-model="addr.street" class="form-control email-name" th:placeholder="#{common.telephonenumbername}">
-								<input type="text" ng-change="validate()" required ng-model="addr.houseNumber" class="form-control email-name" th:placeholder="#{common.telephonenumber}">
-								<br>
-								<input type="text" ng-change="validate()" required ng-model="addr.additionalAddress" class="form-control" th:placeholder="#{common.telephonenumber}">
-								<br>
+								
+								<div class="line-container">
+									<label style="width:70px;" class="control-label col-sm-2">[[#{common.title}]]</label>
+									<input type="text" ng-change="validate()" required ng-model="addr.addressName" class="form-control address-contact-name" th:placeholder="#{common.contactname}" th:title="#{common.contactname}" data-toggle="tooltip">
+									<i class="material-icons list-icon listicon" ng-click="deleteAddress(key)">delete</i>
+								</div>
+								<div class="line-container">
+									<input type="text" ng-change="validate()" required ng-model="addr.street" class="form-control street"  th:placeholder="#{address.street}" th:title="#{address.street}" data-toggle="tooltip">
+									<input type="text" ng-change="validate()" required ng-model="addr.houseNumber" class="form-control housenumber"  th:placeholder="#{address.number}" th:title="#{address.number}" data-toggle="tooltip">
+								</div>
+								<div class="line-container">
+									<input type="text" ng-change="validate()" required ng-model="addr.city" class="form-control city" th:placeholder="#{address.city}" th:title="#{address.city}" data-toggle="tooltip">
+									<input type="text" ng-change="validate()" required ng-model="addr.postcode" class="form-control postcode"  th:placeholder="#{address.postcode}" th:title="#{address.postcode}" data-toggle="tooltip">								
+									<select class="form-control country" ng-change="validate()" ng-class="{'invalid' : addr.country == ''}" ng-model="addr.country" th:title="#{address.country}" data-toggle="tooltip">
+										<option value=""></option>
+										<option th:each="country : ${countries}" th:value="${country.getName()}">[[${country.getName()}]]</option>
+									</select>
+								</div>
+								
+								<div class="line-container">
+									<label style="width:120px;" class="control-label col-sm-2">[[#{address.additionalline}]]</label>
+									<input type="text" ng-change="validate()" required ng-model="addr.additionalAddress" class="form-control additional"  th:placeholder="#{address.additionalline}" th:title="#{address.additionalline}" data-toggle="tooltip">
+								</div>
 								
 					    	</div>
 					    </div>
@@ -56,9 +67,9 @@
 				    	<div class="panel-body">
 					    	<div ng-repeat="(key, tel) in savedata.company.phoneNumbers" class="group-item">
 								<label class="control-label col-sm-2">[[#{common.telephonenumber}]]</label>
-								<input type="text" ng-change="validate()" required ng-model="tel.telephoneName" class="form-control email-name" th:placeholder="#{common.telephonenumbername}">
-								<input type="text" ng-change="validate()" required ng-model="tel.phonenumner" class="form-control email-address" th:placeholder="#{common.telephonenumber}">
-								<i class="material-icons list-icon" ng-click="deleteTel(key)">delete</i>
+								<input type="text" ng-change="validate()" required ng-model="tel.telephoneName" class="form-control contact-name" th:placeholder="#{common.contactname}" th:title="#{common.contactname}" data-toggle="tooltip">
+								<input type="text" ng-change="validate()" required ng-model="tel.phonenumner" class="form-control email-address" th:placeholder="#{common.telephonenumber}" th:title="#{common.telephonenumber}" data-toggle="tooltip">
+								<i class="material-icons list-icon listicon" ng-click="deleteTel(key)">delete</i>
 					    	</div>
 					    </div>
 				    </div>
@@ -71,9 +82,9 @@
 				    	<div class="panel-body">
 					    	<div ng-repeat="(key, email) in savedata.company.emails" class="group-item">
 								<label class="control-label col-sm-2">[[#{common.email}]]</label>
-								<input type="text" ng-change="validate()" required ng-model="email.emailName" class="form-control email-name" th:placeholder="#{common.emailname}">
-								<input type="text" ng-change="validate()" required ng-model="email.email" class="form-control email-address" th:placeholder="#{common.email}">
-								<i class="material-icons list-icon" ng-click="deleteEmail(key)">delete</i>
+								<input type="text" ng-change="validate()" required ng-model="email.emailName" class="form-control contact-name" th:placeholder="#{common.contactname}" th:title="#{common.contactname}" data-toggle="tooltip">
+								<input type="text" ng-change="validate()" required ng-model="email.email" class="form-control email-address" th:placeholder="#{common.email}" th:title="#{common.email}" data-toggle="tooltip">
+								<i class="material-icons list-icon listicon" ng-click="deleteEmail(key)">delete</i>
 					    	</div>
 					    </div>
 				    </div>

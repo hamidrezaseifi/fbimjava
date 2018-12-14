@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.featurebim.gui.anotations.FbGuiRequestGetDataMapping;
 import com.featurebim.gui.anotations.FbGuiRequestPostDataMapping;
 import com.featurebim.gui.bl.IUserHandler;
+import com.featurebim.gui.bl.IValueHandler;
 import com.featurebim.gui.configuration.UiConfiguration;
 import com.featurebim.gui.controller.base.UiActivationControllerBase;
 import com.featurebim.gui.model.futurebim.GuiCompany;
@@ -23,6 +24,9 @@ public class ActivateController extends UiActivationControllerBase {
 
   @Autowired
   IUserHandler userHandler;
+  
+  @Autowired
+  IValueHandler valueHandler;
   
   @Autowired
   UiConfiguration uiConfiguration;
@@ -40,6 +44,7 @@ public class ActivateController extends UiActivationControllerBase {
   public String showActivateCompany(final Model model) {
 
     model.addAttribute("users", userHandler.listCompanyUsers(this.getSessionUserInfo().getCompany().getId()));
+    model.addAttribute("countries", valueHandler.listCountries());
     return "activation/initcompany";
   }
 
