@@ -18,7 +18,7 @@
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{company.contactperson}]]</label>
-				      <select class="form-control fullline" ng-change="validate()" ng-class="{'invalid' : savedata.company.contactPerson < 1}" ng-model="savedata.company.contactPerson" th:title="#{company.contactperson}" data-toggle="tooltip">
+				      <select class="form-control fullline" ng-change="validate()" ng-class="{'invalid' : savedata.contactperson < 1}" ng-model="savedata.contactperson" th:title="#{company.contactperson}" data-toggle="tooltip">
 						<option value="0"></option>
 				      	<option th:each="user : ${users}" th:value="${user.getId()}">[[${user.getFullname()}]]</option>
 				      </select>

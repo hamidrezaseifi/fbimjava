@@ -53,7 +53,7 @@
 			    </div>
 			    <ul class="nav navbar-nav">
 			      <li th:each="menu: ${pageTopToolList}" th:if="${menu.isEnabled()}" th:class="${menu.isActive() ? 'active' : ''}">
-			      	<a th:href="${menu.getUrl()}">
+			      	<a th:href="${menu.isActive() ? '#' : menu.getUrl()}">
 						<i class="material-icons" th:text="${menu.getImage()}"></i><div th:text="${menu.getLabel()}"></div> 
 					</a>
 				  </li>
@@ -65,8 +65,8 @@
 			      		<span th:text="${session.loggedData.getUser().getFullName()}"></span>
 			      		<span class="glyphicon glyphicon-user"></span>
 					</md-button>
-					<md-button ng-click="" style="background-color:#cecece;" th:if="${session.loggedData == null}" href="/site/login">
-			      		<span>Anmelden</span>
+					<md-button ng-click="" style="background-color:#cecece;" th:if="${session.loggedData == null}" href="/logout">
+			      		<span>[[#{common.logout}]]</span>
 			      		<span class="glyphicon glyphicon-log-in"></span>
 					</md-button>
 			      </div>
@@ -78,7 +78,7 @@
 			<div class="left-panel" id ="left-panel" th:if="${pageLeftToolList.size() > 0}">
 				<ul>
 					<li th:each="menu: ${pageLeftToolList}" th:if="${menu.isEnabled()}" th:class="${menu.isActive() ? 'active' : ''}">
-						<a th:href="${menu.getUrl()}" >
+						<a th:href="${menu.isActive() ? '#' : menu.getUrl()}" >
 							<i class="material-icons" th:text="${menu.getImage()}"></i><div th:text="${menu.getLabel()}"></div> 
 						</a>
 					</li>

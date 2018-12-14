@@ -32,6 +32,8 @@ public class CompanyEdo {
 
 	List<CompanyEmailEdo> emails = new ArrayList<>();
 
+	List<Long> contactPersons = new ArrayList<>();
+
 	public CompanyEdo() {
 	}
 
@@ -150,6 +152,22 @@ public class CompanyEdo {
 	public void setEmails(final List<CompanyEmailEdo> emails) {
 		if (emails != null) {
 			this.emails = emails;
+		}
+	}
+
+	/**
+	 * @return the contactPersons
+	 */
+	public List<Long> getContactPersons() {
+		return contactPersons;
+	}
+
+	/**
+	 * @param contactPersons the contactPersons to set
+	 */
+	public void setContactPersons(final List<Long> contactPersons) {
+		if (contactPersons != null) {
+			this.contactPersons = contactPersons;
 		}
 	}
 

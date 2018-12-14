@@ -1,18 +1,27 @@
 
 
+.project-item {
+    background-color: #ffd7d7!important;
+    border: 1px solid gray ;
+    border-radius: 5px !important;
+    margin-bottom: 10px !important;
+    height: 40px;
+    line-height: 30px;
+    padding: 4px;
+}
 
 .form-horizontal .form-group {
     margin-right: 0; 
     margin-left: 0; 
 }
 
-.activation-pannel 
+.project-detail-pannel 
 {
-    width: 600px;
-    margin: 40px auto;
+    width: 100%;
+    margin: 10px auto;
 }
 
-.activation-pannel label 
+.project-detail-pannel label 
 {
     width: 140px;
     float: none;
@@ -21,34 +30,34 @@
     margin: 0;
 }
 
-.activation-pannel input, 
-.activation-pannel select 
+.project-detail-pannel input, 
+.project-detail-pannel select 
 {
     float: none;
     display: inline-block;
 }
 
-.activation-pannel input.fullline, 
-.activation-pannel select.fullline 
+.project-detail-pannel input.fullline, 
+.project-detail-pannel select.fullline 
 {
     width: calc(100% - 150px);
     float: none;
     display: inline-block;
 }
 
-.activation-pannel input.contact-name
+.project-detail-pannel input.contact-name
 {
     width: 120px;
     float: none;
     display: inline-block;
 }
 
-.activation-pannel input.address-contact-name
+.project-detail-pannel input.address-contact-name
 {
     width: calc(100% - 198px);
 }
 
-.activation-pannel input.email-address
+.project-detail-pannel input.email-address
 {
     width: calc(100% - 298px);
 }
@@ -156,4 +165,6 @@ button.btn.save
     width: 380px;
     margin-left: 14px;
 }
+
+
 

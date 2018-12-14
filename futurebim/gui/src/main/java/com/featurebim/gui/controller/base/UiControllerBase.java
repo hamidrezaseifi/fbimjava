@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.featurebim.gui.authentication.UiSessionUserService;
 import com.featurebim.gui.configuration.WebSecurityConfig;
+import com.featurebim.gui.helper.MessagesHelper;
 import com.featurebim.gui.model.enums.EGuiCompanyStatus;
 import com.featurebim.gui.model.enums.EGuiUserStatus;
 import com.featurebim.gui.model.futurebim.GuiUserFull;
@@ -33,11 +34,14 @@ public abstract class UiControllerBase {
   @Autowired
   private UiSessionUserService sessionUserService;
   
+  @Autowired
+  protected MessagesHelper messagesHelper;
+  
   private UiSessionUserInfo sessionUserInfo;
   
   protected String getCurrentRelatedUrl() {
     ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentContextPath();
-    final String root = builder.build().toUriString();
+    final String                root    = builder.build().toUriString();
     builder = ServletUriComponentsBuilder.fromCurrentRequestUri();
     String path = builder.build().toUriString();
     path = path.replace(root, "");
@@ -46,10 +50,7 @@ public abstract class UiControllerBase {
   }
   
   @ModelAttribute
-  public void addAttributes(final Model model,
-      final HttpSession session,
-      final HttpServletResponse response,
-      final HttpServletRequest request) throws IOException {
+  public void addAttributes(final Model model, final HttpSession session, final HttpServletResponse response, final HttpServletRequest request) throws IOException {
     
     sessionUserInfo = sessionUserService.getUserFromSession(session);
     
@@ -67,7 +68,7 @@ public abstract class UiControllerBase {
 
       }
       else {
-        if (sessionUserInfo.getCompany().getStatus() == EGuiCompanyStatus.NOT_INITIALIZED) {
+        if (sessionUserInfo.getCompany().getStatusEnum() == EGuiCompanyStatus.NOT_INITIALIZED) {
           response.sendRedirect(WebSecurityConfig.INITCOMPANY_URL);
 
         }

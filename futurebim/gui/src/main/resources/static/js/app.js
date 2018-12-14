@@ -96,9 +96,10 @@ fbimApp.controller('BodyController', function ($scope, $http, $sce, $element, $c
 	  
   });
     
+  
 	if(angular.element("md-sidenav[md-component-id='rightSidenav']").length == 1){
 		$scope.$watch(function(){
-	      return $mdComponentRegistry.get('rightSidenav') ? $mdSidenav('rightSidenav').isOpen() : true;
+	      return $mdSidenav('rightSidenav').isOpen();
 	    }, 
 	    function(newVal){
 	    	if($mdSidenav('rightSidenav').isOpen()){ 

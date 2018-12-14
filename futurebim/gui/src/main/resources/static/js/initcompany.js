@@ -23,6 +23,15 @@ fbimApp.controller('ActivationCompanyController', function ($scope, $http, $sce,
 	}).then(function(response){
 	  
 		$scope.savedata.company = response.data;
+		
+		
+		$scope.savedata.contactperson = -1;
+		if($scope.savedata.company.contactPersons.length > 0){
+			$scope.savedata.contactperson = $scope.savedata.company.contactPersons[0] + "";
+			
+			
+		}
+		
 		delete $scope.savedata.company.created;
 		delete $scope.savedata.company.updated;
 		
@@ -63,12 +72,17 @@ fbimApp.controller('ActivationCompanyController', function ($scope, $http, $sce,
 		//alert("save !!!!");
 		
 		//$("#userform").submit();
-		
+		if($scope.savedata.contactperson < 1){
+			return;
+		}
+				
+		$scope.savedata.company.contactPersons = [$scope.savedata.contactperson];
+
 		$http({
 			method: "post",
-			url: "/activation/data/saveuser", 
+			url: "/activation/data/savecompany", 
 			timeout: 10000,
-			data: $scope.savedata,
+			data: $scope.savedata.company,
 			headers: {
 				'Content-Type': 'application/json'
 			}
@@ -76,6 +90,7 @@ fbimApp.controller('ActivationCompanyController', function ($scope, $http, $sce,
 		  
 			$scope.test = response.data;
 			
+			window.location = rooturl ;
 			  //$scope.$parent.showloading = false;
 			
 			
@@ -93,22 +108,19 @@ fbimApp.controller('ActivationCompanyController', function ($scope, $http, $sce,
 			$scope.dataValidation[dataItem] = true;
 		}
 		
-		
+		if($scope.savedata.contactperson < 1){
+			$scope.dataValidation["contactperson"] = false;
+			$scope.isValidate = false;			
+		}
 	
 		for(dataItem in $scope.dataValidation){
 
-			if(dataItem == 'password' || dataItem == 'passwordconfirm'){
-				if($scope.savedata[dataItem] == undefined || $scope.savedata[dataItem] == null || $scope.savedata[dataItem].length < 3){
-					$scope.dataValidation[dataItem] = false;
-					$scope.isValidate = false;
-				}
-			}
-			else{
-				if($scope.savedata.company[dataItem] == undefined || $scope.savedata.company[dataItem] == null || $scope.savedata.company[dataItem].length < 3){
-					$scope.dataValidation[dataItem] = false;
-					$scope.isValidate = false;
-				}	
-			}
+			
+			//if($scope.savedata.company[dataItem] == undefined || $scope.savedata.company[dataItem] == null || $scope.savedata.company[dataItem].length < 3){
+				//$scope.dataValidation[dataItem] = false;
+				//$scope.isValidate = false;
+			//}	
+			
 					
 		}
 		

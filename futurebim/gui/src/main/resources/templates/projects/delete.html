@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" ng-app="fbimApp" >
+    <head>
+    
+    	<th:block th:include="layout/mainLayout :: pageheader" />
+    	
+    	<link rel="stylesheet" th:href="@{/css/projects.css}">
+		<script th:src="@{/js/projects.js}"></script>
+    </head>
+    <body ng-controller="BodyController">
+        <header th:replace="layout/mainLayout :: header" ></header>
+        <div th:replace="layout/mainLayout :: breadcrumb" ></div>
+		
+		<div class="page-content" ng-controller="ProjectController">
+			<div class="page-title"> <span th:text="#{project.projects-list}" class="title-content"></span> <a href="/projects/create"><i class="material-icons list-icon" ng-click="addAddress()">playlist_add</i></a></div>
+			
+			<div th:each="project: ${projects}" th:text="${project.getProjectName()}" class="project-item"></div>
+			
+		</div>
+		
+        <footer th:replace="layout/mainLayout :: footer" ></footer>
+    </body>
+</html>

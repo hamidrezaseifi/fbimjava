@@ -69,6 +69,8 @@ public class CompanyDaoImpl implements CompanyDao {
 
       updateCompanyPostalAddress(company);
       updateCompanyPhoneNumbers(company);
+      updateCompanyEmails(company);
+      updateCompanyContactPersons(company);
       
       this.platformTransactionManager.commit(transactionStatus);
     }
@@ -107,7 +109,9 @@ public class CompanyDaoImpl implements CompanyDao {
       
       updateCompanyPostalAddress(company);
       updateCompanyPhoneNumbers(company);
-      
+      updateCompanyEmails(company);
+      updateCompanyContactPersons(company);
+
       this.platformTransactionManager.commit(transactionStatus);
     }
     catch (final Exception e) {
@@ -194,6 +198,78 @@ public class CompanyDaoImpl implements CompanyDao {
     }
     catch (final Exception e) {
       logger.error("Unable to update company Phone Numbers [id: {}]: {}", company.getId(), e.toString(), e);
+      throw new StorageException(e.toString(), e);
+    }
+    return getById(company.getId());
+  }
+
+  private Company updateCompanyEmails(final Company company) throws StorageException {
+    logger.debug("Updating company Emails with id {}...", company.getId());
+    try {
+
+      final String delSql = "delete from company_emails WHERE companyid = ?";
+
+      jdbcTemplate.update(con -> {
+        final PreparedStatement ps = con.prepareStatement(delSql);
+        ps.setLong(1, company.getId());
+
+        return ps;
+      });
+
+      final String insertSql = "INSERT INTO company_emails (companyid, email_name, emailaddress, comments, status, version) VALUES (?, ?, ?, ?, ?, ?)";
+
+      for (final CompanyEmail model : company.getEmails()) {
+
+        jdbcTemplate.update(con -> {
+          final PreparedStatement ps = con.prepareStatement(insertSql);
+          ps.setLong(1, company.getId());
+          ps.setString(2, model.getEmailName());
+          ps.setString(3, model.getEmail());
+          ps.setString(4, model.getComments());
+          ps.setInt(5, model.getStatus());
+          ps.setInt(6, model.getVersion());
+
+          return ps;
+        });
+      }
+
+    }
+    catch (final Exception e) {
+      logger.error("Unable to update company Emails [id: {}]: {}", company.getId(), e.toString(), e);
+      throw new StorageException(e.toString(), e);
+    }
+    return getById(company.getId());
+  }
+
+  private Company updateCompanyContactPersons(final Company company) throws StorageException {
+    logger.debug("Updating company Contact Persons with id {}...", company.getId());
+    try {
+
+      final String delSql = "delete from company_contact_person WHERE companyid = ?";
+
+      jdbcTemplate.update(con -> {
+        final PreparedStatement ps = con.prepareStatement(delSql);
+        ps.setLong(1, company.getId());
+
+        return ps;
+      });
+
+      final String insertSql = "INSERT INTO company_contact_person (companyid, userid) VALUES (?, ?)";
+
+      for (final Long userid : company.getContactPersons()) {
+
+        jdbcTemplate.update(con -> {
+          final PreparedStatement ps = con.prepareStatement(insertSql);
+          ps.setLong(1, company.getId());
+          ps.setLong(2, userid);
+
+          return ps;
+        });
+      }
+
+    }
+    catch (final Exception e) {
+      logger.error("Unable to update company Contact Persons [id: {}]: {}", company.getId(), e.toString(), e);
       throw new StorageException(e.toString(), e);
     }
     return getById(company.getId());
@@ -307,6 +383,7 @@ public class CompanyDaoImpl implements CompanyDao {
     company.setPhoneNumbers(listCompanyPhoneNumbers(company.getId()));
     company.setPostalAddresses(listCompanyPostalAddresses(company.getId()));
     company.setEmails(listCompanyEmails(company.getId()));
+    company.setContactPersons(listCompanyContactPersons(company.getId()));
 
     return company;
   }
@@ -364,7 +441,7 @@ public class CompanyDaoImpl implements CompanyDao {
     
     return list;
   }
-  
+
   @Override
   public List<CompanyEmail> listCompanyEmails(final Long companyId) throws StorageException {
     logger.info("Dao Read Company emails List");
@@ -381,6 +458,33 @@ public class CompanyDaoImpl implements CompanyDao {
       }, (rs, rowNum) -> {
 
         return emailFromResultSet(rs);
+
+      });
+
+    }
+    catch (final Exception e) {
+      throw new StorageException("Unable to Company retrieve emails: " + e.toString());
+    }
+    
+    return list;
+  }
+
+  @Override
+  public List<Long> listCompanyContactPersons(final Long companyId) throws StorageException {
+    logger.info("Dao Read Company emails List");
+    final String sqlSelect = "SELECT userid FROM company_contact_person where companyid=?";
+    
+    List<Long> list = new ArrayList<>();
+
+    try {
+      list = jdbcTemplate.query(con -> {
+        final PreparedStatement ps = con.prepareStatement(sqlSelect);
+        ps.setLong(1, companyId);
+        return ps;
+
+      }, (rs, rowNum) -> {
+
+        return rs.getLong("userid");
 
       });
 

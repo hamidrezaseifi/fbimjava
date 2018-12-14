@@ -33,6 +33,8 @@ public class Company {
   List<CompanyPhoneNumber> phoneNumbers = new ArrayList<>();
   
   List<CompanyEmail> emails = new ArrayList<>();
+  
+  List<Long> contactPersons = new ArrayList<>();
 
   public Company() {
   }
@@ -162,7 +164,21 @@ public class Company {
   public void setEmails(final List<CompanyEmail> emails) {
     this.emails = emails;
   }
-  
+
+  /**
+   * @return the contactPersons
+   */
+  public List<Long> getContactPersons() {
+    return contactPersons;
+  }
+
+  /**
+   * @param contactPersons the contactPersons to set
+   */
+  public void setContactPersons(final List<Long> contactPersons) {
+    this.contactPersons = contactPersons;
+  }
+
   @Override
   public String toString() {
     return "id=" + id + ", name=" + companyName + ", updated=" + updated;
@@ -174,12 +190,14 @@ public class Company {
     edo.setCompanyName(companyName);
     edo.setCreated(created);
     edo.setId(id);
+    edo.setIdentname(identname);
     edo.setStatus(status);
     edo.setUpdated(updated);
     edo.setVersion(version);
     edo.setEmails(CompanyEmail.toEdoList(emails));
     edo.setPostalAddresses(CompanyPostalAddress.toEdoList(postalAddresses));
     edo.setPhoneNumbers(CompanyPhoneNumber.toEdoList(phoneNumbers));
+    edo.setContactPersons(contactPersons);
 
     return edo;
   }
@@ -191,12 +209,14 @@ public class Company {
     company.setCompanyName(edo.getCompanyName());
     company.setCreated(edo.getCreated());
     company.setId(edo.getId());
+    company.setIdentname(edo.getIdentname());
     company.setStatus(edo.getStatus());
     company.setUpdated(edo.getUpdated());
     company.setVersion(edo.getVersion());
     company.setPhoneNumbers(CompanyPhoneNumber.fromEdoList(edo.getPhoneNumbers()));
     company.setPostalAddresses(CompanyPostalAddress.fromEdoList(edo.getPostalAddresses()));
     company.setEmails(CompanyEmail.fromEdoList(edo.getEmails()));
+    company.setContactPersons(edo.getContactPersons());
     
     return company;
   }
