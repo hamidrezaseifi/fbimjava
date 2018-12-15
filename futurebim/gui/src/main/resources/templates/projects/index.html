@@ -14,17 +14,25 @@
 		<div class="page-content" ng-controller="ProjectController">
 			<div class="page-title"> 
 				<span th:text="#{project.projects-list}" class="title-content"></span> 
-				<a href="/projects/create"><i class="material-icons" ng-click="addAddress()">playlist_add</i></a>
+				<a class="toolbar-item" href="/projects/create"><i class="material-icons" ng-click="addAddress()">playlist_add</i></a>
 			
 			</div>
 			
 			<div loading-container="tableParams.settings().$loading">
 				
 				<div ng-table-pagination="tableParams" template-url="'ng-table/pager.html'"></div>			
-				<table ng-table-dynamic="tableParams with columns" class="table table-condensed table-bordered table-striped">						
+				<table ng-table-dynamic="tableParams with columns" class="table table-condensed table-bordered table-striped">		
+					<colgroup>
+			          <col width="50px"/>
+			          <col/>
+			          <col width="120px"/>
+			          <col width="120px"/>
+			          <col width="120px"/>
+			          <col width="100px"/>
+			        </colgroup>								
 					<tr ng-repeat="row in $data">
 						
-						<td ng-repeat="col in $columns">{{col.renderValue(this, row, $index)}}</td>
+						<td ng-repeat="col in $columns" header-class="col.headerClass" ng-bind-html="col.renderValue(this, row, $index)"></td>
 						
 					</tr>		
 				</table>
@@ -35,12 +43,12 @@
 	    <script th:inline="javascript">
     	var projectTypes = /*[[${projectTypes}]]*/ [];
     	var columns = [
-    		{field: false, title: "#", },
+    		{field: "index", title: "#", },
     		{field: "projectName", title: /*[[#{project.project-name}]]*/"", },
     		{field: "projectTypeName", title: /*[[#{project.project-type}]]*/"", },
     		{field: "startDate", title: /*[[#{project.project-startdate}]]*/"", },
     		{field: "deadline", title: /*[[#{project.project-deadline}]]*/"", },
-    		{field: false, title: "", },
+    		{field: "action", title: "", },
     		];
 	    </script>
         <footer th:replace="layout/mainLayout :: footer" ></footer>

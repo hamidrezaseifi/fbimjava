@@ -66,7 +66,7 @@ public class ProjectsController extends UiControllerBase {
   public String viewProject(@PathVariable(name = "projectid") final long projectid, final Model model) {
     model.addAttribute("breadCrumb", new ArrayList<>());
 
-    model.addAttribute("msg", "Projekte Alarm Page");
+    model.addAttribute("projectId", projectid);
 
     return "projects/view";
   }
@@ -78,6 +78,15 @@ public class ProjectsController extends UiControllerBase {
     model.addAttribute("msg", "Projekte Alarm Page");
 
     return "projects/update";
+  }
+
+  @RequestMapping(path = "/delete/{projectid}")
+  public String deleteProject(@PathVariable(name = "projectid") final long projectid, final Model model) {
+    model.addAttribute("breadCrumb", new ArrayList<>());
+
+    model.addAttribute("msg", "Projekte Alarm Page");
+
+    return "projects/delete";
   }
   
   @Override

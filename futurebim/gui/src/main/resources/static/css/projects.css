@@ -166,5 +166,16 @@ button.btn.save
     margin-left: 14px;
 }
 
+a.toolbar-item,
+a.toolbar-item:active,
+a.toolbar-item:visited
+{
+	color: #337ab7;
+	cursor: pointer;
+}
 
+a.toolbar-item:hover
+{
+	color: #80b3ff;
+}
 

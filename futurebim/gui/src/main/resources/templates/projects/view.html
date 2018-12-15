@@ -12,9 +12,11 @@
         <div th:replace="layout/mainLayout :: breadcrumb" ></div>
 		
 		<div class="page-content" ng-controller="ProjectController">
-			<div class="page-title"> <span th:text="#{project.projects-list}" class="title-content"></span> <a href="/projects/create"><i class="material-icons list-icon" ng-click="addAddress()">playlist_add</i></a></div>
-			
-			<div th:each="project: ${projects}" th:text="${project.getProjectName()}" class="project-item"></div>
+			<div class="page-title"> 
+				<span th:text="#{project.projects-create}" class="title-content"></span> 
+				<a class="toolbar-item" th:href="${'/projects/update/' + projectId}"><i class="material-icons">edit</i></a>
+				<a class="toolbar-item" href="/projects"><i class="material-icons">cancel</i></a>
+			</div>
 			
 		</div>
 		

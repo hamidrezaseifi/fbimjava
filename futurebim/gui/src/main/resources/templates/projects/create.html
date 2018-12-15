@@ -14,8 +14,8 @@
 		<div class="page-content" ng-controller="ProjectController">
 			<div class="page-title"> 
 				<span th:text="#{project.projects-create}" class="title-content"></span> 
-				<i class="material-icons" ng-click="addAddress()">done</i>
-				<i class="material-icons" ng-click="addAddress()">cancel</i>
+				<a class="toolbar-item"><i class="material-icons" ng-click="addAddress()">done</i></a>
+				<a class="toolbar-item" href="/projects"><i class="material-icons">cancel</i></a>
 			</div>
 			
 		    <div class="panel panel-default project-detail-pannel" ng-controller="ActivationCompanyController">

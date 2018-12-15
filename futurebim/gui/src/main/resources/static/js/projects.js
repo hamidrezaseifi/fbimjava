@@ -11,6 +11,7 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	
 	for(o in $scope.columns){
 		$scope.columns[o].show = true;
+		$scope.columns[o].headerClass = "test";
 		
 		if($scope.columns[o].field == "index"){
 			$scope.columns[o].renderValue = renderFixedValue;
@@ -80,7 +81,11 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	}
 	
 	function renderActions($scope, row, index) {
-		return "";
+		var actions = '<a class="toolbar-item" href="/projects/view/' + row['id'] + '"><i class="material-icons">pageview</i></a>';
+		actions += '<a class="toolbar-item" href="/projects/update/' + row['id'] + '"><i class="material-icons">edit</i></a>';
+		actions += '<a class="toolbar-item" href="/projects/delete/' + row['id'] + '"><i class="material-icons">delete</i></a>';
+		
+		return actions;
 	}
 	
 	function createTable(){
