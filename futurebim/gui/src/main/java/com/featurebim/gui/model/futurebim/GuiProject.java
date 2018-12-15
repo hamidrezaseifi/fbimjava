@@ -23,15 +23,17 @@ public class GuiProject {
 
   private int projectType;
 
-  private LocalDateTime created;
-
-  private LocalDate deadline;
+  private String projectTypeName;
 
   private String projectName;
 
   private LocalDate startDate;
 
+  private LocalDate deadline;
+
   private EGuiProjectStatus status;
+
+  private LocalDateTime created;
 
   private LocalDateTime updated;
 
@@ -71,7 +73,21 @@ public class GuiProject {
   public void setProjectType(final int projectType) {
     this.projectType = projectType;
   }
-
+  
+  /**
+   * @return the projectTypeName
+   */
+  public String getProjectTypeName() {
+    return projectTypeName;
+  }
+  
+  /**
+   * @param projectTypeName the projectTypeName to set
+   */
+  public void setProjectTypeName(final String projectTypeName) {
+    this.projectTypeName = projectTypeName;
+  }
+  
   public LocalDateTime getCreated() {
     return this.created;
   }
@@ -139,6 +155,7 @@ public class GuiProject {
   public ProjectEdo toEdo() {
     final ProjectEdo edo = new ProjectEdo();
     edo.setCompanyid(companyid);
+    edo.setProjectType(projectType);
     edo.setDeadline(deadline);
     edo.setProjectName(projectName);
     edo.setStartDate(startDate);
@@ -160,6 +177,7 @@ public class GuiProject {
     project.setDeadline(edo.getDeadline());
     project.setProjectName(edo.getProjectName());
     project.setStartDate(edo.getStartDate());
+    project.setProjectType(edo.getProjectType());
 
     project.setCreated(edo.getCreated());
     project.setId(edo.getId());

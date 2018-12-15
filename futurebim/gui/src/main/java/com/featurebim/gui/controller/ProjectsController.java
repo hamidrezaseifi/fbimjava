@@ -1,7 +1,9 @@
 package com.featurebim.gui.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.featurebim.gui.anotations.FbGuiRequestGetDataMapping;
 import com.featurebim.gui.bl.IProjectsHandler;
+import com.featurebim.gui.bl.IValueHandler;
 import com.featurebim.gui.controller.base.UiControllerBase;
 import com.featurebim.gui.helper.PageMenuLoader;
 import com.featurebim.gui.model.ui.MenuItem;
@@ -23,15 +27,30 @@ public class ProjectsController extends UiControllerBase {
   
   @Autowired
   private IProjectsHandler projectsHandler;
+  
+  @Autowired
+  private IValueHandler valueHandler;
 
   @RequestMapping(value = { "", "/", "/index" })
-  public String index(final Model model) {
+  public String showIndex(final Model model) {
     model.addAttribute("breadCrumb", new ArrayList<>());
     
-    model.addAttribute("company", this.getSessionUserInfo().getCompany());
-    model.addAttribute("projects", projectsHandler.listProjects(this.getSessionUserInfo().getCompany().getId()));
+    // model.addAttribute("company", this.getSessionUserInfo().getCompany());
+    // model.addAttribute("projects", projectsHandler.listProjects(this.getSessionUserInfo().getCompany().getId()));
+    model.addAttribute("projectTypes", valueHandler.listProjectTypes());
     
     return "projects/index";
+  }
+
+  @FbGuiRequestGetDataMapping(value = "/data/projectlist")
+  public Map<String, Object> getProjectListData(final Model model) {
+    model.addAttribute("breadCrumb", new ArrayList<>());
+    final Map<String, Object> list = new HashMap<>();
+
+    list.put("projects", projectsHandler.listProjects(this.getSessionUserInfo().getCompany().getId()));
+    list.put("company", this.getSessionUserInfo().getCompany());
+
+    return list;
   }
 
   @RequestMapping(path = "/create")

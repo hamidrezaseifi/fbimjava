@@ -18,10 +18,31 @@
 			
 			</div>
 			
-			<div th:each="project: ${projects}" th:text="${project.getProjectName()}" class="project-item"></div>
+			<div loading-container="tableParams.settings().$loading">
+				
+				<div ng-table-pagination="tableParams" template-url="'ng-table/pager.html'"></div>			
+				<table ng-table-dynamic="tableParams with columns" class="table table-condensed table-bordered table-striped">						
+					<tr ng-repeat="row in $data">
+						
+						<td ng-repeat="col in $columns">{{col.renderValue(this, row, $index)}}</td>
+						
+					</tr>		
+				</table>
+			</div>			
 			
 		</div>
 		
+	    <script th:inline="javascript">
+    	var projectTypes = /*[[${projectTypes}]]*/ [];
+    	var columns = [
+    		{field: false, title: "#", },
+    		{field: "projectName", title: /*[[#{project.project-name}]]*/"", },
+    		{field: "projectTypeName", title: /*[[#{project.project-type}]]*/"", },
+    		{field: "startDate", title: /*[[#{project.project-startdate}]]*/"", },
+    		{field: "deadline", title: /*[[#{project.project-deadline}]]*/"", },
+    		{field: false, title: "", },
+    		];
+	    </script>
         <footer th:replace="layout/mainLayout :: footer" ></footer>
     </body>
 </html>

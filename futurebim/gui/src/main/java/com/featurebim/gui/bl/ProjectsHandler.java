@@ -16,34 +16,48 @@ import com.featurebim.gui.model.futurebim.GuiProject;
 
 @Service
 public class ProjectsHandler implements IProjectsHandler {
-  
+
   private final Logger logger = LoggerFactory.getLogger(ProjectsHandler.class);
-  
-  @Autowired
-  MessagesHelper messages;
-  
-  @Autowired
-  UiConfiguration.CoreAccessConfig coreAccessConfig;
 
   @Autowired
+  MessagesHelper messages;
+
+  @Autowired
+  UiConfiguration.CoreAccessConfig coreAccessConfig;
+  
+  @Autowired
   private IUiRestTemplateCall restTemplateCall;
+
+  @Autowired
+  private IValueHandler valueHandler;
 
   @Override
   public GuiProject getById(final Long id) {
     return null;
-    
+
   }
-  
+
   @Override
   public List<GuiProject> listProjects(final Long companyId) {
-    
-    logger.debug("get projects list from core");
-    
-    logger.info("url:" + coreAccessConfig.getAllProjectsReadPath());
-    
-    final ProjectCollectionEdo projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getAllProjectsReadPath(), EModule.CORE, ProjectCollectionEdo.class, true, companyId);
 
-    return GuiProject.fromEdoList(projectsEdo.getProjects());
+    logger.debug("get projects list from core");
+
+    logger.info("url:" + coreAccessConfig.getAllProjectsReadPath());
+
+    final ProjectCollectionEdo projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getAllProjectsReadPath(), EModule.CORE, ProjectCollectionEdo.class, true, companyId);
+    
+    final List<GuiProject> list = GuiProject.fromEdoList(projectsEdo.getProjects());
+
+    for (final GuiProject project : list) {
+      prepareProject(project);
+    }
+    return list;
   }
-  
+
+  private GuiProject prepareProject(final GuiProject project) {
+    project.setProjectTypeName(valueHandler.getProjectTypeName(project.getProjectType()));
+
+    return project;
+  }
+
 }

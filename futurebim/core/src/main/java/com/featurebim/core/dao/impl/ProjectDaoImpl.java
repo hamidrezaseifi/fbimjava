@@ -22,6 +22,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.featurebim.core.dao.ProjectDao;
 import com.featurebim.core.dao.exceptions.StorageException;
+import com.featurebim.core.dao.utils.SqlUtils;
 import com.featurebim.core.model.Project;
 
 @Transactional
@@ -48,7 +49,7 @@ public class ProjectDaoImpl implements ProjectDao {
     try {
 
       final String sql = "INSERT INTO companies (companyid, parent_project, type, project_name, start_date, deadline, version, status)"
-                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+          + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
       this.jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql);
@@ -81,7 +82,7 @@ public class ProjectDaoImpl implements ProjectDao {
     try {
 
       final String sql = "UPDATE projects SET companyid = ?, parent_project = ?, type = ?, project_name = ?," +
-                         " start_date = ?, deadline = ?, version = ?, status = ? WHERE id = ?";
+          " start_date = ?, deadline = ?, version = ?, status = ? WHERE id = ?";
 
       final int changedRows = jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql);
@@ -206,11 +207,11 @@ public class ProjectDaoImpl implements ProjectDao {
     project.setParentProjectId(rs.getLong("parent_project"));
     project.setVersion(rs.getInt("version"));
     project.setProjectType(rs.getInt("type"));
-    project.setStartDate(rs.getTimestamp("created").toLocalDateTime());
-    project.setDeadline(rs.getTimestamp("created").toLocalDateTime());
+    project.setStartDate(SqlUtils.getDateFromTimestamp(rs.getTimestamp("start_date")));
+    project.setDeadline(SqlUtils.getDateFromTimestamp(rs.getTimestamp("deadline")));
     project.setProjectName(rs.getString("project_name"));
-    project.setCreated(rs.getTimestamp("created").toLocalDateTime());
-    project.setUpdated(rs.getTimestamp("updated").toLocalDateTime());
+    project.setCreated(SqlUtils.getDatetimeFromTimestamp(rs.getTimestamp("created")));
+    project.setUpdated(SqlUtils.getDatetimeFromTimestamp(rs.getTimestamp("updated")));
     project.setId(rs.getLong("id"));
     project.setVersion(rs.getInt("version"));
     project.setStatus(rs.getInt("status"));
