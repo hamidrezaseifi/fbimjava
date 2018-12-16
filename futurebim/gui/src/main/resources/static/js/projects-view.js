@@ -25,7 +25,16 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 			}			
 		}
 	}
-	
+		
+	$scope.getProjectTypeName = function(typeId){
+		
+		for(o in $scope.projectTypes){
+			if($scope.projectTypes[0].type == typeId){
+				return $scope.projectTypes[0].name;
+			}
+		}
+		return "";
+	}
 
 	$scope.loadProjects = function(){
 		

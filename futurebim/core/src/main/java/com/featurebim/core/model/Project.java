@@ -43,7 +43,7 @@ public class Project {
   }
 
   public void setId(final Long id) {
-    this.id = id;
+    this.id = id != null ? id : 0;
   }
 
   public Long getParentProjectId() {
@@ -51,7 +51,7 @@ public class Project {
   }
 
   public void setParentProjectId(final Long parentid) {
-    this.parentProjectId = parentid;
+    this.parentProjectId = parentid != null ? parentid : 0;
   }
 
   public Long getCompanyid() {
@@ -59,7 +59,7 @@ public class Project {
   }
 
   public void setCompanyid(final Long companyid) {
-    this.companyid = companyid;
+    this.companyid = companyid != null ? companyid : 0;
   }
 
   public int getProjectType() {
@@ -133,6 +133,10 @@ public class Project {
   public void setVersion(final int version) {
     this.version = version;
   }
+  
+  public boolean isNew() {
+    return id == null || id < 1;
+  }
 
   public ProjectEdo toEdo() {
     final ProjectEdo edo = new ProjectEdo();
@@ -158,7 +162,8 @@ public class Project {
     project.setDeadline(edo.getDeadline());
     project.setProjectName(edo.getProjectName());
     project.setStartDate(edo.getStartDate());
-
+    project.setProjectType(edo.getProjectType());
+    project.setParentProjectId(edo.getParentProjectId());
     project.setCreated(edo.getCreated());
     project.setId(edo.getId());
     project.setStatus(edo.getStatus());

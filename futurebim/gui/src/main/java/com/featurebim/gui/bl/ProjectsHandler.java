@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.featurebim.common.model.edo.ProjectCollectionEdo;
+import com.featurebim.common.model.edo.ProjectEdo;
 import com.featurebim.common.model.enums.EModule;
 import com.featurebim.gui.configuration.UiConfiguration;
 import com.featurebim.gui.helper.IUiRestTemplateCall;
@@ -33,8 +34,15 @@ public class ProjectsHandler implements IProjectsHandler {
 
   @Override
   public GuiProject getById(final Long id) {
-    return null;
-
+    logger.debug("get projects list from core");
+    
+    logger.info("url:" + coreAccessConfig.getProjectReadPath());
+    
+    final ProjectEdo projectEdo = restTemplateCall.callRestGet(coreAccessConfig.getProjectReadPath(), EModule.CORE, ProjectEdo.class, true, id);
+    
+    final GuiProject project = GuiProject.fromEdo(projectEdo);
+    
+    return prepareProject(project);
   }
 
   @Override
@@ -42,9 +50,9 @@ public class ProjectsHandler implements IProjectsHandler {
 
     logger.debug("get projects list from core");
 
-    logger.info("url:" + coreAccessConfig.getAllProjectsReadPath());
+    logger.info("url:" + coreAccessConfig.getProjectReadAllPath());
 
-    final ProjectCollectionEdo projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getAllProjectsReadPath(), EModule.CORE, ProjectCollectionEdo.class, true, companyId);
+    final ProjectCollectionEdo projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getProjectReadAllPath(), EModule.CORE, ProjectCollectionEdo.class, true, companyId);
     
     final List<GuiProject> list = GuiProject.fromEdoList(projectsEdo.getProjects());
 
@@ -56,8 +64,20 @@ public class ProjectsHandler implements IProjectsHandler {
 
   private GuiProject prepareProject(final GuiProject project) {
     project.setProjectTypeName(valueHandler.getProjectTypeName(project.getProjectType()));
-
+    project.setStatusName(valueHandler.getProjectStatusName(project.getStatus()));
+    
     return project;
+  }
+  
+  @Override
+  public GuiProject save(final GuiProject project) {
+    logger.debug("save projects into core");
+
+    logger.info("url:" + coreAccessConfig.getProjectSavePath());
+
+    final ProjectEdo projectEdo = restTemplateCall.callRestPost(coreAccessConfig.getProjectSavePath(), EModule.CORE, project.toEdo(), ProjectEdo.class, true);
+    
+    return GuiProject.fromEdo(projectEdo);
   }
 
 }

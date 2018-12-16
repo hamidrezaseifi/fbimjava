@@ -233,3 +233,17 @@ ul.navbar-nav li a
     margin-right: 10px;
 }
 
+.form-control.invalid
+{
+	border: 1px solid #ff0040;
+	outline: 2px solid #ff0040;
+	background-color: #f8d1d6;
+	
+}
+
+md-datepicker.invalid .md-datepicker-input-container
+{
+	border: 1px solid #ff0040;
+	outline: 2px solid #ff0040;
+	background-color: #f8d1d6;
+}

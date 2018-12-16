@@ -64,8 +64,14 @@ public class UiConfiguration {
     
     private final Logger log = LoggerFactory.getLogger(getClass());
     
-    @Value("${core.rest.url.projects}")
-    private String allProjectsReadPath;
+    @Value("${core.rest.url.project.readall}")
+    private String projectReadAllPath;
+    
+    @Value("${core.rest.url.project.read}")
+    private String projectReadPath;
+    
+    @Value("${core.rest.url.project.save}")
+    private String projectSavePath;
     
     @Value("${core.rest.url.user.authenticate}")
     private String userAuthenticate;
@@ -89,19 +95,47 @@ public class UiConfiguration {
     private void init() {
       
     }
-    
+
     /**
-     * @return the allProjectsReadPath
+     * @return the allProjectReadAllPath
      */
-    public String getAllProjectsReadPath() {
-      return allProjectsReadPath;
+    public String getProjectReadAllPath() {
+      return projectReadAllPath;
+    }
+
+    /**
+     * @param allProjectReadAllPath the allProjectReadAllPath to set
+     */
+    public void setProjectReadAllPath(final String allProjectReadAllPath) {
+      this.projectReadAllPath = allProjectReadAllPath;
+    }
+
+    /**
+     * @return the allProjectReadPath
+     */
+    public String getProjectReadPath() {
+      return projectReadPath;
+    }
+
+    /**
+     * @param allProjectReadPath the allProjectReadPath to set
+     */
+    public void setProjectReadPath(final String allProjectReadPath) {
+      this.projectReadPath = allProjectReadPath;
     }
     
     /**
-     * @param allProjectsReadPath the allProjectsReadPath to set
+     * @return the allProjectSavePath
      */
-    public void setAllProjectsReadPath(final String allProjectsReadPath) {
-      this.allProjectsReadPath = allProjectsReadPath;
+    public String getProjectSavePath() {
+      return projectSavePath;
+    }
+    
+    /**
+     * @param allProjectSavePath the allProjectSavePath to set
+     */
+    public void setProjectSavePath(final String allProjectSavePath) {
+      this.projectSavePath = allProjectSavePath;
     }
     
     /**

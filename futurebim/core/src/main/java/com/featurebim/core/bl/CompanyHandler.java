@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.featurebim.common.exceptions.EExceptionType;
+import com.featurebim.common.exceptions.FBCustomizedException;
+import com.featurebim.common.model.enums.EModule;
 import com.featurebim.core.dao.CompanyDao;
 import com.featurebim.core.dao.exceptions.StorageException;
 import com.featurebim.core.model.Company;
@@ -22,17 +25,21 @@ public class CompanyHandler implements ICompanyHandler {
    */
 
   @Override
-  public Company addCompany(final Company c) throws StorageException {
-    return companyDao.addCompany(c);
-  }
+  public Company saveCompany(final Company c) throws StorageException {
+    
+    if (c.isNew()) {
+      c.setVersion(1);
+      return companyDao.addCompany(c);
+    }
 
-  @Override
-  public Company updateCompany(final Company c) throws StorageException {
+    checkRecordVersion(c.getId(), c.getVersion());
+    c.setVersion(c.getVersion() + 1);
     return companyDao.updateCompany(c);
   }
 
   @Override
   public boolean removeCompany(final Long id) throws StorageException {
+    checkRecordVersion(id, companyDao.getById(id).getVersion());
     return companyDao.removeCompany(id);
   }
 
@@ -46,4 +53,12 @@ public class CompanyHandler implements ICompanyHandler {
     return companyDao.listCompanies();
   }
 
+  private boolean checkRecordVersion(final long companyId, final int version) throws StorageException {
+    final Company exists = companyDao.getById(companyId);
+    if (exists.getVersion() > version) {
+      throw new FBCustomizedException(EExceptionType.VersionMismatch.name(), "", EModule.CORE.getModuleName());
+    }
+    
+    return true;
+  }
 }

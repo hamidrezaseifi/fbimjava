@@ -1,6 +1,15 @@
 
 var fbimApp = angular.module('fbimApp', ['ngMaterial', 'ngTable', 'ngMaterialAccordion', 'ngSanitize']);
 
+fbimApp.config(function($mdDateLocaleProvider) {
+    $mdDateLocaleProvider.formatDate = function(date) {
+    	if(date != null){
+    		return moment(date).format('DD.MM.YYYY');
+    	}
+       return null;
+    };
+});
+
 
 fbimApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.timeout = 10000;

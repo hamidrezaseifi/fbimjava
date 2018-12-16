@@ -7,9 +7,7 @@ import com.featurebim.core.model.Company;
 
 public interface ICompanyHandler {
 
-  public Company addCompany(final Company c) throws StorageException;
-
-  public Company updateCompany(final Company c) throws StorageException;
+  public Company saveCompany(final Company c) throws StorageException;
 
   public boolean removeCompany(final Long id) throws StorageException;
 

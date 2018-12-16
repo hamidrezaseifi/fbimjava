@@ -5,7 +5,7 @@
     	<th:block th:include="layout/mainLayout :: pageheader" />
     	
     	<link rel="stylesheet" th:href="@{/css/projects.css}">
-		<script th:src="@{/js/projects.js}"></script>
+		<script th:src="@{/js/projects-view.js}"></script>
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
@@ -16,6 +16,36 @@
 				<span th:text="#{project.projects-create}" class="title-content"></span> 
 				<a class="toolbar-item" th:href="${'/projects/update/' + projectId}"><i class="material-icons">edit</i></a>
 				<a class="toolbar-item" href="/projects"><i class="material-icons">cancel</i></a>
+			</div>
+			
+		    <div class="panel panel-default project-detail-pannel">
+		    	<div class="panel-heading"><h4>[[#{project.projects-detail}]]</h4></div>
+		    	<div class="panel-body">
+				    <form class="form-horizontal" id="userform" name="userform" method="post" enctype="application/json" target="_blank">
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{project.project-name}]]</label>
+					      <span class="fullline" th:text="${project.getProjectName()}"></span>
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{project.project-type}]]</label>
+					      <span class="fullline" th:text="${project.getProjectTypeName()}"></span>					      
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{project.project-status}]]</label>
+					      <span class="fullline" th:text="${project.getStatusName()}"></span>					      
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{project.project-startdate}]]</label>
+					      <span class="fullline" th:text="${project.getStartDate()}"></span>
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{project.project-deadline}]]</label>
+					      <span class="fullline" th:text="${project.getDeadline()}"></span>
+					    </div>					    					    
+												
+				    </form>
+				</div>
+			
 			</div>
 			
 		</div>
