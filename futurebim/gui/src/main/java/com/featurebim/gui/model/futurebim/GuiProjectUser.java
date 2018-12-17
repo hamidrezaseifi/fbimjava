@@ -28,6 +28,8 @@ public class GuiProjectUser {
   private GuiUserFull user;
 
   private GuiProjectRole role;
+  
+  private String accessTypeName;
 
   @JsonSerialize(using = FBLocalDateTimeSerializer.class)
   @JsonDeserialize(using = FBLocalDateTimeDeserializer.class)
@@ -151,6 +153,28 @@ public class GuiProjectUser {
     this.updated = updated;
   }
   
+  public String getFullname() {
+    return user.getFullname();
+  }
+  
+  public String getRolename() {
+    return role.getName();
+  }
+  
+  /**
+   * @return the accessTypeName
+   */
+  public String getAccessTypeName() {
+    return accessTypeName;
+  }
+  
+  /**
+   * @param accessTypeName the accessTypeName to set
+   */
+  public void setAccessTypeName(final String accessTypeName) {
+    this.accessTypeName = accessTypeName;
+  }
+  
   public ProjectUserEdo toEdo() {
     final ProjectUserEdo edo = new ProjectUserEdo();
 
@@ -181,8 +205,10 @@ public class GuiProjectUser {
     
     final List<GuiProjectUser> list = new ArrayList<>();
 
-    for (final ProjectUserEdo edo : edoList) {
-      list.add(GuiProjectUser.fromEdo(edo));
+    if (edoList != null) {
+      for (final ProjectUserEdo edo : edoList) {
+        list.add(GuiProjectUser.fromEdo(edo));
+      }
     }
     return list;
   }

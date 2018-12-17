@@ -31,9 +31,9 @@
 			          <col width="120px"/>
 			          <col width="100px"/>
 			        </colgroup>								
-					<tr ng-repeat="row in $data">
+					<tr ng-repeat="(rowIndex, row) in $data">
 						
-						<td ng-repeat="col in $columns" header-class="col.headerClass" ng-bind-html="col.renderValue(this, row, $index)"></td>
+						<td ng-repeat="col in $columns" header-class="col.headerClass" ng-bind-html="col.renderValue(this, row, rowIndex + 1)"></td>
 						
 					</tr>		
 				</table>

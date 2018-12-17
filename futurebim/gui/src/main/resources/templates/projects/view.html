@@ -24,25 +24,25 @@
 				    <form class="form-horizontal" id="userform" name="userform" method="post" enctype="application/json" target="_blank">
 					    <div class="form-group">
 					      <label class="control-label col-sm-2">[[#{project.project-name}]]</label>
-					      <span class="fullline" th:text="${project.getProjectName()}"></span>
+					      <span class="fullline" ng-bind-html="project.projectName"></span>
 					    </div>
 					    <div class="form-group">
 					      <label class="control-label col-sm-2">[[#{project.project-type}]]</label>
-					      <span class="fullline" th:text="${project.getProjectTypeName()}"></span>					      
+					      <span class="fullline" ng-bind-html="project.projectTypeName"></span>					      
 					    </div>
 					    <div class="form-group">
 					      <label class="control-label col-sm-2">[[#{project.project-status}]]</label>
-					      <span class="fullline" th:text="${project.getStatusName()}"></span>					      
+					      <span class="fullline" ng-bind-html="project.statusName"></span>					      
 					    </div>
 					    <div class="form-group">
 					      <label class="control-label col-sm-2">[[#{project.project-startdate}]]</label>
-					      <span class="fullline" th:text="${project.getStartDate()}"></span>
+					      <span class="fullline" ng-bind-html="project.startDate | date : 'dd.MM.yyyy'"></span>
 					    </div>
 					    <div class="form-group">
 					      <label class="control-label col-sm-2">[[#{project.project-deadline}]]</label>
-					      <span class="fullline" th:text="${project.getDeadline()}"></span>
+					      <span class="fullline" ng-bind-html="project.deadline | date : 'dd.MM.yyyy'"></span>
 					    </div>					    					    
-												
+						<input type="hidden" th:value="${projectId}" id="hdnpid" />					
 				    </form>
 				</div>
 			
@@ -50,7 +50,24 @@
 
 		    <div class="panel panel-default project-detail-pannel">
 		    	<div class="panel-heading"><h4>[[#{project.project-users}]]</h4></div>
-		    	<div class="panel-body">
+		    	<div class="panel-body">		    		
+					<div loading-container="tableUsers.settings().$loading">
+						
+						<table ng-table-dynamic="tableUsers with usersColumns" class="table table-condensed table-bordered table-striped">		
+							<colgroup>
+					          <col/>
+					          <col width="120px"/>
+					          <col width="120px"/>
+					          <col width="100px"/>
+					        </colgroup>								
+							<tr ng-repeat="(rowIndex, row) in $data">
+								
+								<td ng-repeat="col in $columns" header-class="col.headerClass" ng-bind-html="col.renderValue(this, row, rowIndex + 1)"></td>
+								
+							</tr>		
+						</table>
+					</div>			
+		    		
 				</div>
 			</div>	
 
@@ -60,7 +77,17 @@
 				</div>
 			</div>	
 					
+			<div style="margin-top: 50px; border: 1px solid gray; padding: 10px;">{{test}}</div>
 		</div>
+		
+	    <script th:inline="javascript">
+    	var usersColumns = [
+    		{field: "fullname", title: /*[[#{user.fullname}]]*/"", },
+    		{field: "rolename", title: /*[[#{project.role}]]*/"", },
+    		{field: "accessTypeName", title: /*[[#{project.accesstype}]]*/"", },
+    		{field: "action", title: "", },
+    		];
+	    </script>
 		
         <footer th:replace="layout/mainLayout :: footer" ></footer>
     </body>

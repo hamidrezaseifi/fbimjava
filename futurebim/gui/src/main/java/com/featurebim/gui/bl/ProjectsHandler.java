@@ -27,7 +27,7 @@ public class ProjectsHandler implements IProjectsHandler {
   private final Logger logger = LoggerFactory.getLogger(ProjectsHandler.class);
 
   @Autowired
-  MessagesHelper messages;
+  MessagesHelper messagesHelper;
 
   @Autowired
   UiConfiguration.CoreAccessConfig coreAccessConfig;
@@ -76,7 +76,8 @@ public class ProjectsHandler implements IProjectsHandler {
   private GuiProject prepareProject(final GuiProject project) {
     project.setProjectTypeName(valueHandler.getProjectTypeName(project.getProjectType()));
     project.setStatusName(valueHandler.getProjectStatusName(project.getStatus()));
-    
+    project.setUsers(listProjectUsers(project.getId()));
+
     return project;
   }
   
@@ -133,7 +134,8 @@ public class ProjectsHandler implements IProjectsHandler {
     final List<GuiProjectUser> list = GuiProjectUser.fromEdoList(projectsEdo.getItems());
     
     for (final GuiProjectUser puser : list) {
-      puser.setUser(userHandler.getById(puser.getUserId())).setRole(sessionUserInfo.getProjectRoleById(puser.getRoleId()));
+      puser.setUser(userHandler.getById(puser.getUserId())).setRole(sessionUserInfo.getProjectRoleById(puser.getRoleId())).setAccessTypeName(messagesHelper.get("project.accesstypename" +
+                                                                                                                                                              puser.getAccessType()));
     }
 
     return list;
