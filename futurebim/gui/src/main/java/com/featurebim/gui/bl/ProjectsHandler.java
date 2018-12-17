@@ -5,15 +5,21 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 
-import com.featurebim.common.model.edo.ProjectCollectionEdo;
+import com.featurebim.common.model.edo.FBCollectionEdo;
 import com.featurebim.common.model.edo.ProjectEdo;
+import com.featurebim.common.model.edo.ProjectRoleEdo;
+import com.featurebim.common.model.edo.ProjectUserEdo;
 import com.featurebim.common.model.enums.EModule;
 import com.featurebim.gui.configuration.UiConfiguration;
 import com.featurebim.gui.helper.IUiRestTemplateCall;
 import com.featurebim.gui.helper.MessagesHelper;
 import com.featurebim.gui.model.futurebim.GuiProject;
+import com.featurebim.gui.model.futurebim.GuiProjectRole;
+import com.featurebim.gui.model.futurebim.GuiProjectUser;
+import com.featurebim.gui.model.ui.UiSessionUserInfo;
 
 @Service
 public class ProjectsHandler implements IProjectsHandler {
@@ -31,7 +37,13 @@ public class ProjectsHandler implements IProjectsHandler {
 
   @Autowired
   private IValueHandler valueHandler;
-
+  
+  @Autowired
+  private IUserHandler userHandler;
+  
+  @Autowired
+  private UiSessionUserInfo sessionUserInfo;
+  
   @Override
   public GuiProject getById(final Long id) {
     logger.debug("get projects list from core");
@@ -48,9 +60,12 @@ public class ProjectsHandler implements IProjectsHandler {
 
     logger.debug("get projects list from core");
 
-    final ProjectCollectionEdo projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getProjectReadAllPath(), EModule.CORE, ProjectCollectionEdo.class, true, companyId);
+    final ParameterizedTypeReference<FBCollectionEdo<ProjectEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<ProjectEdo>>() {
+    };
+
+    final FBCollectionEdo<ProjectEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getProjectReadAllPath(), EModule.CORE, typeRef, true, companyId);
     
-    final List<GuiProject> list = GuiProject.fromEdoList(projectsEdo.getProjects());
+    final List<GuiProject> list = GuiProject.fromEdoList(projectsEdo.getItems());
 
     for (final GuiProject project : list) {
       prepareProject(project);
@@ -81,6 +96,56 @@ public class ProjectsHandler implements IProjectsHandler {
     restTemplateCall.callRestPost(coreAccessConfig.getProjectDeletePath(), EModule.CORE, project.toEdo(), Void.class, true);
     
     return true;
+  }
+
+  @Override
+  public List<GuiProjectRole> listProjectRoles(final Long companyId) {
+    logger.debug("get project roles list from core");
+
+    final ParameterizedTypeReference<FBCollectionEdo<ProjectRoleEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<ProjectRoleEdo>>() {
+    };
+
+    final FBCollectionEdo<ProjectRoleEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getProjectRoleReadAllPath(), EModule.CORE, typeRef, true, companyId);
+    
+    final List<GuiProjectRole> list = GuiProjectRole.fromEdoList(projectsEdo.getItems());
+    
+    return list;
+  }
+
+  @Override
+  public GuiProjectRole saveProjectRole(final GuiProjectRole role) {
+    logger.debug("save project role into core");
+
+    final ProjectRoleEdo roleEdo = restTemplateCall.callRestPost(coreAccessConfig.getProjectRoleSavePath(), EModule.CORE, role.toEdo(), ProjectRoleEdo.class, true);
+    
+    return GuiProjectRole.fromEdo(roleEdo);
+  }
+
+  @Override
+  public List<GuiProjectUser> listProjectUsers(final Long projectId) {
+    logger.debug("get project users list from core");
+
+    final ParameterizedTypeReference<FBCollectionEdo<ProjectUserEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<ProjectUserEdo>>() {
+    };
+
+    final FBCollectionEdo<ProjectUserEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getProjectUserReadAllPath(), EModule.CORE, typeRef, true, projectId);
+    
+    final List<GuiProjectUser> list = GuiProjectUser.fromEdoList(projectsEdo.getItems());
+    
+    for (final GuiProjectUser puser : list) {
+      puser.setUser(userHandler.getById(puser.getUserId())).setRole(sessionUserInfo.getProjectRoleById(puser.getRoleId()));
+    }
+
+    return list;
+  }
+
+  @Override
+  public GuiProjectUser saveProjectUser(final GuiProjectUser projectUser) {
+    logger.debug("save project user into core");
+
+    final ProjectUserEdo projectUserEdo = restTemplateCall.callRestPost(coreAccessConfig.getProjectUserSavePath(), EModule.CORE, projectUser.toEdo(), ProjectUserEdo.class, true);
+    
+    return GuiProjectUser.fromEdo(projectUserEdo).setUser(userHandler.getById(projectUser.getUserId())).setRole(sessionUserInfo.getProjectRoleById(projectUser.getRoleId()));
   }
 
 }

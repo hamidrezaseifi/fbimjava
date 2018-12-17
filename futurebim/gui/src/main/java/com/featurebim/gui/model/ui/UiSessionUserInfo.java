@@ -1,10 +1,15 @@
 package com.featurebim.gui.model.ui;
 
 import java.util.Date;
+import java.util.List;
 
-import org.springframework.context.annotation.Scope;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import com.featurebim.gui.model.futurebim.GuiCompany;
+import com.featurebim.gui.model.futurebim.GuiProjectRole;
 import com.featurebim.gui.model.futurebim.GuiUserFull;
 
 /**
@@ -13,29 +18,38 @@ import com.featurebim.gui.model.futurebim.GuiUserFull;
  * @author rezasei
  *
  */
-@Scope("session")
+@SessionScope(proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Component
 public class UiSessionUserInfo {
   
   public static String SESSION_LOGGEDUSERINFO_KEY = "fb-session-user";
   
-  private Date        loginTime;
-  private GuiUserFull user;
-  private GuiCompany  company;
+  @Value("${server.session.timeout}")
+  private int sessionTimeOut;
   
-  public boolean isValid(final int timeOut) {
+  private Date                 loginTime;
+  private GuiUserFull          user;
+  private GuiCompany           company;
+  private List<GuiProjectRole> projectRoles;
+  
+  public boolean isLoggedIn() {
+    return user != null && company != null;
+  }
+
+  public boolean isValid() {
     
     final Date currect = new Date();
-    long diff = currect.getTime() - this.loginTime.getTime();
+    long       diff    = currect.getTime() - this.loginTime.getTime();
     diff /= 1000;
     
-    return diff <= timeOut;
+    return diff <= sessionTimeOut;
   }
-  
-  public UiSessionUserInfo(final GuiUserFull user, final GuiCompany company) {
-    this.user = user;
-    this.company = company;
+
+  public UiSessionUserInfo() {
+    this.user = null;
+    this.company = null;
+    this.projectRoles = null;
     this.loginTime = new Date();
-    
   }
 
   public void update() {
@@ -82,6 +96,33 @@ public class UiSessionUserInfo {
    */
   public void setCompany(final GuiCompany company) {
     this.company = company;
+  }
+  
+  /**
+   * @return the projectRoles
+   */
+  public List<GuiProjectRole> getProjectRoles() {
+    return projectRoles;
+  }
+
+  /**
+   * @return the projectRoles
+   */
+  public GuiProjectRole getProjectRoleById(final Long id) {
+
+    for (final GuiProjectRole role : projectRoles) {
+      if (role.getId() == id) {
+        return role;
+      }
+    }
+    return null;
+  }
+  
+  /**
+   * @param projectRoles the projectRoles to set
+   */
+  public void setProjectRoles(final List<GuiProjectRole> projectRoles) {
+    this.projectRoles = projectRoles;
   }
   
 }

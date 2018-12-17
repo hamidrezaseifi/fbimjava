@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.featurebim.common.exceptions.EExceptionType;
 import com.featurebim.common.exceptions.FBCustomizedException;
 import com.featurebim.common.model.edo.EncryptedContentEdo;
-import com.featurebim.common.model.edo.UserFullCollectionEdo;
+import com.featurebim.common.model.edo.FBCollectionEdo;
 import com.featurebim.common.model.edo.UserFullEdo;
 import com.featurebim.common.model.edo.UserLoginEdo;
 import com.featurebim.common.model.edo.UserPasswordEdo;
@@ -44,7 +44,7 @@ public class UserController {
     final List<UserFull> users = userHandler.listCompanyUsers(companyid);
 
     final EncryptedContentEdo encrypedEdo = new EncryptedContentEdo();
-    encrypedEdo.setContentObject(new UserFullCollectionEdo(UserFull.toEdoList(users)), mappingJackson2HttpMessageConverter.getObjectMapper());
+    encrypedEdo.setContentObject(new FBCollectionEdo<>(UserFull.toEdoList(users)), mappingJackson2HttpMessageConverter.getObjectMapper());
     
     return encrypedEdo;
   }
@@ -86,6 +86,17 @@ public class UserController {
 
       throw new FBCustomizedException(EExceptionType.SaveError.name(), "Error in save customer!", EModule.CORE.getModuleName());
     }
-
   }
+  
+  @FbCoreRequestGetDataMapping(value = "/read/{userid}")
+  public EncryptedContentEdo readUser(@RequestBody(required = true) @PathVariable final Long userid) throws Exception {
+
+    final UserFull authUser = userHandler.getById(userid);
+    final UserFullEdo authUserEdo = authUser != null ? authUser.toEdo() : null;
+
+    final EncryptedContentEdo resEncrypedEdo = new EncryptedContentEdo();
+    resEncrypedEdo.setContentObject(authUserEdo, mappingJackson2HttpMessageConverter.getObjectMapper());
+    return resEncrypedEdo;
+  }
+  
 }

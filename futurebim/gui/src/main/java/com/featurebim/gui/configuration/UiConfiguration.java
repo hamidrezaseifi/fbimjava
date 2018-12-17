@@ -76,11 +76,26 @@ public class UiConfiguration {
     @Value("${core.rest.url.project.delete}")
     private String projectDeletePath;
 
+    @Value("${core.rest.url.projectrole.readall}")
+    private String projectRoleReadAllPath;
+
+    @Value("${core.rest.url.projectrole.save}")
+    private String projectRoleSavePath;
+
+    @Value("${core.rest.url.projectuser.readall}")
+    private String projectUserReadAllPath;
+
+    @Value("${core.rest.url.projectuser.save}")
+    private String projectUserSavePath;
+
     @Value("${core.rest.url.user.authenticate}")
     private String userAuthenticate;
 
     @Value("${core.rest.url.user.save}")
     private String userSave;
+
+    @Value("${core.rest.url.user.read}")
+    private String userRead;
 
     @Value("${core.rest.url.user.companyusers}")
     private String userCompanyUserList;
@@ -237,6 +252,76 @@ public class UiConfiguration {
      */
     public void setUserCompanyUserList(final String userCompanyUserList) {
       this.userCompanyUserList = userCompanyUserList;
+    }
+
+    /**
+     * @return the projectUserReadAllPath
+     */
+    public String getProjectUserReadAllPath() {
+      return projectUserReadAllPath;
+    }
+
+    /**
+     * @param projectUserReadAllPath the projectUserReadAllPath to set
+     */
+    public void setProjectUserReadAllPath(final String projectUserReadAllPath) {
+      this.projectUserReadAllPath = projectUserReadAllPath;
+    }
+
+    /**
+     * @return the projectUserSavePath
+     */
+    public String getProjectUserSavePath() {
+      return projectUserSavePath;
+    }
+
+    /**
+     * @param projectUserSavePath the projectUserSavePath to set
+     */
+    public void setProjectUserSavePath(final String projectUserSavePath) {
+      this.projectUserSavePath = projectUserSavePath;
+    }
+    
+    /**
+     * @return the projectRoleReadAllPath
+     */
+    public String getProjectRoleReadAllPath() {
+      return projectRoleReadAllPath;
+    }
+    
+    /**
+     * @param projectRoleReadAllPath the projectRoleReadAllPath to set
+     */
+    public void setProjectRoleReadAllPath(final String projectRoleReadAllPath) {
+      this.projectRoleReadAllPath = projectRoleReadAllPath;
+    }
+    
+    /**
+     * @return the projectRoleSavePath
+     */
+    public String getProjectRoleSavePath() {
+      return projectRoleSavePath;
+    }
+    
+    /**
+     * @param projectRoleSavePath the projectRoleSavePath to set
+     */
+    public void setProjectRoleSavePath(final String projectRoleSavePath) {
+      this.projectRoleSavePath = projectRoleSavePath;
+    }
+    
+    /**
+     * @return the userRead
+     */
+    public String getUserRead() {
+      return userRead;
+    }
+    
+    /**
+     * @param userRead the userRead to set
+     */
+    public void setUserRead(final String userRead) {
+      this.userRead = userRead;
     }
     
   }

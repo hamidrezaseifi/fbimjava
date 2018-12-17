@@ -19,6 +19,7 @@ import com.featurebim.gui.bl.IValueHandler;
 import com.featurebim.gui.controller.base.UiControllerBase;
 import com.featurebim.gui.helper.PageMenuLoader;
 import com.featurebim.gui.model.futurebim.GuiProject;
+import com.featurebim.gui.model.futurebim.GuiProjectRole;
 import com.featurebim.gui.model.ui.MenuItem;
 
 @Controller
@@ -38,42 +39,11 @@ public class ProjectsController extends UiControllerBase {
   public String showIndex(final Model model) {
     model.addAttribute("breadCrumb", new ArrayList<>());
     
-    // model.addAttribute("company", this.getSessionUserInfo().getCompany());
-    // model.addAttribute("projects", projectsHandler.listProjects(this.getSessionUserInfo().getCompany().getId()));
+    // model.addAttribute("company", this.getCurrentCompany());
+    // model.addAttribute("projects", projectsHandler.listProjects(this.getCurrentCompany().getId()));
     model.addAttribute("projectTypes", valueHandler.listProjectTypes());
     
     return "projects/index";
-  }
-
-  @FbGuiRequestGetDataMapping(value = "/data/projectlist")
-  public Map<String, Object> getProjectListData(final Model model) {
-    model.addAttribute("breadCrumb", new ArrayList<>());
-    final Map<String, Object> list = new HashMap<>();
-
-    list.put("projects", projectsHandler.listProjects(this.getSessionUserInfo().getCompany().getId()));
-    list.put("company", this.getSessionUserInfo().getCompany());
-
-    return list;
-  }
-
-  @FbGuiRequestGetDataMapping(value = "/data/project/read/{projectid}")
-  public GuiProject getProjectData(@PathVariable(name = "projectid") final long projectid, final Model model) {
-    if (projectid == 0L) {
-      return GuiProject.createNew(this.getSessionUserInfo().getCompany().getId(), 0L, messagesHelper.get("project.newproject"));
-    }
-    return projectsHandler.getById(projectid);
-  }
-
-  @FbGuiRequestPostDataMapping(value = "/data/project/save")
-  public GuiProject saveProjectData(@RequestBody final GuiProject project, final Model model) {
-    
-    return projectsHandler.save(project);
-  }
-
-  @FbGuiRequestPostDataMapping(value = "/data/project/delete")
-  public boolean deleteProjectData(@RequestBody final GuiProject project, final Model model) {
-    
-    return projectsHandler.delete(project);
   }
 
   @RequestMapping(path = "/create")
@@ -81,10 +51,10 @@ public class ProjectsController extends UiControllerBase {
     model.addAttribute("breadCrumb", new ArrayList<>());
 
     model.addAttribute("projectId", 0);
-    model.addAttribute("project", GuiProject.createNew(this.getSessionUserInfo().getCompany().getId(), 0L, messagesHelper.get("project.newproject")));
+    model.addAttribute("project", GuiProject.createNew(this.getCurrentCompany().getId(), 0L, messagesHelper.get("project.newproject")));
     model.addAttribute("projectTypes", valueHandler.listProjectTypes());
     model.addAttribute("projectStatusList", valueHandler.listProjectStatusList());
-    model.addAttribute("company", this.getSessionUserInfo().getCompany());
+    model.addAttribute("company", this.getCurrentCompany());
 
     return "projects/create";
   }
@@ -96,7 +66,8 @@ public class ProjectsController extends UiControllerBase {
     model.addAttribute("projectId", projectid);
     model.addAttribute("project", projectsHandler.getById(projectid));
     model.addAttribute("projectTypes", valueHandler.listProjectTypes());
-    model.addAttribute("company", this.getSessionUserInfo().getCompany());
+    model.addAttribute("company", this.getCurrentCompany());
+    model.addAttribute("user", projectsHandler.listProjectUsers(projectid));
 
     return "projects/view";
   }
@@ -109,7 +80,7 @@ public class ProjectsController extends UiControllerBase {
     model.addAttribute("project", projectsHandler.getById(projectid));
     model.addAttribute("projectTypes", valueHandler.listProjectTypes());
     model.addAttribute("projectStatusList", valueHandler.listProjectStatusList());
-    model.addAttribute("company", this.getSessionUserInfo().getCompany());
+    model.addAttribute("company", this.getCurrentCompany());
 
     return "projects/update";
   }
@@ -127,6 +98,41 @@ public class ProjectsController extends UiControllerBase {
     model.addAttribute("projectId", projectid);
 
     return "projects/delete";
+  }
+
+  @FbGuiRequestGetDataMapping(value = "/data/projectlist")
+  public Map<String, Object> getProjectListData() {
+    final Map<String, Object> list = new HashMap<>();
+
+    list.put("projects", projectsHandler.listProjects(this.getCurrentCompany().getId()));
+    list.put("company", this.getCurrentCompany());
+
+    return list;
+  }
+
+  @FbGuiRequestGetDataMapping(value = "/data/projectrolelist")
+  public List<GuiProjectRole> getProjectRoleListData() {
+    return this.getProjectRoles();
+  }
+
+  @FbGuiRequestGetDataMapping(value = "/data/project/read/{projectid}")
+  public GuiProject getProjectData(@PathVariable(name = "projectid") final long projectid, final Model model) {
+    if (projectid == 0L) {
+      return GuiProject.createNew(this.getCurrentCompany().getId(), 0L, messagesHelper.get("project.newproject"));
+    }
+    return projectsHandler.getById(projectid);
+  }
+
+  @FbGuiRequestPostDataMapping(value = "/data/project/save")
+  public GuiProject saveProjectData(@RequestBody final GuiProject project) {
+    
+    return projectsHandler.save(project);
+  }
+
+  @FbGuiRequestPostDataMapping(value = "/data/project/delete")
+  public boolean deleteProjectData(@RequestBody final GuiProject project) {
+    
+    return projectsHandler.delete(project);
   }
   
   @Override

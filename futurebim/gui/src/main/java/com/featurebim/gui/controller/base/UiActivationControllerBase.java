@@ -12,8 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.featurebim.gui.authentication.UiSessionUserService;
 import com.featurebim.gui.configuration.WebSecurityConfig;
+import com.featurebim.gui.model.futurebim.GuiCompany;
 import com.featurebim.gui.model.futurebim.GuiUserFull;
 import com.featurebim.gui.model.ui.UiSessionUserInfo;
 
@@ -21,13 +21,11 @@ import com.featurebim.gui.model.ui.UiSessionUserInfo;
 public abstract class UiActivationControllerBase {
   
   @Autowired
-  private UiSessionUserService sessionUserService;
-  
   private UiSessionUserInfo sessionUserInfo;
   
   protected String getCurrentRelatedUrl() {
     ServletUriComponentsBuilder builder = ServletUriComponentsBuilder.fromCurrentContextPath();
-    final String root = builder.build().toUriString();
+    final String                root    = builder.build().toUriString();
     builder = ServletUriComponentsBuilder.fromCurrentRequestUri();
     String path = builder.build().toUriString();
     path = path.replace(root, "");
@@ -36,18 +34,13 @@ public abstract class UiActivationControllerBase {
   }
   
   @ModelAttribute
-  public void addAttributes(final Model model,
-      final HttpSession session,
-      final HttpServletResponse response,
-      final HttpServletRequest request) throws IOException {
-    
-    sessionUserInfo = sessionUserService.getUserFromSession(session);
+  public void addAttributes(final Model model, final HttpSession session, final HttpServletResponse response, final HttpServletRequest request) throws IOException {
     
     /*
      * redirect to login if session expired c
      */
     
-    if (sessionUserInfo == null) {
+    if (sessionUserInfo == null || !sessionUserInfo.isLoggedIn()) {
       response.sendRedirect(WebSecurityConfig.LOGIN_URL);
     }
     
@@ -69,5 +62,9 @@ public abstract class UiActivationControllerBase {
   
   protected GuiUserFull getCurrentUser() {
     return this.getSessionUserInfo().getUser();
+  }
+
+  protected GuiCompany getCurrentCompany() {
+    return this.getSessionUserInfo().getCompany();
   }
 }
