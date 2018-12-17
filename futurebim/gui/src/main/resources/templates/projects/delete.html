@@ -5,7 +5,7 @@
     	<th:block th:include="layout/mainLayout :: pageheader" />
     	
     	<link rel="stylesheet" th:href="@{/css/projects.css}">
-		<script th:src="@{/js/projects.js}"></script>
+		<script th:src="@{/js/projects-delete.js}"></script>
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
@@ -13,11 +13,20 @@
 		
 		<div class="page-content" ng-controller="ProjectController">
 			<div class="page-title"> 
-				<span th:text="#{project.projects-create}" class="title-content"></span> 
-				<a class="toolbar-item"><i class="material-icons" ng-click="addAddress()">done</i></a>
+				<span th:text="#{project.projects-delete}" class="title-content"></span> 
+				<a class="toolbar-item" ng-click="deleteProject()"><i class="material-icons">done</i></a>
 				<a class="toolbar-item" href="/projects"><i class="material-icons">cancel</i></a>
 			</div>
 			
+			<div class=""></div>
+			
+			<div class="panel panel-danger">
+				<div class="panel-body">
+					<span id="deletemsgpanel">[[${msg}]]</span>
+				</div>
+		    </div>
+		    <input type="hidden" th:value="${projectId}" id="hdnpid" />			
+		    <input type="hidden" th:value="${projectName}" id="hdnpname" />			
 		</div>
 		
         <footer th:replace="layout/mainLayout :: footer" ></footer>

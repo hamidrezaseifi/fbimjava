@@ -36,8 +36,6 @@ public class ProjectsHandler implements IProjectsHandler {
   public GuiProject getById(final Long id) {
     logger.debug("get projects list from core");
     
-    logger.info("url:" + coreAccessConfig.getProjectReadPath());
-    
     final ProjectEdo projectEdo = restTemplateCall.callRestGet(coreAccessConfig.getProjectReadPath(), EModule.CORE, ProjectEdo.class, true, id);
     
     final GuiProject project = GuiProject.fromEdo(projectEdo);
@@ -49,8 +47,6 @@ public class ProjectsHandler implements IProjectsHandler {
   public List<GuiProject> listProjects(final Long companyId) {
 
     logger.debug("get projects list from core");
-
-    logger.info("url:" + coreAccessConfig.getProjectReadAllPath());
 
     final ProjectCollectionEdo projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getProjectReadAllPath(), EModule.CORE, ProjectCollectionEdo.class, true, companyId);
     
@@ -73,11 +69,18 @@ public class ProjectsHandler implements IProjectsHandler {
   public GuiProject save(final GuiProject project) {
     logger.debug("save projects into core");
 
-    logger.info("url:" + coreAccessConfig.getProjectSavePath());
-
     final ProjectEdo projectEdo = restTemplateCall.callRestPost(coreAccessConfig.getProjectSavePath(), EModule.CORE, project.toEdo(), ProjectEdo.class, true);
     
     return GuiProject.fromEdo(projectEdo);
+  }
+
+  @Override
+  public boolean delete(final GuiProject project) {
+    logger.debug("save projects into core");
+    
+    restTemplateCall.callRestPost(coreAccessConfig.getProjectDeletePath(), EModule.CORE, project.toEdo(), Void.class, true);
+    
+    return true;
   }
 
 }

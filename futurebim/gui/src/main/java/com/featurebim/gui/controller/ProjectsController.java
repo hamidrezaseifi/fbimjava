@@ -70,6 +70,12 @@ public class ProjectsController extends UiControllerBase {
     return projectsHandler.save(project);
   }
 
+  @FbGuiRequestPostDataMapping(value = "/data/project/delete")
+  public boolean deleteProjectData(@RequestBody final GuiProject project, final Model model) {
+    
+    return projectsHandler.delete(project);
+  }
+
   @RequestMapping(path = "/create")
   public String createProject(final Model model) {
     model.addAttribute("breadCrumb", new ArrayList<>());
@@ -112,7 +118,13 @@ public class ProjectsController extends UiControllerBase {
   public String deleteProject(@PathVariable(name = "projectid") final long projectid, final Model model) {
     model.addAttribute("breadCrumb", new ArrayList<>());
 
-    model.addAttribute("msg", "Projekte Alarm Page");
+    final GuiProject project = projectsHandler.getById(projectid);
+    final String     msg     = messagesHelper.get("project.delete-project-message");
+    
+    model.addAttribute("msg", msg);
+    model.addAttribute("project", project);
+    model.addAttribute("projectName", project.getProjectName());
+    model.addAttribute("projectId", projectid);
 
     return "projects/delete";
   }

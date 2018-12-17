@@ -14,35 +14,42 @@ import com.featurebim.core.model.Project;
 
 @Service
 public class ProjectHandler implements IProjectHandler {
-  
+
   private ProjectDao projectDao;
-  
+
   @Autowired(required = true)
   public void setProjectService(final ProjectDao projectDao) {
     this.projectDao = projectDao;
   }
-  
+
   @Override
   public Project getById(final Long id) throws StorageException {
     return projectDao.getById(id);
   }
-  
+
   @Override
   public List<Project> listProjects(final Long companyId) throws StorageException {
     return projectDao.listProjects(companyId);
   }
-  
+
   @Override
   public Project saveProject(final Project project) throws StorageException {
-
+    
     if (project.isNew()) {
       project.setVersion(1);
       return projectDao.addProject(project);
     }
-
+    
     checkRecordVersion(project.getId(), project.getVersion());
     project.setVersion(project.getVersion() + 1);
     return projectDao.updateProject(project);
+  }
+  
+  @Override
+  public boolean deleteProject(final Project project) throws StorageException {
+    checkRecordVersion(project.getId(), project.getVersion());
+
+    return projectDao.deleteProject(project.getId());
   }
 
   private boolean checkRecordVersion(final long id, final int version) throws StorageException {
@@ -50,7 +57,8 @@ public class ProjectHandler implements IProjectHandler {
     if (exists.getVersion() > version) {
       throw new FBCustomizedException(EExceptionType.VersionMismatch.name(), "", EModule.CORE.getModuleName());
     }
-
+    
     return true;
   }
+  
 }

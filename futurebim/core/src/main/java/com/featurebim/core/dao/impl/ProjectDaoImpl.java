@@ -114,7 +114,7 @@ public class ProjectDaoImpl implements ProjectDao {
   }
   
   @Override
-  public boolean removeProject(final Long id) throws StorageException {
+  public boolean deleteProject(final Long id) throws StorageException {
     logger.debug("Deleting Project with id {}...", id);
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
     try {

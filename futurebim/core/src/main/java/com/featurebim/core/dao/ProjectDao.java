@@ -11,7 +11,7 @@ public interface ProjectDao {
 
   public Project updateProject(Project c) throws StorageException;
 
-  public boolean removeProject(Long id) throws StorageException;
+  public boolean deleteProject(Long id) throws StorageException;
 
   public Project getById(Long id) throws StorageException;
 

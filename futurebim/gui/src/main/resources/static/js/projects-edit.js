@@ -47,7 +47,7 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 			}
 		}).then(function(response){
 		  
-			window.location = "/projects";
+			window.location = "/projects/view/" + response.data.id;
 			
 
 		}, function errorCallback(response){ 
