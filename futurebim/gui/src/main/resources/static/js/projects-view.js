@@ -7,6 +7,8 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	$scope.projectId = $("#hdnpid").val();
 	$scope.usersColumns = usersColumns;
 	$scope.tableUsers = false;
+	$scope.users = false;
+	$scope.showUserSelect = false;
 	
 	for(o in $scope.usersColumns){
 		$scope.usersColumns[o].show = true;
@@ -32,6 +34,14 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		return actions;
 	}
 
+	$scope.toggleUserSelect = function(ev, showSelect){
+		var button = $(ev.target).parent();
+		//alert(button.position().top);
+		$("#user-select-panel").css("top" , button.position().top - 20);
+		//$("#user-select-panel").css("left" , button.position().left - 300);
+		$scope.showUserSelect = showSelect;
+	}
+	
 	$scope.loadProject = function(){
 		
 		$http({
@@ -49,8 +59,10 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 			delete $scope.project.created;
 			delete $scope.project.updated;
 			
+			$scope.loadUsers();
+			
 			createUsersTable();
-			$scope.test = new Date() + " : " + JSON.stringify($scope.project);
+			
 
 
 		}, function errorCallback(response){ 
@@ -58,6 +70,32 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 			
 		});		
 		
+	}
+
+	$scope.loadUsers = function(){
+		
+		$http({
+			method: "GET",
+			url: "/projects/data/users/all/", 
+			timeout: 10000				
+		}).then(function(response){
+		  
+			$scope.users = response.data;
+			$scope.test = new Date() + " : " + JSON.stringify($scope.users);
+
+		}, function errorCallback(response){ 
+			$scope.$parent.showloading = false;		
+			
+		});		
+		
+	}
+	
+	$scope.notInProjectUsers = function(){
+		return $scope.users ? $scope.users.filter(function(u) { return !isUserIdInProject(u.id); }) : [];
+	}
+	
+	function isUserIdInProject(id){
+		return $scope.project && $scope.project.users ? $scope.project.users.filter(function(u) { return u.userId === id; }).length > 0 : false;
 	}
 
 	function createUsersTable(){

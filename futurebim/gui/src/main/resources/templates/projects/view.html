@@ -19,7 +19,7 @@
 			</div>
 			
 		    <div class="panel panel-default project-detail-pannel">
-		    	<div class="panel-heading"><h4>[[#{project.projects-detail}]]</h4></div>
+		    	<div class="panel-heading">[[#{project.projects-detail}]]</div>
 		    	<div class="panel-body">
 				    <form class="form-horizontal" id="userform" name="userform" method="post" enctype="application/json" target="_blank">
 					    <div class="form-group">
@@ -49,7 +49,10 @@
 			</div>
 
 		    <div class="panel panel-default project-detail-pannel">
-		    	<div class="panel-heading"><h4>[[#{project.project-users}]]</h4></div>
+		    	<div class="panel-heading">
+		    		<span>[[#{project.project-users}]]</span>
+					<i class="material-icons list-icon" ng-click="toggleUserSelect($event, true)">playlist_add</i>
+				</div>
 		    	<div class="panel-body">		    		
 					<div loading-container="tableUsers.settings().$loading">
 						
@@ -57,8 +60,8 @@
 							<colgroup>
 					          <col/>
 					          <col width="120px"/>
-					          <col width="120px"/>
-					          <col width="100px"/>
+					          <col width="180px"/>
+					          <col width="80px"/>
 					        </colgroup>								
 							<tr ng-repeat="(rowIndex, row) in $data">
 								
@@ -66,13 +69,25 @@
 								
 							</tr>		
 						</table>
-					</div>			
+					</div>	
+					
+					<div class="user-select" ng-hide="!showUserSelect" id="user-select-panel">
+						<div class="user-item toolbar">
+							<i class="material-icons list-icon" ng-click="toggleUserSelect($event, false)">close</i>
+							<i class="material-icons list-icon" ng-click="toggleUserSelect($event, false)">add</i>
+						</div>
+						<div class="user-item" ng-repeat="user in notInProjectUsers()">{{user.fullname}}</div>
+						
+					</div>		
 		    		
 				</div>
 			</div>	
 
 		    <div class="panel panel-default project-detail-pannel">
-		    	<div class="panel-heading"><h4>[[#{project.project-tasks}]]</h4></div>
+		    	<div class="panel-heading">
+		    		<span>[[#{project.project-tasks}]]</span>
+					<i class="material-icons list-icon" ng-click="">playlist_add</i>
+				</div>
 		    	<div class="panel-body">
 				</div>
 			</div>	
