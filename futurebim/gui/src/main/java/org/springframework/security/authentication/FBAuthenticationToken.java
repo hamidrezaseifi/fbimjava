@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import com.featurebim.gui.model.futurebim.GuiUserFull;
+import com.futurebim.gui.model.futurebim.GuiUserFull;
 
 public class FBAuthenticationToken extends UsernamePasswordAuthenticationToken {
   
