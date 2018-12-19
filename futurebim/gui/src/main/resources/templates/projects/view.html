@@ -84,7 +84,7 @@
 							<tr ng-repeat="(rowIndex, row) in $data" class="project-user-item" data-user="{{row.userId}}">
 								<td ng-repeat="col in usersColumns" ng-bind-html="col.renderValue(this, row, rowIndex + 1)"></td>
 								<td>
-									<a class="toolbar-item user-toolbar-item-edit" ng-click="editProjectUser(row.userId)"><i class="material-icons">edit</i></a>
+									<a class="toolbar-item user-toolbar-item-edit" ng-click="toggleUserEdit(true, row)"><i class="material-icons">edit</i></a>
 									<a class="toolbar-item user-toolbar-item-delete" ng-click="deleteProjectUser(row.userId)"><i class="material-icons">delete</i></a>
 								
 								</td>
@@ -107,7 +107,7 @@
 					
 			<div style="margin-top: 50px; border: 1px solid gray; padding: 10px;">{{test}}</div>
 			
-			<div class="user-select-background" ng-hide="!showUserSelect">
+			<div class="full-modal-background" ng-hide="!showUserSelect">
 				<div class="user-select-container">
 					<div class="toolbar">
 						<span class="title">[[#{project.adduser}]]</span>
@@ -120,16 +120,37 @@
 					</div>		
 				</div>
 			</div>
+			
+			<div class="full-modal-background" ng-hide="!showUserEdit">
+				<div class="user-edit-container">
+					<div class="toolbar">
+						<span class="title">[[#{project.edituser}]]</span>
+						<i th:tile="#{common.close}" class="material-icons list-icon" ng-click="toggleUserEdit(false)">close</i>
+					</div>
+					<div class="user-edit">
+						<div><label th:text="#{user.fullname}"></label> <span>{{editingProjectUser.fullname}}</span></div>
+						<div><label th:text="#{project.role}"></label> <select class="form-control fullline" ng-model="editingProjectUser.roleId"><option ng-repeat="item in projectRoles" value="{{item.id}}">{{item.name}}</option></select></div>
+						<div><label th:text="#{project.accesstype}"></label> <select class="form-control fullline" ng-model="editingProjectUser.accessType"><option ng-repeat="item in accessTypes" value="{{item.id}}">{{item.name}}</option></select></div>
+						<div>
+							<button class="md-raised md-button md-ink-ripple" ng-click="toggleUserEdit(false)"><span th:text="#{common.close}">Cancel</span> <i class="material-icons list-icon" ng-click="">clear</i></button>
+							<button class="md-raised md-primary md-button md-ink-ripple" ng-click="editProjectUser()"><span th:text="#{common.save}">Applay</span> <i class="material-icons list-icon" ng-click="">done</i></button>
+						</div>
+					</div>		
+				</div>
+			</div>
 		</div>
 		
 	    <script th:inline="javascript">
-    	var usersColumns = [
-    		{field: "fullname", title: /*[[#{user.fullname}]]*/"", sortable: "fullname", direction: "asc"},
-    		{field: "rolename", title: /*[[#{project.role}]]*/"", sortable: "rolename", direction: "asc"},
-    		{field: "accessTypeName", title: /*[[#{project.accesstype}]]*/"", sortable: "accessTypeName", direction: "asc"},
-    		
-    		];
-	    </script>
+	    	var usersColumns = [
+	    		{field: "fullname", title: /*[[#{user.fullname}]]*/"", sortable: "fullname", direction: "asc"},
+	    		{field: "rolename", title: /*[[#{project.role}]]*/"", sortable: "rolename", direction: "asc"},
+	    		{field: "accessTypeName", title: /*[[#{project.accesstype}]]*/"", sortable: "accessTypeName", direction: "asc"},
+	    		
+	    		];
+	    	var projectRoles = /*[[${projectRoles}]]*/ [];
+	    	var accessTypes = /*[[${accessTypes}]]*/ [];
+
+    	</script>
 		
         <footer th:replace="layout/mainLayout :: footer" ></footer>
     </body>

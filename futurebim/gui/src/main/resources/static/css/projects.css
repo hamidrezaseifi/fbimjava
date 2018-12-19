@@ -37,8 +37,8 @@
     display: inline-block;
 }
 
-.project-detail-pannel input.fullline, 
-.project-detail-pannel select.fullline 
+input.fullline, 
+select.fullline 
 {
     width: calc(100% - 150px);
     float: none;
@@ -128,6 +128,14 @@ button.btn.save
 	cursor: pointer;
 }
 
+button .list-icon
+{
+	float: right;	
+	margin-left: 8px;
+	cursor: pointer;
+	margin-top: 5px;
+}
+
 .list-icon:after
 {
 	clear: both;	
@@ -184,16 +192,6 @@ a.toolbar-item.disabled
 	color: #909090;
 }
 
-.user-select-background
-{
-    position: fixed;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background-color: rgba(100, 140, 180, 0.5);
-}
-
 .user-select-container
 {
 	margin: auto;
@@ -216,7 +214,8 @@ div.user-select .list-group-item
    cursor: pointer;
 }
 
-.user-select-container .toolbar
+.user-select-container .toolbar,
+.user-edit-container .toolbar
 {
 	border-bottom: 1px solid gray;
     padding: 10px;
@@ -228,14 +227,54 @@ div.user-select .list-group-item
     color: #fdfde5;
 }
 
-.user-select-container .toolbar .list-icon
+.user-select-container .toolbar .list-icon,
+.user-edit-container .toolbar .list-icon
 {
 	margin-top: 5px;
 }
 
-.user-select-container .toolbar .title
+.user-select-container .toolbar .title,
+.user-edit-container .toolbar .title
 {
 	line-height: 40px;
 	font-weight: bold;
+}
+
+.user-edit-container
+{
+	margin: auto;
+	margin-top: calc(50vh - 200px);
+    border: 1px solid gray;
+    background-color: white;
+    width: 500px;
+    height: 260px;
+    border-radius: 7px;
+}
+
+.user-edit-container .user-edit
+{
+    padding: 10px;
+}
+
+.user-edit-container .user-edit div
+{
+    padding: 5px;
+}
+
+.user-edit-container .user-edit div:last-child
+{
+    padding: 0px;
+    padding-top: 30px;
+}
+
+.user-edit-container .user-edit div label
+{
+    width: 100px;
+}
+
+.user-edit-container .user-edit div button
+{
+    float: right;
+   margin-left: 10px;;
 }
 

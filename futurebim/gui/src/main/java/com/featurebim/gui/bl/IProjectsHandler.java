@@ -26,4 +26,6 @@ public interface IProjectsHandler {
   
   public boolean deleteProjectUser(final GuiProjectUser projectUser);
   
+  public String getProjectAccessTypeName(final int accessType);
+  
 }

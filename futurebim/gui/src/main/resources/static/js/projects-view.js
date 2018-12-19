@@ -8,6 +8,12 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	$scope.tableUsers = false;
 	$scope.users = false;
 	$scope.showUserSelect = false;
+	$scope.showUserEdit = false;
+	$scope.editingProjectUser = false;
+	$scope.projectRoles = false;
+	$scope.accessTypes = false;
+	$scope.projectRoles = projectRoles;
+	$scope.accessTypes = accessTypes;
 	
 	for(o in $scope.usersColumns){
 		$scope.usersColumns[o].show = true;
@@ -35,6 +41,20 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 
 	$scope.toggleUserSelect = function(showSelect){
 		$scope.showUserSelect = showSelect;
+	}
+
+	$scope.toggleUserEdit = function(showSelect, projectUser){
+		$scope.showUserEdit = showSelect;
+		
+		projectUser = projectUser !== undefined ? projectUser : false;
+		
+		$scope.editingProjectUser = projectUser;
+		
+		if(projectUser){
+			$scope.editingProjectUser.roleId = $scope.editingProjectUser.roleId + "";
+			$scope.editingProjectUser.accessType = $scope.editingProjectUser.accessType + "";			
+		}
+		
 	}
 	
 	$scope.loadProject = function(){
@@ -121,15 +141,29 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 	}
 
-	$scope.editProjectUser = function(id){
-		alert(id); return; 
+	$scope.editProjectUser = function(){
+		if(!$scope.editingProjectUser){
+			return;
+		}
+		
+		var editUser = {
+				projectId: $scope.editingProjectUser.projectId, 
+				userId: $scope.editingProjectUser.userId, 
+				roleId: $scope.editingProjectUser.roleId, 
+				accessType: $scope.editingProjectUser.accessType, 
+		};
+		
 		$http({
-			method: "GET",
-			url: "/projects/data/adduser/" + $scope.projectId + "/" + id, 
-			timeout: 10000				
+			method: "POST",
+			url: "/projects/data/edituser/", 
+			timeout: 10000,
+			data: editUser,
+			headers: {
+				'Content-Type': 'application/json'
+			}
 		}).then(function(response){
 		  
-			$scope.toggleUserSelect(false);
+			$scope.toggleUserEdit(false);
 			
 			$scope.loadProject();
 
@@ -159,7 +193,8 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	function createUsersTable(){
 
 		var initialParams = {
-		        count: $scope.project.users.length // initial page size
+		        count: $scope.project.users.length,
+		        sorting: { fullname: "asc"}
 		      };
 		
 		var initialSettings = {

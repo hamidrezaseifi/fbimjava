@@ -247,3 +247,14 @@ md-datepicker.invalid .md-datepicker-input-container
 	outline: 2px solid #ff0040;
 	background-color: #f8d1d6;
 }
+
+.full-modal-background
+{
+    position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(100, 140, 180, 0.5);
+}
+
