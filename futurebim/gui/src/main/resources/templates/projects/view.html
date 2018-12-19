@@ -102,6 +102,50 @@
 					<i class="material-icons list-icon" ng-click="">playlist_add</i>
 				</div>
 		    	<div class="panel-body">
+					<div loading-container="tableTasks.settings().$loading">
+						
+						<table ng-table="tableTasks" class="table table-condensed table-bordered table-striped">		
+							<colgroup>
+					          <col width="40px"/>
+					          <col/>
+					          <col width="180px"/>
+					          <col width="180px"/>
+					          <col width="140px"/>
+					          <col width="140px"/>
+					          <col width="100px"/>
+					          <col width="80px"/>
+					        </colgroup>	
+							<thead>
+								<tr class="ng-table-sort-header">
+								    <th>#</th>
+								    <th title="" ng-repeat="$column in tasksColumns" ng-class="{
+								                    'sortable': $column.sortable,
+								                    'sort-asc': params.sorting()[$column.sortable]=='asc',
+								                    'sort-desc': params.sorting()[$column.sortable]=='desc'
+								                  }" ng-click="pSortBy($column, $event)" ng-if="$column.show" class="header " role="button" tabindex="0">
+								        	<div ng-if="!template" class="ng-table-header ng-scope" ng-class="{'sort-indicator': params.settings().sortingIndicator == 'div'}">
+								            <span ng-bind="$column.title" ng-class="{'sort-indicator': params.settings().sortingIndicator == 'span'}" class="ng-binding sort-indicator" style=""></span>
+								        </div>
+								        
+								    </th>
+								    <th></th>
+								</tr>
+							
+							</thead>					        
+					        					
+							<tr ng-repeat="(rowIndex, row) in $data" class="project-user-item" data-user="{{row.userId}}">
+								<td>{{rowIndex + 1}}</td>
+								<td ng-repeat="col in tasksColumns" ng-bind-html="col.renderValue(this, row, rowIndex + 1)"></td>
+								<td>
+									<a class="toolbar-item user-toolbar-item-edit" ng-click="toggleTaskEdit(true, row)"><i class="material-icons">edit</i></a>
+									<a class="toolbar-item user-toolbar-item-delete" ng-click="deleteProjectTask(row.id)"><i class="material-icons">delete</i></a>
+								
+								</td>
+							</tr>	
+						
+						</table>
+					</div>	
+		    	
 				</div>
 			</div>	
 					
@@ -144,9 +188,18 @@
 	    	var usersColumns = [
 	    		{field: "fullname", title: /*[[#{user.fullname}]]*/"", sortable: "fullname", direction: "asc"},
 	    		{field: "rolename", title: /*[[#{project.role}]]*/"", sortable: "rolename", direction: "asc"},
-	    		{field: "accessTypeName", title: /*[[#{project.accesstype}]]*/"", sortable: "accessTypeName", direction: "asc"},
-	    		
+	    		{field: "accessTypeName", title: /*[[#{project.accesstype}]]*/"", sortable: "accessTypeName", direction: "asc"},    		
 	    		];
+	    	
+	    	var tasksColumns = [
+	    		{field: "name", title: /*[[#{task.name}]]*/"", sortable: "name", direction: "asc"},
+	    		{field: "reporterName", title: /*[[#{task.reporter}]]*/"", sortable: "reporterName", direction: "asc"},
+	    		{field: "assignedName", title: /*[[#{task.assignedto}]]*/"", sortable: "assignedName", direction: "asc"},    		
+	    		{field: "startDate", title: /*[[#{task.startdate}]]*/"", sortable: "startDate", direction: "asc"},    		
+	    		{field: "deadline", title: /*[[#{task.deadline}]]*/"", sortable: "deadline", direction: "asc"},    		
+	    		{field: "status", title: /*[[#{task.status}]]*/"", sortable: "status", direction: "asc"},    		
+	    		];
+    	
 	    	var projectRoles = /*[[${projectRoles}]]*/ [];
 	    	var accessTypes = /*[[${accessTypes}]]*/ [];
 

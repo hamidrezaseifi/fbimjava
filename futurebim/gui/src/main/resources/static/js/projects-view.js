@@ -14,6 +14,8 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	$scope.accessTypes = false;
 	$scope.projectRoles = projectRoles;
 	$scope.accessTypes = accessTypes;
+	$scope.tasksColumns = tasksColumns;
+	$scope.tableTasks = false;
 	
 	for(o in $scope.usersColumns){
 		$scope.usersColumns[o].show = true;
@@ -24,6 +26,19 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		}
 		else{
 			$scope.usersColumns[o].renderValue = renderData;
+		}			
+		
+	}
+	
+	for(o in $scope.tasksColumns){
+		$scope.tasksColumns[o].show = true;
+		
+		
+		if($scope.tasksColumns[o].field == "action"){
+			$scope.tasksColumns[o].renderValue = renderUsersActions;
+		}
+		else{
+			$scope.tasksColumns[o].renderValue = renderData;
 		}			
 		
 	}
@@ -77,7 +92,7 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 			$scope.loadUsers();
 			
 			createUsersTable();
-			
+			createTaskTable();
 
 
 		}, function errorCallback(response){ 
@@ -206,6 +221,25 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		        dataset: $scope.project.users
 		      };		
 		$scope.tableUsers = new NgTableParams(initialParams, initialSettings);
+		 
+	}
+
+	function createTaskTable(){
+
+		var initialParams = {
+		        count: $scope.project.tasks.length,
+		        sorting: { name: "asc"}
+		      };
+		
+		var initialSettings = {
+		        // page size buttons (right set of buttons in demo)
+		        counts: [],
+		        // determines the pager buttons (left set of buttons in demo)
+		        paginationMaxBlocks: 13,
+		        paginationMinBlocks: 2,
+		        dataset: $scope.project.tasks
+		      };		
+		$scope.tableTasks = new NgTableParams(initialParams, initialSettings);
 		 
 	}
 	

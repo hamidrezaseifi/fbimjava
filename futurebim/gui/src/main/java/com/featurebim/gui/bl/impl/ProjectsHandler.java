@@ -1,4 +1,4 @@
-package com.featurebim.gui.bl;
+package com.featurebim.gui.bl.impl;
 
 import java.util.List;
 
@@ -13,6 +13,10 @@ import com.featurebim.common.model.edo.ProjectEdo;
 import com.featurebim.common.model.edo.ProjectRoleEdo;
 import com.featurebim.common.model.edo.ProjectUserEdo;
 import com.featurebim.common.model.enums.EModule;
+import com.featurebim.gui.bl.IProjectsHandler;
+import com.featurebim.gui.bl.ITaskHandler;
+import com.featurebim.gui.bl.IUserHandler;
+import com.featurebim.gui.bl.IValueHandler;
 import com.featurebim.gui.configuration.UiConfiguration;
 import com.featurebim.gui.helper.IUiRestTemplateCall;
 import com.featurebim.gui.helper.MessagesHelper;
@@ -40,7 +44,10 @@ public class ProjectsHandler implements IProjectsHandler {
   
   @Autowired
   private IUserHandler userHandler;
-  
+
+  @Autowired
+  private ITaskHandler taskHandler;
+
   @Autowired
   private UiSessionUserInfo sessionUserInfo;
   
@@ -77,6 +84,7 @@ public class ProjectsHandler implements IProjectsHandler {
     project.setProjectTypeName(valueHandler.getProjectTypeName(project.getProjectType()));
     project.setStatusName(valueHandler.getProjectStatusName(project.getStatus()));
     project.setUsers(listProjectUsers(project.getId()));
+    project.setTasks(taskHandler.listTasks(project.getId()));
 
     return project;
   }

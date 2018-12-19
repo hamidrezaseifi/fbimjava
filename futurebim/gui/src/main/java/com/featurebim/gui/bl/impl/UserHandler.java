@@ -1,4 +1,4 @@
-package com.featurebim.gui.bl;
+package com.featurebim.gui.bl.impl;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ import com.featurebim.common.model.edo.UserFullEdo;
 import com.featurebim.common.model.edo.UserLoginEdo;
 import com.featurebim.common.model.edo.UserPasswordEdo;
 import com.featurebim.common.model.enums.EModule;
+import com.featurebim.gui.bl.IUserHandler;
 import com.featurebim.gui.configuration.UiConfiguration;
 import com.featurebim.gui.helper.IUiRestTemplateCall;
 import com.featurebim.gui.helper.MessagesHelper;

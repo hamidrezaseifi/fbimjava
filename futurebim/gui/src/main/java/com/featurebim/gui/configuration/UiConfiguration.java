@@ -112,6 +112,18 @@ public class UiConfiguration {
     @Value("${core.rest.url.company.update}")
     private String companyUpdate;
 
+    @Value("${core.rest.url.task.readall}")
+    private String taskReadAll;
+
+    @Value("${core.rest.url.task.read}")
+    private String taskRead;
+
+    @Value("${core.rest.url.task.save}")
+    private String taskSave;
+
+    @Value("${core.rest.url.task.delete}")
+    private String taskDelete;
+
     @PostConstruct
     private void init() {
 
@@ -339,6 +351,62 @@ public class UiConfiguration {
      */
     public void setUserRead(final String userRead) {
       this.userRead = userRead;
+    }
+    
+    /**
+     * @return the taskReadAll
+     */
+    public String getTaskReadAll() {
+      return taskReadAll;
+    }
+    
+    /**
+     * @param taskReadAll the taskReadAll to set
+     */
+    public void setTaskReadAll(final String taskReadAll) {
+      this.taskReadAll = taskReadAll;
+    }
+    
+    /**
+     * @return the taskRead
+     */
+    public String getTaskRead() {
+      return taskRead;
+    }
+    
+    /**
+     * @param taskRead the taskRead to set
+     */
+    public void setTaskRead(final String taskRead) {
+      this.taskRead = taskRead;
+    }
+    
+    /**
+     * @return the taskSave
+     */
+    public String getTaskSave() {
+      return taskSave;
+    }
+    
+    /**
+     * @param taskSave the taskSave to set
+     */
+    public void setTaskSave(final String taskSave) {
+      this.taskSave = taskSave;
+    }
+    
+    /**
+     * @return the taskDelete
+     */
+    public String getTaskDelete() {
+      return taskDelete;
+    }
+    
+    /**
+     * @param taskDelete the taskDelete to set
+     */
+    public void setTaskDelete(final String taskDelete) {
+      this.taskDelete = taskDelete;
     }
     
   }

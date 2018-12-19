@@ -1,4 +1,4 @@
-package com.featurebim.gui.bl;
+package com.featurebim.gui.bl.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.featurebim.common.model.edo.CompanyEdo;
 import com.featurebim.common.model.enums.EModule;
+import com.featurebim.gui.bl.ICompanyHandler;
 import com.featurebim.gui.configuration.UiConfiguration;
 import com.featurebim.gui.helper.IUiRestTemplateCall;
 import com.featurebim.gui.helper.MessagesHelper;

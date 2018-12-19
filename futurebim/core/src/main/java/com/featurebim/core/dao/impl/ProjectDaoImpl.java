@@ -42,7 +42,7 @@ public class ProjectDaoImpl implements ProjectDao {
 
   @Override
   public Project addProject(final Project project) throws StorageException {
-    logger.debug("insert Project with id {}...", project.getId());
+    logger.debug("insert Project {}...", project.getProjectName());
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
     final KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -120,7 +120,6 @@ public class ProjectDaoImpl implements ProjectDao {
     try {
 
       final String sql = "delete from projects where id = ? ";
-      //@formatter:on
 
       final int deletedRows = this.jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql);
