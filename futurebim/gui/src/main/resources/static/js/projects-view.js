@@ -189,12 +189,14 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 	}
 	
-	$scope.pSortBy = function(column, ev){
-
-		var val = $scope.tableUsers.sorting(column.sortable, column.direction);
-
+	$scope.userSortBy = function(column, ev){
+		$scope.tableUsers.sorting(column.sortable, column.direction);
 		column.direction = column.direction == "asc" ? "desc" : "asc";
-
+	}
+	
+	$scope.taskSortBy = function(column, ev){
+		$scope.tableTasks.sorting(column.sortable, column.direction);
+		column.direction = column.direction == "asc" ? "desc" : "asc";
 	}
 	
 	$scope.notInProjectUsers = function(){
