@@ -56,16 +56,38 @@
 		    	<div class="panel-body">		    		
 					<div loading-container="tableUsers.settings().$loading">
 						
-						<table ng-table-dynamic="tableUsers with usersColumns" class="table table-condensed table-bordered table-striped">		
+						<table ng-table="tableUsers" class="table table-condensed table-bordered table-striped">		
 							<colgroup>
 					          <col/>
 					          <col width="120px"/>
 					          <col width="180px"/>
 					          <col width="80px"/>
 					        </colgroup>	
+							<thead>
+								<tr class="ng-table-sort-header">
+								    <th title="" ng-repeat="$column in usersColumns" ng-class="{
+								                    'sortable': $column.sortable,
+								                    'sort-asc': params.sorting()[$column.sortable]=='asc',
+								                    'sort-desc': params.sorting()[$column.sortable]=='desc'
+								                  }" ng-click="pSortBy($column, $event)" ng-if="$column.show" class="header " role="button" tabindex="0">
+								        	<div ng-if="!template" class="ng-table-header ng-scope" ng-class="{'sort-indicator': params.settings().sortingIndicator == 'div'}">
+								            <span ng-bind="$column.title" ng-class="{'sort-indicator': params.settings().sortingIndicator == 'span'}" class="ng-binding sort-indicator" style=""></span>
+								        </div>
+								        
+								    </th>
+								    <th>
+								    </th>
+								</tr>
+							
+							</thead>					        
 					        					
 							<tr ng-repeat="(rowIndex, row) in $data" class="project-user-item" data-user="{{row.userId}}">
-								<td ng-repeat="col in $columns" header-class="col.headerClass" ng-bind-html="col.renderValue(this, row, rowIndex + 1)"></td>
+								<td ng-repeat="col in usersColumns" ng-bind-html="col.renderValue(this, row, rowIndex + 1)"></td>
+								<td>
+									<a class="toolbar-item user-toolbar-item-edit" ng-click="editProjectUser(row.userId)"><i class="material-icons">edit</i></a>
+									<a class="toolbar-item user-toolbar-item-delete" ng-click="deleteProjectUser(row.userId)"><i class="material-icons">delete</i></a>
+								
+								</td>
 							</tr>	
 						
 						</table>
@@ -102,10 +124,10 @@
 		
 	    <script th:inline="javascript">
     	var usersColumns = [
-    		{field: "fullname", title: /*[[#{user.fullname}]]*/"", },
-    		{field: "rolename", title: /*[[#{project.role}]]*/"", },
-    		{field: "accessTypeName", title: /*[[#{project.accesstype}]]*/"", },
-    		{field: "action", title: "", },
+    		{field: "fullname", title: /*[[#{user.fullname}]]*/"", sortable: "fullname", direction: "asc"},
+    		{field: "rolename", title: /*[[#{project.role}]]*/"", sortable: "rolename", direction: "asc"},
+    		{field: "accessTypeName", title: /*[[#{project.accesstype}]]*/"", sortable: "accessTypeName", direction: "asc"},
+    		
     		];
 	    </script>
 		

@@ -9,42 +9,6 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	$scope.users = false;
 	$scope.showUserSelect = false;
 	
-	$scope.$watch(
-	        function(scope) {
-	             // watch the 'compile' expression for changes
-	            return $(".user-toolbar-item-delete").length;
-	        },
-	        function(value) {
-	            
-	        	//alert(value);
-	        	
-	        	$(".user-toolbar-item-delete").each(function(index, item){
-	        		
-	        		$(item).unbind("click");
-	        		$(item).click(function() { deleteProjectUser($(item).parent().parent().data("user")); });
-	        		
-	        	});
-	        }
-	);
-	
-	$scope.$watch(
-	        function(scope) {
-	             // watch the 'compile' expression for changes
-	            return $(".user-toolbar-item-edit").length;
-	        },
-	        function(value) {
-	            
-	        	//alert(value);
-	        	
-	        	$(".user-toolbar-item-edit").each(function(index, item){
-	        		
-	        		$(item).unbind("click");
-	        		$(item).click(function() { editProjectUser($(item).parent().parent().data("user")); });
-	        		
-	        	});
-	        }
-	);
-	
 	for(o in $scope.usersColumns){
 		$scope.usersColumns[o].show = true;
 		
@@ -140,7 +104,7 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 	}
 
-	function deleteProjectUser(id){
+	$scope.deleteProjectUser = function(id){
 		
 		$http({
 			method: "GET",
@@ -157,7 +121,7 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 	}
 
-	function editProjectUser(id){
+	$scope.editProjectUser = function(id){
 		alert(id); return; 
 		$http({
 			method: "GET",
@@ -174,6 +138,14 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 			
 		});		
 		
+	}
+	
+	$scope.pSortBy = function(column, ev){
+
+		var val = $scope.tableUsers.sorting(column.sortable, column.direction);
+
+		column.direction = column.direction == "asc" ? "desc" : "asc";
+
 	}
 	
 	$scope.notInProjectUsers = function(){
