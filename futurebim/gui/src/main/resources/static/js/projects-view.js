@@ -1,5 +1,4 @@
 
-
 fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element, $compile, $mdSidenav, NgTableParams) {
 
 	$scope.showloading = false;
@@ -9,6 +8,42 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	$scope.tableUsers = false;
 	$scope.users = false;
 	$scope.showUserSelect = false;
+	
+	$scope.$watch(
+	        function(scope) {
+	             // watch the 'compile' expression for changes
+	            return $(".user-toolbar-item-delete").length;
+	        },
+	        function(value) {
+	            
+	        	//alert(value);
+	        	
+	        	$(".user-toolbar-item-delete").each(function(index, item){
+	        		
+	        		$(item).unbind("click");
+	        		$(item).click(function() { deleteProjectUser($(item).parent().parent().data("user")); });
+	        		
+	        	});
+	        }
+	);
+	
+	$scope.$watch(
+	        function(scope) {
+	             // watch the 'compile' expression for changes
+	            return $(".user-toolbar-item-edit").length;
+	        },
+	        function(value) {
+	            
+	        	//alert(value);
+	        	
+	        	$(".user-toolbar-item-edit").each(function(index, item){
+	        		
+	        		$(item).unbind("click");
+	        		$(item).click(function() { editProjectUser($(item).parent().parent().data("user")); });
+	        		
+	        	});
+	        }
+	);
 	
 	for(o in $scope.usersColumns){
 		$scope.usersColumns[o].show = true;
@@ -28,17 +63,13 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	}
 	
 	function renderUsersActions($scope, row, index) {
-		var actions = '<a class="toolbar-item" href="/projects/puser/update/' + row['projectId'] + '/' + row['userId'] + '"><i class="material-icons">edit</i></a>';
-		actions += '<a class="toolbar-item" href="/projects/puser/delete/' + row['projectId'] + '/' + row['userId'] + '"><i class="material-icons">delete</i></a>';
+		var actions = '<a class="toolbar-item user-toolbar-item-edit" userid="' + row['userId'] + '"><i class="material-icons">edit</i></a>';
+		actions += '<a class="toolbar-item user-toolbar-item-delete" userid="' + row['userId'] + '"><i class="material-icons">delete</i></a>';
 		
 		return actions;
 	}
 
-	$scope.toggleUserSelect = function(ev, showSelect){
-		var button = $(ev.target).parent();
-		//alert(button.position().top);
-		$("#user-select-panel").css("top" , button.position().top - 20);
-		//$("#user-select-panel").css("left" , button.position().left - 300);
+	$scope.toggleUserSelect = function(showSelect){
 		$scope.showUserSelect = showSelect;
 	}
 	
@@ -82,6 +113,61 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		  
 			$scope.users = response.data;
 			$scope.test = new Date() + " : " + JSON.stringify($scope.users);
+
+		}, function errorCallback(response){ 
+			$scope.$parent.showloading = false;		
+			
+		});		
+		
+	}
+
+	$scope.addUser = function(id){
+		
+		$http({
+			method: "GET",
+			url: "/projects/data/adduser/" + $scope.projectId + "/" + id, 
+			timeout: 10000				
+		}).then(function(response){
+		  
+			$scope.toggleUserSelect(false);
+			
+			$scope.loadProject();
+
+		}, function errorCallback(response){ 
+			$scope.$parent.showloading = false;		
+			
+		});		
+		
+	}
+
+	function deleteProjectUser(id){
+		
+		$http({
+			method: "GET",
+			url: "/projects/data/deluser/" + $scope.projectId + "/" + id, 
+			timeout: 10000				
+		}).then(function(response){
+		  			
+			$scope.loadProject();
+
+		}, function errorCallback(response){ 
+			$scope.$parent.showloading = false;		
+			
+		});		
+		
+	}
+
+	function editProjectUser(id){
+		alert(id); return; 
+		$http({
+			method: "GET",
+			url: "/projects/data/adduser/" + $scope.projectId + "/" + id, 
+			timeout: 10000				
+		}).then(function(response){
+		  
+			$scope.toggleUserSelect(false);
+			
+			$scope.loadProject();
 
 		}, function errorCallback(response){ 
 			$scope.$parent.showloading = false;		

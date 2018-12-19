@@ -72,4 +72,9 @@ public class ProjectController {
     return projectUserHandler.save(ProjectUser.fromEdo(userEdo)).toEdo();
   }
   
+  @FbCoreRequestPostDataMapping(value = "/user/delete")
+  public void deleteProjectUser(@RequestBody(required = true) final ProjectUserEdo userEdo) throws StorageException {
+    projectUserHandler.remove(ProjectUser.fromEdo(userEdo));
+  }
+  
 }

@@ -88,6 +88,9 @@ public class UiConfiguration {
     @Value("${core.rest.url.projectuser.save}")
     private String projectUserSavePath;
 
+    @Value("${core.rest.url.projectuser.delete}")
+    private String projectUserDeletePath;
+
     @Value("${core.rest.url.user.authenticate}")
     private String userAuthenticate;
 
@@ -280,6 +283,20 @@ public class UiConfiguration {
      */
     public void setProjectUserSavePath(final String projectUserSavePath) {
       this.projectUserSavePath = projectUserSavePath;
+    }
+    
+    /**
+     * @return the projectUserDeletePath
+     */
+    public String getProjectUserDeletePath() {
+      return projectUserDeletePath;
+    }
+    
+    /**
+     * @param projectUserDeletePath the projectUserDeletePath to set
+     */
+    public void setProjectUserDeletePath(final String projectUserDeletePath) {
+      this.projectUserDeletePath = projectUserDeletePath;
     }
     
     /**

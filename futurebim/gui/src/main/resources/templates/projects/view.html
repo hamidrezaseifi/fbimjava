@@ -51,7 +51,7 @@
 		    <div class="panel panel-default project-detail-pannel">
 		    	<div class="panel-heading">
 		    		<span>[[#{project.project-users}]]</span>
-					<i class="material-icons list-icon" ng-click="toggleUserSelect($event, true)">playlist_add</i>
+					<i class="material-icons list-icon" ng-click="toggleUserSelect(true)">playlist_add</i>
 				</div>
 		    	<div class="panel-body">		    		
 					<div loading-container="tableUsers.settings().$loading">
@@ -62,24 +62,15 @@
 					          <col width="120px"/>
 					          <col width="180px"/>
 					          <col width="80px"/>
-					        </colgroup>								
-							<tr ng-repeat="(rowIndex, row) in $data">
-								
+					        </colgroup>	
+					        					
+							<tr ng-repeat="(rowIndex, row) in $data" class="project-user-item" data-user="{{row.userId}}">
 								<td ng-repeat="col in $columns" header-class="col.headerClass" ng-bind-html="col.renderValue(this, row, rowIndex + 1)"></td>
-								
-							</tr>		
+							</tr>	
+						
 						</table>
 					</div>	
-					
-					<div class="user-select" ng-hide="!showUserSelect" id="user-select-panel">
-						<div class="user-item toolbar">
-							<i class="material-icons list-icon" ng-click="toggleUserSelect($event, false)">close</i>
-							<i class="material-icons list-icon" ng-click="toggleUserSelect($event, false)">add</i>
-						</div>
-						<div class="user-item" ng-repeat="user in notInProjectUsers()">{{user.fullname}}</div>
-						
-					</div>		
-		    		
+							    		
 				</div>
 			</div>	
 
@@ -93,6 +84,20 @@
 			</div>	
 					
 			<div style="margin-top: 50px; border: 1px solid gray; padding: 10px;">{{test}}</div>
+			
+			<div class="user-select-background" ng-hide="!showUserSelect">
+				<div class="user-select-container">
+					<div class="toolbar">
+						<span class="title">[[#{project.adduser}]]</span>
+						<i class="material-icons list-icon" ng-click="toggleUserSelect(false)">close</i>
+						<i class="material-icons list-icon" ng-click="toggleUserSelect(false)">add</i>
+					</div>
+					<div class="user-select list-group">
+						<a class="list-group-item" ng-repeat="user in notInProjectUsers()" ng-click="addUser(user.id)">{{user.fullname}}</a>
+						
+					</div>		
+				</div>
+			</div>
 		</div>
 		
 	    <script th:inline="javascript">

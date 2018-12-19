@@ -24,4 +24,6 @@ public interface IProjectsHandler {
   
   public GuiProjectUser saveProjectUser(final GuiProjectUser projectUser);
   
+  public boolean deleteProjectUser(final GuiProjectUser projectUser);
+  
 }
