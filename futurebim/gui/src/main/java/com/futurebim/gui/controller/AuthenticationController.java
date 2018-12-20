@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,11 +31,11 @@ public class AuthenticationController {
   private MessagesHelper messages;
   
   @GetMapping("/login")
-  public String showLogin(final Model model, final HttpServletRequest request) throws ServletException, UnsupportedEncodingException {
+  public String showLogin(@CookieValue(value = "comp_ind", defaultValue = "") final String companyIndicator, final Model model, final HttpServletRequest request) throws ServletException, UnsupportedEncodingException {
     
-    String message = "";
-    String username = "";
-    String company = "";
+    String       message  = "";
+    String       username = "";
+    String       company  = companyIndicator;
     final String password = "";
     
     if (request.getParameter("error") != null) {
