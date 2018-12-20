@@ -4,8 +4,8 @@
     
     	<th:block th:include="layout/mainLayout :: pageheader" />
     	
-    	<link rel="stylesheet" th:href="@{/css/projects.css}">
-		<script th:src="@{/js/projects.js}"></script>
+    	<link rel="stylesheet" th:href="@{/css/workflow.css}">
+		<script th:src="@{/js/workflow.js}"></script>
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
@@ -13,8 +13,8 @@
 		
 		<div class="page-content" ng-controller="ProjectController">
 			<div class="page-title"> 
-				<span th:text="#{project.projects-list}" class="title-content"></span> 
-				<a class="toolbar-item" href="/projects/create"><i class="material-icons" ng-click="addAddress()">playlist_add</i></a>
+				<span th:text="#{workflow.workflow-list}" class="title-content"></span> 
+				<a class="toolbar-item" href="/workflow/create"><i class="material-icons">playlist_add</i></a>
 			
 			</div>
 			
