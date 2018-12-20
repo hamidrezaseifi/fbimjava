@@ -19,203 +19,198 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-import com.futurebim.core.dao.TaskDao;
+import com.futurebim.core.dao.WorkflowDao;
 import com.futurebim.core.dao.exceptions.StorageException;
 import com.futurebim.core.dao.utils.SqlUtils;
-import com.futurebim.core.model.Task;
+import com.futurebim.core.model.Workflow;
 
 @Transactional
 @Repository
-public class TaskDaoImpl implements TaskDao {
-
-  private static final Logger              logger = LoggerFactory.getLogger(TaskDaoImpl.class);
+public class WorkflowDaoImpl implements WorkflowDao {
+  
+  private static final Logger              logger = LoggerFactory.getLogger(WorkflowDaoImpl.class);
   private final JdbcTemplate               jdbcTemplate;
   private final PlatformTransactionManager platformTransactionManager;
-  
+
   @Autowired
-  TaskDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager) {
+  WorkflowDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager) {
     this.jdbcTemplate = jdbcTemplate;
     this.platformTransactionManager = platformTransactionManager;
   }
   
   @Override
-  public Task addNew(final Task task) throws StorageException {
-    logger.debug("insert Task {}...", task.getName());
+  public Workflow addNew(final Workflow workflow) throws StorageException {
+    logger.debug("insert Workflow {}...", workflow.getName());
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
     final KeyHolder keyHolder = new GeneratedKeyHolder();
-
+    
     try {
-
-      final String sql = "INSERT INTO tasks (project_id, name, comments, reporter, assigned_to, start_date, deadline, status, version)"
+      
+      final String sql = "INSERT INTO workflow (project_id, workflow_type, name, reporter, responsible, version, status)"
           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+      
       this.jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setLong(1, task.getProjectid());
-        ps.setString(2, task.getName());
-        ps.setString(3, task.getComments());
-        ps.setLong(4, task.getReporter());
-        ps.setLong(5, task.getAssignedTo());
-        ps.setTimestamp(6, SqlUtils.getTimestampFromDate(task.getStartDate()));
-        ps.setTimestamp(7, SqlUtils.getTimestampFromDate(task.getDeadline()));
-        ps.setInt(8, task.getStatus());
-        ps.setInt(9, task.getVersion());
-
+        ps.setLong(1, workflow.getProjectid());
+        ps.setInt(2, workflow.getType());
+        ps.setString(3, workflow.getName());
+        ps.setLong(4, workflow.getReporter());
+        ps.setLong(5, workflow.getResponsible());
+        ps.setInt(6, workflow.getVersion());
+        ps.setInt(7, workflow.getStatus());
+        
         return ps;
       }, keyHolder);
-
+      
       this.platformTransactionManager.commit(transactionStatus);
     }
     catch (final Exception e) {
       platformTransactionManager.rollback(transactionStatus);
-      logger.error("Unable to insert Task [name: {}]: {}", task.getName(), e.toString(), e);
+      logger.error("Unable to insert Workflow [name: {}]: {}", workflow.getName(), e.toString(), e);
       throw new StorageException(e.toString(), e);
     }
     return getById(keyHolder.getKey().longValue());
   }
-
+  
   @Override
-  public Task getById(final Long id) throws StorageException {
+  public Workflow getById(final Long id) throws StorageException {
     logger.info("Dao Read Project by id: " + id);
-    final String sqlSelect = "SELECT * FROM tasks where id=?";
-
-    Task task;
-
+    final String sqlSelect = "SELECT * FROM workflow where id=?";
+    
+    Workflow workflow;
+    
     try {
-
-      task = this.jdbcTemplate.query(con -> {
+      
+      workflow = this.jdbcTemplate.query(con -> {
         final PreparedStatement ps = con.prepareStatement(sqlSelect);
         ps.setLong(1, id);
         return ps;
-
+        
       }, (rs) -> {
         if (rs.next()) {
-          return taskFromResultSet(rs);
+          return workflowFromResultSet(rs);
         }
         else {
           return null;
         }
       });
-
+      
     }
     catch (final Exception e) {
       throw new StorageException("Unable to retrieve Project data: " + e.toString());
     }
-
-    return task;
+    
+    return workflow;
   }
-
+  
   @Override
-  public List<Task> list(final Long projectId) throws StorageException {
-    logger.info("Dao Read Project Task List");
-    final String sqlSelect = "SELECT * FROM tasks where project_id=?";
-
-    List<Task> list = new ArrayList<>();
-
+  public List<Workflow> list(final Long projectId) throws StorageException {
+    logger.info("Dao Read Project Workflow List");
+    final String sqlSelect = "SELECT * FROM workflow where project_id=?";
+    
+    List<Workflow> list = new ArrayList<>();
+    
     try {
       list = jdbcTemplate.query(con -> {
         final PreparedStatement ps = con.prepareStatement(sqlSelect);
         ps.setLong(1, projectId);
         return ps;
-
+        
       }, (rs, rowNum) -> {
-
-        return taskFromResultSet(rs);
-
+        
+        return workflowFromResultSet(rs);
+        
       });
-
+      
     }
     catch (final Exception e) {
-      throw new StorageException("Unable to retrieve project Task: " + e.toString());
+      throw new StorageException("Unable to retrieve project Workflow: " + e.toString());
     }
-
+    
     return list;
   }
-
+  
   @Override
-  public Task update(final Task task) throws StorageException {
-    logger.debug("Updating Project with id {}...", task.getId());
+  public Workflow update(final Workflow workflow) throws StorageException {
+    logger.debug("Updating Project with id {}...", workflow.getId());
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
     try {
-
-      final String sql = "UPDATE tasks SET project_id = ?, name = ?, comments = ?, reporter = ?," +
-          " assigned_to = ?, start_date = ?, deadline = ?, status = ?, version = ? WHERE id = ?";
-
+      
+      final String sql = "UPDATE workflow SET project_id = ?, workflow_type = ?, name = ?, reporter = ?," +
+          " responsible = ?, version = ? ,status = ? WHERE id = ?";
+      
       final int changedRows = jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql);
-        ps.setLong(1, task.getProjectid());
-        ps.setString(2, task.getName());
-        ps.setString(3, task.getComments());
-        ps.setLong(4, task.getReporter());
-        ps.setLong(5, task.getAssignedTo());
-        ps.setTimestamp(6, SqlUtils.getTimestampFromDate(task.getStartDate()));
-        ps.setTimestamp(7, SqlUtils.getTimestampFromDate(task.getDeadline()));
-        ps.setInt(8, task.getStatus());
-        ps.setInt(9, task.getVersion());
-        ps.setLong(10, task.getId());
-
+        ps.setLong(1, workflow.getProjectid());
+        ps.setInt(2, workflow.getType());
+        ps.setString(3, workflow.getName());
+        ps.setLong(4, workflow.getReporter());
+        ps.setLong(5, workflow.getResponsible());
+        ps.setInt(6, workflow.getVersion());
+        ps.setInt(7, workflow.getStatus());
+        ps.setLong(8, workflow.getId());
+        
         return ps;
       });
-
+      
       if (changedRows != 1) {
-        throw new StorageException(String.format("Unable to update Project [id: {}]", task.getId()));
+        throw new StorageException(String.format("Unable to update Project [id: {}]", workflow.getId()));
       }
-
+      
       this.platformTransactionManager.commit(transactionStatus);
     }
     catch (final Exception e) {
       platformTransactionManager.rollback(transactionStatus);
-      logger.error("Unable to update Project [id: {}]: {}", task.getId(), e.toString(), e);
+      logger.error("Unable to update Project [id: {}]: {}", workflow.getId(), e.toString(), e);
       throw new StorageException(e.toString(), e);
     }
-    return getById(task.getId());
+    return getById(workflow.getId());
   }
-
+  
   @Override
-  public boolean delete(final Task task) throws StorageException {
-    logger.debug("Deleting Task with id {}...", task.getId());
+  public boolean delete(final Workflow workflow) throws StorageException {
+    logger.debug("Deleting Workflow with id {}...", workflow.getId());
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
     try {
-      
-      final String sql = "delete from tasks where id = ? ";
-      
+
+      final String sql = "delete from workflow where id = ? ";
+
       final int deletedRows = this.jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql);
-        ps.setLong(1, task.getId());
+        ps.setLong(1, workflow.getId());
         return ps;
       });
-      
+
       if (deletedRows != 1) {
-        throw new StorageException(String.format("Unable to delete Project  [id: {}]", task.getId()));
+        throw new StorageException(String.format("Unable to delete Project  [id: {}]", workflow.getId()));
       }
-      
+
       this.platformTransactionManager.commit(transactionStatus);
       return true;
     }
-    
+
     catch (final Exception e) {
       this.platformTransactionManager.rollback(transactionStatus);
-      logger.error("Unable to delete Task [id: {}]: {}", task.getId(), e.toString(), e);
+      logger.error("Unable to delete Workflow [id: {}]: {}", workflow.getId(), e.toString(), e);
       throw new StorageException(e.toString(), e);
     }
   }
-
-  private Task taskFromResultSet(final ResultSet rs) throws SQLException {
-    final Task model = new Task();
+  
+  private Workflow workflowFromResultSet(final ResultSet rs) throws SQLException {
+    final Workflow model = new Workflow();
     
-    model.setAssignedTo(rs.getLong("assigned_to"));
-    model.setComments(rs.getString("comments"));
+    model.setResponsible(rs.getLong("responsible"));
+    model.setType(rs.getInt("workflow_type"));
     model.setName(rs.getString("name"));
     model.setProjectid(rs.getLong("project_id"));
     model.setReporter(rs.getLong("reporter"));
-    model.setStartDate(SqlUtils.getDateFromTimestamp(rs.getTimestamp("start_date")));
-    model.setDeadline(SqlUtils.getDateFromTimestamp(rs.getTimestamp("deadline")));
     model.setCreated(SqlUtils.getDatetimeFromTimestamp(rs.getTimestamp("created")));
     model.setUpdated(SqlUtils.getDatetimeFromTimestamp(rs.getTimestamp("updated")));
     model.setId(rs.getLong("id"));
     model.setVersion(rs.getInt("version"));
     model.setStatus(rs.getInt("status"));
-
+    
     return model;
   }
+  
 }

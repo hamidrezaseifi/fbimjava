@@ -1,13 +1,13 @@
 
 
-fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element, $compile, $mdSidenav, NgTableParams) {
+fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element, $compile, $mdSidenav, NgTableParams) {
 
 	$scope.showloading = false;
 	$scope.company = false;
-	$scope.projectlist = false;
+	$scope.selectedProjectId = firstProjectId + "";
+	$scope.workflowlist = false;
 	$scope.tableParams = false;
 	$scope.columns = columns;
-	$scope.projectTypes = projectTypes;
 	
 	for(o in $scope.columns){
 		$scope.columns[o].show = true;
@@ -27,16 +27,15 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	}
 	
 
-	$scope.loadProjects = function(){
+	$scope.loadWorkflows = function(){
 		
 		$http({
 			method: "GET",
-			url: "/projects/data/projectlist", 
+			url: "/workflow/data/list/" + $scope.selectedProjectId, 
 			timeout: 10000				
 		}).then(function(response){
 		  
-			$scope.company = response.data.company;
-			$scope.projectlist = prepareListData(response.data.projects);
+			$scope.workflowlist = prepareListData(response.data);
 			
 			createTable();
 			
@@ -69,9 +68,9 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	}
 	
 	function renderActions($scope, row, index) {
-		var actions = '<a class="toolbar-item" href="/projects/view/' + row['id'] + '"><i class="material-icons">pageview</i></a>';
-		actions += '<a class="toolbar-item" href="/projects/update/' + row['id'] + '"><i class="material-icons">edit</i></a>';
-		actions += '<a class="toolbar-item" href="/projects/delete/' + row['id'] + '"><i class="material-icons">delete</i></a>';
+		var actions = '<a class="toolbar-item" href="/workflow/view/' + row['id'] + '"><i class="material-icons">pageview</i></a>';
+		actions += '<a class="toolbar-item" href="/workflow/update/' + row['id'] + '"><i class="material-icons">edit</i></a>';
+		actions += '<a class="toolbar-item" href="/workflow/delete/' + row['id'] + '"><i class="material-icons">delete</i></a>';
 		
 		return actions;
 	}
@@ -88,14 +87,14 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		        // determines the pager buttons (left set of buttons in demo)
 		        paginationMaxBlocks: 13,
 		        paginationMinBlocks: 2,
-		        dataset: $scope.projectlist
+		        dataset: $scope.workflowlist
 		      };
 		
 		$scope.tableParams = new NgTableParams(initialParams, initialSettings);
 		 
 	}
 	
-	$scope.loadProjects();
+	$scope.loadWorkflows();
 	
 });
 

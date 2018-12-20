@@ -1,4 +1,23 @@
 
+.project-select-container
+{
+    margin-bottom: 20px !important;	
+    font-size: 16px;
+}
+
+.project-select-container span
+{
+    margin-left: 65px;	
+    margin-right: 30px;	
+}
+
+.project-select-container select
+{
+    min-width: 300px;	
+    width: calc(100% - 150px);
+    height: 30px;	
+}
+
 
 .project-item {
     background-color: #ffd7d7!important;

@@ -4,8 +4,8 @@
     
     	<th:block th:include="layout/mainLayout :: pageheader" />
     	
-    	<link rel="stylesheet" th:href="@{/css/projects.css}">
-		<script th:src="@{/js/projects-delete.js}"></script>
+    	<link rel="stylesheet" th:href="@{/css/workflow.css}">
+		<script th:src="@{/js/workflow-delete.js}"></script>
     </head>
     <body ng-controller="BodyController">
         <header th:replace="layout/mainLayout :: header" ></header>
@@ -15,7 +15,7 @@
 			<div class="page-title"> 
 				<span th:text="#{project.projects-delete}" class="title-content"></span> 
 				<a class="toolbar-item" ng-click="deleteProject()"><i class="material-icons">done</i></a>
-				<a class="toolbar-item" href="/projects"><i class="material-icons">cancel</i></a>
+				<a class="toolbar-item" href="/workflow"><i class="material-icons">cancel</i></a>
 			</div>
 			
 			<div class=""></div>

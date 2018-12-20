@@ -119,6 +119,18 @@ public class UiConfiguration {
     
     @Value("${core.rest.url.task.delete}")
     private String taskDelete;
+
+    @Value("${core.rest.url.workflow.readall}")
+    private String workflowReadAll;
+    
+    @Value("${core.rest.url.workflow.read}")
+    private String workflowRead;
+    
+    @Value("${core.rest.url.workflow.save}")
+    private String workflowSave;
+    
+    @Value("${core.rest.url.workflow.delete}")
+    private String workflowDelete;
     
     @PostConstruct
     private void init() {
@@ -403,6 +415,62 @@ public class UiConfiguration {
      */
     public void setTaskDelete(final String taskDelete) {
       this.taskDelete = taskDelete;
+    }
+    
+    /**
+     * @return the workflowReadAll
+     */
+    public String getWorkflowReadAll() {
+      return workflowReadAll;
+    }
+    
+    /**
+     * @param workflowReadAll the workflowReadAll to set
+     */
+    public void setWorkflowReadAll(final String workflowReadAll) {
+      this.workflowReadAll = workflowReadAll;
+    }
+    
+    /**
+     * @return the workflowRead
+     */
+    public String getWorkflowRead() {
+      return workflowRead;
+    }
+    
+    /**
+     * @param workflowRead the workflowRead to set
+     */
+    public void setWorkflowRead(final String workflowRead) {
+      this.workflowRead = workflowRead;
+    }
+    
+    /**
+     * @return the workflowSave
+     */
+    public String getWorkflowSave() {
+      return workflowSave;
+    }
+    
+    /**
+     * @param workflowSave the workflowSave to set
+     */
+    public void setWorkflowSave(final String workflowSave) {
+      this.workflowSave = workflowSave;
+    }
+    
+    /**
+     * @return the workflowDelete
+     */
+    public String getWorkflowDelete() {
+      return workflowDelete;
+    }
+    
+    /**
+     * @param workflowDelete the workflowDelete to set
+     */
+    public void setWorkflowDelete(final String workflowDelete) {
+      this.workflowDelete = workflowDelete;
     }
 
   }

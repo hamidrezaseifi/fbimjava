@@ -11,11 +11,17 @@
         <header th:replace="layout/mainLayout :: header" ></header>
         <div th:replace="layout/mainLayout :: breadcrumb" ></div>
 		
-		<div class="page-content" ng-controller="ProjectController">
+		<div class="page-content" ng-controller="WorkflowController">
 			<div class="page-title"> 
 				<span th:text="#{workflow.workflow-list}" class="title-content"></span> 
-				<a class="toolbar-item" href="/workflow/create"><i class="material-icons">playlist_add</i></a>
-			
+				<a class="toolbar-item" href="/workflow/create"><i class="material-icons">playlist_add</i></a>	
+			</div>
+			<div class="project-select-container"> 
+				<span th:text="#{project.project}" class="title-content"></span> 
+				<select class="" ng-model="selectedProjectId" ng-change="loadWorkflows()">
+					<option th:each="project : ${projects}" th:value="${project.getId()}" th:text="${project.getProjectName()}"></option>
+				</select>
+					
 			</div>
 			
 			<div loading-container="tableParams.settings().$loading">
@@ -26,7 +32,8 @@
 			          <col width="50px"/>
 			          <col/>
 			          <col width="100px"/>
-			          <col width="120px"/>
+			          <col width="180px"/>
+			          <col width="80px"/>
 			          <col width="120px"/>
 			          <col width="120px"/>
 			          <col width="100px"/>
@@ -42,14 +49,16 @@
 		</div>
 		
 	    <script th:inline="javascript">
+    	var firstProjectId = /*[[${firstProjectId}]]*/ 0;
     	var projectTypes = /*[[${projectTypes}]]*/ [];
     	var columns = [
     		{field: "index", title: "#", },
-    		{field: "projectName", title: /*[[#{project.project-name}]]*/"", },
-    		{field: "projectTypeName", title: /*[[#{project.project-type}]]*/"", },
-    		{field: "statusName", title: /*[[#{project.project-status}]]*/"", },
-    		{field: "startDate", title: /*[[#{project.project-startdate}]]*/"", },
-    		{field: "deadline", title: /*[[#{project.project-deadline}]]*/"", },
+    		{field: "name", title: /*[[#{workflow.workflow-name}]]*/"", },
+    		{field: "typeName", title: /*[[#{workflow.workflow-type}]]*/"", },
+    		{field: "responsibleName", title: /*[[#{workflow.responsible}]]*/"", },
+    		{field: "statusName", title: /*[[#{workflow.workflow-status}]]*/"", },
+    		{field: "startDate", title: /*[[#{workflow.workflow-startdate}]]*/"", },
+    		{field: "deadline", title: /*[[#{workflow.workflow-deadline}]]*/"", },
     		{field: "action", title: "", },
     		];
 	    </script>
