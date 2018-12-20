@@ -15,97 +15,59 @@ import com.futurebim.gui.model.ui.MenuItem;
 @Controller
 @RequestMapping(path = "/workflow")
 public class WorkflowController extends UiControllerBase {
-
+  
   @Autowired
   private PageMenuLoader pageMenuLoader;
-
-  @RequestMapping(path = "/")
-  public String index(final Model model){
-    model.addAttribute("breadCrumb" , new ArrayList<>());
-
-    model.addAttribute("msg" , "Workflow Index Page");
-
-    return "index";
+  
+  @RequestMapping(value = { "", "/", "/index" })
+  public String index(final Model model) {
+    model.addAttribute("breadCrumb", new ArrayList<>());
+    
+    model.addAttribute("msg", "Workflow Index Page");
+    
+    return "workflow/index";
   }
 
-  @RequestMapping(path = "/balance")
-  public String balance(final Model model){
-    model.addAttribute("breadCrumb" , new ArrayList<>());
+  @RequestMapping(path = "/create")
+  public String createProject(final Model model) {
+    model.addAttribute("breadCrumb", new ArrayList<>());
 
-    model.addAttribute("msg" , "Workflow Balance Page");
-
-    return "index";
+    return "workflow/create";
   }
-
-  @RequestMapping(path = "/alarm")
-  public String alarm(final Model model){
-    model.addAttribute("breadCrumb" , new ArrayList<>());
-
-    model.addAttribute("msg" , "Workflow Alarm Page");
-
-    return "index";
-  }
-
-  @RequestMapping(path = "/settings")
-  public String settings(final Model model){
-    model.addAttribute("breadCrumb" , new ArrayList<>());
-
-    model.addAttribute("msg" , "Workflow Konfiguration Page");
-
-    return "index";
-  }
-
-  @RequestMapping(path = "/code")
-  public String code(final Model model){
-    model.addAttribute("breadCrumb" , new ArrayList<>());
-
-    model.addAttribute("msg" , "Workflow Entwicklung Page");
-
-    return "index";
-  }
-
-  @RequestMapping(path = "/questions")
-  public String questions(final Model model){
-    model.addAttribute("breadCrumb" , new ArrayList<>());
-
-    model.addAttribute("msg" , "Workflow Fragen Page");
-
-    return "index";
-  }
-
-  @RequestMapping(path = "/moves")
-  public String moves(final Model model){
-    model.addAttribute("breadCrumb" , new ArrayList<>());
-
-    model.addAttribute("msg" , "Workflow Bewegungen Page");
-
-    return "index";
-  }
-
+  
   @Override
   protected List<MenuItem> getTopToolbar() {
-
+    
     return pageMenuLoader.getTopMenus("menu.workflow");
   }
-
+  
   @Override
   protected List<MenuItem> getLeftToolbar() {
+    
+    final List<MenuItem> menus = new ArrayList<>();
 
-    return pageMenuLoader.getLeftMenus("/workflow", getActiveLeftToolbarId());
+    MenuItem m = new MenuItem("menu.index", messagesHelper.get("workflow.workflow-list"), "list", "/workflow");
+
+    m.setActive(false);
+    if (getCurrentRelatedUrl().equals("/workflow") || getCurrentRelatedUrl().equals("/workflow/") || getCurrentRelatedUrl().equals("/workflow/index")) {
+      m.setActive(true);
+    }
+    menus.add(m);
+
+    m = new MenuItem("menu.create", messagesHelper.get("workflow.workflow-create"), "playlist_add", "/workflow/create");
+
+    m.setActive(false);
+    if (getCurrentRelatedUrl().equals(m.getUrl())) {
+      m.setActive(true);
+    }
+    menus.add(m);
+
+    return menus;
   }
-
+  
   @Override
   protected String getActiveLeftToolbarId() {
-    switch(getCurrentRelatedUrl())
-    {
-    case "/workflow/balance": return "menu.balance";
-    case "/workflow/alarm": return "menu.alarm";
-    case "/workflow/settings": return "menu.settings";
-    case "/workflow/code": return "menu.code";
-    case "/workflow/questions": return "menu.questions";
-    case "/workflow/moves": return "menu.moves";
-    }
-
+    
     return "";
   }
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" ng-app="fbimApp" >
+    <head>
+    
+    	<th:block th:include="layout/mainLayout :: pageheader" />
+    	
+    	<link rel="stylesheet" th:href="@{/css/projects.css}">
+		<script th:src="@{/js/projects-edit.js}"></script>
+    </head>
+    <body ng-controller="BodyController">
+        <header th:replace="layout/mainLayout :: header" ></header>
+        <div th:replace="layout/mainLayout :: breadcrumb" ></div>
+		
+		<div class="page-content" ng-controller="ProjectController">
+			<div class="page-title"> 
+				<span th:text="#{project.projects-create}" class="title-content"></span> 
+				<a class="toolbar-item" ng-disabled="!validate()" ng-class="{'disabled': !validate()}" ng-click="save()"><i class="material-icons">done</i></a>
+				<a class="toolbar-item" href="/projects"><i class="material-icons">cancel</i></a>
+			</div>
+			
+		    <div class="panel panel-default project-detail-pannel">
+		    	<div class="panel-heading"><h4>[[#{project.projects-detail}]]</h4></div>
+		    	<div class="panel-body">
+				    <form class="form-horizontal" id="userform" name="userform" method="post" enctype="application/json" target="_blank">
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{project.project-name}]]</label>
+					      <input type="text" ng-class="{'invalid': !validations.projectName}" required="required" ng-model="project.projectName" ng-change="validate()" class="form-control fullline" th:title="#{company.companyname}" data-toggle="tooltip">
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{project.project-type}]]</label>
+					      <select class="form-control fullline" ng-class="{'invalid': !validations.projectType}" required="required" ng-model="project.projectType" ng-change="validate()">
+					      	<option value="0"></option>
+					      	<option th:each="type : ${projectTypes}" th:value="${type.getType()}" th:text="${type.getName()}"></option>
+					      </select>
+					      
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{project.project-status}]]</label>
+					      <select class="form-control fullline" ng-class="{'invalid': !validations.status}" required="required" ng-model="project.status" ng-change="validate()">
+					      	<option value="0"></option>
+					      	<option th:each="status : ${projectStatusList}" th:value="${status.getStatus()}" th:text="${status.getName()}"></option>
+					      </select>
+					      
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{project.project-startdate}]]</label>
+					      <md-datepicker ng-model="startdate" ng-class="{'invalid': !validations.startDate}" required="required" class="fullline" ng-change="validate()" th:title="#{project.project-startdate}" data-toggle="tooltip"></md-datepicker>
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{project.project-deadline}]]</label>
+					      <md-datepicker ng-model="deadline" md-min-date="startdate" ng-class="{'invalid': !validations.deadline}" class="fullline" ng-change="validate()" th:title="#{project.project-deadline}" data-toggle="tooltip"></md-datepicker>
+					    </div>					    					    
+						<input type="hidden" th:value="${projectId}" id="hdnpid" />					
+				    </form>
+				</div>
+				
+				<div style="margin-top: 50px; border: 1px solid gray; padding: 10px;">{{test}}</div>
+			
+			</div>			
+			
+			
+		</div>
+		
+        <footer th:replace="layout/mainLayout :: footer" ></footer>
+    </body>
+</html>

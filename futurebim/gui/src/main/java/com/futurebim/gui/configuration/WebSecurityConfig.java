@@ -28,14 +28,15 @@ import com.futurebim.gui.authentication.provider.CustomAuthenticationProvider;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   
-  public static String USERNAME_FIELD_NAME  = "username";
-  public static String PASSWORD_FIELD_NAME  = "password";
-  public static String COMPANYID_FIELD_NAME = "companyid";
-  public static String LOGIN_URL            = "/auth/login";
-  public static String INITUSER_URL         = "/activation/user";
-  public static String INITCOMPANY_URL      = "/activation/company";
-  public static String ROOT_URL             = "/";
-  
+  public static final String USERNAME_FIELD_NAME         = "username";
+  public static final String PASSWORD_FIELD_NAME         = "password";
+  public static final String COMPANYID_FIELD_NAME        = "companyid";
+  public static final String LOGIN_URL                   = "/auth/login";
+  public static final String INITUSER_URL                = "/activation/user";
+  public static final String INITCOMPANY_URL             = "/activation/company";
+  public static final String ROOT_URL                    = "/";
+  public static final String COMPANYINDICATOR_COOKIE_KEY = "comp_ind";
+
   @Autowired
   private UiAuthenticationSuccessHandler uiAuthenticationSuccessHandler;
   
@@ -55,37 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       http.authorizeRequests().antMatchers("/**").permitAll();
     }
     else {
-      http
-          .authorizeRequests()
-          .antMatchers("/images/*")
-          .permitAll()
-          .antMatchers("/js/*")
-          .permitAll()
-          .antMatchers("/css/*")
-          .permitAll()
-          .antMatchers("/angular/*")
-          .permitAll()
-          .antMatchers("/fonts/*")
-          .permitAll()
-          .antMatchers(LOGIN_URL)
-          .permitAll()
-          .antMatchers("/mdm/common/admin/health")
-          .permitAll()
-          .antMatchers("/customers/data/save")
-          .hasAnyRole("ADMIN", "DATASTEWARD")
-          .antMatchers("/customers/*")
-          .hasAnyRole("ADMIN", "VIEW", "USER", "DATASTEWARD")
-          .antMatchers("/user/*")
-          .hasAnyRole("ADMIN", "VIEW", "USER", "DATASTEWARD")
-          .antMatchers("/ds/*")
-          .hasAnyRole("ADMIN", "DATASTEWARD")
-          .antMatchers("/settings/*")
-          .hasAnyRole("ADMIN")
-          .antMatchers("/admin/*")
-          .hasAnyRole("ADMIN")
-          .antMatchers("/**")
-          .authenticated()
-          .and()
+      http.authorizeRequests().antMatchers("/images/*").permitAll().antMatchers("/js/*").permitAll().antMatchers("/css/*").permitAll().antMatchers("/angular/*").permitAll().antMatchers("/fonts/*").permitAll().antMatchers(LOGIN_URL).permitAll().antMatchers("/mdm/common/admin/health").permitAll().antMatchers("/customers/data/save").hasAnyRole("ADMIN", "DATASTEWARD").antMatchers("/customers/*").hasAnyRole("ADMIN", "VIEW", "USER", "DATASTEWARD").antMatchers("/user/*").hasAnyRole("ADMIN", "VIEW", "USER", "DATASTEWARD").antMatchers("/ds/*").hasAnyRole("ADMIN", "DATASTEWARD").antMatchers("/settings/*").hasAnyRole("ADMIN").antMatchers("/admin/*").hasAnyRole("ADMIN").antMatchers("/**").authenticated().and()
       // .addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
       ;
       
@@ -95,22 +66,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     http.csrf().disable();
     
-    http
-        .formLogin()
-        .authenticationDetailsSource(authenticationDetailsSource())
-        .loginPage(LOGIN_URL)
-        .permitAll()
-        .defaultSuccessUrl("/")
-        .usernameParameter(USERNAME_FIELD_NAME)
-        .passwordParameter(PASSWORD_FIELD_NAME)
-        .successHandler(uiAuthenticationSuccessHandler)
-        .failureHandler(authenticationFailureHandler)
-        .permitAll();
+    http.formLogin().authenticationDetailsSource(authenticationDetailsSource()).loginPage(LOGIN_URL).permitAll().defaultSuccessUrl("/").usernameParameter(USERNAME_FIELD_NAME).passwordParameter(PASSWORD_FIELD_NAME).successHandler(uiAuthenticationSuccessHandler).failureHandler(authenticationFailureHandler).permitAll();
     
-    http
-        .logout()
-        .logoutUrl("/logout")
-        .logoutSuccessUrl("/");
+    http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
     
   }
 

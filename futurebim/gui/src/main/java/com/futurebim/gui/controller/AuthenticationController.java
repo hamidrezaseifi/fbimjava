@@ -26,43 +26,43 @@ import com.futurebim.gui.helper.MessagesHelper;
 @Controller
 @RequestMapping(path = "/auth")
 public class AuthenticationController {
-  
+
   @Autowired
   private MessagesHelper messages;
-  
+
   @GetMapping("/login")
-  public String showLogin(@CookieValue(value = "comp_ind", defaultValue = "") final String companyIndicator, final Model model, final HttpServletRequest request) throws ServletException, UnsupportedEncodingException {
-    
+  public String showLogin(@CookieValue(value = WebSecurityConfig.COMPANYINDICATOR_COOKIE_KEY, defaultValue = "") final String companyIndicator, final Model model, final HttpServletRequest request) throws ServletException, UnsupportedEncodingException {
+
     String       message  = "";
     String       username = "";
     String       company  = companyIndicator;
     final String password = "";
-    
+
     if (request.getParameter("error") != null) {
-      
+
       final Map<String, String> params = UiAuthenticationErrorUrlCreator.decodeErrorUrl(request.getParameter("error"));
-      
+
       if (params.get("err").equals("auth")) {
         message = messages.get("common.invalidlogin");
       }
       if (params.get("err").equals("access")) {
         message = messages.get("common.noaccesssite");
       }
-      
+
       username = params.get("u");
       company = params.get("c");
       // no password in error url // password = params.get("u");
-      
+
     }
-    
+
     model.addAttribute("username", username);
     model.addAttribute("password", password);
     model.addAttribute("companyid", company);
-    
+
     model.addAttribute("logginMessage", message);
     model.addAttribute("rooturl", WebSecurityConfig.ROOT_URL);
-    
+
     return "auth/login";
   }
-  
+
 }
