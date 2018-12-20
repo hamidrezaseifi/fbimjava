@@ -86,7 +86,12 @@ public class TaskHandler implements ITaskHandler {
   }
 
   private GuiTask prepareTask(final GuiTask task) {
-    return task.setAssignedToUser(userHandler.getById(task.getAssignedTo())).setReporterUser(userHandler.getById(task.getReporter()));
+    return task.setAssignedToUser(userHandler.getById(task.getAssignedTo())).setReporterUser(userHandler.getById(task.getReporter())).setStatusName(getTaskStatusName(task.getStatus()));
+  }
+
+  @Override
+  public String getTaskStatusName(final int accessType) {
+    return messagesHelper.get("task.statustitle" + accessType);
   }
   
 }

@@ -101,7 +101,7 @@
 		    <div class="panel panel-default project-detail-pannel">
 		    	<div class="panel-heading">
 		    		<span>[[#{project.project-tasks}]]</span>
-					<i class="material-icons list-icon" ng-click="">playlist_add</i>
+					<i class="material-icons list-icon" ng-click="toggleTaskEdit('new')">playlist_add</i>
 				</div>
 		    	<div class="panel-body">
 					<div loading-container="tableTasks.settings().$loading">
@@ -139,8 +139,8 @@
 								<td>{{rowIndex + 1}}</td>
 								<td ng-repeat="col in tasksColumns" ng-bind-html="col.renderValue(this, row, rowIndex + 1)"></td>
 								<td>
-									<a class="toolbar-item user-toolbar-item-edit" ng-click="toggleTaskEdit(true, row)"><i class="material-icons">edit</i></a>
-									<a class="toolbar-item user-toolbar-item-delete" ng-click="deleteProjectTask(row.id)"><i class="material-icons">delete</i></a>
+									<a class="toolbar-item user-toolbar-item-edit" ng-click="toggleTaskEdit('edit', row)"><i class="material-icons">edit</i></a>
+									<a class="toolbar-item user-toolbar-item-delete" ng-click="deleteProjectTask(row)"><i class="material-icons">delete</i></a>
 								
 								</td>
 							</tr>	
@@ -154,13 +154,13 @@
 			<div style="margin-top: 50px; border: 1px solid gray; padding: 10px;">{{test}}</div>
 			
 			<div class="full-modal-background" ng-hide="!showUserSelect">
-				<div class="user-select-container">
-					<div class="toolbar">
+				<div class="dialog-container user-select-container" layout="column">
+					<div class="dialog-container-toolbar">
 						<span class="title">[[#{project.adduser}]]</span>
 						<i class="material-icons list-icon" ng-click="toggleUserSelect(false)">close</i>
 						<i class="material-icons list-icon" ng-click="toggleUserSelect(false)">add</i>
 					</div>
-					<div class="user-select list-group">
+					<div class="user-select list-group" flex>
 						<a class="list-group-item" ng-repeat="user in notInProjectUsers()" ng-click="addUser(user.id)">{{user.fullname}}</a>
 						
 					</div>		
@@ -168,22 +168,44 @@
 			</div>
 			
 			<div class="full-modal-background" ng-hide="!showUserEdit">
-				<div class="user-edit-container">
-					<div class="toolbar">
+				<div class="dialog-container user-edit-container" layout="column">
+					<div class="dialog-container-toolbar">
 						<span class="title">[[#{project.edituser}]]</span>
 						<i th:tile="#{common.close}" class="material-icons list-icon" ng-click="toggleUserEdit(false)">close</i>
 					</div>
-					<div class="user-edit">
+					<div class="dialog-content-container" flex>
 						<div><label th:text="#{user.fullname}"></label> <span>{{editingProjectUser.fullname}}</span></div>
 						<div><label th:text="#{project.role}"></label> <select class="form-control fullline" ng-model="editingProjectUser.roleId"><option ng-repeat="item in projectRoles" value="{{item.id}}">{{item.name}}</option></select></div>
 						<div><label th:text="#{project.accesstype}"></label> <select class="form-control fullline" ng-model="editingProjectUser.accessType"><option ng-repeat="item in accessTypes" value="{{item.id}}">{{item.name}}</option></select></div>
-						<div>
-							<button class="md-raised md-button md-ink-ripple" ng-click="toggleUserEdit(false)"><span th:text="#{common.close}">Cancel</span> <i class="material-icons list-icon" ng-click="">clear</i></button>
-							<button class="md-raised md-primary md-button md-ink-ripple" ng-click="editProjectUser()"><span th:text="#{common.save}">Applay</span> <i class="material-icons list-icon" ng-click="">done</i></button>
-						</div>
 					</div>		
+					<div class="dialog-button-container">
+						<button class="md-raised md-button md-ink-ripple" ng-click="toggleUserEdit(false)"><span th:text="#{common.close}">Cancel</span> <i class="material-icons list-icon" ng-click="">clear</i></button>
+						<button class="md-raised md-primary md-button md-ink-ripple" ng-click="editProjectUser()"><span th:text="#{common.save}">Applay</span> <i class="material-icons list-icon" ng-click="">done</i></button>
+					</div>
 				</div>
 			</div>
+			
+			<div class="full-modal-background" ng-hide="showTaskEdit == 'hide'">
+				<div class="dialog-container task-edit-container" layout="column">
+					<div class="dialog-container-toolbar">
+						<span class="title">[[#{task.taskdetail}]]</span>
+						<i th:tile="#{common.close}" class="material-icons list-icon" ng-click="toggleTaskEdit('hide')">close</i>
+					</div>
+					<div class="dialog-content-container" flex>
+						<div><label th:text="#{task.name}"></label> <span><input class="form-control fullline" ng-model="editingProjectTask.name" /></span></div>
+						<div><label th:text="#{task.startdate}"></label> <md-datepicker ng-model="editingProjectTask.startDate" required="required" class="fullline" ng-change="validate()" th:title="#{task.startdate}" data-toggle="tooltip"></md-datepicker></div>
+						<div><label th:text="#{task.deadline}"></label> <md-datepicker ng-model="editingProjectTask.deadline" md-min-date="editingProjectTask.startDate" required="required" class="fullline" ng-change="validate()" th:title="#{task.deadline}" data-toggle="tooltip"></md-datepicker></div>
+						<div><label th:text="#{task.assignedto}"></label> <select class="form-control fullline" ng-model="editingProjectTask.assignedTo"><option value="0"></option><option ng-repeat="item in project.users" value="{{item.userId}}">{{item.fullname}}</option></select></div>
+						<div><label th:text="#{task.status}"></label> <select class="form-control fullline" ng-model="editingProjectTask.status"><option ng-repeat="item in taskStatusList" value="{{item.id}}">{{item.name}}</option></select></div>
+						<div><label th:text="#{task.comments}"></label> <span><textarea class="form-control fullline" ng-model="editingProjectTask.comments" ></textarea></span></div>
+					</div>		
+					<div class="dialog-button-container">
+						<button class="md-raised md-button md-ink-ripple" ng-click="toggleTaskEdit('hide')"><span th:text="#{common.close}">Cancel</span> <i class="material-icons list-icon" ng-click="">clear</i></button>
+						<button class="md-raised md-primary md-button md-ink-ripple" ng-disabled="!isTaskValid()" ng-click="editProjectTask()"><span th:text="#{common.save}">Applay</span> <i class="material-icons list-icon" ng-click="">done</i></button>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 		
 	    <script th:inline="javascript">
@@ -199,11 +221,12 @@
 	    		{field: "assignedName", title: /*[[#{task.assignedto}]]*/"", sortable: "assignedName", direction: "asc"},    		
 	    		{field: "startDate", title: /*[[#{task.startdate}]]*/"", sortable: "startDate", direction: "asc"},    		
 	    		{field: "deadline", title: /*[[#{task.deadline}]]*/"", sortable: "deadline", direction: "asc"},    		
-	    		{field: "status", title: /*[[#{task.status}]]*/"", sortable: "status", direction: "asc"},    		
+	    		{field: "statusName", title: /*[[#{task.status}]]*/"", sortable: "statusName", direction: "asc"},    		
 	    		];
     	
 	    	var projectRoles = /*[[${projectRoles}]]*/ [];
 	    	var accessTypes = /*[[${accessTypes}]]*/ [];
+	    	var taskStatusList = /*[[${taskStatusList}]]*/ [];
 
     	</script>
 		

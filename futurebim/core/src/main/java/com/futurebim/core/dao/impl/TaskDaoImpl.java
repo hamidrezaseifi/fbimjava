@@ -46,7 +46,7 @@ public class TaskDaoImpl implements TaskDao {
 
     try {
 
-      final String sql = "INSERT INTO tasks (project_id, name, comments, reporter, assigned_to, start_date, deatline, status, version)"
+      final String sql = "INSERT INTO tasks (project_id, name, comments, reporter, assigned_to, start_date, deadline, status, version)"
           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
       this.jdbcTemplate.update(con -> {
@@ -138,7 +138,7 @@ public class TaskDaoImpl implements TaskDao {
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
     try {
 
-      final String sql = "UPDATE projects SET project_id = ?, name = ?, comments = ?, reporter = ?," +
+      final String sql = "UPDATE tasks SET project_id = ?, name = ?, comments = ?, reporter = ?," +
           " assigned_to = ?, start_date = ?, deadline = ?, status = ?, version = ? WHERE id = ?";
 
       final int changedRows = jdbcTemplate.update(con -> {

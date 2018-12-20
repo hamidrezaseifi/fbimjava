@@ -35,7 +35,7 @@
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2">[[#{user.birthdate}]]</label>
-				      <input type="date" ng-class="{'invalid' : !dataValidation['birthdate']}" ng-change="validate()" required class="form-control" ng-model="savedata.user.birthdateDate" th:placeholder="#{user.birthdateplaceholder}">
+				      <md-datepicker ng-model="savedata.user.birthdateDate" ng-class="{'invalid' : !dataValidation['birthdate']}" required="required" class="form-control" ng-change="validate()" th:title="#{user.birthdateplaceholder}" data-toggle="tooltip"></md-datepicker>
 				    </div>
 				    
 				    <div class="panel panel-default security-panel">

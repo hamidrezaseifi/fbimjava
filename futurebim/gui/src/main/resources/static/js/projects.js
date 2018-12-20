@@ -53,11 +53,8 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 		var list = [];
 		
-		for(var i=0; i< 30; i++){
-			for(index in dataList){
-				list.push(angular.copy(dataList[index]));
-			}
-			//list = list.concat(dataList);
+		for(index in dataList){
+			list.push(angular.copy(dataList[index]));
 		}
 		
 		return list;

@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.futurebim.common.model.enums.EProjectAccessType;
+import com.futurebim.common.model.enums.ETaskStatus;
 import com.futurebim.gui.anotations.FbGuiRequestGetDataMapping;
 import com.futurebim.gui.anotations.FbGuiRequestPostDataMapping;
 import com.futurebim.gui.bl.IProjectsHandler;
+import com.futurebim.gui.bl.ITaskHandler;
 import com.futurebim.gui.bl.IUserHandler;
 import com.futurebim.gui.bl.IValueHandler;
 import com.futurebim.gui.controller.base.UiControllerBase;
@@ -24,6 +26,7 @@ import com.futurebim.gui.helper.PageMenuLoader;
 import com.futurebim.gui.model.futurebim.GuiProject;
 import com.futurebim.gui.model.futurebim.GuiProjectRole;
 import com.futurebim.gui.model.futurebim.GuiProjectUser;
+import com.futurebim.gui.model.futurebim.GuiTask;
 import com.futurebim.gui.model.futurebim.GuiUserFull;
 import com.futurebim.gui.model.ui.MenuItem;
 
@@ -36,6 +39,9 @@ public class ProjectsController extends UiControllerBase {
 
   @Autowired
   private IProjectsHandler projectsHandler;
+
+  @Autowired
+  private ITaskHandler taskHandler;
 
   @Autowired
   private IUserHandler userHandler;
@@ -76,10 +82,16 @@ public class ProjectsController extends UiControllerBase {
       accessTypes.add(new FbIdNamePair(aType.getDbValue(), projectsHandler.getProjectAccessTypeName(aType.getDbValue())));
     }
     
+    final List<FbIdNamePair> taskStatusList = new ArrayList<>();
+    for (final ETaskStatus status : ETaskStatus.values()) {
+      taskStatusList.add(new FbIdNamePair(status.getDbValue(), taskHandler.getTaskStatusName(status.getDbValue())));
+    }
+    
     model.addAttribute("projectId", projectid);
     model.addAttribute("projectTypes", valueHandler.listProjectTypes());
     model.addAttribute("projectRoles", this.getSessionUserInfo().getProjectRoles());
     model.addAttribute("accessTypes", accessTypes);
+    model.addAttribute("taskStatusList", taskStatusList);
     model.addAttribute("company", this.getCurrentCompany());
     
     return "projects/view";
@@ -138,7 +150,7 @@ public class ProjectsController extends UiControllerBase {
     return projectsHandler.getById(projectid);
   }
   
-  @FbGuiRequestGetDataMapping(value = "/data/adduser/{projectid}/{userid}")
+  @FbGuiRequestGetDataMapping(value = "/data/user/add/{projectid}/{userid}")
   public GuiProjectUser addProjectUser(@PathVariable(name = "projectid") final long projectid, @PathVariable(name = "userid") final long userid) {
 
     final GuiProjectUser pUser = new GuiProjectUser();
@@ -150,13 +162,13 @@ public class ProjectsController extends UiControllerBase {
     return projectsHandler.saveProjectUser(pUser);
   }
   
-  @FbGuiRequestPostDataMapping(value = "/data/edituser")
+  @FbGuiRequestPostDataMapping(value = "/data/user/update")
   public GuiProjectUser editProjectUser(@RequestBody final GuiProjectUser pUser) {
 
     return projectsHandler.saveProjectUser(pUser);
   }
   
-  @FbGuiRequestGetDataMapping(value = "/data/deluser/{projectid}/{userid}")
+  @FbGuiRequestGetDataMapping(value = "/data/user/delete/{projectid}/{userid}")
   public boolean deleteProjectUser(@PathVariable(name = "projectid") final long projectid, @PathVariable(name = "userid") final long userid) {
 
     final GuiProjectUser pUser = new GuiProjectUser();
@@ -190,6 +202,27 @@ public class ProjectsController extends UiControllerBase {
   public List<GuiUserFull> readTaskList() {
 
     return userHandler.listCompanyUsers(this.getCurrentCompany().getId());
+  }
+
+  @FbGuiRequestPostDataMapping(value = "/data/task/add")
+  public GuiTask addProjectTask(@RequestBody final GuiTask task) {
+
+    task.setStatus(1);
+    task.setReporter(this.getCurrentUser().getId());
+
+    return taskHandler.save(task);
+  }
+  
+  @FbGuiRequestPostDataMapping(value = "/data/task/update")
+  public GuiTask editProjectTask(@RequestBody final GuiTask task) {
+
+    return taskHandler.save(task);
+  }
+  
+  @FbGuiRequestPostDataMapping(value = "/data/task/delete")
+  public boolean deleteProjectTask(@RequestBody final GuiTask task) {
+    
+    return taskHandler.delete(task);
   }
 
   @Override

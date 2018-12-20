@@ -6,7 +6,7 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	$scope.projectId = $("#hdnpid").val();
 	$scope.usersColumns = usersColumns;
 	$scope.tableUsers = false;
-	$scope.users = false;
+	$scope.allUsers = false;
 	$scope.showUserSelect = false;
 	$scope.showUserEdit = false;
 	$scope.editingProjectUser = false;
@@ -14,8 +14,11 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	$scope.accessTypes = false;
 	$scope.projectRoles = projectRoles;
 	$scope.accessTypes = accessTypes;
+	$scope.taskStatusList = taskStatusList;
 	$scope.tasksColumns = tasksColumns;
 	$scope.tableTasks = false;
+	$scope.editingProjectTask = false;
+	$scope.showTaskEdit = "hide";
 	
 	for(o in $scope.usersColumns){
 		$scope.usersColumns[o].show = true;
@@ -63,11 +66,41 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 		projectUser = projectUser !== undefined ? projectUser : false;
 		
-		$scope.editingProjectUser = projectUser;
+		$scope.editingProjectUser = angular.copy(projectUser);
 		
 		if(projectUser){
 			$scope.editingProjectUser.roleId = $scope.editingProjectUser.roleId + "";
 			$scope.editingProjectUser.accessType = $scope.editingProjectUser.accessType + "";			
+		}
+		
+	}
+
+	$scope.toggleTaskEdit = function(showSelect, task){
+		$scope.showTaskEdit = showSelect;
+		
+		task = task !== undefined ? task : false;
+		
+		$scope.editingProjectTask = angular.copy(task);
+		
+		if(task){
+			$scope.editingProjectTask.status = $scope.editingProjectTask.status + "";
+			$scope.editingProjectTask.assignedTo = $scope.editingProjectTask.assignedTo + "";
+			$scope.editingProjectTask.startDate = new Date($scope.editingProjectTask.startDate);			
+			$scope.editingProjectTask.deadline = moment($scope.editingProjectTask.deadline).isValid() ? new Date($scope.editingProjectTask.deadline) : null;			
+		}
+		else{
+			$scope.editingProjectTask = {
+					id: 0, 
+					projectId: $scope.projectId, 
+					name: "", 
+					comments: "", 
+					startDate: new Date(), 
+					deadline: null, 
+					version: 1, 
+					status: "1", 
+					reporter: 0, 
+					assignedTo: 0, 
+				};
 		}
 		
 	}
@@ -110,8 +143,8 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 			timeout: 10000				
 		}).then(function(response){
 		  
-			$scope.users = response.data;
-			$scope.test = new Date() + " : " + JSON.stringify($scope.users);
+			$scope.allUsers = response.data;
+			$scope.test = new Date() + " : " + JSON.stringify($scope.allUsers);
 
 		}, function errorCallback(response){ 
 			$scope.$parent.showloading = false;		
@@ -124,7 +157,7 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 		$http({
 			method: "GET",
-			url: "/projects/data/adduser/" + $scope.projectId + "/" + id, 
+			url: "/projects/data/user/add/" + $scope.projectId + "/" + id, 
 			timeout: 10000				
 		}).then(function(response){
 		  
@@ -143,7 +176,7 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 		$http({
 			method: "GET",
-			url: "/projects/data/deluser/" + $scope.projectId + "/" + id, 
+			url: "/projects/data/user/delete/" + $scope.projectId + "/" + id, 
 			timeout: 10000				
 		}).then(function(response){
 		  			
@@ -162,15 +195,15 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		}
 		
 		var editUser = {
-				projectId: $scope.editingProjectUser.projectId, 
-				userId: $scope.editingProjectUser.userId, 
-				roleId: $scope.editingProjectUser.roleId, 
-				accessType: $scope.editingProjectUser.accessType, 
+			projectId: $scope.editingProjectUser.projectId, 
+			userId: $scope.editingProjectUser.userId, 
+			roleId: $scope.editingProjectUser.roleId, 
+			accessType: $scope.editingProjectUser.accessType, 
 		};
 		
 		$http({
 			method: "POST",
-			url: "/projects/data/edituser/", 
+			url: "/projects/data/user/update", 
 			timeout: 10000,
 			data: editUser,
 			headers: {
@@ -200,13 +233,157 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	}
 	
 	$scope.notInProjectUsers = function(){
-		return $scope.users ? $scope.users.filter(function(u) { return !isUserIdInProject(u.id); }) : [];
+		return $scope.allUsers ? $scope.allUsers.filter(function(u) { return !isUserIdInProject(u.id); }) : [];
 	}
 	
 	function isUserIdInProject(id){
 		return $scope.project && $scope.project.users ? $scope.project.users.filter(function(u) { return u.userId === id; }).length > 0 : false;
 	}
 
+	$scope.addProjectTask = function(){
+		if(!$scope.editingProjectTask){
+			return;
+		}
+		
+		var editTask = {
+			id: 0, 
+			projectid: $scope.projectId, 
+			name: $scope.editingProjectTask.name, 
+			comments: $scope.editingProjectTask.comments, 
+			startDate: moment($scope.editingProjectTask.startDate).format("YYYY-MM-DD"), 
+			deadline: $scope.editingProjectTask.deadline !== null ? moment($scope.editingProjectTask.deadline).format("YYYY-MM-DD") : "", 
+			status: $scope.editingProjectTask.status, 
+			reporter: 0, 
+			assignedTo: $scope.editingProjectTask.assignedTo, 
+		};
+		
+		$http({
+			method: "POST",
+			url: "/projects/data/task/add", 
+			timeout: 10000,
+			data: editTask,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(function(response){
+		  
+			$scope.toggleTaskEdit('hide');
+			
+			$scope.loadProject();
+
+		}, function errorCallback(response){ 
+			$scope.$parent.showloading = false;		
+			
+		});		
+		
+	}	
+
+	$scope.editProjectTask = function(){
+		if(!$scope.editingProjectTask){
+			return;
+		}
+		
+		if($scope.showTaskEdit === "new"){
+			$scope.addProjectTask();
+			return;
+		}
+		
+		var editTask = {
+			id: $scope.editingProjectTask.id, 
+			projectid: $scope.projectId, 
+			name: $scope.editingProjectTask.name, 
+			comments: $scope.editingProjectTask.comments, 
+			startDate: moment($scope.editingProjectTask.startDate).format("YYYY-MM-DD"), 
+			deadline: $scope.editingProjectTask.deadline !== null ? moment($scope.editingProjectTask.deadline).format("YYYY-MM-DD") : "", 
+			status: $scope.editingProjectTask.status, 
+			reporter: $scope.editingProjectTask.reporter, 
+			assignedTo: $scope.editingProjectTask.assignedTo, 
+			version: $scope.editingProjectTask.version, 
+		};
+		
+		$http({
+			method: "POST",
+			url: "/projects/data/task/update", 
+			timeout: 10000,
+			data: editTask,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(function(response){
+		  
+			$scope.toggleTaskEdit('hide');
+			
+			$scope.loadProject();
+
+		}, function errorCallback(response){ 
+			$scope.$parent.showloading = false;		
+			
+		});		
+		
+	}	
+
+	$scope.deleteProjectTask = function(task){
+		if(!task){
+			return;
+		}
+		
+		var editTask = {
+			id: task.id, 
+			projectid: task.projectid, 
+			name: task.name, 
+			comments: task.comments, 
+			startDate: moment(task.startDate).format("YYYY-MM-DD"), 
+			deadline: task.deadline !== null ? moment(task.deadline).format("YYYY-MM-DD") : "", 
+			status: task.status, 
+			reporter: task.reporter, 
+			assignedTo: task.assignedTo, 
+			version: task.version, 
+		};
+		
+		$http({
+			method: "POST",
+			url: "/projects/data/task/delete", 
+			timeout: 10000,
+			data: editTask,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(function(response){
+			
+			$scope.loadProject();
+
+		}, function errorCallback(response){ 
+			$scope.$parent.showloading = false;		
+			
+		});		
+		
+	}	
+
+
+	$scope.isTaskValid = function(){
+		
+		var isValid = true;
+		
+		if(!$scope.editingProjectTask){
+			return;
+		}
+		
+		if($scope.editingProjectTask.name == undefined || $scope.editingProjectTask.name.length < 3){
+			isValid = false;
+		}
+		
+		if($scope.editingProjectTask.startDate == undefined || $scope.editingProjectTask.startDate == null){
+			isValid = false;
+		}
+		
+		if($scope.editingProjectTask.deadline == undefined || $scope.editingProjectTask.deadline == null){
+			isValid = false;
+		}
+			
+		return isValid;
+	}	
+
+	
 	function createUsersTable(){
 
 		var initialParams = {
