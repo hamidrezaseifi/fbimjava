@@ -8,7 +8,7 @@ public class FbRestPaths {
 
 		public static final String PROJECT_BASE = "/project";
 
-		public static final String PROJECT_READ_BASE = "/read/{projectId}";
+		public static final String PROJECT_READ_BASE = "/read/{projectid}";
 		public static final String PROJECT_READ = PROJECT_BASE + PROJECT_READ_BASE;
 
 		public static final String PROJECT_READALLCOMPANY_BASE = "/comapny/readall/{companyid}";
@@ -26,7 +26,7 @@ public class FbRestPaths {
 		public static final String PROJECTROLE_SAVE_BASE = "/role/save";
 		public static final String PROJECTROLE_SAVE = PROJECT_BASE + PROJECTROLE_SAVE_BASE;
 
-		public static final String PROJECTUSER_READALL_BASE = "/user/readall/{projectId}";
+		public static final String PROJECTUSER_READALL_BASE = "/user/readall/{projectid}";
 		public static final String PROJECTUSER_READALL = PROJECT_BASE + PROJECTUSER_READALL_BASE;
 
 		public static final String PROJECTUSER_SAVE_BASE = "/user/save";
@@ -68,13 +68,13 @@ public class FbRestPaths {
 
 		public static final String TASK_BASE = "/task";
 
-		public static final String TASK_PROJECT_READALL_BASE = "/project/readall/{projectId}";
+		public static final String TASK_PROJECT_READALL_BASE = "/project/readall/{projectid}";
 		public static final String TASK_PROJECT_READALL = TASK_BASE + TASK_PROJECT_READALL_BASE;
 
-		public static final String TASK_WORKFLOW_READALL_BASE = "/workflow/readall/{workflowId}";
+		public static final String TASK_WORKFLOW_READALL_BASE = "/workflow/readall/{workflowid}";
 		public static final String TASK_WORKFLOW_READALL = TASK_BASE + TASK_WORKFLOW_READALL_BASE;
 
-		public static final String TASK_READ_BASE = "/read/{taskId}";
+		public static final String TASK_READ_BASE = "/read/{taskid}";
 		public static final String TASK_READ = TASK_BASE + TASK_READ_BASE;
 
 		public static final String TASK_SAVE_BASE = "/save";
@@ -85,10 +85,10 @@ public class FbRestPaths {
 
 		public static final String WORKFLOW_BASE = "/workflow";
 
-		public static final String WORKFLOW_READALL_BASE = "/project/readall/{projectId}";
+		public static final String WORKFLOW_READALL_BASE = "/project/readall/{projectid}";
 		public static final String WORKFLOW_READALL = WORKFLOW_BASE + WORKFLOW_READALL_BASE;
 
-		public static final String WORKFLOW_READ_BASE = "/read/{workflowId}";
+		public static final String WORKFLOW_READ_BASE = "/read/{workflowid}";
 		public static final String WORKFLOW_READ = WORKFLOW_BASE + WORKFLOW_READ_BASE;
 
 		public static final String WORKFLOW_SAVE_BASE = "/save";

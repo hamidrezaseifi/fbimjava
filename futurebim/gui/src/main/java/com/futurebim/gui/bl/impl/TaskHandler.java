@@ -57,7 +57,7 @@ public class TaskHandler implements ITaskHandler {
     final ParameterizedTypeReference<FBCollectionEdo<TaskEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<TaskEdo>>() {
     };
 
-    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskReadAll(), EModule.CORE, typeRef, true, projectId);
+    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskProjectReadAll(), EModule.CORE, typeRef, true, projectId);
 
     final List<GuiTask> list = GuiTask.fromEdoList(projectsEdo.getItems());
 

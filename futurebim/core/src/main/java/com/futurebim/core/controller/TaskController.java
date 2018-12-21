@@ -18,37 +18,37 @@ import com.futurebim.core.model.Task;
 @RestController
 @RequestMapping(path = FbRestPaths.Core.TASK_BASE)
 public class TaskController {
-
-  private ITaskHandler taskHandler;
   
+  private ITaskHandler taskHandler;
+
   @Autowired(required = true)
   public void setPersonService(final ITaskHandler taskHandler) {
     this.taskHandler = taskHandler;
   }
-
+  
   @FbCoreRequestGetDataMapping(value = FbRestPaths.Core.TASK_PROJECT_READALL_BASE)
-  public FBCollectionEdo<TaskEdo> readAllByProject(@PathVariable final Long projectId) throws StorageException {
-    return new FBCollectionEdo<>(Task.toEdoList(taskHandler.listTasksByPoject(projectId)));
+  public FBCollectionEdo<TaskEdo> readAllByProject(@PathVariable final Long projectid) throws StorageException {
+    return new FBCollectionEdo<>(Task.toEdoList(taskHandler.listTasksByPoject(projectid)));
   }
-
+  
   @FbCoreRequestGetDataMapping(value = FbRestPaths.Core.TASK_WORKFLOW_READALL_BASE)
-  public FBCollectionEdo<TaskEdo> readAllByWorkflow(@PathVariable final Long workflowId) throws StorageException {
-    return new FBCollectionEdo<>(Task.toEdoList(taskHandler.listTasksByWorkflow(workflowId)));
+  public FBCollectionEdo<TaskEdo> readAllByWorkflow(@PathVariable final Long workflowid) throws StorageException {
+    return new FBCollectionEdo<>(Task.toEdoList(taskHandler.listTasksByWorkflow(workflowid)));
   }
-
+  
   @FbCoreRequestPostDataMapping(value = FbRestPaths.Core.TASK_SAVE_BASE)
   public TaskEdo createProject(@RequestBody(required = true) final TaskEdo taskEdo) throws StorageException {
     return taskHandler.saveTask(Task.fromEdo(taskEdo)).toEdo();
   }
-
+  
   @FbCoreRequestGetDataMapping(value = FbRestPaths.Core.TASK_READ_BASE)
-  public TaskEdo getProject(@PathVariable final Long taskId) throws StorageException {
-    return taskHandler.getById(taskId).toEdo();
+  public TaskEdo getProject(@PathVariable final Long taskid) throws StorageException {
+    return taskHandler.getById(taskid).toEdo();
   }
-
+  
   @FbCoreRequestPostDataMapping(value = FbRestPaths.Core.TASK_DELETE_BASE)
   public boolean deleteProject(@RequestBody final TaskEdo taskEdo) throws StorageException {
     return taskHandler.deleteTask(Task.fromEdo(taskEdo));
   }
-  
+
 }
