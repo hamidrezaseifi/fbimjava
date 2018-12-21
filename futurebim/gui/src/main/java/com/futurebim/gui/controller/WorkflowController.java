@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.futurebim.gui.anotations.FbGuiRequestGetDataMapping;
@@ -66,16 +67,20 @@ public class WorkflowController extends UiControllerBase {
     return "workflow/view";
   }
   
-  @RequestMapping(path = "/update/{projectid}")
-  public String editProject(@PathVariable(name = "projectid") final long projectid, final Model model) {
+  @RequestMapping(path = "/update/{workflowid}")
+  public String editProject(@PathVariable(name = "workflowid") final long workflowid, final Model model) {
 
+    final GuiWorkflow workflow = workflowHandler.getById(workflowid);
+    
     final List<FbIdNamePair> statusList = new ArrayList<>();
     for (int i = 0; i < 4; i++) {
       statusList.add(new FbIdNamePair(i, workflowHandler.getWorkflowStatusName(i)));
     }
+    model.addAttribute("workflow", workflow);
+    model.addAttribute("projectId", workflow.getProjectid());
     model.addAttribute("types", workflowHandler.listTypes());
     model.addAttribute("statusList", statusList);
-    model.addAttribute("projectUsers", projectsHandler.listProjectUsers(projectid));
+    model.addAttribute("projectUsers", projectsHandler.listProjectUsers(workflow.getProjectid()));
     model.addAttribute("allUsers", userHandler.listCompanyUsers(this.getCurrentCompany().getId()));
     
     return "workflow/update";
@@ -99,10 +104,10 @@ public class WorkflowController extends UiControllerBase {
     return workflowHandler.getById(workflowid);
   }
   
-  @FbGuiRequestPostDataMapping(value = "/data/workflow/update")
-  public GuiWorkflow updateWorkflows(@PathVariable(name = "workflowid") final long workflowid) {
+  @FbGuiRequestPostDataMapping(value = "/data/workflow/save")
+  public GuiWorkflow saveWorkflow(@RequestBody final GuiWorkflow workflow) {
     
-    return workflowHandler.getById(workflowid);
+    return workflowHandler.save(workflow);
   }
   
   @FbGuiRequestGetDataMapping(value = "/data/workflow/delete/{workflowid}")
