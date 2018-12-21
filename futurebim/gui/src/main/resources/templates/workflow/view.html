@@ -11,7 +11,7 @@
         <header th:replace="layout/mainLayout :: header" ></header>
         <div th:replace="layout/mainLayout :: breadcrumb" ></div>
 		
-		<div class="page-content" ng-controller="ProjectController">
+		<div class="page-content" ng-controller="WorkflowController">
 			<div class="page-title"> 
 				<span th:text="#{project.projects-detail}" class="title-content"></span> 
 				<a class="toolbar-item" th:href="${'/workflow/update/' + projectId}"><i class="material-icons">edit</i></a>
@@ -23,80 +23,29 @@
 		    	<div class="panel-body">
 				    <form class="form-horizontal" id="userform" name="userform" method="post" enctype="application/json" target="_blank">
 					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{project.project-name}]]</label>
-					      <span class="fullline" ng-bind-html="project.projectName"></span>
+					      <label class="control-label col-sm-2">[[#{workflow.workflow-name}]]</label>
+					      <span ng-bind-html="workflow.name"  class="fullline" ></span>
 					    </div>
 					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{project.project-type}]]</label>
-					      <span class="fullline" ng-bind-html="project.projectTypeName"></span>					      
+					      <label class="control-label col-sm-2">[[#{workflow.workflow-type}]]</label>
+					      <span class="fullline" ng-bind-html="workflow.typeName" ></span>
+					      
 					    </div>
 					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{project.project-status}]]</label>
-					      <span class="fullline" ng-bind-html="project.statusName"></span>					      
+					      <label class="control-label col-sm-2">[[#{workflow.responsible}]]</label>
+					      <span class="fullline" ng-bind-html="workflow.responsibleName" ></span>
+					      
 					    </div>
 					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{project.project-startdate}]]</label>
-					      <span class="fullline" ng-bind-html="project.startDate | date : 'dd.MM.yyyy'"></span>
+					      <label class="control-label col-sm-2">[[#{workflow.workflow-status}]]</label>
+					      <span class="fullline" ng-bind-html="workflow.statusName" > </span>
+					      
 					    </div>
-					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{project.project-deadline}]]</label>
-					      <span class="fullline" ng-bind-html="project.deadline | date : 'dd.MM.yyyy'"></span>
-					    </div>					    					    
-						<input type="hidden" th:value="${projectId}" id="hdnpid" />					
+						<input type="hidden" th:value="${workflow.getId()}" id="hdnwid" />					
 				    </form>
 				</div>
 			
 			</div>
-
-		    <div class="panel panel-default project-detail-pannel">
-		    	<div class="panel-heading">
-		    		<span>[[#{project.project-users}]]</span>
-					<i class="material-icons list-icon" ng-click="toggleUserSelect(true)">playlist_add</i>
-				</div>
-		    	<div class="panel-body">		    		
-					<div loading-container="tableUsers.settings().$loading">
-						
-						<table ng-table="tableUsers" class="table table-condensed table-bordered table-striped">		
-							<colgroup>
-					          <col width="40px"/>
-					          <col/>
-					          <col width="120px"/>
-					          <col width="180px"/>
-					          <col width="80px"/>
-					        </colgroup>	
-							<thead>
-								<tr class="ng-table-sort-header">
-									<th>#</th>
-								    <th title="" ng-repeat="$column in usersColumns" ng-class="{
-								                    'sortable': $column.sortable,
-								                    'sort-asc': params.sorting()[$column.sortable]=='asc',
-								                    'sort-desc': params.sorting()[$column.sortable]=='desc'
-								                  }" ng-click="userSortBy($column, $event)" ng-if="$column.show" class="header " role="button" tabindex="0">
-								        	<div ng-if="!template" class="ng-table-header ng-scope" ng-class="{'sort-indicator': params.settings().sortingIndicator == 'div'}">
-								            <span ng-bind="$column.title" ng-class="{'sort-indicator': params.settings().sortingIndicator == 'span'}" class="ng-binding sort-indicator" style=""></span>
-								        </div>
-								        
-								    </th>
-								    <th></th>
-								</tr>
-							
-							</thead>					        
-					        					
-							<tr ng-repeat="(rowIndex, row) in $data" class="project-user-item" data-user="{{row.userId}}">
-								<td>{{rowIndex + 1}}</td>
-								<td ng-repeat="col in usersColumns" ng-bind-html="col.renderValue(this, row, rowIndex + 1)"></td>
-								<td>
-									<a class="toolbar-item user-toolbar-item-edit" ng-click="toggleUserEdit(true, row)"><i class="material-icons">edit</i></a>
-									<a class="toolbar-item user-toolbar-item-delete" ng-click="deleteProjectUser(row.userId)"><i class="material-icons">delete</i></a>
-								
-								</td>
-							</tr>	
-						
-						</table>
-					</div>	
-							    		
-				</div>
-			</div>	
 
 		    <div class="panel panel-default project-detail-pannel">
 		    	<div class="panel-heading">
@@ -153,7 +102,7 @@
 					
 			<div style="margin-top: 50px; border: 1px solid gray; padding: 10px;">{{test}}</div>
 			
-			<div class="full-modal-background" ng-hide="!showUserSelect">
+			<div class="full-modal-background" ng-hide="!showTaskSelect">
 				<div class="dialog-container user-select-container" layout="column">
 					<div class="dialog-container-toolbar">
 						<span class="title">[[#{project.adduser}]]</span>
@@ -166,25 +115,7 @@
 					</div>		
 				</div>
 			</div>
-			
-			<div class="full-modal-background" ng-hide="!showUserEdit">
-				<div class="dialog-container user-edit-container" layout="column">
-					<div class="dialog-container-toolbar">
-						<span class="title">[[#{project.edituser}]]</span>
-						<i th:tile="#{common.close}" class="material-icons list-icon" ng-click="toggleUserEdit(false)">close</i>
-					</div>
-					<div class="dialog-content-container" flex>
-						<div><label th:text="#{user.fullname}"></label> <span>{{editingProjectUser.fullname}}</span></div>
-						<div><label th:text="#{project.role}"></label> <select class="form-control fullline" ng-model="editingProjectUser.roleId"><option ng-repeat="item in projectRoles" value="{{item.id}}">{{item.name}}</option></select></div>
-						<div><label th:text="#{project.accesstype}"></label> <select class="form-control fullline" ng-model="editingProjectUser.accessType"><option ng-repeat="item in accessTypes" value="{{item.id}}">{{item.name}}</option></select></div>
-					</div>		
-					<div class="dialog-button-container">
-						<button class="md-raised md-button md-ink-ripple" ng-click="toggleUserEdit(false)"><span th:text="#{common.close}">Cancel</span> <i class="material-icons list-icon" ng-click="">clear</i></button>
-						<button class="md-raised md-primary md-button md-ink-ripple" ng-click="editProjectUser()"><span th:text="#{common.save}">Applay</span> <i class="material-icons list-icon" ng-click="">done</i></button>
-					</div>
-				</div>
-			</div>
-			
+						
 			<div class="full-modal-background" ng-hide="showTaskEdit == 'hide'">
 				<div class="dialog-container task-edit-container" layout="column">
 					<div class="dialog-container-toolbar">

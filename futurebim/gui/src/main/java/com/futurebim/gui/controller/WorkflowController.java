@@ -61,8 +61,21 @@ public class WorkflowController extends UiControllerBase {
     return "workflow/create";
   }
 
-  @RequestMapping(path = "/view/{projectid}")
-  public String viewProject(@PathVariable(name = "projectid") final long projectid, final Model model) {
+  @RequestMapping(path = "/view/{workflowid}")
+  public String viewProject(@PathVariable(name = "workflowid") final long workflowid, final Model model) {
+
+    final GuiWorkflow workflow = workflowHandler.getById(workflowid);
+    
+    final List<FbIdNamePair> statusList = new ArrayList<>();
+    for (int i = 0; i < 4; i++) {
+      statusList.add(new FbIdNamePair(i, workflowHandler.getWorkflowStatusName(i)));
+    }
+    model.addAttribute("workflow", workflow);
+    model.addAttribute("projectId", workflow.getProjectid());
+    model.addAttribute("types", workflowHandler.listTypes());
+    model.addAttribute("statusList", statusList);
+    model.addAttribute("projectUsers", projectsHandler.listProjectUsers(workflow.getProjectid()));
+    model.addAttribute("allUsers", userHandler.listCompanyUsers(this.getCurrentCompany().getId()));
 
     return "workflow/view";
   }
