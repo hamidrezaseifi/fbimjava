@@ -11,7 +11,6 @@ import com.futurebim.common.exceptions.FBCustomizedException;
 import com.futurebim.common.model.enums.EModule;
 import com.futurebim.core.bl.ICompanyHandler;
 import com.futurebim.core.dao.CompanyDao;
-import com.futurebim.core.dao.exceptions.StorageException;
 import com.futurebim.core.model.Company;
 
 @Service
@@ -26,7 +25,7 @@ public class CompanyHandler implements ICompanyHandler {
    */
 
   @Override
-  public Company saveCompany(final Company c) throws StorageException {
+  public Company saveCompany(final Company c) throws Exception {
     
     if (c.isNew()) {
       c.setVersion(1);
@@ -39,22 +38,22 @@ public class CompanyHandler implements ICompanyHandler {
   }
 
   @Override
-  public boolean removeCompany(final Long id) throws StorageException {
+  public boolean removeCompany(final Long id) throws Exception {
     checkRecordVersion(id, companyDao.getById(id).getVersion());
     return companyDao.removeCompany(id);
   }
 
   @Override
-  public Company getById(final Long id) throws StorageException {
+  public Company getById(final Long id) throws Exception {
     return companyDao.getById(id);
   }
 
   @Override
-  public List<Company> listCompanies() throws StorageException {
+  public List<Company> listCompanies() throws Exception {
     return companyDao.listCompanies();
   }
 
-  private boolean checkRecordVersion(final long companyId, final int version) throws StorageException {
+  private boolean checkRecordVersion(final long companyId, final int version) throws Exception {
     final Company exists = companyDao.getById(companyId);
     if (exists.getVersion() > version) {
       throw new FBCustomizedException(EExceptionType.VersionMismatch.name(), "", EModule.CORE.getModuleName());

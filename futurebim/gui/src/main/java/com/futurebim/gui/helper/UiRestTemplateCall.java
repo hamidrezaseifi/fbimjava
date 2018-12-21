@@ -15,7 +15,7 @@ import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import com.futurebim.common.model.enums.EModule;
-import com.futurebim.common.model.reponse.FBUiRestResponse;
+import com.futurebim.common.model.reponse.FBRestResponse;
 import com.futurebim.gui.exception.UiCustomizedException;
 
 @Component
@@ -50,9 +50,9 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
       }
       final String resp = e.getResponseBodyAsString();
       
-      FBUiRestResponse response = null;
+      FBRestResponse response = null;
       try {
-        response = converter.getObjectMapper().readValue(resp, FBUiRestResponse.class);
+        response = converter.getObjectMapper().readValue(resp, FBRestResponse.class);
       }
       catch (final IOException e1) {
         
@@ -64,7 +64,7 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
       if (!throwError) {
         return null;
       }
-      throw new UiCustomizedException(messages.get("error.invalidservicestatusorurl", service.getModuleName(), uri), FBUiRestResponse.stackListToString(e.getStackTrace()), EModule.GUI.getModuleName());
+      throw new UiCustomizedException(messages.get("error.invalidservicestatusorurl", service.getModuleName(), uri), FBRestResponse.stackListToString(e.getStackTrace()), EModule.GUI.getModuleName());
     }
   }
   
@@ -99,9 +99,9 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
       }
       final String resp = e.getResponseBodyAsString();
       
-      FBUiRestResponse response = null;
+      FBRestResponse response = null;
       try {
-        response = converter.getObjectMapper().readValue(resp, FBUiRestResponse.class);
+        response = converter.getObjectMapper().readValue(resp, FBRestResponse.class);
       }
       catch (final IOException e1) {
         
@@ -118,7 +118,7 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
         propUrl = retreiveUrlFromError(e, url);
       }
       
-      throw new UiCustomizedException(messages.get("error.invalidservicestatusorurl", service.getModuleName(), propUrl), FBUiRestResponse.stackListToString(e.getStackTrace()), EModule.GUI.getModuleName());
+      throw new UiCustomizedException(messages.get("error.invalidservicestatusorurl", service.getModuleName(), propUrl), FBRestResponse.stackListToString(e.getStackTrace()), EModule.GUI.getModuleName());
     }
   }
   
@@ -165,9 +165,9 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
       }
       final String resp = e.getResponseBodyAsString();
       
-      FBUiRestResponse response = null;
+      FBRestResponse response = null;
       try {
-        response = converter.getObjectMapper().readValue(resp, FBUiRestResponse.class);
+        response = converter.getObjectMapper().readValue(resp, FBRestResponse.class);
       }
       catch (final IOException e1) {
         
@@ -184,7 +184,7 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
         propUrl = retreiveUrlFromError(e, url);
       }
       
-      throw new UiCustomizedException(messages.get("error.invalidservicestatusorurl", service.getModuleName(), propUrl), FBUiRestResponse.stackListToString(e.getStackTrace()), EModule.GUI.getModuleName());
+      throw new UiCustomizedException(messages.get("error.invalidservicestatusorurl", service.getModuleName(), propUrl), FBRestResponse.stackListToString(e.getStackTrace()), EModule.GUI.getModuleName());
     }
   }
   
@@ -203,9 +203,9 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
       }
       final String resp = e.getResponseBodyAsString();
       
-      FBUiRestResponse response = null;
+      FBRestResponse response = null;
       try {
-        response = converter.getObjectMapper().readValue(resp, FBUiRestResponse.class);
+        response = converter.getObjectMapper().readValue(resp, FBRestResponse.class);
       }
       catch (final IOException e1) {
         
@@ -222,7 +222,7 @@ public class UiRestTemplateCall implements IUiRestTemplateCall {
         propUrl = retreiveUrlFromError(e, url);
       }
       
-      throw new UiCustomizedException(messages.get("error.invalidservicestatusorurl", service.getModuleName(), propUrl), FBUiRestResponse.stackListToString(e.getStackTrace()), EModule.GUI.getModuleName());
+      throw new UiCustomizedException(messages.get("error.invalidservicestatusorurl", service.getModuleName(), propUrl), FBRestResponse.stackListToString(e.getStackTrace()), EModule.GUI.getModuleName());
     }
   }
   

@@ -2,7 +2,7 @@ package com.futurebim.common.model.reponse;
 
 import org.springframework.http.HttpStatus;
 
-public class GeneralRestResponse extends FBUiRestResponse {
+public class GeneralRestResponse extends FBRestResponse {
 
   private Object data = null;
 
@@ -16,7 +16,7 @@ public class GeneralRestResponse extends FBUiRestResponse {
   }
 
   public static GeneralRestResponse createError(final HttpStatus status, final Exception ex) {
-    return (GeneralRestResponse) new FBUiRestResponse(status, ex.getClass().getName(), ex.getMessage());
+    return (GeneralRestResponse) new FBRestResponse(status, ex.getClass().getName(), ex.getMessage());
   }
 
   public static GeneralRestResponse createData(final Object data) {

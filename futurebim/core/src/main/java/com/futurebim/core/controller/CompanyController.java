@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.futurebim.common.model.edo.CompanyEdo;
+import com.futurebim.common.rest.FbRestPaths;
 import com.futurebim.core.annotations.FbCoreRequestGetDataMapping;
 import com.futurebim.core.annotations.FbCoreRequestPostDataMapping;
 import com.futurebim.core.bl.ICompanyHandler;
-import com.futurebim.core.dao.exceptions.StorageException;
 import com.futurebim.core.model.Company;
 
 @RestController
-@RequestMapping(path = "/company")
+@RequestMapping(path = FbRestPaths.Core.COMPANY_BASE)
 public class CompanyController {
   
   private ICompanyHandler companyReadHandler;
@@ -26,26 +26,26 @@ public class CompanyController {
     this.companyReadHandler = companyReadHandler;
   }
   
-  @FbCoreRequestGetDataMapping(value = "/all")
-  public List<CompanyEdo> readAll() throws StorageException {
+  @FbCoreRequestGetDataMapping(value = FbRestPaths.Core.COMPANY_ALL_BASE)
+  public List<CompanyEdo> readAll() throws Exception {
     final List<Company> companies = companyReadHandler.listCompanies();
     return Company.toEdoList(companies);
   }
   
-  @FbCoreRequestGetDataMapping(value = "/read/{companyid}")
-  public CompanyEdo getCompany(@PathVariable final Long companyid) throws StorageException {
+  @FbCoreRequestGetDataMapping(value = FbRestPaths.Core.COMPANY_READ_BASE)
+  public CompanyEdo getCompany(@PathVariable final Long companyid) throws Exception {
     
     return companyReadHandler.getById(companyid).toEdo();
   }
   
-  @FbCoreRequestPostDataMapping(value = "/delete")
-  public boolean deleteCompany(@RequestBody(required = true) final CompanyEdo companyEdo) {
+  @FbCoreRequestPostDataMapping(value = FbRestPaths.Core.COMPANY_DELETE_BASE)
+  public boolean deleteCompany(@RequestBody(required = true) final CompanyEdo companyEdo) throws Exception {
     
     return false;
   }
   
-  @FbCoreRequestPostDataMapping(value = "/update")
-  public CompanyEdo updateCompany(@RequestBody(required = true) final CompanyEdo companyEdo) throws StorageException {
+  @FbCoreRequestPostDataMapping(value = FbRestPaths.Core.COMPANY_UPDATE_BASE)
+  public CompanyEdo updateCompany(@RequestBody(required = true) final CompanyEdo companyEdo) throws Exception {
     
     return companyReadHandler.saveCompany(Company.fromEdo(companyEdo)).toEdo();
   }

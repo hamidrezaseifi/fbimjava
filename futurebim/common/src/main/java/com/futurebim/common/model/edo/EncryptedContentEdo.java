@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.futurebim.common.crypt.FBTextCryption;
+import com.futurebim.common.exception.FbCustomeException;
 import com.futurebim.common.rest.json.JsonConstants;
 import com.futurebim.common.rest.xml.LocalDateTimeAdapter;
 
@@ -35,10 +36,15 @@ public class EncryptedContentEdo {
 		return FBTextCryption.decrypt(Base64.getDecoder().decode(encryptedContent));
 	}
 
-	public <T> T getObjectContent(final Class<T> valueType, final ObjectMapper mapper) throws Exception {
+	public <T> T getObjectContent(final Class<T> valueType, final ObjectMapper mapper) {
 
-		final String decContent = getDecryptedContent();
-		final T t = mapper.readValue(decContent, valueType);
+		T t = null;
+		try {
+			final String decContent = getDecryptedContent();
+			t = mapper.readValue(decContent, valueType);
+		} catch (final Exception e) {
+			throw new FbCustomeException(e.getLocalizedMessage(), e);
+		}
 
 		return t;
 	}
