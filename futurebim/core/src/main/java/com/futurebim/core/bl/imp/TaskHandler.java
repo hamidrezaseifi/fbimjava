@@ -29,8 +29,13 @@ public class TaskHandler implements ITaskHandler {
   }
   
   @Override
-  public List<Task> listTasks(final Long projectId) throws StorageException {
-    return taskDao.list(projectId);
+  public List<Task> listTasksByPoject(final Long projectId) throws StorageException {
+    return taskDao.listByProject(projectId);
+  }
+  
+  @Override
+  public List<Task> listTasksByWorkflow(final Long projectId) throws StorageException {
+    return taskDao.listByWorkflow(projectId);
   }
   
   @Override

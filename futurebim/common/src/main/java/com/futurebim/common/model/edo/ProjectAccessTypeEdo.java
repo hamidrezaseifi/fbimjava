@@ -8,68 +8,59 @@ import java.time.LocalDateTime;
  */
 public class ProjectAccessTypeEdo {
 
-  private int id;
+	private int id;
 
-  private LocalDateTime created;
+	private LocalDateTime created;
 
-  private int status;
+	private int status;
 
-  private String typeName;
+	private String typeName;
 
-  private LocalDateTime updated;
+	private LocalDateTime updated;
 
-  // private List<UserProjectAccess> userProjectAccesses;
+	// private List<UserProjectAccess> userProjectAccesses;
 
-  public ProjectAccessTypeEdo() {
-  }
+	public ProjectAccessTypeEdo() {
+	}
 
-  public int getId() {
-    return this.id;
-  }
+	public int getId() {
+		return this.id;
+	}
 
-  public void setId(final int id) {
-    this.id = id;
-  }
+	public void setId(final int id) {
+		this.id = id;
+	}
 
-  public LocalDateTime getCreated() {
-    return this.created;
-  }
+	public LocalDateTime getCreated() {
+		return this.created;
+	}
 
-  public void setCreated(final LocalDateTime created) {
-    this.created = created;
-  }
+	public void setCreated(final LocalDateTime created) {
+		this.created = created;
+	}
 
-  public int getStatus() {
-    return this.status;
-  }
+	public int getStatus() {
+		return this.status;
+	}
 
-  public void setStatus(final int status) {
-    this.status = status;
-  }
+	public void setStatus(final int status) {
+		this.status = status;
+	}
 
-  public String getTypeName() {
-    return this.typeName;
-  }
+	public String getTypeName() {
+		return this.typeName;
+	}
 
-  public void setTypeName(final String typeName) {
-    this.typeName = typeName;
-  }
+	public void setTypeName(final String typeName) {
+		this.typeName = typeName;
+	}
 
-  public LocalDateTime getUpdated() {
-    return this.updated;
-  }
+	public LocalDateTime getUpdated() {
+		return this.updated;
+	}
 
-  public void setUpdated(final LocalDateTime updated) {
-    this.updated = updated;
-  }
-
-  /*
-   * public List<UserProjectAccess> getUserProjectAccesses() { return this.userProjectAccesses; } public void
-   * setUserProjectAccesses(List<UserProjectAccess> userProjectAccesses) { this.userProjectAccesses = userProjectAccesses; } public
-   * UserProjectAccess addUserProjectAccess(UserProjectAccess userProjectAccess) { getUserProjectAccesses().add(userProjectAccess);
-   * userProjectAccess.setProjectAccessType(this); return userProjectAccess; } public UserProjectAccess
-   * removeUserProjectAccess(UserProjectAccess userProjectAccess) { getUserProjectAccesses().remove(userProjectAccess);
-   * userProjectAccess.setProjectAccessType(null); return userProjectAccess; }
-   */
+	public void setUpdated(final LocalDateTime updated) {
+		this.updated = updated;
+	}
 
 }

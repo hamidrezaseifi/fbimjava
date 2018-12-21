@@ -49,7 +49,7 @@ public class TaskHandler implements ITaskHandler {
     
     return prepareTask(task);
   }
-  
+
   @Override
   public List<GuiTask> listTasks(final Long projectId) {
     logger.debug("get task list from core");
@@ -58,6 +58,23 @@ public class TaskHandler implements ITaskHandler {
     };
 
     final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskReadAll(), EModule.CORE, typeRef, true, projectId);
+
+    final List<GuiTask> list = GuiTask.fromEdoList(projectsEdo.getItems());
+
+    for (final GuiTask project : list) {
+      prepareTask(project);
+    }
+    return list;
+  }
+
+  @Override
+  public List<GuiTask> listTasksByWorkflow(final Long workflowId) {
+    logger.debug("get task list from core");
+
+    final ParameterizedTypeReference<FBCollectionEdo<TaskEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<TaskEdo>>() {
+    };
+
+    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskWorkflowReadAll(), EModule.CORE, typeRef, true, workflowId);
 
     final List<GuiTask> list = GuiTask.fromEdoList(projectsEdo.getItems());
 

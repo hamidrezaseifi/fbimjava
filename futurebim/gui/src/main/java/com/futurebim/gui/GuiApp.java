@@ -23,6 +23,7 @@ public class GuiApp {
   public static void main(final String[] args) {
     GuiApp.logger.info("Starting Feature Bim GUI application...");
     SpringApplication.run(GuiApp.class, args);
+    
   }
-
+  
 }

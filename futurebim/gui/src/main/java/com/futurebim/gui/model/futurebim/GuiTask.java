@@ -9,12 +9,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.futurebim.common.model.edo.TaskEdo;
 import com.futurebim.common.model.enums.ETaskStatus;
 import com.futurebim.common.rest.json.JsonConstants;
+import com.futurebim.gui.model.futurebim.base.IDateLimited;
 
 /**
  * The persistent class for the users database table.
  *
  */
-public class GuiTask {
+public class GuiTask implements IDateLimited {
 
   private Long id;
 
@@ -137,6 +138,7 @@ public class GuiTask {
   /**
    * @return the startDate
    */
+  @Override
   public LocalDate getStartDate() {
     return startDate;
   }
@@ -151,6 +153,7 @@ public class GuiTask {
   /**
    * @return the deadline
    */
+  @Override
   public LocalDate getDeadline() {
     return deadline;
   }

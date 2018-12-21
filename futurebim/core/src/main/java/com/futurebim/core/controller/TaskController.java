@@ -26,8 +26,13 @@ public class TaskController {
   }
 
   @FbCoreRequestGetDataMapping(value = "/project/readall/{projectId}")
-  public FBCollectionEdo<TaskEdo> readAll(@PathVariable final Long projectId) throws StorageException {
-    return new FBCollectionEdo<>(Task.toEdoList(taskHandler.listTasks(projectId)));
+  public FBCollectionEdo<TaskEdo> readAllByProject(@PathVariable final Long projectId) throws StorageException {
+    return new FBCollectionEdo<>(Task.toEdoList(taskHandler.listTasksByPoject(projectId)));
+  }
+
+  @FbCoreRequestGetDataMapping(value = "/workflow/readall/{workflowId}")
+  public FBCollectionEdo<TaskEdo> readAllByWorkflow(@PathVariable final Long workflowId) throws StorageException {
+    return new FBCollectionEdo<>(Task.toEdoList(taskHandler.listTasksByWorkflow(workflowId)));
   }
 
   @FbCoreRequestPostDataMapping(value = "/save")

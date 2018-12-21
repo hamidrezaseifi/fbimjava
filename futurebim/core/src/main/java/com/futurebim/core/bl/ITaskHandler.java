@@ -9,7 +9,9 @@ public interface ITaskHandler {
 
   public Task getById(final Long id) throws StorageException;
 
-  public List<Task> listTasks(final Long projectId) throws StorageException;
+  public List<Task> listTasksByPoject(final Long projectId) throws StorageException;
+
+  public List<Task> listTasksByWorkflow(final Long projectId) throws StorageException;
 
   public Task saveTask(final Task task) throws StorageException;
 
