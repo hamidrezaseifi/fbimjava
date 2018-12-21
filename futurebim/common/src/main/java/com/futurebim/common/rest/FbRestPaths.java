@@ -74,6 +74,12 @@ public class FbRestPaths {
 		public static final String TASK_WORKFLOW_READALL_BASE = "/workflow/readall/{workflowid}";
 		public static final String TASK_WORKFLOW_READALL = TASK_BASE + TASK_WORKFLOW_READALL_BASE;
 
+		public static final String TASK_WORKFLOW_ADD_BASE = "/workflow/add/{workflowid}/{taskid}";
+		public static final String TASK_WORKFLOW_ADD = TASK_BASE + TASK_WORKFLOW_ADD_BASE;
+
+		public static final String TASK_WORKFLOW_DELETE_BASE = "/workflow/delete/{workflowid}/{taskid}";
+		public static final String TASK_WORKFLOW_DELETE = TASK_BASE + TASK_WORKFLOW_DELETE_BASE;
+
 		public static final String TASK_READ_BASE = "/read/{taskid}";
 		public static final String TASK_READ = TASK_BASE + TASK_READ_BASE;
 

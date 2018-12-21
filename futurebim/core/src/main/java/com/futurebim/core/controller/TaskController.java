@@ -31,11 +31,6 @@ public class TaskController {
     return new FBCollectionEdo<>(Task.toEdoList(taskHandler.listTasksByPoject(projectid)));
   }
   
-  @FbCoreRequestGetDataMapping(value = FbRestPaths.Core.TASK_WORKFLOW_READALL_BASE)
-  public FBCollectionEdo<TaskEdo> readAllByWorkflow(@PathVariable final Long workflowid) throws StorageException {
-    return new FBCollectionEdo<>(Task.toEdoList(taskHandler.listTasksByWorkflow(workflowid)));
-  }
-  
   @FbCoreRequestPostDataMapping(value = FbRestPaths.Core.TASK_SAVE_BASE)
   public TaskEdo createProject(@RequestBody(required = true) final TaskEdo taskEdo) throws StorageException {
     return taskHandler.saveTask(Task.fromEdo(taskEdo)).toEdo();
@@ -50,5 +45,20 @@ public class TaskController {
   public boolean deleteProject(@RequestBody final TaskEdo taskEdo) throws StorageException {
     return taskHandler.deleteTask(Task.fromEdo(taskEdo));
   }
-
+  
+  @FbCoreRequestGetDataMapping(value = FbRestPaths.Core.TASK_WORKFLOW_READALL_BASE)
+  public FBCollectionEdo<TaskEdo> readAllByWorkflow(@PathVariable final Long workflowid) throws StorageException {
+    return new FBCollectionEdo<>(Task.toEdoList(taskHandler.listTasksByWorkflow(workflowid)));
+  }
+  
+  @FbCoreRequestGetDataMapping(value = FbRestPaths.Core.TASK_WORKFLOW_ADD_BASE)
+  public boolean addWorkflowTask(@PathVariable final Long workflowid, @PathVariable final Long taskid) throws StorageException {
+    return taskHandler.addWorkflowTask(workflowid, taskid);
+  }
+  
+  @FbCoreRequestGetDataMapping(value = FbRestPaths.Core.TASK_WORKFLOW_DELETE_BASE)
+  public boolean deleteWorkflowTask(@PathVariable final Long workflowid, @PathVariable final Long taskid) throws StorageException {
+    return taskHandler.deleteWorkflowTask(workflowid, taskid);
+  }
+  
 }

@@ -13,9 +13,13 @@ public interface TaskDao {
   
   public List<Task> listByProject(final Long projectId) throws StorageException;
   
-  public List<Task> listByWorkflow(final Long projectId) throws StorageException;
-  
   public Task update(final Task task) throws StorageException;
   
   boolean delete(final Task task) throws StorageException;
+  
+  public boolean addWorkflowTask(final Long workflowId, final Long taskId) throws StorageException;
+
+  public boolean deleteWorkflowTask(final Long workflowId, final Long taskId) throws StorageException;
+
+  public List<Task> listByWorkflow(final Long workflowId) throws StorageException;
 }

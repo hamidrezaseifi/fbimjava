@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.futurebim.common.model.enums.ETaskStatus;
 import com.futurebim.gui.anotations.FbGuiRequestGetDataMapping;
 import com.futurebim.gui.anotations.FbGuiRequestPostDataMapping;
 import com.futurebim.gui.bl.IProjectsHandler;
@@ -55,14 +56,14 @@ public class WorkflowController extends UiControllerBase {
   }
 
   @RequestMapping(path = "/create")
-  public String createProject(final Model model) {
+  public String createWorkflow(final Model model) {
     model.addAttribute("breadCrumb", new ArrayList<>());
 
     return "workflow/create";
   }
 
   @RequestMapping(path = "/view/{workflowid}")
-  public String viewProject(@PathVariable(name = "workflowid") final long workflowid, final Model model) {
+  public String viewWorkflow(@PathVariable(name = "workflowid") final long workflowid, final Model model) {
 
     final GuiWorkflow workflow = workflowHandler.getById(workflowid);
     
@@ -70,18 +71,25 @@ public class WorkflowController extends UiControllerBase {
     for (int i = 0; i < 4; i++) {
       statusList.add(new FbIdNamePair(i, workflowHandler.getWorkflowStatusName(i)));
     }
+    
+    final List<FbIdNamePair> taskStatusList = new ArrayList<>();
+    for (final ETaskStatus status : ETaskStatus.values()) {
+      taskStatusList.add(new FbIdNamePair(status.getDbValue(), taskHandler.getTaskStatusName(status.getDbValue())));
+    }
+    
     model.addAttribute("workflow", workflow);
     model.addAttribute("projectId", workflow.getProjectid());
     model.addAttribute("types", workflowHandler.listTypes());
     model.addAttribute("statusList", statusList);
     model.addAttribute("projectUsers", projectsHandler.listProjectUsers(workflow.getProjectid()));
     model.addAttribute("allUsers", userHandler.listCompanyUsers(this.getCurrentCompany().getId()));
-
+    model.addAttribute("taskStatusList", taskStatusList);
+    
     return "workflow/view";
   }
   
   @RequestMapping(path = "/update/{workflowid}")
-  public String editProject(@PathVariable(name = "workflowid") final long workflowid, final Model model) {
+  public String editWorkflow(@PathVariable(name = "workflowid") final long workflowid, final Model model) {
 
     final GuiWorkflow workflow = workflowHandler.getById(workflowid);
     
@@ -111,10 +119,42 @@ public class WorkflowController extends UiControllerBase {
     return workflowHandler.list(projectid);
   }
   
+  @FbGuiRequestGetDataMapping(value = "/data/task/list/{projectid}")
+  public List<GuiTask> listAllProjectTasks(@PathVariable(name = "projectid") final long projectid) {
+    
+    return taskHandler.listTasks(projectid);
+  }
+  
   @FbGuiRequestGetDataMapping(value = "/data/workflow/read/{workflowid}")
   public GuiWorkflow readWorkflows(@PathVariable(name = "workflowid") final long workflowid) {
     
     return workflowHandler.getById(workflowid);
+  }
+  
+  @FbGuiRequestGetDataMapping(value = "/data/workflow/task/add/{workflowid}/{taskid}")
+  public boolean addWorkflowTask(@PathVariable(name = "workflowid") final long workflowid, @PathVariable(name = "taskid") final long taskid) {
+    
+    return taskHandler.addWorkflowTask(workflowid, taskid);
+  }
+  
+  @FbGuiRequestGetDataMapping(value = "/data/workflow/task/delete/{workflowid}/{taskid}")
+  public boolean deleteWorkflowTask(@PathVariable(name = "workflowid") final long workflowid, @PathVariable(name = "taskid") final long taskid) {
+    
+    return taskHandler.deleteWorkflowTask(workflowid, taskid);
+  }
+  
+  @FbGuiRequestPostDataMapping(value = "/data/task/create/{workflowid}")
+  public GuiTask createWorkflowTask(@PathVariable(name = "workflowid") final long workflowid, @RequestBody final GuiTask task) {
+    
+    final GuiTask newTask = taskHandler.save(task);
+    taskHandler.addWorkflowTask(workflowid, newTask.getId());
+    return newTask;
+  }
+  
+  @FbGuiRequestPostDataMapping(value = "/data/task/update")
+  public GuiTask saveWorkflowTask(@RequestBody final GuiTask task) {
+    
+    return taskHandler.save(task);
   }
   
   @FbGuiRequestPostDataMapping(value = "/data/workflow/save")
@@ -127,12 +167,6 @@ public class WorkflowController extends UiControllerBase {
   public GuiWorkflow deleteWorkflows(@PathVariable(name = "workflowid") final long workflowid) {
     
     return workflowHandler.getById(workflowid);
-  }
-  
-  @FbGuiRequestGetDataMapping(value = "/data/task/list/{workflowid}")
-  public List<GuiTask> listWorkflowTasks(@PathVariable(name = "workflowid") final long workflowid) {
-    
-    return taskHandler.listTasksByWorkflow(workflowid);
   }
 
   @Override

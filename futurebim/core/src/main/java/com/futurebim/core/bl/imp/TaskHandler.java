@@ -63,4 +63,14 @@ public class TaskHandler implements ITaskHandler {
     
     return true;
   }
+
+  @Override
+  public boolean addWorkflowTask(final Long workflowId, final Long taskId) throws StorageException {
+    return taskDao.addWorkflowTask(workflowId, taskId);
+  }
+
+  @Override
+  public boolean deleteWorkflowTask(final Long workflowId, final Long taskId) throws StorageException {
+    return taskDao.deleteWorkflowTask(workflowId, taskId);
+  }
 }

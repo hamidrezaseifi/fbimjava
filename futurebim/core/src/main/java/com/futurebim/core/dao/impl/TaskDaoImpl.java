@@ -27,28 +27,27 @@ import com.futurebim.core.model.Task;
 @Transactional
 @Repository
 public class TaskDaoImpl implements TaskDao {
-  
+
   private static final Logger              logger = LoggerFactory.getLogger(TaskDaoImpl.class);
   private final JdbcTemplate               jdbcTemplate;
   private final PlatformTransactionManager platformTransactionManager;
-
+  
   @Autowired
   TaskDaoImpl(final JdbcTemplate jdbcTemplate, final PlatformTransactionManager platformTransactionManager) {
     this.jdbcTemplate = jdbcTemplate;
     this.platformTransactionManager = platformTransactionManager;
   }
-
+  
   @Override
   public Task addNew(final Task task) throws StorageException {
     logger.debug("insert Task {}...", task.getName());
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
-    final KeyHolder keyHolder = new GeneratedKeyHolder();
-    
+    final KeyHolder         keyHolder         = new GeneratedKeyHolder();
+
     try {
-      
-      final String sql = "INSERT INTO tasks (project_id, name, comments, reporter, assigned_to, start_date, deadline, status, version)"
-          + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-      
+
+      final String sql = "INSERT INTO tasks (project_id, name, comments, reporter, assigned_to, start_date, deadline, status, version)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
       this.jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setLong(1, task.getProjectid());
@@ -60,10 +59,10 @@ public class TaskDaoImpl implements TaskDao {
         ps.setTimestamp(7, SqlUtils.getTimestampFromDate(task.getDeadline()));
         ps.setInt(8, task.getStatus());
         ps.setInt(9, task.getVersion());
-        
+
         return ps;
       }, keyHolder);
-      
+
       this.platformTransactionManager.commit(transactionStatus);
     }
     catch (final Exception e) {
@@ -73,21 +72,21 @@ public class TaskDaoImpl implements TaskDao {
     }
     return getById(keyHolder.getKey().longValue());
   }
-  
+
   @Override
   public Task getById(final Long id) throws StorageException {
     logger.info("Dao Read Project by id: " + id);
     final String sqlSelect = "SELECT * FROM tasks where id=?";
-    
+
     Task task;
-    
+
     try {
-      
+
       task = this.jdbcTemplate.query(con -> {
         final PreparedStatement ps = con.prepareStatement(sqlSelect);
         ps.setLong(1, id);
         return ps;
-        
+
       }, (rs) -> {
         if (rs.next()) {
           return taskFromResultSet(rs);
@@ -96,78 +95,78 @@ public class TaskDaoImpl implements TaskDao {
           return null;
         }
       });
-      
+
     }
     catch (final Exception e) {
       throw new StorageException("Unable to retrieve Project data: " + e.toString());
     }
-    
+
     return task;
   }
-  
+
   @Override
   public List<Task> listByProject(final Long projectId) throws StorageException {
     logger.info("Dao Read Project Task List");
     final String sqlSelect = "SELECT * FROM tasks where project_id=?";
-    
+
     List<Task> list = new ArrayList<>();
-    
+
     try {
       list = jdbcTemplate.query(con -> {
         final PreparedStatement ps = con.prepareStatement(sqlSelect);
         ps.setLong(1, projectId);
         return ps;
-        
+
       }, (rs, rowNum) -> {
-        
+
         return taskFromResultSet(rs);
-        
+
       });
-      
+
     }
     catch (final Exception e) {
       throw new StorageException("Unable to retrieve project Task: " + e.toString());
     }
-    
+
     return list;
   }
-  
+
   @Override
   public List<Task> listByWorkflow(final Long workflowId) throws StorageException {
     logger.info("Dao Read Project Task List");
     final String sqlSelect = "SELECT tasks.* FROM workflow_tasks inner join tasks on workflow_tasks.task_id = tasks.id where workflow_id=?";
-    
+
     List<Task> list = new ArrayList<>();
-    
+
     try {
       list = jdbcTemplate.query(con -> {
         final PreparedStatement ps = con.prepareStatement(sqlSelect);
         ps.setLong(1, workflowId);
         return ps;
-        
+
       }, (rs, rowNum) -> {
-        
+
         return taskFromResultSet(rs);
-        
+
       });
-      
+
     }
     catch (final Exception e) {
       throw new StorageException("Unable to retrieve project Task: " + e.toString());
     }
-    
+
     return list;
   }
-  
+
   @Override
   public Task update(final Task task) throws StorageException {
     logger.debug("Updating Project with id {}...", task.getId());
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
     try {
-      
+
       final String sql = "UPDATE tasks SET project_id = ?, name = ?, comments = ?, reporter = ?," +
-          " assigned_to = ?, start_date = ?, deadline = ?, status = ?, version = ? WHERE id = ?";
-      
+                                                                                                                                                              " assigned_to = ?, start_date = ?, deadline = ?, status = ?, version = ? WHERE id = ?";
+
       final int changedRows = jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql);
         ps.setLong(1, task.getProjectid());
@@ -180,14 +179,14 @@ public class TaskDaoImpl implements TaskDao {
         ps.setInt(8, task.getStatus());
         ps.setInt(9, task.getVersion());
         ps.setLong(10, task.getId());
-        
+
         return ps;
       });
-      
+
       if (changedRows != 1) {
         throw new StorageException(String.format("Unable to update Project [id: {}]", task.getId()));
       }
-      
+
       this.platformTransactionManager.commit(transactionStatus);
     }
     catch (final Exception e) {
@@ -197,39 +196,97 @@ public class TaskDaoImpl implements TaskDao {
     }
     return getById(task.getId());
   }
-  
+
   @Override
   public boolean delete(final Task task) throws StorageException {
     logger.debug("Deleting Task with id {}...", task.getId());
     final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
     try {
-
+      
       final String sql = "delete from tasks where id = ? ";
-
+      
       final int deletedRows = this.jdbcTemplate.update(con -> {
         final PreparedStatement ps = con.prepareStatement(sql);
         ps.setLong(1, task.getId());
         return ps;
       });
-
+      
       if (deletedRows != 1) {
         throw new StorageException(String.format("Unable to delete Project  [id: {}]", task.getId()));
       }
-
+      
       this.platformTransactionManager.commit(transactionStatus);
       return true;
     }
-
+    
     catch (final Exception e) {
       this.platformTransactionManager.rollback(transactionStatus);
       logger.error("Unable to delete Task [id: {}]: {}", task.getId(), e.toString(), e);
       throw new StorageException(e.toString(), e);
     }
   }
+
+  @Override
+  public boolean addWorkflowTask(final Long workflowId, final Long taskId) throws StorageException {
+    
+    logger.debug("insert Task {} to workflow {}...", taskId, workflowId);
+    final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
+
+    try {
+
+      final String sql = "INSERT INTO workflow_tasks (workflow_id, task_id, status) VALUES (?, ?, 1)";
+
+      this.jdbcTemplate.update(con -> {
+        final PreparedStatement ps = con.prepareStatement(sql);
+        ps.setLong(1, workflowId);
+        ps.setLong(2, taskId);
+
+        return ps;
+      });
+
+      this.platformTransactionManager.commit(transactionStatus);
+    }
+    catch (final Exception e) {
+      platformTransactionManager.rollback(transactionStatus);
+      logger.error("Unable to insert Task {} to workflow {} : {}", taskId, workflowId, e.toString(), e);
+      throw new StorageException(e.toString(), e);
+    }
+    return true;
+  }
+
+  @Override
+  public boolean deleteWorkflowTask(final Long workflowId, final Long taskId) throws StorageException {
+    logger.debug("Deleting Task {} from workflow {}...", taskId, workflowId);
+    final TransactionStatus transactionStatus = this.platformTransactionManager.getTransaction(new DefaultTransactionDefinition());
+    try {
+      
+      final String sql = "delete from workflow_tasks where workflow_id = ? and task_id = ? ";
+      
+      final int deletedRows = this.jdbcTemplate.update(con -> {
+        final PreparedStatement ps = con.prepareStatement(sql);
+        ps.setLong(1, workflowId);
+        ps.setLong(2, taskId);
+        return ps;
+      });
+      
+      if (deletedRows != 1) {
+        throw new StorageException(String.format("Unable to Deleting Task {} from workflow {}...", taskId, workflowId));
+      }
+      
+      this.platformTransactionManager.commit(transactionStatus);
+      return true;
+    }
+    
+    catch (final Exception e) {
+      this.platformTransactionManager.rollback(transactionStatus);
+      logger.error("Unable to Deleting Task {} from workflow {}...{}", taskId, workflowId, e.toString(), e);
+      throw new StorageException(e.toString(), e);
+    }
+  }
   
   private Task taskFromResultSet(final ResultSet rs) throws SQLException {
     final Task model = new Task();
-
+    
     model.setAssignedTo(rs.getLong("assigned_to"));
     model.setComments(rs.getString("comments"));
     model.setName(rs.getString("name"));
@@ -242,7 +299,8 @@ public class TaskDaoImpl implements TaskDao {
     model.setId(rs.getLong("id"));
     model.setVersion(rs.getInt("version"));
     model.setStatus(rs.getInt("status"));
-    
+
     return model;
   }
+  
 }
