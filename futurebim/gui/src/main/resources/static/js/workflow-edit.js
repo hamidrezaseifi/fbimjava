@@ -7,8 +7,10 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 	$scope.startdate = null;
 	$scope.deadline = null;
 	$scope.workflowId = $("#hdnwid").val();
+	$scope.lastSelectedProjectId = null;
+	$scope.users = [];
 	
-	$scope.validations = {name: true , type: true, responsible: true, status: true };
+	$scope.validations = {name: true , type: true, responsible: true, status: true, project: true,  };
 
 	$scope.loadWorkflow = function(){
 		
@@ -22,6 +24,8 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 			$scope.workflow.type = $scope.workflow.type + "";
 			$scope.workflow.status = $scope.workflow.status + "";
 			$scope.workflow.responsible = $scope.workflow.responsible + "";
+			$scope.workflow.projectid = $scope.workflow.projectid + "";
+			$scope.lastSelectedProjectId = $scope.workflow.projectid;
 			
 			delete $scope.workflow.created;
 			delete $scope.workflow.updated;
@@ -69,6 +73,12 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 		
 		$scope.test = new Date() + " : " + JSON.stringify($scope.workflow);
 		
+		$scope.validations.project = true;
+		if($scope.workflow.projectid < 1){
+			valid = false;
+			$scope.validations.project = false;
+		}
+		
 		$scope.validations.name = true;
 		if($scope.workflow.name == undefined || $scope.workflow.name.length < 3){
 			valid = false;
@@ -88,11 +98,28 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 		}
 		
 		$scope.validations.status = true;
-		if($scope.workflow.status == undefined || $scope.workflow.status == 0){
+		if($scope.workflow.status == undefined || $scope.workflow.status < 0){
 			valid = false;
 			$scope.validations.status = false;
 		}
 		
+		if($scope.lastSelectedProjectId !== $scope.workflow.projectid){
+			$scope.lastSelectedProjectId = $scope.workflow.projectid;
+			
+			$http({
+				method: "GET",
+				url: "/workflow/data/user/list/" + $scope.workflow.projectid, 
+				timeout: 10000				
+			}).then(function(response){
+			  
+				$scope.users = response.data;
+
+			}, function errorCallback(response){ 
+				$scope.$parent.showloading = false;		
+				
+			});		
+						
+		}
 		
 		return valid;
 	}

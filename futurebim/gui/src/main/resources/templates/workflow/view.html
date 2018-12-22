@@ -14,7 +14,7 @@
 		<div class="page-content" ng-controller="WorkflowController">
 			<div class="page-title"> 
 				<span th:text="#{project.projects-detail}" class="title-content"></span> 
-				<a class="toolbar-item" th:href="${'/workflow/update/' + projectId}"><i class="material-icons">edit</i></a>
+				<a class="toolbar-item" th:href="${'/workflow/update/' + workflow.getId()}"><i class="material-icons">edit</i></a>
 				<a class="toolbar-item" href="/workflow"><i class="material-icons">cancel</i></a>
 			</div>
 			

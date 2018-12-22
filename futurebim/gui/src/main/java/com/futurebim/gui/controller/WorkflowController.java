@@ -21,6 +21,7 @@ import com.futurebim.gui.controller.base.UiControllerBase;
 import com.futurebim.gui.helper.FbIdNamePair;
 import com.futurebim.gui.helper.PageMenuLoader;
 import com.futurebim.gui.model.futurebim.GuiProject;
+import com.futurebim.gui.model.futurebim.GuiProjectUser;
 import com.futurebim.gui.model.futurebim.GuiTask;
 import com.futurebim.gui.model.futurebim.GuiWorkflow;
 import com.futurebim.gui.model.ui.MenuItem;
@@ -57,7 +58,21 @@ public class WorkflowController extends UiControllerBase {
 
   @RequestMapping(path = "/create")
   public String createWorkflow(final Model model) {
-    model.addAttribute("breadCrumb", new ArrayList<>());
+    final GuiWorkflow workflow = GuiWorkflow.createNew();
+    
+    final List<FbIdNamePair> statusList = new ArrayList<>();
+    for (int i = 0; i < 4; i++) {
+      statusList.add(new FbIdNamePair(i, workflowHandler.getWorkflowStatusName(i)));
+    }
+    
+    final List<GuiProject> projects = projectsHandler.listProjects(this.getCurrentCompany().getId());
+    model.addAttribute("projects", projects);
+    model.addAttribute("workflow", workflow);
+    model.addAttribute("projectId", 0);
+    model.addAttribute("types", workflowHandler.listTypes());
+    model.addAttribute("statusList", statusList);
+    model.addAttribute("projectUsers", new ArrayList<>());
+    model.addAttribute("allUsers", userHandler.listCompanyUsers(this.getCurrentCompany().getId()));
 
     return "workflow/create";
   }
@@ -125,9 +140,17 @@ public class WorkflowController extends UiControllerBase {
     return taskHandler.listTasks(projectid);
   }
   
+  @FbGuiRequestGetDataMapping(value = "/data/user/list/{projectid}")
+  public List<GuiProjectUser> listAllProjectUsers(@PathVariable(name = "projectid") final long projectid) {
+    
+    return projectsHandler.listProjectUsers(projectid);
+  }
+  
   @FbGuiRequestGetDataMapping(value = "/data/workflow/read/{workflowid}")
   public GuiWorkflow readWorkflows(@PathVariable(name = "workflowid") final long workflowid) {
-    
+    if (workflowid == 0) {
+      return GuiWorkflow.createNew();
+    }
     return workflowHandler.getById(workflowid);
   }
   
@@ -160,6 +183,10 @@ public class WorkflowController extends UiControllerBase {
   @FbGuiRequestPostDataMapping(value = "/data/workflow/save")
   public GuiWorkflow saveWorkflow(@RequestBody final GuiWorkflow workflow) {
     
+    if (workflow.getReporter() == 0L) {
+      workflow.setReporter(this.getCurrentUser().getId());
+    }
+
     return workflowHandler.save(workflow);
   }
   

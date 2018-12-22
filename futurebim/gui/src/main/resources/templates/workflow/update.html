@@ -45,7 +45,7 @@
 					    <div class="form-group">
 					      <label class="control-label col-sm-2">[[#{workflow.workflow-status}]]</label>
 					      <select class="form-control fullline" ng-class="{'invalid': !validations.status}" required="required" ng-model="workflow.status" ng-change="validate()">
-					      	<option value="0"></option>
+					      	<option value="-1"></option>
 					      	<option th:each="status : ${statusList}" th:value="${status.getId()}" th:text="${status.getName()}"></option>
 					      </select>
 					      

@@ -11,7 +11,7 @@
         <header th:replace="layout/mainLayout :: header" ></header>
         <div th:replace="layout/mainLayout :: breadcrumb" ></div>
 		
-		<div class="page-content" ng-controller="ProjectController">
+		<div class="page-content" ng-controller="WorkflowController">
 			<div class="page-title"> 
 				<span th:text="#{workflow.workflow-create}" class="title-content"></span> 
 				<a class="toolbar-item" ng-disabled="!validate()" ng-class="{'disabled': !validate()}" ng-click="save()"><i class="material-icons">done</i></a>
@@ -19,46 +19,52 @@
 			</div>
 			
 		    <div class="panel panel-default project-detail-pannel">
-		    	<div class="panel-heading"><h4>[[#{project.projects-detail}]]</h4></div>
+		    	<div class="panel-heading"><h4>[[#{workflow.workflows-detail}]]</h4></div>
 		    	<div class="panel-body">
 				    <form class="form-horizontal" id="userform" name="userform" method="post" enctype="application/json" target="_blank">
 					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{project.project-name}]]</label>
-					      <input type="text" ng-class="{'invalid': !validations.projectName}" required="required" ng-model="project.projectName" ng-change="validate()" class="form-control fullline" th:title="#{company.companyname}" data-toggle="tooltip">
+							<label class="control-label col-sm-2">[[#{project.project}]]</label>
+							<select class="form-control fullline" ng-model="workflow.projectid" ng-change="validate()" ng-class="{'invalid': !validations.project}">
+								<option value="0"></option>
+								<option th:each="project : ${projects}" th:value="${project.getId()}" th:text="${project.getProjectName()}"></option>
+							</select>
+					      
 					    </div>
 					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{project.project-type}]]</label>
-					      <select class="form-control fullline" ng-class="{'invalid': !validations.projectType}" required="required" ng-model="project.projectType" ng-change="validate()">
+					      <label class="control-label col-sm-2">[[#{workflow.workflow-name}]]</label>
+					      <input type="text" ng-class="{'invalid': !validations.name}" required="required" ng-model="workflow.name" ng-change="validate()" class="form-control fullline" th:title="#{company.companyname}" data-toggle="tooltip">
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{workflow.workflow-type}]]</label>
+					      <select class="form-control fullline" ng-class="{'invalid': !validations.type}" required="required" ng-model="workflow.type" ng-change="validate()">
 					      	<option value="0"></option>
-					      	<option th:each="type : ${projectTypes}" th:value="${type.getType()}" th:text="${type.getName()}"></option>
+					      	<option th:each="type : ${types}" th:value="${type.getId()}" th:text="${type.getTypeName()}"></option>
 					      </select>
 					      
 					    </div>
 					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{project.project-status}]]</label>
-					      <select class="form-control fullline" ng-class="{'invalid': !validations.status}" required="required" ng-model="project.status" ng-change="validate()">
+					      <label class="control-label col-sm-2">[[#{workflow.responsible}]]</label>
+					      <select class="form-control fullline" ng-class="{'invalid': !validations.responsible}" required="required" ng-model="workflow.responsible" ng-change="validate()">
 					      	<option value="0"></option>
-					      	<option th:each="status : ${projectStatusList}" th:value="${status.getStatus()}" th:text="${status.getName()}"></option>
+					      	<option ng-repeat="user in users" value="{{user.userId}}">{{user.fullname}}</option>
 					      </select>
 					      
 					    </div>
 					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{project.project-startdate}]]</label>
-					      <md-datepicker ng-model="startdate" ng-class="{'invalid': !validations.startDate}" required="required" class="fullline" ng-change="validate()" th:title="#{project.project-startdate}" data-toggle="tooltip"></md-datepicker>
+					      <label class="control-label col-sm-2">[[#{workflow.workflow-status}]]</label>
+					      <select class="form-control fullline" ng-class="{'invalid': !validations.status}" required="required" ng-model="workflow.status" ng-change="validate()">
+					      	<option value="-1"></option>
+					      	<option th:each="status : ${statusList}" th:value="${status.getId()}" th:text="${status.getName()}"></option>
+					      </select>
+					      
 					    </div>
-					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{project.project-deadline}]]</label>
-					      <md-datepicker ng-model="deadline" md-min-date="startdate" ng-class="{'invalid': !validations.deadline}" class="fullline" ng-change="validate()" th:title="#{project.project-deadline}" data-toggle="tooltip"></md-datepicker>
-					    </div>					    					    
-						<input type="hidden" th:value="${projectId}" id="hdnpid" />					
+						<input type="hidden" th:value="${workflow.getId()}" id="hdnwid" />					
 				    </form>
 				</div>
 				
 				<div style="margin-top: 50px; border: 1px solid gray; padding: 10px;">{{test}}</div>
 			
 			</div>			
-			
-			
 		</div>
 		
         <footer th:replace="layout/mainLayout :: footer" ></footer>
