@@ -60,6 +60,7 @@
 	padding: 5px;
 	padding-top: 20px;
 	overflow-x: hidden; 
+	z-index: 9999;
 }
 
 .left-panel ul

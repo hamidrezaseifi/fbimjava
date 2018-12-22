@@ -70,9 +70,10 @@
 .line-date-text
 {
 	position: absolute;
-    bottom: -22px;
-    height: 20px;
-    
+    bottom: -42px;
+    height: 40px;
+    font-size: 10px;
+    writing-mode: vertical-lr;
 }
 
 .line-year-text
@@ -82,3 +83,23 @@
     height: 20px;
     
 }
+
+.task-line-container
+{
+	position: absolute;
+    height: 30px;
+	width: 100%;
+	border: 1px dashed gray;
+	background: rgba(200, 200, 200, 0.4);
+}
+
+.task-line-item
+{
+	position: absolute;
+    height: 26px;
+    line-height: 26px;
+	border: 1px solid gray;
+	background: #f9830d;
+	text-align: center;
+}
+
