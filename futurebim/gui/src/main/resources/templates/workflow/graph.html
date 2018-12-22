@@ -12,7 +12,7 @@
         <header th:replace="layout/mainLayout :: header" ></header>
         <div th:replace="layout/mainLayout :: breadcrumb" ></div>
 		
-		<div class="page-content" ng-controller="ProjectController">
+		<div class="page-content" ng-controller="WorkflowGraphController">
 			<div class="page-title"> 
 				<span th:text="#{workflow.workflow-graph}" class="title-content"></span> 
 			</div>
@@ -22,7 +22,7 @@
 			<div class="panel panel-danger timeline-container-panel">
 			    <div class="form-group">
 					<label class="">[[#{project.project}]]</label>
-					<select class="form-control fullline" ng-model="workflow.projectid" ng-change="validate()">
+					<select class="form-control fullline" ng-model="projectId" ng-change="loadWorkflowList()">
 						<option value="0"></option>
 						<option th:each="project : ${projects}" th:value="${project.getId()}" th:text="${project.getProjectName()}"></option>
 					</select>
@@ -31,19 +31,21 @@
 
 			    <div class="form-group">
 					<label class="">[[#{workflow.workflow}]]</label>
-					<select class="form-control fullline" ng-model="workflow.projectid" ng-change="validate()">
-						<option value="0"></option>
-						<option th:each="project : ${projects}" th:value="${project.getId()}" th:text="${project.getProjectName()}"></option>
+					<select class="form-control fullline" ng-model="workflowId" ng-change="loadWorkflow()">
+						<option ng-repeat="wf in workflowList" value="{{wf.id}}">{{wf.name}}</option>
 					</select>
 			      
 			    </div>
 			
-				<div class="timeline-container">
-					
+				<div class="timeline-container"> </div>
+				<div class="task-container"> 
+					<div ng-repeat="task in workflow.tasks" class="task-item" >
+						<input type="checkbox">
+						<span>{{task.name}}</span>
+					</div>
 				</div>
 		    </div>
-		    <input type="hidden" th:value="${workflow.getId()}" id="hdnwid" />			
-		    <input type="hidden" th:value="${workflow.getName()}" id="hdnwname" />			
+	    	<div style="margin-top: 50px; border: 1px solid gray; padding: 10px;">{{test}}</div>
 		</div>
 		
         <footer th:replace="layout/mainLayout :: footer" ></footer>

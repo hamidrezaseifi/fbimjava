@@ -14,14 +14,14 @@ import com.futurebim.common.rest.json.FBLocalDateTimeSerializer;
 import com.futurebim.common.rest.json.JsonConstants;
 import com.futurebim.gui.helper.DeadlineComparator;
 import com.futurebim.gui.helper.StartDateComparator;
-import com.futurebim.gui.model.futurebim.base.IDateLimited;
+import com.futurebim.gui.model.futurebim.base.DateLimitedBase;
 
 /**
  * The persistent class for the projects database table.
  *
  */
 
-public class GuiWorkflow implements IDateLimited {
+public class GuiWorkflow extends DateLimitedBase {
 
   private Long id;
 
@@ -296,8 +296,6 @@ public class GuiWorkflow implements IDateLimited {
     this.tasks.clear();
     if (tasks != null) {
       this.tasks.addAll(tasks);
-      
-      this.tasks.sort(new StartDateComparator());
     }
     return this;
   }
@@ -307,6 +305,7 @@ public class GuiWorkflow implements IDateLimited {
   public LocalDate getStartDate() {
 
     if (!this.tasks.isEmpty()) {
+      
       this.tasks.sort(new StartDateComparator());
 
       return this.tasks.get(0).getStartDate();

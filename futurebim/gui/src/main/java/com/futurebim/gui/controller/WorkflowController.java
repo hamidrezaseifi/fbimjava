@@ -137,8 +137,7 @@ public class WorkflowController extends UiControllerBase {
   @RequestMapping(path = "/graph")
   public String showWorkflowGraph(final Model model) {
     
-    final GuiWorkflow workflow = workflowHandler.getById(1L);
-    model.addAttribute("workflow", workflow);
+    model.addAttribute("projects", projectsHandler.listProjects(this.getCurrentCompany().getId()));
     
     return "workflow/graph";
   }

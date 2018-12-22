@@ -5,14 +5,14 @@
     overflow: hidden;
     left: 1px;
     top: 0px;
-    height: 680px;
+    height: 720px;
     padding: 10px;
 }
 
 .timeline-container-panel .form-group
 {
 	float: left;
-    width: 40%;
+    width: 49%;
     margin-left: 10px;
 }
 
@@ -31,7 +31,30 @@
     position: absolute;
     left: 0px;
     top: 50px;
-    width: calc(100% - 22px);
+    width: calc(100% - 222px);
+}
+
+.task-container
+{
+    margin: 10px;	
+    font-size: 14px;
+    border: lightgray 1px solid;
+    border-radius: 3px;
+    height: 600px;
+    position: absolute;
+    right: 0px;
+    top: 50px;
+    width: 180px;
+    overflow-x: hidden;
+}
+
+.task-container .task-item
+{
+    margin: 4px 2px;
+    padding: 4px;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;     
 }
 
 .vertical-line
@@ -41,5 +64,21 @@
     width: 0px;
     top: 0px;
     height: 600px;
+    
+}
+
+.line-date-text
+{
+	position: absolute;
+    bottom: -22px;
+    height: 20px;
+    
+}
+
+.line-year-text
+{
+	position: absolute;
+    bottom: -42px;
+    height: 20px;
     
 }
