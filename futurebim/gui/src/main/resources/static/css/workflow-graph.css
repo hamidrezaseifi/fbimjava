@@ -1,0 +1,45 @@
+
+.timeline-container-panel
+{
+	position: relative;
+    overflow: hidden;
+    left: 1px;
+    top: 0px;
+    height: 680px;
+    padding: 10px;
+}
+
+.timeline-container-panel .form-group
+{
+	float: left;
+    width: 40%;
+    margin-left: 10px;
+}
+
+.timeline-container-panel .form-group label
+{
+    width: 100px;
+}
+
+.timeline-container
+{
+    margin: 10px;	
+    font-size: 14px;
+    border: lightgray 1px solid;
+    border-radius: 3px;
+    height: 600px;
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    width: calc(100% - 22px);
+}
+
+.vertical-line
+{
+	border-left: lightgray 1px dashed;
+	position: absolute;
+    width: 0px;
+    top: 0px;
+    height: 600px;
+    
+}

@@ -134,7 +134,7 @@ public class WorkflowController extends UiControllerBase {
     return "workflow/delete";
   }
 
-  @RequestMapping(path = "/grapgh")
+  @RequestMapping(path = "/graph")
   public String showWorkflowGraph(final Model model) {
     
     final GuiWorkflow workflow = workflowHandler.getById(1L);
@@ -231,6 +231,14 @@ public class WorkflowController extends UiControllerBase {
     menus.add(m);
     
     m = new MenuItem("menu.create", messagesHelper.get("workflow.workflow-create"), "playlist_add", "/workflow/create");
+    
+    m.setActive(false);
+    if (getCurrentRelatedUrl().equals(m.getUrl())) {
+      m.setActive(true);
+    }
+    menus.add(m);
+    
+    m = new MenuItem("menu.graph", messagesHelper.get("workflow.workflow-graph"), "tune", "/workflow/graph");
     
     m.setActive(false);
     if (getCurrentRelatedUrl().equals(m.getUrl())) {

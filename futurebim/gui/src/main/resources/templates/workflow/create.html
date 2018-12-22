@@ -23,7 +23,7 @@
 		    	<div class="panel-body">
 				    <form class="form-horizontal" id="userform" name="userform" method="post" enctype="application/json" target="_blank">
 					    <div class="form-group">
-							<label class="control-label col-sm-2">[[#{project.project}]]</label>
+							<label class="">[[#{project.project}]]</label>
 							<select class="form-control fullline" ng-model="workflow.projectid" ng-change="validate()" ng-class="{'invalid': !validations.project}">
 								<option value="0"></option>
 								<option th:each="project : ${projects}" th:value="${project.getId()}" th:text="${project.getProjectName()}"></option>
@@ -31,7 +31,7 @@
 					      
 					    </div>
 					    <div class="form-group">
-					      <label class="control-label col-sm-2">[[#{workflow.workflow-name}]]</label>
+					      <label class="">[[#{workflow.workflow-name}]]</label>
 					      <input type="text" ng-class="{'invalid': !validations.name}" required="required" ng-model="workflow.name" ng-change="validate()" class="form-control fullline" th:title="#{company.companyname}" data-toggle="tooltip">
 					    </div>
 					    <div class="form-group">
