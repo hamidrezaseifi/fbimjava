@@ -13,8 +13,8 @@
 		
 		<div class="page-content" ng-controller="ProjectController">
 			<div class="page-title"> 
-				<span th:text="#{workflow.workflows-delete}" class="title-content"></span> 
-				<a class="toolbar-item" ng-click="deleteWorkflow()"><i class="material-icons">done</i></a>
+				<span th:text="#{project.projects-delete}" class="title-content"></span> 
+				<a class="toolbar-item" ng-click="deleteProject()"><i class="material-icons">done</i></a>
 				<a class="toolbar-item" href="/workflow"><i class="material-icons">cancel</i></a>
 			</div>
 			
@@ -25,8 +25,8 @@
 					<span id="deletemsgpanel">[[${msg}]]</span>
 				</div>
 		    </div>
-		    <input type="hidden" th:value="${workflow.getId()}" id="hdnwid" />			
-		    <input type="hidden" th:value="${workflow.getName()}" id="hdnwname" />			
+		    <input type="hidden" th:value="${projectId}" id="hdnpid" />			
+		    <input type="hidden" th:value="${projectName}" id="hdnpname" />			
 		</div>
 		
         <footer th:replace="layout/mainLayout :: footer" ></footer>
