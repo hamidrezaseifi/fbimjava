@@ -5,14 +5,14 @@
     overflow: hidden;
     left: 1px;
     top: 0px;
-    height: 720px;
+    height: 740px;
     padding: 10px;
 }
 
 .timeline-container-panel .form-group
 {
 	float: left;
-    width: 49%;
+    width: 30%;
     margin-left: 10px;
 }
 
@@ -23,15 +23,31 @@
 
 .timeline-container
 {
-    margin: 10px;	
+    margin: 10px;
     font-size: 14px;
     border: lightgray 1px solid;
     border-radius: 3px;
-    height: 600px;
+    height: 660px;
     position: absolute;
     left: 0px;
     top: 50px;
     width: calc(100% - 222px);
+    overflow-x: auto;
+}
+
+.timeline-container-inner
+{
+    height: 630px;
+    width: 3000px;
+}
+
+.horizontal-line
+{
+	border-bottom: lightgray 1px solid;
+	position: absolute;
+    width: 100%;
+	height:0;
+	left:0;
 }
 
 .task-container
@@ -72,8 +88,8 @@
 	position: absolute;
     bottom: -42px;
     height: 40px;
-    font-size: 10px;
-    writing-mode: vertical-lr;
+    font-size: 12px;
+    /*writing-mode: vertical-lr;*/
 }
 
 .line-year-text
@@ -101,5 +117,15 @@
 	border: 1px solid gray;
 	background: #f9830d;
 	text-align: center;
+}
+
+.today-vertical-line
+{
+	background: rgba(0, 75, 151, 0.4);
+	position: absolute;
+    width: 3px;
+    top: 0px;
+    bottom: 0px;
+    
 }
 

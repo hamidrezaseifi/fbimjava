@@ -7,8 +7,9 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 	$scope.workflowList = [];
 	$scope.workflowId = "1";
 	$scope.projectId = "1";
+	$scope.lineDays = "5";
 
-	$scope.timelineContainer = $(".timeline-container");
+	$scope.timelineContainer = $(".timeline-container-inner");
 	
 	$scope.loadTimeline = function(){
 		$scope.timelineContainer.html("");
@@ -18,52 +19,101 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 			return;
 		}
 		
-		var w = $scope.timelineContainer.width() - 40;
-		var vline_count = totalDays / 20;
-		var vline_width = w / vline_count;
-		var vLines = ""; 
-		for(var i=0; i<= vline_count; i++){
-			var vLine = $("<div class='vertical-line'></div>").appendTo($scope.timelineContainer);
-			vLine.css("left", i * vline_width + 20);
-		}
+		//--------------------------------------
+		var line_days = new Number($scope.lineDays);
+		//--------------------------------------		
+				
+		var margin = 20;
+		var line_width = 30;
 		
-		var startDate = moment($scope.workflow.startDate);
-		var curDate = moment($scope.workflow.startDate);
-		var startDay = moment($scope.workflow.startDate).date() + 0;
-		var dayDiff = Math.floor(totalDays / (vline_count - 1));
+		var container_height = $scope.timelineContainer.height();
+		
+		var vLine = ""; 
+		var lineHeight = 0;
+
+		vLine = $("<div class='horizontal-line'></div>").appendTo($scope.timelineContainer);
+		vLine.css("top", 46);
+		vLine.css("width", container_width);
+		
+		var workflowStartDate = moment($scope.workflow.startDate);
+		var endDate = moment($scope.workflow.deadline);
+		endDate = endDate.add(1, 'months').subtract(1, 'days');
+
+		var startDate = moment([workflowStartDate.year(), workflowStartDate.month(), 1]);
+		var curDate = moment([workflowStartDate.year(), workflowStartDate.month(), 1]);
+		
 		var lastYear = "";
-		for(var i=0; i<= vline_count; i++){
-			var vLine = $("<div class='line-date-text'>" + curDate.format("MMM DD") + "</div>").appendTo($scope.timelineContainer);
-			vLine.css("left", (i * vline_width) + 15);
+		var lastMonth = "";
+		var vline_count = 0;
+		while(curDate.isSameOrBefore(endDate)){
+			vLine = $("<div class='vertical-line'></div>").appendTo($scope.timelineContainer);
+			vLine.css("left", vline_count * line_width + 20);
+			vLine.css("top", 46);
+			vLine.css("height", container_height - 40);
+			lineHeight = vLine.height();
+			
+			vLine = $("<div class='line-date-text'>" + curDate.format("DD") + "</div>").appendTo($scope.timelineContainer);
+			vLine.css("left", vline_count * line_width + 13);
+			vLine.css("top", 32);
+
+			if(lastMonth != curDate.format("MMM")){
+				vLine = $("<div class='line-date-text'>" + curDate.format("MMM") + "</div>").appendTo($scope.timelineContainer);
+				vLine.css("left", vline_count * line_width + 10);
+				vLine.css("top", 16);
+				lastMonth = curDate.format("MMM");
+			}
+
 
 			if(lastYear != curDate.format("YYYY")){
-				//vLine = $("<div class='line-date-text line-year-text'>" + curDate.format("YYYY") + "</div>").appendTo($scope.timelineContainer);
-				//vLine.css("left", (i * vline_width) + 0);
+				vLine = $("<div class='line-date-text'>" + curDate.format("YYYY") + "</div>").appendTo($scope.timelineContainer);
+				vLine.css("left", vline_count * line_width + 10);
+				vLine.css("top", 0);
 				lastYear = curDate.format("YYYY");
 			}
 
-			curDate = curDate.add(dayDiff, 'days');
+			curDate = curDate.add(line_days, 'days');
+			vline_count++;
 		}
+		
+		var container_width = (vline_count * 30) + (margin * 2);
+		$scope.timelineContainer.css("width", container_width);
 
 		for(var i=0; i< $scope.workflow.tasks.length; i++){
 			var task = $scope.workflow.tasks[i];
 
 			var vLine = $("<div class='task-line-container'></div>").appendTo($scope.timelineContainer);
-			vLine.css("top", i * 35 + 30);
-			//task.startDate + ", " + task.deadline
+			vLine.css("top", i * 35 + 46);
+			vLine.css("width", container_width);
+
+			if(!task.showInGraph){
+				continue;
+			}
+
 			var taskStart = moment(task.startDate);
 			var taskEnd = moment(task.deadline);
-			var taskDurection = taskEnd.diff(taskStart, 'days', true);
-			var taskWidth = (vline_width * taskDurection) / dayDiff;
-			var taskStartUntilWorkflowStart = taskStart.diff(startDate, 'days', true);
-			var taskLeft = (vline_width * taskStartUntilWorkflowStart) / dayDiff;
+			var taskDurection = taskEnd.diff(taskStart, 'days');
+			var taskWidth = taskDurection * line_width / line_days;
+			var taskStartUntilGraphStart = taskStart.diff(startDate, 'days');
+			var taskLeft = (line_width * taskStartUntilGraphStart) / line_days;
 
-			vLine = $("<div class='task-line-item'>" + task.name + ", " + taskStartUntilWorkflowStart + ", " + taskDurection + ", " + task.startDate + " , " + task.deadline + "</div>").appendTo($scope.timelineContainer);
-			vLine.css("top", i * 35 + 2 + 30);
-			vLine.css("left", taskLeft + 20);
+			vLine = $("<div class='task-line-item'>" + task.name + "</div>").appendTo($scope.timelineContainer);
+			vLine.css("top", i * 35 + 46 + 2);
+			vLine.css("left", taskLeft + margin);
 			vLine.css("width", taskWidth);
 			
 		}
+		
+		if(moment().isBetween(startDate, endDate)){
+			
+			var todayUntilGraphStart = moment().diff(startDate, 'days');
+			var left = (line_width * todayUntilGraphStart) / line_days;
+			
+			vLine = $("<div class='today-vertical-line'></div>").appendTo($scope.timelineContainer);
+			vLine.css("left", left + margin);
+			vLine.css("top", 0);
+			vLine.css("height", container_height);			
+		}
+
 
 	}
 	
@@ -111,6 +161,10 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 			$scope.workflow.status = $scope.workflow.status + "";
 			$scope.workflow.responsible = $scope.workflow.responsible + "";
 			$scope.workflow.projectid = $scope.workflow.projectid + "";
+			
+			for(o in $scope.workflow.tasks){
+				$scope.workflow.tasks[o].showInGraph = true;
+			}
 			
 			delete $scope.workflow.created;
 			delete $scope.workflow.updated;
