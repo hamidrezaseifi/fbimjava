@@ -26,7 +26,6 @@
 						<option value="0"></option>
 						<option th:each="project : ${projects}" th:value="${project.getId()}" th:text="${project.getProjectName()}"></option>
 					</select>
-			      
 			    </div>
 
 			    <div class="form-group">
@@ -34,7 +33,6 @@
 					<select class="form-control fullline" ng-model="workflowId" ng-change="loadWorkflow()">
 						<option ng-repeat="wf in workflowList" value="{{wf.id}}">{{wf.name}}</option>
 					</select>
-			      
 			    </div>
 
 			    <div class="form-group">
@@ -47,7 +45,11 @@
 						<option value="50">50 [[#{graph.days}]]</option>
 						<option value="100">100 [[#{graph.days}]]</option>
 					</select>
-			      
+			    </div>
+
+			    <div class="form-group">
+					<button class="refresh" ng-click="loadWorkflow()"><i class="material-icons">refresh</i></button>
+					<span class="change-message" ng-click="loadWorkflow()" ng-if="newchanges">[[#{workflow.workflow-newchange}]]</span>					
 			    </div>
 			
 				<div class="timeline-container"> <div class="timeline-container-inner"> </div> </div>

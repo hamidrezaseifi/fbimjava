@@ -25,6 +25,8 @@ import com.futurebim.gui.model.futurebim.GuiProjectUser;
 import com.futurebim.gui.model.futurebim.GuiTask;
 import com.futurebim.gui.model.futurebim.GuiWorkflow;
 import com.futurebim.gui.model.ui.MenuItem;
+import com.futurebim.gui.model.ui.WorkflowCheck;
+import com.futurebim.gui.model.ui.WorkflowCheckResult;
 
 @Controller
 @RequestMapping(path = "/workflow")
@@ -183,6 +185,7 @@ public class WorkflowController extends UiControllerBase {
   @FbGuiRequestPostDataMapping(value = "/data/task/create/{workflowid}")
   public GuiTask createWorkflowTask(@PathVariable(name = "workflowid") final long workflowid, @RequestBody final GuiTask task) {
 
+    task.setReporter(this.getCurrentUser().getId());
     final GuiTask newTask = taskHandler.save(task);
     taskHandler.addWorkflowTask(workflowid, newTask.getId());
     return newTask;
@@ -208,6 +211,14 @@ public class WorkflowController extends UiControllerBase {
   public boolean deleteWorkflows(@RequestBody final GuiWorkflow workflow) {
 
     return workflowHandler.delete(workflow);
+  }
+
+  @FbGuiRequestPostDataMapping(value = "/data/changecheck/{workflowid}")
+  public WorkflowCheckResult checkForChangeInWorkflows(@PathVariable(name = "workflowid") final long workflowid, @RequestBody final WorkflowCheck checkList) {
+
+    final WorkflowCheckResult res = new WorkflowCheckResult(checkList.getWorkflowId());
+
+    return res;
   }
   
   @Override

@@ -106,6 +106,9 @@ public class FbRestPaths {
 		public static final String WORKFLOW_WORKFLOWTYPE_READALL_BASE = "/workflowtype/readall";
 		public static final String WORKFLOW_WORKFLOWTYPE_READALL = WORKFLOW_BASE + WORKFLOW_WORKFLOWTYPE_READALL_BASE;
 
+		public static final String WORKFLOW_CHECKVERSION_BASE = "/workflowtype/checkversion";
+		public static final String WORKFLOW_CHECKVERSION = WORKFLOW_BASE + WORKFLOW_CHECKVERSION_BASE;
+
 		public static final String GENERALDATA_BASE = "/general";
 
 		public static final String GENERALDATA_VALUELIST_BASE = "/valuelist";

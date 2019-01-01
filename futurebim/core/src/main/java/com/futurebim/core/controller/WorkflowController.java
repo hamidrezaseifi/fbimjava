@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.futurebim.common.model.edo.CheckVersionEdo;
 import com.futurebim.common.model.edo.FBCollectionEdo;
 import com.futurebim.common.model.edo.WorkflowEdo;
 import com.futurebim.common.model.edo.WorkflowTypeEdo;
@@ -47,9 +48,14 @@ public class WorkflowController {
   public boolean deleteWorkflow(@RequestBody final WorkflowEdo workflowEdo) throws StorageException {
     return workflowHandler.delete(Workflow.fromEdo(workflowEdo));
   }
-  
+
   @FbCoreRequestGetDataMapping(value = FbRestPaths.Core.WORKFLOW_WORKFLOWTYPE_READALL_BASE)
   public FBCollectionEdo<WorkflowTypeEdo> readWorkflowTypes() throws StorageException {
+    return new FBCollectionEdo<>(WorkflowType.toEdoList(workflowHandler.listWorkflowTypes()));
+  }
+  
+  @FbCoreRequestPostDataMapping(value = FbRestPaths.Core.WORKFLOW_CHECKVERSION_BASE)
+  public CheckVersionEdo checkWorkflowVersion() throws StorageException {
     return new FBCollectionEdo<>(WorkflowType.toEdoList(workflowHandler.listWorkflowTypes()));
   }
 

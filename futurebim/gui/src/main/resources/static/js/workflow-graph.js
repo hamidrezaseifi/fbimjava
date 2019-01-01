@@ -8,6 +8,7 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 	$scope.workflowId = "1";
 	$scope.projectId = "1";
 	$scope.lineDays = "5";
+	$scope.newchanges = false;
 
 	$scope.timelineContainer = $(".timeline-container-inner");
 	
@@ -25,6 +26,19 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 				
 		var margin = 20;
 		var line_width = 30;
+		
+		var taskContainerHeight = 40;
+		var showTasks = $scope.workflow.tasks.length;
+		var lastTop = 0;
+		for(var i=0; i< $scope.workflow.tasks.length; i++){
+			var task = $scope.workflow.tasks[i];
+
+			if(!task.showInGraph){
+				showTasks --;
+			}
+		}
+		
+		lastTop = showTasks * (taskContainerHeight + 5) + 50;
 		
 		var container_height = $scope.timelineContainer.height();
 		
@@ -49,7 +63,7 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 			vLine = $("<div class='vertical-line'></div>").appendTo($scope.timelineContainer);
 			vLine.css("left", vline_count * line_width + 20);
 			vLine.css("top", 46);
-			vLine.css("height", container_height - 40);
+			vLine.css("height", lastTop);
 			lineHeight = vLine.height();
 			
 			vLine = $("<div class='line-date-text'>" + curDate.format("DD") + "</div>").appendTo($scope.timelineContainer);
@@ -78,16 +92,19 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 		var container_width = (vline_count * 30) + (margin * 2);
 		$scope.timelineContainer.css("width", container_width);
 
+		var taskHeight = taskContainerHeight - 4;
+		var index = 0;
 		for(var i=0; i< $scope.workflow.tasks.length; i++){
 			var task = $scope.workflow.tasks[i];
-
-			var vLine = $("<div class='task-line-container'></div>").appendTo($scope.timelineContainer);
-			vLine.css("top", i * 35 + 46);
-			vLine.css("width", container_width);
 
 			if(!task.showInGraph){
 				continue;
 			}
+
+			var taskContainer = $("<div class='task-line-container'></div>").appendTo($scope.timelineContainer);
+			taskContainer.css("top", index * (taskContainerHeight + 5) + 46);
+			taskContainer.css("width", container_width);
+			taskContainer.css("height", taskContainerHeight);
 
 			var taskStart = moment(task.startDate);
 			var taskEnd = moment(task.deadline);
@@ -96,22 +113,33 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 			var taskStartUntilGraphStart = taskStart.diff(startDate, 'days');
 			var taskLeft = (line_width * taskStartUntilGraphStart) / line_days;
 
-			vLine = $("<div class='task-line-item'>" + task.name + "</div>").appendTo($scope.timelineContainer);
-			vLine.css("top", i * 35 + 46 + 2);
-			vLine.css("left", taskLeft + margin);
-			vLine.css("width", taskWidth);
+			var taskItem = $("<div class='task-line-item task-line-item" + task.id + "' data-taskid='" + task.id + "'><div class='taskname'>" + task.name + "</div></div>").appendTo($scope.timelineContainer);
+			taskItem.css("top", index * (taskContainerHeight + 5) + 46 + 2);
+			taskItem.css("left", taskLeft + margin);
+			taskItem.css("width", taskWidth);
+			taskItem.css("height", taskHeight);
+			taskItem.css("line-height", taskHeight + "px");
 			
+			if(task.editable){
+				$("<i class='material-icons'>edit</i>").appendTo(taskItem);
+			}
+						
+			//taskItem.resizable({ animate: true, containment: taskContainer, ghost: true, handles: "e", });
+			//taskItem.draggable({ axis: "x", cursor: "crosshair", stop: function() {}, });
+			$scope.test = JSON.stringify(task);
+			index ++;
 		}
 		
-		if(moment().isBetween(startDate, endDate)){
+		var now = moment();
+		if(now.isBetween(startDate, endDate)){
 			
-			var todayUntilGraphStart = moment().diff(startDate, 'days');
+			var todayUntilGraphStart = now.diff(startDate, 'days');
 			var left = (line_width * todayUntilGraphStart) / line_days;
 			
 			vLine = $("<div class='today-vertical-line'></div>").appendTo($scope.timelineContainer);
 			vLine.css("left", left + margin);
 			vLine.css("top", 0);
-			vLine.css("height", container_height);			
+			vLine.css("height", lastTop + 50);			
 		}
 
 
@@ -150,6 +178,7 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 			return;
 		}
 		$scope.test = new Date() + " : " + JSON.stringify($scope.workflow);
+		
 		$http({
 			method: "GET",
 			url: "/workflow/data/workflow/read/" + $scope.workflowId, 
@@ -173,6 +202,10 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 			$scope.test = new Date() + " : " + JSON.stringify($scope.workflow);
 			$scope.loadTimeline();
 			
+			$scope.newchanges = false;
+			
+			checkNewWorkflowChanges();
+			
 		}, function errorCallback(response){ 
 			$scope.$parent.showloading = false;		
 			
@@ -180,6 +213,37 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 		
 	}
 
+	function checkNewWorkflowChanges(){
+		var data = {workflowId : $scope.workflowId, taskList: []};
+		for(var i=0; i< $scope.workflow.tasks.length; i++){
+			var t = {id: $scope.workflow.tasks[i].id, value: $scope.workflow.tasks[i].version};
+			
+			data.taskList.push(t);
+
+		}
+		
+		alert(JSON.stringify(data));
+		//return;
+		$http({
+			method: "POST",
+			url: "/workflow/data/changecheck/" + $scope.workflowId, 
+			timeout: 100000,
+			data: data,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(function(response){
+			alert("res: " + response.data);	
+			
+
+		}, function errorCallback(response){
+			
+			
+			
+			alert("error: " + response.data.error);	
+			
+		});	
+	}
 	
 	
 	$scope.loadWorkflowList();
