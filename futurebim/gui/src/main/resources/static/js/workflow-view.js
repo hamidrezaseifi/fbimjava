@@ -24,13 +24,28 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 			$scope.tasksColumns[o].renderValue = renderUsersActions;
 		}
 		else{
-			$scope.tasksColumns[o].renderValue = renderData;
+			if($scope.tasksColumns[o].field == "subtask"){
+				$scope.tasksColumns[o].renderValue = renderSubTasklist;
+			}
+			else{
+				$scope.tasksColumns[o].renderValue = renderData;
+			}			
 		}			
 		
 	}
 
 	function renderData($scope, row, index) {
 		return row[this.field];
+	}
+
+	function renderSubTasklist($scope, row, index) {
+		res = "";
+		for(index in row.subTasks){
+			var sub = row.subTasks[index]; 
+			res += "<div >" + sub.title + " (" + sub.progress + "%)" +"</div>";
+		}
+		
+		return res;
 	}
 
 	$scope.validations = {name: true , type: true, responsible: true, status: true };

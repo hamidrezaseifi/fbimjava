@@ -1,9 +1,6 @@
 package com.futurebim.common.model.edo;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.futurebim.common.rest.json.JsonConstants;
@@ -12,25 +9,19 @@ import com.futurebim.common.rest.json.JsonConstants;
  * The persistent class for the users database table.
  *
  */
-public class TaskEdo {
+public class SubTaskEdo {
 
 	private Long id;
 
-	private Long projectid;
+	private Long taskid;
 
-	private String name;
+	private String title;
+
+	private int progress;
 
 	private String comments;
 
 	private Long reporter;
-
-	private Long assignedTo;
-
-	@JsonFormat(pattern = JsonConstants.DATE_FORMAT_ISO)
-	private LocalDate startDate;
-
-	@JsonFormat(pattern = JsonConstants.DATE_FORMAT_ISO)
-	private LocalDate deadline;
 
 	private int status;
 
@@ -41,8 +32,6 @@ public class TaskEdo {
 
 	@JsonFormat(pattern = JsonConstants.DATETIME_FORMAT_ISO)
 	private LocalDateTime updated;
-
-	private final List<SubTaskEdo> subTasks = new ArrayList<>();
 
 	/**
 	 * @return the id
@@ -55,35 +44,49 @@ public class TaskEdo {
 	 * @param id the id to set
 	 */
 	public void setId(final Long id) {
-		this.id = id;
+		this.id = id != null ? id : 0;
 	}
 
 	/**
-	 * @return the projectid
+	 * @return the taskid
 	 */
-	public Long getProjectid() {
-		return projectid;
+	public Long getTaskid() {
+		return taskid;
 	}
 
 	/**
-	 * @param projectid the projectid to set
+	 * @param taskid the taskid to set
 	 */
-	public void setProjectid(final Long projectid) {
-		this.projectid = projectid;
+	public void setTaskid(final Long taskid) {
+		this.taskid = taskid != null ? taskid : 0;
 	}
 
 	/**
-	 * @return the name
+	 * @return the title
 	 */
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param title the title to set
 	 */
-	public void setName(final String name) {
-		this.name = name;
+	public void setTitle(final String title) {
+		this.title = title;
+	}
+
+	/**
+	 * @return the progress
+	 */
+	public int getProgress() {
+		return progress;
+	}
+
+	/**
+	 * @param progress the progress to set
+	 */
+	public void setProgress(final int progress) {
+		this.progress = progress;
 	}
 
 	/**
@@ -111,73 +114,7 @@ public class TaskEdo {
 	 * @param reporter the reporter to set
 	 */
 	public void setReporter(final Long reporter) {
-		this.reporter = reporter;
-	}
-
-	/**
-	 * @return the assignedTo
-	 */
-	public Long getAssignedTo() {
-		return assignedTo;
-	}
-
-	/**
-	 * @param assignedTo the assignedTo to set
-	 */
-	public void setAssignedTo(final Long assignedTo) {
-		this.assignedTo = assignedTo;
-	}
-
-	/**
-	 * @return the startDate
-	 */
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-
-	/**
-	 * @param startDate the startDate to set
-	 */
-	public void setStartDate(final LocalDate startDate) {
-		this.startDate = startDate;
-	}
-
-	/**
-	 * @return the deadline
-	 */
-	public LocalDate getDeadline() {
-		return deadline;
-	}
-
-	/**
-	 * @param deadline the deadline to set
-	 */
-	public void setDeadline(final LocalDate deadline) {
-		this.deadline = deadline;
-	}
-
-	/**
-	 * @return the subTasks
-	 */
-	public List<SubTaskEdo> getSubTasks() {
-		return subTasks;
-	}
-
-	/**
-	 * @param subTasks the subTasks to set
-	 */
-	public void setSubTasks(final List<SubTaskEdo> subTasks) {
-		this.subTasks.clear();
-		if (subTasks != null) {
-			this.subTasks.addAll(subTasks);
-		}
-	}
-
-	/**
-	 * @param subTasks the subTasks to set
-	 */
-	public void addSubTask(final SubTaskEdo subTask) {
-		this.subTasks.add(subTask);
+		this.reporter = reporter != null ? reporter : 0;
 	}
 
 	/**

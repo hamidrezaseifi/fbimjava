@@ -41,7 +41,12 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 			$scope.tasksColumns[o].renderValue = renderUsersActions;
 		}
 		else{
-			$scope.tasksColumns[o].renderValue = renderData;
+			if($scope.tasksColumns[o].field == "subtask"){
+				$scope.tasksColumns[o].renderValue = renderSubTasklist;
+			}
+			else{
+				$scope.tasksColumns[o].renderValue = renderData;
+			}			
 		}			
 		
 	}
@@ -50,6 +55,17 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		return row[this.field];
 	}
 	
+
+	function renderSubTasklist($scope, row, index) {
+		res = "";
+		for(index in row.subTasks){
+			var sub = row.subTasks[index]; 
+			res += "<div >" + sub.title + " (" + sub.progress + "%)" +"</div>";
+		}
+		
+		return res;
+	}
+
 	function renderUsersActions($scope, row, index) {
 		var actions = '<a class="toolbar-item user-toolbar-item-edit" userid="' + row['userId'] + '"><i class="material-icons">edit</i></a>';
 		actions += '<a class="toolbar-item user-toolbar-item-delete" userid="' + row['userId'] + '"><i class="material-icons">delete</i></a>';
