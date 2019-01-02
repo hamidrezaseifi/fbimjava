@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 
+import com.futurebim.common.model.edo.CheckVersionEdo;
 import com.futurebim.common.model.edo.FBCollectionEdo;
 import com.futurebim.common.model.edo.WorkflowEdo;
 import com.futurebim.common.model.edo.WorkflowTypeEdo;
@@ -16,10 +17,13 @@ import com.futurebim.gui.bl.ITaskHandler;
 import com.futurebim.gui.bl.IUserHandler;
 import com.futurebim.gui.bl.IWorkflowHandler;
 import com.futurebim.gui.configuration.UiConfiguration;
+import com.futurebim.gui.helper.FbIPair;
 import com.futurebim.gui.helper.IUiRestTemplateCall;
 import com.futurebim.gui.helper.MessagesHelper;
 import com.futurebim.gui.model.futurebim.GuiWorkflow;
 import com.futurebim.gui.model.futurebim.GuiWorkflowType;
+import com.futurebim.gui.model.ui.GuiWorkflowCheck;
+import com.futurebim.gui.model.ui.GuiWorkflowCheckResult;
 import com.futurebim.gui.model.ui.UiSessionUserInfo;
 
 @Service
@@ -121,6 +125,31 @@ public class WorkflowHandler implements IWorkflowHandler {
     final List<GuiWorkflowType> list = GuiWorkflowType.fromEdoList(projectsEdo.getItems());
     
     return list;
+  }
+
+  @Override
+  public GuiWorkflowCheckResult checkWorkflowVersion(final GuiWorkflowCheck checkingWorkflow) {
+    logger.debug("check workflow version");
+
+    final CheckVersionEdo checkVersionEdo = new CheckVersionEdo();
+    checkVersionEdo.setId(checkingWorkflow.getWorkflowId());
+    for (final FbIPair<Long, Integer> fp : checkingWorkflow.getTaskList()) {
+      final CheckVersionEdo checkTask = new CheckVersionEdo();
+      checkTask.setId(fp.getId());
+      checkTask.setVersion(fp.getValue());
+      checkVersionEdo.addCheckList(checkTask);
+    }
+    
+    final CheckVersionEdo checkVersionResultEdo = restTemplateCall.callRestPost(coreAccessConfig.getWorkflowCheck(), EModule.CORE, checkVersionEdo, CheckVersionEdo.class, true);
+    
+    final GuiWorkflowCheckResult result = new GuiWorkflowCheckResult(checkingWorkflow.getWorkflowId());
+    for (final CheckVersionEdo chk : checkVersionResultEdo.getCheckList()) {
+      final FbIPair<Long, Integer> fp = checkingWorkflow.getById(chk.getId());
+      if (fp != null) {
+        result.addTaskCheckItem(fp.getId(), fp.getValue() == chk.getVersion());
+      }
+    }
+    return result;
   }
 
 }

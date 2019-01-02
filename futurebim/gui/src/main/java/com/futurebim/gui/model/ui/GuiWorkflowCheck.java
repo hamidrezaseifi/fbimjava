@@ -5,18 +5,10 @@ import java.util.List;
 
 import com.futurebim.gui.helper.FbIPair;
 
-public class WorkflowCheckResult {
-
+public class GuiWorkflowCheck {
+  
   private Long                               workflowId;
-  private final List<FbIPair<Long, Boolean>> taskList = new ArrayList<>();
-
-  public WorkflowCheckResult() {
-    
-  }
-
-  public WorkflowCheckResult(final Long workflowId) {
-    this.workflowId = workflowId;
-  }
+  private final List<FbIPair<Long, Integer>> taskList = new ArrayList<>();
   
   /**
    * @return the workflowId
@@ -24,29 +16,38 @@ public class WorkflowCheckResult {
   public Long getWorkflowId() {
     return workflowId;
   }
-
+  
   /**
    * @param workflowId the workflowId to set
    */
   public void setWorkflowId(final Long workflowId) {
     this.workflowId = workflowId;
   }
-
+  
   /**
    * @return the taskList
    */
-  public List<FbIPair<Long, Boolean>> getTaskList() {
+  public List<FbIPair<Long, Integer>> getTaskList() {
     return taskList;
   }
-
+  
   /**
    * @param taskList the taskList to set
    */
-  public void setTaskList(final List<FbIPair<Long, Boolean>> taskList) {
+  public void setTaskList(final List<FbIPair<Long, Integer>> taskList) {
     this.taskList.clear();
     if (taskList != null) {
       this.taskList.addAll(taskList);
     }
   }
   
+  public FbIPair<Long, Integer> getById(final Long id) {
+    for (final FbIPair<Long, Integer> fp : taskList) {
+      if (fp.getId() == id) {
+        return fp;
+      }
+    }
+    return null;
+  }
+
 }

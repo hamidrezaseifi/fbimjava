@@ -13,7 +13,7 @@ public class CheckVersionEdo {
 
 	private int version;
 
-	private List<CheckVersionEdo> checkList = new ArrayList<>();
+	private final List<CheckVersionEdo> checkList = new ArrayList<>();
 
 	public CheckVersionEdo() {
 	}
@@ -48,7 +48,17 @@ public class CheckVersionEdo {
 	 * @param checkList the checkList to set
 	 */
 	public void setCheckList(final List<CheckVersionEdo> checkList) {
-		this.checkList = checkList;
+		this.checkList.clear();
+		if (checkList != null) {
+			this.checkList.addAll(checkList);
+		}
+	}
+
+	/**
+	 * @param checkItem the checkList to add
+	 */
+	public void addCheckList(final CheckVersionEdo checkItem) {
+		this.checkList.add(checkItem);
 	}
 
 }

@@ -9,9 +9,11 @@ import com.futurebim.common.exceptions.EExceptionType;
 import com.futurebim.common.exceptions.FBCustomizedException;
 import com.futurebim.common.model.enums.EModule;
 import com.futurebim.core.bl.IWorkflowHandler;
+import com.futurebim.core.dao.TaskDao;
 import com.futurebim.core.dao.WorkflowDao;
 import com.futurebim.core.dao.WorkflowTypeDao;
 import com.futurebim.core.dao.exceptions.StorageException;
+import com.futurebim.core.model.CheckVersion;
 import com.futurebim.core.model.Workflow;
 import com.futurebim.core.model.WorkflowType;
 
@@ -20,6 +22,9 @@ public class WorkflowHandler implements IWorkflowHandler {
 
   @Autowired
   WorkflowDao workflowkDao;
+  
+  @Autowired
+  TaskDao taskDao;
   
   @Autowired
   WorkflowTypeDao workflowTypekDao;
@@ -68,5 +73,12 @@ public class WorkflowHandler implements IWorkflowHandler {
   public List<WorkflowType> listWorkflowTypes() throws StorageException {
     
     return workflowTypekDao.list();
+  }
+
+  @Override
+  public CheckVersion checkWorkflowVersion(final CheckVersion checkingWorkflow) {
+    final CheckVersion checkVersion = workflowkDao.checkWorkflowVersion(checkingWorkflow);
+    checkVersion.setCheckList(taskDao.checkTaskListVersion(checkingWorkflow.getCheckList()));
+    return checkVersion;
   }
 }

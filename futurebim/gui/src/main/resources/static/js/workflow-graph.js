@@ -204,7 +204,7 @@ fbimApp.controller('WorkflowGraphController', function ($scope, $http, $sce, $el
 			
 			$scope.newchanges = false;
 			
-			checkNewWorkflowChanges();
+			//checkNewWorkflowChanges();
 			
 		}, function errorCallback(response){ 
 			$scope.$parent.showloading = false;		

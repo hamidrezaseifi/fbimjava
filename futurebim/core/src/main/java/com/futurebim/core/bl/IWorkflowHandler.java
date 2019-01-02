@@ -3,6 +3,7 @@ package com.futurebim.core.bl;
 import java.util.List;
 
 import com.futurebim.core.dao.exceptions.StorageException;
+import com.futurebim.core.model.CheckVersion;
 import com.futurebim.core.model.Workflow;
 import com.futurebim.core.model.WorkflowType;
 
@@ -17,5 +18,7 @@ public interface IWorkflowHandler {
   boolean delete(final Workflow workflow) throws StorageException;
   
   public List<WorkflowType> listWorkflowTypes() throws StorageException;
+  
+  public CheckVersion checkWorkflowVersion(final CheckVersion checkingWorkflow);
   
 }

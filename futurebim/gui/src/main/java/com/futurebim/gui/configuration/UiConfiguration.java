@@ -278,6 +278,13 @@ public class UiConfiguration {
       return FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.WORKFLOW_WORKFLOWTYPE_READALL;
     }
     
+    /**
+     * @return the workflowCheck
+     */
+    public String getWorkflowCheck() {
+      return FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.WORKFLOW_CHECKVERSION;
+    }
+    
   }
 
 }
