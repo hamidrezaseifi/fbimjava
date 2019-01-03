@@ -17,8 +17,9 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	$scope.taskStatusList = taskStatusList;
 	$scope.tasksColumns = tasksColumns;
 	$scope.tableTasks = false;
-	$scope.editingProjectTask = false;
+	$scope.editingTask = false;
 	$scope.showTaskEdit = "hide";
+	$scope.allProjectUsers = false;
 	
 	for(o in $scope.usersColumns){
 		$scope.usersColumns[o].show = true;
@@ -96,16 +97,16 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 		task = task !== undefined ? task : false;
 		
-		$scope.editingProjectTask = angular.copy(task);
+		$scope.editingTask = angular.copy(task);
 		
 		if(task){
-			$scope.editingProjectTask.status = $scope.editingProjectTask.status + "";
-			$scope.editingProjectTask.assignedTo = $scope.editingProjectTask.assignedTo + "";
-			$scope.editingProjectTask.startDate = new Date($scope.editingProjectTask.startDate);			
-			$scope.editingProjectTask.deadline = moment($scope.editingProjectTask.deadline).isValid() ? new Date($scope.editingProjectTask.deadline) : null;			
+			$scope.editingTask.status = $scope.editingTask.status + "";
+			$scope.editingTask.assignedTo = $scope.editingTask.assignedTo + "";
+			$scope.editingTask.startDate = new Date($scope.editingTask.startDate);			
+			$scope.editingTask.deadline = moment($scope.editingTask.deadline).isValid() ? new Date($scope.editingTask.deadline) : null;			
 		}
 		else{
-			$scope.editingProjectTask = {
+			$scope.editingTask = {
 					id: 0, 
 					projectId: $scope.projectId, 
 					name: "", 
@@ -115,7 +116,7 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 					version: 1, 
 					status: "1", 
 					reporter: 0, 
-					assignedTo: 0, 
+					assignedTo: "0", 
 				};
 		}
 		
@@ -143,6 +144,7 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 			createUsersTable();
 			createTaskTable();
 
+			$scope.allProjectUsers = $scope.project.users;
 
 		}, function errorCallback(response){ 
 			$scope.$parent.showloading = false;		
@@ -257,20 +259,20 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 	}
 
 	$scope.addProjectTask = function(){
-		if(!$scope.editingProjectTask){
+		if(!$scope.editingTask){
 			return;
 		}
 		
 		var editTask = {
 			id: 0, 
 			projectid: $scope.projectId, 
-			name: $scope.editingProjectTask.name, 
-			comments: $scope.editingProjectTask.comments, 
-			startDate: moment($scope.editingProjectTask.startDate).format("YYYY-MM-DD"), 
-			deadline: $scope.editingProjectTask.deadline !== null ? moment($scope.editingProjectTask.deadline).format("YYYY-MM-DD") : "", 
-			status: $scope.editingProjectTask.status, 
+			name: $scope.editingTask.name, 
+			comments: $scope.editingTask.comments, 
+			startDate: moment($scope.editingTask.startDate).format("YYYY-MM-DD"), 
+			deadline: $scope.editingTask.deadline !== null ? moment($scope.editingTask.deadline).format("YYYY-MM-DD") : "", 
+			status: $scope.editingTask.status, 
 			reporter: 0, 
-			assignedTo: $scope.editingProjectTask.assignedTo, 
+			assignedTo: $scope.editingTask.assignedTo, 
 		};
 		
 		$http({
@@ -294,8 +296,8 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 	}	
 
-	$scope.editProjectTask = function(){
-		if(!$scope.editingProjectTask){
+	$scope.saveTask = function(){
+		if(!$scope.editingTask){
 			return;
 		}
 		
@@ -305,16 +307,16 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		}
 		
 		var editTask = {
-			id: $scope.editingProjectTask.id, 
+			id: $scope.editingTask.id, 
 			projectid: $scope.projectId, 
-			name: $scope.editingProjectTask.name, 
-			comments: $scope.editingProjectTask.comments, 
-			startDate: moment($scope.editingProjectTask.startDate).format("YYYY-MM-DD"), 
-			deadline: $scope.editingProjectTask.deadline !== null ? moment($scope.editingProjectTask.deadline).format("YYYY-MM-DD") : "", 
-			status: $scope.editingProjectTask.status, 
-			reporter: $scope.editingProjectTask.reporter, 
-			assignedTo: $scope.editingProjectTask.assignedTo, 
-			version: $scope.editingProjectTask.version, 
+			name: $scope.editingTask.name, 
+			comments: $scope.editingTask.comments, 
+			startDate: moment($scope.editingTask.startDate).format("YYYY-MM-DD"), 
+			deadline: $scope.editingTask.deadline !== null ? moment($scope.editingTask.deadline).format("YYYY-MM-DD") : "", 
+			status: $scope.editingTask.status, 
+			reporter: $scope.editingTask.reporter, 
+			assignedTo: $scope.editingTask.assignedTo, 
+			version: $scope.editingTask.version, 
 		};
 		
 		$http({
@@ -380,19 +382,19 @@ fbimApp.controller('ProjectController', function ($scope, $http, $sce, $element,
 		
 		var isValid = true;
 		
-		if(!$scope.editingProjectTask){
+		if(!$scope.editingTask){
 			return;
 		}
 		
-		if($scope.editingProjectTask.name == undefined || $scope.editingProjectTask.name.length < 3){
+		if($scope.editingTask.name == undefined || $scope.editingTask.name.length < 3){
 			isValid = false;
 		}
 		
-		if($scope.editingProjectTask.startDate == undefined || $scope.editingProjectTask.startDate == null){
+		if($scope.editingTask.startDate == undefined || $scope.editingTask.startDate == null){
 			isValid = false;
 		}
 		
-		if($scope.editingProjectTask.deadline == undefined || $scope.editingProjectTask.deadline == null){
+		if($scope.editingTask.deadline == undefined || $scope.editingTask.deadline == null){
 			isValid = false;
 		}
 			

@@ -259,3 +259,88 @@ md-datepicker.invalid .md-datepicker-input-container
 	background-color: rgba(100, 140, 180, 0.5);
 }
 
+.dialog-container
+{
+	margin: auto;
+	margin-top: calc(50vh - 275px);
+    border: 1px solid gray;
+    background-color: white;
+    width: 600px;
+    height: 550px;
+    border-radius: 7px;
+}
+
+.dialog-container .dialog-content-container
+{
+    padding: 10px;
+}
+
+.dialog-container-toolbar
+{
+	border-bottom: 1px solid gray;
+    padding: 10px;
+    padding-top: 2px;
+    height: 40px;
+    background: #1d2f63;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #fdfde5;
+}
+
+.dialog-container-toolbar .list-icon
+{
+	margin-top: 5px;
+}
+
+.dialog-container-toolbar .title
+{
+	line-height: 40px;
+	font-weight: bold;
+}
+
+.dialog-content-container div:not(.dialog-button-container)
+{
+    padding: 5px;
+}
+
+.dialog-content-container div label
+{
+    width: 100px;
+}
+
+.dialog-button-container
+{
+	padding: 0px;
+    background-color: lightgray;
+    height: 50px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.dialog-button-container button
+{
+    float: right;
+	margin-left: 10px;;
+}
+
+md-datepicker .md-datepicker-triangle-button
+{
+	display: none;
+}
+
+.task-edit-container label
+{
+	width: 120px !important;
+}
+
+input.fullline, 
+textarea.fullline, 
+md-datepicker.fullline, 
+select.fullline 
+{
+    width: calc(100% - 150px);
+    float: none;
+    display: inline-block;
+}
+
+

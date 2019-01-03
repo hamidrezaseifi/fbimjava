@@ -1,0 +1,23 @@
+
+			<div th:fragment="taskeditdialog">
+			<div class="full-modal-background" ng-hide="showTaskEdit == 'hide'">
+				<div class="dialog-container task-edit-container" layout="column">
+					<div class="dialog-container-toolbar">
+						<span class="title">[[#{task.taskdetail}]]</span>
+						<i th:tile="#{common.close}" class="material-icons list-icon" ng-click="toggleTaskEdit('hide')">close</i>
+					</div>
+					<div class="dialog-content-container" flex>
+						<div><label th:text="#{task.name}"></label> <span><input class="form-control fullline" ng-model="editingTask.name" /></span></div>
+						<div><label th:text="#{task.startdate}"></label> <md-datepicker ng-model="editingTask.startDate" required="required" class="fullline" ng-change="validate()" th:title="#{task.startdate}" data-toggle="tooltip"></md-datepicker></div>
+						<div><label th:text="#{task.deadline}"></label> <md-datepicker ng-model="editingTask.deadline" md-min-date="editingTask.startDate" required="required" class="fullline" ng-change="validate()" th:title="#{task.deadline}" data-toggle="tooltip"></md-datepicker></div>
+						<div><label th:text="#{task.assignedto}"></label> <select class="form-control fullline" ng-model="editingTask.assignedTo"><option value="0"></option><option ng-repeat="item in allProjectUsers" value="{{item.userId}}">{{item.fullname}}</option></select></div>
+						<div><label th:text="#{task.status}"></label> <select class="form-control fullline" ng-model="editingTask.status"><option ng-repeat="item in taskStatusList" value="{{item.id}}">{{item.name}}</option></select></div>
+						<div><label th:text="#{task.comments}"></label> <span><textarea class="form-control fullline" ng-model="editingTask.comments" ></textarea></span></div>
+					</div>		
+					<div class="dialog-button-container">
+						<button class="md-raised md-button md-ink-ripple" ng-click="toggleTaskEdit('hide')"><span th:text="#{common.close}">Cancel</span> <i class="material-icons list-icon" ng-click="">clear</i></button>
+						<button class="md-raised md-primary md-button md-ink-ripple" ng-disabled="!isTaskValid()" ng-click="saveTask()"><span th:text="#{common.save}">Applay</span> <i class="material-icons list-icon" ng-click="">done</i></button>
+					</div>
+				</div>
+			</div>
+			</div>

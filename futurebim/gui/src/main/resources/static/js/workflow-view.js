@@ -14,7 +14,7 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 	$scope.editingTask = false;
 	$scope.allTasks = [];
 	$scope.taskStatusList = taskStatusList;
-	$scope.allUsers = allUsers;
+	$scope.allProjectUsers = allUsers;
 
 	for(o in $scope.tasksColumns){
 		$scope.tasksColumns[o].show = true;
@@ -54,7 +54,7 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 		$scope.showTaskSelect = show;
 	}
 
-	$scope.toggleTaskEditAdd = function(show, task){
+	$scope.toggleTaskEdit = function(show, task){
 		$scope.showTaskEdit = show;
 		
 		task = task !== undefined ? task : false;
@@ -77,7 +77,7 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 					version: 1, 
 					status: "1", 
 					reporter: 0, 
-					assignedTo: 0, 
+					assignedTo: "0", 
 				};		
 			
 		}
@@ -202,7 +202,7 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 			}
 		}).then(function(response){
 		  
-			$scope.toggleTaskEditAdd('hide');
+			$scope.toggleTaskEdit('hide');
 			$scope.toggleTaskSelect(false);
 			
 			loadWorkflow();
@@ -214,7 +214,7 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 		
 	}	
 
-	$scope.editWorkflowTask = function(){
+	$scope.saveTask = function(){
 		if(!$scope.editingTask){
 			return;
 		}
@@ -247,7 +247,7 @@ fbimApp.controller('WorkflowController', function ($scope, $http, $sce, $element
 			}
 		}).then(function(response){
 		  
-			$scope.toggleTaskEditAdd('hide');
+			$scope.toggleTaskEdit('hide');
 			$scope.toggleTaskSelect(false);
 			
 			loadWorkflow();
