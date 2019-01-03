@@ -20,15 +20,15 @@ import com.futurebim.gui.model.enums.EGuiUserStatus;
 import com.futurebim.gui.model.futurebim.GuiCompany;
 import com.futurebim.gui.model.futurebim.GuiProjectRole;
 import com.futurebim.gui.model.futurebim.GuiUserFull;
-import com.futurebim.gui.model.ui.MenuItem;
+import com.futurebim.gui.model.ui.GuiMenuItem;
 import com.futurebim.gui.model.ui.UiSessionUserInfo;
 
 @Controller
 public abstract class UiControllerBase {
   
-  protected abstract List<MenuItem> getTopToolbar();
+  protected abstract List<GuiMenuItem> getTopToolbar();
   
-  protected abstract List<MenuItem> getLeftToolbar();
+  protected abstract List<GuiMenuItem> getLeftToolbar();
   
   protected abstract String getActiveLeftToolbarId();
 

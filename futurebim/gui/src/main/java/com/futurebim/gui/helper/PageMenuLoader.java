@@ -3,38 +3,37 @@ package com.futurebim.gui.helper;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.futurebim.gui.model.ui.MenuItem;
+import com.futurebim.gui.model.ui.GuiMenuItem;
 
-@Component
-public class PageMenuLoader {
-  private final List<MenuItem> topMenus = new ArrayList<>();
-  private final List<MenuItem> leftMenus = new ArrayList<>();
+@Service
+public class PageMenuLoader implements IPageMenuLoader {
 
-  public PageMenuLoader()
-  {
-    topMenus.add(new MenuItem("menu.home" , "Home", "home" , "/"));
-    topMenus.add(new MenuItem("menu.bim" , "Bim", "aspect_ratio" , "/bim/"));
-    topMenus.add(new MenuItem("menu.projects" , "Projekte", "chrome_reader_mode" , "/projects/", true));
-    topMenus.add(new MenuItem("menu.workflow" , "Workflow", "assessment" , "/workflow/"));
-    topMenus.add(new MenuItem("menu.ifc" , "IFC Viewer", "perm_media" , "/ifc/"));
-    topMenus.add(new MenuItem("menu.settings" , "Einstellung", "settings" , "/options/"));
+  private final List<GuiMenuItem> topMenus  = new ArrayList<>();
+  private final List<GuiMenuItem> leftMenus = new ArrayList<>();
 
-    leftMenus.add(new MenuItem("menu.balance" , "Balance", "account_balance" , "/balance"));
-    leftMenus.add(new MenuItem("menu.alarm" , "Alarm", "alarm_on" , "/alarm"));
-    leftMenus.add(new MenuItem("menu.settings" , "Konfiguration", "build" , "/settings", true));
-    leftMenus.add(new MenuItem("menu.code" , "Entwicklung", "code" , "/code"));
-    leftMenus.add(new MenuItem("menu.questions" , "Fragen", "help_outline" , "/questions"));
-    leftMenus.add(new MenuItem("menu.moves" , "Bewegungen", "open_with" , "/moves"));
+  public PageMenuLoader() {
+    topMenus.add(new GuiMenuItem("menu.home", "Home", "home", "/"));
+    topMenus.add(new GuiMenuItem("menu.bim", "Bim", "aspect_ratio", "/bim/"));
+    topMenus.add(new GuiMenuItem("menu.projects", "Projekte", "chrome_reader_mode", "/projects/", true));
+    topMenus.add(new GuiMenuItem("menu.workflow", "Workflow", "assessment", "/workflow/"));
+    topMenus.add(new GuiMenuItem("menu.ifc", "IFC Viewer", "perm_media", "/ifc/"));
+    topMenus.add(new GuiMenuItem("menu.settings", "Einstellung", "settings", "/options/"));
+
+    leftMenus.add(new GuiMenuItem("menu.balance", "Balance", "account_balance", "/balance"));
+    leftMenus.add(new GuiMenuItem("menu.alarm", "Alarm", "alarm_on", "/alarm"));
+    leftMenus.add(new GuiMenuItem("menu.settings", "Konfiguration", "build", "/settings", true));
+    leftMenus.add(new GuiMenuItem("menu.code", "Entwicklung", "code", "/code"));
+    leftMenus.add(new GuiMenuItem("menu.questions", "Fragen", "help_outline", "/questions"));
+    leftMenus.add(new GuiMenuItem("menu.moves", "Bewegungen", "open_with", "/moves"));
   }
 
-
-  public List<MenuItem> getTopMenus(final String activeMenuId) {
-    for(final MenuItem ms:topMenus) {
+  @Override
+  public List<GuiMenuItem> getTopMenus(final String activeMenuId) {
+    for (final GuiMenuItem ms : topMenus) {
       ms.setActive(false);
-      if(ms.getId().equals(activeMenuId))
-      {
+      if (ms.getId().equals(activeMenuId)) {
         ms.setActive(true);
       }
     }
@@ -42,16 +41,16 @@ public class PageMenuLoader {
     return topMenus;
   }
 
-  public List<MenuItem> getLeftMenus(final String routUrl, final String activeMenuId) {
+  @Override
+  public List<GuiMenuItem> getLeftMenus(final String routUrl, final String activeMenuId) {
 
-    final List<MenuItem> menus = new ArrayList<>();
+    final List<GuiMenuItem> menus = new ArrayList<>();
 
-    for(final MenuItem ms:leftMenus) {
-      final MenuItem m = ms.clone();
+    for (final GuiMenuItem ms : leftMenus) {
+      final GuiMenuItem m = ms.clone();
       m.setUrl(routUrl + m.getUrl());
       m.setActive(false);
-      if(m.getId().equals(activeMenuId))
-      {
+      if (m.getId().equals(activeMenuId)) {
         m.setActive(true);
       }
       menus.add(m);
@@ -59,6 +58,5 @@ public class PageMenuLoader {
 
     return menus;
   }
-
 
 }
