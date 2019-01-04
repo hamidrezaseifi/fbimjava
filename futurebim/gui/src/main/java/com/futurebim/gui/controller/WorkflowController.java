@@ -19,12 +19,10 @@ import com.futurebim.gui.bl.IUserHandler;
 import com.futurebim.gui.bl.IWorkflowHandler;
 import com.futurebim.gui.controller.base.UiControllerBase;
 import com.futurebim.gui.helper.FbIdNamePair;
-import com.futurebim.gui.helper.IPageMenuLoader;
 import com.futurebim.gui.model.futurebim.GuiProject;
 import com.futurebim.gui.model.futurebim.GuiProjectUser;
 import com.futurebim.gui.model.futurebim.GuiTask;
 import com.futurebim.gui.model.futurebim.GuiWorkflow;
-import com.futurebim.gui.model.ui.GuiMenuItem;
 import com.futurebim.gui.model.ui.GuiWorkflowCheck;
 import com.futurebim.gui.model.ui.GuiWorkflowCheckResult;
 
@@ -32,9 +30,6 @@ import com.futurebim.gui.model.ui.GuiWorkflowCheckResult;
 @RequestMapping(path = "/workflow")
 public class WorkflowController extends UiControllerBase {
 
-  @Autowired
-  private IPageMenuLoader pageMenuLoader;
-  
   @Autowired
   private IProjectsHandler projectsHandler;
   
@@ -218,47 +213,4 @@ public class WorkflowController extends UiControllerBase {
     return workflowHandler.checkWorkflowVersion(checkList);
   }
   
-  @Override
-  protected List<GuiMenuItem> getTopToolbar() {
-
-    return pageMenuLoader.getTopMenus("menu.workflow");
-  }
-
-  @Override
-  protected List<GuiMenuItem> getLeftToolbar() {
-
-    final List<GuiMenuItem> menus = new ArrayList<>();
-    
-    GuiMenuItem m = new GuiMenuItem("menu.index", messagesHelper.get("workflow.workflow-list"), "list", "/workflow");
-    
-    m.setActive(false);
-    if (getCurrentRelatedUrl().equals("/workflow") || getCurrentRelatedUrl().equals("/workflow/") || getCurrentRelatedUrl().equals("/workflow/index")) {
-      m.setActive(true);
-    }
-    menus.add(m);
-    
-    m = new GuiMenuItem("menu.create", messagesHelper.get("workflow.workflow-create"), "playlist_add", "/workflow/create");
-    
-    m.setActive(false);
-    if (getCurrentRelatedUrl().equals(m.getUrl())) {
-      m.setActive(true);
-    }
-    menus.add(m);
-    
-    m = new GuiMenuItem("menu.graph", messagesHelper.get("workflow.workflow-graph"), "tune", "/workflow/graph");
-    
-    m.setActive(false);
-    if (getCurrentRelatedUrl().equals(m.getUrl())) {
-      m.setActive(true);
-    }
-    menus.add(m);
-    
-    return menus;
-  }
-
-  @Override
-  protected String getActiveLeftToolbarId() {
-
-    return "";
-  }
 }

@@ -23,6 +23,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.futurebim.core.dao.CompanyDao;
 import com.futurebim.core.dao.exceptions.StorageException;
+import com.futurebim.core.dao.utils.SqlUtils;
 import com.futurebim.core.model.Company;
 import com.futurebim.core.model.CompanyEmail;
 import com.futurebim.core.model.CompanyPhoneNumber;
@@ -369,21 +370,21 @@ public class CompanyDaoImpl implements CompanyDao {
   }
   
   private Company companyFromResultSet(final ResultSet rs) throws SQLException, StorageException {
-    final Company company = new Company();
-    company.setComments(rs.getString("comments"));
-    company.setIdentname(rs.getString("identname"));
-    company.setCompanyName(rs.getString("company_name"));
-    company.setCreated(rs.getTimestamp("created").toLocalDateTime());
-    company.setUpdated(rs.getTimestamp("updated").toLocalDateTime());
-    company.setId(rs.getLong("id"));
-    company.setVersion(rs.getInt("version"));
-    company.setStatus(rs.getInt("status"));
-    company.setPhoneNumbers(listCompanyPhoneNumbers(company.getId()));
-    company.setPostalAddresses(listCompanyPostalAddresses(company.getId()));
-    company.setEmails(listCompanyEmails(company.getId()));
-    company.setContactPersons(listCompanyContactPersons(company.getId()));
+    final Company model = new Company();
+    model.setComments(rs.getString("comments"));
+    model.setIdentname(rs.getString("identname"));
+    model.setCompanyName(rs.getString("company_name"));
+    model.setCreated(SqlUtils.getDatetimeFromTimestamp(rs.getTimestamp("created")));
+    model.setUpdated(SqlUtils.getDatetimeFromTimestamp(rs.getTimestamp("updated")));
+    model.setId(rs.getLong("id"));
+    model.setVersion(rs.getInt("version"));
+    model.setStatus(rs.getInt("status"));
+    model.setPhoneNumbers(listCompanyPhoneNumbers(model.getId()));
+    model.setPostalAddresses(listCompanyPostalAddresses(model.getId()));
+    model.setEmails(listCompanyEmails(model.getId()));
+    model.setContactPersons(listCompanyContactPersons(model.getId()));
 
-    return company;
+    return model;
   }
   
   @Override

@@ -3,60 +3,82 @@ package com.futurebim.gui.helper;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.futurebim.gui.model.ui.GuiMenuItem;
+import com.futurebim.common.model.edo.SystemMenuItemEdo;
+import com.futurebim.common.model.enums.EModule;
+import com.futurebim.gui.configuration.UiConfiguration;
+import com.futurebim.gui.model.ui.GuiSystemMenuItem;
 
 @Service
 public class PageMenuLoader implements IPageMenuLoader {
-
-  private final List<GuiMenuItem> topMenus  = new ArrayList<>();
-  private final List<GuiMenuItem> leftMenus = new ArrayList<>();
-
+  
+  private GuiSystemMenuItem       rootMenu = null;
+  private List<GuiSystemMenuItem> topMenus = new ArrayList<>();
+  // private final List<GuiSystemMenuItem> leftMenus = new ArrayList<>();
+  
+  private final Logger logger = LoggerFactory.getLogger(PageMenuLoader.class);
+  
+  @Autowired
+  MessagesHelper messages;
+  
+  @Autowired
+  UiConfiguration.CoreAccessConfig coreAccessConfig;
+  
+  @Autowired
+  private IUiRestTemplateCall restTemplateCall;
+  
   public PageMenuLoader() {
-    topMenus.add(new GuiMenuItem("menu.home", "Home", "home", "/"));
-    topMenus.add(new GuiMenuItem("menu.bim", "Bim", "aspect_ratio", "/bim/"));
-    topMenus.add(new GuiMenuItem("menu.projects", "Projekte", "chrome_reader_mode", "/projects/", true));
-    topMenus.add(new GuiMenuItem("menu.workflow", "Workflow", "assessment", "/workflow/"));
-    topMenus.add(new GuiMenuItem("menu.ifc", "IFC Viewer", "perm_media", "/ifc/"));
-    topMenus.add(new GuiMenuItem("menu.settings", "Einstellung", "settings", "/options/"));
-
-    leftMenus.add(new GuiMenuItem("menu.balance", "Balance", "account_balance", "/balance"));
-    leftMenus.add(new GuiMenuItem("menu.alarm", "Alarm", "alarm_on", "/alarm"));
-    leftMenus.add(new GuiMenuItem("menu.settings", "Konfiguration", "build", "/settings", true));
-    leftMenus.add(new GuiMenuItem("menu.code", "Entwicklung", "code", "/code"));
-    leftMenus.add(new GuiMenuItem("menu.questions", "Fragen", "help_outline", "/questions"));
-    leftMenus.add(new GuiMenuItem("menu.moves", "Bewegungen", "open_with", "/moves"));
+    
   }
+  
+  @PostConstruct
+  public boolean reload() {
+    
+    logger.debug("get company from core");
 
-  @Override
-  public List<GuiMenuItem> getTopMenus(final String activeMenuId) {
-    for (final GuiMenuItem ms : topMenus) {
-      ms.setActive(false);
-      if (ms.getId().equals(activeMenuId)) {
-        ms.setActive(true);
-      }
+    final SystemMenuItemEdo edo = restTemplateCall.callRestGet(coreAccessConfig.getAllSystemMenuUrl(), EModule.CORE, SystemMenuItemEdo.class, true);
+    rootMenu = GuiSystemMenuItem.fromEdo(edo);
+    
+    topMenus = rootMenu.getChildren();
+    for (final GuiSystemMenuItem menu : topMenus) {
+      menu.setLabel(messages.get(menu.getLabel()));
     }
-
+    
+    return true;
+  }
+  
+  @Override
+  public List<GuiSystemMenuItem> getTopMenus(final String url) {
+    for (final GuiSystemMenuItem ms : topMenus) {
+      ms.setActive(ms.isCurrentMenu(url));
+    }
+    
     return topMenus;
   }
-
+  
   @Override
-  public List<GuiMenuItem> getLeftMenus(final String routUrl, final String activeMenuId) {
+  public List<GuiSystemMenuItem> getLeftMenus(final String url) {
 
-    final List<GuiMenuItem> menus = new ArrayList<>();
-
-    for (final GuiMenuItem ms : leftMenus) {
-      final GuiMenuItem m = ms.clone();
-      m.setUrl(routUrl + m.getUrl());
-      m.setActive(false);
-      if (m.getId().equals(activeMenuId)) {
-        m.setActive(true);
+    List<GuiSystemMenuItem> list = new ArrayList<>();
+    for (final GuiSystemMenuItem ms : topMenus) {
+      if (ms.isCurrentMenu(url)) {
+        list = ms.getChildren();
+        break;
       }
-      menus.add(m);
+
+    }
+    
+    for (final GuiSystemMenuItem ms : list) {
+      ms.setActive(ms.isCurrentMenu(url));
     }
 
-    return menus;
+    return list;
   }
-
+  
 }

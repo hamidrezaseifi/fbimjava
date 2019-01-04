@@ -22,20 +22,15 @@ import com.futurebim.gui.bl.IUserHandler;
 import com.futurebim.gui.bl.IValueHandler;
 import com.futurebim.gui.controller.base.UiControllerBase;
 import com.futurebim.gui.helper.FbIdNamePair;
-import com.futurebim.gui.helper.IPageMenuLoader;
 import com.futurebim.gui.model.futurebim.GuiProject;
 import com.futurebim.gui.model.futurebim.GuiProjectRole;
 import com.futurebim.gui.model.futurebim.GuiProjectUser;
 import com.futurebim.gui.model.futurebim.GuiTask;
 import com.futurebim.gui.model.futurebim.GuiUserFull;
-import com.futurebim.gui.model.ui.GuiMenuItem;
 
 @Controller
 @RequestMapping(path = "/projects")
 public class ProjectsController extends UiControllerBase {
-  
-  @Autowired
-  private IPageMenuLoader pageMenuLoader;
 
   @Autowired
   private IProjectsHandler projectsHandler;
@@ -224,40 +219,4 @@ public class ProjectsController extends UiControllerBase {
     return taskHandler.delete(task);
   }
 
-  @Override
-  protected List<GuiMenuItem> getTopToolbar() {
-    
-    return pageMenuLoader.getTopMenus("menu.projects");
-  }
-  
-  @Override
-  protected List<GuiMenuItem> getLeftToolbar() {
-    
-    final List<GuiMenuItem> menus = new ArrayList<>();
-    
-    GuiMenuItem m = new GuiMenuItem("menu.index", messagesHelper.get("project.projects-list"), "list", "/projects");
-    
-    m.setActive(false);
-    if (getCurrentRelatedUrl().equals("/projects") || getCurrentRelatedUrl().equals("/projects/") || getCurrentRelatedUrl().equals("/projects/index")) {
-      m.setActive(true);
-    }
-    menus.add(m);
-    
-    m = new GuiMenuItem("menu.create", messagesHelper.get("project.projects-create"), "playlist_add", "/projects/create");
-    
-    m.setActive(false);
-    if (getCurrentRelatedUrl().equals(m.getUrl())) {
-      m.setActive(true);
-    }
-    menus.add(m);
-    
-    return menus;
-
-  }
-  
-  @Override
-  protected String getActiveLeftToolbarId() {
-    
-    return "";
-  }
 }

@@ -114,5 +114,10 @@ public class FbRestPaths {
 		public static final String GENERALDATA_VALUELIST_BASE = "/valuelist";
 		public static final String GENERALDATA_VALUELIST = GENERALDATA_BASE + GENERALDATA_VALUELIST_BASE;
 
+		public static final String SYSTEMMENU_BASE = "/menu";
+
+		public static final String SYSTEMMENU_ALLLIST_BASE = "/all";
+		public static final String SYSTEMMENU_ALLLIST = SYSTEMMENU_BASE + SYSTEMMENU_ALLLIST_BASE;
+
 	}
 }

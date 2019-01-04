@@ -3,12 +3,12 @@ package com.futurebim.common.model.reponse;
 import org.springframework.http.HttpStatus;
 
 import com.futurebim.common.model.edo.CompanyStatusListEdo;
-import com.futurebim.common.model.edo.MenuItemEdo;
+import com.futurebim.common.model.edo.SystemMenuItemEdo;
 
 public class ValueListRestResponse extends FBRestResponse {
 
 	private CompanyStatusListEdo companyStatusList = null;
-	private MenuItemEdo rootMenu = null;
+	private SystemMenuItemEdo rootMenu = null;
 
 	public ValueListRestResponse() {
 		super();
@@ -33,14 +33,14 @@ public class ValueListRestResponse extends FBRestResponse {
 	/**
 	 * @return the rootMenu
 	 */
-	public MenuItemEdo getRootMenu() {
+	public SystemMenuItemEdo getRootMenu() {
 		return rootMenu;
 	}
 
 	/**
 	 * @param rootMenu the rootMenu to set
 	 */
-	public void setRootMenu(final MenuItemEdo rootMenu) {
+	public void setRootMenu(final SystemMenuItemEdo rootMenu) {
 		this.rootMenu = rootMenu;
 	}
 

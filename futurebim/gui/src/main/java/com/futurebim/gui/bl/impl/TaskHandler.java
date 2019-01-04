@@ -48,7 +48,7 @@ public class TaskHandler implements ITaskHandler {
   public GuiTask getById(final Long id) {
     logger.debug("get task from core");
     
-    final TaskEdo taskEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskRead(), EModule.CORE, TaskEdo.class, true, id);
+    final TaskEdo taskEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskReadUrl(), EModule.CORE, TaskEdo.class, true, id);
     
     final GuiTask task = GuiTask.fromEdo(taskEdo);
     
@@ -62,7 +62,7 @@ public class TaskHandler implements ITaskHandler {
     final ParameterizedTypeReference<FBCollectionEdo<TaskEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<TaskEdo>>() {
     };
 
-    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskProjectReadAll(), EModule.CORE, typeRef, true, projectId);
+    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskProjectReadAllUrl(), EModule.CORE, typeRef, true, projectId);
 
     final List<GuiTask> list = GuiTask.fromEdoList(projectsEdo.getItems());
 
@@ -79,7 +79,7 @@ public class TaskHandler implements ITaskHandler {
     final ParameterizedTypeReference<FBCollectionEdo<TaskEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<TaskEdo>>() {
     };
 
-    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskWorkflowReadAll(), EModule.CORE, typeRef, true, workflowId);
+    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskWorkflowReadAllUrl(), EModule.CORE, typeRef, true, workflowId);
 
     final List<GuiTask> list = GuiTask.fromEdoList(projectsEdo.getItems());
 
@@ -93,7 +93,7 @@ public class TaskHandler implements ITaskHandler {
   public GuiTask save(final GuiTask task) {
     logger.debug("save projects into core");
     
-    final TaskEdo projectEdo = restTemplateCall.callRestPost(coreAccessConfig.getTaskSave(), EModule.CORE, task.toEdo(), TaskEdo.class, true);
+    final TaskEdo projectEdo = restTemplateCall.callRestPost(coreAccessConfig.getTaskSaveUrl(), EModule.CORE, task.toEdo(), TaskEdo.class, true);
 
     return GuiTask.fromEdo(projectEdo);
   }
@@ -102,7 +102,7 @@ public class TaskHandler implements ITaskHandler {
   public boolean delete(final GuiTask task) {
     logger.debug("delete projects into core");
 
-    restTemplateCall.callRestPost(coreAccessConfig.getTaskDelete(), EModule.CORE, task.toEdo(), Void.class, true);
+    restTemplateCall.callRestPost(coreAccessConfig.getTaskDeleteUrl(), EModule.CORE, task.toEdo(), Void.class, true);
 
     return true;
   }

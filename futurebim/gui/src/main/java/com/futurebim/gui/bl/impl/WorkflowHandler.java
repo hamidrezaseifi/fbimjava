@@ -57,7 +57,7 @@ public class WorkflowHandler implements IWorkflowHandler {
   public GuiWorkflow getById(final Long id) {
     logger.debug("get workflow from core");
 
-    final WorkflowEdo workflowEdo = restTemplateCall.callRestGet(coreAccessConfig.getWorkflowRead(), EModule.CORE, WorkflowEdo.class, true, id);
+    final WorkflowEdo workflowEdo = restTemplateCall.callRestGet(coreAccessConfig.getWorkflowReadUrl(), EModule.CORE, WorkflowEdo.class, true, id);
 
     final GuiWorkflow workflow = GuiWorkflow.fromEdo(workflowEdo);
 
@@ -71,7 +71,7 @@ public class WorkflowHandler implements IWorkflowHandler {
     final ParameterizedTypeReference<FBCollectionEdo<WorkflowEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<WorkflowEdo>>() {
     };
     
-    final FBCollectionEdo<WorkflowEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getWorkflowReadAll(), EModule.CORE, typeRef, true, projectId);
+    final FBCollectionEdo<WorkflowEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getWorkflowReadAllUrl(), EModule.CORE, typeRef, true, projectId);
     
     final List<GuiWorkflow> list = GuiWorkflow.fromEdoList(projectsEdo.getItems());
     
@@ -85,7 +85,7 @@ public class WorkflowHandler implements IWorkflowHandler {
   public GuiWorkflow save(final GuiWorkflow workflow) {
     logger.debug("save projects into core");
 
-    final WorkflowEdo projectEdo = restTemplateCall.callRestPost(coreAccessConfig.getWorkflowSave(), EModule.CORE, workflow.toEdo(), WorkflowEdo.class, true);
+    final WorkflowEdo projectEdo = restTemplateCall.callRestPost(coreAccessConfig.getWorkflowSaveUrl(), EModule.CORE, workflow.toEdo(), WorkflowEdo.class, true);
     
     return GuiWorkflow.fromEdo(projectEdo);
   }
@@ -94,7 +94,7 @@ public class WorkflowHandler implements IWorkflowHandler {
   public boolean delete(final GuiWorkflow workflow) {
     logger.debug("delete projects into core");
     
-    restTemplateCall.callRestPost(coreAccessConfig.getWorkflowDelete(), EModule.CORE, workflow.toEdo(), Void.class, true);
+    restTemplateCall.callRestPost(coreAccessConfig.getWorkflowDeleteUrl(), EModule.CORE, workflow.toEdo(), Void.class, true);
     
     return true;
   }
@@ -120,7 +120,7 @@ public class WorkflowHandler implements IWorkflowHandler {
     final ParameterizedTypeReference<FBCollectionEdo<WorkflowTypeEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<WorkflowTypeEdo>>() {
     };
     
-    final FBCollectionEdo<WorkflowTypeEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getWorkflowtypeReadAll(), EModule.CORE, typeRef, true);
+    final FBCollectionEdo<WorkflowTypeEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getWorkflowtypeReadAllUrl(), EModule.CORE, typeRef, true);
     
     final List<GuiWorkflowType> list = GuiWorkflowType.fromEdoList(projectsEdo.getItems());
     
@@ -140,7 +140,7 @@ public class WorkflowHandler implements IWorkflowHandler {
       checkVersionEdo.addCheckList(checkTask);
     }
     
-    final CheckVersionEdo checkVersionResultEdo = restTemplateCall.callRestPost(coreAccessConfig.getWorkflowCheck(), EModule.CORE, checkVersionEdo, CheckVersionEdo.class, true);
+    final CheckVersionEdo checkVersionResultEdo = restTemplateCall.callRestPost(coreAccessConfig.getWorkflowCheckUrl(), EModule.CORE, checkVersionEdo, CheckVersionEdo.class, true);
     
     final GuiWorkflowCheckResult result = new GuiWorkflowCheckResult(checkingWorkflow.getWorkflowId());
     for (final CheckVersionEdo chk : checkVersionResultEdo.getCheckList()) {

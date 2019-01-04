@@ -135,7 +135,7 @@ public class UserHandler implements IUserHandler {
     
     try {
       
-      final EncryptedContentEdo encrypedResEdo = restTemplateCall.callRestGet(coreAccessConfig.getUserRead(), EModule.CORE, EncryptedContentEdo.class, true, userId);
+      final EncryptedContentEdo encrypedResEdo = restTemplateCall.callRestGet(coreAccessConfig.getUserReadUrl(), EModule.CORE, EncryptedContentEdo.class, true, userId);
       final UserFullEdo         userEdo        = encrypedResEdo.getObjectContent(UserFullEdo.class, mappingJackson2HttpMessageConverter.getObjectMapper());
       return GuiUserFull.fromEdo(userEdo);
       

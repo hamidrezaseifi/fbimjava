@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.futurebim.gui.model.ui.GuiMenuItem;
+import com.futurebim.gui.model.ui.GuiSystemMenuItem;
 
 @Service
 public interface IPageMenuLoader {
   
-  public List<GuiMenuItem> getTopMenus(final String activeMenuId);
+  public List<GuiSystemMenuItem> getTopMenus(final String url);
 
-  public List<GuiMenuItem> getLeftMenus(final String routUrl, final String activeMenuId);
+  public List<GuiSystemMenuItem> getLeftMenus(final String url);
 
 }
