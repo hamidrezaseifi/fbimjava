@@ -102,5 +102,45 @@
     </dependencies>
 
 
+	<build>
+	  <plugins>
+	    <plugin>
+	      <!-- creates an executable spring boot JAR -->
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-maven-plugin</artifactId>
+	    </plugin>
+	
+          <plugin>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                 <goals>
+                  <goal>info</goal>
+                  <goal>migrate</goal>
+                  <goal>info</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <skip>false</skip>
+              <!-- otherwise we get the warning: Unable to restore connection to having no default schema: -->
+              <url>jdbc:mysql://localhost:3306</url>
+              <user>bim</user>
+              <password>bim</password>
+			  <schemas>
+		      	<schema>featurebim</schema>
+			  </schemas>
+              <locations>
+                <location>filesystem:${basedir}/database/flyway/one-time</location>
+                <location>filesystem:${basedir}/database/flyway/all-time</location>
+              </locations>
+            </configuration>
+          </plugin>
+	
+	  </plugins>
+	</build>
+
+
   
 </project>
