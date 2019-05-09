@@ -11,67 +11,67 @@ import com.futurebim.gui.controller.base.UiControllerBase;
 @Controller
 @RequestMapping(path = "/")
 public class MainController extends UiControllerBase {
-  
-  @RequestMapping(value = { "", "/", "/index" })
-  public String index(final Model model) {
-    model.addAttribute("breadCrumb", new ArrayList<>());
 
-    model.addAttribute("msg", "Index Page ");
+	@RequestMapping(value = { "", "/", "/index" })
+	public String index(final Model model) {
+		model.addAttribute("breadCrumb", new ArrayList<>());
 
-    return "index";
-  }
+		model.addAttribute("msg", "Index Page ");
 
-  @RequestMapping(path = "/site/balance")
-  public String balance(final Model model) {
-    model.addAttribute("breadCrumb", new ArrayList<>());
+		return "index";
+	}
 
-    model.addAttribute("msg", "Balance Page");
-    return "index";
-  }
+	@RequestMapping(path = "/site/balance")
+	public String balance(final Model model) {
+		model.addAttribute("breadCrumb", new ArrayList<>());
 
-  @RequestMapping(path = "/site/alarm")
-  public String alarm(final Model model) {
-    model.addAttribute("breadCrumb", new ArrayList<>());
+		model.addAttribute("msg", "Balance Page");
+		return "index";
+	}
 
-    model.addAttribute("msg", "Alarm Page");
+	@RequestMapping(path = "/site/alarm")
+	public String alarm(final Model model) {
+		model.addAttribute("breadCrumb", new ArrayList<>());
 
-    return "index";
-  }
+		model.addAttribute("msg", "Alarm Page");
 
-  @RequestMapping(path = "/site/settings")
-  public String settings(final Model model) {
-    model.addAttribute("breadCrumb", new ArrayList<>());
+		return "index";
+	}
 
-    model.addAttribute("msg", "Konfiguration Page ");
+	@RequestMapping(path = "/site/settings")
+	public String settings(final Model model) {
+		model.addAttribute("breadCrumb", new ArrayList<>());
 
-    return "index";
-  }
+		model.addAttribute("msg", "Konfiguration Page ");
 
-  @RequestMapping(path = "/site/code")
-  public String code(final Model model) {
-    model.addAttribute("breadCrumb", new ArrayList<>());
+		return "index";
+	}
 
-    model.addAttribute("msg", "Entwicklung Page");
+	@RequestMapping(path = "/site/code")
+	public String code(final Model model) {
+		model.addAttribute("breadCrumb", new ArrayList<>());
 
-    return "index";
-  }
+		model.addAttribute("msg", "Entwicklung Page");
 
-  @RequestMapping(path = "/site/questions")
-  public String questions(final Model model) {
-    model.addAttribute("breadCrumb", new ArrayList<>());
+		return "index";
+	}
 
-    model.addAttribute("msg", "Fragen Page");
+	@RequestMapping(path = "/site/questions")
+	public String questions(final Model model) {
+		model.addAttribute("breadCrumb", new ArrayList<>());
 
-    return "index";
-  }
+		model.addAttribute("msg", "Fragen Page");
 
-  @RequestMapping(path = "/site/moves")
-  public String moves(final Model model) {
-    model.addAttribute("breadCrumb", new ArrayList<>());
+		return "index";
+	}
 
-    model.addAttribute("msg", "Bewegungen Page");
+	@RequestMapping(path = "/noaccess")
+	public String moves(final Model model) {
+		model.addAttribute("breadCrumb", new ArrayList<>());
 
-    return "index";
-  }
+		model.addAttribute("msg", "Bewegungen Page");
+
+		return "noaccess";
+	}
 
 }

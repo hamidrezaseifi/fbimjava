@@ -4,16 +4,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.futurebim.common.model.edo.SystemMenuItemEdo;
 import com.futurebim.common.rest.json.FBLocalDateTimeDeserializer;
 import com.futurebim.common.rest.json.FBLocalDateTimeSerializer;
 
-public class GuiSystemMenuItem {
+public class GuiSystemMenuItem implements Comparable<GuiSystemMenuItem> {
   
   private String                        id;
-  private String                        parebtid;
+  private String                        parent;
   private String                        label;
   private String                        image;
   private String                        url;
@@ -64,15 +66,23 @@ public class GuiSystemMenuItem {
   /**
    * @return the parebtid
    */
-  public String getParebtid() {
-    return parebtid;
+  public String getParent() {
+    return parent;
+  }
+  
+  public boolean hasParent() {
+    return StringUtils.isNoneBlank(parent);
+  }
+  
+  public boolean isRoot() {
+    return StringUtils.isBlank(parent);
   }
 
   /**
    * @param parebtid the parebtid to set
    */
   public void setParebtid(final String parebtid) {
-    this.parebtid = parebtid;
+    this.parent = parebtid;
   }
 
   public String getLabel() {
@@ -235,7 +245,7 @@ public class GuiSystemMenuItem {
     edo.setCreated(created);
     edo.setUpdated(updated);
     edo.setVersion(version);
-    edo.setParebtid(parebtid);
+    edo.setParebtid(parent);
 
     return edo;
   }
@@ -273,6 +283,12 @@ public class GuiSystemMenuItem {
       list.add(GuiSystemMenuItem.fromEdo(edo));
     }
     return list;
+  }
+
+  @Override
+  public int compareTo(final GuiSystemMenuItem o) {
+    
+    return this.sort > o.sort ? 1 : this.sort < o.sort ? -1 : 0;
   }
 
 }

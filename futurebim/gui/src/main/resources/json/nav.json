@@ -1,0 +1,146 @@
+[
+	{
+		"id" : "menu.top.bim",
+		"parent" : "",
+		"label" : "menu.top.bim",
+		"url" : "/bim",
+		"image" : "list",		
+		"sort" : 25,
+		"state" : true
+	},
+	{
+		"id" : "menu.top.user",
+		"parent" : "",
+		"label" : "menu.top.user",
+		"url" : "/user",
+		"image" : "person",		
+		"sort" : 35,
+		"state" : true
+	},
+	{
+		"id" : "menu.top.administration",
+		"parent" : "",
+		"label" : "menu.top.administration",
+		"url" : "/admin",
+		"image" : "domain",		
+		"sort" : 40,
+		"state" : true
+	},
+	{
+		"id" : "menu.left.administration.index",
+		"parent" : "menu.top.administration",
+		"label" : "menu.left.administration.index",
+		"url" : "/admin",
+		"image" : "domain",		
+		"sort" : 5,
+		"state" : true
+	},
+	{
+		"id" : "menu.left.administration.userlist",
+		"parent" : "menu.top.administration",
+		"label" : "menu.left.administration.userlist",
+		"url" : "/admin/users/list",
+		"image" : "group",		
+		"sort" : 5,
+		"state" : true
+	},
+	{
+		"id" : "menu.top.home",
+		"parent" : "",
+		"label" : "menu.top.home",
+		"url" : "/",
+		"image" : "dashboard",		
+		"sort" : 5,
+		"state" : true
+	},
+	{
+		"id" : "menu.top.ifc",
+		"parent" : "",
+		"label" : "menu.top.ifc",
+		"url" : "#",
+		"image" : "playlist_add_check",		
+		"sort" : 20,
+		"state" : true
+	},
+	{
+		"id" : "menu.top.messages",
+		"parent" : "",
+		"label" : "menu.top.messages",
+		"url" : "/messages",
+		"image" : "message",		
+		"sort" : 30,
+		"state" : true
+	},
+	{
+		"id" : "menu.top.projects",
+		"parent" : "",
+		"label" : "menu.top.projects",
+		"url" : "/projects",
+		"image" : "chrome_reader_mode",		
+		"sort" : 10,
+		"state" : true
+	},
+	{
+		"id" : "menu.top.settings",
+		"parent" : "",
+		"label" : "menu.top.settings",
+		"url" : "/options",
+		"image" : "build",		
+		"sort" : 45,
+		"state" : true
+	},
+	{
+		"id" : "menu.top.workflow",
+		"parent" : "",
+		"label" : "menu.top.workflow",
+		"url" : "/workflow",
+		"image" : "menu",		
+		"sort" : 15,
+		"state" : true
+	},
+	{
+		"id" : "project.projects-create",
+		"parent" : "menu.top.projects",
+		"label" : "project.projects-create",
+		"url" : "/projects/create",
+		"image" : "add",		
+		"sort" : 10,
+		"state" : true
+	},
+	{
+		"id" : "project.projects-list",
+		"parent" : "menu.top.projects",
+		"label" : "project.projects-list",
+		"url" : "/projects",
+		"image" : "list",		
+		"sort" : 5,
+		"state" : true
+	},
+	{
+		"id" : "workflow.workflow-create",
+		"parent" : "menu.top.workflow",
+		"label" : "workflow.workflow-create",
+		"url" : "/workflow/create",
+		"image" : "add",		
+		"sort" : 10,
+		"state" : true
+	},
+	{
+		"id" : "workflow.workflow-graph",
+		"parent" : "menu.top.workflow",
+		"label" : "workflow.workflow-graph",
+		"url" : "/workflow/graph",
+		"image" : "assessment",		
+		"sort" : 15,
+		"state" : true
+	},
+	{
+		"id" : "workflow.workflow-list",
+		"parent" : "menu.top.workflow",
+		"label" : "workflow.workflow-list",
+		"url" : "/workflow",
+		"image" : "list",		
+		"sort" : 5,
+		"state" : true
+	}
+]

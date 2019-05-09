@@ -343,4 +343,34 @@ select.fullline
     display: inline-block;
 }
 
+.error-input
+{
+	border: 1px solid #ce0000;
+	background-color: #ffd7d7;
+}
 
+.form-err-message
+{
+	color: #ce0000;
+    margin-left: 20px;
+    display: none;
+}
+
+.alert-error-message
+{
+	padding: 5px 10px;
+	color: #7d020e;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.alert-warning-message
+{
+	padding: 5px 10px;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    border-radius: 6px;
+}

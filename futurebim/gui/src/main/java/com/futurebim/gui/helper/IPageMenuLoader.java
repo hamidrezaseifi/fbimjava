@@ -13,4 +13,6 @@ public interface IPageMenuLoader {
 
   public List<GuiSystemMenuItem> getLeftMenus(final String url);
 
+  public List<GuiSystemMenuItem> getLeftMenusById(final String id, final String url);
+
 }

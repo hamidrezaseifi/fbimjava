@@ -1,0 +1,221 @@
+
+
+.project-item {
+    background-color: #ffd7d7!important;
+    border: 1px solid gray ;
+    border-radius: 5px !important;
+    margin-bottom: 10px !important;
+    height: 40px;
+    line-height: 30px;
+    padding: 4px;
+}
+
+.form-horizontal .form-group {
+    margin-right: 0; 
+    margin-left: 0; 
+}
+
+.project-detail-pannel 
+{
+    width: 100%;
+    margin: 10px auto;
+}
+
+.project-detail-pannel label 
+{
+    width: 140px;
+    float: none;
+    text-align: left !important;
+    padding: 0;
+    margin: 0;
+}
+
+.project-detail-pannel input, 
+.project-detail-pannel select 
+{
+    float: none;
+    display: inline-block;
+}
+
+.project-detail-pannel input.contact-name
+{
+    width: 120px;
+    float: none;
+    display: inline-block;
+}
+
+.project-detail-pannel input.address-contact-name
+{
+    width: calc(100% - 198px);
+}
+
+.project-detail-pannel input.email-address
+{
+    width: calc(100% - 298px);
+}
+
+.gender-panel
+{
+	margin: 10px 0;
+	width: 405px;
+	padding: 0;
+}
+
+label.radio-inline1 {
+    padding-top: 0px !important;
+    margin-left: 20px;
+    margin-right: 10px;
+    width: inherit;
+}
+
+input[type=checkbox], input[type=radio] {
+    margin: 0;
+}
+
+button.btn.save
+{
+	float: right;	
+	margin-right: 10px;
+}
+
+.security-panel
+{
+	margin: 10px 0;
+	padding: 0;
+}
+
+.security-panel input[type="password"]
+{
+	width: 269px !important;
+}
+
+.form-control.invalid
+{
+	border-color: #dc3545;
+	box-shadow: 1px 1px 4px #dc3545;
+	background-color: #f8d1d6;
+}
+
+.group-item
+{
+	padding: 8px 8px;	
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	margin-bottom: 8px;
+}
+
+.group-item:nth-child(odd)
+{
+	background-color: #ffffec;
+}
+
+.group-item:nth-child(even)
+{
+	background-color: #f7fbff;
+}
+
+.list-icon
+{
+	float: right;	
+	cursor: pointer;
+}
+
+button .list-icon
+{
+	float: right;	
+	margin-left: 8px;
+	cursor: pointer;
+	margin-top: 5px;
+}
+
+.list-icon:after
+{
+	clear: both;	
+}
+
+.material-icons.listicon
+{
+	padding-top: 5px;
+}
+
+.address-panel .line-container
+{
+	margin-bottom: 8px;	
+}
+
+.address-panel .street
+{
+    width: 424px;
+}
+
+.address-panel .housenumber
+{
+    width: 90px;
+}
+
+.address-panel .city,
+.address-panel .postcode,
+.address-panel .country
+{
+    width: 170px;
+}
+
+.address-panel .additional
+{
+    width: 380px;
+    margin-left: 14px;
+}
+
+a.toolbar-item:not(.disabled),
+a.toolbar-item:active:not(.disabled),
+a.toolbar-item:visited:not(.disabled)
+{
+	color: #337ab7;
+	cursor: pointer;
+}
+
+a.toolbar-item:hover:not(.disabled)
+{
+	color: #80b3ff;
+}
+
+a.toolbar-item.disabled
+{
+	color: #909090;
+}
+
+.user-select-container
+{
+	margin-top: calc(50vh - 200px);
+    width: 300px;
+    height: 400px;
+}
+
+.list-group-item
+{
+   cursor: pointer;
+}
+
+.user-edit-container
+{
+	margin-top: calc(50vh - 130px);
+    width: 500px;
+    height: 260px;
+}
+
+input.useredit
+{
+	width: 200px;
+}
+
+.radio-container
+{
+	float: left;
+	margin-right: 20px;
+}
+
+input.useredit.error-input + .form-err-message
+{
+    display: inline !important;
+}
+

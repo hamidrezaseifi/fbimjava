@@ -69,7 +69,7 @@ public class WorkflowController extends UiControllerBase {
     model.addAttribute("types", workflowHandler.listTypes());
     model.addAttribute("statusList", statusList);
     model.addAttribute("projectUsers", new ArrayList<>());
-    model.addAttribute("allUsers", userHandler.listCompanyUsers(this.getCurrentCompany().getId()));
+    model.addAttribute("allUsers", userHandler.getCompanyUsers(this.getCurrentCompany().getId()));
     
     return "workflow/create";
   }
@@ -94,7 +94,7 @@ public class WorkflowController extends UiControllerBase {
     model.addAttribute("types", workflowHandler.listTypes());
     model.addAttribute("statusList", statusList);
     model.addAttribute("projectUsers", projectsHandler.listProjectUsers(workflow.getProjectid()));
-    model.addAttribute("allUsers", userHandler.listCompanyUsers(this.getCurrentCompany().getId()));
+    model.addAttribute("allUsers", userHandler.getCompanyUsers(this.getCurrentCompany().getId()));
     model.addAttribute("taskStatusList", taskStatusList);
 
     return "workflow/view";
@@ -114,7 +114,7 @@ public class WorkflowController extends UiControllerBase {
     model.addAttribute("types", workflowHandler.listTypes());
     model.addAttribute("statusList", statusList);
     model.addAttribute("projectUsers", projectsHandler.listProjectUsers(workflow.getProjectid()));
-    model.addAttribute("allUsers", userHandler.listCompanyUsers(this.getCurrentCompany().getId()));
+    model.addAttribute("allUsers", userHandler.getCompanyUsers(this.getCurrentCompany().getId()));
 
     return "workflow/update";
   }

@@ -13,227 +13,251 @@ import com.futurebim.common.model.edo.UserFullEdo;
  */
 public class UserFull {
 
-  private Long id;
+	private Long id;
 
-  private Long companyid;
+	private Long companyid;
 
-  private String username;
+	private String username;
 
-  private String hashPassword;
+	private String hashPassword;
 
-  private short gender;
+	private short gender;
 
-  private String lastname;
+	private String lastname;
 
-  private String firstname;
+	private String firstname;
 
-  private String nameTag;
+	private String nameTag;
 
-  private LocalDate birthdate;
+	private LocalDate birthdate;
 
-  private String email;
+	private String email;
 
-  private int status;
+	private Boolean isContactPerson;
 
-  private int version;
+	private Boolean isDeletable;
 
-  private LocalDateTime created;
+	private int status;
 
-  private LocalDateTime updated;
+	private int version;
 
-  private final List<Integer> roles = new ArrayList<>();
+	private LocalDateTime created;
 
-  public UserFull() {
-  }
+	private LocalDateTime updated;
 
-  public Long getId() {
-    return this.id;
-  }
+	private final List<Integer> roles = new ArrayList<>();
 
-  public void setId(final Long id) {
-    this.id = id;
-  }
+	public UserFull() {
+	}
 
-  public Long getCompanyid() {
-    return this.companyid;
-  }
+	public Long getId() {
+		return this.id;
+	}
 
-  public void setCompanyid(final Long company) {
-    this.companyid = company;
-  }
+	public void setId(final Long id) {
+		this.id = id;
+	}
 
-  public LocalDate getBirthdate() {
-    return this.birthdate;
-  }
+	public Long getCompanyid() {
+		return this.companyid;
+	}
 
-  public void setBirthdate(final LocalDate birthdate) {
-    this.birthdate = birthdate;
-  }
+	public void setCompanyid(final Long company) {
+		this.companyid = company;
+	}
 
-  public LocalDateTime getCreated() {
-    return this.created;
-  }
+	public LocalDate getBirthdate() {
+		return this.birthdate;
+	}
 
-  public void setCreated(final LocalDateTime created) {
-    this.created = created;
-  }
+	public void setBirthdate(final LocalDate birthdate) {
+		this.birthdate = birthdate;
+	}
 
-  public String getEmail() {
-    return this.email;
-  }
+	public LocalDateTime getCreated() {
+		return this.created;
+	}
 
-  public void setEmail(final String email) {
-    this.email = email;
-  }
+	public void setCreated(final LocalDateTime created) {
+		this.created = created;
+	}
 
-  public String getFirstname() {
-    return this.firstname;
-  }
+	public String getEmail() {
+		return this.email;
+	}
 
-  public void setFirstname(final String firstname) {
-    this.firstname = firstname;
-  }
+	public void setEmail(final String email) {
+		this.email = email;
+	}
 
-  public short getGender() {
-    return this.gender;
-  }
+	public String getFirstname() {
+		return this.firstname;
+	}
 
-  public void setGender(final short gender) {
-    this.gender = gender;
-  }
+	public void setFirstname(final String firstname) {
+		this.firstname = firstname;
+	}
 
-  public String getHashPassword() {
-    return this.hashPassword;
-  }
+	public short getGender() {
+		return this.gender;
+	}
 
-  public void setHashPassword(final String hashPassword) {
-    this.hashPassword = hashPassword;
-  }
+	public void setGender(final short gender) {
+		this.gender = gender;
+	}
 
-  public String getLastname() {
-    return this.lastname;
-  }
+	public String getHashPassword() {
+		return this.hashPassword;
+	}
 
-  public void setLastname(final String lastname) {
-    this.lastname = lastname;
-  }
+	public void setHashPassword(final String hashPassword) {
+		this.hashPassword = hashPassword;
+	}
 
-  public String getNameTag() {
-    return this.nameTag;
-  }
+	public String getLastname() {
+		return this.lastname;
+	}
 
-  public void setNameTag(final String nameTag) {
-    this.nameTag = nameTag;
-  }
+	public void setLastname(final String lastname) {
+		this.lastname = lastname;
+	}
 
-  public int getStatus() {
-    return this.status;
-  }
+	public String getNameTag() {
+		return this.nameTag;
+	}
 
-  public void setStatus(final int status) {
-    this.status = status;
-  }
+	public void setNameTag(final String nameTag) {
+		this.nameTag = nameTag;
+	}
 
-  public LocalDateTime getUpdated() {
-    return this.updated;
-  }
+	public Boolean getIsContactPerson() {
+		return isContactPerson;
+	}
 
-  public void setUpdated(final LocalDateTime updated) {
-    this.updated = updated;
-  }
+	public void setIsContactPerson(final Boolean isContactPerson) {
+		this.isContactPerson = isContactPerson;
+	}
 
-  public String getUsername() {
-    return this.username;
-  }
+	public Boolean getIsDeletable() {
+		return isDeletable;
+	}
 
-  public void setUsername(final String username) {
-    this.username = username;
-  }
+	public void setIsDeletable(final Boolean isDeletable) {
+		this.isDeletable = isDeletable;
+	}
 
-  public int getVersion() {
-    return this.version;
-  }
+	public int getStatus() {
+		return this.status;
+	}
 
-  public void setVersion(final int version) {
-    this.version = version;
-  }
+	public void setStatus(final int status) {
+		this.status = status;
+	}
 
-  public List<Integer> getRoles() {
-    return roles;
-  }
+	public LocalDateTime getUpdated() {
+		return this.updated;
+	}
 
-  public void setRoles(final List<Integer> roles) {
-    if (roles != null) {
-      this.roles.addAll(roles);
-    }
-  }
+	public void setUpdated(final LocalDateTime updated) {
+		this.updated = updated;
+	}
 
-  public void addRole(final Integer role) {
-    this.roles.add(role);
-  }
+	public String getUsername() {
+		return this.username;
+	}
 
-  public boolean isNew() {
-    return id == null || id <= 0;
-  }
+	public void setUsername(final String username) {
+		this.username = username;
+	}
 
-  public UserFullEdo toEdo() {
-    final UserFullEdo edo = new UserFullEdo();
-    edo.setBirthdate(birthdate);
-    edo.setCompanyid(companyid);
-    edo.setEmail(email);
-    edo.setFirstname(firstname);
-    edo.setGender(gender);
-    edo.setLastname(lastname);
-    edo.setNameTag(nameTag);
-    edo.setUsername(username);
+	public int getVersion() {
+		return this.version;
+	}
 
-    edo.setCreated(created);
-    edo.setId(id);
-    edo.setStatus(status);
-    edo.setUpdated(updated);
-    edo.setVersion(version);
-    edo.setRoles(getRoles());
+	public void setVersion(final int version) {
+		this.version = version;
+	}
 
-    return edo;
-  }
+	public List<Integer> getRoles() {
+		return roles;
+	}
 
-  public static UserFull fromEdo(final UserFullEdo edo) {
-    final UserFull user = new UserFull();
+	public void setRoles(final List<Integer> roles) {
+		if (roles != null) {
+			this.roles.addAll(roles);
+		}
+	}
 
-    user.setBirthdate(edo.getBirthdate());
-    user.setCompanyid(edo.getCompanyid());
-    user.setEmail(edo.getEmail());
-    user.setFirstname(edo.getFirstname());
-    user.setGender(edo.getGender());
-    user.setLastname(edo.getLastname());
-    user.setNameTag(edo.getNameTag());
-    user.setUsername(edo.getUsername());
+	public void addRole(final Integer role) {
+		this.roles.add(role);
+	}
 
-    user.setCreated(edo.getCreated());
-    user.setId(edo.getId());
-    user.setStatus(edo.getStatus());
-    user.setUpdated(edo.getUpdated());
-    user.setVersion(edo.getVersion());
-    user.setRoles(edo.getRoles());
+	public boolean isNew() {
+		return id == null || id <= 0;
+	}
 
-    return user;
-  }
+	public UserFullEdo toEdo() {
+		final UserFullEdo edo = new UserFullEdo();
+		edo.setBirthdate(birthdate);
+		edo.setCompanyid(companyid);
+		edo.setEmail(email);
+		edo.setFirstname(firstname);
+		edo.setGender(gender);
+		edo.setLastname(lastname);
+		edo.setNameTag(nameTag);
+		edo.setUsername(username);
+		edo.setIsContactPerson(isContactPerson);
+		edo.setIsDeletable(isDeletable);
 
-  public static List<UserFullEdo> toEdoList(final List<UserFull> list) {
+		edo.setCreated(created);
+		edo.setId(id);
+		edo.setStatus(status);
+		edo.setUpdated(updated);
+		edo.setVersion(version);
+		edo.setRoles(getRoles());
 
-    final List<UserFullEdo> edoList = new ArrayList<>();
-    for (final UserFull p : list) {
-      edoList.add(p.toEdo());
-    }
-    return edoList;
-  }
+		return edo;
+	}
 
-  public static List<UserFull> fromEdoList(final List<UserFullEdo> edoList) {
+	public static UserFull fromEdo(final UserFullEdo edo) {
+		final UserFull user = new UserFull();
 
-    final List<UserFull> list = new ArrayList<>();
-    for (final UserFullEdo edo : edoList) {
-      list.add(UserFull.fromEdo(edo));
-    }
-    return list;
-  }
+		user.setBirthdate(edo.getBirthdate());
+		user.setCompanyid(edo.getCompanyid());
+		user.setEmail(edo.getEmail());
+		user.setFirstname(edo.getFirstname());
+		user.setGender(edo.getGender());
+		user.setLastname(edo.getLastname());
+		user.setNameTag(edo.getNameTag());
+		user.setUsername(edo.getUsername());
+		user.setIsContactPerson(edo.getIsContactPerson());
+		user.setIsDeletable(edo.getIsDeletable());
+
+		user.setCreated(edo.getCreated());
+		user.setId(edo.getId());
+		user.setStatus(edo.getStatus());
+		user.setUpdated(edo.getUpdated());
+		user.setVersion(edo.getVersion());
+		user.setRoles(edo.getRoles());
+
+		return user;
+	}
+
+	public static List<UserFullEdo> toEdoList(final List<UserFull> list) {
+
+		final List<UserFullEdo> edoList = new ArrayList<>();
+		for (final UserFull p : list) {
+			edoList.add(p.toEdo());
+		}
+		return edoList;
+	}
+
+	public static List<UserFull> fromEdoList(final List<UserFullEdo> edoList) {
+
+		final List<UserFull> list = new ArrayList<>();
+		for (final UserFullEdo edo : edoList) {
+			list.add(UserFull.fromEdo(edo));
+		}
+		return list;
+	}
 }

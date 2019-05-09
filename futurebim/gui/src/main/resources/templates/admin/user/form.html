@@ -1,0 +1,70 @@
+		
+		<div th:fragment="userform">
+		    <div class="panel panel-default project-detail-pannel">
+		    	<div class="panel-heading">[[#{user.user-detail}]]</div>
+		    	<div class="panel-body">
+				    <form class="form-horizontal" id="userform" name="userform" method="post" enctype="application/json" target="_blank">
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{user.firstname}]]</label>
+					      <span class="fullline userview" ng-show="!isEdit" ng-bind-html="user.firstname"></span>
+					      <input class="useredit input-firstname" ng-show="isEdit" ng-model="editUser.firstname" />
+					      <span class="form-err-message" ng-show="isEdit">[[#{user.invalidfirstname}]]</span>
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{user.lastname}]]</label>
+					      <span class="fullline userview" ng-show="!isEdit" ng-bind-html="user.lastname"></span>					      
+					      <input class="useredit input-lastname" ng-show="isEdit" ng-model="editUser.lastname" />
+					      <span class="form-err-message" ng-show="isEdit">[[#{user.invalidlastname}]]</span>
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{user.username}]]</label>
+					      <span class="fullline userview" ng-show="!isEdit" ng-bind-html="user.username"></span>
+					      <input class="useredit input-username" ng-show="isEdit" ng-model="editUser.username" />
+					      <span class="form-err-message" ng-show="isEdit">[[#{user.invalidusername}]]</span>
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{user.email}]]</label>
+					      <span class="fullline userview" ng-show="!isEdit" ng-bind-html="user.email"></span>					      
+					      <input class="useredit input-email" ng-show="isEdit" type="email" ng-model="editUser.email" />
+					      <span class="form-err-message" ng-show="isEdit">[[#{user.invalidemail}]]</span>
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{user.birthdate}]]</label>
+					      <span class="fullline userview" ng-show="!isEdit" ng-bind-html="user.birthdate | date : 'dd.MM.yyyy'"></span>
+					      <input class="useredit input-birthdate" ng-show="isEdit" ng-model="editUser.birthdate" />
+					      <span class="form-err-message" ng-show="isEdit">[[#{user.invalidbirthdate}]]</span>
+					    </div>
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{user.gender}]]</label>
+					      <span class="fullline userview" ng-show="!isEdit" ng-bind-html="user.genderName"></span>
+					      
+					      <div ng-show="isEdit" class="all-gender" style="display: inline-block; ">
+						      <div th:each="instance : ${genderList}" class="radio-container">
+						      	<span th:text="${instance.value}"></span>
+						      	<input th:value="${instance.key}" class="" ng-model="editUser.gender" type="radio" />
+						      </div>
+						      <div class="clear"></div>
+					      </div>
+					    </div>					    					    
+					    <div class="form-group">
+					      <label class="control-label col-sm-2">[[#{user.status}]]</label>
+					      <span class="fullline userview" ng-show="!isEdit" ng-bind-html="user.statusName"></span>
+					      
+					      <div ng-show="isEdit" class="all-status" style="display: inline-block; ">
+						      <div th:each="instance : ${statusList}" class="radio-container">
+						      	<span th:text="${instance.value}"></span>
+						      	<input th:value="${instance.key}" class="" ng-model="editUser.status" type="radio" />
+						      </div>
+						      <div class="clear"></div>
+					      </div>
+					      
+					    </div>					    					    
+				    					    
+						<input type="hidden" th:value="${userId}" id="hdnuid" />					
+				    </form>
+				</div>
+			
+			</div>
+			
+		</div>
+		

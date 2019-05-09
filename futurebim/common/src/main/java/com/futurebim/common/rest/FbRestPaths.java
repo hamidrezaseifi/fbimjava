@@ -4,7 +4,7 @@ public class FbRestPaths {
 
 	public static class Core {
 
-		public static final String CORE_BASE = "http://localhost:1010";
+		// public static final String CORE_BASE = "http://localhost:1010";
 
 		public static final String PROJECT_BASE = "/project";
 
@@ -42,6 +42,9 @@ public class FbRestPaths {
 
 		public static final String USER_SAVE_BASE = "/save";
 		public static final String USER_SAVE = USER_BASE + USER_SAVE_BASE;
+
+		public static final String USER_DELETE_BASE = "/delete";
+		public static final String USER_DELETE = USER_BASE + USER_DELETE_BASE;
 
 		public static final String USER_SETPASSWORD_BASE = "/setpassword";
 		public static final String USER_SETPASSWORD = USER_BASE + USER_SETPASSWORD_BASE;

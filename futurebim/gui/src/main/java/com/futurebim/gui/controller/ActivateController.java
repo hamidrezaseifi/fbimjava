@@ -47,7 +47,7 @@ public class ActivateController extends UiActivationControllerBase {
   @RequestMapping(path = "/company")
   public String showActivateCompany(final Model model) {
 
-    model.addAttribute("users", userHandler.listCompanyUsers(this.getCurrentCompany().getId()));
+    model.addAttribute("users", userHandler.getCompanyUsers(this.getCurrentCompany().getId()));
     model.addAttribute("countries", valueHandler.listCountries());
     return "activation/initcompany";
   }

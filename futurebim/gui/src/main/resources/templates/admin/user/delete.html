@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" ng-app="fbimApp" >
+    <head>
+    
+    	<th:block th:include="layout/mainLayout :: pageheader" />
+    	
+    	<link rel="stylesheet" th:href="@{/css/userlist.css}">
+		<script th:src="@{/js/users-delete.js}"></script>
+    </head>
+    <body ng-controller="BodyController">
+        <header th:replace="layout/mainLayout :: header" ></header>
+        <div th:replace="layout/mainLayout :: breadcrumb" ></div>
+		
+		<div class="page-content" ng-controller="UserDeleteController">
+			<div class="page-title"> 
+				<span th:text="#{user.user-delete}" class="title-content"></span> 
+				
+				
+				<a class="toolbar-item" href="#" ng-click="applyDelete()"><i class="material-icons">done</i></a>
+				<a class="toolbar-item" href="/admin/users/list"><i class="material-icons">group</i></a>
+			</div>
+			<form action="/admin/users/data/delete" method="post" id="userdeleteform">
+				<input type="hidden" th:value="${userId}" name="deluserid" id="hdnuid">
+				<input type="hidden" th:value="${user.getVersion()}" name="deluserver" id="hdnuid">
+			</form>
+			<span th:text="#{user.user-delete-message}" class="alert-warning-message"></span>
+			
+		    <div class="panel panel-default project-detail-pannel">
+		    	<div class="panel-heading">[[#{user.user-detail}]]</div>
+		    	<div class="panel-body">
+				    <div class="form-group">
+				      <label class="control-label col-sm-2">[[#{user.firstname}]]</label>
+				      <span class="fullline userview" th:text="${user.getFirstname()}"></span>
+				    </div>
+				    <div class="form-group">
+				      <label class="control-label col-sm-2">[[#{user.lastname}]]</label>
+				      <span class="fullline userview" th:text="${user.getLastname()}"></span>					      
+				    </div>
+				    <div class="form-group">
+				      <label class="control-label col-sm-2">[[#{user.username}]]</label>
+				      <span class="fullline userview" th:text="${user.getUsername()}"></span>
+				    </div>
+				    <div class="form-group">
+				      <label class="control-label col-sm-2">[[#{user.email}]]</label>
+				      <span class="fullline userview" th:text="${user.getEmail()}"></span>					      
+				    </div>
+				    <div class="form-group">
+				      <label class="control-label col-sm-2">[[#{user.birthdate}]]</label>
+				      <span class="fullline userview" th:text="${user.getBirthdate()}"></span>
+				    </div>
+				    <div class="form-group">
+				      <label class="control-label col-sm-2">[[#{user.gender}]]</label>
+				      <span class="fullline userview" th:text="${user.getGenderName()}"></span>
+				    </div>					    					    
+				    <div class="form-group">
+				      <label class="control-label col-sm-2">[[#{user.status}]]</label>
+				      <span class="fullline userview" th:text="${user.getStatusName()}"></span>			      
+				    </div>					    					    
+			    					    
+				</div>
+			
+			</div>			
+					
+		</div>
+		
+	    <script th:inline="javascript">
+    	
+	    </script>
+        <footer th:replace="layout/mainLayout :: footer" ></footer>
+    </body>
+</html>

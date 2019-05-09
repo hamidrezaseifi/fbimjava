@@ -25,38 +25,40 @@ import com.futurebim.core.bl.ICompanyHandler;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CompanyControllerTest extends TestDataProvider {
-
+  
   @Autowired
   private MockMvc mockMvc;
-
+  
   @Autowired
   private MappingJackson2XmlHttpMessageConverter xmlConverter;
-
+  
   @MockBean
   private ICompanyHandler companyReadHandler;
-  
+
   @Before
   public void setUp() throws Exception {
   }
-
+  
   @After
   public void tearDown() throws Exception {
   }
-
+  
   @Test
   public void testReadCompany() throws Exception {
-    
-    mockMvc.perform(MockMvcRequestBuilders.get(FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.COMPANY_READ, 123456)).andExpect(status().isConflict()).andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
-                                                                                                                                                            ";charset=UTF-8"));
-    
-  }
 
+    mockMvc.perform(MockMvcRequestBuilders.get(FbRestPaths.Core.COMPANY_READ, 123456)).andExpect(status().isConflict())
+        .andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
+            ";charset=UTF-8"));
+
+  }
+  
   @Test
   public void testReadAllCompany() throws Exception {
-
-    mockMvc.perform(MockMvcRequestBuilders.get(FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.COMPANY_ALL)).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
-                                                                                                                                                            ";charset=UTF-8"));
-
+    
+    mockMvc.perform(MockMvcRequestBuilders.get(FbRestPaths.Core.COMPANY_ALL)).andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
+            ";charset=UTF-8"));
+    
   }
-
+  
 }

@@ -28,100 +28,109 @@ import com.futurebim.core.bl.IUserHandler;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerTest extends TestDataProvider {
-  
+
   @Autowired
   private MockMvc mockMvc;
-  
+
   @Autowired
   private MappingJackson2XmlHttpMessageConverter xmlConverter;
-  
+
   // @MockBean
   // private MappingJackson2XmlHttpMessageConverter mappingJackson2HttpMessageConverter;
-  
+
   @MockBean
   private IUserHandler userHandler;
-
+  
   @Before
   public void setUp() throws Exception {
   }
-  
+
   @After
   public void tearDown() throws Exception {
   }
-
-  @Test
-  public void testReadCompanyUsers() throws Exception {
-
-    mockMvc.perform(MockMvcRequestBuilders.get(FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.USER_COMPANYUSERS, 123456)).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
-                                                                                                                                                            ";charset=UTF-8"));
-
-  }
   
   @Test
+  public void testReadCompanyUsers() throws Exception {
+    
+    mockMvc.perform(MockMvcRequestBuilders.get(FbRestPaths.Core.USER_COMPANYUSERS, 123456)).andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
+            ";charset=UTF-8"));
+    
+  }
+
+  @Test
   public void testAuthenticateUser() throws Exception {
-
-    final UserLoginEdo        loginEdo    = new UserLoginEdo("user1", "password1", "companyindent");
+    
+    final UserLoginEdo loginEdo = new UserLoginEdo("user1", "password1", "companyindent");
     final EncryptedContentEdo encrypedEdo = new EncryptedContentEdo();
-
+    
     try {
       encrypedEdo.setContentObject(loginEdo, xmlConverter.getObjectMapper());
     }
     catch (final Exception e) {
-
+      
     }
-
+    
     final String contentrAsString = xmlConverter.getObjectMapper().writeValueAsString(encrypedEdo);
-
-    mockMvc.perform(MockMvcRequestBuilders.post(FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.USER_AUTHENTICATE).content(contentrAsString).contentType(MediaType.APPLICATION_XML_VALUE)).andExpect(status().isConflict()).andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
-                                                                                                                                                            ";charset=UTF-8"));
-
+    
+    mockMvc
+        .perform(
+            MockMvcRequestBuilders.post(FbRestPaths.Core.USER_AUTHENTICATE).content(contentrAsString).contentType(MediaType.APPLICATION_XML_VALUE))
+        .andExpect(status().isConflict()).andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
+            ";charset=UTF-8"));
+    
   }
-  
+
   @Test
   public void testSaveUser() throws Exception {
-
+    
     final UserFullEdo edo = new UserFullEdo();
     edo.setId(99234567L);
     final EncryptedContentEdo encrypedEdo = new EncryptedContentEdo();
-
+    
     try {
       encrypedEdo.setContentObject(edo, xmlConverter.getObjectMapper());
     }
     catch (final Exception e) {
-
+      
     }
-
+    
     final String contentrAsString = xmlConverter.getObjectMapper().writeValueAsString(encrypedEdo);
+    
+    mockMvc.perform(MockMvcRequestBuilders.post(FbRestPaths.Core.USER_SAVE).content(contentrAsString).contentType(MediaType.APPLICATION_XML_VALUE))
+        .andExpect(status().isConflict()).andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
+            ";charset=UTF-8"));
+  }
 
-    mockMvc.perform(MockMvcRequestBuilders.post(FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.USER_SAVE).content(contentrAsString).contentType(MediaType.APPLICATION_XML_VALUE)).andExpect(status().isConflict()).andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
-                                                                                                                                                            ";charset=UTF-8"));
+  @Test
+  public void testSetUserPassword() throws Exception {
+    
+    final UserFullEdo edo = new UserFullEdo();
+    edo.setId(99234567L);
+    final EncryptedContentEdo encrypedEdo = new EncryptedContentEdo();
+    
+    try {
+      encrypedEdo.setContentObject(edo, xmlConverter.getObjectMapper());
+    }
+    catch (final Exception e) {
+      
+    }
+    
+    final String contentrAsString = xmlConverter.getObjectMapper().writeValueAsString(encrypedEdo);
+    
+    mockMvc
+        .perform(
+            MockMvcRequestBuilders.post(FbRestPaths.Core.USER_SETPASSWORD).content(contentrAsString).contentType(MediaType.APPLICATION_XML_VALUE))
+        .andExpect(status().isConflict()).andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
+            ";charset=UTF-8"));
   }
   
   @Test
-  public void testSetUserPassword() throws Exception {
-
-    final UserFullEdo edo = new UserFullEdo();
-    edo.setId(99234567L);
-    final EncryptedContentEdo encrypedEdo = new EncryptedContentEdo();
-
-    try {
-      encrypedEdo.setContentObject(edo, xmlConverter.getObjectMapper());
-    }
-    catch (final Exception e) {
-
-    }
-
-    final String contentrAsString = xmlConverter.getObjectMapper().writeValueAsString(encrypedEdo);
-
-    mockMvc.perform(MockMvcRequestBuilders.post(FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.USER_SETPASSWORD).content(contentrAsString).contentType(MediaType.APPLICATION_XML_VALUE)).andExpect(status().isConflict()).andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
-                                                                                                                                                            ";charset=UTF-8"));
-  }
-
-  @Test
   public void testReadUser() throws Exception {
-
-    mockMvc.perform(MockMvcRequestBuilders.get(FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.USER_READ, 999123456)).andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
-                                                                                                                                                            ";charset=UTF-8"));
-
+    
+    mockMvc.perform(MockMvcRequestBuilders.get(FbRestPaths.Core.USER_READ, 999123456)).andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE +
+            ";charset=UTF-8"));
+    
   }
 }

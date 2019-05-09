@@ -189,13 +189,13 @@ public class ProjectsController extends UiControllerBase {
   @FbGuiRequestGetDataMapping(value = "/data/users/all")
   public List<GuiUserFull> readUserList() {
 
-    return userHandler.listCompanyUsers(this.getCurrentCompany().getId());
+    return userHandler.getCompanyUsers(this.getCurrentCompany().getId());
   }
   
   @FbGuiRequestGetDataMapping(value = "/data/task/all")
   public List<GuiUserFull> readTaskList() {
 
-    return userHandler.listCompanyUsers(this.getCurrentCompany().getId());
+    return userHandler.getCompanyUsers(this.getCurrentCompany().getId());
   }
 
   @FbGuiRequestPostDataMapping(value = "/data/task/add")

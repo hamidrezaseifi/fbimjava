@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" ng-app="fbimApp" >
+    <head>
+    
+    	<th:block th:include="layout/mainLayout :: pageheader" />
+    	
+    	<link rel="stylesheet" th:href="@{/css/userlist.css}">
+		<script th:src="@{/js/users-view.js}"></script>
+    </head>
+    <body ng-controller="BodyController">
+        <header th:replace="layout/mainLayout :: header" ></header>
+        <div th:replace="layout/mainLayout :: breadcrumb" ></div>
+		
+		<div class="page-content" ng-controller="UserListController">
+			<div class="page-title"> 
+				<span th:text="#{user.user-detail}" class="title-content"></span> 
+				<a class="toolbar-item" href="#" ng-click="toggleEdit(true)" ng-show="!isEdit"><i class="material-icons">edit</i></a>
+				<a class="toolbar-item" href="/admin/users/list" ng-show="!isEdit"><i class="material-icons">group</i></a>
+			
+				<a class="toolbar-item" href="#" ng-click="applyEdit()" ng-show="isEdit"><i class="material-icons">done</i></a>
+				<a class="toolbar-item" href="#" ng-click="toggleEdit(false)" ng-show="isEdit"><i class="material-icons">cancel</i></a>
+			</div>
+			
+		<th:block th:include="admin/user/form :: userform" />
+					
+		</div>
+		
+	    <script th:inline="javascript">
+    	
+	    </script>
+        <footer th:replace="layout/mainLayout :: footer" ></footer>
+    </body>
+</html>

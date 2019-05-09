@@ -13,209 +13,209 @@ import com.futurebim.common.model.edo.UserEdo;
  */
 public class User {
 
-  private Long id;
+	private Long id;
 
-  private Long companyid;
+	private Long companyid;
 
-  private String username;
-  
-  private String hashPassword;
-  
-  private short gender;
+	private String username;
 
-  private String lastname;
+	private String hashPassword;
 
-  private String firstname;
+	private short gender;
 
-  private String nameTag;
+	private String lastname;
 
-  private LocalDate birthdate;
+	private String firstname;
 
-  private String email;
+	private String nameTag;
 
-  private int status;
+	private LocalDate birthdate;
 
-  private int version;
+	private String email;
 
-  private LocalDateTime created;
+	private int status;
 
-  private LocalDateTime updated;
+	private int version;
 
-  public User() {
-  }
-  
-  public boolean isNew() {
-    return id == null || id < 1;
-  }
-  
-  public Long getId() {
-    return this.id;
-  }
+	private LocalDateTime created;
 
-  public void setId(final Long id) {
-    this.id = id;
-  }
+	private LocalDateTime updated;
 
-  public Long getCompanyid() {
-    return this.companyid;
-  }
+	public User() {
+	}
 
-  public void setCompanyid(final Long company) {
-    this.companyid = company;
-  }
+	public boolean isNew() {
+		return id == null || id < 1;
+	}
 
-  public LocalDate getBirthdate() {
-    return this.birthdate;
-  }
+	public Long getId() {
+		return this.id;
+	}
 
-  public void setBirthdate(final LocalDate birthdate) {
-    this.birthdate = birthdate;
-  }
+	public void setId(final Long id) {
+		this.id = id;
+	}
 
-  public LocalDateTime getCreated() {
-    return this.created;
-  }
+	public Long getCompanyid() {
+		return this.companyid;
+	}
 
-  public void setCreated(final LocalDateTime created) {
-    this.created = created;
-  }
+	public void setCompanyid(final Long company) {
+		this.companyid = company;
+	}
 
-  public String getEmail() {
-    return this.email;
-  }
+	public LocalDate getBirthdate() {
+		return this.birthdate;
+	}
 
-  public void setEmail(final String email) {
-    this.email = email;
-  }
+	public void setBirthdate(final LocalDate birthdate) {
+		this.birthdate = birthdate;
+	}
 
-  public String getFirstname() {
-    return this.firstname;
-  }
+	public LocalDateTime getCreated() {
+		return this.created;
+	}
 
-  public void setFirstname(final String firstname) {
-    this.firstname = firstname;
-  }
+	public void setCreated(final LocalDateTime created) {
+		this.created = created;
+	}
 
-  public short getGender() {
-    return this.gender;
-  }
+	public String getEmail() {
+		return this.email;
+	}
 
-  public void setGender(final short gender) {
-    this.gender = gender;
-  }
-  
-  public String getHashPassword() {
-    return this.hashPassword;
-  }
-  
-  public void setHashPassword(final String hashPassword) {
-    this.hashPassword = hashPassword;
-  }
-  
-  public String getLastname() {
-    return this.lastname;
-  }
+	public void setEmail(final String email) {
+		this.email = email;
+	}
 
-  public void setLastname(final String lastname) {
-    this.lastname = lastname;
-  }
+	public String getFirstname() {
+		return this.firstname;
+	}
 
-  public String getNameTag() {
-    return this.nameTag;
-  }
+	public void setFirstname(final String firstname) {
+		this.firstname = firstname;
+	}
 
-  public void setNameTag(final String nameTag) {
-    this.nameTag = nameTag;
-  }
+	public short getGender() {
+		return this.gender;
+	}
 
-  public int getStatus() {
-    return this.status;
-  }
+	public void setGender(final short gender) {
+		this.gender = gender;
+	}
 
-  public void setStatus(final int status) {
-    this.status = status;
-  }
+	public String getHashPassword() {
+		return this.hashPassword;
+	}
 
-  public LocalDateTime getUpdated() {
-    return this.updated;
-  }
+	public void setHashPassword(final String hashPassword) {
+		this.hashPassword = hashPassword;
+	}
 
-  public void setUpdated(final LocalDateTime updated) {
-    this.updated = updated;
-  }
+	public String getLastname() {
+		return this.lastname;
+	}
 
-  public String getUsername() {
-    return this.username;
-  }
+	public void setLastname(final String lastname) {
+		this.lastname = lastname;
+	}
 
-  public void setUsername(final String username) {
-    this.username = username;
-  }
+	public String getNameTag() {
+		return this.nameTag;
+	}
 
-  public int getVersion() {
-    return this.version;
-  }
+	public void setNameTag(final String nameTag) {
+		this.nameTag = nameTag;
+	}
 
-  public void setVersion(final int version) {
-    this.version = version;
-  }
+	public int getStatus() {
+		return this.status;
+	}
 
-  public UserEdo toEdo() {
-    final UserEdo edo = new UserEdo();
-    edo.setBirthdate(birthdate);
-    edo.setCompanyid(companyid);
-    edo.setEmail(email);
-    edo.setFirstname(firstname);
-    edo.setGender(gender);
-    edo.setLastname(lastname);
-    edo.setNameTag(nameTag);
-    edo.setUsername(username);
+	public void setStatus(final int status) {
+		this.status = status;
+	}
 
-    edo.setCreated(created);
-    edo.setId(id);
-    edo.setStatus(status);
-    edo.setUpdated(updated);
-    edo.setVersion(version);
+	public LocalDateTime getUpdated() {
+		return this.updated;
+	}
 
-    return edo;
-  }
+	public void setUpdated(final LocalDateTime updated) {
+		this.updated = updated;
+	}
 
-  public static User fromEdo(final UserEdo edo) {
-    final User user = new User();
+	public String getUsername() {
+		return this.username;
+	}
 
-    user.setBirthdate(edo.getBirthdate());
-    user.setCompanyid(edo.getCompanyid());
-    user.setEmail(edo.getEmail());
-    user.setFirstname(edo.getFirstname());
-    user.setGender(edo.getGender());
-    user.setLastname(edo.getLastname());
-    user.setNameTag(edo.getNameTag());
-    user.setUsername(edo.getUsername());
+	public void setUsername(final String username) {
+		this.username = username;
+	}
 
-    user.setCreated(edo.getCreated());
-    user.setId(edo.getId());
-    user.setStatus(edo.getStatus());
-    user.setUpdated(edo.getUpdated());
-    user.setVersion(edo.getVersion());
+	public int getVersion() {
+		return this.version;
+	}
 
-    return user;
-  }
+	public void setVersion(final int version) {
+		this.version = version;
+	}
 
-  public static List<UserEdo> toEdoList(final List<User> list) {
+	public UserEdo toEdo() {
+		final UserEdo edo = new UserEdo();
+		edo.setBirthdate(birthdate);
+		edo.setCompanyid(companyid);
+		edo.setEmail(email);
+		edo.setFirstname(firstname);
+		edo.setGender(gender);
+		edo.setLastname(lastname);
+		edo.setNameTag(nameTag);
+		edo.setUsername(username);
 
-    final List<UserEdo> edoList = new ArrayList<>();
-    for (final User p : list) {
-      edoList.add(p.toEdo());
-    }
-    return edoList;
-  }
+		edo.setCreated(created);
+		edo.setId(id);
+		edo.setStatus(status);
+		edo.setUpdated(updated);
+		edo.setVersion(version);
 
-  public static List<User> fromEdoList(final List<UserEdo> edoList) {
+		return edo;
+	}
 
-    final List<User> list = new ArrayList<>();
-    for (final UserEdo edo : edoList) {
-      list.add(User.fromEdo(edo));
-    }
-    return list;
-  }
+	public static User fromEdo(final UserEdo edo) {
+		final User user = new User();
+
+		user.setBirthdate(edo.getBirthdate());
+		user.setCompanyid(edo.getCompanyid());
+		user.setEmail(edo.getEmail());
+		user.setFirstname(edo.getFirstname());
+		user.setGender(edo.getGender());
+		user.setLastname(edo.getLastname());
+		user.setNameTag(edo.getNameTag());
+		user.setUsername(edo.getUsername());
+
+		user.setCreated(edo.getCreated());
+		user.setId(edo.getId());
+		user.setStatus(edo.getStatus());
+		user.setUpdated(edo.getUpdated());
+		user.setVersion(edo.getVersion());
+
+		return user;
+	}
+
+	public static List<UserEdo> toEdoList(final List<User> list) {
+
+		final List<UserEdo> edoList = new ArrayList<>();
+		for (final User p : list) {
+			edoList.add(p.toEdo());
+		}
+		return edoList;
+	}
+
+	public static List<User> fromEdoList(final List<UserEdo> edoList) {
+
+		final List<User> list = new ArrayList<>();
+		for (final UserEdo edo : edoList) {
+			list.add(User.fromEdo(edo));
+		}
+		return list;
+	}
 }

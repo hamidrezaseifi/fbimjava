@@ -17,7 +17,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
-import com.futurebim.gui.authentication.DebugModeAuthentication;
 import com.futurebim.gui.authentication.FBUiAuthenticationDetails;
 import com.futurebim.gui.authentication.UiAuthenticationFailureHandler;
 import com.futurebim.gui.authentication.UiAuthenticationSuccessHandler;
@@ -36,51 +35,50 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public static final String INITCOMPANY_URL             = "/activation/company";
   public static final String ROOT_URL                    = "/";
   public static final String COMPANYINDICATOR_COOKIE_KEY = "comp_ind";
-
+  
   @Autowired
   private UiAuthenticationSuccessHandler uiAuthenticationSuccessHandler;
   
   @Autowired
   private UiAuthenticationFailureHandler authenticationFailureHandler;
-
-  @Autowired
-  private CustomAuthenticationProvider customAuthenticationProvider;
   
   @Autowired
-  private DebugModeAuthentication debugModeAuthentication;
+  private CustomAuthenticationProvider customAuthenticationProvider;
   
   @Override
   protected void configure(final HttpSecurity http) throws Exception {
     
-    if (debugModeAuthentication.isDebugLoginEnabled()) {
-      http.authorizeRequests().antMatchers("/**").permitAll();
-    }
-    else {
-      http.authorizeRequests().antMatchers("/images/*").permitAll().antMatchers("/js/*").permitAll().antMatchers("/css/*").permitAll().antMatchers("/angular/*").permitAll().antMatchers("/fonts/*").permitAll().antMatchers(LOGIN_URL).permitAll().antMatchers("/mdm/common/admin/health").permitAll().antMatchers("/customers/data/save").hasAnyRole("ADMIN", "DATASTEWARD").antMatchers("/customers/*").hasAnyRole("ADMIN", "VIEW", "USER", "DATASTEWARD").antMatchers("/user/*").hasAnyRole("ADMIN", "VIEW", "USER", "DATASTEWARD").antMatchers("/ds/*").hasAnyRole("ADMIN", "DATASTEWARD").antMatchers("/settings/*").hasAnyRole("ADMIN").antMatchers("/admin/*").hasAnyRole("ADMIN").antMatchers("/**").authenticated().and()
-      // .addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-      ;
-      
-      http.exceptionHandling().accessDeniedPage("/noaccess");
-      
-    }
+    http.authorizeRequests().antMatchers("/images/*").permitAll().antMatchers("/js/*").permitAll()
+        .antMatchers("/css/*").permitAll().antMatchers("/angular/*").permitAll().antMatchers("/fonts/*")
+        .permitAll().antMatchers(LOGIN_URL).permitAll()
+        .antMatchers("/admin/**")
+        .hasAnyRole("ADMIN", "COMPANY_ADMIN")
+        .antMatchers("/admin/user/**", "/admin/data/**", "/admin/data/user/**")
+        .hasAnyRole("ADMIN", "COMPANY_ADMIN")
+        .antMatchers("/**").authenticated().and();
+    
+    http.exceptionHandling().accessDeniedPage("/noaccess");
     
     http.csrf().disable();
     
-    http.formLogin().authenticationDetailsSource(authenticationDetailsSource()).loginPage(LOGIN_URL).permitAll().defaultSuccessUrl("/").usernameParameter(USERNAME_FIELD_NAME).passwordParameter(PASSWORD_FIELD_NAME).successHandler(uiAuthenticationSuccessHandler).failureHandler(authenticationFailureHandler).permitAll();
+    http.formLogin().authenticationDetailsSource(authenticationDetailsSource()).loginPage(LOGIN_URL).permitAll()
+        .defaultSuccessUrl("/").usernameParameter(USERNAME_FIELD_NAME).passwordParameter(PASSWORD_FIELD_NAME)
+        .successHandler(uiAuthenticationSuccessHandler).failureHandler(authenticationFailureHandler)
+        .permitAll();
     
     http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
     
   }
-
+  
   private AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> authenticationDetailsSource() {
-
+    
     return new AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails>() {
-
+      
       @Override
       public WebAuthenticationDetails buildDetails(final HttpServletRequest request) {
         return new FBUiAuthenticationDetails(request);
       }
-
+      
     };
   }
   
@@ -92,7 +90,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   @Bean
   public AuthenticationManager authenticationManager() throws Exception {
-    final AuthenticationManager authenticationManager = new ProviderManager(Arrays.asList(customAuthenticationProvider));
+    final AuthenticationManager authenticationManager = new ProviderManager(
+        Arrays.asList(customAuthenticationProvider));
     return authenticationManager;
   }
   

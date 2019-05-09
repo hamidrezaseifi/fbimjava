@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org" ng-app="fbimApp" >
+    <head>
+    
+    	<th:block th:include="layout/mainLayout :: pageheader" />
+    	
+    	<link rel="stylesheet" th:href="@{/css/userlist.css}">
+		<script th:src="@{/js/userlist.js}"></script>
+    </head>
+    <body ng-controller="BodyController">
+        <header th:replace="layout/mainLayout :: header" ></header>
+        <div th:replace="layout/mainLayout :: breadcrumb" ></div>
+		
+		<div class="page-content" ng-controller="UserListController">
+			<div class="page-title"> 
+				<span th:text="#{user.user-list}" class="title-content"></span> 
+				<a class="toolbar-item" href="/admin/users/create"><i class="material-icons">playlist_add</i></a>
+			
+			</div>
+			
+			<div loading-container="tableParams.settings().$loading">
+				
+				<div ng-table-pagination="tableParams" template-url="'ng-table/pager.html'"></div>			
+				<table ng-table-dynamic="tableParams with columns" class="table table-condensed table-bordered table-striped">		
+					<colgroup>
+			          <col width="50px"/>
+			          <col/>
+			          <col width="100px"/>
+			          <col width="120px"/>
+			          <col width="120px"/>
+			          <col width="120px"/>
+			          <col width="100px"/>
+			        </colgroup>								
+					<tr ng-repeat="(rowIndex, row) in $data">
+						
+						<td ng-repeat="col in $columns" header-class="col.headerClass" ng-bind-html="col.renderValue(this, row, rowIndex + 1)"></td>
+						
+					</tr>		
+				</table>
+			</div>			
+			
+		</div>
+		
+	    <script th:inline="javascript">
+    	var columns = [
+    		{field: "index", title: "#", },
+    		{field: "fullname", title: /*[[#{user.fullname}]]*/"", },
+    		{field: "username", title: /*[[#{user.username}]]*/"", },
+    		{field: "email", title: /*[[#{user.email}]]*/"", },
+    		{field: "birthdate", title: /*[[#{user.birthdate}]]*/"", },
+    		{field: "statusName", title: /*[[#{user.status}]]*/"", },
+    		{field: "action", title: "", },
+    		];
+	    </script>
+        <footer th:replace="layout/mainLayout :: footer" ></footer>
+    </body>
+</html>

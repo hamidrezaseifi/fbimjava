@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.futurebim.common.model.edo.FBCollectionEdo;
 import com.futurebim.common.model.edo.TaskEdo;
 import com.futurebim.common.model.enums.EModule;
-import com.futurebim.common.rest.FbRestPaths;
 import com.futurebim.gui.bl.ITaskHandler;
 import com.futurebim.gui.bl.IUserHandler;
 import com.futurebim.gui.configuration.UiConfiguration;
@@ -62,7 +61,8 @@ public class TaskHandler implements ITaskHandler {
     final ParameterizedTypeReference<FBCollectionEdo<TaskEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<TaskEdo>>() {
     };
 
-    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskProjectReadAllUrl(), EModule.CORE, typeRef, true, projectId);
+    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskProjectReadAllUrl(), EModule.CORE, typeRef,
+        true, projectId);
 
     final List<GuiTask> list = GuiTask.fromEdoList(projectsEdo.getItems());
 
@@ -79,7 +79,8 @@ public class TaskHandler implements ITaskHandler {
     final ParameterizedTypeReference<FBCollectionEdo<TaskEdo>> typeRef = new ParameterizedTypeReference<FBCollectionEdo<TaskEdo>>() {
     };
 
-    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskWorkflowReadAllUrl(), EModule.CORE, typeRef, true, workflowId);
+    final FBCollectionEdo<TaskEdo> projectsEdo = restTemplateCall.callRestGet(coreAccessConfig.getTaskWorkflowReadAllUrl(), EModule.CORE, typeRef,
+        true, workflowId);
 
     final List<GuiTask> list = GuiTask.fromEdoList(projectsEdo.getItems());
 
@@ -110,7 +111,8 @@ public class TaskHandler implements ITaskHandler {
   private GuiTask prepareTask(final GuiTask task) {
     final boolean editable = task.getAssignedTo() == sessionUserInfo.getUser().getId(); // || sessionUserInfo.getUser().isAdmin();
 
-    return task.setAssignedToUser(userHandler.getById(task.getAssignedTo())).setReporterUser(userHandler.getById(task.getReporter())).setStatusName(getTaskStatusName(task.getStatus())).setEditable(editable);
+    return task.setAssignedToUser(userHandler.getById(task.getAssignedTo())).setReporterUser(userHandler.getById(task.getReporter()))
+        .setStatusName(getTaskStatusName(task.getStatus())).setEditable(editable);
   }
 
   @Override
@@ -122,7 +124,7 @@ public class TaskHandler implements ITaskHandler {
   public boolean addWorkflowTask(final Long workflowId, final Long taskId) {
     logger.debug("get task list from core");
 
-    restTemplateCall.callRestGet(FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.TASK_WORKFLOW_ADD, EModule.CORE, Void.class, true, workflowId, taskId);
+    restTemplateCall.callRestGet(coreAccessConfig.getTaskWorkflowAddUrl(), EModule.CORE, Void.class, true, workflowId, taskId);
     
     return true;
   }
@@ -131,7 +133,8 @@ public class TaskHandler implements ITaskHandler {
   public boolean deleteWorkflowTask(final Long workflowId, final Long taskId) {
     logger.debug("get task list from core");
 
-    restTemplateCall.callRestGet(FbRestPaths.Core.CORE_BASE + FbRestPaths.Core.TASK_WORKFLOW_DELETE, EModule.CORE, Void.class, true, workflowId, taskId);
+    restTemplateCall.callRestGet(coreAccessConfig.getTaskWorkflowDeleteUrl(), EModule.CORE, Void.class, true, workflowId,
+        taskId);
     
     return true;
   }
